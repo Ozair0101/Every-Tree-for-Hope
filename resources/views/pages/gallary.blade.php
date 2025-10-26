@@ -1,89 +1,11 @@
-<!DOCTYPE html>
+@extends('layouts.layout')
+@section('title', 'Gallary Page')
+@section('content')
 
-<html class="light" lang="en">
-
-<head>
-    <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Main Gallery - Every Tree for Hope</title>
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <link href="https://fonts.googleapis.com" rel="preconnect" />
-    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&amp;display=swap"
-        rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
-    <script>
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    colors: {
-                        "primary": "#19b357",
-                        "background-light": "#f6f8f7",
-                        "background-dark": "#112118",
-                    },
-                    fontFamily: {
-                        "display": ["Inter", "sans-serif"]
-                    },
-                    borderRadius: {
-                        "DEFAULT": "0.25rem",
-                        "lg": "0.5rem",
-                        "xl": "0.75rem",
-                        "full": "9999px"
-                    },
-                },
-            },
-        }
-    </script>
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-        }
-    </style>
-</head>
-
-<body class="bg-background-light dark:bg-background-dark font-display text-gray-800 dark:text-gray-200">
     <div class="relative flex min-h-screen w-full flex-col group/design-root overflow-x-hidden">
         <div class="layout-container flex h-full grow flex-col">
             <div class="px-4 sm:px-8 md:px-16 lg:px-24 xl:px-40 flex flex-1 justify-center py-5">
                 <div class="layout-content-container flex flex-col w-full max-w-6xl flex-1">
-                    <header
-                        class="flex items-center justify-between whitespace-nowrap border-b border-solid border-gray-200 dark:border-gray-700 px-4 sm:px-6 lg:px-10 py-3">
-                        <div class="flex items-center gap-4 text-gray-900 dark:text-white">
-                            <div class="size-6 text-primary">
-                                <svg fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M24 4C25.7818 14.2173 33.7827 22.2182 44 24C33.7827 25.7818 25.7818 33.7827 24 44C22.2182 33.7827 14.2173 25.7818 4 24C14.2173 22.2182 22.2182 14.2173 24 4Z"
-                                        fill="currentColor"></path>
-                                </svg>
-                            </div>
-                            <h2 class="text-lg font-bold leading-tight tracking-[-0.015em]">Every Tree for Hope</h2>
-                        </div>
-                        <nav class="hidden lg:flex flex-1 justify-end gap-8">
-                            <div class="flex items-center gap-9">
-                                <a class="text-sm font-medium leading-normal text-gray-800 dark:text-gray-200 hover:text-primary dark:hover:text-primary"
-                                    href="#">Home</a>
-                                <a class="text-sm font-medium leading-normal text-gray-800 dark:text-gray-200 hover:text-primary dark:hover:text-primary"
-                                    href="#">About</a>
-                                <a class="text-sm font-medium leading-normal text-gray-800 dark:text-gray-200 hover:text-primary dark:hover:text-primary"
-                                    href="#">Events</a>
-                                <a class="text-sm font-medium leading-normal text-gray-800 dark:text-gray-200 hover:text-primary dark:hover:text-primary"
-                                    href="#">Donate</a>
-                                <a class="text-sm font-bold leading-normal text-primary dark:text-primary"
-                                    href="#">Gallery</a>
-                            </div>
-                            <button
-                                class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary text-white text-sm font-bold leading-normal tracking-[0.015em] hover:bg-primary/90 transition-colors">
-                                <span class="truncate">Join Us</span>
-                            </button>
-                        </nav>
-                        <div class="lg:hidden">
-                            <button
-                                class="p-2 rounded-md text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800">
-                                <span class="material-symbols-outlined">menu</span>
-                            </button>
-                        </div>
-                    </header>
                     <main class="flex flex-col gap-8 md:gap-12 mt-8">
                         <div class="@container">
                             <div class="@[480px]:p-4">
@@ -161,8 +83,7 @@
                             <div class="bg-cover bg-center flex flex-col gap-3 rounded-lg justify-end p-4 aspect-[3/4] group cursor-pointer relative"
                                 data-alt="A short video clip of people planting a tree."
                                 style='background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0) 100%), url("https://lh3.googleusercontent.com/aida-public/AB6AXuACYxMZdBdP8mR-X8-nCMD_tMIDCeuKIdBazJ5G432AFQ3EGDiR6Em4PoBDppaS_4GaXz0FotPxPMJ4eM-8RL0TCOQYL2wmuqm601zwTE0GJY9E1hcV2HabEH3Vgx-aPwdHz-mZ30vvyApvUTvXUoZk4UzfH8IYawarXRBOW7aOSK95fyBxwKNQy5i_3tOJd-PN1_LJK0bgtOd47XqHXmKUgqLNhqjAC1sV9z8XvlXKX_BzEX2RZnXkACAw8TaG14MgQOQ3Ba2YiOg");'>
-                                <span
-                                    class="material-symbols-outlined text-white absolute top-4 right-4">play_circle</span>
+                                <span class="material-symbols-outlined text-white absolute top-4 right-4">play_circle</span>
                                 <p
                                     class="text-white text-base font-bold leading-tight line-clamp-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                                     Community event in action</p>
@@ -217,49 +138,9 @@
                             </button>
                         </div>
                     </main>
-                    <footer
-                        class="mt-16 border-t border-gray-200 dark:border-gray-700 pt-10 pb-6 text-center text-gray-500 dark:text-gray-400">
-                        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-8 text-left px-4">
-                            <div>
-                                <h4 class="font-bold text-gray-800 dark:text-white mb-3">Navigate</h4>
-                                <ul class="space-y-2">
-                                    <li><a class="hover:text-primary" href="#">Home</a></li>
-                                    <li><a class="hover:text-primary" href="#">About Us</a></li>
-                                    <li><a class="hover:text-primary" href="#">Events</a></li>
-                                    <li><a class="hover:text-primary" href="#">Gallery</a></li>
-                                </ul>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-gray-800 dark:text-white mb-3">Get Involved</h4>
-                                <ul class="space-y-2">
-                                    <li><a class="hover:text-primary" href="#">Donate</a></li>
-                                    <li><a class="hover:text-primary" href="#">Volunteer</a></li>
-                                    <li><a class="hover:text-primary" href="#">Start a Project</a></li>
-                                </ul>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-gray-800 dark:text-white mb-3">Resources</h4>
-                                <ul class="space-y-2">
-                                    <li><a class="hover:text-primary" href="#">Blog</a></li>
-                                    <li><a class="hover:text-primary" href="#">FAQs</a></li>
-                                    <li><a class="hover:text-primary" href="#">Contact</a></li>
-                                </ul>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-gray-800 dark:text-white mb-3">Follow Us</h4>
-                                <div class="flex space-x-4">
-                                    <a class="hover:text-primary" href="#">Facebook</a>
-                                    <a class="hover:text-primary" href="#">Twitter</a>
-                                    <a class="hover:text-primary" href="#">Instagram</a>
-                                </div>
-                            </div>
-                        </div>
-                        <p class="text-sm">© 2024 Every Tree for Hope. All Rights Reserved.</p>
-                    </footer>
                 </div>
             </div>
         </div>
     </div>
-</body>
 
-</html>
+@endsection
