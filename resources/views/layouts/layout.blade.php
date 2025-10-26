@@ -50,7 +50,7 @@
         <header
             class="sticky top-0 z-50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-sm border-b border-gray-200 dark:border-gray-800">
             <nav class="container mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between">
-                <a class="flex items-center gap-3" href="#">
+                <a class="flex items-center gap-3" href="{{ route('home') }}">
                     <svg class="h-6 w-6 text-primary" fill="none" viewBox="0 0 48 48"
                         xmlns="http://www.w3.org/2000/svg">
                         <path
