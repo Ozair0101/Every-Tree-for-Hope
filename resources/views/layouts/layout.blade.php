@@ -7,9 +7,11 @@
     <title>Every Tree for Hope</title>
     <link href="https://fonts.googleapis.com" rel="preconnect" />
     <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&amp;family=Playfair+Display:ital,wght@0,700;1,900&amp;display=swap"
+    <link
+        href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&amp;family=Playfair+Display:ital,wght@0,700;1,900&amp;display=swap"
         rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
         rel="stylesheet" />
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <script>
@@ -73,6 +75,7 @@
         }
 
         @keyframes float {
+
             0%,
             100% {
                 transform: translateY(0) rotate(0deg);
@@ -136,14 +139,12 @@
                     </div>
                 </header>
 
-                <main
-                    class="relative z-10 flex flex-1 flex-col justify-center px-6 md:px-12 lg:px-24 pb-20">
+                <main class="relative z-10 flex flex-1 flex-col justify-center px-6 md:px-12 lg:px-24 pb-20">
                     <div class="max-w-3xl space-y-8">
                         <div
                             class="inline-flex items-center gap-2 bg-deep-green/5 border border-deep-green/10 px-4 py-2 rounded-full">
                             <span class="flex h-2 w-2 rounded-full bg-primary animate-pulse"></span>
-                            <p
-                                class="text-deep-green text-[10px] font-bold uppercase tracking-[0.2em]">
+                            <p class="text-deep-green text-[10px] font-bold uppercase tracking-[0.2em]">
                                 Global Reforestation Mission
                             </p>
                         </div>
@@ -152,8 +153,7 @@
                             Rooting for <br />
                             <span class="text-vibrant-lime italic font-black">the Future</span>
                         </h1>
-                        <p
-                            class="text-charcoal/80 text-lg md:text-xl max-w-xl font-medium leading-relaxed">
+                        <p class="text-charcoal/80 text-lg md:text-xl max-w-xl font-medium leading-relaxed">
                             Join our global community in restoring the world's forests one seedling at a time.
                             Transparent, tracked, and impactful climate action starting today.
                         </p>
@@ -177,31 +177,27 @@
                     <div class="grid grid-cols-2 md:flex gap-12 md:gap-20">
                         <div class="flex flex-col">
                             <p class="text-deep-green text-4xl font-extrabold tabular-nums">1,240,500</p>
-                            <p
-                                class="text-charcoal/50 text-[10px] font-bold uppercase tracking-[0.2em] mt-1">
+                            <p class="text-charcoal/50 text-[10px] font-bold uppercase tracking-[0.2em] mt-1">
                                 Trees Planted
                             </p>
                         </div>
                         <div class="flex flex-col">
                             <p class="text-deep-green text-4xl font-extrabold tabular-nums">45,000</p>
-                            <p
-                                class="text-charcoal/50 text-[10px] font-bold uppercase tracking-[0.2em] mt-1">
+                            <p class="text-charcoal/50 text-[10px] font-bold uppercase tracking-[0.2em] mt-1">
                                 Tons CO2 Offset
                             </p>
                         </div>
                     </div>
                     <div
                         class="hidden md:flex flex-col items-center gap-3 absolute left-1/2 -translate-x-1/2 bottom-12">
-                        <p
-                            class="text-charcoal/30 text-[10px] font-bold uppercase tracking-[0.3em]">
+                        <p class="text-charcoal/30 text-[10px] font-bold uppercase tracking-[0.3em]">
                             Explore
                         </p>
                         <div class="w-[1px] h-14 bg-gradient-to-b from-deep-green/30 to-transparent">
                         </div>
                     </div>
                     <div class="hidden lg:flex flex-col items-end">
-                        <p
-                            class="text-charcoal/40 text-[10px] font-bold mb-5 uppercase tracking-[0.15em]">
+                        <p class="text-charcoal/40 text-[10px] font-bold mb-5 uppercase tracking-[0.15em]">
                             Trusted by Environmental Leaders
                         </p>
                         <div class="flex gap-8 opacity-40 grayscale contrast-125">
@@ -255,52 +251,82 @@
             @stack('scripts')
         @endif
 
-        <footer class="bg-background-light dark:bg-background-dark border-t border-gray-200 dark:border-gray-800">
-            <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
-                <div class="flex flex-col md:flex-row justify-between items-center gap-8">
-                    <div class="flex flex-wrap justify-center md:justify-start gap-6">
-                        <a class="text-sm text-gray-600 dark:text-gray-400 hover:text-primary transition-colors"
-                            href="{{ route('about') }}">About</a>
-                        <a class="text-sm text-gray-600 dark:text-gray-400 hover:text-primary transition-colors"
-                            href="{{ route('works') }}">Our Works</a>
-                        <a class="text-sm text-gray-600 dark:text-gray-400 hover:text-primary transition-colors"
-                            href="{{ route('gallery') }}">Gallery</a>
-                        <a class="text-sm text-gray-600 dark:text-gray-400 hover:text-primary transition-colors"
-                            href="{{ route('donators') }}">Donators</a>
-                        <a class="text-sm text-gray-600 dark:text-gray-400 hover:text-primary transition-colors"
-                            href="{{ route('report') }}">Report</a>
+        <footer class="relative z-10 bg-off-white border-t border-charcoal/5 pt-20 pb-12 px-6 md:px-12 lg:px-24">
+            <div class="absolute right-0 bottom-0 opacity-10 select-none pointer-events-none">
+                <span class="material-symbols-outlined text-[20rem] text-gold-accent leading-none">potted_plant</span>
+            </div>
+            <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-16 mb-20 relative z-10">
+                <div class="space-y-6">
+                    <div class="flex items-center gap-2">
+                        <div class="bg-deep-green p-1.5 rounded-lg">
+                            <span class="material-symbols-outlined text-white text-xl">nature</span>
+                        </div>
+                        <h3 class="text-deep-green text-xl font-extrabold tracking-tight">EverGreen</h3>
                     </div>
-                    <div class="flex justify-center gap-6">
-                        <a class="text-gray-500 dark:text-gray-400 hover:text-primary dark:hover:text-primary transition-colors"
-                            href="#">
-                            <svg aria-hidden="true" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                    <p class="text-charcoal/70 leading-relaxed max-w-sm">
+                        Dedicated to restoring Kabul's natural heritage, one tree at a time. We bridge the gap between
+                        global support and local ecological restoration in Afghanistan.
+                    </p>
+                </div>
+                <div class="space-y-6">
+                    <h4 class="font-serif text-lg font-bold text-deep-green">Contact Us</h4>
+                    <ul class="space-y-4 text-sm text-charcoal/70">
+                        <li class="flex items-center gap-3">
+                            <span class="material-symbols-outlined text-sage-green text-lg">mail</span>
+                            <a class="hover:text-primary transition-colors"
+                                href="mailto:tamimalim209@gmail.com">tamimalim209@gmail.com</a>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <span class="material-symbols-outlined text-sage-green text-lg">chat</span>
+                            <a class="hover:text-primary transition-colors" href="https://wa.me/93749290591">+93 749
+                                290 591</a>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="material-symbols-outlined text-sage-green text-lg">location_on</span>
+                            <span>Kabul, Afghanistan<br /><span
+                                    class="text-[10px] font-bold uppercase tracking-wider opacity-60">Visits by
+                                    appointment only</span></span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="space-y-6">
+                    <h4 class="font-serif text-lg font-bold text-deep-green">Quick Links</h4>
+                    <ul class="space-y-3 text-sm font-bold uppercase tracking-widest text-charcoal/60">
+                        <li><a class="hover:text-primary transition-colors" href="#">Impact</a></li>
+                        <li><a class="hover:text-primary transition-colors" href="#">Projects</a></li>
+                        <li><a class="hover:text-primary transition-colors text-primary" href="#">Donation</a>
+                        </li>
+                    </ul>
+                    <div class="flex items-center gap-8">
+                        <a class="text-deep-green hover:text-primary transition-colors" href="#">
+                            <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
                                 <path
-                                    d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.71v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84">
+                                    d="M22.675 0h-21.35c-.732 0-1.325.593-1.325 1.325v21.351c0 .731.593 1.324 1.325 1.324h11.495v-9.294h-3.128v-3.622h3.128v-2.671c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12v9.293h6.116c.73 0 1.323-.593 1.323-1.325v-21.35c0-.732-.593-1.325-1.325-1.325z">
                                 </path>
                             </svg>
                         </a>
-                        <a class="text-gray-500 dark:text-gray-400 hover:text-primary dark:hover:text-primary transition-colors"
-                            href="#">
-                            <svg aria-hidden="true" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
-                                <path clip-rule="evenodd"
-                                    d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"
-                                    fill-rule="evenodd"></path>
+                        <a class="text-deep-green hover:text-primary transition-colors" href="#">
+                            <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                                <path
+                                    d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z">
+                                </path>
                             </svg>
                         </a>
-                        <a class="text-gray-500 dark:text-gray-400 hover:text-primary dark:hover:text-primary transition-colors"
-                            href="#">
-                            <svg aria-hidden="true" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
-                                <path clip-rule="evenodd"
-                                    d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.024.06 1.378.06 3.808s-.012 2.784-.06 3.808c-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.024.048-1.378.06-3.808.06s-2.784-.013-3.808-.06c-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.048-1.024-.06-1.378-.06-3.808s.012-2.784.06-3.808c.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 016.08 2.525c.636-.247 1.363-.416 2.427-.465C9.53 2.013 9.884 2 12.315 2zM12 7a5 5 0 100 10 5 5 0 000-10zm0 8a3 3 0 110-6 3 3 0 010 6zm5.25-9.75a1.25 1.25 0 100-2.5 1.25 1.25 0 000 2.5z"
-                                    fill-rule="evenodd"></path>
+                        <a class="text-deep-green hover:text-primary transition-colors" href="#">
+                            <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                                <path
+                                    d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z">
+                                </path>
                             </svg>
                         </a>
                     </div>
                 </div>
-                <div class="mt-8 border-t border-gray-200 dark:border-gray-800 pt-8 text-center">
-                    <p class="text-sm text-gray-500 dark:text-gray-400">© 2024 Every Tree for Hope. All rights
-                        reserved.</p>
-                </div>
+            </div>
+            <div
+                class="max-w-7xl mx-auto pt-8 border-t border-charcoal/10 flex flex-col md:row justify-between items-center gap-8 relative z-10">
+                <p class="text-xs font-medium text-charcoal/40 uppercase tracking-widest">
+                    © 2024 Kabul Reforestation Initiative. All rights reserved.
+                </p>
             </div>
         </footer>
     </div>
