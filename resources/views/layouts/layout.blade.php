@@ -21,6 +21,8 @@
                         primary: "#22c55e",
                         "deep-green": "#064e3b",
                         "vibrant-lime": "#84cc16",
+                        "sage-green": "#86a693",
+                        "gold-accent": "#d4af37",
                         charcoal: "#374151",
                         "background-light": "#fdfdfd",
                         "background-dark": "#112118",
@@ -56,6 +58,41 @@
             .hero-white-overlay {
                 background: linear-gradient(to bottom, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.7) 100%);
             }
+        }
+
+        .glass-panel {
+            background-color: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.05);
+        }
+
+        .floating {
+            animation: float 8s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%,
+            100% {
+                transform: translateY(0) rotate(0deg);
+            }
+
+            50% {
+                transform: translateY(-15px) rotate(5deg);
+            }
+        }
+
+        .parallax-leaf {
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .gold-line-art {
+            background: linear-gradient(90deg, transparent, #d4af37 50%, transparent);
+            height: 1px;
+            width: 100%;
+            opacity: 0.3;
         }
     </style>
 </head>
