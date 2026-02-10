@@ -106,35 +106,47 @@
     <!-- Founder's Message -->
     <section class="py-32 px-8 bg-white dark:bg-background-dark">
         <div class="max-w-5xl mx-auto">
-            <div class="flex flex-col md:flex-row items-center gap-16">
-                <div class="w-full md:w-1/3">
-                    <div class="aspect-square rounded-full border-8 border-background-light overflow-hidden shadow-xl">
-                        <img alt="Mohammad Iqbal Alimyar" class="w-full h-full object-cover"
-                            data-alt="Portrait of Mohammad Iqbal Alimyar looking inspired"
-                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBFc6_q8OE6jhUzlrpiaswc_o1CdqQ6hwH8oF_3pQn90pTe2wRrUs6AbN1pownHb-U4G2ZPOfTeavje_HdOf6pa0lre-F_e5gUYCG5ddp1IxbJZSBFLGoQt07wx0egQigZRL-smajXqCMUYkA0vFpEHww4ES4q1mDoi3OM3YMbCzna-mfioJcxPU0SNIR1lUDvupNpDoGRkcVsfSlNKge7L0hkbviXomGrQ_HyrlKKIT1oImxjSTAWKJ4EHB0a0uToItW1H92bsNIQ" />
+            @php
+                $founder = \App\Models\Team::active()->where('position', 'Founder & CEO')->first();
+            @endphp
+            @if ($founder)
+                <div class="flex flex-col md:flex-row items-center gap-16">
+                    <div class="w-full md:w-1/3">
+                        <div class="aspect-square rounded-full border-8 border-background-light overflow-hidden shadow-xl">
+                            <img alt="{{ $founder->name }}" class="w-full h-full object-cover"
+                                data-alt="Portrait of {{ $founder->name }}" src="{{ $founder->full_image_url }}" />
+                        </div>
                     </div>
-                </div>
-                <div class="w-full md:w-2/3">
-                    <span class="text-primary font-bold uppercase tracking-tighter text-4xl mb-6 block">"</span>
-                    <blockquote
-                        class="text-3xl md:text-4xl font-display italic text-stone-800 dark:text-stone-200 mb-8 leading-snug">
-                        Every tree planted is a promise kept to the future generations of Kabul. We aren't just planting
-                        wood and leaves; we are planting hope.
-                    </blockquote>
-                    <div class="flex flex-col">
-                        <span class="text-xl font-bold text-stone-900 dark:text-white">Mohammad Iqbal Alimyar</span>
-                        <span class="text-stone-500 uppercase tracking-widest text-sm">Founder &amp; Chief
-                            Visionary</span>
-                        <div class="mt-4 signature-font text-4xl text-accent-gold">
-                            M. Iqbal Alimyar
+                    <div class="w-full md:w-2/3">
+                        <span class="text-primary font-bold uppercase tracking-tighter text-4xl mb-6 block">"</span>
+                        <blockquote
+                            class="text-3xl md:text-4xl font-display italic text-stone-800 dark:text-stone-200 mb-8 leading-snug">
+                            @if ($founder->message)
+                                {{ $founder->message }}
+                            @else
+                                Every tree planted is a promise kept to the future generations of Kabul. We aren't just
+                                planting
+                                wood and leaves; we are planting hope.
+                            @endif
+                        </blockquote>
+                        <div class="flex flex-col">
+                            <span class="text-xl font-bold text-stone-900 dark:text-white">{{ $founder->name }}</span>
+                            <span class="text-stone-500 uppercase tracking-widest text-sm">{{ $founder->position }}</span>
+                            <div class="mt-4 signature-font text-4xl text-accent-gold">
+                                {{ $founder->name }}
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            @else
+                <div class="text-center py-12">
+                    <p class="text-stone-500">Founder & CEO information not available.</p>
+                </div>
+            @endif
         </div>
     </section>
     <!-- Our Team Section -->
-    <section class="py-32 bg-background-light dark:bg-stone-950 px-8">
+    <section id="team-section" class="py-32 bg-background-light dark:bg-stone-950 px-8">
         <div class="max-w-7xl mx-auto">
             <div class="text-center mb-20">
                 <h2 class="text-5xl font-display mb-4">The Visionaries</h2>
@@ -143,7 +155,10 @@
             </div>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12">
                 @php
-                    $teamMembers = \App\Models\Team::active()->ordered()->get();
+                    $teamMembers = \App\Models\Team::active()
+                        ->where('position', '!=', 'Founder & CEO')
+                        ->ordered()
+                        ->get();
                 @endphp
                 @forelse($teamMembers as $member)
                     <div class="group text-center">
@@ -182,6 +197,15 @@
                         <p class="text-stone-500">No team members available at the moment.</p>
                     </div>
                 @endforelse
+            </div>
+
+            <!-- Scroll to Team Button -->
+            <div class="text-center mt-16">
+                <a href="#team-section"
+                    class="inline-flex items-center gap-2 bg-primary text-white px-8 py-4 rounded-full font-bold hover:bg-primary/90 transition-colors duration-300 shadow-lg hover:shadow-xl">
+                    <span>Meet Our Team</span>
+                    <span class="material-symbols-outlined animate-bounce">arrow_downward</span>
+                </a>
             </div>
         </div>
     </section>
