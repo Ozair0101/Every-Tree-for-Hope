@@ -322,8 +322,8 @@
                     <div class="mt-10 pt-6">
                         <button
                             class="w-full py-3 rounded-full bg-white border border-charcoal/10 text-charcoal text-sm font-bold hover:bg-charcoal/5 transition-all flex items-center justify-center gap-2">
-                            <span class="material-symbols-outlined text-lg">download</span>
-                            Download Details (PDF)
+                            <span class="material-symbols-outlined text-lg">picture_as_pdf</span>
+                            Download Bank Details (PDF)
                         </button>
                     </div>
                 </div>
