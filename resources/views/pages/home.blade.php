@@ -351,15 +351,36 @@
         document.addEventListener('DOMContentLoaded', function () {
             var copyTriggers = document.querySelectorAll('.js-copy-trigger[data-copy-text]');
 
+            function showCheckMark(target) {
+                // Remove existing marker on this target if any
+                var existing = target.parentElement.querySelector('.js-copy-check');
+                if (existing) {
+                    existing.remove();
+                }
+
+                var mark = document.createElement('span');
+                mark.className = 'js-copy-check inline-flex items-center justify-center ml-2 text-primary text-xs font-bold';
+                mark.textContent = '✓';
+                target.parentElement.appendChild(mark);
+
+                setTimeout(function () {
+                    if (mark && mark.parentElement) {
+                        mark.parentElement.removeChild(mark);
+                    }
+                }, 1000);
+            }
+
             copyTriggers.forEach(function (el) {
                 el.addEventListener('click', function () {
                     var text = el.getAttribute('data-copy-text');
                     if (!text) return;
 
+                    var onSuccess = function () {
+                        showCheckMark(el);
+                    };
+
                     if (navigator.clipboard && navigator.clipboard.writeText) {
-                        navigator.clipboard.writeText(text).then(function () {
-                            alert('Copied to clipboard');
-                        }).catch(function (err) {
+                        navigator.clipboard.writeText(text).then(onSuccess).catch(function (err) {
                             console.error('Copy failed', err);
                         });
                     } else {
@@ -371,7 +392,7 @@
                         textarea.select();
                         try {
                             document.execCommand('copy');
-                            alert('Copied to clipboard');
+                            onSuccess();
                         } catch (e) {
                             console.error('Copy failed', e);
                         }
