@@ -20,10 +20,10 @@
         </div>
         <!-- Floating Leaf Elements (Decorative) -->
         <div class="absolute top-1/4 left-10 text-primary/30 rotate-12">
-            <span class="material-icons text-6xl">energy_savings_leaf</span>
+            <span class="material-symbols-outlined text-6xl">energy_savings_leaf</span>
         </div>
         <div class="absolute bottom-1/4 right-10 text-primary/20 -rotate-45">
-            <span class="material-icons text-8xl">spa</span>
+            <span class="material-symbols-outlined text-8xl">spa</span>
         </div>
     </header>
     <!-- Our Story Section -->
@@ -72,11 +72,11 @@
                     class="glass-card p-12 rounded-xl relative overflow-hidden group hover:shadow-2xl transition-all duration-500">
                     <div
                         class="absolute top-0 right-0 p-8 text-accent-gold/20 group-hover:text-accent-gold/40 transition-colors">
-                        <span class="material-icons text-8xl">landscape</span>
+                        <span class="material-symbols-outlined text-8xl">landscape</span>
                     </div>
                     <h3 class="text-3xl font-display mb-6 text-stone-900 dark:text-white">Our Mission</h3>
                     <p class="text-xl text-stone-600 dark:text-stone-300 leading-relaxed font-light relative z-10">
-                        To transform Kabul’s urban landscape through sustainable reforestation, fostering a culture of
+                        To transform Kabul's urban landscape through sustainable reforestation, fostering a culture of
                         environmental stewardship that secures a breathable future for all citizens.
                     </p>
                     <div class="mt-8 flex items-center gap-2 text-accent-gold">
@@ -88,7 +88,7 @@
                 <div
                     class="glass-card p-12 rounded-xl relative overflow-hidden group hover:shadow-2xl transition-all duration-500">
                     <div class="absolute top-0 right-0 p-8 text-primary/20 group-hover:text-primary/40 transition-colors">
-                        <span class="material-icons text-8xl">visibility</span>
+                        <span class="material-symbols-outlined text-8xl">visibility</span>
                     </div>
                     <h3 class="text-3xl font-display mb-6 text-stone-900 dark:text-white">Our Vision</h3>
                     <p class="text-xl text-stone-600 dark:text-stone-300 leading-relaxed font-light relative z-10">
@@ -154,9 +154,9 @@
                             class="absolute inset-0 bg-primary/80 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300">
                             <div class="flex gap-4">
                                 <a class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-primary"
-                                    href="#"><span class="material-icons text-sm">link</span></a>
+                                    href="#"><span class="material-symbols-outlined text-sm">link</span></a>
                                 <a class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-primary"
-                                    href="#"><span class="material-icons text-sm">mail</span></a>
+                                    href="#"><span class="material-symbols-outlined text-sm">mail</span></a>
                             </div>
                         </div>
                     </div>
@@ -175,9 +175,9 @@
                             class="absolute inset-0 bg-primary/80 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300">
                             <div class="flex gap-4">
                                 <a class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-primary"
-                                    href="#"><span class="material-icons text-sm">link</span></a>
+                                    href="#"><span class="material-symbols-outlined text-sm">link</span></a>
                                 <a class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-primary"
-                                    href="#"><span class="material-icons text-sm">mail</span></a>
+                                    href="#"><span class="material-symbols-outlined text-sm">mail</span></a>
                             </div>
                         </div>
                     </div>
@@ -196,9 +196,9 @@
                             class="absolute inset-0 bg-primary/80 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300">
                             <div class="flex gap-4">
                                 <a class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-primary"
-                                    href="#"><span class="material-icons text-sm">link</span></a>
+                                    href="#"><span class="material-symbols-outlined text-sm">link</span></a>
                                 <a class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-primary"
-                                    href="#"><span class="material-icons text-sm">mail</span></a>
+                                    href="#"><span class="material-symbols-outlined text-sm">mail</span></a>
                             </div>
                         </div>
                     </div>
@@ -217,9 +217,9 @@
                             class="absolute inset-0 bg-primary/80 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300">
                             <div class="flex gap-4">
                                 <a class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-primary"
-                                    href="#"><span class="material-icons text-sm">link</span></a>
+                                    href="#"><span class="material-symbols-outlined text-sm">link</span></a>
                                 <a class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-primary"
-                                    href="#"><span class="material-icons text-sm">mail</span></a>
+                                    href="#"><span class="material-symbols-outlined text-sm">mail</span></a>
                             </div>
                         </div>
                     </div>
@@ -237,23 +237,23 @@
             <div class="flex flex-wrap justify-center items-center gap-16 opacity-60 hover:opacity-100 transition-opacity">
                 <!-- Mock Logos -->
                 <div class="flex items-center gap-3 grayscale">
-                    <span class="material-icons text-4xl">public</span>
+                    <span class="material-symbols-outlined text-4xl">public</span>
                     <span class="text-2xl font-display font-bold">EarthCare</span>
                 </div>
                 <div class="flex items-center gap-3 grayscale">
-                    <span class="material-icons text-4xl">water_drop</span>
+                    <span class="material-symbols-outlined text-4xl">water_drop</span>
                     <span class="text-2xl font-display font-bold">HydroAlliance</span>
                 </div>
                 <div class="flex items-center gap-3 grayscale">
-                    <span class="material-icons text-4xl">foundation</span>
+                    <span class="material-symbols-outlined text-4xl">foundation</span>
                     <span class="text-2xl font-display font-bold">CivicGreen</span>
                 </div>
                 <div class="flex items-center gap-3 grayscale">
-                    <span class="material-icons text-4xl">forest</span>
+                    <span class="material-symbols-outlined text-4xl">forest</span>
                     <span class="text-2xl font-display font-bold">NatureNet</span>
                 </div>
                 <div class="flex items-center gap-3 grayscale">
-                    <span class="material-icons text-4xl">park</span>
+                    <span class="material-symbols-outlined text-4xl">park</span>
                     <span class="text-2xl font-display font-bold">KabulUnity</span>
                 </div>
             </div>
