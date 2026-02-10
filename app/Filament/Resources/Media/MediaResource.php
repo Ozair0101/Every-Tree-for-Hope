@@ -52,11 +52,6 @@ class MediaResource extends Resource
                     ->label('Active')
                     ->default(true)
                     ->helperText('Inactive items will not be displayed on the website'),
-                Components\TextInput::make('sort_order')
-                    ->label('Sort Order')
-                    ->numeric()
-                    ->default(0)
-                    ->helperText('Lower numbers appear first'),
             ]);
     }
 
@@ -77,9 +72,6 @@ class MediaResource extends Resource
                 Tables\Columns\IconColumn::make('is_active')
                     ->label('Active')
                     ->boolean(),
-                Tables\Columns\TextColumn::make('sort_order')
-                    ->label('Order')
-                    ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -115,8 +107,7 @@ class MediaResource extends Resource
                         ->deselectRecordsAfterCompletion(),
                 ]),
             ])
-            ->defaultSort('sort_order', 'asc')
-            ->reorderable('sort_order');
+            ->defaultSort('date', 'desc');
     }
 
     public static function getRelations(): array
