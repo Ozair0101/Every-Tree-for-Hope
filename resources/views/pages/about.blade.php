@@ -153,13 +153,13 @@
                                 class="w-full h-full object-cover rounded-full filter grayscale group-hover:grayscale-0 transition-all duration-500"
                                 data-alt="Professional portrait of {{ $member->name }}"
                                 src="{{ $member->full_image_url }}" />
-                            @if ($member->linkedin_url || $member->email)
+                            @if ($member->social_media_url || $member->email)
                                 <div
                                     class="absolute inset-0 bg-primary/80 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300">
                                     <div class="flex gap-4">
-                                        @if ($member->linkedin_url)
+                                        @if ($member->social_media_url)
                                             <a class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-primary"
-                                                href="{{ $member->linkedin_url }}" target="_blank"><span
+                                                href="{{ $member->social_media_url }}" target="_blank"><span
                                                     class="material-symbols-outlined text-sm">link</span></a>
                                         @endif
                                         @if ($member->email)
