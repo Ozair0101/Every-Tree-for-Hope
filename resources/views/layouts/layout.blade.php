@@ -97,10 +97,40 @@
             width: 100%;
             opacity: 0.3;
         }
+
+        .botanical-mask {
+            mask-image: linear-gradient(to bottom, black, transparent);
+            -webkit-mask-image: linear-gradient(to bottom, black, transparent);
+        }
+
+        .leaf-float {
+            pointer-events: none;
+            position: absolute;
+            opacity: 0.15;
+        }
+
+        .input-premium {
+            @apply w-full bg-white/40 border-b border-charcoal/10 px-0 py-4 focus:border-deep-green focus:ring-0 transition-colors text-charcoal font-serif placeholder:text-charcoal/30 placeholder:font-sans placeholder:text-sm;
+        }
+
+        .hill-organic-mask {
+            clip-path: polygon(0% 15%, 15% 5%, 35% 20%, 55% 5%, 75% 25%, 100% 10%, 100% 100%, 0% 100%);
+            border-radius: 40% 60% 70% 30% / 40% 40% 60% 60%;
+        }
+
+        .topographical-bg {
+            background-image: url("data:image/svg+xml,%3Csvg width='800' height='800' viewBox='0 0 800 800' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 100 C 150 150, 300 50, 450 100 S 750 150, 800 100' stroke='%23374151' fill='transparent' stroke-opacity='0.05'/%3E%3Cpath d='M0 200 C 200 250, 400 150, 600 200 S 800 250, 800 200' stroke='%23374151' fill='transparent' stroke-opacity='0.03'/%3E%3Cpath d='M0 300 C 100 350, 300 250, 500 300 S 700 350, 800 300' stroke='%23374151' fill='transparent' stroke-opacity='0.04'/%3E%3Cpath d='M0 400 C 250 450, 500 350, 800 400' stroke='%23374151' fill='transparent' stroke-opacity='0.02'/%3E%3Cpath d='M0 500 C 150 550, 350 450, 550 500 S 750 550, 800 500' stroke='%23374151' fill='transparent' stroke-opacity='0.05'/%3E%3C/svg%3E");
+            background-size: cover;
+        }
+
+        .off-white {
+            background-color: #f9fafb;
+        }
     </style>
 </head>
 
-<body class="bg-background-light dark:bg-background-dark font-sans text-charcoal dark:text-gray-200 overflow-x-hidden">
+<body
+    class="bg-background-light dark:bg-background-dark font-sans text-charcoal dark:text-gray-200 overflow-x-hidden {{ Route::currentRouteName() === 'contact' ? 'topographical-bg' : '' }}">
     <div class="flex flex-col min-h-screen">
         @if (Route::currentRouteName() === 'home')
             <div class="relative min-h-screen w-full flex flex-col overflow-hidden">
@@ -236,6 +266,8 @@
                             href="{{ route('donators') }}">Donators</a>
                         <a class="text-sm font-medium hover:text-primary transition-colors"
                             href="{{ route('report') }}">Report</a>
+                        <a class="text-sm font-medium hover:text-primary transition-colors"
+                            href="{{ route('contact') }}">Contact</a>
                     </div>
                     <div class="flex items-center gap-2">
                         <button
