@@ -151,7 +151,8 @@
                             class="relative mb-6 mx-auto w-64 h-64 rounded-full overflow-hidden border-4 border-transparent group-hover:border-primary transition-all duration-500 p-2">
                             <img alt="{{ $member->name }}"
                                 class="w-full h-full object-cover rounded-full filter grayscale group-hover:grayscale-0 transition-all duration-500"
-                                data-alt="Professional portrait of {{ $member->name }}" src="{{ $member->image_url }}" />
+                                data-alt="Professional portrait of {{ $member->name }}"
+                                src="{{ $member->full_image_url }}" />
                             @if ($member->linkedin_url || $member->email)
                                 <div
                                     class="absolute inset-0 bg-primary/80 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300">
