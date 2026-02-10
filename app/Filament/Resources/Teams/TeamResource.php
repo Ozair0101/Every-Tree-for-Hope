@@ -49,11 +49,11 @@ class TeamResource extends Resource
                     ->imageEditor()
                     ->helperText('Upload the team member\'s profile photo')
                     ->columnSpanFull(),
-                Components\TextInput::make('linkedin_url')
-                    ->label('LinkedIn URL')
+                Components\TextInput::make('social_media_url')
+                    ->label('Social Media URL')
                     ->url()
-                    ->placeholder('https://linkedin.com/in/username')
-                    ->helperText('Optional: Link to LinkedIn profile')
+                    ->placeholder('https://twitter.com/username or https://linkedin.com/in/username')
+                    ->helperText('Optional: Link to any social media profile (Twitter, LinkedIn, Instagram, etc.)')
                     ->columnSpanFull(),
                 Components\TextInput::make('email')
                     ->email()
