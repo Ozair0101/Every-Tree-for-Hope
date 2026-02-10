@@ -10,7 +10,7 @@ class Team extends Model
         'name',
         'position',
         'image',
-        'linkedin_url',
+        'social_media_url',
         'email',
         'bio',
         'message',
