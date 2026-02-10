@@ -80,6 +80,41 @@
                         24h</p>
                 </div>
             </section>
+            <section class="w-full max-w-5xl mx-auto px-6 mb-32">
+                <div class="glass-panel p-12 md:p-20 rounded-[3rem] relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-64 h-64 opacity-5 pointer-events-none botanical-mask">
+                        <img alt="nature" class="object-cover w-full h-full"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCp83JCfKCRYgHZuZA8dzBJ3Ih5yeidFw9eQGrfMH89CUBjfUnGXPlxXvfb0DmVToP0iwQwPaK0W5XabUIrIKFxbSwRZd0LqiyyCermKdbgrB2uPKlC48Z7W_on-lUkUOnlJd62ok3dkmH7JXdQxf63fiy8lTJ7mxggLO5Vjo_p7uKwbi43Dl3GWm8aiiPqcYvOfRpQgKV513yPQakVJ-1w2d86ue27OPY3p8N9H5sr5Mg5oew18KgTO2Ehhj7cSGj-2a6ht7DOZOs" />
+                    </div>
+                    <div class="max-w-2xl relative z-10">
+                        <h2 class="font-serif text-4xl text-deep-green mb-10">Send a Message</h2>
+                        <form class="space-y-8">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                                <div class="relative">
+                                    <input class="input-premium" placeholder="Your Name" type="text" />
+                                </div>
+                                <div class="relative">
+                                    <input class="input-premium" placeholder="Email Address" type="email" />
+                                </div>
+                            </div>
+                            <div class="relative">
+                                <input class="input-premium" placeholder="Subject" type="text" />
+                            </div>
+                            <div class="relative">
+                                <textarea class="input-premium resize-none" placeholder="How can we help you plant the future?" rows="4"></textarea>
+                            </div>
+                            <div class="pt-6">
+                                <button
+                                    class="bg-deep-green text-white px-12 py-5 rounded-full font-bold text-sm tracking-widest uppercase hover:bg-deep-green/90 transition-all shadow-xl shadow-deep-green/20 flex items-center gap-3"
+                                    type="submit">
+                                    Send Message
+                                    <span class="material-symbols-outlined text-lg">arrow_right_alt</span>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </section>
             <section class="w-full py-16 bg-white border-y border-charcoal/5">
                 <div class="max-w-7xl mx-auto px-6 text-center">
                     <p class="text-[10px] font-bold text-sage-green uppercase tracking-[0.3em] mb-10">Follow the
