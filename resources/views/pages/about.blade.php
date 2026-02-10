@@ -173,6 +173,9 @@
                         </div>
                         <h4 class="text-xl font-bold text-stone-900 dark:text-white">{{ $member->name }}</h4>
                         <p class="text-stone-500 font-light">{{ $member->position }}</p>
+                        @if ($member->message)
+                            <p class="text-stone-600 italic text-sm mt-3 max-w-xs mx-auto">"{{ $member->message }}"</p>
+                        @endif
                     </div>
                 @empty
                     <div class="col-span-full text-center py-12">

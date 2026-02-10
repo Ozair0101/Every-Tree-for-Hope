@@ -13,6 +13,7 @@ class Team extends Model
         'linkedin_url',
         'email',
         'bio',
+        'message',
         'is_active',
     ];
 

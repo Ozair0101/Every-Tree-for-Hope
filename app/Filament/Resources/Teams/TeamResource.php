@@ -65,6 +65,11 @@ class TeamResource extends Resource
                     ->rows(4)
                     ->helperText('Optional: Brief biography or description')
                     ->columnSpanFull(),
+                Components\Textarea::make('message')
+                    ->label('Partner Message')
+                    ->rows(3)
+                    ->helperText('Optional: Personal message or quote from the team member')
+                    ->columnSpanFull(),
                 Components\Toggle::make('is_active')
                     ->label('Active')
                     ->default(true)
