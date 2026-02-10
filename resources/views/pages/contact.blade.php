@@ -88,27 +88,35 @@
                     </div>
                     <div class="max-w-2xl relative z-10">
                         <h2 class="font-serif text-4xl text-deep-green mb-10">Send a Message</h2>
-                        <form class="space-y-8">
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                                <div class="relative">
-                                    <input class="input-premium" placeholder="Your Name" type="text" />
+                        <form class="space-y-6">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <input
+                                        class="w-full bg-white/60 backdrop-blur-sm border border-white/20 rounded-xl px-4 py-3 focus:border-deep-green focus:ring-2 focus:ring-deep-green/20 transition-all text-charcoal placeholder:text-charcoal/40"
+                                        placeholder="Your Name" type="text" />
                                 </div>
-                                <div class="relative">
-                                    <input class="input-premium" placeholder="Email Address" type="email" />
+                                <div>
+                                    <input
+                                        class="w-full bg-white/60 backdrop-blur-sm border border-white/20 rounded-xl px-4 py-3 focus:border-deep-green focus:ring-2 focus:ring-deep-green/20 transition-all text-charcoal placeholder:text-charcoal/40"
+                                        placeholder="Email Address" type="email" />
                                 </div>
                             </div>
-                            <div class="relative">
-                                <input class="input-premium" placeholder="Subject" type="text" />
+                            <div>
+                                <input
+                                    class="w-full bg-white/60 backdrop-blur-sm border border-white/20 rounded-xl px-4 py-3 focus:border-deep-green focus:ring-2 focus:ring-deep-green/20 transition-all text-charcoal placeholder:text-charcoal/40"
+                                    placeholder="Subject" type="text" />
                             </div>
-                            <div class="relative">
-                                <textarea class="input-premium resize-none" placeholder="How can we help you plant the future?" rows="4"></textarea>
+                            <div>
+                                <textarea
+                                    class="w-full bg-white/60 backdrop-blur-sm border border-white/20 rounded-xl px-4 py-3 focus:border-deep-green focus:ring-2 focus:ring-deep-green/20 transition-all text-charcoal placeholder:text-charcoal/40 resize-none"
+                                    placeholder="How can we help you plant the future?" rows="4"></textarea>
                             </div>
-                            <div class="pt-6">
+                            <div class="pt-4">
                                 <button
-                                    class="bg-deep-green text-white px-12 py-5 rounded-full font-bold text-sm tracking-widest uppercase hover:bg-deep-green/90 transition-all shadow-xl shadow-deep-green/20 flex items-center gap-3"
+                                    class="bg-deep-green text-white px-8 py-3 rounded-xl font-semibold text-sm hover:bg-deep-green/90 transition-all shadow-lg shadow-deep-green/20 flex items-center gap-2"
                                     type="submit">
                                     Send Message
-                                    <span class="material-symbols-outlined text-lg">arrow_right_alt</span>
+                                    <span class="material-symbols-outlined">arrow_right_alt</span>
                                 </button>
                             </div>
                         </form>
