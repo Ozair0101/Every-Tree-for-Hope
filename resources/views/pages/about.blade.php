@@ -149,7 +149,7 @@
     <section id="team-section" class="py-32 bg-background-light dark:bg-stone-950 px-8">
         <div class="max-w-7xl mx-auto">
             <div class="text-center mb-20">
-                <h2 class="text-5xl font-display mb-4">The Visionaries</h2>
+                <h2 class="text-5xl font-display mb-4">Our Team</h2>
                 <p class="text-stone-500 tracking-widest uppercase text-sm">A dedicated collective of ecologists and
                     activists</p>
             </div>
@@ -212,7 +212,7 @@
     <!-- Partners Section -->
     <section class="py-24 bg-white dark:bg-stone-900 overflow-hidden">
         <div class="max-w-7xl mx-auto px-8">
-            <h5 class="text-center text-stone-400 uppercase tracking-[0.4em] text-xs font-bold mb-16">Global Partners
+            <h5 class="text-center text-stone-400 uppercase tracking-[0.4em] text-xl font-bold mb-16">Global Partners
                 &amp; Allies</h5>
             <div class="flex flex-wrap justify-center items-center gap-16 opacity-60 hover:opacity-100 transition-opacity">
                 <!-- Mock Logos -->

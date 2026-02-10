@@ -62,6 +62,8 @@ class TeamResource extends Resource
                     ->required()
                     ->image()
                     ->directory('team-photos')
+                    ->disk('public')
+                    ->visibility('public')
                     ->imageEditor()
                     ->helperText('Upload the team member\'s profile photo')
                     ->columnSpanFull(),
