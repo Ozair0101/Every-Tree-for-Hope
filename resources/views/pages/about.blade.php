@@ -142,90 +142,42 @@
                     activists</p>
             </div>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12">
-                <!-- Team Member 1 -->
-                <div class="group text-center">
-                    <div
-                        class="relative mb-6 mx-auto w-64 h-64 rounded-full overflow-hidden border-4 border-transparent group-hover:border-primary transition-all duration-500 p-2">
-                        <img alt="Team Member"
-                            class="w-full h-full object-cover rounded-full filter grayscale group-hover:grayscale-0 transition-all duration-500"
-                            data-alt="Professional portrait of a female ecologist"
-                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuC4plSKBs97i04FxD7P-RAjP4DF9aQo-JFcVelGQ9VeYGVHvnrj_zXG6CsEqmcYWysyULa6MNr2CdxE1ooWz1NNuXF3J1ld2E9zrkyYs36nl8F2FCFftTf3tOz5mUejpDoZMc8tR7lpQftFs_xB2UNU8KWG1xf_ZzfO01oSfFCkcImByIjmOsTXFsavn1-VynnrAC0k8Cex8FPbdEtMR9bD_1BjeUulqlgPdtpaZIxH8KaHx2aY2r8YHb5UFg6Vn-Jj3T6NA8TKxXw" />
+                @php
+                    $teamMembers = \App\Models\Team::active()->ordered()->get();
+                @endphp
+                @forelse($teamMembers as $member)
+                    <div class="group text-center">
                         <div
-                            class="absolute inset-0 bg-primary/80 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300">
-                            <div class="flex gap-4">
-                                <a class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-primary"
-                                    href="#"><span class="material-symbols-outlined text-sm">link</span></a>
-                                <a class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-primary"
-                                    href="#"><span class="material-symbols-outlined text-sm">mail</span></a>
-                            </div>
+                            class="relative mb-6 mx-auto w-64 h-64 rounded-full overflow-hidden border-4 border-transparent group-hover:border-primary transition-all duration-500 p-2">
+                            <img alt="{{ $member->name }}"
+                                class="w-full h-full object-cover rounded-full filter grayscale group-hover:grayscale-0 transition-all duration-500"
+                                data-alt="Professional portrait of {{ $member->name }}" src="{{ $member->image_url }}" />
+                            @if ($member->linkedin_url || $member->email)
+                                <div
+                                    class="absolute inset-0 bg-primary/80 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300">
+                                    <div class="flex gap-4">
+                                        @if ($member->linkedin_url)
+                                            <a class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-primary"
+                                                href="{{ $member->linkedin_url }}" target="_blank"><span
+                                                    class="material-symbols-outlined text-sm">link</span></a>
+                                        @endif
+                                        @if ($member->email)
+                                            <a class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-primary"
+                                                href="mailto:{{ $member->email }}"><span
+                                                    class="material-symbols-outlined text-sm">mail</span></a>
+                                        @endif
+                                    </div>
+                                </div>
+                            @endif
                         </div>
+                        <h4 class="text-xl font-bold text-stone-900 dark:text-white">{{ $member->name }}</h4>
+                        <p class="text-stone-500 font-light">{{ $member->position }}</p>
                     </div>
-                    <h4 class="text-xl font-bold text-stone-900 dark:text-white">Zahra Ahmadi</h4>
-                    <p class="text-stone-500 font-light">Lead Ecologist</p>
-                </div>
-                <!-- Team Member 2 -->
-                <div class="group text-center">
-                    <div
-                        class="relative mb-6 mx-auto w-64 h-64 rounded-full overflow-hidden border-4 border-transparent group-hover:border-primary transition-all duration-500 p-2">
-                        <img alt="Team Member"
-                            class="w-full h-full object-cover rounded-full filter grayscale group-hover:grayscale-0 transition-all duration-500"
-                            data-alt="Professional portrait of a male urban planner"
-                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDIk8_LctVt2OdUjiStQeXQ5dTXtgC2blBRUKi1_JbmKROoafAJFJRQy-reBMtETPjx4jutjwziyDPxMSDf3UTBdwtLaMHGzsKiQFSE1-6cUImH4ik3IiOES35KZc3bjuA5Wg1kumb__UQjdazTMW5hkniWuLdFy_NtdT-OM__nBw0W3F1dEBCGUMhTflFNIxJPvs-D4L_y6lA_14cW_y7H1UIfYgOsqywtB-2TbhNI7tAdOAh9x-1NzkGlmWkoQuEEtCvVaNl-8Wo" />
-                        <div
-                            class="absolute inset-0 bg-primary/80 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300">
-                            <div class="flex gap-4">
-                                <a class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-primary"
-                                    href="#"><span class="material-symbols-outlined text-sm">link</span></a>
-                                <a class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-primary"
-                                    href="#"><span class="material-symbols-outlined text-sm">mail</span></a>
-                            </div>
-                        </div>
+                @empty
+                    <div class="col-span-full text-center py-12">
+                        <p class="text-stone-500">No team members available at the moment.</p>
                     </div>
-                    <h4 class="text-xl font-bold text-stone-900 dark:text-white">Omar Kakar</h4>
-                    <p class="text-stone-500 font-light">Community Director</p>
-                </div>
-                <!-- Team Member 3 -->
-                <div class="group text-center">
-                    <div
-                        class="relative mb-6 mx-auto w-64 h-64 rounded-full overflow-hidden border-4 border-transparent group-hover:border-primary transition-all duration-500 p-2">
-                        <img alt="Team Member"
-                            class="w-full h-full object-cover rounded-full filter grayscale group-hover:grayscale-0 transition-all duration-500"
-                            data-alt="Professional portrait of a female operations manager"
-                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDICKjikr3Jm14xRekvLOyVnMp-38lnZ_4N4DlQraCbyhlJIEtJXa8JRBgeh9HJKPEasi0bDiAPq3nAd7sfi1FZQfAlBI36RR2dlOuw2p6ND_HXWDbvCFoj2vc6WO-IMk_rDJEfhmEy8AAjFr9f6sao5NNWlD2nismocr3Jbk88traj3omZ1VpQwiDgWHUgX_XtI3Z5wGRgZEYLO6Wy4HmMQGu8AXRMJ_FgglyqCUpgK4JriKdn_-wvEXIg5XznocbgtU1iejy23wA" />
-                        <div
-                            class="absolute inset-0 bg-primary/80 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300">
-                            <div class="flex gap-4">
-                                <a class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-primary"
-                                    href="#"><span class="material-symbols-outlined text-sm">link</span></a>
-                                <a class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-primary"
-                                    href="#"><span class="material-symbols-outlined text-sm">mail</span></a>
-                            </div>
-                        </div>
-                    </div>
-                    <h4 class="text-xl font-bold text-stone-900 dark:text-white">Laila Rahmani</h4>
-                    <p class="text-stone-500 font-light">Operations Manager</p>
-                </div>
-                <!-- Team Member 4 -->
-                <div class="group text-center">
-                    <div
-                        class="relative mb-6 mx-auto w-64 h-64 rounded-full overflow-hidden border-4 border-transparent group-hover:border-primary transition-all duration-500 p-2">
-                        <img alt="Team Member"
-                            class="w-full h-full object-cover rounded-full filter grayscale group-hover:grayscale-0 transition-all duration-500"
-                            data-alt="Professional portrait of a male botanist"
-                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAgn_MjtW5StZRmyD7iAjDp-tR0K2O_IR0tVvVNdi3HBqOJuR5MsBvZ1LP-7RYkzo0SEnMZGM2FIdiQgzLVTcB4uHEyzQAg4n4o9BcNyz67j4GMvgNc-skSLlSBmGICRk-b7DYG5MLAZhTrYq0o1xY8XmsWY6zPqKy6ISr4DZ_VS_wqUBNoqCC4cxbThxQG15yp5QS53I1a5DwFYZ2WPbS71cqjZKdZJ_-9k0GpZXT5EhZlPy3KclBbGsvO_BLgbAt1FDyVDPeSNpQ" />
-                        <div
-                            class="absolute inset-0 bg-primary/80 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300">
-                            <div class="flex gap-4">
-                                <a class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-primary"
-                                    href="#"><span class="material-symbols-outlined text-sm">link</span></a>
-                                <a class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-primary"
-                                    href="#"><span class="material-symbols-outlined text-sm">mail</span></a>
-                            </div>
-                        </div>
-                    </div>
-                    <h4 class="text-xl font-bold text-stone-900 dark:text-white">Ahmad Shah</h4>
-                    <p class="text-stone-500 font-light">Botanist</p>
-                </div>
+                @endforelse
             </div>
         </div>
     </section>
