@@ -35,7 +35,6 @@ class MediaController extends Controller
             'video_youtube_url' => 'required|string|max:255',
             'description' => 'nullable|string',
             'is_active' => 'boolean',
-            'sort_order' => 'integer|min:0',
         ]);
 
         Media::create($validated);
@@ -71,7 +70,6 @@ class MediaController extends Controller
             'video_youtube_url' => 'required|string|max:255',
             'description' => 'nullable|string',
             'is_active' => 'boolean',
-            'sort_order' => 'integer|min:0',
         ]);
 
         $media->update($validated);
