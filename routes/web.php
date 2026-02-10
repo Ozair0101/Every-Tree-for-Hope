@@ -25,3 +25,7 @@ Route::get('/donators', function () {
 Route::get('/report', function () {
     return view('pages.report');
 })->name('report');
+
+Route::get('/contact', function () {
+    return view('pages.contact');
+})->name('contact');
