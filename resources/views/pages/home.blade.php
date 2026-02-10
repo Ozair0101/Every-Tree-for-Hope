@@ -113,7 +113,7 @@
                 <div class="relative">
                     <div id="videoContainer" class="flex gap-6 overflow-x-hidden pb-8 px-4 -mx-4">
                         @php
-                            $mediaItems = \App\Models\Media::active()->ordered()->get();
+                            $mediaItems = \App\Models\Media::active()->ordered()->take(10)->get();
                         @endphp
                         @forelse($mediaItems as $index => $media)
                             <div class="flex-shrink-0 w-80 group cursor-pointer"
