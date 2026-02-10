@@ -41,11 +41,13 @@ class TeamResource extends Resource
                     ->required()
                     ->maxLength(255)
                     ->columnSpanFull(),
-                Components\TextInput::make('image_url')
-                    ->label('Profile Image URL')
+                Components\FileUpload::make('image')
+                    ->label('Profile Photo')
                     ->required()
-                    ->placeholder('https://example.com/image.jpg')
-                    ->helperText('Enter the full URL to the team member\'s profile image')
+                    ->image()
+                    ->directory('team-photos')
+                    ->imageEditor()
+                    ->helperText('Upload the team member\'s profile photo')
                     ->columnSpanFull(),
                 Components\TextInput::make('linkedin_url')
                     ->label('LinkedIn URL')
@@ -67,11 +69,6 @@ class TeamResource extends Resource
                     ->label('Active')
                     ->default(true)
                     ->helperText('Inactive members will not be displayed on the website'),
-                Components\TextInput::make('sort_order')
-                    ->label('Sort Order')
-                    ->numeric()
-                    ->default(0)
-                    ->helperText('Lower numbers appear first'),
             ]);
     }
 
@@ -85,16 +82,13 @@ class TeamResource extends Resource
                 Tables\Columns\TextColumn::make('position')
                     ->label('Position')
                     ->searchable(),
-                Tables\Columns\ImageColumn::make('image_url')
+                Tables\Columns\ImageColumn::make('image')
                     ->label('Photo')
                     ->circular()
                     ->defaultImageUrl(url('/placeholder-user.jpg')),
                 Tables\Columns\IconColumn::make('is_active')
                     ->label('Active')
                     ->boolean(),
-                Tables\Columns\TextColumn::make('sort_order')
-                    ->label('Order')
-                    ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -130,8 +124,7 @@ class TeamResource extends Resource
                         ->deselectRecordsAfterCompletion(),
                 ]),
             ])
-            ->defaultSort('sort_order', 'asc')
-            ->reorderable('sort_order');
+            ->defaultSort('name', 'asc');
     }
 
     public static function getRelations(): array
