@@ -6,18 +6,17 @@ use App\Filament\Resources\ContactMessages\Pages\ListContactMessages;
 use App\Models\ContactMessage;
 use BackedEnum;
 use Filament\Forms;
-use Filament\Forms\Form;
 use Filament\Resources\Resource;
+use Filament\Schemas\Schema;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
-use Filament\Icons\Heroicon;
 
 class ContactMessageResource extends Resource
 {
     protected static ?string $model = ContactMessage::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedEnvelope;
+    protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-envelope';
 
     protected static ?string $navigationLabel = 'Contact Messages';
 
@@ -25,9 +24,9 @@ class ContactMessageResource extends Resource
 
     protected static ?string $pluralModelLabel = 'Contact Messages';
 
-    public static function form(Form $form): Form
+    public static function form(Schema $schema): Schema
     {
-        return $form
+        return $schema
             ->schema([
                 Forms\Components\Section::make('Message Details')
                     ->schema([
