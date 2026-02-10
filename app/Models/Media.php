@@ -12,13 +12,11 @@ class Media extends Model
         'video_youtube_url',
         'description',
         'is_active',
-        'sort_order',
     ];
 
     protected $casts = [
         'date' => 'date',
         'is_active' => 'boolean',
-        'sort_order' => 'integer',
     ];
 
     /**
@@ -67,10 +65,10 @@ class Media extends Model
     }
 
     /**
-     * Scope to order by sort order and date
+     * Scope to order by date (newest first)
      */
     public function scopeOrdered($query)
     {
-        return $query->orderBy('sort_order')->orderBy('date', 'desc');
+        return $query->orderBy('date', 'desc');
     }
 }
