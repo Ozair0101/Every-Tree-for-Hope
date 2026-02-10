@@ -2,6 +2,15 @@
 
 @section('content')
     <div class="relative min-h-screen w-full flex flex-col">
+        @if (session('success'))
+            <div class="relative z-10 mx-auto max-w-5xl px-6 pt-8">
+                <div class="bg-green-50 border border-green-200 text-green-800 px-6 py-4 rounded-xl flex items-center gap-3 success-message"
+                    id="successMessage">
+                    <span class="material-symbols-outlined text-green-600">check_circle</span>
+                    <p class="font-medium">{{ session('success') }}</p>
+                </div>
+            </div>
+        @endif
         <div class="absolute inset-0 z-0 overflow-hidden pointer-events-none">
             <div class="absolute top-20 right-[-5%] text-sage-green/5">
                 <span class="material-symbols-outlined text-[30rem] select-none rotate-12">spa</span>
@@ -88,28 +97,29 @@
                     </div>
                     <div class="max-w-2xl relative z-10">
                         <h2 class="font-serif text-4xl text-deep-green mb-10">Send a Message</h2>
-                        <form class="space-y-6">
+                        <form action="{{ route('contact.submit') }}" method="POST" class="space-y-6">
+                            @csrf
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div>
                                     <input
                                         class="w-full bg-white/60 backdrop-blur-sm border border-gray-300 rounded-xl px-4 py-3 focus:border-deep-green focus:ring-2 focus:ring-deep-green/20 transition-all text-charcoal placeholder:text-charcoal/40"
-                                        placeholder="Your Name" type="text" />
+                                        placeholder="Your Name" type="text" name="name" required />
                                 </div>
                                 <div>
                                     <input
                                         class="w-full bg-white/60 backdrop-blur-sm border border-gray-300 rounded-xl px-4 py-3 focus:border-deep-green focus:ring-2 focus:ring-deep-green/20 transition-all text-charcoal placeholder:text-charcoal/40"
-                                        placeholder="Email Address" type="email" />
+                                        placeholder="Email Address" type="email" name="email" required />
                                 </div>
                             </div>
                             <div>
                                 <input
                                     class="w-full bg-white/60 backdrop-blur-sm border border-gray-300 rounded-xl px-4 py-3 focus:border-deep-green focus:ring-2 focus:ring-deep-green/20 transition-all text-charcoal placeholder:text-charcoal/40"
-                                    placeholder="Subject" type="text" />
+                                    placeholder="Subject" type="text" name="subject" required />
                             </div>
                             <div>
                                 <textarea
                                     class="w-full bg-white/60 backdrop-blur-sm border border-gray-300 rounded-xl px-4 py-3 focus:border-deep-green focus:ring-2 focus:ring-deep-green/20 transition-all text-charcoal placeholder:text-charcoal/40 resize-none"
-                                    placeholder="How can we help you plant the future?" rows="4"></textarea>
+                                    placeholder="How can we help you plant the future?" rows="4" name="message" required></textarea>
                             </div>
                             <div class="pt-4">
                                 <button
@@ -182,3 +192,20 @@
         </main>
     </div>
 @endsection
+
+@push('scripts')
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const successMessage = document.getElementById('successMessage');
+            if (successMessage) {
+                setTimeout(function() {
+                    successMessage.style.transition = 'opacity 0.5s ease-out';
+                    successMessage.style.opacity = '0';
+                    setTimeout(function() {
+                        successMessage.remove();
+                    }, 500);
+                }, 3000);
+            }
+        });
+    </script>
+@endpush
