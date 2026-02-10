@@ -9,17 +9,15 @@ class Team extends Model
     protected $fillable = [
         'name',
         'position',
-        'image_url',
+        'image',
         'linkedin_url',
         'email',
         'bio',
         'is_active',
-        'sort_order',
     ];
 
     protected $casts = [
         'is_active' => 'boolean',
-        'sort_order' => 'integer',
     ];
 
     /**
@@ -31,11 +29,11 @@ class Team extends Model
     }
 
     /**
-     * Scope to order by sort order and name
+     * Scope to order by name
      */
     public function scopeOrdered($query)
     {
-        return $query->orderBy('sort_order')->orderBy('name');
+        return $query->orderBy('name');
     }
 
     /**
@@ -43,6 +41,9 @@ class Team extends Model
      */
     public function getFullImageUrlAttribute()
     {
-        return $this->image_url;
+        if ($this->image) {
+            return asset('storage/' . $this->image);
+        }
+        return asset('placeholder-user.jpg');
     }
 }
