@@ -132,156 +132,44 @@
 <body
     class="bg-background-light dark:bg-background-dark font-sans text-charcoal dark:text-gray-200 overflow-x-hidden {{ Route::currentRouteName() === 'contact' ? 'topographical-bg' : '' }}">
     <div class="flex flex-col min-h-screen">
-        @if (Route::currentRouteName() === 'home')
-            <div class="relative min-h-screen w-full flex flex-col overflow-hidden">
-                <div class="absolute inset-0 z-0">
-                    <div class="w-full h-full bg-cover bg-center"
-                        style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCp83JCfKCRYgHZuZA8dzBJ3Ih5yeidFw9eQGrfMH89CUBjfUnGXPlxXvfb0DmVToP0iwQwPaK0W5XabUIrIKFxbSwRZd0LqiyyCermKdbgrB2uPKlC48Z7W_on-lUkUOnlJd62ok3dkmH7JXdQxf63fiy8lTJ7mxggLO5Vjo_p7uKwbi43Dl3GWm8aiiPqcYvOfRpQgKV513yPQakVJ-1w2d86ue27OPY3p8N9H5sr5Mg5oew18KgTO2Ehhj7cSGj-2a6ht7DOZOs');">
-                    </div>
-                    <div class="absolute inset-0 hero-white-overlay"></div>
+        <header
+            class="sticky top-0 z-50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-sm border-b border-gray-200 dark:border-gray-800">
+            <nav class="container mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between">
+                <a class="flex items-center gap-3" href="{{ route('home') }}">
+                    <svg class="h-6 w-6 text-primary" fill="none" viewBox="0 0 48 48"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M24 4C25.7818 14.2173 33.7827 22.2182 44 24C33.7827 25.7818 25.7818 33.7827 24 44C22.2182 33.7827 14.2173 25.7818 4 24C14.2173 22.2182 22.2182 14.2173 24 4Z"
+                            fill="currentColor"></path>
+                    </svg>
+                    <h2 class="text-xl font-bold text-gray-900 dark:text-white">Every Tree for Hope</h2>
+                </a>
+                <div class="hidden md:flex items-center gap-8">
+                    <a class="text-sm font-medium hover:text-primary transition-colors"
+                        href="{{ route('about') }}">About</a>
+                    <a class="text-sm font-medium hover:text-primary transition-colors" href="{{ route('works') }}">Our
+                        Works</a>
+                    <a class="text-sm font-medium hover:text-primary transition-colors"
+                        href="{{ route('gallery') }}">Gallery</a>
+                    <a class="text-sm font-medium hover:text-primary transition-colors"
+                        href="{{ route('donators') }}">Donators</a>
+                    <a class="text-sm font-medium hover:text-primary transition-colors"
+                        href="{{ route('report') }}">Report</a>
+                    <a class="text-sm font-medium hover:text-primary transition-colors"
+                        href="{{ route('contact') }}">Contact</a>
                 </div>
-                <header class="relative z-20 flex items-center justify-between px-6 py-8 md:px-12 lg:px-24">
-                    <a href="{{ route('home') }}" class="flex items-center gap-2 group cursor-pointer">
-                        <div class="bg-deep-green p-1.5 rounded-lg flex items-center justify-center">
-                            <span class="material-symbols-outlined text-white text-2xl font-bold">nature</span>
-                        </div>
-                        <h2 class="text-deep-green text-xl font-extrabold tracking-tight">EverGreen</h2>
-                    </a>
-                    <nav class="hidden md:flex items-center gap-10">
-                        <a class="text-charcoal hover:text-primary transition-colors text-sm font-bold tracking-wide"
-                            href="{{ route('about') }}">Impact</a>
-                        <a class="text-charcoal hover:text-primary transition-colors text-sm font-bold tracking-wide"
-                            href="{{ route('works') }}">Projects</a>
-                        <a class="text-charcoal hover:text-primary transition-colors text-sm font-bold tracking-wide"
-                            href="{{ route('gallery') }}">Our Mission</a>
-                        <a class="text-charcoal hover:text-primary transition-colors text-sm font-bold tracking-wide"
-                            href="{{ route('report') }}">Transparency</a>
-                    </nav>
-                    <div class="flex items-center gap-4">
-                        <button
-                            class="hidden sm:flex items-center justify-center px-5 py-2.5 rounded-lg bg-transparent hover:bg-charcoal/5 text-charcoal border border-charcoal/20 transition-all text-sm font-bold">
-                            Join Us
-                        </button>
-                        <button
-                            class="flex items-center justify-center px-6 py-2.5 rounded-lg bg-primary hover:bg-primary/90 text-white transition-all text-sm font-extrabold shadow-lg shadow-primary/20">
-                            Donate
-                        </button>
-                    </div>
-                </header>
-
-                <main class="relative z-10 flex flex-1 flex-col justify-center px-6 md:px-12 lg:px-24 pb-20">
-                    <div class="max-w-3xl space-y-8">
-                        <div
-                            class="inline-flex items-center gap-2 bg-deep-green/5 border border-deep-green/10 px-4 py-2 rounded-full">
-                            <span class="flex h-2 w-2 rounded-full bg-primary animate-pulse"></span>
-                            <p class="text-deep-green text-[10px] font-bold uppercase tracking-[0.2em]">
-                                Global Reforestation Mission
-                            </p>
-                        </div>
-                        <h1
-                            class="text-deep-green text-6xl md:text-7xl lg:text-8xl font-serif font-bold leading-[1.05] tracking-tight">
-                            Rooting for <br />
-                            <span class="text-vibrant-lime italic font-black">the Future</span>
-                        </h1>
-                        <p class="text-charcoal/80 text-lg md:text-xl max-w-xl font-medium leading-relaxed">
-                            Join our global community in restoring the world's forests one seedling at a time.
-                            Transparent, tracked, and impactful climate action starting today.
-                        </p>
-                        <div class="flex flex-col sm:flex-row gap-4 pt-4">
-                            <button
-                                class="flex min-w-[220px] h-14 items-center justify-center rounded-lg bg-primary hover:bg-primary/90 text-white text-lg font-extrabold transition-all shadow-xl shadow-primary/20 group">
-                                Plant a Tree Today
-                                <span
-                                    class="material-symbols-outlined ml-2 group-hover:translate-x-1 transition-transform">arrow_forward</span>
-                            </button>
-                            <button
-                                class="flex min-w-[220px] h-14 items-center justify-center rounded-lg border border-charcoal/30 hover:bg-charcoal/5 text-charcoal text-lg font-bold transition-all">
-                                View Our Projects
-                            </button>
-                        </div>
-                    </div>
-                </main>
-
-                <div
-                    class="relative z-10 w-full px-6 md:px-12 lg:px-24 pb-12 flex flex-col md:flex-row items-end justify-between gap-8">
-                    <div class="grid grid-cols-2 md:flex gap-12 md:gap-20">
-                        <div class="flex flex-col">
-                            <p class="text-deep-green text-4xl font-extrabold tabular-nums">1,240,500</p>
-                            <p class="text-charcoal/50 text-[10px] font-bold uppercase tracking-[0.2em] mt-1">
-                                Trees Planted
-                            </p>
-                        </div>
-                        <div class="flex flex-col">
-                            <p class="text-deep-green text-4xl font-extrabold tabular-nums">45,000</p>
-                            <p class="text-charcoal/50 text-[10px] font-bold uppercase tracking-[0.2em] mt-1">
-                                Tons CO2 Offset
-                            </p>
-                        </div>
-                    </div>
-                    <div
-                        class="hidden md:flex flex-col items-center gap-3 absolute left-1/2 -translate-x-1/2 bottom-12">
-                        <p class="text-charcoal/30 text-[10px] font-bold uppercase tracking-[0.3em]">
-                            Explore
-                        </p>
-                        <div class="w-[1px] h-14 bg-gradient-to-b from-deep-green/30 to-transparent">
-                        </div>
-                    </div>
-                    <div class="hidden lg:flex flex-col items-end">
-                        <p class="text-charcoal/40 text-[10px] font-bold mb-5 uppercase tracking-[0.15em]">
-                            Trusted by Environmental Leaders
-                        </p>
-                        <div class="flex gap-8 opacity-40 grayscale contrast-125">
-                            <span class="material-symbols-outlined text-deep-green text-3xl">eco</span>
-                            <span class="material-symbols-outlined text-deep-green text-3xl">public</span>
-                            <span class="material-symbols-outlined text-deep-green text-3xl">water_drop</span>
-                        </div>
-                    </div>
+                <div class="flex items-center gap-2">
+                    <button
+                        class="px-4 py-2 text-sm font-bold text-white bg-primary rounded-lg hover:bg-primary/90 transition-colors">Donate</button>
+                    <button
+                        class="px-4 py-2 text-sm font-bold text-gray-900 dark:text-white bg-gray-200 dark:bg-gray-700 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors">Join
+                        Us</button>
                 </div>
-            </div>
+            </nav>
+        </header>
 
-            @yield('content')
-            @stack('scripts')
-        @else
-            <header
-                class="sticky top-0 z-50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-sm border-b border-gray-200 dark:border-gray-800">
-                <nav class="container mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between">
-                    <a class="flex items-center gap-3" href="{{ route('home') }}">
-                        <svg class="h-6 w-6 text-primary" fill="none" viewBox="0 0 48 48"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M24 4C25.7818 14.2173 33.7827 22.2182 44 24C33.7827 25.7818 25.7818 33.7827 24 44C22.2182 33.7827 14.2173 25.7818 4 24C14.2173 22.2182 22.2182 14.2173 24 4Z"
-                                fill="currentColor"></path>
-                        </svg>
-                        <h2 class="text-xl font-bold text-gray-900 dark:text-white">Every Tree for Hope</h2>
-                    </a>
-                    <div class="hidden md:flex items-center gap-8">
-                        <a class="text-sm font-medium hover:text-primary transition-colors"
-                            href="{{ route('about') }}">About</a>
-                        <a class="text-sm font-medium hover:text-primary transition-colors"
-                            href="{{ route('works') }}">Our
-                            Works</a>
-                        <a class="text-sm font-medium hover:text-primary transition-colors"
-                            href="{{ route('gallery') }}">Gallery</a>
-                        <a class="text-sm font-medium hover:text-primary transition-colors"
-                            href="{{ route('donators') }}">Donators</a>
-                        <a class="text-sm font-medium hover:text-primary transition-colors"
-                            href="{{ route('report') }}">Report</a>
-                        <a class="text-sm font-medium hover:text-primary transition-colors"
-                            href="{{ route('contact') }}">Contact</a>
-                    </div>
-                    <div class="flex items-center gap-2">
-                        <button
-                            class="px-4 py-2 text-sm font-bold text-white bg-primary rounded-lg hover:bg-primary/90 transition-colors">Donate</button>
-                        <button
-                            class="px-4 py-2 text-sm font-bold text-gray-900 dark:text-white bg-gray-200 dark:bg-gray-700 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors">Join
-                            Us</button>
-                    </div>
-                </nav>
-            </header>
-
-            @yield('content')
-            @stack('scripts')
-        @endif
+        @yield('content')
+        @stack('scripts')
 
         <footer class="relative z-10 bg-off-white border-t border-charcoal/5 pt-20 pb-12 px-6 md:px-12 lg:px-24">
             <div class="absolute right-0 bottom-0 opacity-10 select-none pointer-events-none">
