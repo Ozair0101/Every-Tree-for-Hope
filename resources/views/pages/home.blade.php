@@ -112,86 +112,52 @@
 
                 <div class="relative">
                     <div id="videoContainer" class="flex gap-6 overflow-x-hidden pb-8 px-4 -mx-4">
-                        <div class="flex-shrink-0 w-80 group cursor-pointer" data-video-id="ScMzIvxBSi4">
-                            <div
-                                class="bg-white rounded-2xl overflow-hidden shadow-lg border border-white p-2 transition-all duration-300 group-hover:-translate-y-2 group-hover:shadow-xl">
-                                <div class="relative aspect-[16/10] rounded-xl overflow-hidden mb-4">
-                                    <img alt="Soil Preparation" class="w-full h-full object-cover"
-                                        src="https://img.youtube.com/vi/ScMzIvxBSi4/hqdefault.jpg" />
-                                    <div
-                                        class="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity">
-                                        <span class="material-symbols-outlined text-white text-4xl">play_circle</span>
+                        @php
+                            $mediaItems = \App\Models\Media::active()->ordered()->get();
+                        @endphp
+                        @forelse($mediaItems as $index => $media)
+                            <div class="flex-shrink-0 w-80 group cursor-pointer"
+                                data-video-id="{{ $media->youtube_video_id }}" data-title="{{ $media->title }}"
+                                data-date="{{ $media->date->format('M d, Y') }}">
+                                <div
+                                    class="bg-white rounded-2xl overflow-hidden shadow-lg border border-white p-2 transition-all duration-300 group-hover:-translate-y-2 group-hover:shadow-xl">
+                                    <div class="relative aspect-[16/10] rounded-xl overflow-hidden mb-4">
+                                        <img alt="{{ $media->title }}" class="w-full h-full object-cover"
+                                            src="{{ $media->thumbnail_url ?? 'https://via.placeholder.com/320x180/deep-green/white?text=Video' }}" />
+                                        <div
+                                            class="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity">
+                                            <span class="material-symbols-outlined text-white text-4xl">play_circle</span>
+                                        </div>
+                                    </div>
+                                    <div class="px-2 pb-2">
+                                        <span class="text-[10px] font-bold text-gold-accent uppercase tracking-widest">
+                                            {{ $media->date->format('M d, Y') }}
+                                        </span>
+                                        <h4
+                                            class="text-deep-green font-bold text-lg mt-1 group-hover:text-primary transition-colors">
+                                            {{ Str::limit($media->title, 30) }}
+                                        </h4>
+                                        @if ($media->description)
+                                            <p class="text-charcoal/60 text-sm mt-2 line-clamp-2">
+                                                {{ Str::limit($media->description, 80) }}
+                                            </p>
+                                        @endif
                                     </div>
                                 </div>
-                                <div class="px-2 pb-2">
-                                    <span class="text-[10px] font-bold text-gold-accent uppercase tracking-widest">Episode
-                                        01</span>
-                                    <h4
-                                        class="text-deep-green font-bold text-lg mt-1 group-hover:text-primary transition-colors">
-                                        Native Species Selection</h4>
-                                </div>
                             </div>
-                        </div>
-                        <div class="flex-shrink-0 w-80 group cursor-pointer" data-video-id="jNQXAC9IVRw">
-                            <div
-                                class="bg-white rounded-2xl overflow-hidden shadow-lg border border-white p-2 transition-all duration-300 group-hover:-translate-y-2 group-hover:shadow-xl">
-                                <div class="relative aspect-[16/10] rounded-xl overflow-hidden mb-4">
-                                    <img alt="Community Planting" class="w-full h-full object-cover"
-                                        src="https://img.youtube.com/vi/jNQXAC9IVRw/hqdefault.jpg" />
+                        @empty
+                            <div class="flex-shrink-0 w-80">
+                                <div class="bg-white rounded-2xl overflow-hidden shadow-lg border border-white p-2">
                                     <div
-                                        class="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity">
-                                        <span class="material-symbols-outlined text-white text-4xl">play_circle</span>
+                                        class="relative aspect-[16/10] rounded-xl overflow-hidden mb-4 bg-gray-100 flex items-center justify-center">
+                                        <span class="text-gray-400 text-center">No media items available</span>
+                                    </div>
+                                    <div class="px-2 pb-2">
+                                        <h4 class="text-deep-green font-bold text-lg">No Media Available</h4>
                                     </div>
                                 </div>
-                                <div class="px-2 pb-2">
-                                    <span class="text-[10px] font-bold text-gold-accent uppercase tracking-widest">Episode
-                                        02</span>
-                                    <h4
-                                        class="text-deep-green font-bold text-lg mt-1 group-hover:text-primary transition-colors">
-                                        Community Voices</h4>
-                                </div>
                             </div>
-                        </div>
-                        <div class="flex-shrink-0 w-80 group cursor-pointer" data-video-id="9bZkp7q19f0">
-                            <div
-                                class="bg-white rounded-2xl overflow-hidden shadow-lg border border-white p-2 transition-all duration-300 group-hover:-translate-y-2 group-hover:shadow-xl">
-                                <div class="relative aspect-[16/10] rounded-xl overflow-hidden mb-4">
-                                    <img alt="Impact Metrics" class="w-full h-full object-cover"
-                                        src="https://img.youtube.com/vi/9bZkp7q19f0/hqdefault.jpg" />
-                                    <div
-                                        class="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity">
-                                        <span class="material-symbols-outlined text-white text-4xl">play_circle</span>
-                                    </div>
-                                </div>
-                                <div class="px-2 pb-2">
-                                    <span class="text-[10px] font-bold text-gold-accent uppercase tracking-widest">Episode
-                                        03</span>
-                                    <h4
-                                        class="text-deep-green font-bold text-lg mt-1 group-hover:text-primary transition-colors">
-                                        Measuring Ecosystem Recovery</h4>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="flex-shrink-0 w-80 group cursor-pointer" data-video-id="dQw4w9WgXcQ">
-                            <div
-                                class="bg-white rounded-2xl overflow-hidden shadow-lg border border-white p-2 transition-all duration-300 group-hover:-translate-y-2 group-hover:shadow-xl">
-                                <div class="relative aspect-[16/10] rounded-xl overflow-hidden mb-4">
-                                    <img alt="The Future" class="w-full h-full object-cover"
-                                        src="https://img.youtube.com/vi/dQw4w9WgXcQ/hqdefault.jpg" />
-                                    <div
-                                        class="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity">
-                                        <span class="material-symbols-outlined text-white text-4xl">play_circle</span>
-                                    </div>
-                                </div>
-                                <div class="px-2 pb-2">
-                                    <span class="text-[10px] font-bold text-gold-accent uppercase tracking-widest">Episode
-                                        04</span>
-                                    <h4
-                                        class="text-deep-green font-bold text-lg mt-1 group-hover:text-primary transition-colors">
-                                        A 2050 Vision</h4>
-                                </div>
-                            </div>
-                        </div>
+                        @endforelse
                     </div>
                 </div>
             </div>
