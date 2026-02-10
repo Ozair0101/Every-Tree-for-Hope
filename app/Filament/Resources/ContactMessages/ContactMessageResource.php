@@ -7,6 +7,7 @@ use App\Models\ContactMessage;
 use BackedEnum;
 use Filament\Actions;
 use Filament\Forms;
+use Filament\Forms\Components;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Tables;
@@ -29,30 +30,30 @@ class ContactMessageResource extends Resource
     {
         return $schema
             ->schema([
-                Forms\Components\Section::make('Message Details')
-                    ->schema([
-                        Forms\Components\TextInput::make('name')
-                            ->required()
-                            ->maxLength(255),
-                        Forms\Components\TextInput::make('email')
-                            ->email()
-                            ->required()
-                            ->maxLength(255),
-                        Forms\Components\TextInput::make('subject')
-                            ->required()
-                            ->maxLength(255),
-                        Forms\Components\Textarea::make('message')
-                            ->required()
-                            ->columnSpanFull(),
-                        Forms\Components\Select::make('status')
-                            ->options([
-                                'unread' => 'Unread',
-                                'read' => 'Read',
-                            ])
-                            ->required()
-                            ->default('unread'),
+                Components\TextInput::make('name')
+                    ->required()
+                    ->maxLength(255)
+                    ->columnSpanFull(),
+                Components\TextInput::make('email')
+                    ->email()
+                    ->required()
+                    ->maxLength(255)
+                    ->columnSpanFull(),
+                Components\TextInput::make('subject')
+                    ->required()
+                    ->maxLength(255)
+                    ->columnSpanFull(),
+                Components\Textarea::make('message')
+                    ->required()
+                    ->columnSpanFull(),
+                Components\Select::make('status')
+                    ->options([
+                        'unread' => 'Unread',
+                        'read' => 'Read',
                     ])
-                    ->columns(2),
+                    ->required()
+                    ->default('unread')
+                    ->columnSpanFull(),
             ]);
     }
 
