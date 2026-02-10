@@ -2,96 +2,90 @@
 @section('title', 'Home Page')
 @section('content')
     <main class="flex-grow">
-        <section class="py-16 sm:py-24">
-            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="grid grid-cols-1 sm:grid-cols-3 gap-8 text-center">
-                    <div class="bg-white dark:bg-background-dark p-8 rounded-xl shadow-sm">
-                        <p class="text-4xl font-bold text-primary">15,000+</p>
-                        <p class="mt-2 text-base font-medium text-gray-600 dark:text-gray-400">Trees Planted</p>
+        <section class="relative bg-white py-32 md:py-48 px-6 overflow-hidden" id="mission-vision">
+            <span
+                class="material-symbols-outlined absolute top-20 left-[10%] text-primary/20 text-5xl animate-pulse">eco</span>
+            <span
+                class="material-symbols-outlined absolute top-1/2 right-[5%] text-vibrant-lime/20 text-4xl animate-pulse">spa</span>
+            <span
+                class="material-symbols-outlined absolute bottom-20 left-[15%] text-primary/10 text-6xl animate-pulse">psychology_alt</span>
+            <div class="max-w-7xl mx-auto relative">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                    <div class="lg:col-span-7 relative min-h-[500px] md:min-h-[700px] flex items-center">
+                        <div
+                            class="absolute top-0 right-0 w-[85%] h-[400px] md:h-[550px] rounded-3xl overflow-hidden shadow-2xl group transition-transform duration-1000 hover:scale-[1.02]">
+                            <img alt="Wide forest vision" class="w-full h-full object-cover"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuD5PZeVaTDepGXwxR10OE6Feq5BCgdn9QWsVmA4IbXGKfKSs73Z3RJmcJr94tWX6qn3cwUdQkyUzzyb1rcDVCCH8xmAwSGxDZm1r3_nO-wCov2_Zkigwdde52aed5g0M6LOMOF_6QRpACjAY2NxqbwfbGtUy1D4R7vCjhXxFrvsbaSJgSVhB7z3LRSnxWBUdv5fpb6X7rSLf-Uy-cjJiEH_2VbWXYagPry5eiNyF7wx9DeU9PZTGBenuYElX7QHOixLCBDOHMz49PM" />
+                            <div class="absolute inset-0 bg-deep-green/10"></div>
+                        </div>
+                        <div
+                            class="absolute bottom-0 left-0 w-[75%] h-[350px] md:h-[450px] rounded-3xl overflow-hidden shadow-2xl border-[8px] border-white group transition-transform duration-1000 hover:scale-[1.05] z-10">
+                            <img alt="Sprout mission" class="w-full h-full object-cover"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuD5PZeVaTDepGXwxR10OE6Feq5BCgdn9QWsVmA4IbXGKfKSs73Z3RJmcJr94tWX6qn3cwUdQkyUzzyb1rcDVCCH8xmAwSGxDZm1r3_nO-wCov2_Zkigwdde52aed5g0M6LOMOF_6QRpACjAY2NxqbwfbGtUy1D4R7vCjhXxFrvsbaSJgSVhB7z3LRSnxWBUdv5fpb6X7rSLf-Uy-cjJiEH_2VbWXYagPry5eiNyF7wx9DeU9PZTGBenuYElX7QHOixLCBDOHMz49PM" />
+                            <div class="absolute inset-0 bg-primary/10"></div>
+                            <div
+                                class="absolute top-0 left-0 w-full h-full flex flex-col justify-end p-8 bg-gradient-to-t from-white/90 via-white/60 to-transparent">
+                                <div class="flex items-center gap-4 mb-3">
+                                    <span class="material-symbols-outlined text-primary">favorite</span>
+                                    <h3 class="font-serif text-3xl font-bold text-deep-green">Mission</h3>
+                                </div>
+                                <p class="text-charcoal/80 font-light leading-relaxed">
+                                    Cultivating a greener tomorrow by empowering global communities to restore
+                                    biodiversity through science.
+                                </p>
+                            </div>
+                        </div>
+                        <div
+                            class="absolute -bottom-6 -left-6 w-32 h-32 border-l-2 border-b-2 border-vibrant-lime/40 rounded-bl-3xl -z-10">
+                        </div>
                     </div>
-                    <div class="bg-white dark:bg-background-dark p-8 rounded-xl shadow-sm">
-                        <p class="text-4xl font-bold text-primary">5,000+</p>
-                        <p class="mt-2 text-base font-medium text-gray-600 dark:text-gray-400">Volunteers</p>
-                    </div>
-                    <div class="bg-white dark:bg-background-dark p-8 rounded-xl shadow-sm">
-                        <p class="text-4xl font-bold text-primary">100+</p>
-                        <p class="mt-2 text-base font-medium text-gray-600 dark:text-gray-400">Events Hosted</p>
+                    <div class="lg:col-span-5 space-y-12 lg:pl-12">
+                        <div class="space-y-4">
+                            <h4
+                                class="text-primary font-bold tracking-[0.3em] text-xs uppercase">
+                                Our Core Purpose
+                            </h4>
+                            <div class="relative">
+                                <h2
+                                    class="text-5xl md:text-7xl font-serif font-light text-deep-green leading-tight">
+                                    Growing <br />
+                                    <span class="font-bold italic">Intentionally.</span>
+                                </h2>
+                                <div class="w-24 h-[1px] bg-vibrant-lime mt-8"></div>
+                            </div>
+                        </div>
+                        <div class="space-y-10">
+                            <div class="group">
+                                <div class="flex items-center gap-6 mb-4">
+                                    <span
+                                        class="text-vibrant-lime/40 text-4xl font-serif italic group-hover:text-vibrant-lime transition-colors">01.</span>
+                                    <h5 class="text-xl font-bold text-deep-green uppercase tracking-wider">The
+                                        Mission</h5>
+                                </div>
+                                <p class="text-charcoal/60 text-lg font-light leading-relaxed pl-16">
+                                    To plant with purpose. We don't just put seeds in the ground; we restore entire
+                                    ecosystems by selecting native species that support local fauna and repair
+                                    depleted soil.
+                                </p>
+                            </div>
+                            <div class="group">
+                                <div class="flex items-center gap-6 mb-4">
+                                    <span
+                                        class="text-vibrant-lime/40 text-4xl font-serif italic group-hover:text-vibrant-lime transition-colors">02.</span>
+                                    <h5 class="text-xl font-bold text-deep-green uppercase tracking-wider">The
+                                        Vision</h5>
+                                </div>
+                                <p class="text-charcoal/60 text-lg font-light leading-relaxed pl-16">
+                                    We envision a 2050 where global temperatures have stabilized and
+                                    "nature-positive" is the mandatory framework for every city and corporation on
+                                    Earth.
+                                </p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
-        
-
-<section class="relative bg-white py-32 md:py-48 px-6 overflow-hidden" id="mission-vision">
-<span class="material-symbols-outlined absolute top-20 left-[10%] text-sage-green/20 text-5xl floating" style="animation-delay: 0s;">eco</span>
-<span class="material-symbols-outlined absolute top-1/2 right-[5%] text-gold-accent/20 text-4xl floating" style="animation-delay: 2s;">spa</span>
-<span class="material-symbols-outlined absolute bottom-20 left-[15%] text-primary/10 text-6xl floating" style="animation-delay: 4s;">psychology_alt</span>
-<div class="max-w-7xl mx-auto relative">
-<div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-<div class="lg:col-span-7 relative min-h-[500px] md:min-h-[700px] flex items-center">
-<div class="absolute top-0 right-0 w-[85%] h-[400px] md:h-[550px] rounded-3xl overflow-hidden shadow-2xl group transition-transform duration-1000 hover:scale-[1.02]">
-<img alt="Wide forest vision" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD5PZeVaTDepGXwxR10OE6Feq5BCgdn9QWsVmA4IbXGKfKSs73Z3RJmcJr94tWX6qn3cwUdQkyUzzyb1rcDVCCH8xmAwSGxDZm1r3_nO-wCov2_Zkigwdde52aed5g0M6LOMOF_6QRpACjAY2NxqbwfbGtUy1D4R7vCjhXxFrvsbaSJgSVhB7z3LRSnxWBUdv5fpb6X7rSLf-Uy-cjJiEH_2VbWXYagPry5eiNyF7wx9DeU9PZTGBenuYElX7QHOixLCBDOHMz49PM"/>
-<div class="absolute inset-0 bg-deep-green/10"></div>
-<div class="absolute bottom-10 right-10 glass-panel p-8 rounded-2xl max-w-sm">
-<div class="flex items-center gap-4 mb-3">
-<span class="material-symbols-outlined text-gold-accent">satellite</span>
-<h3 class="font-serif text-3xl font-bold text-deep-green">Vision</h3>
-</div>
-<p class="text-charcoal/80 font-light leading-relaxed">
-                                A world where urban landscapes and natural ecosystems coexist in a perfect, breathing harmony.
-                            </p>
-</div>
-</div>
-<div class="absolute bottom-0 left-0 w-[75%] h-[350px] md:h-[450px] rounded-3xl overflow-hidden shadow-2xl border-[8px] border-white group transition-transform duration-1000 hover:scale-[1.05] z-10">
-<img alt="Sprout mission" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD5PZeVaTDepGXwxR10OE6Feq5BCgdn9QWsVmA4IbXGKfKSs73Z3RJmcJr94tWX6qn3cwUdQkyUzzyb1rcDVCCH8xmAwSGxDZm1r3_nO-wCov2_Zkigwdde52aed5g0M6LOMOF_6QRpACjAY2NxqbwfbGtUy1D4R7vCjhXxFrvsbaSJgSVhB7z3LRSnxWBUdv5fpb6X7rSLf-Uy-cjJiEH_2VbWXYagPry5eiNyF7wx9DeU9PZTGBenuYElX7QHOixLCBDOHMz49PM"/>
-<div class="absolute inset-0 bg-sage-green/10"></div>
-<div class="absolute top-0 left-0 w-full h-full glass-panel flex flex-col justify-end p-8">
-<div class="flex items-center gap-4 mb-3">
-<span class="material-symbols-outlined text-sage-green">favorite</span>
-<h3 class="font-serif text-3xl font-bold text-deep-green">Mission</h3>
-</div>
-<p class="text-charcoal/80 font-light leading-relaxed">
-                                Cultivating a greener tomorrow by empowering global communities to restore biodiversity through science.
-                            </p>
-</div>
-</div>
-<div class="absolute -bottom-6 -left-6 w-32 h-32 border-l-2 border-b-2 border-gold-accent/40 rounded-bl-3xl -z-10"></div>
-</div>
-<div class="lg:col-span-5 space-y-12 lg:pl-12">
-<div class="space-y-4">
-<h4 class="text-sage-green font-bold tracking-[0.3em] text-xs uppercase">Our Core Purpose</h4>
-<div class="relative">
-<h2 class="text-5xl md:text-7xl font-serif font-light text-deep-green leading-tight">
-                                Growing <br/>
-<span class="font-bold italic">Intentionally.</span>
-</h2>
-<div class="w-24 h-[1px] bg-gold-accent mt-8"></div>
-</div>
-</div>
-<div class="space-y-10">
-<div class="group">
-<div class="flex items-center gap-6 mb-4">
-<span class="text-gold-accent/30 text-4xl font-serif italic group-hover:text-gold-accent transition-colors">01.</span>
-<h5 class="text-xl font-bold text-deep-green uppercase tracking-wider">The Mission</h5>
-</div>
-<p class="text-charcoal/60 text-lg font-light leading-relaxed pl-16">
-                                To plant with purpose. We don't just put seeds in the ground; we restore entire ecosystems by selecting native species that support local fauna and repair depleted soil.
-                            </p>
-</div>
-<div class="group">
-<div class="flex items-center gap-6 mb-4">
-<span class="text-gold-accent/30 text-4xl font-serif italic group-hover:text-gold-accent transition-colors">02.</span>
-<h5 class="text-xl font-bold text-deep-green uppercase tracking-wider">The Vision</h5>
-</div>
-<p class="text-charcoal/60 text-lg font-light leading-relaxed pl-16">
-                                We envision a 2050 where global temperatures have stabilized and "nature-positive" is the mandatory framework for every city and corporation on Earth.
-                            </p>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
         <section class="py-16 sm:py-24 bg-background-light/60 dark:bg-background-dark/60">
             <div class="container mx-auto px-4 sm:px-6 lg:px-8">
                 <div
