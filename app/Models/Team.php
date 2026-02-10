@@ -43,6 +43,11 @@ class Team extends Model
     public function getFullImageUrlAttribute()
     {
         if ($this->image) {
+            // If it's already a full URL (starts with http), return as is
+            if (str_starts_with($this->image, 'http')) {
+                return $this->image;
+            }
+            // Otherwise, treat as stored file path
             return asset('storage/' . $this->image);
         }
         return asset('placeholder-user.jpg');
