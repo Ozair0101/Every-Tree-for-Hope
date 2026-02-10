@@ -5,6 +5,7 @@ namespace App\Filament\Resources\ContactMessages;
 use App\Filament\Resources\ContactMessages\Pages\ListContactMessages;
 use App\Models\ContactMessage;
 use BackedEnum;
+use Filament\Actions;
 use Filament\Forms;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
@@ -95,21 +96,21 @@ class ContactMessageResource extends Resource
                     ]),
             ])
             ->actions([
-                Tables\Actions\ViewAction::make(),
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                Actions\ViewAction::make(),
+                Actions\EditAction::make(),
+                Actions\DeleteAction::make(),
             ])
             ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                    Tables\Actions\BulkAction::make('markAsRead')
+                Actions\BulkActionGroup::make([
+                    Actions\DeleteBulkAction::make(),
+                    Actions\BulkAction::make('markAsRead')
                         ->label('Mark as Read')
                         ->icon('heroicon-o-check')
                         ->action(function ($records) {
                             $records->each->update(['status' => 'read']);
                         })
                         ->deselectRecordsAfterCompletion(),
-                    Tables\Actions\BulkAction::make('markAsUnread')
+                    Actions\BulkAction::make('markAsUnread')
                         ->label('Mark as Unread')
                         ->icon('heroicon-o-envelope')
                         ->action(function ($records) {
