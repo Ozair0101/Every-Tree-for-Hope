@@ -1,6 +1,81 @@
 @extends('layouts.layout')
 @section('title', 'Home Page')
 @section('content')
+    <div class="relative min-h-screen w-full flex flex-col overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <div class="w-full h-full bg-cover bg-center"
+                style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCp83JCfKCRYgHZuZA8dzBJ3Ih5yeidFw9eQGrfMH89CUBjfUnGXPlxXvfb0DmVToP0iwQwPaK0W5XabUIrIKFxbSwRZd0LqiyyCermKdbgrB2uPKlC48Z7W_on-lUkUOnlJd62ok3dkmH7JXdQxf63fiy8lTJ7mxggLO5Vjo_p7uKwbi43Dl3GWm8aiiPqcYvOfRpQgKV513yPQakVJ-1w2d86ue27OPY3p8N9H5sr5Mg5oew18KgTO2Ehhj7cSGj-2a6ht7DOZOs');">
+            </div>
+            <div class="absolute inset-0 hero-white-overlay"></div>
+        </div>
+        <main class="relative z-10 flex flex-1 flex-col justify-center px-6 md:px-12 lg:px-24 pb-20">
+            <div class="max-w-3xl space-y-8">
+                <div
+                    class="inline-flex items-center gap-2 bg-deep-green/5 border border-deep-green/10 px-4 py-2 rounded-full">
+                    <span class="flex h-2 w-2 rounded-full bg-primary animate-pulse"></span>
+                    <p class="text-deep-green text-[10px] font-bold uppercase tracking-[0.2em]">
+                        Global Reforestation Mission
+                    </p>
+                </div>
+                <h1
+                    class="text-deep-green text-6xl md:text-7xl lg:text-8xl font-serif font-bold leading-[1.05] tracking-tight">
+                    Rooting for <br />
+                    <span class="text-vibrant-lime italic font-black">the Future</span>
+                </h1>
+                <p class="text-charcoal/80 text-lg md:text-xl max-w-xl font-medium leading-relaxed">
+                    Join our global community in restoring the world's forests one seedling at a time.
+                    Transparent, tracked, and impactful climate action starting today.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 pt-4">
+                    <button
+                        class="flex min-w-[220px] h-14 items-center justify-center rounded-lg bg-primary hover:bg-primary/90 text-white text-lg font-extrabold transition-all shadow-xl shadow-primary/20 group">
+                        Plant a Tree Today
+                        <span
+                            class="material-symbols-outlined ml-2 group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                    </button>
+                    <button
+                        class="flex min-w-[220px] h-14 items-center justify-center rounded-lg border border-charcoal/30 hover:bg-charcoal/5 text-charcoal text-lg font-bold transition-all">
+                        View Our Projects
+                    </button>
+                </div>
+            </div>
+        </main>
+
+        <div
+            class="relative z-10 w-full px-6 md:px-12 lg:px-24 pb-12 flex flex-col md:flex-row items-end justify-between gap-8">
+            <div class="grid grid-cols-2 md:flex gap-12 md:gap-20">
+                <div class="flex flex-col">
+                    <p class="text-deep-green text-4xl font-extrabold tabular-nums">1,240,500</p>
+                    <p class="text-charcoal/50 text-[10px] font-bold uppercase tracking-[0.2em] mt-1">
+                        Trees Planted
+                    </p>
+                </div>
+                <div class="flex flex-col">
+                    <p class="text-deep-green text-4xl font-extrabold tabular-nums">45,000</p>
+                    <p class="text-charcoal/50 text-[10px] font-bold uppercase tracking-[0.2em] mt-1">
+                        Tons CO2 Offset
+                    </p>
+                </div>
+            </div>
+            <div class="hidden md:flex flex-col items-center gap-3 absolute left-1/2 -translate-x-1/2 bottom-12">
+                <p class="text-charcoal/30 text-[10px] font-bold uppercase tracking-[0.3em]">
+                    Explore
+                </p>
+                <div class="w-[1px] h-14 bg-gradient-to-b from-deep-green/30 to-transparent">
+                </div>
+            </div>
+            <div class="hidden lg:flex flex-col items-end">
+                <p class="text-charcoal/40 text-[10px] font-bold mb-5 uppercase tracking-[0.15em]">
+                    Trusted by Environmental Leaders
+                </p>
+                <div class="flex gap-8 opacity-40 grayscale contrast-125">
+                    <span class="material-symbols-outlined text-deep-green text-3xl">eco</span>
+                    <span class="material-symbols-outlined text-deep-green text-3xl">public</span>
+                    <span class="material-symbols-outlined text-deep-green text-3xl">water_drop</span>
+                </div>
+            </div>
+        </div>
+    </div>
     <main class="flex-grow">
         <section class="relative bg-white py-32 md:py-48 px-6 overflow-hidden" id="mission-vision">
             <span
