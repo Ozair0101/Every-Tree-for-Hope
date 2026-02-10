@@ -181,8 +181,205 @@
             </div>
         </section>
 
-       
+        <section class="relative py-24 md:py-32 px-6 overflow-hidden bg-background-light" id="donation-section">
+            <div class="relative max-w-4xl mx-auto text-center mb-20">
+                <h4 class="text-sage-green font-bold tracking-[0.4em] text-xs uppercase mb-4">Support the Canopy</h4>
+                <h2 class="text-5xl md:text-7xl font-serif text-deep-green leading-tight">
+                    Your Contribution <br />
+                    <span class="font-bold italic">Roots Our Change.</span>
+                </h2>
+                <div class="w-24 h-[1px] bg-gold-accent mx-auto mt-8 opacity-40"></div>
+            </div>
+
+            <div class="relative grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+                <span
+                    class="material-symbols-outlined absolute -top-12 -left-12 text-sage-green/20 text-7xl floating parallax-leaf">eco</span>
+                <span
+                    class="material-symbols-outlined absolute -bottom-12 -right-12 text-gold-accent/20 text-8xl floating parallax-leaf"
+                    style="animation-delay: 2s;">spa</span>
+                <span
+                    class="material-symbols-outlined absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-primary/5 text-[300px] parallax-leaf">potted_plant</span>
+
+                <div
+                    class="glass-panel rounded-[2rem] p-10 flex flex-col h-full relative group hover:-translate-y-2 transition-transform duration-500 overflow-hidden">
+                    <div class="absolute top-0 right-0 p-6 opacity-10">
+                        <span class="material-symbols-outlined text-6xl text-gold-accent">location_on</span>
+                    </div>
+                    <div class="mb-8">
+                        <span class="material-symbols-outlined text-gold-accent text-3xl mb-4">distance</span>
+                        <h3 class="font-serif text-2xl font-bold text-deep-green mb-2">Local Handover</h3>
+                        <p class="text-sage-green text-xs font-bold uppercase tracking-widest">Kabul, Afghanistan</p>
+                    </div>
+                    <div class="gold-line-art mb-8"></div>
+                    <div class="space-y-6 flex-grow">
+                        <div>
+                            <p
+                                class="text-[10px] text-charcoal/40 font-bold uppercase tracking-widest mb-1">Primary
+                                Location</p>
+                            <p class="font-serif text-lg text-charcoal/80">Haidari Market</p>
+                            <p class="text-sm text-charcoal/60 italic">District 4, Kabul</p>
+                        </div>
+                        <div>
+                            <p
+                                class="text-[10px] text-charcoal/40 font-bold uppercase tracking-widest mb-1">Exchange
+                                Office</p>
+                            <p class="font-serif text-lg text-charcoal/80">Saray Shazada</p>
+                            <p class="text-sm text-charcoal/60">Main Financial Hub</p>
+                        </div>
+                    </div>
+                    <div class="mt-10 pt-6 border-t border-charcoal/5">
+                        <button
+                            class="w-full py-3 rounded-full border border-gold-accent/30 text-gold-accent text-sm font-bold hover:bg-gold-accent hover:text-white transition-all flex items-center justify-center gap-2">
+                            <span class="material-symbols-outlined text-lg">map</span>
+                            Get Directions
+                        </button>
+                    </div>
+                </div>
+
+                <div
+                    class="glass-panel rounded-[2rem] p-10 flex flex-col h-full relative group hover:-translate-y-2 transition-transform duration-500 overflow-hidden border-sage-green/20">
+                    <div class="absolute top-0 right-0 p-6 opacity-10">
+                        <span class="material-symbols-outlined text-6xl text-sage-green">account_balance_wallet</span>
+                    </div>
+                    <div class="mb-8">
+                        <span class="material-symbols-outlined text-sage-green text-3xl mb-4">payments</span>
+                        <h3 class="font-serif text-2xl font-bold text-deep-green mb-2">MoneyGram &amp; WU</h3>
+                        <p class="text-sage-green text-xs font-bold uppercase tracking-widest">Global Remittance</p>
+                    </div>
+                    <div class="gold-line-art mb-8"></div>
+                    <div class="space-y-8 flex-grow">
+                        <div>
+                            <p
+                                class="text-[10px] text-charcoal/40 font-bold uppercase tracking-widest mb-3">Receiver
+                                Name</p>
+                            <p class="font-serif text-3xl font-bold text-deep-green leading-tight">Mohammad Iqbal
+                                Alimyar</p>
+                            <p class="text-xs text-sage-green mt-2 font-medium">Verify spelling for secure
+                                transfer</p>
+                        </div>
+                        <div class="bg-sage-green/5 p-4 rounded-xl border border-sage-green/10">
+                            <p
+                                class="text-[10px] text-sage-green font-bold uppercase tracking-widest mb-2">Instructions
+                            </p>
+                            <p class="text-xs text-charcoal/60 leading-relaxed">Please share the MTCN or Reference
+                                Number via our secure contact portal after the transaction is complete.</p>
+                        </div>
+                    </div>
+                    <div class="mt-10 pt-6">
+                        <button
+                            class="w-full py-4 rounded-full bg-deep-green text-white text-sm font-bold hover:bg-deep-green/90 transition-all shadow-lg shadow-deep-green/20 flex items-center justify-center gap-2 js-copy-trigger"
+                            data-copy-text="Mohammad Iqbal Alimyar">
+                            <span class="material-symbols-outlined text-lg">content_copy</span>
+                            Copy Full Name
+                        </button>
+                    </div>
+                </div>
+
+                <div
+                    class="glass-panel rounded-[2rem] p-10 flex flex-col h-full relative group hover:-translate-y-2 transition-transform duration-500 overflow-hidden">
+                    <div class="absolute top-0 right-0 p-6 opacity-10">
+                        <span class="material-symbols-outlined text-6xl text-charcoal">account_balance</span>
+                    </div>
+                    <div class="mb-8">
+                        <span class="material-symbols-outlined text-charcoal/70 text-3xl mb-4">assured_workload</span>
+                        <h3 class="font-serif text-2xl font-bold text-deep-green mb-2">Bank Transfer</h3>
+                        <p class="text-sage-green text-xs font-bold uppercase tracking-widest">International Ziraat
+                            Bankası</p>
+                    </div>
+                    <div class="gold-line-art mb-8"></div>
+                    <div class="space-y-5 flex-grow">
+                        <div class="relative">
+                            <p
+                                class="text-[10px] text-charcoal/40 font-bold uppercase tracking-widest mb-1">IBAN
+                                Number</p>
+                            <div
+                                class="flex items-center justify-between bg-white/40 p-3 rounded-lg border border-charcoal/5">
+                                <p class="font-mono text-xs text-charcoal font-bold">TR76 0001 0021 2193 4812 5001</p>
+                                <span
+                                    class="material-symbols-outlined text-lg text-sage-green cursor-pointer hover:scale-110 transition-transform js-copy-trigger"
+                                    data-copy-text="TR76 0001 0021 2193 4812 5001">content_copy</span>
+                            </div>
+                        </div>
+                        <div class="relative">
+                            <p
+                                class="text-[10px] text-charcoal/40 font-bold uppercase tracking-widest mb-1">Swift /
+                                BIC Code</p>
+                            <div
+                                class="flex items-center justify-between bg-white/40 p-3 rounded-lg border border-charcoal/5">
+                                <p class="font-mono text-xs text-charcoal font-bold">TCZRTRA2</p>
+                                <span
+                                    class="material-symbols-outlined text-lg text-sage-green cursor-pointer hover:scale-110 transition-transform js-copy-trigger"
+                                    data-copy-text="TCZRTRA2">content_copy</span>
+                            </div>
+                        </div>
+                        <div class="relative">
+                            <p
+                                class="text-[10px] text-charcoal/40 font-bold uppercase tracking-widest mb-1">Account
+                                Holder</p>
+                            <p class="font-serif text-sm text-charcoal/80">EverGreen Conservation Fund</p>
+                        </div>
+                    </div>
+                    <div class="mt-10 pt-6">
+                        <button
+                            class="w-full py-3 rounded-full bg-white border border-charcoal/10 text-charcoal text-sm font-bold hover:bg-charcoal/5 transition-all flex items-center justify-center gap-2">
+                            <span class="material-symbols-outlined text-lg">download</span>
+                            Download Details (PDF)
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-20 flex flex-col items-center gap-4 text-center">
+                <div class="flex -space-x-2">
+                    <div
+                        class="w-10 h-10 rounded-full border-2 border-white bg-sage-green flex items-center justify-center text-white text-[10px] font-bold">
+                        99+
+                    </div>
+                    <div
+                        class="w-10 h-10 rounded-full border-2 border-white bg-gold-accent flex items-center justify-center text-white text-xs">
+                        <span class="material-symbols-outlined text-sm">shield_with_heart</span>
+                    </div>
+                </div>
+                <p class="text-charcoal/40 text-[10px] font-bold uppercase tracking-[0.3em]">Fully Encrypted &amp;
+                    Secure Transfers</p>
+            </div>
+        </section>
+
     </main>
+@push('scripts')
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var copyTriggers = document.querySelectorAll('.js-copy-trigger[data-copy-text]');
+
+            copyTriggers.forEach(function (el) {
+                el.addEventListener('click', function () {
+                    var text = el.getAttribute('data-copy-text');
+                    if (!text) return;
+
+                    if (navigator.clipboard && navigator.clipboard.writeText) {
+                        navigator.clipboard.writeText(text).then(function () {
+                            alert('Copied to clipboard');
+                        }).catch(function (err) {
+                            console.error('Copy failed', err);
+                        });
+                    } else {
+                        var textarea = document.createElement('textarea');
+                        textarea.value = text;
+                        textarea.style.position = 'fixed';
+                        textarea.style.left = '-9999px';
+                        document.body.appendChild(textarea);
+                        textarea.select();
+                        try {
+                            document.execCommand('copy');
+                            alert('Copied to clipboard');
+                        } catch (e) {
+                            console.error('Copy failed', e);
+                        }
+                        document.body.removeChild(textarea);
+                    }
+                });
+            });
+        });
+    </script>
+@endpush
 @endsection
-
-
