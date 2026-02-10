@@ -112,12 +112,12 @@
 
                 <div class="relative">
                     <div id="videoContainer" class="flex gap-6 overflow-x-hidden pb-8 px-4 -mx-4">
-                        <div class="flex-shrink-0 w-80 group cursor-pointer" data-video-id="dQw4w9WgXcQ">
+                        <div class="flex-shrink-0 w-80 group cursor-pointer" data-video-id="j72Q9eNmT_8">
                             <div
                                 class="bg-white rounded-2xl overflow-hidden shadow-lg border border-white p-2 transition-all duration-300 group-hover:-translate-y-2 group-hover:shadow-xl">
                                 <div class="relative aspect-[16/10] rounded-xl overflow-hidden mb-4">
                                     <img alt="Soil Preparation" class="w-full h-full object-cover"
-                                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuD5PZeVaTDepGXwxR10OE6Feq5BCgdn9QWsVmA4IbXGKfKSs73Z3RJmcJr94tWX6qn3cwUdQkyUzzyb1rcDVCCH8xmAwSGxDZm1r3_nO-wCov2_Zkigwdde52aed5g0M6LOMOF_6QRpACjAY2NxqbwfbGtUy1D4R7vCjhXxFrvsbaSJgSVhB7z3LRSnxWBUdv5fpb6X7rSLf-Uy-cjJiEH_2VbWXYagPry5eiNyF7wx9DeU9PZTGBenuYElX7QHOixLCBDOHMz49PM" />
+                                        src="https://img.youtube.com/vi/j72Q9eNmT_8/hqdefault.jpg" />
                                     <div
                                         class="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity">
                                         <span class="material-symbols-outlined text-white text-4xl">play_circle</span>
@@ -132,12 +132,12 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="flex-shrink-0 w-80 group cursor-pointer" data-video-id="dQw4w9WgXcQ">
+                        <div class="flex-shrink-0 w-80 group cursor-pointer" data-video-id="9Iax2V4hDJI">
                             <div
                                 class="bg-white rounded-2xl overflow-hidden shadow-lg border border-white p-2 transition-all duration-300 group-hover:-translate-y-2 group-hover:shadow-xl">
                                 <div class="relative aspect-[16/10] rounded-xl overflow-hidden mb-4">
                                     <img alt="Community Planting" class="w-full h-full object-cover"
-                                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuCp83JCfKCRYgHZuZA8dzBJ3Ih5yeidFw9eQGrfMH89CUBjfUnGXPlxXvfb0DmVToP0iwQwPaK0W5XabUIrIKFxbSwRZd0LqiyyCermKdbgrB2uPKlC48Z7W_on-lUkUOnlJd62ok3dkmH7JXdQxf63fiy8lTJ7mxggLO5Vjo_p7uKwbi43Dl3GWm8aiiPqcYvOfRpQgKV513yPQakVJ-1w2d86ue27OPY3p8N9H5sr5Mg5oew18KgTO2Ehhj7cSGj-2a6ht7DOZOs" />
+                                        src="https://img.youtube.com/vi/9Iax2V4hDJI/hqdefault.jpg" />
                                     <div
                                         class="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity">
                                         <span class="material-symbols-outlined text-white text-4xl">play_circle</span>
@@ -152,12 +152,12 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="flex-shrink-0 w-80 group cursor-pointer" data-video-id="dQw4w9WgXcQ">
+                        <div class="flex-shrink-0 w-80 group cursor-pointer" data-video-id="Yc5bfyT5Vq8">
                             <div
                                 class="bg-white rounded-2xl overflow-hidden shadow-lg border border-white p-2 transition-all duration-300 group-hover:-translate-y-2 group-hover:shadow-xl">
                                 <div class="relative aspect-[16/10] rounded-xl overflow-hidden mb-4">
                                     <img alt="Impact Metrics" class="w-full h-full object-cover"
-                                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuD5PZeVaTDepGXwxR10OE6Feq5BCgdn9QWsVmA4IbXGKfKSs73Z3RJmcJr94tWX6qn3cwUdQkyUzzyb1rcDVCCH8xmAwSGxDZm1r3_nO-wCov2_Zkigwdde52aed5g0M6LOMOF_6QRpACjAY2NxqbwfbGtUy1D4R7vCjhXxFrvsbaSJgSVhB7z3LRSnxWBUdv5fpb6X7rSLf-Uy-cjJiEH_2VbWXYagPry5eiNyF7wx9DeU9PZTGBenuYElX7QHOixLCBDOHMz49PM" />
+                                        src="https://img.youtube.com/vi/Yc5bfyT5Vq8/hqdefault.jpg" />
                                     <div
                                         class="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity">
                                         <span class="material-symbols-outlined text-white text-4xl">play_circle</span>
@@ -172,12 +172,12 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="flex-shrink-0 w-80 group cursor-pointer" data-video-id="dQw4w9WgXcQ">
+                        <div class="flex-shrink-0 w-80 group cursor-pointer" data-video-id="n6G1_3P6s7w">
                             <div
                                 class="bg-white rounded-2xl overflow-hidden shadow-lg border border-white p-2 transition-all duration-300 group-hover:-translate-y-2 group-hover:shadow-xl">
                                 <div class="relative aspect-[16/10] rounded-xl overflow-hidden mb-4">
                                     <img alt="The Future" class="w-full h-full object-cover"
-                                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuD5PZeVaTDepGXwxR10OE6Feq5BCgdn9QWsVmA4IbXGKfKSs73Z3RJmcJr94tWX6qn3cwUdQkyUzzyb1rcDVCCH8xmAwSGxDZm1r3_nO-wCov2_Zkigwdde52aed5g0M6LOMOF_6QRpACjAY2NxqbwfbGtUy1D4R7vCjhXxFrvsbaSJgSVhB7z3LRSnxWBUdv5fpb6X7rSLf-Uy-cjJiEH_2VbWXYagPry5eiNyF7wx9DeU9PZTGBenuYElX7QHOixLCBDOHMz49PM" />
+                                        src="https://img.youtube.com/vi/n6G1_3P6s7w/hqdefault.jpg" />
                                     <div
                                         class="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity">
                                         <span class="material-symbols-outlined text-white text-4xl">play_circle</span>
@@ -711,6 +711,7 @@
                     const videoId = this.getAttribute('data-video-id');
                     const img = this.querySelector('img');
                     const overlay = this.querySelector('.absolute.inset-0');
+                    const aspectContainer = this.querySelector('.relative');
 
                     // Create iframe
                     const iframe = document.createElement('iframe');
@@ -726,7 +727,7 @@
                     // Replace image with iframe
                     img.style.display = 'none';
                     overlay.style.display = 'none';
-                    this.querySelector('.relative.aspect-[16\\/10]').appendChild(iframe);
+                    aspectContainer.appendChild(iframe);
 
                     // Remove click handler after video loads
                     this.style.cursor = 'default';
