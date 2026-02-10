@@ -92,23 +92,23 @@
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div>
                                     <input
-                                        class="w-full bg-white/60 backdrop-blur-sm border border-white/20 rounded-xl px-4 py-3 focus:border-deep-green focus:ring-2 focus:ring-deep-green/20 transition-all text-charcoal placeholder:text-charcoal/40"
+                                        class="w-full bg-white/60 backdrop-blur-sm border border-gray-300 rounded-xl px-4 py-3 focus:border-deep-green focus:ring-2 focus:ring-deep-green/20 transition-all text-charcoal placeholder:text-charcoal/40"
                                         placeholder="Your Name" type="text" />
                                 </div>
                                 <div>
                                     <input
-                                        class="w-full bg-white/60 backdrop-blur-sm border border-white/20 rounded-xl px-4 py-3 focus:border-deep-green focus:ring-2 focus:ring-deep-green/20 transition-all text-charcoal placeholder:text-charcoal/40"
+                                        class="w-full bg-white/60 backdrop-blur-sm border border-gray-300 rounded-xl px-4 py-3 focus:border-deep-green focus:ring-2 focus:ring-deep-green/20 transition-all text-charcoal placeholder:text-charcoal/40"
                                         placeholder="Email Address" type="email" />
                                 </div>
                             </div>
                             <div>
                                 <input
-                                    class="w-full bg-white/60 backdrop-blur-sm border border-white/20 rounded-xl px-4 py-3 focus:border-deep-green focus:ring-2 focus:ring-deep-green/20 transition-all text-charcoal placeholder:text-charcoal/40"
+                                    class="w-full bg-white/60 backdrop-blur-sm border border-gray-300 rounded-xl px-4 py-3 focus:border-deep-green focus:ring-2 focus:ring-deep-green/20 transition-all text-charcoal placeholder:text-charcoal/40"
                                     placeholder="Subject" type="text" />
                             </div>
                             <div>
                                 <textarea
-                                    class="w-full bg-white/60 backdrop-blur-sm border border-white/20 rounded-xl px-4 py-3 focus:border-deep-green focus:ring-2 focus:ring-deep-green/20 transition-all text-charcoal placeholder:text-charcoal/40 resize-none"
+                                    class="w-full bg-white/60 backdrop-blur-sm border border-gray-300 rounded-xl px-4 py-3 focus:border-deep-green focus:ring-2 focus:ring-deep-green/20 transition-all text-charcoal placeholder:text-charcoal/40 resize-none"
                                     placeholder="How can we help you plant the future?" rows="4"></textarea>
                             </div>
                             <div class="pt-4">
