@@ -215,27 +215,24 @@
             <h5 class="text-center text-stone-400 uppercase tracking-[0.4em] text-xl font-bold mb-16">Global Partners
                 &amp; Allies</h5>
             <div class="flex flex-wrap justify-center items-center gap-16 opacity-60 hover:opacity-100 transition-opacity">
-                <!-- Mock Logos -->
-                <div class="flex items-center gap-3 grayscale">
-                    <span class="material-symbols-outlined text-4xl">public</span>
-                    <span class="text-2xl font-display font-bold">EarthCare</span>
-                </div>
-                <div class="flex items-center gap-3 grayscale">
-                    <span class="material-symbols-outlined text-4xl">water_drop</span>
-                    <span class="text-2xl font-display font-bold">HydroAlliance</span>
-                </div>
-                <div class="flex items-center gap-3 grayscale">
-                    <span class="material-symbols-outlined text-4xl">foundation</span>
-                    <span class="text-2xl font-display font-bold">CivicGreen</span>
-                </div>
-                <div class="flex items-center gap-3 grayscale">
-                    <span class="material-symbols-outlined text-4xl">forest</span>
-                    <span class="text-2xl font-display font-bold">NatureNet</span>
-                </div>
-                <div class="flex items-center gap-3 grayscale">
-                    <span class="material-symbols-outlined text-4xl">park</span>
-                    <span class="text-2xl font-display font-bold">KabulUnity</span>
-                </div>
+                @php
+                    $partners = \App\Models\Partner::active()->ordered()->get();
+                @endphp
+                @forelse($partners as $partner)
+                    <div class="flex items-center gap-3 grayscale hover:grayscale-0 transition-all duration-300">
+                        @if ($partner->full_logo_url)
+                            <img src="{{ $partner->full_logo_url }}" alt="{{ $partner->company_name }}"
+                                class="h-12 w-auto object-contain">
+                        @else
+                            <span class="material-symbols-outlined text-4xl">business</span>
+                        @endif
+                        <span class="text-2xl font-display font-bold">{{ $partner->company_name }}</span>
+                    </div>
+                @empty
+                    <div class="text-center py-8">
+                        <p class="text-stone-400">No partners available at the moment.</p>
+                    </div>
+                @endforelse
             </div>
         </div>
     </section>
