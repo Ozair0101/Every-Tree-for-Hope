@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('teams', function (Blueprint $table) {
-            //
+            $table->renameColumn('linkedin_url', 'social_media_url');
         });
     }
 
@@ -22,7 +22,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('teams', function (Blueprint $table) {
-            //
+            $table->renameColumn('social_media_url', 'linkedin_url');
         });
     }
 };
