@@ -76,6 +76,122 @@
             </div>
         </div>
     </div>
+    <section class="relative bg-white pb-18 pt-28  px-6 botanical-bg overflow-hidden" id="media-stories">
+        <div class="absolute top-0 right-0 w-96 h-96 opacity-[0.03] pointer-events-none">
+            <span class="material-symbols-outlined text-[300px] text-deep-green">potted_plant</span>
+        </div>
+        <div class="absolute bottom-0 left-0 w-96 h-96 opacity-[0.03] pointer-events-none translate-y-20 -translate-x-20">
+            <span class="material-symbols-outlined text-[350px] text-gold-accent">forest</span>
+        </div>
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center space-y-6 mb-20 max-w-3xl mx-auto">
+                <div class="inline-flex items-center gap-3">
+                    <div class="h-[1px] w-8 bg-gold-accent"></div>
+                    <span class="text-gold-accent font-bold tracking-[0.3em] text-xs uppercase">Documenting the
+                        Change</span>
+                    <div class="h-[1px] w-8 bg-gold-accent"></div>
+                </div>
+                <h2 class="text-5xl md:text-6xl font-serif font-bold text-deep-green leading-tight">
+                    Watch Our Mission <br /><span class="font-light italic">in Action</span>
+                </h2>
+                <p class="text-charcoal/70 text-lg leading-relaxed font-medium">
+                    From the foothills of Kabul to the urban centers, witness the healing power of reforestation. Every
+                    seedling planted is a breath of hope restored to our historic landscape.
+                </p>
+            </div>
+            <div class="relative space-y-12">
+                <div class="relative">
+                    <div class="flex gap-6 overflow-x-auto no-scrollbar pb-8 px-4 -mx-4">
+                        <div class="flex-shrink-0 w-80 group cursor-pointer">
+                            <div
+                                class="bg-white rounded-2xl overflow-hidden shadow-lg border border-white p-2 transition-all duration-300 group-hover:-translate-y-2 group-hover:shadow-xl">
+                                <div class="relative aspect-[16/10] rounded-xl overflow-hidden mb-4">
+                                    <img alt="Soil Preparation"
+                                        class="w-full h-full object-cover transition-opacity duration-300 group-hover:opacity-40"
+                                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuD5PZeVaTDepGXwxR10OE6Feq5BCgdn9QWsVmA4IbXGKfKSs73Z3RJmcJr94tWX6qn3cwUdQkyUzzyb1rcDVCCH8xmAwSGxDZm1r3_nO-wCov2_Zkigwdde52aed5g0M6LOMOF_6QRpACjAY2NxqbwfbGtUy1D4R7vCjhXxFrvsbaSJgSVhB7z3LRSnxWBUdv5fpb6X7rSLf-Uy-cjJiEH_2VbWXYagPry5eiNyF7wx9DeU9PZTGBenuYElX7QHOixLCBDOHMz49PM" />
+                                    <div
+                                        class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                                        <span class="material-symbols-outlined text-deep-green text-3xl">play_circle</span>
+                                    </div>
+                                </div>
+                                <div class="px-2 pb-2">
+                                    <span class="text-[10px] font-bold text-gold-accent uppercase tracking-widest">Episode
+                                        01</span>
+                                    <h4
+                                        class="text-deep-green font-bold text-lg mt-1 group-hover:text-primary transition-colors">
+                                        Native Species Selection</h4>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex-shrink-0 w-80 group cursor-pointer">
+                            <div
+                                class="bg-white rounded-2xl overflow-hidden shadow-lg border border-white p-2 transition-all duration-300 group-hover:-translate-y-2 group-hover:shadow-xl">
+                                <div class="relative aspect-[16/10] rounded-xl overflow-hidden mb-4">
+                                    <img alt="Community Planting"
+                                        class="w-full h-full object-cover transition-opacity duration-300 group-hover:opacity-40"
+                                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuCp83JCfKCRYgHZuZA8dzBJ3Ih5yeidFw9eQGrfMH89CUBjfUnGXPlxXvfb0DmVToP0iwQwPaK0W5XabUIrIKFxbSwRZd0LqiyyCermKdbgrB2uPKlC48Z7W_on-lUkUOnlJd62ok3dkmH7JXdQxf63fiy8lTJ7mxggLO5Vjo_p7uKwbi43Dl3GWm8aiiPqcYvOfRpQgKV513yPQakVJ-1w2d86ue27OPY3p8N9H5sr5Mg5oew18KgTO2Ehhj7cSGj-2a6ht7DOZOs" />
+                                    <div
+                                        class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                                        <span class="material-symbols-outlined text-deep-green text-3xl">play_circle</span>
+                                    </div>
+                                </div>
+                                <div class="px-2 pb-2">
+                                    <span class="text-[10px] font-bold text-gold-accent uppercase tracking-widest">Episode
+                                        02</span>
+                                    <h4
+                                        class="text-deep-green font-bold text-lg mt-1 group-hover:text-primary transition-colors">
+                                        Community Voices</h4>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex-shrink-0 w-80 group cursor-pointer">
+                            <div
+                                class="bg-white rounded-2xl overflow-hidden shadow-lg border border-white p-2 transition-all duration-300 group-hover:-translate-y-2 group-hover:shadow-xl">
+                                <div class="relative aspect-[16/10] rounded-xl overflow-hidden mb-4">
+                                    <img alt="Impact Metrics"
+                                        class="w-full h-full object-cover transition-opacity duration-300 group-hover:opacity-40"
+                                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuD5PZeVaTDepGXwxR10OE6Feq5BCgdn9QWsVmA4IbXGKfKSs73Z3RJmcJr94tWX6qn3cwUdQkyUzzyb1rcDVCCH8xmAwSGxDZm1r3_nO-wCov2_Zkigwdde52aed5g0M6LOMOF_6QRpACjAY2NxqbwfbGtUy1D4R7vCjhXxFrvsbaSJgSVhB7z3LRSnxWBUdv5fpb6X7rSLf-Uy-cjJiEH_2VbWXYagPry5eiNyF7wx9DeU9PZTGBenuYElX7QHOixLCBDOHMz49PM" />
+                                    <div
+                                        class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                                        <span class="material-symbols-outlined text-deep-green text-3xl">play_circle</span>
+                                    </div>
+                                </div>
+                                <div class="px-2 pb-2">
+                                    <span class="text-[10px] font-bold text-gold-accent uppercase tracking-widest">Episode
+                                        03</span>
+                                    <h4
+                                        class="text-deep-green font-bold text-lg mt-1 group-hover:text-primary transition-colors">
+                                        Measuring Ecosystem Recovery</h4>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex-shrink-0 w-80 group cursor-pointer">
+                            <div
+                                class="bg-white rounded-2xl overflow-hidden shadow-lg border border-white p-2 transition-all duration-300 group-hover:-translate-y-2 group-hover:shadow-xl">
+                                <div class="relative aspect-[16/10] rounded-xl overflow-hidden mb-4">
+                                    <img alt="The Future"
+                                        class="w-full h-full object-cover transition-opacity duration-300 group-hover:opacity-40"
+                                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuD5PZeVaTDepGXwxR10OE6Feq5BCgdn9QWsVmA4IbXGKfKSs73Z3RJmcJr94tWX6qn3cwUdQkyUzzyb1rcDVCCH8xmAwSGxDZm1r3_nO-wCov2_Zkigwdde52aed5g0M6LOMOF_6QRpACjAY2NxqbwfbGtUy1D4R7vCjhXxFrvsbaSJgSVhB7z3LRSnxWBUdv5fpb6X7rSLf-Uy-cjJiEH_2VbWXYagPry5eiNyF7wx9DeU9PZTGBenuYElX7QHOixLCBDOHMz49PM" />
+                                    <div
+                                        class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                                        <span class="material-symbols-outlined text-deep-green text-3xl">play_circle</span>
+                                    </div>
+                                </div>
+                                <div class="px-2 pb-2">
+                                    <span class="text-[10px] font-bold text-gold-accent uppercase tracking-widest">Episode
+                                        04</span>
+                                    <h4
+                                        class="text-deep-green font-bold text-lg mt-1 group-hover:text-primary transition-colors">
+                                        A 2050 Vision</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <main class="flex-grow">
         <section class="relative bg-white py-32 md:py-48 px-6 overflow-hidden" id="mission-vision">
             <span
