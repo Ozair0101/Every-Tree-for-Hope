@@ -76,7 +76,7 @@
             </div>
         </div>
     </div>
-    <section class="relative bg-white pb-18 pt-28  px-6 botanical-bg overflow-hidden" id="media-stories">
+    <section class="relative bg-white pb-18 pt-28 px-6 botanical-bg overflow-hidden" id="media-stories">
         <div class="absolute top-0 right-0 w-96 h-96 opacity-[0.03] pointer-events-none">
             <span class="material-symbols-outlined text-[300px] text-deep-green">potted_plant</span>
         </div>
@@ -99,19 +99,28 @@
                     seedling planted is a breath of hope restored to our historic landscape.
                 </p>
             </div>
-            <div class="relative space-y-12">
+            <div class="relative">
+                <!-- Scroll buttons -->
+                <button id="scrollLeft"
+                    class="absolute left-0 top-1/2 -translate-y-1/2 z-20 bg-white/90 backdrop-blur-sm rounded-full p-3 shadow-lg hover:bg-white transition-all -translate-x-4">
+                    <span class="material-symbols-outlined text-deep-green text-2xl">chevron_left</span>
+                </button>
+                <button id="scrollRight"
+                    class="absolute right-0 top-1/2 -translate-y-1/2 z-20 bg-white/90 backdrop-blur-sm rounded-full p-3 shadow-lg hover:bg-white transition-all translate-x-4">
+                    <span class="material-symbols-outlined text-deep-green text-2xl">chevron_right</span>
+                </button>
+
                 <div class="relative">
-                    <div class="flex gap-6 overflow-x-auto no-scrollbar pb-8 px-4 -mx-4">
-                        <div class="flex-shrink-0 w-80 group cursor-pointer">
+                    <div id="videoContainer" class="flex gap-6 overflow-x-hidden pb-8 px-4 -mx-4">
+                        <div class="flex-shrink-0 w-80 group cursor-pointer" data-video-id="dQw4w9WgXcQ">
                             <div
                                 class="bg-white rounded-2xl overflow-hidden shadow-lg border border-white p-2 transition-all duration-300 group-hover:-translate-y-2 group-hover:shadow-xl">
                                 <div class="relative aspect-[16/10] rounded-xl overflow-hidden mb-4">
-                                    <img alt="Soil Preparation"
-                                        class="w-full h-full object-cover transition-opacity duration-300 group-hover:opacity-40"
+                                    <img alt="Soil Preparation" class="w-full h-full object-cover"
                                         src="https://lh3.googleusercontent.com/aida-public/AB6AXuD5PZeVaTDepGXwxR10OE6Feq5BCgdn9QWsVmA4IbXGKfKSs73Z3RJmcJr94tWX6qn3cwUdQkyUzzyb1rcDVCCH8xmAwSGxDZm1r3_nO-wCov2_Zkigwdde52aed5g0M6LOMOF_6QRpACjAY2NxqbwfbGtUy1D4R7vCjhXxFrvsbaSJgSVhB7z3LRSnxWBUdv5fpb6X7rSLf-Uy-cjJiEH_2VbWXYagPry5eiNyF7wx9DeU9PZTGBenuYElX7QHOixLCBDOHMz49PM" />
                                     <div
-                                        class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                                        <span class="material-symbols-outlined text-deep-green text-3xl">play_circle</span>
+                                        class="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity">
+                                        <span class="material-symbols-outlined text-white text-4xl">play_circle</span>
                                     </div>
                                 </div>
                                 <div class="px-2 pb-2">
@@ -123,16 +132,15 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="flex-shrink-0 w-80 group cursor-pointer">
+                        <div class="flex-shrink-0 w-80 group cursor-pointer" data-video-id="dQw4w9WgXcQ">
                             <div
                                 class="bg-white rounded-2xl overflow-hidden shadow-lg border border-white p-2 transition-all duration-300 group-hover:-translate-y-2 group-hover:shadow-xl">
                                 <div class="relative aspect-[16/10] rounded-xl overflow-hidden mb-4">
-                                    <img alt="Community Planting"
-                                        class="w-full h-full object-cover transition-opacity duration-300 group-hover:opacity-40"
+                                    <img alt="Community Planting" class="w-full h-full object-cover"
                                         src="https://lh3.googleusercontent.com/aida-public/AB6AXuCp83JCfKCRYgHZuZA8dzBJ3Ih5yeidFw9eQGrfMH89CUBjfUnGXPlxXvfb0DmVToP0iwQwPaK0W5XabUIrIKFxbSwRZd0LqiyyCermKdbgrB2uPKlC48Z7W_on-lUkUOnlJd62ok3dkmH7JXdQxf63fiy8lTJ7mxggLO5Vjo_p7uKwbi43Dl3GWm8aiiPqcYvOfRpQgKV513yPQakVJ-1w2d86ue27OPY3p8N9H5sr5Mg5oew18KgTO2Ehhj7cSGj-2a6ht7DOZOs" />
                                     <div
-                                        class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                                        <span class="material-symbols-outlined text-deep-green text-3xl">play_circle</span>
+                                        class="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity">
+                                        <span class="material-symbols-outlined text-white text-4xl">play_circle</span>
                                     </div>
                                 </div>
                                 <div class="px-2 pb-2">
@@ -144,16 +152,15 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="flex-shrink-0 w-80 group cursor-pointer">
+                        <div class="flex-shrink-0 w-80 group cursor-pointer" data-video-id="dQw4w9WgXcQ">
                             <div
                                 class="bg-white rounded-2xl overflow-hidden shadow-lg border border-white p-2 transition-all duration-300 group-hover:-translate-y-2 group-hover:shadow-xl">
                                 <div class="relative aspect-[16/10] rounded-xl overflow-hidden mb-4">
-                                    <img alt="Impact Metrics"
-                                        class="w-full h-full object-cover transition-opacity duration-300 group-hover:opacity-40"
+                                    <img alt="Impact Metrics" class="w-full h-full object-cover"
                                         src="https://lh3.googleusercontent.com/aida-public/AB6AXuD5PZeVaTDepGXwxR10OE6Feq5BCgdn9QWsVmA4IbXGKfKSs73Z3RJmcJr94tWX6qn3cwUdQkyUzzyb1rcDVCCH8xmAwSGxDZm1r3_nO-wCov2_Zkigwdde52aed5g0M6LOMOF_6QRpACjAY2NxqbwfbGtUy1D4R7vCjhXxFrvsbaSJgSVhB7z3LRSnxWBUdv5fpb6X7rSLf-Uy-cjJiEH_2VbWXYagPry5eiNyF7wx9DeU9PZTGBenuYElX7QHOixLCBDOHMz49PM" />
                                     <div
-                                        class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                                        <span class="material-symbols-outlined text-deep-green text-3xl">play_circle</span>
+                                        class="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity">
+                                        <span class="material-symbols-outlined text-white text-4xl">play_circle</span>
                                     </div>
                                 </div>
                                 <div class="px-2 pb-2">
@@ -165,16 +172,15 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="flex-shrink-0 w-80 group cursor-pointer">
+                        <div class="flex-shrink-0 w-80 group cursor-pointer" data-video-id="dQw4w9WgXcQ">
                             <div
                                 class="bg-white rounded-2xl overflow-hidden shadow-lg border border-white p-2 transition-all duration-300 group-hover:-translate-y-2 group-hover:shadow-xl">
                                 <div class="relative aspect-[16/10] rounded-xl overflow-hidden mb-4">
-                                    <img alt="The Future"
-                                        class="w-full h-full object-cover transition-opacity duration-300 group-hover:opacity-40"
+                                    <img alt="The Future" class="w-full h-full object-cover"
                                         src="https://lh3.googleusercontent.com/aida-public/AB6AXuD5PZeVaTDepGXwxR10OE6Feq5BCgdn9QWsVmA4IbXGKfKSs73Z3RJmcJr94tWX6qn3cwUdQkyUzzyb1rcDVCCH8xmAwSGxDZm1r3_nO-wCov2_Zkigwdde52aed5g0M6LOMOF_6QRpACjAY2NxqbwfbGtUy1D4R7vCjhXxFrvsbaSJgSVhB7z3LRSnxWBUdv5fpb6X7rSLf-Uy-cjJiEH_2VbWXYagPry5eiNyF7wx9DeU9PZTGBenuYElX7QHOixLCBDOHMz49PM" />
                                     <div
-                                        class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                                        <span class="material-symbols-outlined text-deep-green text-3xl">play_circle</span>
+                                        class="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity">
+                                        <span class="material-symbols-outlined text-white text-4xl">play_circle</span>
                                     </div>
                                 </div>
                                 <div class="px-2 pb-2">
@@ -646,3 +652,87 @@
         </script>
     @endpush
 @endsection
+
+@push('scripts')
+    <script>
+        // Video carousel scroll functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const videoContainer = document.getElementById('videoContainer');
+            const scrollLeftBtn = document.getElementById('scrollLeft');
+            const scrollRightBtn = document.getElementById('scrollRight');
+
+            if (videoContainer && scrollLeftBtn && scrollRightBtn) {
+                const scrollAmount = 340; // Width of one video card + gap
+
+                scrollLeftBtn.addEventListener('click', function() {
+                    videoContainer.scrollBy({
+                        left: -scrollAmount,
+                        behavior: 'smooth'
+                    });
+                });
+
+                scrollRightBtn.addEventListener('click', function() {
+                    videoContainer.scrollBy({
+                        left: scrollAmount,
+                        behavior: 'smooth'
+                    });
+                });
+
+                // Update button visibility based on scroll position
+                function updateButtonVisibility() {
+                    const maxScroll = videoContainer.scrollWidth - videoContainer.clientWidth;
+
+                    if (videoContainer.scrollLeft <= 0) {
+                        scrollLeftBtn.style.opacity = '0.3';
+                        scrollLeftBtn.style.pointerEvents = 'none';
+                    } else {
+                        scrollLeftBtn.style.opacity = '1';
+                        scrollLeftBtn.style.pointerEvents = 'auto';
+                    }
+
+                    if (videoContainer.scrollLeft >= maxScroll - 10) {
+                        scrollRightBtn.style.opacity = '0.3';
+                        scrollRightBtn.style.pointerEvents = 'none';
+                    } else {
+                        scrollRightBtn.style.opacity = '1';
+                        scrollRightBtn.style.pointerEvents = 'auto';
+                    }
+                }
+
+                videoContainer.addEventListener('scroll', updateButtonVisibility);
+                updateButtonVisibility(); // Initial check
+            }
+
+            // YouTube video functionality
+            const videoCards = document.querySelectorAll('[data-video-id]');
+
+            videoCards.forEach(function(card) {
+                card.addEventListener('click', function() {
+                    const videoId = this.getAttribute('data-video-id');
+                    const img = this.querySelector('img');
+                    const overlay = this.querySelector('.absolute.inset-0');
+
+                    // Create iframe
+                    const iframe = document.createElement('iframe');
+                    iframe.setAttribute('src', 'https://www.youtube.com/embed/' + videoId +
+                        '?autoplay=1&rel=0');
+                    iframe.setAttribute('frameborder', '0');
+                    iframe.setAttribute('allow',
+                        'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
+                    );
+                    iframe.setAttribute('allowfullscreen', '');
+                    iframe.className = 'w-full h-full absolute top-0 left-0 rounded-xl';
+
+                    // Replace image with iframe
+                    img.style.display = 'none';
+                    overlay.style.display = 'none';
+                    this.querySelector('.relative.aspect-[16\\/10]').appendChild(iframe);
+
+                    // Remove click handler after video loads
+                    this.style.cursor = 'default';
+                    this.removeEventListener('click', arguments.callee);
+                });
+            });
+        });
+    </script>
+@endpush
