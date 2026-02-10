@@ -198,6 +198,19 @@
         </div>
     </section>
 
+    <!-- Video Modal -->
+    <div id="videoModal"
+        class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="relative w-full max-w-4xl">
+            <button id="closeModal" class="absolute -top-12 right-0 text-white hover:text-gray-300 transition-colors">
+                <span class="material-symbols-outlined text-4xl">close</span>
+            </button>
+            <div class="relative aspect-video bg-black rounded-lg overflow-hidden">
+                <iframe id="modalIframe" class="w-full h-full" frameborder="0" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+
     <main class="flex-grow">
         <section class="relative bg-white py-32 md:py-48 px-6 overflow-hidden" id="mission-vision">
             <span
@@ -705,35 +718,57 @@
 
             // YouTube video functionality
             const videoCards = document.querySelectorAll('[data-video-id]');
+            const videoModal = document.getElementById('videoModal');
+            const modalIframe = document.getElementById('modalIframe');
+            const closeModal = document.getElementById('closeModal');
 
             videoCards.forEach(function(card) {
                 card.addEventListener('click', function() {
                     const videoId = this.getAttribute('data-video-id');
-                    const img = this.querySelector('img');
-                    const overlay = this.querySelector('.absolute.inset-0');
-                    const aspectContainer = this.querySelector('.relative');
 
-                    // Create iframe
-                    const iframe = document.createElement('iframe');
-                    iframe.setAttribute('src', 'https://www.youtube.com/embed/' + videoId +
+                    // Set iframe src with autoplay
+                    modalIframe.setAttribute('src', 'https://www.youtube.com/embed/' + videoId +
                         '?autoplay=1&rel=0');
-                    iframe.setAttribute('frameborder', '0');
-                    iframe.setAttribute('allow',
-                        'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
-                    );
-                    iframe.setAttribute('allowfullscreen', '');
-                    iframe.className = 'w-full h-full absolute top-0 left-0 rounded-xl';
 
-                    // Replace image with iframe
-                    img.style.display = 'none';
-                    overlay.style.display = 'none';
-                    aspectContainer.appendChild(iframe);
+                    // Show modal
+                    videoModal.classList.remove('hidden');
+                    videoModal.classList.add('flex');
 
-                    // Remove click handler after video loads
-                    this.style.cursor = 'default';
-                    this.removeEventListener('click', arguments.callee);
+                    // Prevent body scroll
+                    document.body.style.overflow = 'hidden';
                 });
             });
+
+            // Close modal when clicking close button
+            closeModal.addEventListener('click', function() {
+                closeVideoModal();
+            });
+
+            // Close modal when clicking outside
+            videoModal.addEventListener('click', function(e) {
+                if (e.target === videoModal) {
+                    closeVideoModal();
+                }
+            });
+
+            // Close modal with Escape key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && !videoModal.classList.contains('hidden')) {
+                    closeVideoModal();
+                }
+            });
+
+            function closeVideoModal() {
+                // Hide modal
+                videoModal.classList.add('hidden');
+                videoModal.classList.remove('flex');
+
+                // Clear iframe src to stop video
+                modalIframe.setAttribute('src', '');
+
+                // Restore body scroll
+                document.body.style.overflow = '';
+            }
         });
     </script>
 @endpush
