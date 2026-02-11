@@ -31,7 +31,13 @@
                 <div
                     class="glass-panel rounded-[3rem] p-12 md:p-20 relative overflow-hidden flex flex-col lg:flex-row items-center gap-16 border-gold-accent/10">
                     <div class="flex-1 space-y-8">
-                        <h4 class="text-gold-accent font-bold tracking-[0.3em] text-xs uppercase">Fiscal Year 2023</h4>
+                        @php
+                            $totalTrees = \App\Models\Event::active()->sum('trees_planted');
+                            $totalVolunteers = \App\Models\Event::active()->sum('volunteers');
+                            $totalEvents = \App\Models\Event::active()->count();
+                            $survivalRate = 92; // This could be a field in the future
+                        @endphp
+                        <h4 class="text-gold-accent font-bold tracking-[0.3em] text-xs uppercase">Fiscal Year 2024</h4>
                         <h2 class="text-4xl md:text-6xl font-serif text-deep-green leading-tight">Yearly Growth
                             <br /><span class="italic font-light">By The Numbers</span>
                         </h2>
@@ -46,23 +52,23 @@
                     </div>
                     <div class="flex-1 grid grid-cols-2 gap-8 w-full">
                         <div class="p-8 border-l border-gold-accent/20">
-                            <p class="text-5xl font-serif text-deep-green mb-2">92%</p>
+                            <p class="text-5xl font-serif text-deep-green mb-2">{{ $survivalRate }}%</p>
                             <p class="text-charcoal/40 text-[10px] font-bold uppercase tracking-widest">Survival Rate
                             </p>
                         </div>
                         <div class="p-8 border-l border-gold-accent/20">
-                            <p class="text-5xl font-serif text-deep-green mb-2">45k</p>
+                            <p class="text-5xl font-serif text-deep-green mb-2">{{ number_format($totalTrees) }}</p>
                             <p class="text-charcoal/40 text-[10px] font-bold uppercase tracking-widest">Trees Planted
                             </p>
                         </div>
                         <div class="p-8 border-l border-gold-accent/20">
-                            <p class="text-5xl font-serif text-deep-green mb-2">128</p>
+                            <p class="text-5xl font-serif text-deep-green mb-2">{{ round($totalTrees * 0.021) }}</p>
                             <p class="text-charcoal/40 text-[10px] font-bold uppercase tracking-widest">Tons CO2 Offset
                             </p>
                         </div>
                         <div class="p-8 border-l border-gold-accent/20">
-                            <p class="text-5xl font-serif text-deep-green mb-2">12</p>
-                            <p class="text-charcoal/40 text-[10px] font-bold uppercase tracking-widest">New Micro-Sheds
+                            <p class="text-5xl font-serif text-deep-green mb-2">{{ $totalEvents }}</p>
+                            <p class="text-charcoal/40 text-[10px] font-bold uppercase tracking-widest">Events Completed
                             </p>
                         </div>
                     </div>
@@ -83,10 +89,15 @@
                                     Our Impact Report</h1>
                             </div>
                             <!-- BodyText -->
+                            @php
+                                $events = \App\Models\Event::active()->ordered()->get();
+                            @endphp
                             <p
                                 class="text-center text-base font-normal leading-normal pb-6 pt-2 px-4 text-[#111714]/80 dark:text-[#f6f8f7]/80 max-w-3xl mx-auto">
                                 This table shows the cumulative results of community efforts, events, and donations. Thank
-                                you for helping us green our neighborhoods.
+                                you for helping us green our neighborhoods. Total: {{ number_format($totalTrees) }} trees
+                                planted by {{ number_format($totalVolunteers) }} volunteers across {{ $totalEvents }}
+                                events.
                             </p>
                             <!-- Chips -->
                             <div class="flex flex-wrap items-center justify-center gap-3 p-3 overflow-x-hidden">
@@ -128,80 +139,33 @@
                                                 </tr>
                                             </thead>
                                             <tbody class="divide-y divide-primary/20 dark:divide-primary/30">
-                                                <tr
-                                                    class="block md:table-row p-4 border-b border-primary/20 dark:border-primary/30 md:border-none">
-                                                    <td class="block md:table-cell px-2 md:px-6 py-2 md:py-4 text-[#111714] dark:text-[#f6f8f7] text-sm font-medium md:font-normal leading-normal before:content-[attr(data-label)] before:font-bold before:mr-2 before:md:hidden"
-                                                        data-label="Event/Initiative">Greenwood Park Planting</td>
-                                                    <td class="block md:table-cell px-2 md:px-6 py-2 md:py-4 text-[#111714]/80 dark:text-[#f6f8f7]/80 text-sm font-normal leading-normal before:content-[attr(data-label)] before:font-bold before:mr-2 before:md:hidden"
-                                                        data-label="Location">Central Park, Springfield</td>
-                                                    <td class="block md:table-cell px-2 md:px-6 py-2 md:py-4 text-[#111714]/80 dark:text-[#f6f8f7]/80 text-sm font-normal leading-normal before:content-[attr(data-label)] before:font-bold before:mr-2 before:md:hidden"
-                                                        data-label="Date">Oct 22, 2023</td>
-                                                    <td class="block md:table-cell px-2 md:px-6 py-2 md:py-4 text-[#111714]/80 dark:text-[#f6f8f7]/80 text-sm font-normal leading-normal md:text-right before:content-[attr(data-label)] before:font-bold before:mr-2 before:md:hidden"
-                                                        data-label="Trees Planted">150</td>
-                                                    <td class="block md:table-cell px-2 md:px-6 py-2 md:py-4 text-[#111714]/80 dark:text-[#f6f8f7]/80 text-sm font-normal leading-normal md:text-right before:content-[attr(data-label)] before:font-bold before:mr-2 before:md:hidden"
-                                                        data-label="Volunteers">45</td>
-                                                    <td class="block md:table-cell px-2 md:px-6 py-2 md:py-4 text-[#111714]/80 dark:text-[#f6f8f7]/80 text-sm font-normal leading-normal before:content-[attr(data-label)] before:font-bold before:mr-2 before:md:hidden"
-                                                        data-label="Sponsor/Partner">City Parks Dept.</td>
-                                                </tr>
-                                                <tr
-                                                    class="block md:table-row p-4 border-b border-primary/20 dark:border-primary/30 md:border-none">
-                                                    <td class="block md:table-cell px-2 md:px-6 py-2 md:py-4 text-[#111714] dark:text-[#f6f8f7] text-sm font-medium md:font-normal leading-normal before:content-[attr(data-label)] before:font-bold before:mr-2 before:md:hidden"
-                                                        data-label="Event/Initiative">Oakridge Community Day</td>
-                                                    <td class="block md:table-cell px-2 md:px-6 py-2 md:py-4 text-[#111714]/80 dark:text-[#f6f8f7]/80 text-sm font-normal leading-normal before:content-[attr(data-label)] before:font-bold before:mr-2 before:md:hidden"
-                                                        data-label="Location">Oakridge, Meadowville</td>
-                                                    <td class="block md:table-cell px-2 md:px-6 py-2 md:py-4 text-[#111714]/80 dark:text-[#f6f8f7]/80 text-sm font-normal leading-normal before:content-[attr(data-label)] before:font-bold before:mr-2 before:md:hidden"
-                                                        data-label="Date">Sep 15, 2023</td>
-                                                    <td class="block md:table-cell px-2 md:px-6 py-2 md:py-4 text-[#111714]/80 dark:text-[#f6f8f7]/80 text-sm font-normal leading-normal md:text-right before:content-[attr(data-label)] before:font-bold before:mr-2 before:md:hidden"
-                                                        data-label="Trees Planted">85</td>
-                                                    <td class="block md:table-cell px-2 md:px-6 py-2 md:py-4 text-[#111714]/80 dark:text-[#f6f8f7]/80 text-sm font-normal leading-normal md:text-right before:content-[attr(data-label)] before:font-bold before:mr-2 before:md:hidden"
-                                                        data-label="Volunteers">30</td>
-                                                    <td class="block md:table-cell px-2 md:px-6 py-2 md:py-4 text-[#111714]/80 dark:text-[#f6f8f7]/80 text-sm font-normal leading-normal before:content-[attr(data-label)] before:font-bold before:mr-2 before:md:hidden"
-                                                        data-label="Sponsor/Partner">GreenCo</td>
-                                                </tr>
-                                                <tr
-                                                    class="block md:table-row p-4 border-b border-primary/20 dark:border-primary/30 md:border-none">
-                                                    <td class="block md:table-cell px-2 md:px-6 py-2 md:py-4 text-[#111714] dark:text-[#f6f8f7] text-sm font-medium md:font-normal leading-normal before:content-[attr(data-label)] before:font-bold before:mr-2 before:md:hidden"
-                                                        data-label="Event/Initiative">Riverbank Restoration</td>
-                                                    <td class="block md:table-cell px-2 md:px-6 py-2 md:py-4 text-[#111714]/80 dark:text-[#f6f8f7]/80 text-sm font-normal leading-normal before:content-[attr(data-label)] before:font-bold before:mr-2 before:md:hidden"
-                                                        data-label="Location">River's Edge, Brookside</td>
-                                                    <td class="block md:table-cell px-2 md:px-6 py-2 md:py-4 text-[#111714]/80 dark:text-[#f6f8f7]/80 text-sm font-normal leading-normal before:content-[attr(data-label)] before:font-bold before:mr-2 before:md:hidden"
-                                                        data-label="Date">Aug 05, 2023</td>
-                                                    <td class="block md:table-cell px-2 md:px-6 py-2 md:py-4 text-[#111714]/80 dark:text-[#f6f8f7]/80 text-sm font-normal leading-normal md:text-right before:content-[attr(data-label)] before:font-bold before:mr-2 before:md:hidden"
-                                                        data-label="Trees Planted">220</td>
-                                                    <td class="block md:table-cell px-2 md:px-6 py-2 md:py-4 text-[#111714]/80 dark:text-[#f6f8f7]/80 text-sm font-normal leading-normal md:text-right before:content-[attr(data-label)] before:font-bold before:mr-2 before:md:hidden"
-                                                        data-label="Volunteers">60</td>
-                                                    <td class="block md:table-cell px-2 md:px-6 py-2 md:py-4 text-[#111714]/80 dark:text-[#f6f8f7]/80 text-sm font-normal leading-normal before:content-[attr(data-label)] before:font-bold before:mr-2 before:md:hidden"
-                                                        data-label="Sponsor/Partner">Nature's Keepers</td>
-                                                </tr>
-                                                <tr
-                                                    class="block md:table-row p-4 border-b border-primary/20 dark:border-primary/30 md:border-none">
-                                                    <td class="block md:table-cell px-2 md:px-6 py-2 md:py-4 text-[#111714] dark:text-[#f6f8f7] text-sm font-medium md:font-normal leading-normal before:content-[attr(data-label)] before:font-bold before:mr-2 before:md:hidden"
-                                                        data-label="Event/Initiative">Maple Street Beautification</td>
-                                                    <td class="block md:table-cell px-2 md:px-6 py-2 md:py-4 text-[#111714]/80 dark:text-[#f6f8f7]/80 text-sm font-normal leading-normal before:content-[attr(data-label)] before:font-bold before:mr-2 before:md:hidden"
-                                                        data-label="Location">Maple Street, Springfield</td>
-                                                    <td class="block md:table-cell px-2 md:px-6 py-2 md:py-4 text-[#111714]/80 dark:text-[#f6f8f7]/80 text-sm font-normal leading-normal before:content-[attr(data-label)] before:font-bold before:mr-2 before:md:hidden"
-                                                        data-label="Date">Jul 11, 2023</td>
-                                                    <td class="block md:table-cell px-2 md:px-6 py-2 md:py-4 text-[#111714]/80 dark:text-[#f6f8f7]/80 text-sm font-normal leading-normal md:text-right before:content-[attr(data-label)] before:font-bold before:mr-2 before:md:hidden"
-                                                        data-label="Trees Planted">50</td>
-                                                    <td class="block md:table-cell px-2 md:px-6 py-2 md:py-4 text-[#111714]/80 dark:text-[#f6f8f7]/80 text-sm font-normal leading-normal md:text-right before:content-[attr(data-label)] before:font-bold before:mr-2 before:md:hidden"
-                                                        data-label="Volunteers">25</td>
-                                                    <td class="block md:table-cell px-2 md:px-6 py-2 md:py-4 text-[#111714]/80 dark:text-[#f6f8f7]/80 text-sm font-normal leading-normal before:content-[attr(data-label)] before:font-bold before:mr-2 before:md:hidden"
-                                                        data-label="Sponsor/Partner">Local Homeowners Assn.</td>
-                                                </tr>
-                                                <tr class="block md:table-row p-4">
-                                                    <td class="block md:table-cell px-2 md:px-6 py-2 md:py-4 text-[#111714] dark:text-[#f6f8f7] text-sm font-medium md:font-normal leading-normal before:content-[attr(data-label)] before:font-bold before:mr-2 before:md:hidden"
-                                                        data-label="Event/Initiative">Annual Earth Day Event</td>
-                                                    <td class="block md:table-cell px-2 md:px-6 py-2 md:py-4 text-[#111714]/80 dark:text-[#f6f8f7]/80 text-sm font-normal leading-normal before:content-[attr(data-label)] before:font-bold before:mr-2 before:md:hidden"
-                                                        data-label="Location">City Center, Meadowville</td>
-                                                    <td class="block md:table-cell px-2 md:px-6 py-2 md:py-4 text-[#111714]/80 dark:text-[#f6f8f7]/80 text-sm font-normal leading-normal before:content-[attr(data-label)] before:font-bold before:mr-2 before:md:hidden"
-                                                        data-label="Date">Apr 22, 2023</td>
-                                                    <td class="block md:table-cell px-2 md:px-6 py-2 md:py-4 text-[#111714]/80 dark:text-[#f6f8f7]/80 text-sm font-normal leading-normal md:text-right before:content-[attr(data-label)] before:font-bold before:mr-2 before:md:hidden"
-                                                        data-label="Trees Planted">500</td>
-                                                    <td class="block md:table-cell px-2 md:px-6 py-2 md:py-4 text-[#111714]/80 dark:text-[#f6f8f7]/80 text-sm font-normal leading-normal md:text-right before:content-[attr(data-label)] before:font-bold before:mr-2 before:md:hidden"
-                                                        data-label="Volunteers">120</td>
-                                                    <td class="block md:table-cell px-2 md:px-6 py-2 md:py-4 text-[#111714]/80 dark:text-[#f6f8f7]/80 text-sm font-normal leading-normal before:content-[attr(data-label)] before:font-bold before:mr-2 before:md:hidden"
-                                                        data-label="Sponsor/Partner">EcoSolutions Inc.</td>
-                                                </tr>
+                                                @forelse($events as $event)
+                                                    <tr
+                                                        class="block md:table-row p-4 border-b border-primary/20 dark:border-primary/30 md:border-none">
+                                                        <td class="block md:table-cell px-2 md:px-6 py-2 md:py-4 text-[#111714] dark:text-[#f6f8f7] text-sm font-medium md:font-normal leading-normal before:content-[attr(data-label)] before:font-bold before:mr-2 before:md:hidden"
+                                                            data-label="Event/Initiative">{{ $event->title }}</td>
+                                                        <td class="block md:table-cell px-2 md:px-6 py-2 md:py-4 text-[#111714]/80 dark:text-[#f6f8f7]/80 text-sm font-normal leading-normal before:content-[attr(data-label)] before:font-bold before:mr-2 before:md:hidden"
+                                                            data-label="Location">{{ $event->location }}</td>
+                                                        <td class="block md:table-cell px-2 md:px-6 py-2 md:py-4 text-[#111714]/80 dark:text-[#f6f8f7]/80 text-sm font-normal leading-normal before:content-[attr(data-label)] before:font-bold before:mr-2 before:md:hidden"
+                                                            data-label="Date">{{ $event->formatted_date }}</td>
+                                                        <td class="block md:table-cell px-2 md:px-6 py-2 md:py-4 text-[#111714]/80 dark:text-[#f6f8f7]/80 text-sm font-normal leading-normal md:text-right before:content-[attr(data-label)] before:font-bold before:mr-2 before:md:hidden"
+                                                            data-label="Trees Planted">
+                                                            {{ number_format($event->trees_planted) }}</td>
+                                                        <td class="block md:table-cell px-2 md:px-6 py-2 md:py-4 text-[#111714]/80 dark:text-[#f6f8f7]/80 text-sm font-normal leading-normal md:text-right before:content-[attr(data-label)] before:font-bold before:mr-2 before:md:hidden"
+                                                            data-label="Volunteers">{{ number_format($event->volunteers) }}
+                                                        </td>
+                                                        <td class="block md:table-cell px-2 md:px-6 py-2 md:py-4 text-[#111714]/80 dark:text-[#f6f8f7]/80 text-sm font-normal leading-normal before:content-[attr(data-label)] before:font-bold before:mr-2 before:md:hidden"
+                                                            data-label="Sponsor/Partner">
+                                                            {{ $event->sponsor_partner ?? 'N/A' }}</td>
+                                                    </tr>
+                                                @empty
+                                                    <tr>
+                                                        <td colspan="6"
+                                                            class="text-center py-8 text-[#111714]/60 dark:text-[#f6f8f7]/60">
+                                                            No events found. Check back soon for updates!
+                                                        </td>
+                                                    </tr>
+                                                @endforelse
                                             </tbody>
                                         </table>
                                     </div>
