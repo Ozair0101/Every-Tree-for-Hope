@@ -11,6 +11,7 @@ class Event extends Model
         'title',
         'description',
         'location',
+        'province',
         'date',
         'trees_planted',
         'volunteers',
