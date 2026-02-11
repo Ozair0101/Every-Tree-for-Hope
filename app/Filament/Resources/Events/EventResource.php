@@ -45,6 +45,49 @@ class EventResource extends Resource
                     ->maxLength(255)
                     ->helperText('Event location or address')
                     ->columnSpanFull(),
+                Components\Select::make('province')
+                    ->label('Province')
+                    ->options([
+                        'Badakhshan' => 'Badakhshan',
+                        'Badghis' => 'Badghis',
+                        'Baghlan' => 'Baghlan',
+                        'Balkh' => 'Balkh',
+                        'Bamyan' => 'Bamyan',
+                        'Daykundi' => 'Daykundi',
+                        'Farah' => 'Farah',
+                        'Faryab' => 'Faryab',
+                        'Ghazni' => 'Ghazni',
+                        'Ghor' => 'Ghor',
+                        'Helmand' => 'Helmand',
+                        'Herat' => 'Herat',
+                        'Jowzjan' => 'Jowzjan',
+                        'Kabul' => 'Kabul',
+                        'Kandahar' => 'Kandahar',
+                        'Kapisa' => 'Kapisa',
+                        'Khost' => 'Khost',
+                        'Kunar' => 'Kunar',
+                        'Kunduz' => 'Kunduz',
+                        'Laghman' => 'Laghman',
+                        'Logar' => 'Logar',
+                        'Maimana' => 'Maimana',
+                        'Nangarhar' => 'Nangarhar',
+                        'Nimruz' => 'Nimruz',
+                        'Nuristan' => 'Nuristan',
+                        'Paktia' => 'Paktia',
+                        'Paktika' => 'Paktika',
+                        'Panjshir' => 'Panjshir',
+                        'Parwan' => 'Parwan',
+                        'Samangan' => 'Samangan',
+                        'Sar-e Pol' => 'Sar-e Pol',
+                        'Takhar' => 'Takhar',
+                        'Urozgan' => 'Urozgan',
+                        'Wardak' => 'Wardak',
+                        'Zabul' => 'Zabul',
+                    ])
+                    ->searchable()
+                    ->required()
+                    ->helperText('Select the province where the event took place')
+                    ->columnSpanFull(),
                 Components\DatePicker::make('date')
                     ->required()
                     ->columnSpanFull(),
@@ -111,6 +154,9 @@ class EventResource extends Resource
                     ->sortable(),
                 Tables\Columns\TextColumn::make('location')
                     ->searchable(),
+                Tables\Columns\TextColumn::make('province')
+                    ->searchable()
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('date')
                     ->date()
                     ->sortable(),
