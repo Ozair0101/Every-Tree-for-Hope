@@ -133,64 +133,228 @@
                     </div>
                 </div>
             </section>
-            <section class="w-full py-16 bg-white border-y border-charcoal/5">
-                <div class="max-w-7xl mx-auto px-6 text-center">
-                    <p class="text-[10px] font-bold text-sage-green uppercase tracking-[0.3em] mb-10">Follow the
-                        Journey</p>
-                    <div class="flex justify-center items-center gap-10 md:gap-16">
-                        <a class="group flex flex-col items-center gap-3" href="#">
-                            <div
-                                class="w-12 h-12 flex items-center justify-center rounded-full bg-off-white shadow-sm group-hover:bg-deep-green group-hover:text-white transition-all text-sage-green">
-                                <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
-                                    <path
-                                        d="M22.675 0h-21.35c-.732 0-1.325.593-1.325 1.325v21.351c0 .731.593 1.324 1.325 1.324h11.495v-9.294h-3.128v-3.622h3.128v-2.671c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12v9.293h6.116c.73 0 1.323-.593 1.323-1.325v-21.35c0-.732-.593-1.325-1.325-1.325z">
-                                    </path>
-                                </svg>
-                            </div>
-                            <span
-                                class="text-[10px] font-bold text-charcoal/40 uppercase group-hover:text-deep-green">Facebook</span>
-                        </a>
-                        <a class="group flex flex-col items-center gap-3" href="#">
-                            <div
-                                class="w-12 h-12 flex items-center justify-center rounded-full bg-off-white shadow-sm group-hover:bg-deep-green group-hover:text-white transition-all text-sage-green">
-                                <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
-                                    <path
-                                        d="M12.525.023C13.29 0 14.056 0 14.822.023c.067.85-.24 1.699-.867 2.302.751.421 1.581.65 2.442.677.03-.783-.242-1.556-.767-2.14.75.199 1.467.507 2.115.91-.137 2.133-1.406 3.993-3.322 4.792.052 1.854.197 3.693.435 5.522.083.642.04 1.294-.127 1.917-.738 2.39-3.006 4.145-5.503 4.264-2.174.103-4.32-.774-5.832-2.327-.14-.143-.243-.314-.303-.502-.173-.54-.26-1.103-.26-1.67 0-2.35 1.906-4.256 4.256-4.256.43 0 .85.065 1.246.186-.16-1.127-.235-2.261-.223-3.396-.922.451-1.936.685-2.964.685-1.934 0-3.665-1.11-4.463-2.85-.304-.663-.456-1.38-.445-2.106.01-1.458.835-2.77 2.132-3.396 1.05-.506 2.233-.506 3.282 0 1.297.626 2.122 1.938 2.132 3.396.011.726-.14 1.443-.445 2.106-.21.458-.514.863-.895 1.192.156 1.134.316 2.268.475 3.402.305-.112.63-.168.96-.168 1.428 0 2.585 1.157 2.585 2.585 0 .33-.062.65-.183.948.118.04.24.072.363.093 1.267.22 2.528-.48 3.033-1.688.24-.572.336-1.193.282-1.812-.224-1.748-.36-3.5-.407-5.257z">
-                                    </path>
-                                </svg>
-                            </div>
-                            <span
-                                class="text-[10px] font-bold text-charcoal/40 uppercase group-hover:text-deep-green">TikTok</span>
-                        </a>
-                        <a class="group flex flex-col items-center gap-3" href="#">
-                            <div
-                                class="w-12 h-12 flex items-center justify-center rounded-full bg-off-white shadow-sm group-hover:bg-deep-green group-hover:text-white transition-all text-sage-green">
-                                <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
-                                    <path
-                                        d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z">
-                                    </path>
-                                </svg>
-                            </div>
-                            <span
-                                class="text-[10px] font-bold text-charcoal/40 uppercase group-hover:text-deep-green">YouTube</span>
-                        </a>
-                        <a class="group flex flex-col items-center gap-3" href="#">
-                            <div
-                                class="w-12 h-12 flex items-center justify-center rounded-full bg-off-white shadow-sm group-hover:bg-deep-green group-hover:text-white transition-all text-sage-green">
-                                <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
-                                    <path
-                                        d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z">
-                                    </path>
-                                </svg>
-                            </div>
-                            <span
-                                class="text-[10px] font-bold text-charcoal/40 uppercase group-hover:text-deep-green">Instagram</span>
-                        </a>
-                    </div>
-                </div>
-            </section>
+
         </main>
     </div>
+    <section class="relative py-12 md:py-16 px-6 overflow-hidden bg-background-light" id="donation-section">
+        <div class="absolute inset-0 z-0">
+            <div class="w-full h-full bg-cover bg-center"
+                style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCp83JCfKCRYgHZuZA8dzBJ3Ih5yeidFw9eQGrfMH89CUBjfUnGXPlxXvfb0DmVToP0iwQwPaK0W5XabUIrIKFxbSwRZd0LqiyyCermKdbgrB2uPKlC48Z7W_on-lUkUOnlJd62ok3dkmH7JXdQxf63fiy8lTJ7mxggLO5Vjo_p7uKwbi43Dl3GWm8aiiPqcYvOfRpQgKV513yPQakVJ-1w2d86ue27OPY3p8N9H5sr5Mg5oew18KgTO2Ehhj7cSGj-2a6ht7DOZOs');">
+            </div>
+            <div class="absolute inset-0 bg-white/95"></div>
+        </div>
+        <div class="relative max-w-4xl mx-auto text-center mb-20">
+            <h4 class="text-sage-green font-bold tracking-[0.4em] text-xs uppercase mb-4">Support the Canopy</h4>
+            <h2 class="text-5xl md:text-7xl font-serif text-deep-green leading-tight">
+                Your Contribution <br />
+                <span class="font-bold italic">Roots Our Change.</span>
+            </h2>
+            <div class="w-24 h-[1px] bg-gold-accent mx-auto mt-8 opacity-40"></div>
+        </div>
+
+        <div class="relative grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+            <span
+                class="material-symbols-outlined absolute -top-12 -left-12 text-sage-green/20 text-7xl floating parallax-leaf">eco</span>
+            <span
+                class="material-symbols-outlined absolute -bottom-12 -right-12 text-gold-accent/20 text-8xl floating parallax-leaf"
+                style="animation-delay: 2s;">spa</span>
+            <span
+                class="material-symbols-outlined absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-primary/5 text-[300px] parallax-leaf">potted_plant</span>
+
+            <div
+                class="glass-panel rounded-[2rem] p-10 flex flex-col h-full relative group hover:-translate-y-2 transition-transform duration-500 overflow-hidden">
+                <div class="absolute top-0 right-0 p-6 opacity-10">
+                    <span class="material-symbols-outlined text-6xl text-gold-accent">location_on</span>
+                </div>
+                <div class="mb-8">
+                    <span class="material-symbols-outlined text-gold-accent text-3xl mb-4">distance</span>
+                    <h3 class="font-serif text-2xl font-bold text-deep-green mb-2">Local Handover</h3>
+                    <p class="text-sage-green text-xs font-bold uppercase tracking-widest">Kabul, Afghanistan</p>
+                </div>
+                <div class="gold-line-art mb-8"></div>
+                <div class="space-y-6 flex-grow">
+                    <div>
+                        <p class="text-[10px] text-charcoal/40 font-bold uppercase tracking-widest mb-1">Primary
+                            Location</p>
+                        <p class="font-serif text-lg text-charcoal/80">Haidari Market</p>
+                        <p class="text-sm text-charcoal/60 italic">District 4, Kabul</p>
+                    </div>
+                    <div>
+                        <p class="text-[10px] text-charcoal/40 font-bold uppercase tracking-widest mb-1">Exchange
+                            Office</p>
+                        <p class="font-serif text-lg text-charcoal/80">Saray Shazada</p>
+                        <p class="text-sm text-charcoal/60">Main Financial Hub</p>
+                    </div>
+                </div>
+                <div class="mt-10 pt-6 border-t border-charcoal/5">
+                    <button
+                        class="w-full py-3 rounded-full border border-gold-accent/30 text-gold-accent text-sm font-bold hover:bg-gold-accent hover:text-white transition-all flex items-center justify-center gap-2">
+                        <span class="material-symbols-outlined text-lg">map</span>
+                        Get Directions
+                    </button>
+                </div>
+            </div>
+
+            <div
+                class="glass-panel rounded-[2rem] p-10 flex flex-col h-full relative group hover:-translate-y-2 transition-transform duration-500 overflow-hidden border-sage-green/20">
+                <div class="absolute top-0 right-0 p-6 opacity-10">
+                    <span class="material-symbols-outlined text-6xl text-sage-green">account_balance_wallet</span>
+                </div>
+                <div class="mb-8">
+                    <span class="material-symbols-outlined text-sage-green text-3xl mb-4">payments</span>
+                    <h3 class="font-serif text-2xl font-bold text-deep-green mb-2">MoneyGram &amp; WU</h3>
+                    <p class="text-sage-green text-xs font-bold uppercase tracking-widest">Global Remittance</p>
+                </div>
+                <div class="gold-line-art mb-8"></div>
+                <div class="space-y-8 flex-grow">
+                    <div>
+                        <p class="text-[10px] text-charcoal/40 font-bold uppercase tracking-widest mb-3">Receiver
+                            Name</p>
+                        <p class="font-serif text-3xl font-bold text-deep-green leading-tight">Mohammad Iqbal
+                            Alimyar</p>
+                        <p class="text-xs text-sage-green mt-2 font-medium">Verify spelling for secure
+                            transfer</p>
+                    </div>
+                    <div class="bg-sage-green/5 p-4 rounded-xl border border-sage-green/10">
+                        <p class="text-[10px] text-sage-green font-bold uppercase tracking-widest mb-2">
+                            Instructions
+                        </p>
+                        <p class="text-xs text-charcoal/60 leading-relaxed">Please share the MTCN or Reference
+                            Number via our secure contact portal after the transaction is complete.</p>
+                    </div>
+                </div>
+                <div class="mt-10 pt-6">
+                    <button
+                        class="w-full py-4 rounded-full bg-deep-green text-white text-sm font-bold hover:bg-deep-green/90 transition-all shadow-lg shadow-deep-green/20 flex items-center justify-center gap-2 js-copy-trigger"
+                        data-copy-text="Mohammad Iqbal Alimyar">
+                        <span class="material-symbols-outlined text-lg">content_copy</span>
+                        Copy Full Name
+                    </button>
+                </div>
+            </div>
+
+            <div
+                class="glass-panel rounded-[2rem] p-10 flex flex-col h-full relative group hover:-translate-y-2 transition-transform duration-500 overflow-hidden">
+                <div class="absolute top-0 right-0 p-6 opacity-10">
+                    <span class="material-symbols-outlined text-6xl text-charcoal">account_balance</span>
+                </div>
+                <div class="mb-8">
+                    <span class="material-symbols-outlined text-charcoal/70 text-3xl mb-4">assured_workload</span>
+                    <h3 class="font-serif text-2xl font-bold text-deep-green mb-2">Bank Transfer</h3>
+                    <p class="text-sage-green text-xs font-bold uppercase tracking-widest">International Ziraat
+                        Bankası</p>
+                </div>
+                <div class="gold-line-art mb-8"></div>
+                <div class="space-y-5 flex-grow">
+                    <div class="relative">
+                        <p class="text-[10px] text-charcoal/40 font-bold uppercase tracking-widest mb-1">IBAN
+                            Number</p>
+                        <div class="flex items-center justify-between bg-white/40 p-3 rounded-lg border border-charcoal/5">
+                            <p class="font-mono text-xs text-charcoal font-bold">TR76 0001 0021 2193 4812 5001</p>
+                            <span
+                                class="material-symbols-outlined text-lg text-sage-green cursor-pointer hover:scale-110 transition-transform js-copy-trigger"
+                                data-copy-text="TR76 0001 0021 2193 4812 5001">content_copy</span>
+                        </div>
+                    </div>
+                    <div class="relative">
+                        <p class="text-[10px] text-charcoal/40 font-bold uppercase tracking-widest mb-1">Swift /
+                            BIC Code</p>
+                        <div class="flex items-center justify-between bg-white/40 p-3 rounded-lg border border-charcoal/5">
+                            <p class="font-mono text-xs text-charcoal font-bold">TCZRTRA2</p>
+                            <span
+                                class="material-symbols-outlined text-lg text-sage-green cursor-pointer hover:scale-110 transition-transform js-copy-trigger"
+                                data-copy-text="TCZRTRA2">content_copy</span>
+                        </div>
+                    </div>
+                    <div class="relative">
+                        <p class="text-[10px] text-charcoal/40 font-bold uppercase tracking-widest mb-1">Account
+                            Holder</p>
+                        <p class="font-serif text-sm text-charcoal/80">EverGreen Conservation Fund</p>
+                    </div>
+                </div>
+                <div class="mt-10 pt-6">
+                    <button
+                        class="w-full py-3 rounded-full bg-white border border-charcoal/10 text-charcoal text-sm font-bold hover:bg-charcoal/5 transition-all flex items-center justify-center gap-2 js-copy-all-bank"
+                        type="button">
+                        <span class="material-symbols-outlined text-lg">content_copy</span>
+                        Copy All Bank Details
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-20 flex flex-col items-center gap-4 text-center">
+            <div class="flex -space-x-2">
+                <div
+                    class="w-10 h-10 rounded-full border-2 border-white bg-sage-green flex items-center justify-center text-white text-[10px] font-bold">
+                    99+
+                </div>
+                <div
+                    class="w-10 h-10 rounded-full border-2 border-white bg-gold-accent flex items-center justify-center text-white text-xs">
+                    <span class="material-symbols-outlined text-sm">shield_with_heart</span>
+                </div>
+            </div>
+            <p class="text-charcoal/40 text-[10px] font-bold uppercase tracking-[0.3em]">Fully Encrypted &amp;
+                Secure Transfers</p>
+        </div>
+    </section>
+
+    <section class="w-full py-16 bg-white border-y border-charcoal/5">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <p class="text-[10px] font-bold text-sage-green uppercase tracking-[0.3em] mb-10">Follow the
+                Journey</p>
+            <div class="flex justify-center items-center gap-10 md:gap-16">
+                <a class="group flex flex-col items-center gap-3" href="#">
+                    <div
+                        class="w-12 h-12 flex items-center justify-center rounded-full bg-off-white shadow-sm group-hover:bg-deep-green group-hover:text-white transition-all text-sage-green">
+                        <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                            <path
+                                d="M22.675 0h-21.35c-.732 0-1.325.593-1.325 1.325v21.351c0 .731.593 1.324 1.325 1.324h11.495v-9.294h-3.128v-3.622h3.128v-2.671c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12v9.293h6.116c.73 0 1.323-.593 1.323-1.325v-21.35c0-.732-.593-1.325-1.325-1.325z">
+                            </path>
+                        </svg>
+                    </div>
+                    <span
+                        class="text-[10px] font-bold text-charcoal/40 uppercase group-hover:text-deep-green">Facebook</span>
+                </a>
+                <a class="group flex flex-col items-center gap-3" href="#">
+                    <div
+                        class="w-12 h-12 flex items-center justify-center rounded-full bg-off-white shadow-sm group-hover:bg-deep-green group-hover:text-white transition-all text-sage-green">
+                        <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                            <path
+                                d="M12.525.023C13.29 0 14.056 0 14.822.023c.067.85-.24 1.699-.867 2.302.751.421 1.581.65 2.442.677.03-.783-.242-1.556-.767-2.14.75.199 1.467.507 2.115.91-.137 2.133-1.406 3.993-3.322 4.792.052 1.854.197 3.693.435 5.522.083.642.04 1.294-.127 1.917-.738 2.39-3.006 4.145-5.503 4.264-2.174.103-4.32-.774-5.832-2.327-.14-.143-.243-.314-.303-.502-.173-.54-.26-1.103-.26-1.67 0-2.35 1.906-4.256 4.256-4.256.43 0 .85.065 1.246.186-.16-1.127-.235-2.261-.223-3.396-.922.451-1.936.685-2.964.685-1.934 0-3.665-1.11-4.463-2.85-.304-.663-.456-1.38-.445-2.106.01-1.458.835-2.77 2.132-3.396 1.05-.506 2.233-.506 3.282 0 1.297.626 2.122 1.938 2.132 3.396.011.726-.14 1.443-.445 2.106-.21.458-.514.863-.895 1.192.156 1.134.316 2.268.475 3.402.305-.112.63-.168.96-.168 1.428 0 2.585 1.157 2.585 2.585 0 .33-.062.65-.183.948.118.04.24.072.363.093 1.267.22 2.528-.48 3.033-1.688.24-.572.336-1.193.282-1.812-.224-1.748-.36-3.5-.407-5.257z">
+                            </path>
+                        </svg>
+                    </div>
+                    <span
+                        class="text-[10px] font-bold text-charcoal/40 uppercase group-hover:text-deep-green">TikTok</span>
+                </a>
+                <a class="group flex flex-col items-center gap-3" href="#">
+                    <div
+                        class="w-12 h-12 flex items-center justify-center rounded-full bg-off-white shadow-sm group-hover:bg-deep-green group-hover:text-white transition-all text-sage-green">
+                        <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                            <path
+                                d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z">
+                            </path>
+                        </svg>
+                    </div>
+                    <span
+                        class="text-[10px] font-bold text-charcoal/40 uppercase group-hover:text-deep-green">YouTube</span>
+                </a>
+                <a class="group flex flex-col items-center gap-3" href="#">
+                    <div
+                        class="w-12 h-12 flex items-center justify-center rounded-full bg-off-white shadow-sm group-hover:bg-deep-green group-hover:text-white transition-all text-sage-green">
+                        <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                            <path
+                                d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z">
+                            </path>
+                        </svg>
+                    </div>
+                    <span
+                        class="text-[10px] font-bold text-charcoal/40 uppercase group-hover:text-deep-green">Instagram</span>
+                </a>
+            </div>
+        </div>
+    </section>
 @endsection
 
 @push('scripts')
