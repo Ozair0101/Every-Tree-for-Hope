@@ -399,48 +399,121 @@
 
         <section class="py-24 px-6 md:px-12 lg:px-24 bg-white">
             <div class="max-w-7xl mx-auto space-y-20">
+                @php
+                    // Calculate monthly statistics for current year
+                    $monthlyStats = \App\Models\Event::active()
+                        ->whereYear('date', date('Y'))
+                        ->get()
+                        ->groupBy(function ($event) {
+                            return \Carbon\Carbon::parse($event->date)->format('M');
+                        })
+                        ->map(function ($monthEvents, $month) {
+                            return [
+                                'month' => $month,
+                                'total_trees' => $monthEvents->sum('trees_planted'),
+                                'total_volunteers' => $monthEvents->sum('volunteers'),
+                                'total_events' => $monthEvents->count(),
+                            ];
+                        })
+                        ->sortBy(function ($stat) {
+                            return date('m', strtotime($stat['month']));
+                        })
+                        ->values();
+
+                    // Calculate species distribution (mock data for now - could be added to events table)
+                    $speciesDistribution = [
+                        'Almond' => 45,
+                        'Pine' => 30,
+                        'Pomegranate' => 25,
+                    ];
+
+                    // Calculate monthly CO2 sequestration
+                    $monthlyCO2Data = $monthlyStats->map(function ($stat) {
+                        return [
+                            'month' => $stat['month'],
+                            'trees' => $stat['total_trees'],
+                            'co2' => $stat['total_trees'] * 0.021,
+                        ];
+                    });
+                @endphp
                 <div class="text-center space-y-4">
                     <h4 class="text-gold-accent font-bold tracking-[0.3em] text-xs uppercase">Progress Visualized</h4>
-                    <h2 class="text-4xl md:text-5xl font-serif text-deep-green">Data-Driven Restoration</h2>
+                    <h2 class="text-4xl md:text-5xl font-serif text-deep-green">Monthly Analysis {{ date('Y') }}</h2>
+                    <p class="text-charcoal/60 max-w-2xl mx-auto">
+                        Tracking {{ number_format($filteredTrees) }} trees planted across {{ $monthlyStats->count() }}
+                        months in {{ date('Y') }} with {{ number_format($filteredVolunteers) }} volunteers
+                    </p>
                 </div>
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
                     <div class="space-y-6">
                         <h5 class="text-deep-green font-bold text-lg px-2 flex items-center gap-2">
-                            <span class="material-symbols-outlined text-primary">trending_up</span>
-                            Carbon Sequestration (Metric Tons)
+                            <span class="material-symbols-outlined text-primary">nature</span>
+                            Trees Planted by Month
                         </h5>
                         <div class="h-64 border-b border-l border-charcoal/10 relative p-4">
+                            @php
+                                $maxMonthlyTrees = $monthlyStats->max('total_trees') ?: 1;
+                                $monthlyChartPoints = [];
+                                $monthlyXStep = 400 / max(1, $monthlyStats->count() - 1);
+
+                                foreach ($monthlyCO2Data as $index => $data) {
+                                    $x = $index * $monthlyXStep;
+                                    $y = 200 - ($data['trees'] / $maxMonthlyTrees) * 180;
+                                    $monthlyChartPoints[] = $index == 0 ? "M{$x},{$y}" : "L{$x},{$y}";
+                                }
+
+                                $monthlyPathData = implode(' ', $monthlyChartPoints);
+                            @endphp
                             <svg class="w-full h-full" viewBox="0 0 400 200">
-                                <path class="chart-line" d="M0,180 Q100,160 200,100 T400,20" fill="none"
-                                    stroke="#064e3b" stroke-width="3"></path>
-                                <circle cx="0" cy="180" fill="#d4af37" r="4"></circle>
-                                <circle cx="100" cy="165" fill="#d4af37" r="4"></circle>
-                                <circle cx="200" cy="100" fill="#d4af37" r="4"></circle>
-                                <circle cx="400" cy="20" fill="#d4af37" r="4"></circle>
+                                <path class="chart-line" d="{{ $monthlyPathData }}" fill="none" stroke="#064e3b"
+                                    stroke-width="3"></path>
+                                @foreach ($monthlyCO2Data as $index => $data)
+                                    @php
+                                        $x = $index * $monthlyXStep;
+                                        $y = 200 - ($data['trees'] / $maxMonthlyTrees) * 180;
+                                    @endphp
+                                    <circle cx="{{ $x }}" cy="{{ $y }}" fill="#d4af37" r="4">
+                                    </circle>
+                                @endforeach
                             </svg>
                             <div
                                 class="flex justify-between mt-4 text-[10px] font-bold text-charcoal/40 uppercase tracking-tighter">
-                                <span>2020</span><span>2021</span><span>2022</span><span>2023 (Target)</span>
+                                @foreach ($monthlyCO2Data as $data)
+                                    <span>{{ $data['month'] }}</span>
+                                @endforeach
                             </div>
                         </div>
-                        <p class="text-charcoal/60 text-sm font-light italic leading-relaxed">Cumulative data reflects
-                            the maturation of our initial 2018 canopy. Carbon absorption exponentializes as trees enter
-                            the five-year growth phase.</p>
+                        <p class="text-charcoal/60 text-sm font-light italic leading-relaxed">
+                            Monthly tree planting progress for {{ date('Y') }}.
+                            {{ $monthlyStats->count() }} active months with
+                            {{ number_format($monthlyStats->sum('total_trees')) }} trees planted.
+                        </p>
                     </div>
                     <div class="space-y-6">
                         <h5 class="text-deep-green font-bold text-lg px-2 flex items-center gap-2">
                             <span class="material-symbols-outlined text-primary">pie_chart</span>
-                            Species Distribution 2023
+                            Species Distribution {{ date('Y') }}
                         </h5>
                         <div class="flex items-center gap-12">
                             <div class="relative w-48 h-48">
+                                @php
+                                    $totalPercentage = array_sum($speciesDistribution);
+                                    $dashOffset = 0;
+                                @endphp
                                 <svg class="w-full h-full transform -rotate-90" viewBox="0 0 36 36">
-                                    <circle cx="18" cy="18" fill="transparent" r="15.9" stroke="#064e3b"
-                                        stroke-dasharray="45 100" stroke-width="3.5"></circle>
-                                    <circle cx="18" cy="18" fill="transparent" r="15.9" stroke="#84cc16"
-                                        stroke-dasharray="30 100" stroke-dashoffset="-45" stroke-width="3.5"></circle>
-                                    <circle cx="18" cy="18" fill="transparent" r="15.9" stroke="#d4af37"
-                                        stroke-dasharray="25 100" stroke-dashoffset="-75" stroke-width="3.5"></circle>
+                                    @foreach ($speciesDistribution as $species => $percentage)
+                                        @php
+                                            $dashArray = $percentage . ' ' . (100 - $percentage);
+                                        @endphp
+                                        <circle cx="18" cy="18" fill="transparent" r="15.9"
+                                            @if ($species == 'Almond') stroke="#064e3b"
+                                            @elseif($species == 'Pine') stroke="#84cc16" 
+                                            @else stroke="#d4af37" @endif
+                                            stroke-dasharray="{{ $dashArray }}"
+                                            stroke-dashoffset="-{{ $dashOffset }}" stroke-width="3.5"></circle>
+                                        @php
+                                        $dashOffset += $percentage;
+                                    @endforeach
                                 </svg>
                                 <div class="absolute inset-0 flex items-center justify-center">
                                     <span
@@ -448,23 +521,27 @@
                                 </div>
                             </div>
                             <div class="space-y-3">
-                                <div class="flex items-center gap-3">
-                                    <div class="w-3 h-3 bg-deep-green rounded-full"></div>
-                                    <span class="text-xs font-bold text-charcoal/80 uppercase tracking-widest">Almond
-                                        (45%)</span>
-                                </div>
-                                <div class="flex items-center gap-3">
-                                    <div class="w-3 h-3 bg-vibrant-lime rounded-full"></div>
-                                    <span class="text-xs font-bold text-charcoal/80 uppercase tracking-widest">Pine
-                                        (30%)</span>
-                                </div>
-                                <div class="flex items-center gap-3">
-                                    <div class="w-3 h-3 bg-gold-accent rounded-full"></div>
-                                    <span class="text-xs font-bold text-charcoal/80 uppercase tracking-widest">Pomegranate
-                                        (25%)</span>
-                                </div>
+                                @foreach ($speciesDistribution as $species => $percentage)
+                                    <div class="flex items-center gap-3">
+                                        <div
+                                            class="w-3 h-3 
+                                            @if ($species == 'Almond') bg-deep-green 
+                                            @elseif($species == 'Pine') bg-vibrant-lime 
+                                            @else bg-gold-accent @endif 
+                                            rounded-full">
+                                        </div>
+                                        <span
+                                            class="text-xs font-bold text-charcoal/80 uppercase tracking-widest">{{ $species }}
+                                            ({{ $percentage }}%)
+                                        </span>
+                                    </div>
+                                @endforeach
                             </div>
                         </div>
+                        <p class="text-charcoal/60 text-sm font-light italic leading-relaxed">
+                            Species distribution optimized for local climate conditions and community needs.
+                            {{ number_format($filteredTrees) }} total trees planted across all species.
+                        </p>
                     </div>
                 </div>
             </div>
