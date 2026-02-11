@@ -32,18 +32,71 @@
                     class="glass-panel rounded-[3rem] p-12 md:p-20 relative overflow-hidden flex flex-col lg:flex-row items-center gap-16 border-gold-accent/10">
                     <div class="flex-1 space-y-8">
                         @php
-                            $totalTrees = \App\Models\Event::active()->sum('trees_planted');
-                            $totalVolunteers = \App\Models\Event::active()->sum('volunteers');
-                            $totalEvents = \App\Models\Event::active()->count();
-                            $survivalRate = 92; // This could be a field in the future
+                            // First, build the events query with filters
+                            $events = \App\Models\Event::active();
+
+                            // Apply year filter
+                            if (request('year') && request('year') !== 'all') {
+                                $events = $events->whereYear('date', request('year'));
+                            }
+
+                            // Apply region filter
+                            if (request('region') && request('region') !== 'all') {
+                                $region = request('region');
+                                $events = $events->where('province', $region);
+                            }
+
+                            // Get the events for statistics (before pagination)
+                            $eventsForStats = clone $events;
+                            $eventsForStats = $eventsForStats->orderBy('date', 'desc')->get();
+
+                            // Calculate dynamic statistics for filtered events
+                            $filteredTrees = $eventsForStats->sum('trees_planted');
+                            $filteredVolunteers = $eventsForStats->sum('volunteers');
+                            $filteredEvents = $eventsForStats->count();
+                            $filteredCO2 = $filteredTrees * 0.021; // 21kg CO2 per tree
+                            $survivalRate = 92; // Default survival rate percentage
+
+                            // Now paginate for display
+                            $events = $events->orderBy('date', 'desc')->paginate(6);
+
+                            // Get years for filter dropdown
+                            $years = \App\Models\Event::active()
+                                ->orderBy('date', 'desc')
+                                ->distinct()
+                                ->pluck('date')
+                                ->map(function ($date) {
+                                    return \Carbon\Carbon::parse($date)->format('Y');
+                                })
+                                ->unique()
+                                ->sort()
+                                ->reverse();
                         @endphp
-                        <h4 class="text-gold-accent font-bold tracking-[0.3em] text-xs uppercase">Fiscal Year 2024</h4>
+                        <h4 class="text-gold-accent font-bold tracking-[0.3em] text-xs uppercase">
+                            @if (request('year') && request('year') !== 'all')
+                                {{ request('year') }}
+                            @elseif(request('region') && request('region') !== 'all')
+                                {{ request('region') }}
+                            @else
+                                All Time
+                            @endif
+                            Report
+                        </h4>
                         <h2 class="text-4xl md:text-6xl font-serif text-deep-green leading-tight">Yearly Growth
                             <br /><span class="italic font-light">By The Numbers</span>
                         </h2>
-                        <p class="text-charcoal/70 text-lg leading-relaxed">Our most successful year yet. We've
-                            expanded our nursery capacity by 40% and achieved a record survival rate for our native
-                            almond and pine saplings in the northern ridges.</p>
+                        <p class="text-charcoal/70 text-lg leading-relaxed">
+                            @if (request('year') && request('year') !== 'all')
+                                Showing results for {{ request('year') }}. We've expanded our efforts and achieved
+                                remarkable results across all our planting initiatives.
+                            @elseif(request('region') && request('region') !== 'all')
+                                Showing results for {{ request('region') }} province. Our regional teams have made
+                                significant impact in local communities.
+                            @else
+                                Our most successful year yet. We've expanded our nursery capacity by 40% and achieved a
+                                record survival rate for our native almond and pine saplings in the northern ridges.
+                            @endif
+                        </p>
                         <button
                             class="group flex items-center gap-4 bg-deep-green text-white px-8 py-4 rounded-xl font-bold text-xs uppercase tracking-widest hover:bg-deep-green/90 transition-all">
                             <span class="material-symbols-outlined text-gold-accent">eco</span>
@@ -57,18 +110,29 @@
                             </p>
                         </div>
                         <div class="p-8 border-l border-gold-accent/20">
-                            <p class="text-5xl font-serif text-deep-green mb-2">{{ number_format($totalTrees) }}</p>
+                            <p class="text-5xl font-serif text-deep-green mb-2">{{ number_format($filteredTrees) }}</p>
                             <p class="text-charcoal/40 text-[10px] font-bold uppercase tracking-widest">Trees Planted
                             </p>
                         </div>
                         <div class="p-8 border-l border-gold-accent/20">
-                            <p class="text-5xl font-serif text-deep-green mb-2">{{ round($totalTrees * 0.021) }}</p>
-                            <p class="text-charcoal/40 text-[10px] font-bold uppercase tracking-widest">Tons CO2 Offset
+                            <p class="text-5xl font-serif text-deep-green mb-2">{{ number_format($filteredVolunteers) }}</p>
+                            <p class="text-charcoal/40 text-[10px] font-bold uppercase tracking-widest">Volunteers
                             </p>
                         </div>
                         <div class="p-8 border-l border-gold-accent/20">
-                            <p class="text-5xl font-serif text-deep-green mb-2">{{ $totalEvents }}</p>
+                            <p class="text-5xl font-serif text-deep-green mb-2">{{ number_format($filteredEvents) }}</p>
                             <p class="text-charcoal/40 text-[10px] font-bold uppercase tracking-widest">Events Completed
+                            </p>
+                        </div>
+                        <div class="p-8 border-l border-gold-accent/20">
+                            <p class="text-5xl font-serif text-deep-green mb-2">{{ number_format($filteredCO2, 1) }}</p>
+                            <p class="text-charcoal/40 text-[10px] font-bold uppercase tracking-widest">Tons CO₂ Offset
+                            </p>
+                        </div>
+                        <div class="p-8 border-l border-gold-accent/20">
+                            <p class="text-5xl font-serif text-deep-green mb-2">
+                                {{ number_format(($filteredTrees * $survivalRate) / 100) }}</p>
+                            <p class="text-charcoal/40 text-[10px] font-bold uppercase tracking-widest">Trees Surviving
                             </p>
                         </div>
                     </div>
@@ -89,56 +153,13 @@
                                     Our Impact Report</h1>
                             </div>
                             <!-- BodyText -->
-                            @php
-                                $events = \App\Models\Event::active();
-
-                                // Apply year filter
-                                if (request('year') && request('year') !== 'all') {
-                                    $events = $events->whereYear('date', request('year'));
-                                }
-
-                                // Apply region filter
-                                if (request('region') && request('region') !== 'all') {
-                                    $region = request('region');
-                                    $events = $events->where('province', $region);
-                                }
-
-                                $events = $events->orderBy('date', 'desc')->paginate(6);
-
-                                $years = \App\Models\Event::active()
-                                    ->orderBy('date', 'desc')
-                                    ->distinct()
-                                    ->pluck('date')
-                                    ->map(function ($date) {
-                                        return \Carbon\Carbon::parse($date)->format('Y');
-                                    })
-                                    ->unique()
-                                    ->sort()
-                                    ->reverse();
-                                $regions = \App\Models\Event::active()
-                                    ->distinct()
-                                    ->pluck('location')
-                                    ->map(function ($location) {
-                                        // Extract region from location (simplified logic)
-                                        if (strpos($location, 'Kabul') !== false) {
-                                            return 'Kabul';
-                                        }
-                                        if (strpos($location, 'Mountain') !== false) {
-                                            return 'Mountain Areas';
-                                        }
-                                        if (strpos($location, 'River') !== false) {
-                                            return 'Riverside';
-                                        }
-                                        return 'Other';
-                                    })
-                                    ->unique()
-                                    ->sort();
-                            @endphp
                             <p
                                 class="text-center text-base font-normal leading-normal pb-6 pt-2 px-4 text-[#111714]/80 dark:text-[#f6f8f7]/80 max-w-3xl mx-auto">
                                 This table shows the cumulative results of community efforts, events, and donations. Thank
-                                you for helping us green our neighborhoods. Total: {{ number_format($totalTrees) }} trees
-                                planted by {{ number_format($totalVolunteers) }} volunteers across {{ $totalEvents }}
+                                you for helping us green our neighborhoods. Total: {{ number_format($filteredTrees) }}
+                                trees
+                                planted by {{ number_format($filteredVolunteers) }} volunteers across
+                                {{ $filteredEvents }}
                                 events.
                             </p>
                             <!-- Chips -->
