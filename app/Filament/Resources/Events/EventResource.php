@@ -88,6 +88,33 @@ class EventResource extends Resource
                     ->required()
                     ->helperText('Select the province where the event took place')
                     ->columnSpanFull(),
+                Components\CheckboxList::make('tree_names')
+                    ->label('Tree Species Planted')
+                    ->options([
+                        'Almond' => 'Almond (Badam)',
+                        'Pine' => 'Pine (Khar)',
+                        'Pomegranate' => 'Pomegranate (Anar)',
+                        'Walnut' => 'Walnut (Ghaz)',
+                        'Apricot' => 'Apricot (Zardalu)',
+                        'Mulberry' => 'Mulberry (Toot)',
+                        'Apple' => 'Apple (Sib)',
+                        'Grape' => 'Grape (Angur)',
+                        'Pistachio' => 'Pistachio (Pista)',
+                        'Fig' => 'Fig (Anjeer)',
+                        'Olive' => 'Olive (Zaytun)',
+                        'Cherry' => 'Cherry (Gelas)',
+                        'Plum' => 'Plum (Aloo Bukhara)',
+                        'Pear' => 'Pear (Nashpati)',
+                        'Other' => 'Other Species'
+                    ])
+                    ->columns(3)
+                    ->helperText('Select all tree species planted in this event')
+                    ->columnSpanFull(),
+                Components\TextInput::make('custom_tree_species')
+                    ->label('Custom Tree Species')
+                    ->placeholder('Enter additional tree species (comma-separated)')
+                    ->helperText('Add any tree species not listed above. Separate multiple species with commas.')
+                    ->columnSpanFull(),
                 Components\DatePicker::make('date')
                     ->required()
                     ->columnSpanFull(),
@@ -157,6 +184,18 @@ class EventResource extends Resource
                 Tables\Columns\TextColumn::make('province')
                     ->searchable()
                     ->sortable(),
+                Tables\Columns\TextColumn::make('tree_names')
+                    ->label('Tree Species')
+                    ->formatStateUsing(function ($record) {
+                        $allSpecies = $record->all_tree_species;
+                        if (empty($allSpecies)) {
+                            return 'N/A';
+                        }
+                        return implode(', ', array_slice($allSpecies, 0, 3)) . 
+                               (count($allSpecies) > 3 ? ' +' . (count($allSpecies) - 3) : '');
+                    })
+                    ->limit(30)
+                    ->toggleable(),
                 Tables\Columns\TextColumn::make('date')
                     ->date()
                     ->sortable(),
