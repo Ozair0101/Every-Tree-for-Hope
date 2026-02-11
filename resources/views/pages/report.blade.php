@@ -90,7 +90,7 @@
                             </div>
                             <!-- BodyText -->
                             @php
-                                $events = \App\Models\Event::active()->ordered()->paginate(5);
+                                $events = \App\Models\Event::active()->orderBy('date', 'desc')->paginate(6);
                             @endphp
                             <p
                                 class="text-center text-base font-normal leading-normal pb-6 pt-2 px-4 text-[#111714]/80 dark:text-[#f6f8f7]/80 max-w-3xl mx-auto">
@@ -125,6 +125,8 @@
                                             <thead class="hidden md:table-header-group bg-primary/20 dark:bg-primary/30">
                                                 <tr>
                                                     <th class="px-6 py-4 text-left text-[#111714] dark:text-[#f6f8f7] text-sm font-medium leading-normal"
+                                                        scope="col">#</th>
+                                                    <th class="px-6 py-4 text-left text-[#111714] dark:text-[#f6f8f7] text-sm font-medium leading-normal"
                                                         scope="col">Event/Initiative</th>
                                                     <th class="px-6 py-4 text-left text-[#111714] dark:text-[#f6f8f7] text-sm font-medium leading-normal"
                                                         scope="col">Location</th>
@@ -138,10 +140,15 @@
                                                         scope="col">Sponsor/Partner</th>
                                                 </tr>
                                             </thead>
+                                            @php
+                                                $counter = ($events->currentPage() - 1) * $events->perPage() + 1;
+                                            @endphp
                                             <tbody class="divide-y divide-primary/20 dark:divide-primary/30">
                                                 @forelse($events as $event)
                                                     <tr
                                                         class="block md:table-row p-4 border-b border-primary/20 dark:border-primary/30 md:border-none">
+                                                        <td class="block md:table-cell px-2 md:px-6 py-2 md:py-4 text-[#111714] dark:text-[#f6f8f7] text-sm font-medium md:font-normal leading-normal before:content-[attr(data-label)] before:font-bold before:mr-2 before:md:hidden"
+                                                            data-label="#">#{{ $counter }}</td>
                                                         <td class="block md:table-cell px-2 md:px-6 py-2 md:py-4 text-[#111714] dark:text-[#f6f8f7] text-sm font-medium md:font-normal leading-normal before:content-[attr(data-label)] before:font-bold before:mr-2 before:md:hidden"
                                                             data-label="Event/Initiative">{{ $event->title }}</td>
                                                         <td class="block md:table-cell px-2 md:px-6 py-2 md:py-4 text-[#111714]/80 dark:text-[#f6f8f7]/80 text-sm font-normal leading-normal before:content-[attr(data-label)] before:font-bold before:mr-2 before:md:hidden"
@@ -158,9 +165,10 @@
                                                             data-label="Sponsor/Partner">
                                                             {{ $event->sponsor_partner ?? 'N/A' }}</td>
                                                     </tr>
+                                                    @php $counter++; @endphp
                                                 @empty
                                                     <tr>
-                                                        <td colspan="6"
+                                                        <td colspan="7"
                                                             class="text-center py-8 text-[#111714]/60 dark:text-[#f6f8f7]/60">
                                                             No events found. Check back soon for updates!
                                                         </td>
