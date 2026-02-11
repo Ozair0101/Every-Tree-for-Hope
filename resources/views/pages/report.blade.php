@@ -76,7 +76,7 @@
             </div>
         </section>
 
-        <section class="relative bg-green-50 flex h-auto min-h-screen w-full flex-col group/design-root overflow-x-hidden">
+        <section class="relative bg-green-50 flex h-auto min-h-screen w-full flex-col group/design-root overflow-x-visible">
             <div class="layout-container flex h-full grow flex-col">
                 <div class="flex flex-1 justify-center py-5 sm:px-10 lg:px-20 xl:px-40">
                     <div class="layout-content-container flex flex-col w-full max-w-5xl flex-1">
@@ -100,15 +100,7 @@
                                 // Apply region filter
                                 if (request('region') && request('region') !== 'all') {
                                     $region = request('region');
-                                    $events = $events->where(function ($query) use ($region) {
-                                        if ($region === 'Kabul') {
-                                            $query->where('location', 'like', '%Kabul%');
-                                        } elseif ($region === 'Mountain Areas') {
-                                            $query->where('location', 'like', '%Mountain%');
-                                        } elseif ($region === 'Riverside') {
-                                            $query->where('location', 'like', '%River%');
-                                        }
-                                    });
+                                    $events = $events->where('province', $region);
                                 }
 
                                 $events = $events->orderBy('date', 'desc')->paginate(6);
@@ -150,7 +142,8 @@
                                 events.
                             </p>
                             <!-- Chips -->
-                            <div class="flex flex-wrap items-center justify-center gap-3 p-3 overflow-x-hidden">
+                            <div
+                                class="flex flex-wrap items-center justify-center gap-3 p-3 overflow-x-visible relative z-[100]">
                                 <!-- Year Filter Dropdown -->
                                 <div class="relative">
                                     <button onclick="toggleDropdown('year-dropdown')"
@@ -162,7 +155,7 @@
                                             style="font-size: 20px;">keyboard_arrow_down</span>
                                     </button>
                                     <div id="year-dropdown"
-                                        class="absolute top-full left-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-primary/20 dark:border-primary/30 hidden z-50">
+                                        class="absolute top-full left-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-lg shadow-xl border border-primary/20 dark:border-primary/30 hidden z-[9999] shadow-2xl">
                                         <button onclick="filterByYear('all')"
                                             class="w-full text-left px-4 py-2 text-sm hover:bg-primary/10 dark:hover:bg-primary/20 transition-colors">All
                                             Years</button>
@@ -184,14 +177,81 @@
                                             style="font-size: 20px;">keyboard_arrow_down</span>
                                     </button>
                                     <div id="region-dropdown"
-                                        class="absolute top-full left-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-primary/20 dark:border-primary/30 hidden z-50">
+                                        class="absolute top-full left-0 mt-2 w-64 bg-white dark:bg-gray-800 rounded-lg shadow-xl border border-primary/20 dark:border-primary/30 hidden z-[9999] max-h-64 overflow-y-auto shadow-2xl">
                                         <button onclick="filterByRegion('all')"
                                             class="w-full text-left px-4 py-2 text-sm hover:bg-primary/10 dark:hover:bg-primary/20 transition-colors">All
                                             Regions</button>
-                                        @foreach ($regions as $region)
-                                            <button onclick="filterByRegion('{{ $region }}')"
-                                                class="w-full text-left px-4 py-2 text-sm hover:bg-primary/10 dark:hover:bg-primary/20 transition-colors">{{ $region }}</button>
-                                        @endforeach
+                                        <button onclick="filterByRegion('Badakhshan')"
+                                            class="w-full text-left px-4 py-2 text-sm hover:bg-primary/10 dark:hover:bg-primary/20 transition-colors">Badakhshan</button>
+                                        <button onclick="filterByRegion('Badghis')"
+                                            class="w-full text-left px-4 py-2 text-sm hover:bg-primary/10 dark:hover:bg-primary/20 transition-colors">Badghis</button>
+                                        <button onclick="filterByRegion('Baghlan')"
+                                            class="w-full text-left px-4 py-2 text-sm hover:bg-primary/10 dark:hover:bg-primary-20 transition-colors">Baghlan</button>
+                                        <button onclick="filterByRegion('Balkh')"
+                                            class="w-full text-left px-4 py-2 text-sm hover:bg-primary/10 dark:hover:bg-primary-20 transition-colors">Balkh</button>
+                                        <button onclick="filterByRegion('Bamyan')"
+                                            class="w-full text-left px-4 py-2 text-sm hover:bg-primary/10 dark:hover:bg-primary-20 transition-colors">Bamyan</button>
+                                        <button onclick="filterByRegion('Daykundi')"
+                                            class="w-full text-left px-4 py-2 text-sm hover:bg-primary/10 dark:hover:bg-primary-20 transition-colors">Daykundi</button>
+                                        <button onclick="filterByRegion('Farah')"
+                                            class="w-full text-left px-4 py-2 text-sm hover:bg-primary/10 dark:hover:bg-primary-20 transition-colors">Farah</button>
+                                        <button onclick="filterByRegion('Faryab')"
+                                            class="w-full text-left px-4 py-2 text-sm hover:bg-primary/10 dark:hover:bg-primary-20 transition-colors">Faryab</button>
+                                        <button onclick="filterByRegion('Ghazni')"
+                                            class="w-full text-left px-4 py-2 text-sm hover:bg-primary/10 dark:hover:bg-primary-20 transition-colors">Ghazni</button>
+                                        <button onclick="filterByRegion('Ghor')"
+                                            class="w-full text-left px-4 py-2 text-sm hover:bg-primary/10 dark:hover:bg-primary-20 transition-colors">Ghor</button>
+                                        <button onclick="filterByRegion('Helmand')"
+                                            class="w-full text-left px-4 py-2 text-sm hover:bg-primary/10 dark:hover:bg-primary-20 transition-colors">Helmand</button>
+                                        <button onclick="filterByRegion('Herat')"
+                                            class="w-full text-left px-4 py-2 text-sm hover:bg-primary/10 dark:hover:bg-primary-20 transition-colors">Herat</button>
+                                        <button onclick="filterByRegion('Jowzjan')"
+                                            class="w-full text-left px-4 py-2 text-sm hover:bg-primary/10 dark:hover:bg-primary-20 transition-colors">Jowzjan</button>
+                                        <button onclick="filterByRegion('Kabul')"
+                                            class="w-full text-left px-4 py-2 text-sm hover:bg-primary/10 dark:hover:bg-primary-20 transition-colors">Kabul</button>
+                                        <button onclick="filterByRegion('Kandahar')"
+                                            class="w-full text-left px-4 py-2 text-sm hover:bg-primary/10 dark:hover:bg-primary-20 transition-colors">Kandahar</button>
+                                        <button onclick="filterByRegion('Kapisa')"
+                                            class="w-full text-left px-4 py-2 text-sm hover:bg-primary/10 dark:hover:bg-primary-20 transition-colors">Kapisa</button>
+                                        <button onclick="filterByRegion('Khost')"
+                                            class="w-full text-left px-4 py-2 text-sm hover:bg-primary/10 dark:hover:bg-primary-20 transition-colors">Khost</button>
+                                        <button onclick="filterByRegion('Kunar')"
+                                            class="w-full text-left px-4 py-2 text-sm hover:bg-primary/10 dark:hover:bg-primary-20 transition-colors">Kunar</button>
+                                        <button onclick="filterByRegion('Kunduz')"
+                                            class="w-full text-left px-4 py-2 text-sm hover:bg-primary/10 dark:hover:bg-primary-20 transition-colors">Kunduz</button>
+                                        <button onclick="filterByRegion('Laghman')"
+                                            class="w-full text-left px-4 py-2 text-sm hover:bg-primary/10 dark:hover:bg-primary-20 transition-colors">Laghman</button>
+                                        <button onclick="filterByRegion('Logar')"
+                                            class="w-full text-left px-4 py-2 text-sm hover:bg-primary/10 dark:hover:bg-primary-20 transition-colors">Logar</button>
+                                        <button onclick="filterByRegion('Maimana')"
+                                            class="w-full text-left px-4 py-2 text-sm hover:bg-primary/10 dark:hover:bg-primary-20 transition-colors">Maimana</button>
+                                        <button onclick="filterByRegion('Nangarhar')"
+                                            class="w-full text-left px-4 py-2 text-sm hover:bg-primary/10 dark:hover:bg-primary-20 transition-colors">Nangarhar</button>
+                                        <button onclick="filterByRegion('Nimruz')"
+                                            class="w-full text-left px-4 py-2 text-sm hover:bg-primary/10 dark:hover:bg-primary-20 transition-colors">Nimruz</button>
+                                        <button onclick="filterByRegion('Nuristan')"
+                                            class="w-full text-left px-4 py-2 text-sm hover:bg-primary/10 dark:hover:bg-primary-20 transition-colors">Nuristan</button>
+                                        <button onclick="filterByRegion('Paktia')"
+                                            class="w-full text-left px-4 py-2 text-sm hover:bg-primary/10 dark:hover:bg-primary-20 transition-colors">Paktia</button>
+                                        <button onclick="filterByRegion('Paktika')"
+                                            class="w-full text-left px-4 py-2 text-sm hover:bg-primary/10 dark:hover:bg-primary-20 transition-colors">Paktika</button>
+                                        <button onclick="filterByRegion('Panjshir')"
+                                            class="w-full text-left px-4 py-2 text-sm hover:bg-primary/10 dark:hover:bg-primary-20 transition-colors">Panjshir</button>
+                                        <button onclick="filterByRegion('Parwan')"
+                                            class="w-full text-left px-4 py-2 text-sm hover:bg-primary/10 dark:hover:bg-primary-20 transition-colors">Parwan</button>
+                                        <button onclick="filterByRegion('Samangan')"
+                                            class="w-full text-left px-4 py-2 text-sm hover:bg-primary/10 dark:hover:bg-primary-20 transition-colors">Samangan</button>
+                                        <button onclick="filterByRegion('Sar-e Pol')"
+                                            class="w-full text-left px-4 py-2 text-sm hover:bg-primary/10 dark:hover:bg-primary-20 transition-colors">Sar-e
+                                            Pol</button>
+                                        <button onclick="filterByRegion('Takhar')"
+                                            class="w-full text-left px-4 py-2 text-sm hover:bg-primary/10 dark:hover:bg-primary-20 transition-colors">Takhar</button>
+                                        <button onclick="filterByRegion('Urozgan')"
+                                            class="w-full text-left px-4 py-2 text-sm hover:bg-primary/10 dark:hover:bg-primary-20 transition-colors">Urozgan</button>
+                                        <button onclick="filterByRegion('Wardak')"
+                                            class="w-full text-left px-4 py-2 text-sm hover:bg-primary/10 dark:hover:bg-primary-20 transition-colors">Wardak</button>
+                                        <button onclick="filterByRegion('Zabul')"
+                                            class="w-full text-left px-4 py-2 text-sm hover:bg-primary/10 dark:hover:bg-primary-20 transition-colors">Zabul</button>
                                     </div>
                                 </div>
 
