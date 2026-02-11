@@ -698,8 +698,8 @@
                         class="w-full sm:w-auto px-10 py-5 bg-deep-green text-white rounded-xl font-bold text-xs uppercase tracking-[0.2em] shadow-lg shadow-deep-green/20">Invest
                         in the Earth</button>
                     <a href="{{ route('contact') }}"
-                        class="w-full sm:w-auto px-10 py-5 border border-gold-accent text-deep-green rounded-xl font-bold text-xs uppercase tracking-[0.2em] hover:bg-gold-accent/5 transition-colors">Become
-                        a Partner</a>
+                        class="w-full sm:w-auto px-10 py-5 border border-gold-accent text-deep-green rounded-xl font-bold text-xs uppercase tracking-[0.2em] hover:bg-gold-accent/5 transition-colors">Contact
+                        Us</a>
                 </div>
             </div>
         </section>
