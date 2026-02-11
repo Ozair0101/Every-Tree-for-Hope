@@ -90,7 +90,7 @@
                             </div>
                             <!-- BodyText -->
                             @php
-                                $events = \App\Models\Event::active()->ordered()->get();
+                                $events = \App\Models\Event::active()->ordered()->paginate(5);
                             @endphp
                             <p
                                 class="text-center text-base font-normal leading-normal pb-6 pt-2 px-4 text-[#111714]/80 dark:text-[#f6f8f7]/80 max-w-3xl mx-auto">
@@ -174,28 +174,13 @@
                             <!-- Pagination and CTA -->
                             <div class="flex flex-col sm:flex-row items-center justify-between gap-6 px-4 py-8">
                                 <div class="flex items-center gap-2">
-                                    <button
-                                        class="flex h-9 w-9 items-center justify-center rounded-lg border border-primary/20 dark:border-primary/30 hover:bg-primary/20 dark:hover:bg-primary/30 transition-colors">
-                                        <span class="material-symbols-outlined text-[#111714] dark:text-[#f6f8f7]"
-                                            style="font-size: 20px;">chevron_left</span>
-                                    </button>
-                                    <button
-                                        class="flex h-9 w-9 items-center justify-center rounded-lg border border-primary/20 dark:border-primary/30 bg-primary/20 dark:bg-primary/30 text-sm font-bold text-primary dark:text-primary">1</button>
-                                    <button
-                                        class="flex h-9 w-9 items-center justify-center rounded-lg border border-primary/20 dark:border-primary/30 text-sm font-medium text-[#111714]/80 dark:text-[#f6f8f7]/80 hover:bg-primary/20 dark:hover:bg-primary/30 transition-colors">2</button>
-                                    <button
-                                        class="flex h-9 w-9 items-center justify-center rounded-lg border border-primary/20 dark:border-primary/30 text-sm font-medium text-[#111714]/80 dark:text-[#f6f8f7]/80 hover:bg-primary/20 dark:hover:bg-primary/30 transition-colors">3</button>
-                                    <button
-                                        class="flex h-9 w-9 items-center justify-center rounded-lg border border-primary/20 dark:border-primary/30 hover:bg-primary/20 dark:hover:bg-primary/30 transition-colors">
-                                        <span class="material-symbols-outlined text-[#111714] dark:text-[#f6f8f7]"
-                                            style="font-size: 20px;">chevron_right</span>
-                                    </button>
+                                    {{ $events->links('pagination::tailwind') }}
                                 </div>
-                                <button
+                                <a href="{{ route('home') }}#events"
                                     class="flex w-full sm:w-auto min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center gap-2 overflow-hidden rounded-lg h-12 px-6 bg-primary text-white text-base font-bold leading-normal tracking-[0.015em] hover:bg-opacity-90 transition-opacity">
                                     <span>Join an Event Near You</span>
                                     <span class="material-symbols-outlined">arrow_forward</span>
-                                </button>
+                                </a>
                             </div>
                         </main>
                     </div>
