@@ -512,7 +512,8 @@
                                             stroke-dasharray="{{ $dashArray }}"
                                             stroke-dashoffset="-{{ $dashOffset }}" stroke-width="3.5"></circle>
                                         @php
-                                        $dashOffset += $percentage;
+                                            $dashOffset += $percentage;
+                                        @endphp
                                     @endforeach
                                 </svg>
                                 <div class="absolute inset-0 flex items-center justify-center">

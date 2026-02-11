@@ -45,6 +45,7 @@
                     </div>
                 </div>
             </section>
+
             <section class="w-full max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 px-6 md:px-12 lg:px-24 mb-24">
                 <div
                     class="glass-panel p-10 rounded-3xl text-center group hover:-translate-y-2 transition-transform duration-500">
@@ -89,6 +90,7 @@
                         24h</p>
                 </div>
             </section>
+
             <section class="w-full max-w-5xl mx-auto px-6 mb-32">
                 <div class="glass-panel p-12 md:p-20 rounded-[3rem] relative overflow-hidden">
                     <div class="absolute top-0 right-0 w-64 h-64 opacity-5 pointer-events-none botanical-mask">
