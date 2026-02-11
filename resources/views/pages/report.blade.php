@@ -302,6 +302,8 @@
                                                     <th class="px-6 py-4 text-left text-[#111714] dark:text-[#f6f8f7] text-sm font-medium leading-normal"
                                                         scope="col">Province</th>
                                                     <th class="px-6 py-4 text-left text-[#111714] dark:text-[#f6f8f7] text-sm font-medium leading-normal"
+                                                        scope="col">Tree Species</th>
+                                                    <th class="px-6 py-4 text-left text-[#111714] dark:text-[#f6f8f7] text-sm font-medium leading-normal"
                                                         scope="col">Date</th>
                                                     <th class="px-6 py-4 text-left text-[#111714] dark:text-[#f6f8f7] text-sm font-medium leading-normal text-right"
                                                         scope="col">Trees Planted</th>
@@ -327,6 +329,17 @@
                                                         <td class="block md:table-cell px-2 md:px-6 py-2 md:py-4 text-[#111714]/80 dark:text-[#f6f8f7]/80 text-sm font-normal leading-normal before:content-[attr(data-label)] before:font-bold before:mr-2 before:md:hidden"
                                                             data-label="Province">{{ $event->province ?? 'N/A' }}</td>
                                                         <td class="block md:table-cell px-2 md:px-6 py-2 md:py-4 text-[#111714]/80 dark:text-[#f6f8f7]/80 text-sm font-normal leading-normal before:content-[attr(data-label)] before:font-bold before:mr-2 before:md:hidden"
+                                                            data-label="Tree Species">
+                                                            @if ($event->all_tree_species && count($event->all_tree_species) > 0)
+                                                                {{ implode(', ', array_slice($event->all_tree_species, 0, 3)) }}
+                                                                @if (count($event->all_tree_species) > 3)
+                                                                    +{{ count($event->all_tree_species) - 3 }}
+                                                                @endif
+                                                            @else
+                                                                N/A
+                                                            @endif
+                                                        </td>
+                                                        <td class="block md:table-cell px-2 md:px-6 py-2 md:py-4 text-[#111714]/80 dark:text-[#f6f8f7]/80 text-sm font-normal leading-normal before:content-[attr(data-label)] before:font-bold before:mr-2 before:md:hidden"
                                                             data-label="Date">{{ $event->formatted_date }}</td>
                                                         <td class="block md:table-cell px-2 md:px-6 py-2 md:py-4 text-[#111714]/80 dark:text-[#f6f8f7]/80 text-sm font-normal leading-normal md:text-right before:content-[attr(data-label)] before:font-bold before:mr-2 before:md:hidden"
                                                             data-label="Trees Planted">
@@ -342,7 +355,7 @@
                                                     @php $counter++; @endphp
                                                 @empty
                                                     <tr>
-                                                        <td colspan="8"
+                                                        <td colspan="9"
                                                             class="text-center py-8 text-[#111714]/60 dark:text-[#f6f8f7]/60">
                                                             No events found. Check back soon for updates!
                                                         </td>
