@@ -117,7 +117,7 @@
                                 </button>
                             </div>
                             <!-- Table -->
-                            <div class="px-4 py-6 @container">
+                            <div id="events-table-container" class="px-4 py-6 @container">
                                 <div
                                     class="overflow-hidden rounded-xl border border-primary/20 dark:border-primary/30 bg-white dark:bg-background-dark shadow-sm">
                                     <div class="overflow-x-auto">
@@ -173,8 +173,35 @@
                             </div>
                             <!-- Pagination and CTA -->
                             <div class="flex flex-col sm:flex-row items-center justify-between gap-6 px-4 py-8">
-                                <div class="flex items-center gap-2">
-                                    {{ $events->links('pagination::tailwind') }}
+                                <div class="flex items-center gap-2" id="pagination-container">
+                                    @if ($events->hasPages())
+                                        <button onclick="loadPage({{ $events->currentPage() - 1 }})"
+                                            class="flex h-9 w-9 items-center justify-center rounded-lg border border-primary/20 dark:border-primary/30 hover:bg-primary/20 dark:hover:bg-primary/30 transition-colors {{ $events->onFirstPage() ? 'opacity-50 cursor-not-allowed' : '' }}"
+                                            {{ $events->onFirstPage() ? 'disabled' : '' }}>
+                                            <span class="material-symbols-outlined text-[#111714] dark:text-[#f6f8f7]"
+                                                style="font-size: 20px;">chevron_left</span>
+                                        </button>
+
+                                        @for ($i = 1; $i <= $events->lastPage(); $i++)
+                                            @if ($i == $events->currentPage())
+                                                <button
+                                                    class="flex h-9 w-9 items-center justify-center rounded-lg border border-primary/20 dark:border-primary/30 bg-primary/20 dark:bg-primary/30 text-sm font-bold text-primary dark:text-primary">{{ $i }}</button>
+                                            @elseif(abs($i - $events->currentPage()) <= 2 || $i == 1 || $i == $events->lastPage())
+                                                <button onclick="loadPage({{ $i }})"
+                                                    class="flex h-9 w-9 items-center justify-center rounded-lg border border-primary/20 dark:border-primary/30 text-sm font-medium text-[#111714]/80 dark:text-[#f6f8f7]/80 hover:bg-primary/20 dark:hover:bg-primary/30 transition-colors">{{ $i }}</button>
+                                            @elseif(abs($i - $events->currentPage()) == 3)
+                                                <span
+                                                    class="flex h-9 w-9 items-center justify-center text-sm text-[#111714]/60 dark:text-[#f6f8f7]/60">...</span>
+                                            @endif
+                                        @endfor
+
+                                        <button onclick="loadPage({{ $events->currentPage() + 1 }})"
+                                            class="flex h-9 w-9 items-center justify-center rounded-lg border border-primary/20 dark:border-primary/30 hover:bg-primary/20 dark:hover:bg-primary/30 transition-colors {{ $events->hasMorePages() ? '' : 'opacity-50 cursor-not-allowed' }}"
+                                            {{ $events->hasMorePages() ? '' : 'disabled' }}>
+                                            <span class="material-symbols-outlined text-[#111714] dark:text-[#f6f8f7]"
+                                                style="font-size: 20px;">chevron_right</span>
+                                        </button>
+                                    @endif
                                 </div>
                                 <a href="{{ route('home') }}#events"
                                     class="flex w-full sm:w-auto min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center gap-2 overflow-hidden rounded-lg h-12 px-6 bg-primary text-white text-base font-bold leading-normal tracking-[0.015em] hover:bg-opacity-90 transition-opacity">
@@ -418,4 +445,61 @@
             </div>
         </section>
     </main>
+
+    <script>
+        function loadPage(page) {
+            // Show loading state
+            const container = document.getElementById('events-table-container');
+            const originalContent = container.innerHTML;
+            container.style.opacity = '0.5';
+
+            // Create URL with page parameter
+            const url = `{{ route('report') }}?page=${page}`;
+
+            fetch(url, {
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest',
+                        'Accept': 'text/html'
+                    }
+                })
+                .then(response => response.text())
+                .then(html => {
+                    // Create a temporary DOM element to parse the response
+                    const tempDiv = document.createElement('div');
+                    tempDiv.innerHTML = html;
+
+                    // Extract the new table content
+                    const newContent = tempDiv.querySelector('#events-table-container');
+                    if (newContent) {
+                        container.innerHTML = newContent.innerHTML;
+                    }
+
+                    // Extract and update pagination
+                    const newPagination = tempDiv.querySelector('#pagination-container');
+                    if (newPagination) {
+                        document.getElementById('pagination-container').innerHTML = newPagination.innerHTML;
+                    }
+
+                    // Restore opacity
+                    container.style.opacity = '1';
+
+                    // Smooth scroll to top of table
+                    container.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                })
+                .catch(error => {
+                    console.error('Error loading page:', error);
+                    container.style.opacity = '1';
+                });
+        }
+
+        // Prevent form submissions from reloading the page
+        document.addEventListener('click', function(e) {
+            if (e.target.closest('button[onclick*="loadPage"]')) {
+                e.preventDefault();
+            }
+        });
+    </script>
 @endsection
