@@ -90,7 +90,57 @@
                             </div>
                             <!-- BodyText -->
                             @php
-                                $events = \App\Models\Event::active()->orderBy('date', 'desc')->paginate(6);
+                                $events = \App\Models\Event::active();
+
+                                // Apply year filter
+                                if (request('year') && request('year') !== 'all') {
+                                    $events = $events->whereYear('date', request('year'));
+                                }
+
+                                // Apply region filter
+                                if (request('region') && request('region') !== 'all') {
+                                    $region = request('region');
+                                    $events = $events->where(function ($query) use ($region) {
+                                        if ($region === 'Kabul') {
+                                            $query->where('location', 'like', '%Kabul%');
+                                        } elseif ($region === 'Mountain Areas') {
+                                            $query->where('location', 'like', '%Mountain%');
+                                        } elseif ($region === 'Riverside') {
+                                            $query->where('location', 'like', '%River%');
+                                        }
+                                    });
+                                }
+
+                                $events = $events->orderBy('date', 'desc')->paginate(6);
+
+                                $years = \App\Models\Event::active()
+                                    ->orderBy('date', 'desc')
+                                    ->distinct()
+                                    ->pluck('date')
+                                    ->map(function ($date) {
+                                        return \Carbon\Carbon::parse($date)->format('Y');
+                                    })
+                                    ->unique()
+                                    ->sort()
+                                    ->reverse();
+                                $regions = \App\Models\Event::active()
+                                    ->distinct()
+                                    ->pluck('location')
+                                    ->map(function ($location) {
+                                        // Extract region from location (simplified logic)
+                                        if (strpos($location, 'Kabul') !== false) {
+                                            return 'Kabul';
+                                        }
+                                        if (strpos($location, 'Mountain') !== false) {
+                                            return 'Mountain Areas';
+                                        }
+                                        if (strpos($location, 'River') !== false) {
+                                            return 'Riverside';
+                                        }
+                                        return 'Other';
+                                    })
+                                    ->unique()
+                                    ->sort();
                             @endphp
                             <p
                                 class="text-center text-base font-normal leading-normal pb-6 pt-2 px-4 text-[#111714]/80 dark:text-[#f6f8f7]/80 max-w-3xl mx-auto">
@@ -101,19 +151,57 @@
                             </p>
                             <!-- Chips -->
                             <div class="flex flex-wrap items-center justify-center gap-3 p-3 overflow-x-hidden">
-                                <button
-                                    class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-primary/20 dark:bg-primary/30 px-4">
-                                    <p class="text-[#111714] dark:text-[#f6f8f7] text-sm font-medium leading-normal">Filter
-                                        by Year</p>
+                                <!-- Year Filter Dropdown -->
+                                <div class="relative">
+                                    <button onclick="toggleDropdown('year-dropdown')"
+                                        class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-primary/20 dark:bg-primary/30 px-4 hover:bg-primary/30 dark:hover:bg-primary/40 transition-colors">
+                                        <p class="text-[#111714] dark:text-[#f6f8f7] text-sm font-medium leading-normal">
+                                            Filter
+                                            by Year</p>
+                                        <span class="material-symbols-outlined text-[#111714] dark:text-[#f6f8f7]"
+                                            style="font-size: 20px;">keyboard_arrow_down</span>
+                                    </button>
+                                    <div id="year-dropdown"
+                                        class="absolute top-full left-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-primary/20 dark:border-primary/30 hidden z-50">
+                                        <button onclick="filterByYear('all')"
+                                            class="w-full text-left px-4 py-2 text-sm hover:bg-primary/10 dark:hover:bg-primary/20 transition-colors">All
+                                            Years</button>
+                                        @foreach ($years as $year)
+                                            <button onclick="filterByYear('{{ $year }}')"
+                                                class="w-full text-left px-4 py-2 text-sm hover:bg-primary/10 dark:hover:bg-primary/20 transition-colors">{{ $year }}</button>
+                                        @endforeach
+                                    </div>
+                                </div>
+
+                                <!-- Region Filter Dropdown -->
+                                <div class="relative">
+                                    <button onclick="toggleDropdown('region-dropdown')"
+                                        class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-primary/20 dark:bg-primary/30 px-4 hover:bg-primary/30 dark:hover:bg-primary/40 transition-colors">
+                                        <p class="text-[#111714] dark:text-[#f6f8f7] text-sm font-medium leading-normal">
+                                            Filter
+                                            by Region</p>
+                                        <span class="material-symbols-outlined text-[#111714] dark:text-[#f6f8f7]"
+                                            style="font-size: 20px;">keyboard_arrow_down</span>
+                                    </button>
+                                    <div id="region-dropdown"
+                                        class="absolute top-full left-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-primary/20 dark:border-primary/30 hidden z-50">
+                                        <button onclick="filterByRegion('all')"
+                                            class="w-full text-left px-4 py-2 text-sm hover:bg-primary/10 dark:hover:bg-primary/20 transition-colors">All
+                                            Regions</button>
+                                        @foreach ($regions as $region)
+                                            <button onclick="filterByRegion('{{ $region }}')"
+                                                class="w-full text-left px-4 py-2 text-sm hover:bg-primary/10 dark:hover:bg-primary/20 transition-colors">{{ $region }}</button>
+                                        @endforeach
+                                    </div>
+                                </div>
+
+                                <!-- Clear Filters Button -->
+                                <button onclick="clearFilters()"
+                                    class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-lg border border-primary/20 dark:border-primary/30 px-4 hover:bg-primary/10 dark:hover:bg-primary/20 transition-colors">
+                                    <p class="text-[#111714] dark:text-[#f6f8f7] text-sm font-medium leading-normal">Clear
+                                        Filters</p>
                                     <span class="material-symbols-outlined text-[#111714] dark:text-[#f6f8f7]"
-                                        style="font-size: 20px;">keyboard_arrow_down</span>
-                                </button>
-                                <button
-                                    class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-primary/20 dark:bg-primary/30 px-4">
-                                    <p class="text-[#111714] dark:text-[#f6f8f7] text-sm font-medium leading-normal">Filter
-                                        by Region</p>
-                                    <span class="material-symbols-outlined text-[#111714] dark:text-[#f6f8f7]"
-                                        style="font-size: 20px;">keyboard_arrow_down</span>
+                                        style="font-size: 20px;">clear</span>
                                 </button>
                             </div>
                             <!-- Table -->
@@ -159,7 +247,8 @@
                                                             data-label="Trees Planted">
                                                             {{ number_format($event->trees_planted) }}</td>
                                                         <td class="block md:table-cell px-2 md:px-6 py-2 md:py-4 text-[#111714]/80 dark:text-[#f6f8f7]/80 text-sm font-normal leading-normal md:text-right before:content-[attr(data-label)] before:font-bold before:mr-2 before:md:hidden"
-                                                            data-label="Volunteers">{{ number_format($event->volunteers) }}
+                                                            data-label="Volunteers">
+                                                            {{ number_format($event->volunteers) }}
                                                         </td>
                                                         <td class="block md:table-cell px-2 md:px-6 py-2 md:py-4 text-[#111714]/80 dark:text-[#f6f8f7]/80 text-sm font-normal leading-normal before:content-[attr(data-label)] before:font-bold before:mr-2 before:md:hidden"
                                                             data-label="Sponsor/Partner">
@@ -455,14 +544,45 @@
     </main>
 
     <script>
-        function loadPage(page) {
-            // Show loading state
+        let currentYear = 'all';
+        let currentRegion = 'all';
+
+        function toggleDropdown(dropdownId) {
+            const dropdown = document.getElementById(dropdownId);
+            const allDropdowns = ['year-dropdown', 'region-dropdown'];
+
+            allDropdowns.forEach(id => {
+                if (id !== dropdownId) {
+                    document.getElementById(id).classList.add('hidden');
+                }
+            });
+
+            dropdown.classList.toggle('hidden');
+        }
+
+        function filterByYear(year) {
+            currentYear = year;
+            document.getElementById('year-dropdown').classList.add('hidden');
+            applyFilters();
+        }
+
+        function filterByRegion(region) {
+            currentRegion = region;
+            document.getElementById('region-dropdown').classList.add('hidden');
+            applyFilters();
+        }
+
+        function clearFilters() {
+            currentYear = 'all';
+            currentRegion = 'all';
+            applyFilters();
+        }
+
+        function applyFilters() {
             const container = document.getElementById('events-table-container');
-            const originalContent = container.innerHTML;
             container.style.opacity = '0.5';
 
-            // Create URL with page parameter
-            const url = `{{ route('report') }}?page=${page}`;
+            const url = `{{ route('report') }}?page=1&year=${currentYear}&region=${currentRegion}`;
 
             fetch(url, {
                     headers: {
@@ -472,26 +592,59 @@
                 })
                 .then(response => response.text())
                 .then(html => {
-                    // Create a temporary DOM element to parse the response
                     const tempDiv = document.createElement('div');
                     tempDiv.innerHTML = html;
 
-                    // Extract the new table content
                     const newContent = tempDiv.querySelector('#events-table-container');
                     if (newContent) {
                         container.innerHTML = newContent.innerHTML;
                     }
 
-                    // Extract and update pagination
                     const newPagination = tempDiv.querySelector('#pagination-container');
                     if (newPagination) {
                         document.getElementById('pagination-container').innerHTML = newPagination.innerHTML;
                     }
 
-                    // Restore opacity
                     container.style.opacity = '1';
+                    container.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                })
+                .catch(error => {
+                    console.error('Error applying filters:', error);
+                    container.style.opacity = '1';
+                });
+        }
 
-                    // Smooth scroll to top of table
+        function loadPage(page) {
+            const container = document.getElementById('events-table-container');
+            container.style.opacity = '0.5';
+
+            const url = `{{ route('report') }}?page=${page}&year=${currentYear}&region=${currentRegion}`;
+
+            fetch(url, {
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest',
+                        'Accept': 'text/html'
+                    }
+                })
+                .then(response => response.text())
+                .then(html => {
+                    const tempDiv = document.createElement('div');
+                    tempDiv.innerHTML = html;
+
+                    const newContent = tempDiv.querySelector('#events-table-container');
+                    if (newContent) {
+                        container.innerHTML = newContent.innerHTML;
+                    }
+
+                    const newPagination = tempDiv.querySelector('#pagination-container');
+                    if (newPagination) {
+                        document.getElementById('pagination-container').innerHTML = newPagination.innerHTML;
+                    }
+
+                    container.style.opacity = '1';
                     container.scrollIntoView({
                         behavior: 'smooth',
                         block: 'start'
@@ -503,9 +656,19 @@
                 });
         }
 
+        // Close dropdowns when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.relative')) {
+                document.getElementById('year-dropdown').classList.add('hidden');
+                document.getElementById('region-dropdown').classList.add('hidden');
+            }
+        });
+
         // Prevent form submissions from reloading the page
         document.addEventListener('click', function(e) {
-            if (e.target.closest('button[onclick*="loadPage"]')) {
+            if (e.target.closest('button[onclick*="loadPage"]') ||
+                e.target.closest('button[onclick*="filterBy"]') ||
+                e.target.closest('button[onclick*="clearFilters"]')) {
                 e.preventDefault();
             }
         });
