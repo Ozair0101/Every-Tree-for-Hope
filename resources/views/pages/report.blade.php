@@ -70,7 +70,7 @@
             </div>
         </section>
 
-        <section class="relative bg-green/10 flex h-auto min-h-screen w-full flex-col group/design-root overflow-x-hidden">
+        <section class="relative bg-green-50 flex h-auto min-h-screen w-full flex-col group/design-root overflow-x-hidden">
             <div class="layout-container flex h-full grow flex-col">
                 <div class="flex flex-1 justify-center py-5 sm:px-10 lg:px-20 xl:px-40">
                     <div class="layout-content-container flex flex-col w-full max-w-5xl flex-1">
