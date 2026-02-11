@@ -12,6 +12,8 @@ class Event extends Model
         'description',
         'location',
         'province',
+        'tree_names',
+        'custom_tree_species',
         'date',
         'trees_planted',
         'volunteers',
@@ -22,6 +24,7 @@ class Event extends Model
 
     protected $casts = [
         'date' => 'date',
+        'tree_names' => 'array',
         'trees_planted' => 'integer',
         'volunteers' => 'integer',
         'is_active' => 'boolean',
@@ -34,6 +37,31 @@ class Event extends Model
     public function images(): HasMany
     {
         return $this->hasMany(EventImage::class)->orderBy('sort_order');
+    }
+
+    /**
+     * Get all tree species (both checkbox and custom)
+     */
+    public function getAllTreeSpeciesAttribute(): array
+    {
+        $species = [];
+        
+        // Add checkbox selections
+        if ($this->tree_names && is_array($this->tree_names)) {
+            $species = array_merge($species, $this->tree_names);
+        }
+        
+        // Add custom species
+        if ($this->custom_tree_species) {
+            $customSpecies = array_map('trim', explode(',', $this->custom_tree_species));
+            $customSpecies = array_filter($customSpecies, function($species) {
+                return !empty($species);
+            });
+            $species = array_merge($species, $customSpecies);
+        }
+        
+        // Remove duplicates and re-index
+        return array_values(array_unique($species));
     }
 
     /**
