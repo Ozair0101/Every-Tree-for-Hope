@@ -32,6 +32,14 @@ class Event extends Model
     ];
 
     /**
+     * Get the route key for the model.
+     */
+    public function getRouteKeyName()
+    {
+        return 'id';
+    }
+
+    /**
      * Clean custom_tree_species before saving
      */
     public function setCustomTreeSpeciesAttribute($value)
