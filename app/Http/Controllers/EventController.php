@@ -22,4 +22,19 @@ class EventController extends Controller
         
         return view('pages.gallery', compact('events'));
     }
+    
+    /**
+     * Display the specified event.
+     */
+    public function show(Event $event)
+    {
+        // Get related events (excluding current event)
+        $relatedEvents = Event::active()
+            ->where('id', '!=', $event->id)
+            ->orderBy('date', 'desc')
+            ->take(3)
+            ->get();
+        
+        return view('pages.event-details', compact('event', 'relatedEvents'));
+    }
 }
