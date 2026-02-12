@@ -153,6 +153,8 @@
                     </svg>
                     <h2 class="text-xl font-bold text-gray-900 dark:text-white">Every Tree for Hope</h2>
                 </a>
+
+                <!-- Desktop Navigation -->
                 <div class="hidden md:flex items-center gap-8">
                     <a class="text-sm font-medium hover:text-primary transition-colors"
                         href="{{ route('about') }}">About</a>
@@ -167,14 +169,53 @@
                     <a class="text-sm font-medium hover:text-primary transition-colors"
                         href="{{ route('contact') }}">Contact</a>
                 </div>
-                <div class="flex items-center gap-2">
+
+                <!-- Desktop Action Buttons -->
+                <div class="hidden md:flex items-center gap-2">
                     <button
                         class="px-4 py-2 text-sm font-bold text-white bg-primary rounded-lg hover:bg-primary/90 transition-colors">Donate</button>
                     <button
                         class="px-4 py-2 text-sm font-bold text-gray-900 dark:text-white bg-gray-200 dark:bg-gray-700 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors">Join
                         Us</button>
                 </div>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-button"
+                    class="md:hidden p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+                    <svg class="h-6 w-6 text-gray-900 dark:text-white" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
             </nav>
+
+            <!-- Mobile Menu -->
+            <div id="mobile-menu"
+                class="hidden md:hidden bg-background-light/95 dark:bg-background-dark/95 backdrop-blur-sm border-t border-gray-200 dark:border-gray-800">
+                <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-4 space-y-3">
+                    <a class="block text-sm font-medium hover:text-primary transition-colors py-2"
+                        href="{{ route('about') }}">About</a>
+                    <a class="block text-sm font-medium hover:text-primary transition-colors py-2"
+                        href="{{ route('works') }}">Our
+                        Works</a>
+                    <a class="block text-sm font-medium hover:text-primary transition-colors py-2"
+                        href="{{ route('gallery') }}">Gallery</a>
+                    <a class="block text-sm font-medium hover:text-primary transition-colors py-2"
+                        href="{{ route('donators') }}">Donators</a>
+                    <a class="block text-sm font-medium hover:text-primary transition-colors py-2"
+                        href="{{ route('report') }}">Report</a>
+                    <a class="block text-sm font-medium hover:text-primary transition-colors py-2"
+                        href="{{ route('contact') }}">Contact</a>
+                    <div class="flex flex-col gap-2 pt-4 border-t border-gray-200 dark:border-gray-700">
+                        <button
+                            class="w-full px-4 py-2 text-sm font-bold text-white bg-primary rounded-lg hover:bg-primary/90 transition-colors">Donate</button>
+                        <button
+                            class="w-full px-4 py-2 text-sm font-bold text-gray-900 dark:text-white bg-gray-200 dark:bg-gray-700 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors">Join
+                            Us</button>
+                    </div>
+                </div>
+            </div>
         </header>
 
         @yield('content')
@@ -207,7 +248,8 @@
                         </li>
                         <li class="flex items-center gap-3">
                             <span class="material-symbols-outlined text-gold-accent text-lg">chat</span>
-                            <a class="hover:text-gold-accent transition-colors" href="https://wa.me/93749290591">+93 749
+                            <a class="hover:text-gold-accent transition-colors" href="https://wa.me/93749290591">+93
+                                749
                                 290 591</a>
                         </li>
                         <li class="flex items-start gap-3">
@@ -260,6 +302,55 @@
             </div>
         </footer>
     </div>
+
+    <!-- Mobile Menu JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+            if (mobileMenuButton && mobileMenu) {
+                mobileMenuButton.addEventListener('click', function() {
+                    mobileMenu.classList.toggle('hidden');
+
+                    // Toggle hamburger icon
+                    const icon = mobileMenuButton.querySelector('svg');
+                    if (mobileMenu.classList.contains('hidden')) {
+                        // Show hamburger icon
+                        icon.innerHTML =
+                            '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />';
+                    } else {
+                        // Show close icon
+                        icon.innerHTML =
+                            '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />';
+                    }
+                });
+
+                // Close menu when clicking on links
+                const mobileLinks = mobileMenu.querySelectorAll('a');
+                mobileLinks.forEach(link => {
+                    link.addEventListener('click', function() {
+                        mobileMenu.classList.add('hidden');
+                        // Reset to hamburger icon
+                        const icon = mobileMenuButton.querySelector('svg');
+                        icon.innerHTML =
+                            '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />';
+                    });
+                });
+
+                // Close menu when clicking outside
+                document.addEventListener('click', function(event) {
+                    if (!mobileMenuButton.contains(event.target) && !mobileMenu.contains(event.target)) {
+                        mobileMenu.classList.add('hidden');
+                        // Reset to hamburger icon
+                        const icon = mobileMenuButton.querySelector('svg');
+                        icon.innerHTML =
+                            '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />';
+                    }
+                });
+            }
+        });
+    </script>
 
 </body>
 
