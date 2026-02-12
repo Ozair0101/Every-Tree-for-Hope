@@ -66,7 +66,7 @@
         <script>
             document.addEventListener('DOMContentLoaded', function() {
                 const paginationContainer = document.getElementById('pagination-container');
-                const eventsGrid = document.querySelector('.grid');
+                const eventsGrid = document.querySelector('.grid.grid-cols-2');
 
                 console.log('Pagination container:', paginationContainer);
                 console.log('Events grid:', eventsGrid);
@@ -107,7 +107,7 @@
                             const doc = parser.parseFromString(html, 'text/html');
 
                             // Update events grid
-                            const newEventsGrid = doc.querySelector('.grid');
+                            const newEventsGrid = doc.querySelector('.grid.grid-cols-2');
                             if (newEventsGrid && eventsGrid) {
                                 eventsGrid.innerHTML = newEventsGrid.innerHTML;
                                 console.log('Events grid updated');
