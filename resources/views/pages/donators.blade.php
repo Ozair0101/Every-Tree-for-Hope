@@ -136,31 +136,31 @@
                             <h2 class="text-5xl font-serif text-deep-green">Making a Difference</h2>
                             <div class="w-24 h-1 bg-gold-accent/30"></div>
                         </div>
-                        @forelse($featuredDonators->take(1) as $featuredDonator)
+                        @if ($topSupporter)
                             <div class="space-y-6">
-                                <h3 class="text-3xl font-serif text-deep-green">{{ $featuredDonator->full_name }}</h3>
+                                <h3 class="text-3xl font-serif text-deep-green">{{ $topSupporter->full_name }}</h3>
                                 <p class="text-charcoal/70 text-lg leading-relaxed font-light">
-                                    {{ $featuredDonator->impact ?? 'A passionate advocate for environmental conservation and sustainable urban development in Kabul.' }}
+                                    {{ $topSupporter->impact ?? 'A passionate advocate for environmental conservation and sustainable urban development in Kabul.' }}
                                 </p>
                                 <div class="grid grid-cols-3 gap-8 py-8">
                                     <div class="text-center">
                                         <div class="text-3xl font-bold text-gold-accent">
-                                            {{ $featuredDonator->trees_sponsored ?? 0 }}</div>
+                                            {{ $topSupporter->trees_sponsored ?? 0 }}</div>
                                         <div class="text-sm text-charcoal/60 uppercase tracking-wider">Trees Planted</div>
                                     </div>
                                     <div class="text-center">
                                         <div class="text-3xl font-bold text-gold-accent">
-                                            ${{ number_format($featuredDonator->financial_support ?? 0, 0) }}</div>
+                                            ${{ number_format($topSupporter->financial_support ?? 0, 0) }}</div>
                                         <div class="text-sm text-charcoal/60 uppercase tracking-wider">Support</div>
                                     </div>
                                     <div class="text-center">
                                         <div class="text-3xl font-bold text-gold-accent">
-                                            {{ $featuredDonator->location ?? 'Kabul' }}</div>
+                                            {{ $topSupporter->location ?? 'Kabul' }}</div>
                                         <div class="text-sm text-charcoal/60 uppercase tracking-wider">Location</div>
                                     </div>
                                 </div>
                             </div>
-                        @empty
+                        @else
                             <div class="space-y-6">
                                 <h3 class="text-3xl font-serif text-deep-green">Join Our Mission</h3>
                                 <p class="text-charcoal/70 text-lg leading-relaxed font-light">
@@ -168,7 +168,7 @@
                                     difference in Kabul's green future.
                                 </p>
                             </div>
-                        @endforelse
+                        @endif
                     </div>
                 </div>
             </div>

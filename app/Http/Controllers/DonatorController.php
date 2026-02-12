@@ -28,6 +28,7 @@ class DonatorController extends Controller
         
         return view('pages.donators', compact(
             'featuredDonators',
+            'topSupporter',
             'verifiedDonators',
             'totalDonators',
             'totalTrees',
