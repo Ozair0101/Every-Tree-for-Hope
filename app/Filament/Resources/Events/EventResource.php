@@ -104,16 +104,25 @@ class EventResource extends Resource
                         'Olive' => 'Olive (Zaytun)',
                         'Cherry' => 'Cherry (Gelas)',
                         'Plum' => 'Plum (Aloo Bukhara)',
-                        'Pear' => 'Pear (Nashpati)',
-                        'Other' => 'Other Species'
+                        'Pear' => 'Pear (Nashpati)'
                     ])
                     ->columns(3)
-                    ->helperText('Select all tree species planted in this event')
+                    ->helperText('Select all tree species planted in this event from the list above. Do not enter the same species in the custom field below.')
                     ->columnSpanFull(),
                 Components\TextInput::make('custom_tree_species')
                     ->label('Custom Tree Species')
                     ->placeholder('Enter additional tree species (comma-separated)')
-                    ->helperText('Add any tree species not listed above. Separate multiple species with commas.')
+                    ->helperText('Add any tree species NOT listed above. Do not repeat species already selected above.')
+                    ->formatStateUsing(function ($state) {
+                        if ($state) {
+                            $species = array_map('trim', explode(',', $state));
+                            $species = array_filter($species, function($species) {
+                                return !empty($species);
+                            });
+                            return implode(', ', array_unique($species));
+                        }
+                        return $state;
+                    })
                     ->columnSpanFull(),
                 Components\DatePicker::make('date')
                     ->required()
@@ -187,12 +196,45 @@ class EventResource extends Resource
                 Tables\Columns\TextColumn::make('tree_names')
                     ->label('Tree Species')
                     ->formatStateUsing(function ($record) {
-                        $allSpecies = $record->all_tree_species;
-                        if (empty($allSpecies)) {
+                        $species = [];
+                        
+                        // Add tree names from checkbox selection
+                        if ($record->tree_names && is_array($record->tree_names)) {
+                            $filteredSpecies = array_filter($record->tree_names, function($s) {
+                                return $s !== 'Other' && !empty(trim($s));
+                            });
+                            $species = array_merge($species, $filteredSpecies);
+                        }
+                        
+                        // Add custom tree species
+                        if ($record->custom_tree_species) {
+                            $customSpecies = array_map('trim', explode(',', $record->custom_tree_species));
+                            $customSpecies = array_filter($customSpecies, function($s) {
+                                return !empty($s);
+                            });
+                            $species = array_merge($species, $customSpecies);
+                        }
+                        
+                        // Enhanced deduplication (case-insensitive and trim)
+                        $uniqueSpecies = [];
+                        $seen = [];
+                        foreach ($species as $item) {
+                            $cleanItem = strtolower(trim($item));
+                            if (!empty($cleanItem) && !isset($seen[$cleanItem])) {
+                                $uniqueSpecies[] = trim($item);
+                                $seen[$cleanItem] = true;
+                            }
+                        }
+                        
+                        // Final safety check - remove any remaining duplicates
+                        $uniqueSpecies = array_values(array_unique($uniqueSpecies));
+                        
+                        if (empty($uniqueSpecies)) {
                             return 'N/A';
                         }
-                        return implode(', ', array_slice($allSpecies, 0, 3)) . 
-                               (count($allSpecies) > 3 ? ' +' . (count($allSpecies) - 3) : '');
+                        
+                        return implode(', ', array_slice($uniqueSpecies, 0, 3)) . 
+                               (count($uniqueSpecies) > 3 ? ' +' . (count($uniqueSpecies) - 3) : '');
                     })
                     ->limit(30)
                     ->toggleable(),
