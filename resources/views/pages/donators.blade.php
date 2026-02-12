@@ -41,7 +41,7 @@
                     <div class="w-24 h-1 bg-gold-accent/30 mx-auto mt-6"></div>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
-                    <div class="md:col-span-12 lg:col-span-8 group">
+                    <div class="md:col-span-12 bg-stone-50 lg:col-span-8 group">
                         <div
                             class="glass-sponsor rounded-[2.5rem] p-10 lg:p-16 flex flex-col md:flex-row items-center gap-12 relative">
                             <div class="absolute top-8 right-8 flex items-center gap-2">
@@ -71,7 +71,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="md:col-span-6 lg:col-span-4 group h-full">
+                    <div class="md:col-span-6 bg-stone-50 lg:col-span-4 group h-full">
                         <div
                             class="glass-sponsor rounded-[2.5rem] p-10 flex flex-col h-full justify-between hover:-translate-y-2 transition-transform duration-500">
                             <div class="space-y-6">
@@ -99,7 +99,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="md:col-span-6 lg:col-span-4 group h-full">
+                    <div class="md:col-span-6 bg-stone-50 lg:col-span-4 group h-full">
                         <div
                             class="glass-sponsor rounded-[2.5rem] p-10 flex flex-col h-full justify-between hover:-translate-y-2 transition-transform duration-500">
                             <div class="space-y-6">
@@ -127,7 +127,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="md:col-span-6 lg:col-span-4 group h-full">
+                    <div class="md:col-span-6 bg-stone-50 lg:col-span-4 group h-full">
                         <div
                             class="glass-sponsor rounded-[2.5rem] p-10 flex flex-col h-full justify-between hover:-translate-y-2 transition-transform duration-500">
                             <div class="space-y-6">
@@ -155,7 +155,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="md:col-span-6 lg:col-span-4 group h-full">
+                    <div class="md:col-span-6 bg-stone-50 lg:col-span-4 group h-full">
                         <div
                             class="glass-sponsor rounded-[2.5rem] p-10 flex flex-col h-full justify-between hover:-translate-y-2 transition-transform duration-500">
                             <div class="space-y-6">
@@ -409,7 +409,7 @@
             </div>
         </section>
 
-        <section class="py-24 bg-stone-50">
+        <section class="py-24  bg-stone-50">
             <div class="negative-space-container">
                 <div class="mb-12 text-center space-y-4">
                     <h2 class="text-3xl font-serif text-deep-green">Transparency in Focus</h2>
