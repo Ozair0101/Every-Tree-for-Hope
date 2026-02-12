@@ -3,37 +3,34 @@
 @section('content')
 
     <main class="flex-grow">
-        <section class="relative h-[600px] flex items-center overflow-hidden bg-white border-b border-neutral-mid">
+        <section class="relative h-[600px] flex items-center overflow-hidden bg-neutral-900">
             <div class="absolute right-0 top-0 w-full md:w-2/3 h-full">
-                <img alt="Sun-drenched forest canopy" class="w-full h-full object-cover"
+                <img alt="Sun-drenched forest canopy" class="w-full h-full object-cover opacity-70"
                     src="https://lh3.googleusercontent.com/aida-public/AB6AXuCiSLJVNhgqX_rzJKgvmlDvloU-fcMmenRiN6mZ1Wqevab2hUyke18xq1TOFuMxsqoCVU8oS5wF9skWOEUP9MZePgGonhgkM6bX84t6Iv02iR2PilvhZHea3utpkTvdOoNtvq1v8eYMNuDCvGmkJejzO3YNLClwcjgDP-j-N6T3tqgEvhVO10uaCBCh9xyPNLY_dY7FJmn0WdOo_CT5uzpI1QlpJjhOlMUmQYCjmdVc6qoZyX_3kNo3kLI5c_p04yr_6WNLSMZ-im8" />
-                <div class="absolute inset-0 bg-white/40 md:hidden"></div>
+                <div class="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-transparent"></div>
             </div>
             <div class="relative w-full h-full max-w-7xl mx-auto px-6 flex items-center">
-                <div
-                    class="absolute inset-y-0 left-0 w-full md:w-3/4 hero-gradient-overlay pointer-events-none hidden md:block">
-                </div>
                 <div class="relative z-10 max-w-2xl">
                     <div
-                        class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold uppercase tracking-widest mb-6">
+                        class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/20 border border-primary/40 text-white text-xs font-bold uppercase tracking-widest mb-6 backdrop-blur-sm">
                         <span class="material-icons text-xs">nature_people</span>
                         Botanical Collection
                     </div>
-                    <h1 class="text-6xl md:text-7xl font-serif text-neutral-high mb-6 leading-[1.1]">
+                    <h1 class="text-6xl md:text-7xl font-serif text-white mb-6 leading-[1.1] drop-shadow-2xl">
                         Species <br />
-                        <span class="italic text-primary">Gallery</span>
+                        <span class="italic text-primary-light">Gallery</span>
                     </h1>
-                    <p class="text-lg md:text-xl text-gray-600 font-medium leading-relaxed max-w-lg mb-8">
+                    <p class="text-lg md:text-xl text-gray-200 font-medium leading-relaxed max-w-lg mb-8 drop-shadow-lg">
                         Explore our curated collection of botanical specimens. Each species is selected for its high
                         environmental impact and regional resilience in the face of climate change.
                     </p>
                     <div class="flex gap-4">
                         <button
-                            class="bg-neutral-high text-white px-8 py-4 rounded-lg text-sm font-bold hover:bg-black transition-all uppercase tracking-wider">
+                            class="bg-primary hover:bg-primary/90 text-white px-8 py-4 rounded-lg text-sm font-bold transition-all uppercase tracking-wider shadow-lg hover:shadow-xl">
                             Explore Catalog
                         </button>
                         <button
-                            class="flex items-center gap-2 px-6 py-4 text-sm font-bold text-neutral-high hover:text-primary transition-colors uppercase tracking-wider">
+                            class="flex items-center gap-2 px-6 py-4 bg-white/10 backdrop-blur-sm text-white border border-white/20 hover:bg-white/20 transition-all rounded-lg text-sm font-bold uppercase tracking-wider">
                             <span class="material-icons">play_circle_filled</span>
                             Watch Growth Study
                         </button>
@@ -228,6 +225,18 @@
 
         .hero-gradient-overlay {
             background: linear-gradient(to right, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.95) 30%, rgba(255, 255, 255, 0.4) 70%, rgba(255, 255, 255, 0) 100%);
+        }
+
+        .text-primary-light {
+            color: #86efac !important;
+        }
+
+        .bg-primary/20 {
+            background-color: rgba(34, 197, 94, 0.2) !important;
+        }
+
+        .border-primary/40 {
+            border-color: rgba(34, 197, 94, 0.4) !important;
         }
     </style>
 @endpush
