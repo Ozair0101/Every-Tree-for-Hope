@@ -39,7 +39,7 @@
             </div>
         </section>
         <section
-            class="py-8 bg-white dark:bg-background-dark/50 sticky top-20 z-40 border-b border-neutral-mid dark:border-white/5">
+            class="py-8 mt-20 bg-white dark:bg-background-dark/50 sticky top-20 z-40 border-b border-neutral-mid dark:border-white/5">
             <div class="max-w-7xl mx-auto px-6 flex flex-wrap items-center justify-between gap-6">
                 <div class="flex items-center gap-3 overflow-x-auto pb-2 md:pb-0 no-scrollbar">
                     <button
