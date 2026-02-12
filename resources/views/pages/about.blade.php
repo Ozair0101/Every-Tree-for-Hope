@@ -153,7 +153,7 @@
                 <p class="text-stone-500 tracking-widest uppercase text-sm">A dedicated collective of ecologists and
                     activists</p>
             </div>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12">
+            <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-12">
                 @php
                     $teamMembers = \App\Models\Team::active()
                         ->where('position', '!=', 'Founder & CEO')
@@ -163,7 +163,7 @@
                 @forelse($teamMembers as $member)
                     <div class="group text-center">
                         <div
-                            class="relative mb-6 mx-auto w-64 h-64 rounded-full overflow-hidden border-4 border-transparent group-hover:border-primary transition-all duration-500 p-2">
+                            class="relative mb-6 mx-auto w-48 h-48 sm:w-64 sm:h-64 rounded-full overflow-hidden border-4 border-transparent group-hover:border-primary transition-all duration-500 p-2">
                             <img alt="{{ $member->name }}"
                                 class="w-full h-full object-cover rounded-full filter grayscale group-hover:grayscale-0 transition-all duration-500"
                                 data-alt="Professional portrait of {{ $member->name }}"
@@ -171,25 +171,26 @@
                             @if ($member->social_media_url || $member->email)
                                 <div
                                     class="absolute inset-0 bg-primary/80 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300">
-                                    <div class="flex gap-4">
+                                    <div class="flex gap-2 sm:gap-4">
                                         @if ($member->social_media_url)
-                                            <a class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-primary"
+                                            <a class="w-8 h-8 sm:w-10 sm:h-10 bg-white rounded-full flex items-center justify-center text-primary"
                                                 href="{{ $member->social_media_url }}" target="_blank"><span
-                                                    class="material-symbols-outlined text-sm">link</span></a>
+                                                    class="material-symbols-outlined text-xs sm:text-sm">link</span></a>
                                         @endif
                                         @if ($member->email)
-                                            <a class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-primary"
+                                            <a class="w-8 h-8 sm:w-10 sm:h-10 bg-white rounded-full flex items-center justify-center text-primary"
                                                 href="mailto:{{ $member->email }}"><span
-                                                    class="material-symbols-outlined text-sm">mail</span></a>
+                                                    class="material-symbols-outlined text-xs sm:text-sm">mail</span></a>
                                         @endif
                                     </div>
                                 </div>
                             @endif
                         </div>
-                        <h4 class="text-xl font-bold text-stone-900 dark:text-white">{{ $member->name }}</h4>
-                        <p class="text-stone-500 font-light">{{ $member->position }}</p>
+                        <h4 class="text-lg sm:text-xl font-bold text-stone-900 dark:text-white">{{ $member->name }}</h4>
+                        <p class="text-sm sm:text-base text-stone-500 font-light">{{ $member->position }}</p>
                         @if ($member->message)
-                            <p class="text-stone-600 italic text-sm mt-3 max-w-xs mx-auto">"{{ $member->message }}"</p>
+                            <p class="text-stone-600 italic text-xs sm:text-sm mt-3 max-w-xs mx-auto">
+                                "{{ $member->message }}"</p>
                         @endif
                     </div>
                 @empty
