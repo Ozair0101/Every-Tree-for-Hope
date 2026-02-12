@@ -60,10 +60,10 @@
                 @endif
 
                 <!-- View Details Button -->
-                <button
-                    class="w-full bg-deep-green hover:bg-gold-accent text-white py-3 rounded-lg font-bold text-sm transition-all">
+                <a href="{{ route('events.show', $event->id) }}"
+                    class="w-full bg-deep-green hover:bg-gold-accent text-white py-3 rounded-lg font-bold text-sm transition-all text-center block">
                     View Event Details
-                </button>
+                </a>
             </div>
         </div>
     @empty
