@@ -18,6 +18,7 @@ class DonatorInfolist
                     ->label('Profile Photo')
                     ->size(150)
                     ->circular()
+                    ->disk('public')
                     ->defaultImageUrl(fn ($record) => 'https://ui-avatars.com/api/?name=' . urlencode($record->full_name) . '&color=7F9CF5&background=EBF4FF&size=150')
                     ->columnSpanFull()
                     ->alignCenter(),
