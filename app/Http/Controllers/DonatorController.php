@@ -12,8 +12,11 @@ class DonatorController extends Controller
      */
     public function index()
     {
-        // Get featured donators for the main sections
-        $featuredDonators = Donator::featured()->verified()->get();
+        // Get the last 5 featured donators for the main sections
+        $featuredDonators = Donator::featured()->verified()->latest()->take(5)->get();
+        
+        // Get the featured donator with the highest financial support for Individual Impact section
+        $topSupporter = Donator::featured()->verified()->orderBy('financial_support', 'desc')->first();
         
         // Get all verified donators for the table (latest first)
         $verifiedDonators = Donator::verified()->orderBy('created_at', 'desc')->get();
