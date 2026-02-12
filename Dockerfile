@@ -14,7 +14,7 @@ RUN apt-get update && apt-get install -y \
     libzip-dev \
     libicu-dev
 
-# Install PHP extensions
+# Install PHP extensions required for Laravel 12
 RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install \
     pdo \
@@ -35,11 +35,21 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 WORKDIR /var/www/html
 
-# Copy project
+# Copy project files
 COPY . .
 
 # Increase memory limit for composer
 ENV COMPOSER_MEMORY_LIMIT=-1
 
 # Install dependencies
-RUN composer install --
+RUN composer install --no-dev --optimize-autoloader --no-interaction
+
+# Fix permissions
+RUN chown -R www-data:www-data storage bootstrap/cache \
+    && chmod -R 775 storage bootstrap/cache
+
+# Set Apache document root to Laravel public folder
+RUN sed -i 's!/var/www/html!/var/www/html/public!g' /etc/apache2/sites-available/000-default.conf
+
+EXPOSE 10000
+CMD ["apache2-foreground"]
