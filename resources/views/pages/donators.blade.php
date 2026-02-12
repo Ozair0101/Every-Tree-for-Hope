@@ -31,7 +31,8 @@
                 </div>
             </div>
         </section>
-        <section class="py-32 bg-white relative botanical-pattern">
+
+        <section class="py-32 px-24 bg-white relative botanical-pattern">
             <div class="negative-space-container">
                 <div class="text-center mb-20 space-y-4">
                     <h4 class="text-gold-accent font-bold tracking-[0.4em] text-[10px] uppercase">Institutional Support
@@ -186,7 +187,8 @@
                 </div>
             </div>
         </section>
-        <section class="py-24 bg-white relative overflow-hidden">
+
+        <section class="py-24 px-24 bg-white relative overflow-hidden">
             <div class="negative-space-container">
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
                     <div class="relative group">
@@ -240,7 +242,8 @@
                 </div>
             </div>
         </section>
-        <section class="py-32 bg-white botanical-bg">
+
+        <section class="py-32 px-24 bg-white botanical-bg">
             <div class="negative-space-container">
                 <div class="mb-16 flex flex-col md:flex-row md:items-end justify-between gap-6">
                     <div class="space-y-4">
@@ -405,6 +408,7 @@
                 </div>
             </div>
         </section>
+
         <section class="py-24 bg-stone-50">
             <div class="negative-space-container">
                 <div class="mb-12 text-center space-y-4">
@@ -462,6 +466,7 @@
                 </div>
             </div>
         </section>
+
         <section class="py-32 px-6">
             <div
                 class="max-w-5xl mx-auto glass-panel rounded-[3rem] p-12 md:p-24 text-center space-y-10 relative overflow-hidden">
@@ -499,6 +504,7 @@
                 </div>
             </div>
         </section>
+
     </main>
 @endsection
 
