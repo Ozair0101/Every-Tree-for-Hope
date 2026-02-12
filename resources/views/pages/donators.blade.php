@@ -206,6 +206,10 @@
                                     <th class="text-left py-4 px-4 md:py-6 md:px-8 font-semibold text-sm md:text-base">
                                         Impact</th>
                                     <th class="text-left py-4 px-4 md:py-6 md:px-8 font-semibold text-sm md:text-base">
+                                        Support</th>
+                                    <th class="text-left py-4 px-4 md:py-6 md:px-8 font-semibold text-sm md:text-base">
+                                        Date</th>
+                                    <th class="text-left py-4 px-4 md:py-6 md:px-8 font-semibold text-sm md:text-base">
                                         Location</th>
                                     <th class="text-right py-4 px-4 md:py-6 md:px-8 font-semibold text-sm md:text-base">
                                         Status</th>
@@ -245,6 +249,18 @@
                                             </div>
                                         </td>
                                         <td class="py-4 px-4 md:py-6 md:px-8">
+                                            <div class="flex items-center gap-2">
+                                                <span
+                                                    class="material-symbols-outlined text-gold-accent text-sm">payments</span>
+                                                <span
+                                                    class="text-charcoal font-medium text-sm md:text-base">${{ number_format($donator->financial_support ?? 0, 0) }}</span>
+                                            </div>
+                                        </td>
+                                        <td class="py-4 px-4 md:py-6 md:px-8">
+                                            <span
+                                                class="text-charcoal/60 text-sm md:text-base">{{ $donator->created_at->format('M d, Y') }}</span>
+                                        </td>
+                                        <td class="py-4 px-4 md:py-6 md:px-8">
                                             <span
                                                 class="text-charcoal/60 text-sm md:text-base truncate block max-w-[120px] md:max-w-none">
                                                 {{ $donator->location ?? 'International' }}
@@ -262,7 +278,7 @@
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="4"
+                                        <td colspan="6"
                                             class="py-12 px-4 md:px-8 text-center text-charcoal/60 text-sm md:text-base">
                                             No verified donators yet. Be the first to support our mission!
                                         </td>
@@ -272,6 +288,13 @@
                         </table>
                     </div>
                 </div>
+
+                <!-- Pagination -->
+                @if ($verifiedDonators->hasPages())
+                    <div class="mt-8 flex justify-center">
+                        {{ $verifiedDonators->links() }}
+                    </div>
+                @endif
             </div>
         </section>
     </main>

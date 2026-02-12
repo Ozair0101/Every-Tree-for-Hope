@@ -18,8 +18,8 @@ class DonatorController extends Controller
         // Get the featured donator with the highest financial support for Individual Impact section
         $topSupporter = Donator::featured()->verified()->orderBy('financial_support', 'desc')->first();
         
-        // Get all verified donators for the table (latest first)
-        $verifiedDonators = Donator::verified()->orderBy('created_at', 'desc')->get();
+        // Get all verified donators for the table (latest first with pagination)
+        $verifiedDonators = Donator::verified()->orderBy('created_at', 'desc')->paginate(10);
         
         // Get statistics
         $totalDonators = Donator::verified()->count();
