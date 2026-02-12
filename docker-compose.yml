@@ -1,0 +1,103 @@
+version: "3.8"
+
+services:
+  # Laravel Application
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: every-tree-for-hope:latest
+    container_name: every-tree-for-hope-app
+    restart: unless-stopped
+    working_dir: /var/www/html
+    volumes:
+      - ./:/var/www/html
+      - ./storage/app/public:/var/www/html/storage/app/public
+    ports:
+      - "8000:80"
+    networks:
+      - every-tree-network
+    depends_on:
+      - mysql
+      - redis
+    environment:
+      - APP_ENV=local
+      - APP_DEBUG=true
+      - DB_HOST=mysql
+      - DB_DATABASE=every_tree_for_hope
+      - DB_USERNAME=every_tree_user
+      - DB_PASSWORD=secret_password
+      - REDIS_HOST=redis
+      - CACHE_DRIVER=redis
+      - SESSION_DRIVER=redis
+      - QUEUE_CONNECTION=redis
+
+  # MySQL Database
+  mysql:
+    image: mysql:8.0
+    container_name: every-tree-for-hope-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: every_tree_for_hope
+      MYSQL_USER: every_tree_user
+      MYSQL_PASSWORD: secret_password
+      MYSQL_ROOT_PASSWORD: root_password
+    ports:
+      - "33066:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./docker/mysql/my.cnf:/etc/mysql/conf.d/my.cnf
+    networks:
+      - every-tree-network
+    command: --default-authentication-plugin=mysql_native_password
+
+  # Redis Cache
+  redis:
+    image: redis:7-alpine
+    container_name: every-tree-for-hope-redis
+    restart: unless-stopped
+    ports:
+      - "63799:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - every-tree-network
+    command: redis-server --appendonly yes
+
+  # phpMyAdmin (Optional - for database management)
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: every-tree-for-hope-phpmyadmin
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+    environment:
+      PMA_HOST: mysql
+      PMA_USER: root
+      PMA_PASSWORD: root_password
+      MYSQL_ROOT_PASSWORD: root_password
+    networks:
+      - every-tree-network
+    depends_on:
+      - mysql
+
+  # MailHog (Optional - for email testing in development)
+  mailhog:
+    image: mailhog/mailhog
+    container_name: every-tree-for-hope-mailhog
+    restart: unless-stopped
+    ports:
+      - "1025:1025" # SMTP port
+      - "8025:8025" # Web interface
+    networks:
+      - every-tree-network
+
+networks:
+  every-tree-network:
+    driver: bridge
+
+volumes:
+  mysql_data:
+    driver: local
+  redis_data:
+    driver: local

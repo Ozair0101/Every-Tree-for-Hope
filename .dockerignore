@@ -1,0 +1,65 @@
+# Git
+.git
+.gitignore
+
+# Docker
+Dockerfile
+docker-compose.yml
+.dockerignore
+.dockerenv
+
+# Documentation
+README.md
+CHANGELOG.md
+
+# Dependencies
+node_modules
+vendor
+
+# Environment files
+.env
+.env.*
+!.dockerenv
+
+# Storage and cache
+storage/logs/*
+storage/framework/cache/*
+storage/framework/sessions/*
+storage/framework/testing/*
+storage/framework/views/*
+bootstrap/cache/*.php
+
+# Local development
+.phpunit.result.cache
+.php-cs-fixer.cache
+Homestead.json
+Homestead.yaml
+npm-debug.log
+yarn-error.log
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Laravel
+.phpunit.result.cache
+.Homestead
+.Homestead.json
+.Homestead.yaml
+npm-debug.log
+yarn-error.log
+
+# Testing
+coverage/
+.nyc_output
+
+# Build artifacts
+build/
+dist/
