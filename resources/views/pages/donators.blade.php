@@ -1,6 +1,7 @@
 @extends('layouts.layout')
 @section('title', 'Donators Page')
 @section('content')
+
     <main>
         <section class="relative min-h-[85vh] flex items-center justify-center overflow-hidden">
             <div class="absolute inset-0 z-0">
@@ -21,7 +22,7 @@
                     Meet the <span class="italic font-light text-gold-accent">Guardians</span>
                 </h1>
                 <p class="text-white/90 text-lg md:text-2xl font-light max-w-2xl mx-auto leading-relaxed drop-shadow-lg">
-                    Celebrating the individuals and families who fuel the restoration of Kabul’s green heritage through
+                    Celebrating the individuals and families who fuel the restoration of Kabul's green heritage through
                     dedicated tree planting and environmental stewardship.
                 </p>
                 <div class="pt-8">
@@ -500,3 +501,44 @@
         </section>
     </main>
 @endsection
+
+<!-- Custom Styles for Donators Page -->
+@push('styles')
+    <style>
+        @layer utilities {
+            .glass-panel {
+                @apply bg-white/60 backdrop-blur-xl border border-white/80 shadow-[0_8px_32px_0_rgba(31, 38, 135, 0.04)];
+            }
+
+            .glass-modal {
+                @apply bg-white/40 backdrop-blur-2xl border border-white/60 shadow-[0_20px_50px_rgba(0, 0, 0, 0.1)];
+            }
+
+            .glass-sponsor {
+                @apply bg-white border border-stone-100 shadow-sm hover:shadow-2xl hover:border-gold-accent/30 transition-all duration-500 overflow-hidden;
+            }
+
+            .botanical-pattern {
+                background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M50 10 C50 10 40 30 20 30 C20 30 30 50 50 50 C50 50 70 30 80 30 C80 30 60 10 50 10 Z' fill='%23d4af37' fill-opacity='0.03'/%3E%3C/svg%3E");
+                background-size: 150px 150px;
+            }
+
+            .botanical-bg {
+                background-image: radial-gradient(circle at 2px 2px, rgba(212, 175, 55, 0.05) 1px, transparent 0);
+                background-size: 60px 60px;
+            }
+
+            .donor-row:hover {
+                @apply bg-stone-50/50;
+            }
+
+            .negative-space-container {
+                @apply max-w-6xl mx-auto px-6 md:px-12;
+            }
+
+            .grayscale-hover {
+                @apply grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-700;
+            }
+        }
+    </style>
+@endpush
