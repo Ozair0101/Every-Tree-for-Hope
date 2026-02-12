@@ -96,8 +96,8 @@ class DonatorForm
                 FileUpload::make('profile_image')
                     ->label('Profile Image')
                     ->image()
-                    ->imageEditor()
                     ->directory('donators')
+                    ->disk('public')
                     ->maxSize(2048) // 2MB
                     ->columnSpanFull(),
                 
