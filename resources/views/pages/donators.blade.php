@@ -1,233 +1,502 @@
 @extends('layouts.layout')
 @section('title', 'Donators Page')
 @section('content')
-    <main class="px-4 sm:px-6 md:px-10 lg:px-20 xl:px-40 flex flex-1 justify-center py-5 sm:py-10">
-        <div class="layout-content-container flex flex-col max-w-5xl flex-1 gap-8">
-            <!-- HeroSection Component -->
-            <section class="@container">
-                <div class="@[480px]:p-0">
-                    <div class="flex min-h-[400px] sm:min-h-[480px] flex-col gap-6 bg-cover bg-center bg-no-repeat @[480px]:gap-8 @[480px]:rounded-xl items-center justify-center p-4 text-center"
-                        data-alt="Lush green forest canopy seen from above"
-                        style='background-image: linear-gradient(rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.5) 100%), url("https://lh3.googleusercontent.com/aida-public/AB6AXuDxyqmV5h-u5XpT3vfqXh8OmXdXoHk-zVkxk9f6rJ-V6tRlg8ltF-x6IFvhu8sWpStRLqm97Uw-heYmNWEyyVyBIiantKORJKBeMfD_QRtTLNFGCw2USlTuqyoWW_581KIbs-xLS40IHYFZffl8W5m52pRvVG1rd5WDryOdAtyfPiFvXU7NsJPEOkirMEpsr88A0nRKmdSHxuwpE-f9zsYtS-dpTJmkuVk_4KE9yeaKj4TDjjl50hUlm8Stf0KuHfEFjCcFzT0QrQE");'>
-                        <div class="flex flex-col gap-2">
-                            <h1
-                                class="text-white text-4xl font-black leading-tight tracking-[-0.033em] @[480px]:text-5xl @[480px]:font-black @[480px]:leading-tight @[480px]:tracking-[-0.033em]">
-                                A Forest of Gratitude</h1>
-                            <h2
-                                class="text-white text-sm font-normal leading-normal @[480px]:text-base @[480px]:font-normal @[480px]:leading-normal max-w-xl mx-auto">
-                                Thank you to our supporters. Your contributions are helping us build a greener
-                                planet for everyone, one tree at a time.</h2>
+    <main>
+        <section class="relative min-h-[85vh] flex items-center justify-center overflow-hidden">
+            <div class="absolute inset-0 z-0">
+                <img alt="Sun-drenched hills of Kabul" class="w-full h-full object-cover scale-105"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuCp83JCfKCRYgHZuZA8dzBJ3Ih5yeidFw9eQGrfMH89CUBjfUnGXPlxXvfb0DmVToP0iwQwPaK0W5XabUIrIKFxbSwRZd0LqiyyCermKdbgrB2uPKlC48Z7W_on-lUkUOnlJd62ok3dkmH7JXdQxf63fiy8lTJ7mxggLO5Vjo_p7uKwbi43Dl3GWm8aiiPqcYvOfRpQgKV513yPQakVJ-1w2d86ue27OPY3p8N9H5sr5Mg5oew18KgTO2Ehhj7cSGj-2a6ht7DOZOs" />
+                <div class="absolute inset-0 bg-gradient-to-t from-deep-green/60 via-deep-green/20 to-transparent">
+                </div>
+                <div class="absolute inset-0 bg-black/20"></div>
+            </div>
+            <div class="relative z-10 text-center space-y-8 negative-space-container pt-20">
+                <div
+                    class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20">
+                    <span class="material-symbols-outlined text-gold-accent text-sm">verified</span>
+                    <span class="text-white text-[9px] font-bold uppercase tracking-[0.25em]">Transparency &amp;
+                        Recognition</span>
+                </div>
+                <h1 class="text-white text-6xl md:text-9xl font-serif font-bold tracking-tight drop-shadow-2xl">
+                    Meet the <span class="italic font-light text-gold-accent">Guardians</span>
+                </h1>
+                <p class="text-white/90 text-lg md:text-2xl font-light max-w-2xl mx-auto leading-relaxed drop-shadow-lg">
+                    Celebrating the individuals and families who fuel the restoration of Kabul’s green heritage through
+                    dedicated tree planting and environmental stewardship.
+                </p>
+                <div class="pt-8">
+                    <span
+                        class="material-symbols-outlined text-white animate-bounce text-3xl">keyboard_double_arrow_down</span>
+                </div>
+            </div>
+        </section>
+        <section class="py-32 bg-white relative botanical-pattern">
+            <div class="negative-space-container">
+                <div class="text-center mb-20 space-y-4">
+                    <h4 class="text-gold-accent font-bold tracking-[0.4em] text-[10px] uppercase">Institutional Support
+                    </h4>
+                    <h2 class="text-5xl font-serif text-deep-green">Our Visionary Sponsors</h2>
+                    <div class="w-24 h-1 bg-gold-accent/30 mx-auto mt-6"></div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
+                    <div class="md:col-span-12 lg:col-span-8 group">
+                        <div
+                            class="glass-sponsor rounded-[2.5rem] p-10 lg:p-16 flex flex-col md:flex-row items-center gap-12 relative">
+                            <div class="absolute top-8 right-8 flex items-center gap-2">
+                                <span
+                                    class="px-4 py-1.5 rounded-full bg-gold-accent/10 border border-gold-accent/20 text-gold-accent text-[9px] font-bold uppercase tracking-widest">Lead
+                                    Partner</span>
+                            </div>
+                            <div class="w-full md:w-1/3 flex justify-center">
+                                <img alt="Sponsor Logo" class="w-full max-w-[200px] grayscale-hover"
+                                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuCp83JCfKCRYgHZuZA8dzBJ3Ih5yeidFw9eQGrfMH89CUBjfUnGXPlxXvfb0DmVToP0iwQwPaK0W5XabUIrIKFxbSwRZd0LqiyyCermKdbgrB2uPKlC48Z7W_on-lUkUOnlJd62ok3dkmH7JXdQxf63fiy8lTJ7mxggLO5Vjo_p7uKwbi43Dl3GWm8aiiPqcYvOfRpQgKV513yPQakVJ-1w2d86ue27OPY3p8N9H5sr5Mg5oew18KgTO2Ehhj7cSGj-2a6ht7DOZOs" />
+                            </div>
+                            <div class="w-full md:w-2/3 space-y-6 text-center md:text-left">
+                                <h3 class="text-3xl font-serif text-deep-green">Global Green Foundation</h3>
+                                <p class="text-charcoal/70 text-lg font-light leading-relaxed">
+                                    Spearheading the irrigation infrastructure for the Kabul foothills reforestation
+                                    initiative, ensuring the survival of over 10,000 native saplings.
+                                </p>
+                                <div class="pt-4 flex flex-col sm:flex-row items-center gap-6">
+                                    <a class="text-deep-green font-bold text-[10px] uppercase tracking-[0.2em] border-b-2 border-gold-accent pb-1 hover:text-gold-accent transition-colors"
+                                        href="#">View Partner Profile</a>
+                                    <div class="flex items-center gap-3">
+                                        <span class="material-symbols-outlined text-gold-accent">eco</span>
+                                        <span class="text-charcoal/50 text-[10px] font-bold uppercase">12,000+ Trees
+                                            Sponsored</span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
+                    </div>
+                    <div class="md:col-span-6 lg:col-span-4 group h-full">
+                        <div
+                            class="glass-sponsor rounded-[2.5rem] p-10 flex flex-col h-full justify-between hover:-translate-y-2 transition-transform duration-500">
+                            <div class="space-y-6">
+                                <div class="flex justify-between items-start">
+                                    <img alt="Sponsor Logo" class="max-h-12 w-auto grayscale-hover"
+                                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuDqbsRfkaGON8ghibhqD0FPuvhemuTfvhq_g1lSPz3wYG6q0ViQhZ6BAOn1lWNpqzfmJr0XJbLIN-a7O0EjzNovxSpDbYB4X0qR1gC4IqW8TdOQV_FcmFPAICD1ok8hMNr1-NMIrWGuKXWQfMn3RILiUlG7cXr5g6Vg-21sIzI_9FnD_f9QHbe_IdU71Y4_6JOlRzpP92BALfb2tzoLmwJ9AMpwLqxBdnLJKOIDCKVdYIiqcT_IJ5iOsBHRziCrooDb-fS1XolmyJM" />
+                                    <span
+                                        class="px-3 py-1 rounded-full bg-stone-100 text-charcoal/60 text-[8px] font-bold uppercase tracking-widest">Corporate
+                                        Partner</span>
+                                </div>
+                                <div class="space-y-3">
+                                    <h3 class="text-xl font-serif text-deep-green">Eco-Ventures Group</h3>
+                                    <p class="text-charcoal/60 text-sm font-light leading-relaxed">
+                                        Pioneering sustainable employment for 50 local families through our
+                                        community-led nursery program.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="mt-8">
+                                <a class="text-gold-accent font-bold text-[9px] uppercase tracking-widest group-hover:text-deep-green transition-colors flex items-center gap-2"
+                                    href="#">
+                                    View Partner Profile <span
+                                        class="material-symbols-outlined text-sm">arrow_forward</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="md:col-span-6 lg:col-span-4 group h-full">
+                        <div
+                            class="glass-sponsor rounded-[2.5rem] p-10 flex flex-col h-full justify-between hover:-translate-y-2 transition-transform duration-500">
+                            <div class="space-y-6">
+                                <div class="flex justify-between items-start">
+                                    <img alt="Sponsor Logo" class="max-h-12 w-auto grayscale-hover"
+                                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuCp83JCfKCRYgHZuZA8dzBJ3Ih5yeidFw9eQGrfMH89CUBjfUnGXPlxXvfb0DmVToP0iwQwPaK0W5XabUIrIKFxbSwRZd0LqiyyCermKdbgrB2uPKlC48Z7W_on-lUkUOnlJd62ok3dkmH7JXdQxf63fiy8lTJ7mxggLO5Vjo_p7uKwbi43Dl3GWm8aiiPqcYvOfRpQgKV513yPQakVJ-1w2d86ue27OPY3p8N9H5sr5Mg5oew18KgTO2Ehhj7cSGj-2a6ht7DOZOs" />
+                                    <span
+                                        class="px-3 py-1 rounded-full bg-stone-100 text-charcoal/60 text-[8px] font-bold uppercase tracking-widest">Environmental
+                                        NGO</span>
+                                </div>
+                                <div class="space-y-3">
+                                    <h3 class="text-xl font-serif text-deep-green">The Kabul Collective</h3>
+                                    <p class="text-charcoal/60 text-sm font-light leading-relaxed">
+                                        Funding the restoration of historic cedar forests and public parks within the
+                                        city's green belt.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="mt-8">
+                                <a class="text-gold-accent font-bold text-[9px] uppercase tracking-widest group-hover:text-deep-green transition-colors flex items-center gap-2"
+                                    href="#">
+                                    View Partner Profile <span
+                                        class="material-symbols-outlined text-sm">arrow_forward</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="md:col-span-6 lg:col-span-4 group h-full">
+                        <div
+                            class="glass-sponsor rounded-[2.5rem] p-10 flex flex-col h-full justify-between hover:-translate-y-2 transition-transform duration-500">
+                            <div class="space-y-6">
+                                <div class="flex justify-between items-start">
+                                    <img alt="Sponsor Logo" class="max-h-12 w-auto grayscale-hover"
+                                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuCp83JCfKCRYgHZuZA8dzBJ3Ih5yeidFw9eQGrfMH89CUBjfUnGXPlxXvfb0DmVToP0iwQwPaK0W5XabUIrIKFxbSwRZd0LqiyyCermKdbgrB2uPKlC48Z7W_on-lUkUOnlJd62ok3dkmH7JXdQxf63fiy8lTJ7mxggLO5Vjo_p7uKwbi43Dl3GWm8aiiPqcYvOfRpQgKV513yPQakVJ-1w2d86ue27OPY3p8N9H5sr5Mg5oew18KgTO2Ehhj7cSGj-2a6ht7DOZOs" />
+                                    <span
+                                        class="px-3 py-1 rounded-full bg-stone-100 text-charcoal/60 text-[8px] font-bold uppercase tracking-widest">Philanthropic
+                                        Trust</span>
+                                </div>
+                                <div class="space-y-3">
+                                    <h3 class="text-xl font-serif text-deep-green">Legacy Heritage Trust</h3>
+                                    <p class="text-charcoal/60 text-sm font-light leading-relaxed">
+                                        Providing long-term environmental education grants for students participating in
+                                        urban forestry.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="mt-8">
+                                <a class="text-gold-accent font-bold text-[9px] uppercase tracking-widest group-hover:text-deep-green transition-colors flex items-center gap-2"
+                                    href="#">
+                                    View Partner Profile <span
+                                        class="material-symbols-outlined text-sm">arrow_forward</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="md:col-span-6 lg:col-span-4 group h-full">
+                        <div
+                            class="glass-sponsor rounded-[2.5rem] p-10 flex flex-col h-full justify-between hover:-translate-y-2 transition-transform duration-500">
+                            <div class="space-y-6">
+                                <div class="flex justify-between items-start">
+                                    <div class="bg-deep-green/5 p-2 rounded-lg">
+                                        <span class="material-symbols-outlined text-deep-green text-3xl">landscape</span>
+                                    </div>
+                                    <span
+                                        class="px-3 py-1 rounded-full bg-stone-100 text-charcoal/60 text-[8px] font-bold uppercase tracking-widest">Urban
+                                        Alliance</span>
+                                </div>
+                                <div class="space-y-3">
+                                    <h3 class="text-xl font-serif text-deep-green">Metropolitan Green</h3>
+                                    <p class="text-charcoal/60 text-sm font-light leading-relaxed">
+                                        Implementing vertical greening and micro-forests in the most densely populated
+                                        Kabul neighborhoods.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="mt-8">
+                                <a class="text-gold-accent font-bold text-[9px] uppercase tracking-widest group-hover:text-deep-green transition-colors flex items-center gap-2"
+                                    href="#">
+                                    View Partner Profile <span
+                                        class="material-symbols-outlined text-sm">arrow_forward</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="py-24 bg-white relative overflow-hidden">
+            <div class="negative-space-container">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                    <div class="relative group">
+                        <div
+                            class="absolute -inset-4 bg-gold-accent/5 rounded-[3rem] -z-10 group-hover:scale-105 transition-transform duration-700">
+                        </div>
+                        <img alt="The Rahim Family Portrait"
+                            class="w-full h-[600px] object-cover rounded-[2.5rem] shadow-2xl grayscale-[0.2] hover:grayscale-0 transition-all duration-700"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDqbsRfkaGON8ghibhqD0FPuvhemuTfvhq_g1lSPz3wYG6q0ViQhZ6BAOn1lWNpqzfmJr0XJbLIN-a7O0EjzNovxSpDbYB4X0qR1gC4IqW8TdOQV_FcmFPAICD1ok8hMNr1-NMIrWGuKXWQfMn3RILiUlG7cXr5g6Vg-21sIzI_9FnD_f9QHbe_IdU71Y4_6JOlRzpP92BALfb2tzoLmwJ9AMpwLqxBdnLJKOIDCKVdYIiqcT_IJ5iOsBHRziCrooDb-fS1XolmyJM" />
+                        <div
+                            class="absolute bottom-8 right-8 bg-white p-6 rounded-2xl shadow-xl max-w-xs border border-stone-100">
+                            <p class="text-deep-green font-serif text-xl italic leading-relaxed">"We plant these trees
+                                so that the next generation of Kabul breathes cleaner air."</p>
+                            <div class="mt-4 flex items-center gap-2">
+                                <span class="w-8 h-px bg-gold-accent"></span>
+                                <span class="text-[10px] font-bold uppercase tracking-widest text-gold-accent">Featured
+                                    Guardian</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="space-y-8">
+                        <div class="space-y-2">
+                            <h4 class="text-gold-accent font-bold tracking-[0.3em] text-[10px] uppercase">Guardian
+                                Spotlight</h4>
+                            <h2 class="text-5xl font-serif text-deep-green">The Rahim Family</h2>
+                        </div>
+                        <div class="flex gap-12 border-y border-stone-100 py-8">
+                            <div>
+                                <p class="text-[10px] font-bold text-charcoal/40 uppercase tracking-widest mb-1">Impact
+                                </p>
+                                <p class="text-3xl font-serif text-deep-green">1,250 Trees</p>
+                            </div>
+                            <div>
+                                <p class="text-[10px] font-bold text-charcoal/40 uppercase tracking-widest mb-1">Member
+                                    Since</p>
+                                <p class="text-3xl font-serif text-deep-green">2021</p>
+                            </div>
+                        </div>
+                        <p class="text-charcoal/70 leading-relaxed text-lg font-light">
+                            The Rahim family has been instrumental in the reforestation of the Paghman foothills. Their
+                            commitment extends beyond financial support, having visited the nurseries multiple times to
+                            see the growth of their almond and cedar saplings first-hand.
+                        </p>
                         <button
-                            class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 @[480px]:h-12 @[480px]:px-5 bg-primary text-white text-sm font-bold leading-normal tracking-[0.015em] @[480px]:text-base @[480px]:font-bold @[480px]:leading-normal @[480px]:tracking-[0.015em] hover:bg-primary/90 transition-colors">
-                            <span class="truncate">Become a Donor</span>
+                            class="flex items-center gap-4 text-deep-green font-bold text-xs uppercase tracking-widest group">
+                            Read Their Story
+                            <span
+                                class="material-symbols-outlined text-lg group-hover:translate-x-2 transition-transform">arrow_right_alt</span>
                         </button>
                     </div>
                 </div>
-            </section>
-            <!-- Chips (Filters) Component -->
-            <section class="flex flex-col sm:flex-row gap-3 p-3 flex-wrap items-center">
-                <span class="text-sm font-medium text-gray-700 dark:text-gray-400 pr-2">Filter by:</span>
-                <div class="flex gap-2 flex-wrap">
+            </div>
+        </section>
+        <section class="py-32 bg-white botanical-bg">
+            <div class="negative-space-container">
+                <div class="mb-16 flex flex-col md:flex-row md:items-end justify-between gap-6">
+                    <div class="space-y-4">
+                        <h3 class="text-4xl font-serif text-deep-green">Our Global Community</h3>
+                        <p class="text-charcoal/50 font-light max-w-md">Browse our verified list of supporters.
+                            Transparency is the root of our initiative.</p>
+                    </div>
+                    <div class="flex gap-4">
+                        <div class="relative">
+                            <span
+                                class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-charcoal/30">search</span>
+                            <input
+                                class="pl-12 pr-6 py-3 bg-stone-50 border-none rounded-full text-sm focus:ring-1 focus:ring-gold-accent/50 w-64"
+                                placeholder="Find a guardian..." type="text" />
+                        </div>
+                    </div>
+                </div>
+                <div class="w-full overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="border-b border-stone-100">
+                                <th class="py-6 px-4 text-[10px] font-bold text-charcoal/40 uppercase tracking-widest">
+                                    Guardian</th>
+                                <th class="py-6 px-4 text-[10px] font-bold text-charcoal/40 uppercase tracking-widest">
+                                    Impact</th>
+                                <th class="py-6 px-4 text-[10px] font-bold text-charcoal/40 uppercase tracking-widest">
+                                    Location</th>
+                                <th
+                                    class="py-6 px-4 text-[10px] font-bold text-charcoal/40 uppercase tracking-widest text-right">
+                                    Status</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-stone-50">
+                            <tr class="donor-row transition-colors cursor-pointer group">
+                                <td class="py-6 px-4">
+                                    <div class="flex items-center gap-4">
+                                        <div
+                                            class="w-12 h-12 rounded-full overflow-hidden border-2 border-stone-100 group-hover:border-gold-accent transition-colors">
+                                            <img alt="Donor Profile" class="w-full h-full object-cover"
+                                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDqbsRfkaGON8ghibhqD0FPuvhemuTfvhq_g1lSPz3wYG6q0ViQhZ6BAOn1lWNpqzfmJr0XJbLIN-a7O0EjzNovxSpDbYB4X0qR1gC4IqW8TdOQV_FcmFPAICD1ok8hMNr1-NMIrWGuKXWQfMn3RILiUlG7cXr5g6Vg-21sIzI_9FnD_f9QHbe_IdU71Y4_6JOlRzpP92BALfb2tzoLmwJ9AMpwLqxBdnLJKOIDCKVdYIiqcT_IJ5iOsBHRziCrooDb-fS1XolmyJM" />
+                                        </div>
+                                        <span
+                                            class="text-deep-green font-serif text-xl group-hover:text-gold-accent transition-colors">Dr.
+                                            Aria Mansoor</span>
+                                    </div>
+                                </td>
+                                <td class="py-6 px-4">
+                                    <div class="flex items-center gap-2">
+                                        <span class="material-symbols-outlined text-sage-green text-sm">park</span>
+                                        <span class="text-charcoal font-medium">450 Trees Planted</span>
+                                    </div>
+                                </td>
+                                <td class="py-6 px-4">
+                                    <span class="text-charcoal/60 text-sm">Kabul, Afghanistan</span>
+                                </td>
+                                <td class="py-6 px-4 text-right">
+                                    <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-deep-green/5 rounded-full">
+                                        <span class="material-symbols-outlined text-[14px] text-deep-green">verified</span>
+                                        <span
+                                            class="text-[9px] font-bold text-deep-green uppercase tracking-widest">Verified</span>
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr class="donor-row transition-colors cursor-pointer group">
+                                <td class="py-6 px-4">
+                                    <div class="flex items-center gap-4">
+                                        <div
+                                            class="w-12 h-12 rounded-full overflow-hidden border-2 border-stone-100 group-hover:border-gold-accent transition-colors">
+                                            <img alt="Donor Profile" class="w-full h-full object-cover"
+                                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCp83JCfKCRYgHZuZA8dzBJ3Ih5yeidFw9eQGrfMH89CUBjfUnGXPlxXvfb0DmVToP0iwQwPaK0W5XabUIrIKFxbSwRZd0LqiyyCermKdbgrB2uPKlC48Z7W_on-lUkUOnlJd62ok3dkmH7JXdQxf63fiy8lTJ7mxggLO5Vjo_p7uKwbi43Dl3GWm8aiiPqcYvOfRpQgKV513yPQakVJ-1w2d86ue27OPY3p8N9H5sr5Mg5oew18KgTO2Ehhj7cSGj-2a6ht7DOZOs" />
+                                        </div>
+                                        <span
+                                            class="text-deep-green font-serif text-xl group-hover:text-gold-accent transition-colors">Global
+                                            Ethos Fund</span>
+                                    </div>
+                                </td>
+                                <td class="py-6 px-4">
+                                    <div class="flex items-center gap-2">
+                                        <span class="material-symbols-outlined text-sage-green text-sm">park</span>
+                                        <span class="text-charcoal font-medium">2,100 Trees Planted</span>
+                                    </div>
+                                </td>
+                                <td class="py-6 px-4">
+                                    <span class="text-charcoal/60 text-sm">London, UK</span>
+                                </td>
+                                <td class="py-6 px-4 text-right">
+                                    <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-deep-green/5 rounded-full">
+                                        <span class="material-symbols-outlined text-[14px] text-deep-green">verified</span>
+                                        <span
+                                            class="text-[9px] font-bold text-deep-green uppercase tracking-widest">Verified</span>
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr class="donor-row transition-colors cursor-pointer group">
+                                <td class="py-6 px-4">
+                                    <div class="flex items-center gap-4">
+                                        <div
+                                            class="w-12 h-12 rounded-full overflow-hidden border-2 border-stone-100 group-hover:border-gold-accent transition-colors">
+                                            <img alt="Donor Profile" class="w-full h-full object-cover"
+                                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDqbsRfkaGON8ghibhqD0FPuvhemuTfvhq_g1lSPz3wYG6q0ViQhZ6BAOn1lWNpqzfmJr0XJbLIN-a7O0EjzNovxSpDbYB4X0qR1gC4IqW8TdOQV_FcmFPAICD1ok8hMNr1-NMIrWGuKXWQfMn3RILiUlG7cXr5g6Vg-21sIzI_9FnD_f9QHbe_IdU71Y4_6JOlRzpP92BALfb2tzoLmwJ9AMpwLqxBdnLJKOIDCKVdYIiqcT_IJ5iOsBHRziCrooDb-fS1XolmyJM" />
+                                        </div>
+                                        <span
+                                            class="text-deep-green font-serif text-xl group-hover:text-gold-accent transition-colors">Sara
+                                            &amp; Omar Z.</span>
+                                    </div>
+                                </td>
+                                <td class="py-6 px-4">
+                                    <div class="flex items-center gap-2">
+                                        <span class="material-symbols-outlined text-sage-green text-sm">park</span>
+                                        <span class="text-charcoal font-medium">120 Trees Planted</span>
+                                    </div>
+                                </td>
+                                <td class="py-6 px-4">
+                                    <span class="text-charcoal/60 text-sm">Dubai, UAE</span>
+                                </td>
+                                <td class="py-6 px-4 text-right">
+                                    <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-deep-green/5 rounded-full">
+                                        <span class="material-symbols-outlined text-[14px] text-deep-green">verified</span>
+                                        <span
+                                            class="text-[9px] font-bold text-deep-green uppercase tracking-widest">Verified</span>
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr class="donor-row transition-colors cursor-pointer group">
+                                <td class="py-6 px-4">
+                                    <div class="flex items-center gap-4">
+                                        <div
+                                            class="w-12 h-12 rounded-full overflow-hidden border-2 border-stone-100 group-hover:border-gold-accent transition-colors">
+                                            <img alt="Donor Profile" class="w-full h-full object-cover"
+                                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCp83JCfKCRYgHZuZA8dzBJ3Ih5yeidFw9eQGrfMH89CUBjfUnGXPlxXvfb0DmVToP0iwQwPaK0W5XabUIrIKFxbSwRZd0LqiyyCermKdbgrB2uPKlC48Z7W_on-lUkUOnlJd62ok3dkmH7JXdQxf63fiy8lTJ7mxggLO5Vjo_p7uKwbi43Dl3GWm8aiiPqcYvOfRpQgKV513yPQakVJ-1w2d86ue27OPY3p8N9H5sr5Mg5oew18KgTO2Ehhj7cSGj-2a6ht7DOZOs" />
+                                        </div>
+                                        <span
+                                            class="text-deep-green font-serif text-xl group-hover:text-gold-accent transition-colors">Summit
+                                            Collective</span>
+                                    </div>
+                                </td>
+                                <td class="py-6 px-4">
+                                    <div class="flex items-center gap-2">
+                                        <span class="material-symbols-outlined text-sage-green text-sm">park</span>
+                                        <span class="text-charcoal font-medium">850 Trees Planted</span>
+                                    </div>
+                                </td>
+                                <td class="py-6 px-4">
+                                    <span class="text-charcoal/60 text-sm">International</span>
+                                </td>
+                                <td class="py-6 px-4 text-right">
+                                    <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-deep-green/5 rounded-full">
+                                        <span class="material-symbols-outlined text-[14px] text-deep-green">verified</span>
+                                        <span
+                                            class="text-[9px] font-bold text-deep-green uppercase tracking-widest">Verified</span>
+                                    </span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="mt-16 text-center">
                     <button
-                        class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-primary/20 dark:bg-primary/30 pl-4 pr-2 text-primary dark:text-white">
-                        <p class="text-sm font-medium leading-normal">All Tiers</p>
-                        <span class="material-symbols-outlined text-xl">expand_more</span>
+                        class="px-8 py-4 border border-stone-200 text-charcoal/50 rounded-full text-[10px] font-bold uppercase tracking-widest hover:border-gold-accent hover:text-gold-accent transition-all">
+                        Load More Guardians
+                    </button>
+                </div>
+            </div>
+        </section>
+        <section class="py-24 bg-stone-50">
+            <div class="negative-space-container">
+                <div class="mb-12 text-center space-y-4">
+                    <h2 class="text-3xl font-serif text-deep-green">Transparency in Focus</h2>
+                    <p class="text-charcoal/50 text-sm max-w-xl mx-auto">Every donation is a living legacy. Click on
+                        any guardian above to see their personalized impact profile.</p>
+                </div>
+                <div class="glass-modal max-w-4xl mx-auto rounded-[3rem] p-8 md:p-16 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 p-8">
+                        <span
+                            class="material-symbols-outlined text-charcoal/20 cursor-pointer hover:text-charcoal/50">close</span>
+                    </div>
+                    <div class="flex flex-col md:flex-row gap-12">
+                        <div class="w-full md:w-1/3 space-y-6">
+                            <div class="w-full aspect-square rounded-2xl overflow-hidden shadow-lg border border-white/40">
+                                <img alt="Donor's Specific Trees" class="w-full h-full object-cover"
+                                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuCp83JCfKCRYgHZuZA8dzBJ3Ih5yeidFw9eQGrfMH89CUBjfUnGXPlxXvfb0DmVToP0iwQwPaK0W5XabUIrIKFxbSwRZd0LqiyyCermKdbgrB2uPKlC48Z7W_on-lUkUOnlJd62ok3dkmH7JXdQxf63fiy8lTJ7mxggLO5Vjo_p7uKwbi43Dl3GWm8aiiPqcYvOfRpQgKV513yPQakVJ-1w2d86ue27OPY3p8N9H5sr5Mg5oew18KgTO2Ehhj7cSGj-2a6ht7DOZOs" />
+                            </div>
+                            <div class="space-y-2">
+                                <p class="text-[9px] font-bold text-gold-accent uppercase tracking-widest">Location Tag
+                                </p>
+                                <p class="text-xs text-charcoal/60">Lot 402 - Kabul West Hills. Native Almond Orchard.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="w-full md:w-2/3 space-y-8">
+                            <div>
+                                <h3 class="text-3xl font-serif text-deep-green mb-2">Thank You, Aria.</h3>
+                                <p class="text-charcoal/70 italic text-sm leading-relaxed">"The trees you've planted
+                                    are already showing blossoms. Your contribution of 450 saplings has provided work
+                                    for three local families this season."</p>
+                            </div>
+                            <div class="grid grid-cols-2 gap-8">
+                                <div class="p-4 bg-white/40 rounded-xl border border-white/60">
+                                    <p class="text-[9px] font-bold text-charcoal/40 uppercase tracking-widest mb-1">CO2
+                                        Offset</p>
+                                    <p class="text-xl font-serif text-deep-green">12.5 Tons/yr</p>
+                                </div>
+                                <div class="p-4 bg-white/40 rounded-xl border border-white/60">
+                                    <p class="text-[9px] font-bold text-charcoal/40 uppercase tracking-widest mb-1">
+                                        Sapling Type</p>
+                                    <p class="text-xl font-serif text-deep-green">Native Pine</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-4 pt-4">
+                                <button
+                                    class="px-6 py-3 bg-deep-green text-white rounded-full text-[9px] font-bold uppercase tracking-widest hover:opacity-90 transition-opacity">Download
+                                    Impact Receipt</button>
+                                <button
+                                    class="px-6 py-3 border border-deep-green/20 text-deep-green rounded-full text-[9px] font-bold uppercase tracking-widest hover:bg-deep-green/5 transition-colors">Share
+                                    Impact</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="py-32 px-6">
+            <div
+                class="max-w-5xl mx-auto glass-panel rounded-[3rem] p-12 md:p-24 text-center space-y-10 relative overflow-hidden">
+                <div class="absolute inset-0 bg-gradient-to-tr from-gold-accent/10 to-transparent -z-10"></div>
+                <div class="space-y-6">
+                    <h2 class="text-5xl md:text-6xl font-serif text-deep-green leading-tight">Write Your Name
+                        <br /><span class="italic font-light text-gold-accent">in Kabul's Earth.</span>
+                    </h2>
+                    <p class="text-charcoal/60 text-lg md:text-xl font-light max-w-2xl mx-auto leading-relaxed">
+                        Your contribution directly funds seedlings, irrigation, and local wages in Kabul's urban and
+                        rural fringes. Join our community of forest guardians today.
+                    </p>
+                </div>
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-6">
+                    <button
+                        class="w-full sm:w-auto px-12 py-5 bg-deep-green text-white rounded-full font-bold text-[10px] uppercase tracking-[0.2em] shadow-xl shadow-deep-green/20 hover:scale-105 transition-transform">
+                        Donate &amp; Join the Wall
                     </button>
                     <button
-                        class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-gray-200 dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-gray-700 pl-4 pr-2 transition-colors">
-                        <p class="text-gray-800 dark:text-gray-300 text-sm font-medium leading-normal">Seedling
-                        </p>
-                    </button>
-                    <button
-                        class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-gray-200 dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-gray-700 pl-4 pr-2 transition-colors">
-                        <p class="text-gray-800 dark:text-gray-300 text-sm font-medium leading-normal">Sapling
-                        </p>
-                    </button>
-                    <button
-                        class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-gray-200 dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-gray-700 pl-4 pr-2 transition-colors">
-                        <p class="text-gray-800 dark:text-gray-300 text-sm font-medium leading-normal">Oak</p>
+                        class="w-full sm:w-auto px-12 py-5 border border-gold-accent text-deep-green rounded-full font-bold text-[10px] uppercase tracking-[0.2em] hover:bg-gold-accent/5 transition-colors">
+                        Gift a Tree
                     </button>
                 </div>
-                <div class="flex-grow"></div>
-                <button
-                    class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-gray-200 dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-gray-700 pl-4 pr-2 transition-colors">
-                    <p class="text-gray-800 dark:text-gray-300 text-sm font-medium leading-normal">Sort by: Most
-                        Recent</p>
-                    <span class="material-symbols-outlined text-xl text-gray-600 dark:text-gray-400">expand_more</span>
-                </button>
-            </section>
-            <!-- ImageGrid (Donor Grid) Component -->
-            <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
-                <div
-                    class="flex flex-col gap-3 text-center p-4 border rounded-xl border-gray-200/80 dark:border-gray-700/80 bg-white dark:bg-background-dark">
-                    <div class="px-4">
-                        <div class="w-full bg-center bg-no-repeat aspect-square bg-cover rounded-full"
-                            data-alt="Abstract portrait of Jane Doe"
-                            style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBGH2sC1WZPNU5oX_ffHtA_BOuZYn0S2BgHUjn2nuEbPAbtb5weqHu9mbr5iSOQdXkJ_toAJN1MmtgjiuZEMzLIWBgpAStECjjXdUlICGhkjWG-UdPHfNKFdQW5t_OE4UTwSjXRj_NsnXZ8HGjNImyaAk9wQ54GpOOu79rmy-MQ9u-mlNZs8lxXIXtynVz176BPK53YK_vomhfYDpVzNGaQviO3SeKZi9gRs6pL6DjOLfNpPqNWSwuU5s9oyBFuFGBAugiUH6t93No");'>
-                        </div>
+                <div class="flex items-center justify-center gap-8 pt-8">
+                    <div class="flex items-center gap-2">
+                        <span class="material-symbols-outlined text-gold-accent text-xl">shield_with_heart</span>
+                        <span class="text-[9px] font-bold text-charcoal/40 uppercase tracking-[0.15em]">Secure &amp;
+                            Verified</span>
                     </div>
-                    <div>
-                        <p class="text-gray-900 dark:text-white text-base font-medium leading-normal">Jane Doe
-                        </p>
-                        <p class="text-gray-500 dark:text-gray-400 text-sm font-normal leading-normal italic">
-                            "For a brighter future."</p>
-                        <p class="text-primary text-sm font-semibold leading-normal mt-1">Oak Supporter</p>
+                    <div class="flex items-center gap-2">
+                        <span class="material-symbols-outlined text-gold-accent text-xl">receipt_long</span>
+                        <span class="text-[9px] font-bold text-charcoal/40 uppercase tracking-[0.15em]">Tax
+                            Deductible</span>
                     </div>
                 </div>
-                <div
-                    class="flex flex-col gap-3 text-center p-4 border rounded-xl border-gray-200/80 dark:border-gray-700/80 bg-white dark:bg-background-dark">
-                    <div class="px-4">
-                        <div class="w-full bg-center bg-no-repeat aspect-square bg-cover rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center"
-                            data-alt="Anonymous supporter icon">
-                            <span class="material-symbols-outlined text-5xl text-gray-400 dark:text-gray-500">park</span>
-                        </div>
-                    </div>
-                    <div>
-                        <p class="text-gray-900 dark:text-white text-base font-medium leading-normal">Anonymous
-                            Supporter</p>
-                        <p class="text-gray-500 dark:text-gray-400 text-sm font-normal leading-normal">Joined
-                            October 2023</p>
-                        <p class="text-primary/80 text-sm font-semibold leading-normal mt-1">Sapling Friend</p>
-                    </div>
-                </div>
-                <div
-                    class="flex flex-col gap-3 text-center p-4 border rounded-xl border-gray-200/80 dark:border-gray-700/80 bg-white dark:bg-background-dark">
-                    <div class="px-4">
-                        <div class="w-full bg-center bg-no-repeat aspect-square bg-cover rounded-full"
-                            data-alt="Abstract portrait of Michael Smith"
-                            style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBbVqjYLqX1wnBsJjugamLC5ho4qyXk5v_gsTCcrXxD2cK0br61ngaTGbD_-6zy8W-qU10pL-9j14WmE5SxA8vgMHd8kP0Ph73IjN_kM1soFiVPgwcvO8ltVwWpq6-yAW-_q61DHXTtR6j1jBJM-keUFFHSyELh6CLS4AqT8T8whjNHh4dtbRwPzxfCegDlWsmn9m0RSPix9eqTLq_oK1K9lkeoSdVLVYBScSxPkeiyLSBdLlww02FqsdyhAK6Jq1yZCYxsb1cgWSc");'>
-                        </div>
-                    </div>
-                    <div>
-                        <p class="text-gray-900 dark:text-white text-base font-medium leading-normal">Michael
-                            Smith</p>
-                        <p class="text-gray-500 dark:text-gray-400 text-sm font-normal leading-normal italic">
-                            "In memory of my grandfather."</p>
-                        <p class="text-primary text-sm font-semibold leading-normal mt-1">Oak Supporter</p>
-                    </div>
-                </div>
-                <div
-                    class="flex flex-col gap-3 text-center p-4 border rounded-xl border-gray-200/80 dark:border-gray-700/80 bg-white dark:bg-background-dark">
-                    <div class="px-4">
-                        <div class="w-full bg-center bg-no-repeat aspect-square bg-cover rounded-full"
-                            data-alt="Abstract portrait of Emily Johnson"
-                            style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBMJ3AjLjKjpHba8HmfxeHXR1OxDpBS174jjsOLeAP1Hujfxyk4X3yBwZjUBfJ6e2P0ULK5HIXEsUYu9YGaaqT3hsAFvOV9BH9WOKqvrL1N3iOHwF1okBzoTgcE4mBjGBWJkBEnFtF0HDGQUF9iVphNndXFWJOHA-zZCmoGoew2xMIFsBmAxe8XP285dcJGRS-XCtA14nKEteqpb5q-oSJV1Us5XNa79yH805SE66BlURZ0aMZwUELiD0c_rA1OdO58u62Yb0wGh_8");'>
-                        </div>
-                    </div>
-                    <div>
-                        <p class="text-gray-900 dark:text-white text-base font-medium leading-normal">Emily
-                            Johnson</p>
-                        <p class="text-gray-500 dark:text-gray-400 text-sm font-normal leading-normal">Joined
-                            October 2023</p>
-                        <p class="text-primary/70 text-sm font-semibold leading-normal mt-1">Seedling
-                            Contributor</p>
-                    </div>
-                </div>
-                <div
-                    class="flex flex-col gap-3 text-center p-4 border rounded-xl border-gray-200/80 dark:border-gray-700/80 bg-white dark:bg-background-dark">
-                    <div class="px-4">
-                        <div class="w-full bg-center bg-no-repeat aspect-square bg-cover rounded-full"
-                            data-alt="Abstract portrait of David Chen"
-                            style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuB98pW0dg5vJHXsyZRk-11lQDnP7gAa0AVjsf1fsSwNmiK5ic2QE1bAs_6td5urq8UVDV8U4gIwjG4lxgC9o3uG-6qPsjHAqEpA9Dd9f3JWZuxI69J0Tj-IBlVO220OEBPGHaPqFzNvLdEMvvf1cQuYnXwHviGbBR37U7yDUZn4UibIikodgEjyYGqSgD4mZUOKXO46qM3wqDMPc7ZsBY-BFeKby0tJt73g9FRyCSNZsoDgX4Xrly6Wlnz9Ej6Hn8g4X8IbcPT0SAs");'>
-                        </div>
-                    </div>
-                    <div>
-                        <p class="text-gray-900 dark:text-white text-base font-medium leading-normal">David
-                            Chen</p>
-                        <p class="text-gray-500 dark:text-gray-400 text-sm font-normal leading-normal italic">
-                            "Let's grow together!"</p>
-                        <p class="text-primary/80 text-sm font-semibold leading-normal mt-1">Sapling Friend</p>
-                    </div>
-                </div>
-                <div
-                    class="flex flex-col gap-3 text-center p-4 border rounded-xl border-gray-200/80 dark:border-gray-700/80 bg-white dark:bg-background-dark">
-                    <div class="px-4">
-                        <div class="w-full bg-center bg-no-repeat aspect-square bg-cover rounded-full"
-                            data-alt="Abstract portrait of Maria Garcia"
-                            style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCLHte8FiMz1XzGqSTKciDhfYRnEdZqeNqI3pkAo6G7Rl0xzeoAllb9w-pQl1UiVeKrSZ7JwClKxpENKRJDRayvx2zJMkFVsr3_dfjdUXADfmFVeWWMrJNasyQNpZhU-3x87uKHTNUfc-o9z85qrasOW0d-KDCqdKNjaJiz64e0aQrnbVbe4l354UCnlI_XIYWrhAEZk6d-u1Q8lLofeS1BTa5oBJQhr77YeWODo_T-0X5JUwRYQrIXWWrkC57Lk8BQdUP3FVlyUb8");'>
-                        </div>
-                    </div>
-                    <div>
-                        <p class="text-gray-900 dark:text-white text-base font-medium leading-normal">Maria
-                            Garcia</p>
-                        <p class="text-gray-500 dark:text-gray-400 text-sm font-normal leading-normal">Joined
-                            September 2023</p>
-                        <p class="text-primary/70 text-sm font-semibold leading-normal mt-1">Seedling
-                            Contributor</p>
-                    </div>
-                </div>
-                <div
-                    class="flex flex-col gap-3 text-center p-4 border rounded-xl border-gray-200/80 dark:border-gray-700/80 bg-white dark:bg-background-dark">
-                    <div class="px-4">
-                        <div class="w-full bg-center bg-no-repeat aspect-square bg-cover rounded-full"
-                            data-alt="Abstract portrait of Chris Lee"
-                            style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBzU-GEI-Y5_UOp80bFmc3BSEcyQOY4J_S3qLO2JN64LHbAOjTmLS9GR9iIZBLT_Hi4ajlLUMYMwCZb_NcoacxI8aLrTmqch-MIIEVsJ6HqWmxcRehH4W_WVpSIIurwDFKpoHZQyLLXF-xa3s0vvraPm8uVyQcUJIMUw8uaEz0EoJPO1Fdl7P_Hmwz5AkmP7wYpbqFUjOEb6-k1VLMOV3zWhlHQPgcewbKDxSoKPAYRTQAMt8TCh4d9Pdjt73-lRc39rMsrO0mzIcE");'>
-                        </div>
-                    </div>
-                    <div>
-                        <p class="text-gray-900 dark:text-white text-base font-medium leading-normal">Chris Lee
-                        </p>
-                        <p class="text-gray-500 dark:text-gray-400 text-sm font-normal leading-normal">Joined
-                            September 2023</p>
-                        <p class="text-primary/70 text-sm font-semibold leading-normal mt-1">Seedling
-                            Contributor</p>
-                    </div>
-                </div>
-                <div
-                    class="flex flex-col gap-3 text-center p-4 border rounded-xl border-gray-200/80 dark:border-gray-700/80 bg-white dark:bg-background-dark">
-                    <div class="px-4">
-                        <div class="w-full bg-center bg-no-repeat aspect-square bg-cover rounded-full"
-                            data-alt="Abstract portrait of Olivia Taylor"
-                            style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCvXRNLZ2zLEyHcMCV7LFtbwrxGB-NpRYq1iBxa7DFbxmwtevUmGdtpgGELDpau_-nj4ah0bf9LR1yZLdbg4U9_71xLm7G6KOGVpfEsHERCcf49NYV8MbHms_th3yoj1r0-pkm8Hq2jHvV14rE-rBd1tx5nwBULjl6LyVygeNrCd1Bwve5V8AYv5Yxs-uaw4ecYRFStWv_2_KpJCyz6bS7zh5AhE3OA0TgtllU1rExqltcDWdOwevBdlp-_UDQvICjljEQjj8fYRgM");'>
-                        </div>
-                    </div>
-                    <div>
-                        <p class="text-gray-900 dark:text-white text-base font-medium leading-normal">Olivia
-                            Taylor</p>
-                        <p class="text-gray-500 dark:text-gray-400 text-sm font-normal leading-normal italic">
-                            "For the next generation."</p>
-                        <p class="text-primary/80 text-sm font-semibold leading-normal mt-1">Sapling Friend</p>
-                    </div>
-                </div>
-            </section>
-            <!-- Pagination Component -->
-            <nav aria-label="Pagination" class="flex items-center justify-center p-4">
-                <a class="flex size-10 items-center justify-center rounded-lg hover:bg-gray-200 dark:hover:bg-gray-800 transition-colors"
-                    href="#">
-                    <span class="material-symbols-outlined text-gray-700 dark:text-gray-400">chevron_left</span>
-                    <span class="sr-only">Previous</span>
-                </a>
-                <a aria-current="page"
-                    class="text-sm font-bold leading-normal tracking-[0.015em] flex size-10 items-center justify-center text-white bg-primary rounded-lg mx-1"
-                    href="#">1</a>
-                <a class="text-sm font-normal leading-normal flex size-10 items-center justify-center text-gray-800 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-800 rounded-lg mx-1 transition-colors"
-                    href="#">2</a>
-                <a class="text-sm font-normal leading-normal flex size-10 items-center justify-center text-gray-800 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-800 rounded-lg mx-1 transition-colors"
-                    href="#">3</a>
-                <span
-                    class="text-sm font-normal leading-normal flex size-10 items-center justify-center text-gray-500 dark:text-gray-400 rounded-lg mx-1">...</span>
-                <a class="text-sm font-normal leading-normal flex size-10 items-center justify-center text-gray-800 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-800 rounded-lg mx-1 transition-colors"
-                    href="#">10</a>
-                <a class="flex size-10 items-center justify-center rounded-lg hover:bg-gray-200 dark:hover:bg-gray-800 transition-colors"
-                    href="#">
-                    <span class="material-symbols-outlined text-gray-700 dark:text-gray-400">chevron_right</span>
-                    <span class="sr-only">Next</span>
-                </a>
-            </nav>
-            <!-- Summary & CTA Section -->
-            <section
-                class="text-center bg-white dark:bg-background-dark border border-gray-200/80 dark:border-gray-700/80 rounded-xl p-8 sm:p-12 my-10">
-                <h3 class="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white">Ready to Make a
-                    Difference?</h3>
-                <p class="mt-2 text-base text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">Together, our
-                    donors have already planted over <span class="font-bold text-primary">12,500</span> trees!
-                    Join our growing community and help us create a greener, healthier planet for all.</p>
-                <button
-                    class="mt-6 flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-6 bg-primary text-white text-base font-bold leading-normal tracking-[0.015em] mx-auto hover:bg-primary/90 transition-colors">
-                    <span class="truncate">Join Our Cause</span>
-                </button>
-            </section>
-        </div>
+            </div>
+        </section>
     </main>
 @endsection
