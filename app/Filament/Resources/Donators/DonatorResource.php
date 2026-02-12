@@ -68,4 +68,9 @@ class DonatorResource extends Resource
     {
         return ['full_name', 'email', 'location'];
     }
+
+    public static function getRedirectUrl(): string
+    {
+        return static::getUrl('index');
+    }
 }
