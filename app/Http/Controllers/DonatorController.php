@@ -26,6 +26,11 @@ class DonatorController extends Controller
         $totalTrees = Donator::verified()->sum('trees_sponsored');
         $totalFinancial = Donator::verified()->sum('financial_support');
         
+        // Handle AJAX request - return only table content
+        if (request()->ajax() || request()->get('ajax')) {
+            return view('partials.donators-table', compact('verifiedDonators'));
+        }
+        
         return view('pages.donators', compact(
             'featuredDonators',
             'topSupporter',
