@@ -18,9 +18,7 @@ Route::get('/gallery', function () {
     return view('pages.gallery');
 })->name('gallery');
 
-Route::get('/donators', function () {
-    return view('pages.donators');
-})->name('donators');
+Route::get('/donators', [App\Http\Controllers\DonatorController::class, 'index'])->name('donators');
 
 Route::get('/report', function () {
     return view('pages.report');
