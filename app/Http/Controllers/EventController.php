@@ -12,8 +12,13 @@ class EventController extends Controller
      */
     public function index()
     {
-        // Get active events with pagination (10 per page)
-        $events = Event::active()->ordered()->paginate(10);
+        // Get active events with pagination (9 per page)
+        $events = Event::active()->ordered()->paginate(9);
+        
+        // Handle AJAX request - return only events grid content
+        if (request()->ajax() || request()->get('ajax')) {
+            return view('partials.events-grid', compact('events'));
+        }
         
         return view('pages.gallery', compact('events'));
     }

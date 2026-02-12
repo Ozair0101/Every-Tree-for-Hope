@@ -58,114 +58,97 @@
                 </p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                @forelse($events as $event)
-                    <div
-                        class="event-card group bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300">
-                        <!-- Event Image -->
-                        <div class="relative aspect-video bg-stone-100 overflow-hidden">
-                            @forelse($event->images->take(1) as $image)
-                                <img alt="{{ $event->title }}"
-                                    class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                                    src="{{ $image->full_image_url }}" />
-                            @empty
-                                <img alt="{{ $event->title }}"
-                                    class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                                    src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" />
-                            @endforelse
-
-                            <!-- Date Badge -->
-                            <div
-                                class="absolute top-4 left-4 bg-white/90 backdrop-blur rounded-full px-3 py-1 border border-gold-accent/20">
-                                <span class="text-xs font-bold text-deep-green">
-                                    {{ $event->date->format('M d, Y') }}
-                                </span>
-                            </div>
-                        </div>
-
-                        <!-- Event Content -->
-                        <div class="p-6">
-                            <h3
-                                class="text-xl font-serif text-deep-green mb-2 group-hover:text-gold-accent transition-colors">
-                                {{ $event->title }}
-                            </h3>
-
-                            <p class="text-charcoal/60 text-sm mb-4 line-clamp-3">
-                                {{ Str::limit($event->description, 120) }}
-                            </p>
-
-                            <!-- Event Details -->
-                            <div class="grid grid-cols-2 gap-4 mb-4">
-                                <div class="text-center p-3 bg-stone-50 rounded-lg">
-                                    <div class="flex items-center justify-center gap-1 text-gold-accent mb-1">
-                                        <span class="material-symbols-outlined text-sm">park</span>
-                                        <span class="text-xs font-bold uppercase">Trees</span>
-                                    </div>
-                                    <p class="text-lg font-bold text-deep-green">{{ $event->trees_planted ?? 0 }}</p>
-                                </div>
-                                <div class="text-center p-3 bg-stone-50 rounded-lg">
-                                    <div class="flex items-center justify-center gap-1 text-gold-accent mb-1">
-                                        <span class="material-symbols-outlined text-sm">groups</span>
-                                        <span class="text-xs font-bold uppercase">Volunteers</span>
-                                    </div>
-                                    <p class="text-lg font-bold text-deep-green">{{ $event->volunteers ?? 0 }}</p>
-                                </div>
-                            </div>
-
-                            <!-- Location -->
-                            @if ($event->location)
-                                <div class="flex items-center gap-2 text-charcoal/60 text-sm mb-4">
-                                    <span class="material-symbols-outlined text-base">location_on</span>
-                                    <span>{{ $event->location }}</span>
-                                </div>
-                            @endif
-
-                            <!-- View Details Button -->
-                            <button
-                                class="w-full bg-deep-green hover:bg-gold-accent text-white py-3 rounded-lg font-bold text-sm transition-all">
-                                View Event Details
-                            </button>
-                        </div>
-                    </div>
-                @empty
-                    <div class="col-span-full text-center py-12">
-                        <div class="bg-stone-50 rounded-xl p-8 max-w-md mx-auto">
-                            <span class="material-symbols-outlined text-4xl text-charcoal/40 mb-4">event_available</span>
-                            <h3 class="text-xl font-serif text-deep-green mb-2">No Events Yet</h3>
-                            <p class="text-charcoal/60 mb-4">
-                                We're busy planning our next tree planting events. Check back soon!
-                            </p>
-                            <a href="{{ route('contact') }}"
-                                class="inline-flex items-center gap-2 bg-gold-accent text-deep-green px-6 py-3 rounded-lg font-bold text-sm transition-all hover:bg-gold-accent/90">
-                                <span class="material-symbols-outlined">notifications</span>
-                                Get Notified
-                            </a>
-                        </div>
-                    </div>
-                @endforelse
-            </div>
-
-            <!-- Pagination -->
-            @if ($events->hasPages())
-                <div class="mt-12 flex justify-center">
-                    {{ $events->links() }}
-                </div>
-            @endif
+            @include('partials.events-grid', ['events' => $events])
         </section>
     </main>
 
-    @push('styles')
-        <style>
-            .event-card:hover img {
-                transform: scale(1.05);
-            }
+    @push('scripts')
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const paginationContainer = document.getElementById('pagination-container');
+                const eventsGrid = document.querySelector('.grid');
 
-            .line-clamp-3 {
-                display: -webkit-box;
-                -webkit-line-clamp: 3;
-                -webkit-box-orient: vertical;
-                overflow: hidden;
-            }
-        </style>
+                console.log('Pagination container:', paginationContainer);
+                console.log('Events grid:', eventsGrid);
+
+                if (paginationContainer) {
+                    paginationContainer.addEventListener('click', function(e) {
+                        const link = e.target.closest('a');
+                        if (link && link.href) {
+                            e.preventDefault();
+                            console.log('Loading page:', link.href);
+                            loadPage(link.href);
+                        }
+                    });
+                }
+
+                function loadPage(url) {
+                    if (!eventsGrid) {
+                        console.error('Events grid not found');
+                        return;
+                    }
+
+                    // Show loading state
+                    eventsGrid.style.opacity = '0.5';
+
+                    fetch(url + '?ajax=1', {
+                            headers: {
+                                'X-Requested-With': 'XMLHttpRequest',
+                                'Accept': 'text/html'
+                            }
+                        })
+                        .then(response => {
+                            console.log('Response status:', response.status);
+                            return response.text();
+                        })
+                        .then(html => {
+                            console.log('Received HTML:', html.substring(0, 200));
+                            const parser = new DOMParser();
+                            const doc = parser.parseFromString(html, 'text/html');
+
+                            // Update events grid
+                            const newEventsGrid = doc.querySelector('.grid');
+                            if (newEventsGrid && eventsGrid) {
+                                eventsGrid.innerHTML = newEventsGrid.innerHTML;
+                                console.log('Events grid updated');
+                            } else {
+                                console.error('Could not find new events grid');
+                            }
+
+                            // Update pagination
+                            const newPagination = doc.querySelector('#pagination-container');
+                            if (newPagination && paginationContainer) {
+                                paginationContainer.innerHTML = newPagination.innerHTML;
+                                console.log('Pagination updated');
+                            } else {
+                                console.error('Could not find new pagination');
+                            }
+
+                            // Update URL without reload
+                            history.pushState({}, '', url);
+
+                            // Remove loading state
+                            eventsGrid.style.opacity = '1';
+
+                            // Scroll to top of events section
+                            eventsGrid.scrollIntoView({
+                                behavior: 'smooth',
+                                block: 'start'
+                            });
+                        })
+                        .catch(error => {
+                            console.error('Error loading page:', error);
+                            eventsGrid.style.opacity = '1';
+                            // Fallback: reload the page
+                            window.location.href = url;
+                        });
+                }
+
+                // Handle browser back/forward buttons
+                window.addEventListener('popstate', function(e) {
+                    loadPage(window.location.href);
+                });
+            });
+        </script>
     @endpush
 @endsection
