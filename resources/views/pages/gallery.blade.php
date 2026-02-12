@@ -1,5 +1,5 @@
 @extends('layouts.layout')
-@section('title', 'Gallery Page')
+@section('title', 'Our Work Page')
 @section('content')
 
     <main class="flex-grow">
@@ -18,7 +18,7 @@
                     </div>
                     <h1 class="text-6xl md:text-7xl font-serif text-white mb-6 leading-[1.1] drop-shadow-2xl">
                         Species <br />
-                        <span class="italic text-primary-light">Gallery</span>
+                        <span class="italic text-primary-light">Our Works</span>
                     </h1>
                     <p class="text-lg md:text-xl text-gray-200 font-medium leading-relaxed max-w-lg mb-8 drop-shadow-lg">
                         Explore our curated collection of botanical specimens. Each species is selected for its high

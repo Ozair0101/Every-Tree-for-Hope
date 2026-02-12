@@ -158,10 +158,8 @@
                 <div class="hidden md:flex items-center gap-8">
                     <a class="text-sm font-medium hover:text-primary transition-colors"
                         href="{{ route('about') }}">About</a>
-                    <a class="text-sm font-medium hover:text-primary transition-colors" href="{{ route('works') }}">Our
-                        Works</a>
                     <a class="text-sm font-medium hover:text-primary transition-colors"
-                        href="{{ route('gallery') }}">Gallery</a>
+                        href="{{ route('gallery') }}">Our Works</a>
                     <a class="text-sm font-medium hover:text-primary transition-colors"
                         href="{{ route('donators') }}">Donators</a>
                     <a class="text-sm font-medium hover:text-primary transition-colors"
@@ -197,10 +195,8 @@
                     <a class="block text-sm font-medium hover:text-primary transition-colors py-2"
                         href="{{ route('about') }}">About</a>
                     <a class="block text-sm font-medium hover:text-primary transition-colors py-2"
-                        href="{{ route('works') }}">Our
+                        href="{{ route('gallery') }}">Our
                         Works</a>
-                    <a class="block text-sm font-medium hover:text-primary transition-colors py-2"
-                        href="{{ route('gallery') }}">Gallery</a>
                     <a class="block text-sm font-medium hover:text-primary transition-colors py-2"
                         href="{{ route('donators') }}">Donators</a>
                     <a class="block text-sm font-medium hover:text-primary transition-colors py-2"
