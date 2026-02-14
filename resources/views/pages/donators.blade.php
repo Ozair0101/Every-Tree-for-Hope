@@ -196,9 +196,9 @@
                     </div>
                 </div>
 
-                <div class="bg-white rounded-[2rem] shadow-xl overflow-hidden">
-                    @include('partials.donators-table', ['verifiedDonators' => $verifiedDonators])
-                </div>
+
+                @include('partials.donators-table', ['verifiedDonators' => $verifiedDonators])
+
             </div>
         </section>
     </main>
