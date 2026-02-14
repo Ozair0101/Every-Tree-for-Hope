@@ -143,7 +143,7 @@
         <section class="relative bg-green-50 flex h-auto min-h-screen w-full flex-col group/design-root overflow-x-visible">
             <div class="layout-container flex h-full grow flex-col">
                 <div class="flex flex-1 justify-center py-5 sm:px-10 lg:px-20 xl:px-40">
-                    <div class="layout-content-container flex flex-col w-full max-w-5xl flex-1">
+                    <div class="layout-content-container flex flex-col w-full flex-1">
                         <!-- TopNavBar -->
                         <main class="flex-grow px-4 py-8 sm:py-12">
                             <!-- PageHeading -->
@@ -286,7 +286,7 @@
                                 </button>
                             </div>
                             <!-- Table -->
-                            <div id="events-table-container" class="px-4 py-6 @container">
+                            <div id="events-table-container" class="px-4 py-6">
                                 <div
                                     class="overflow-hidden rounded-xl border border-primary/20 dark:border-primary/30 bg-white dark:bg-background-dark shadow-sm">
                                     <div class="overflow-x-auto">
@@ -561,70 +561,6 @@
             </div>
         </section>
 
-        <section class="py-24 px-6 md:px-12 lg:px-24 bg-background-light">
-            <div class="max-w-7xl mx-auto">
-                <div class="flex flex-col md:flex-row justify-between items-end gap-8 mb-16">
-                    <div class="space-y-4">
-                        <h4 class="text-gold-accent font-bold tracking-[0.3em] text-xs uppercase">Field Updates</h4>
-                        <h2 class="text-4xl md:text-5xl font-serif text-deep-green">Latest from <span
-                                class="italic font-light">the Soil</span></h2>
-                    </div>
-                    <button
-                        class="text-deep-green text-xs font-bold uppercase tracking-widest border-b border-gold-accent pb-1">Archive
-                        2022</button>
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <div class="group cursor-pointer">
-                        <div class="relative rounded-3xl overflow-hidden aspect-[4/5] mb-6">
-                            <img alt="Sapling Care"
-                                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuD5PZeVaTDepGXwxR10OE6Feq5BCgdn9QWsVmA4IbXGKfKSs73Z3RJmcJr94tWX6qn3cwUdQkyUzzyb1rcDVCCH8xmAwSGxDZm1r3_nO-wCov2_Zkigwdde52aed5g0M6LOMOF_6QRpACjAY2NxqbwfbGtUy1D4R7vCjhXxFrvsbaSJgSVhB7z3LRSnxWBUdv5fpb6X7rSLf-Uy-cjJiEH_2VbWXYagPry5eiNyF7wx9DeU9PZTGBenuYElX7QHOixLCBDOHMz49PM" />
-                            <div
-                                class="absolute top-4 left-4 bg-white/90 backdrop-blur-md px-4 py-2 rounded-full shadow-sm">
-                                <p class="text-deep-green text-[10px] font-extrabold uppercase tracking-widest">Oct 12,
-                                    2023</p>
-                            </div>
-                        </div>
-                        <h4 class="text-xl font-serif text-deep-green mb-2 group-hover:text-gold-accent transition-colors">
-                            Irrigation Breakthrough in Paghman</h4>
-                        <p class="text-charcoal/60 text-sm font-medium leading-relaxed">Implementation of gravity-fed
-                            water systems reduced manual labor by 60%.</p>
-                    </div>
-                    <div class="group cursor-pointer">
-                        <div class="relative rounded-3xl overflow-hidden aspect-[4/5] mb-6">
-                            <img alt="Community Team"
-                                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuD5PZeVaTDepGXwxR10OE6Feq5BCgdn9QWsVmA4IbXGKfKSs73Z3RJmcJr94tWX6qn3cwUdQkyUzzyb1rcDVCCH8xmAwSGxDZm1r3_nO-wCov2_Zkigwdde52aed5g0M6LOMOF_6QRpACjAY2NxqbwfbGtUy1D4R7vCjhXxFrvsbaSJgSVhB7z3LRSnxWBUdv5fpb6X7rSLf-Uy-cjJiEH_2VbWXYagPry5eiNyF7wx9DeU9PZTGBenuYElX7QHOixLCBDOHMz49PM" />
-                            <div
-                                class="absolute top-4 left-4 bg-white/90 backdrop-blur-md px-4 py-2 rounded-full shadow-sm">
-                                <p class="text-deep-green text-[10px] font-extrabold uppercase tracking-widest">Sep 28,
-                                    2023</p>
-                            </div>
-                        </div>
-                        <h4 class="text-xl font-serif text-deep-green mb-2 group-hover:text-gold-accent transition-colors">
-                            Women's Cooperative Expansion</h4>
-                        <p class="text-charcoal/60 text-sm font-medium leading-relaxed">20 new families joined the
-                            central Kabul nursery initiative this month.</p>
-                    </div>
-                    <div class="group cursor-pointer">
-                        <div class="relative rounded-3xl overflow-hidden aspect-[4/5] mb-6">
-                            <img alt="Afghan Landscape"
-                                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuD5PZeVaTDepGXwxR10OE6Feq5BCgdn9QWsVmA4IbXGKfKSs73Z3RJmcJr94tWX6qn3cwUdQkyUzzyb1rcDVCCH8xmAwSGxDZm1r3_nO-wCov2_Zkigwdde52aed5g0M6LOMOF_6QRpACjAY2NxqbwfbGtUy1D4R7vCjhXxFrvsbaSJgSVhB7z3LRSnxWBUdv5fpb6X7rSLf-Uy-cjJiEH_2VbWXYagPry5eiNyF7wx9DeU9PZTGBenuYElX7QHOixLCBDOHMz49PM" />
-                            <div
-                                class="absolute top-4 left-4 bg-white/90 backdrop-blur-md px-4 py-2 rounded-full shadow-sm">
-                                <p class="text-deep-green text-[10px] font-extrabold uppercase tracking-widest">Aug 15,
-                                    2023</p>
-                            </div>
-                        </div>
-                        <h4 class="text-xl font-serif text-deep-green mb-2 group-hover:text-gold-accent transition-colors">
-                            Slope Stabilization Success</h4>
-                        <p class="text-charcoal/60 text-sm font-medium leading-relaxed">Root systems of the 2021
-                            planting have successfully anchored the North Slope.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
 
         <section class="py-24 px-6 md:px-12 lg:px-24 bg-white border-t border-charcoal/5">
             <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
