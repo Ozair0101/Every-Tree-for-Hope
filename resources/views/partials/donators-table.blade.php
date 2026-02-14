@@ -1,4 +1,4 @@
-<div class="bg-white rounded-[2rem] shadow-xl overflow-hidden">
+<div class="rounded-[2rem] shadow-xl overflow-hidden">
     <div class="overflow-x-auto">
         <table class="w-full min-w-[600px]">
             <thead class="bg-deep-green text-white">
@@ -87,7 +87,7 @@
     </div>
 </div>
 
-<!-- Pagination -->
+<!-- Pagination - Outside Table Container -->
 @if ($verifiedDonators->hasPages())
     <div class="mt-8 flex justify-center" id="pagination-container">
         {{ $verifiedDonators->links() }}
