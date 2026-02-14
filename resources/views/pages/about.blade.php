@@ -211,29 +211,43 @@
         </div>
     </section>
     <!-- Partners Section -->
-    <section class="py-24 bg-white dark:bg-stone-900 overflow-hidden">
+    <section class="py-16 bg-white dark:bg-stone-900">
         <div class="max-w-7xl mx-auto px-8">
-            <h5 class="text-center text-stone-400 uppercase tracking-[0.4em] text-xl font-bold mb-16">Global Partners
-                &amp; Allies</h5>
-            <div class="flex flex-wrap justify-center items-center gap-16 opacity-60 hover:opacity-100 transition-opacity">
+            <h2 class="text-center text-2xl font-serif text-deep-green dark:text-white mb-12">
+                Global Partners & Allies
+            </h2>
+
+            <!-- Partners Grid - 5 per row -->
+            <div class="grid grid-cols-5 gap-8 mb-12">
                 @php
                     $partners = \App\Models\Partner::active()->ordered()->get();
                 @endphp
                 @forelse($partners as $partner)
-                    <div class="flex items-center gap-3 grayscale hover:grayscale-0 transition-all duration-300">
+                    <div class="text-center group">
                         @if ($partner->full_logo_url)
                             <img src="{{ $partner->full_logo_url }}" alt="{{ $partner->company_name }}"
-                                class="h-12 w-auto object-contain">
+                                class="h-8 w-auto mx-auto mb-2 opacity-60 group-hover:opacity-100 transition-opacity duration-200 filter grayscale group-hover:grayscale-0">
                         @else
-                            <span class="material-symbols-outlined text-4xl">business</span>
+                            <span class="material-symbols-outlined text-2xl text-charcoal/40 mb-2">business</span>
                         @endif
-                        <span class="text-2xl font-display font-bold">{{ $partner->company_name }}</span>
+                        <p
+                            class="text-xs text-charcoal/60 dark:text-stone-400 group-hover:text-deep-green dark:group-hover:text-white transition-colors duration-200">
+                            {{ $partner->company_name }}
+                        </p>
                     </div>
                 @empty
-                    <div class="text-center py-8">
-                        <p class="text-stone-400">No partners available at the moment.</p>
+                    <div class="col-span-5 text-center py-8">
+                        <p class="text-charcoal/40 dark:text-stone-500 text-sm">Partners coming soon</p>
                     </div>
                 @endforelse
+            </div>
+
+            <!-- Simple Call to Action -->
+            <div class="text-center">
+                <a href="{{ route('contact') }}"
+                    class="text-sm text-gold-accent hover:text-deep-green dark:hover:text-gold-accent transition-colors duration-200 underline">
+                    Become a Partner →
+                </a>
             </div>
         </div>
     </section>
