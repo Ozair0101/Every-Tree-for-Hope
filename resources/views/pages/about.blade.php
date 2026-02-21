@@ -31,8 +31,7 @@
             <div class="lg:col-span-5 relative">
                 <div class="aspect-[3/4] rounded-xl overflow-hidden shadow-2xl">
                     <img alt="Tree Nursery" class="w-full h-full object-cover"
-                        data-alt="Lush green saplings in a modern nursery"
-                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuCqqBZKmAQU-OXMuI2cto6vKbaVrhY_EbkjmuBxHlIzxEv1AN6RYebK8f08gOYvURua98t1kQBTu7NsjXFHyZwsi8MN7Anjn_OSerI4aeM0Hurw3YpvgKOrWAuz0PVNfEJZDJlzj3fhKz4u-GNZChXJHNpT-C4MewtzkjQkvsolUejTwfjfxgtn2rTl7bDsKPEiPoygYoIbcpvcEYSC7UxcOCza-iV85fDXz2Nr-fmcgVsw9bnlOUmgYPJh2gSn9drBujJVaH5-8t8" />
+                        data-alt="Lush green saplings in a modern nursery" src="{{ asset('images/1.jpeg') }}" />
                 </div>
                 <div class="absolute -bottom-10 -right-10 w-64 h-64 bg-accent-gold/10 rounded-full -z-10 blur-3xl">
                 </div>
