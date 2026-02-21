@@ -217,7 +217,7 @@
         @yield('content')
         @stack('scripts')
 
-        <footer class="relative z-10 bg-deep-green border-t border-deep-green/80 pt-20 pb-12 px-6 md:px-12 lg:px-24">
+        <footer class="relative z-10 bg-deep-green border-t border-deep-green/80 pt-20 px-6 md:px-12 lg:px-24">
             <div class="absolute right-0 bottom-0 opacity-10 select-none pointer-events-none">
                 <span class="material-symbols-outlined text-[20rem] text-white/20 leading-none">potted_plant</span>
             </div>
@@ -293,7 +293,7 @@
             <div
                 class="max-w-7xl mx-auto pt-8 border-t border-white/10 flex flex-col md:row justify-between items-center gap-8 relative z-10">
                 <p class="text-xs font-medium text-white/60 uppercase tracking-widest">
-                    © 2024 Kabul Reforestation Initiative. All rights reserved.
+                    © 2024 Kabul Reforestation Initiative. All rights reserved. Developed By Mohammad Ozair Khurami.
                 </p>
             </div>
         </footer>
