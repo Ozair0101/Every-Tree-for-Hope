@@ -38,7 +38,7 @@
                     <div class="relative w-full aspect-[4/3] hill-organic-mask overflow-hidden shadow-2xl">
                         <img alt="The rugged, sun-drenched hills surrounding Kabul with new saplings"
                             class="object-cover w-full h-full scale-105 hover:scale-100 transition-transform duration-1000"
-                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuD_luKpgfJE5RBkIsl2Pwvvw1vosV0FwGQz6yMz8Tv4Wy3oSshuZ7Fk1emjcLpX3bAuSoWFz1vp3oUViwxaCaixQ-I7gnDRXuj9BKPBERYX9raiF4EfaxNlll6ro31_AjLgIULYrtJ3MbOFHB9aJE6p0MciGyWg4MllujEZ1yiCkKXVkKgw8M0-m2sLOH3_5E--tqECpazCENmYWAGTLmKuEzOfn8A0QMNguP0TtGtQwVf-hSuqBbpV0xKVRU2xS93GvipFF5BGmFo" />
+                            src="{{ asset('images/2.jpeg') }}" />
                         <div
                             class="absolute inset-0 bg-gradient-to-tr from-deep-green/10 to-transparent mix-blend-multiply">
                         </div>
