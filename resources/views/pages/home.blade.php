@@ -307,8 +307,7 @@
                                     class="relative overflow-hidden rounded-3xl border border-gray-200/70 dark:border-gray-800 bg-white/60 dark:bg-background-dark/60 shadow-sm">
                                     <div class="aspect-[4/3]">
                                         <img alt="Planting drought-tolerant trees in the hills surrounding Kabul"
-                                            class="h-full w-full object-cover"
-                                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDpCpXne7VxAqOhiNQsRPM10zkTmQFSIg9ltGYZGSm3e9zV9-x3KSbEsczDjc98q1XokZ72XjiIlQacMvvwJeX0KKFYmcNKgMznUPFaVBi6vpY_Om2F7eSoPwOA_WTe3_CgzJju-3jgvczry5MZkpIYEKHbbW6qrx0CzzTFYz1kiXFAhFfBRt_fGCGO9HZrfnBKX8XEbbEWuCopaPX9QoYCpFhQAcZZHMyxOC6d2XPaQAo_lqvUV8_OLEMI9N5NMGw7PuL_NLFbIhA" />
+                                            class="h-full w-full object-cover" src="{{ asset('images/4.jpeg') }}" />
                                     </div>
                                     <div class="p-5 sm:p-6">
                                         <p class="text-sm font-semibold text-gray-900 dark:text-white">Kabul, Afghanistan
