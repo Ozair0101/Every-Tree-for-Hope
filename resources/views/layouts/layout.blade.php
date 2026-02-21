@@ -297,15 +297,17 @@
             </div>
             <div
                 class="max-w-7xl mx-auto pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 relative z-10">
-                <p class="text-xs font-medium text-white/60 uppercase tracking-widest text-center md:text-left">
-                    © 2026 Kabul Reforestation Initiative. All rights reserved. Developed By Mohammad Ozair Khurami.
+                <p
+                    class="text-xs font-medium text-white/60 uppercase tracking-widest text-center md:text-left flex items-center justify-center md:justify-start gap-2">
+                    <span>© 2026 Kabul Reforestation Initiative. All rights reserved. Developed By Mohammad Ozair
+                        Khurami.</span>
                     <a href="https://www.linkedin.com/in/mohammad-ozair-khurami-b7ba7b274/" target="_blank"
-                        rel="noopener noreferrer" class="text-white/60 hover:text-gold-accent transition-colors">
-                        <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24" aria-hidden="true">
+                        rel="noopener noreferrer"
+                        class="text-white/60 hover:text-gold-accent transition-colors inline-flex items-center">
+                        <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" aria-hidden="true">
                             <path
                                 d="M4.98 3.5C4.98 4.88 3.88 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM0 8.25h5V24H0V8.25zM8.34 8.25h4.79v2.13h.07c.67-1.27 2.3-2.6 4.73-2.6 5.06 0 5.99 3.33 5.99 7.66V24h-5V16.3c0-1.83-.03-4.18-2.55-4.18-2.55 0-2.94 1.99-2.94 4.05V24h-5V8.25z" />
                         </svg>
-                        <span class="text-xs font-medium tracking-widest uppercase">LinkedIn</span>
                     </a>
                 </p>
             </div>
