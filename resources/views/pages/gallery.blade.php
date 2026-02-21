@@ -5,18 +5,12 @@
     <main class="flex-grow">
         <section class="relative h-[600px] flex items-center overflow-hidden bg-neutral-900">
             <div class="absolute right-0 top-0 w-full md:w-2/3 h-full">
-                @forelse($events->take(1) as $featuredEvent)
-                    @forelse($featuredEvent->images->take(1) as $image)
-                        <img alt="{{ $featuredEvent->title }}" class="w-full h-full object-cover opacity-70"
-                            src="{{ $image->full_image_url }}" />
-                    @empty
-                        <img alt="Planting event" class="w-full h-full object-cover opacity-70"
-                            src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" />
-                    @endforelse
-                @empty
-                    <img alt="Sun-drenched forest canopy" class="w-full h-full object-cover opacity-70"
-                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuCiSLJVNhgqX_rzJKgvmlDvloU-fcMmenRiN6mZ1Wqevab2hUyke18xq1TOFuMxsqoCVU8oS5wF9skWOEUP9MZePgGonhgkM6bX84t6Iv02iR2PilvhZHea3utpkTvdOoNtvq1v8eYMNuDCvGmkJejzO3YNLClwcjgDP-j-N6T3tqgEvhVO10uaCBCh9xyPNLY_dY7FJmn0WdOo_CT5uzpI1QlpJjhOlMUmQYCjmdVc6qoZyX_3kNo3kLI5c_p04yr_6WNLSMZ-im8" />
-                @endforelse
+
+                <img alt="Planting event" class="w-full h-full object-cover opacity-70" src="{{ asset('images/4.jpeg') }}" />
+
+                {{-- <img alt="Sun-drenched forest canopy" class="w-full h-full object-cover opacity-70"
+                    src="{{ asset('images/5.jpeg') }}" /> --}}
+
                 <div class="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-transparent"></div>
             </div>
             <div class="relative w-full h-full max-w-7xl mx-auto px-6 flex items-center">
