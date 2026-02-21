@@ -20,6 +20,12 @@ class RecentActivityWidget extends TableWidget
 
     protected function getTableQuery(): Builder
     {
+        // Return empty query - we'll override getRecords instead
+        return Donator::query()->whereRaw('1 = 0');
+    }
+
+    protected function getRecords(): \Illuminate\Support\Collection
+    {
         // Get recent activities from different models
         $recentDonations = Donator::latest('created_at')
             ->select([
@@ -27,10 +33,14 @@ class RecentActivityWidget extends TableWidget
                 'full_name as title',
                 'financial_support as description',
                 'created_at',
-                DB::raw("'donation' as type"),
-                DB::raw("'Donation' as type_label"),
             ])
-            ->limit(5);
+            ->limit(5)
+            ->get()
+            ->map(function($item) {
+                $item->type = 'donation';
+                $item->type_label = 'Donation';
+                return $item;
+            });
 
         $recentEvents = Event::latest('created_at')
             ->select([
@@ -38,10 +48,14 @@ class RecentActivityWidget extends TableWidget
                 'title',
                 'location as description',
                 'created_at',
-                DB::raw("'event' as type"),
-                DB::raw("'Event' as type_label"),
             ])
-            ->limit(5);
+            ->limit(5)
+            ->get()
+            ->map(function($item) {
+                $item->type = 'event';
+                $item->type_label = 'Event';
+                return $item;
+            });
 
         $recentMessages = ContactMessage::latest('created_at')
             ->select([
@@ -49,15 +63,22 @@ class RecentActivityWidget extends TableWidget
                 'name as title',
                 'subject as description',
                 'created_at',
-                DB::raw("'message' as type"),
-                DB::raw("'Contact Message' as type_label"),
             ])
-            ->limit(5);
+            ->limit(5)
+            ->get()
+            ->map(function($item) {
+                $item->type = 'message';
+                $item->type_label = 'Contact Message';
+                return $item;
+            });
 
-        // Combine all activities
-        return $recentDonations->unionAll($recentEvents)->unionAll($recentMessages)
-            ->orderBy('created_at', 'desc')
-            ->limit(10);
+        // Combine and sort all activities
+        return $recentDonations
+            ->merge($recentEvents)
+            ->merge($recentMessages)
+            ->sortByDesc('created_at')
+            ->take(10)
+            ->values();
     }
 
     protected function getTableColumns(): array
