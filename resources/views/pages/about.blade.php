@@ -4,8 +4,7 @@
     <!-- Hero Section -->
     <header class="relative h-screen w-full flex items-center justify-center overflow-hidden">
         <img alt="Kabul Hills" class="absolute inset-0 w-full h-full object-cover brightness-75 scale-105"
-            data-alt="Cinematic sunrise over the rugged Kabul hills"
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuA5c6jFI7yLgeT_1m1wGniEFqNjyjb0sayKKCfyPXgaSvxt-xCTxNOI0BhGhB1yDlMuQhNtDsBBP1ruiG8uckdSFF9LNbJqNcsGcIxBC_IgvrYLDLlu9yh9msErageJtkVTeX_YlNi5x2R8XAkZmZwDKhLoqG8v_Ss6NwtcaxF_onGkQJQKg5b4f-InFhTWpqR7kYyE3FNAuqG4TxZp_wArs4VelnWZkYIL17OFYm-F9hj7oLSx4nuP08XJB_0HvrTYS8KADP0dLKI" />
+            data-alt="Cinematic sunrise over the rugged Kabul hills" src="{{ asset('images/4.jpeg') }}" />
         <div
             class="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-background-light dark:to-background-dark">
         </div>
