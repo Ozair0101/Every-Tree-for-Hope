@@ -83,8 +83,8 @@
                     </div>
                     <h3 class="font-serif text-xl text-deep-green mb-3">Write Us</h3>
                     <a class="text-charcoal/70 text-sm hover:text-deep-green transition-colors"
-                        href="mailto:tamimalim209@gmail.com">
-                        tamimalim209@gmail.com
+                        href="mailto:everytreeforahope@gmail.com">
+                        everytreeforahope@gmail.com
                     </a>
                     <p class="text-[10px] font-bold text-sage-green uppercase tracking-widest mt-4">Typical Response:
                         24h</p>
