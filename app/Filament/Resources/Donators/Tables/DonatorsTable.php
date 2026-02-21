@@ -79,10 +79,11 @@ class DonatorsTable
                     ->label('Type')
                     ->badge()
                     ->color(fn (string $state): string => match ($state) {
-                        'Local' => 'primary',
-                        'International' => 'success',
-                        'National' => 'warning',
-                        'Regional' => 'info',
+                        'Local', 'local' => 'primary',
+                        'International', 'international' => 'success',
+                        'National', 'national' => 'warning',
+                        'Regional', 'regional' => 'info',
+                        default => 'gray',
                     })
                     ->toggleable(),
             ])
