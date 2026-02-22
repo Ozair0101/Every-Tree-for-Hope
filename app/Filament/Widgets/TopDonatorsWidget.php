@@ -14,6 +14,13 @@ class TopDonatorsWidget extends TableWidget
     
     protected static ?int $columns = 1;
 
+    protected int | string | array $columnSpan = 'full';
+
+    protected function getPollingInterval(): ?string
+    {
+        return null; // Disable polling to prevent infinite loop
+    }
+
     protected function getTableQuery(): Builder
     {
         return Donator::verified()
