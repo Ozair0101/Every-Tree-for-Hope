@@ -18,6 +18,11 @@ class RecentActivityWidget extends TableWidget
     
     protected int | string | array $columnSpan = 'full';
 
+    protected function getPollingInterval(): ?string
+    {
+        return null; // Disable polling to prevent infinite loop
+    }
+
     protected function getTableQuery(): Builder
     {
         // Return empty query - we'll override getRecords instead
