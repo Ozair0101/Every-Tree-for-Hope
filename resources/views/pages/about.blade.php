@@ -43,14 +43,14 @@
                     Reimagined.</h2>
                 <div class="space-y-6 text-lg text-stone-600 dark:text-stone-300 leading-relaxed font-light">
                     <p>
-                        It began in the spring of 2018, not in a boardroom, but on the dusty slopes of the Koh-e-Asmai
-                        mountains. A small group of Kabul residents, tired of the smog-filled horizons, decided to
-                        reclaim their city's natural heritage.
+                        It began in the spring of 2025—not in a boardroom, but on the dusty slopes of Haji‑Nabi town. A
+                        handful of Kabul residents, weary of smog‑filled horizons, set out to reclaim their city’s natural
+                        heritage.
                     </p>
                     <p>
-                        What started with fifty saplings carried by hand has evolved into a sophisticated botanical
-                        operation. We blend ancient Afghan agricultural wisdom with modern ecological data to ensure
-                        every tree we plant survives the harsh seasons of our capital.
+                        What started with fifty saplings carried by hand has grown into a dynamic tree‑planting
+                        movement. By blending ancient Afghan agricultural wisdom with modern ecological knowledge, we ensure
+                        every tree planted can withstand the harsh seasons of our capital.
                     </p>
                     <div class="flex items-center gap-6 pt-6">
                         <div class="h-px flex-1 bg-accent-gold/30"></div>

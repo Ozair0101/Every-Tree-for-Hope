@@ -254,9 +254,9 @@
                                         Vision</h5>
                                 </div>
                                 <p class="text-charcoal/60 text-lg font-light leading-relaxed pl-16">
-                                    We envision a 2050 where global temperatures have stabilized and
-                                    "nature-positive" is the mandatory framework for every city and corporation on
-                                    Earth.
+                                    we envision Afghanistan where both cities and hills flourish with greenery. By planting
+                                    trees and inspiring communities, we aim to restore nature, strengthen society, and
+                                    create a sustainable future filled with hope
                                 </p>
                             </div>
                         </div>
