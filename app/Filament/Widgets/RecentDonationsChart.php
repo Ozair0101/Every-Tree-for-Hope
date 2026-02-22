@@ -14,6 +14,11 @@ class RecentDonationsChart extends ChartWidget
     
     protected static ?int $columns = 2;
 
+    protected function getPollingInterval(): ?string
+    {
+        return null; // Disable polling to prevent infinite loop
+    }
+
     protected function getData(): array
     {
         $data = Donator::select(
