@@ -104,7 +104,19 @@ class EventResource extends Resource
                         'Olive' => 'Olive (Zaytun)',
                         'Cherry' => 'Cherry (Gelas)',
                         'Plum' => 'Plum (Aloo Bukhara)',
-                        'Pear' => 'Pear (Nashpati)'
+                        'Pear' => 'Pear (Nashpati)',
+                        'Chenar' => 'Chenar',
+                        'Sepidar' => 'Sepidar',
+                        'Acacia' => 'Acacia',
+                        'Narvan / Naroon' => 'Narvan / Naroon',
+                        'Kaj' => 'Kaj',
+                        'Sarv' => 'Sarv',
+                        'Najo' => 'Najo',
+                        'Toot' => 'Toot',
+                        'Anjir' => 'Anjir',
+                        'Divar Bidar' => 'Divar Bidar',
+                        'Arghavan' => 'Arghavan',
+                        'Juniper' => 'Juniper'
                     ])
                     ->columns(3)
                     ->helperText('Select all tree species planted in this event from the list above. Do not enter the same species in the custom field below.')
