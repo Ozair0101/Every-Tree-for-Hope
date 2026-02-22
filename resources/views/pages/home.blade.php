@@ -45,13 +45,17 @@
             class="relative z-10 w-full px-6 md:px-12 lg:px-24 pb-12 flex flex-col md:flex-row items-end justify-between gap-8">
             <div class="grid grid-cols-2 md:flex gap-12 md:gap-20">
                 <div class="flex flex-col">
-                    <p class="text-deep-green text-4xl font-extrabold tabular-nums">1,240,500</p>
+                    <p class="text-deep-green text-4xl font-extrabold tabular-nums">
+                        {{ number_format(App\Models\Donator::sum('trees_sponsored') + App\Models\Event::sum('trees_planted')) }}
+                    </p>
                     <p class="text-charcoal/50 text-[10px] font-bold uppercase tracking-[0.2em] mt-1">
                         Trees Planted
                     </p>
                 </div>
                 <div class="flex flex-col">
-                    <p class="text-deep-green text-4xl font-extrabold tabular-nums">45,000</p>
+                    <p class="text-deep-green text-4xl font-extrabold tabular-nums">
+                        {{ number_format(App\Models\Donator::sum('trees_sponsored') * 0.02) }}
+                    </p>
                     <p class="text-charcoal/50 text-[10px] font-bold uppercase tracking-[0.2em] mt-1">
                         Tons CO2 Offset
                     </p>
