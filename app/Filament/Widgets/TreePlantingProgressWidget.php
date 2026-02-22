@@ -13,6 +13,11 @@ class TreePlantingProgressWidget extends ChartWidget
     
     protected static ?int $columns = 1;
 
+    protected function getPollingInterval(): ?string
+    {
+        return null; // Disable polling to prevent infinite loop
+    }
+
     public function getHeading(): string
     {
         return 'Tree Planting Progress';
