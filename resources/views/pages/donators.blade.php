@@ -271,7 +271,10 @@
 
                 // Handle browser back/forward buttons
                 window.addEventListener('popstate', function(e) {
-                    loadPage(window.location.href);
+                    // Only load page if this is a genuine back/forward navigation
+                    if (e.state !== null) {
+                        loadPage(window.location.href);
+                    }
                 });
             });
         </script>

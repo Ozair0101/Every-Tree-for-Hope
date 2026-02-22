@@ -6,7 +6,7 @@
         <section class="relative h-[600px] flex items-center overflow-hidden bg-neutral-900">
             <div class="absolute right-0 top-0 w-full md:w-2/3 h-full">
 
-                <img alt="Planting event" class="w-full h-full object-cover opacity-70" src="{{ asset('images/4.jpeg') }}" />
+                <img alt="Planting event" class="w-full h-full object-cover opacity-70" src="{{ asset('images/5.jpeg') }}" />
 
                 {{-- <img alt="Sun-drenched forest canopy" class="w-full h-full object-cover opacity-70"
                     src="{{ asset('images/5.jpeg') }}" /> --}}
@@ -140,7 +140,10 @@
 
                 // Handle browser back/forward buttons
                 window.addEventListener('popstate', function(e) {
-                    loadPage(window.location.href);
+                    // Only load page if this is a genuine back/forward navigation
+                    if (e.state !== null) {
+                        loadPage(window.location.href);
+                    }
                 });
             });
         </script>
