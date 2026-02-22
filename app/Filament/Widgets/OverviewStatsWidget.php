@@ -14,6 +14,11 @@ class OverviewStatsWidget extends BaseWidget
 {
     protected static ?int $sort = 1;
 
+    protected function getPollingInterval(): ?string
+    {
+        return null; // Disable polling to prevent infinite loop
+    }
+
     protected function getStats(): array
     {
         $totalDonations = Donator::sum('financial_support');
