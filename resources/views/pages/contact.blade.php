@@ -56,7 +56,7 @@
                     <h3 class="font-serif text-xl text-deep-green mb-3">Visit Us</h3>
                     <p class="text-charcoal/70 text-sm leading-relaxed">
                         Kabul, Afghanistan<br />
-                        Haidari Market, District 4
+                        DarulAman, District 7
                     </p>
                     <p class="text-[10px] font-bold text-sage-green uppercase tracking-widest mt-4">By Appointment Only
                     </p>
