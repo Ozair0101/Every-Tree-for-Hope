@@ -23,8 +23,8 @@
                     <span class="text-vibrant-lime italic font-black">the Future</span>
                 </h1>
                 <p class="text-charcoal/80 text-lg md:text-xl max-w-xl font-medium leading-relaxed">
-                    Join our global community in restoring the world's forests one seedling at a time.
-                    Transparent, tracked, and impactful climate action starting today.
+                    Every Tree for a Hope is about bringing life to barren land. Each tree is a symbol of resilience and a
+                    call to Afghans to build a greener future—join our team and grow hope with us.
                 </p>
                 <div class="flex flex-col sm:flex-row gap-4 pt-4">
                     <button
@@ -283,19 +283,19 @@
                                     Turning barren land into green hope
                                 </h2>
                                 <p class="mt-4 text-lg text-gray-700 dark:text-gray-300">
-                                    We are a grassroots environmental movement committed to planting 6 drought-tolerant
-                                    trees every week in the hills surrounding Kabul, Afghanistan. Our mission is simple:
+                                    We are a grassroots environmental movement dedicated to planting six drought-resistant
+                                    trees every week in the hills surrounding Kabul, Afghanistan. Our mission is clear:
                                 </p>
                                 <div
                                     class="mt-6 rounded-2xl bg-background-light dark:bg-background-dark p-6 border border-gray-200/70 dark:border-gray-800">
                                     <p class="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white">
-                                        Turn barren land into green hope—one tree at a time.
+                                        To transform barren land into living hope—one tree at a time.
                                     </p>
                                 </div>
                                 <p class="mt-6 text-lg text-gray-700 dark:text-gray-300">
-                                    As young civil society members, we believe that planting trees is not just about the
-                                    environment—it’s about healing communities, inspiring action, and building a more
-                                    livable future for all Afghans.
+                                    As young members of civil society, we believe tree planting is more than an
+                                    environmental act—it is a way to heal communities, spark collective action, and create a
+                                    more livable future for all Afghans.
                                 </p>
                             </div>
 

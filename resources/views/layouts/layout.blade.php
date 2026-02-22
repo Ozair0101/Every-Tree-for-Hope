@@ -157,6 +157,8 @@
                 <!-- Desktop Navigation -->
                 <div class="hidden md:flex items-center gap-8">
                     <a class="text-sm font-medium hover:text-primary transition-colors"
+                        href="{{ route('home') }}">Home</a>
+                    <a class="text-sm font-medium hover:text-primary transition-colors"
                         href="{{ route('about') }}">About</a>
                     <a class="text-sm font-medium hover:text-primary transition-colors"
                         href="{{ route('gallery') }}">Our Works</a>
@@ -192,6 +194,8 @@
             <div id="mobile-menu"
                 class="hidden md:hidden bg-background-light/95 dark:bg-background-dark/95 backdrop-blur-sm border-t border-gray-200 dark:border-gray-800">
                 <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-4 space-y-3">
+                    <a class="block text-sm font-medium hover:text-primary transition-colors py-2"
+                        href="{{ route('home') }}">Home</a>
                     <a class="block text-sm font-medium hover:text-primary transition-colors py-2"
                         href="{{ route('about') }}">About</a>
                     <a class="block text-sm font-medium hover:text-primary transition-colors py-2"
