@@ -207,23 +207,13 @@ class EventResource extends Resource
                     ->sortable(),
                 Tables\Columns\TextColumn::make('tree_names')
                 ->label('Tree Species')
-                ->formatStateUsing(function ($state, $record) {
+                ->formatStateUsing(function ($state) {
 
-                    $allSpecies = $record->tree_names ?? [];
-
-                    if (!empty($record->custom_tree_species)) {
-                        $customSpecies = array_map(
-                            'trim',
-                            explode(',', $record->custom_tree_species)
-                        );
-                        $allSpecies = array_merge($allSpecies, $customSpecies);
+                    if (is_array($state)) {
+                        return implode(', ', $state);
                     }
 
-                    $uniqueSpecies = array_values(array_unique(array_filter($allSpecies)));
-
-                    return !empty($uniqueSpecies)
-                        ? implode(', ', $uniqueSpecies)
-                        : 'N/A';
+                    return $state ?? 'N/A';
                 })
                     ->toggleable(),
                 Tables\Columns\TextColumn::make('date')
