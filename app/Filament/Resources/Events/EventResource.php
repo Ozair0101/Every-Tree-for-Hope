@@ -206,49 +206,25 @@ class EventResource extends Resource
                     ->searchable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('tree_names')
-                    ->label('Tree Species')
-                    ->formatStateUsing(function ($record) {
-                        $species = [];
-                        
-                        // Add tree names from checkbox selection
-                        if ($record->tree_names && is_array($record->tree_names)) {
-                            $filteredSpecies = array_filter($record->tree_names, function($s) {
-                                return $s !== 'Other' && !empty(trim($s));
-                            });
-                            $species = array_merge($species, $filteredSpecies);
-                        }
-                        
-                        // Add custom tree species
-                        if ($record->custom_tree_species) {
-                            $customSpecies = array_map('trim', explode(',', $record->custom_tree_species));
-                            $customSpecies = array_filter($customSpecies, function($s) {
-                                return !empty($s);
-                            });
-                            $species = array_merge($species, $customSpecies);
-                        }
-                        
-                        // Enhanced deduplication (case-insensitive and trim)
-                        $uniqueSpecies = [];
-                        $seen = [];
-                        foreach ($species as $item) {
-                            $cleanItem = strtolower(trim($item));
-                            if (!empty($cleanItem) && !isset($seen[$cleanItem])) {
-                                $uniqueSpecies[] = trim($item);
-                                $seen[$cleanItem] = true;
-                            }
-                        }
-                        
-                        // Final safety check - remove any remaining duplicates
-                        $uniqueSpecies = array_values(array_unique($uniqueSpecies));
-                        
-                        if (empty($uniqueSpecies)) {
-                            return 'N/A';
-                        }
-                        
-                        return implode(', ', array_slice($uniqueSpecies, 0, 3)) . 
-                               (count($uniqueSpecies) > 3 ? ' +' . (count($uniqueSpecies) - 3) : '');
-                    })
-                    ->limit(30)
+                ->label('Tree Species')
+                ->formatStateUsing(function ($state, $record) {
+
+                    $allSpecies = $record->tree_names ?? [];
+
+                    if (!empty($record->custom_tree_species)) {
+                        $customSpecies = array_map(
+                            'trim',
+                            explode(',', $record->custom_tree_species)
+                        );
+                        $allSpecies = array_merge($allSpecies, $customSpecies);
+                    }
+
+                    $uniqueSpecies = array_values(array_unique(array_filter($allSpecies)));
+
+                    return !empty($uniqueSpecies)
+                        ? implode(', ', $uniqueSpecies)
+                        : 'N/A';
+                })
                     ->toggleable(),
                 Tables\Columns\TextColumn::make('date')
                     ->date()

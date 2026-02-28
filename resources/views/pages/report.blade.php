@@ -143,7 +143,7 @@
         <section class="relative bg-green-50 flex h-auto min-h-screen w-full flex-col group/design-root overflow-x-visible">
             <div class="layout-container flex h-full grow flex-col">
                 <div class="flex flex-1 justify-center py-5 sm:px-10 lg:px-20 xl:px-40">
-                    <div class="layout-content-container flex flex-col w-full flex-1">
+                    <div class="layout-content-container flex flex-col w-full max-w-5xl flex-1">
                         <!-- TopNavBar -->
                         <main class="flex-grow px-4 py-8 sm:py-12">
                             <!-- PageHeading -->
@@ -286,7 +286,7 @@
                                 </button>
                             </div>
                             <!-- Table -->
-                            <div id="events-table-container" class="px-4 py-6">
+                            <div id="events-table-container" class="px-4 py-6 @container">
                                 <div
                                     class="overflow-hidden rounded-xl border border-primary/20 dark:border-primary/30 bg-white dark:bg-background-dark shadow-sm">
                                     <div class="overflow-x-auto">
