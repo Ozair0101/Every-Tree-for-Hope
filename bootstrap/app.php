@@ -13,7 +13,12 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware): void {
         $middleware->alias([
             'filament.admin' => \App\Http\Middleware\FilamentAdmin::class,
+            'locale' => \App\Http\Middleware\SetLocale::class,
+            'language' => \App\Http\Middleware\LanguageMiddleware::class,
         ]);
+        
+        $middleware->web(\App\Http\Middleware\SetLocale::class);
+        $middleware->web(\App\Http\Middleware\LanguageMiddleware::class);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //
