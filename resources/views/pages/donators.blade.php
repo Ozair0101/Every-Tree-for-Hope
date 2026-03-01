@@ -209,42 +209,88 @@
 
                 if (paginationContainer) {
                     paginationContainer.addEventListener('click', function(e) {
-                        const link = e.target.closest('a');
+                        // Find the closest anchor tag, checking both the target and its parents
+                        let target = e.target;
+                        let link = null;
+
+                        // Traverse up to find the link
+                        while (target && target !== paginationContainer) {
+                            if (target.tagName === 'A' && target.href) {
+                                link = target;
+                                break;
+                            }
+                            target = target.parentElement;
+                        }
+
                         if (link && link.href) {
                             e.preventDefault();
+                            e.stopPropagation();
+                            console.log('Loading page:', link.href);
                             loadPage(link.href);
                         }
                     });
                 }
 
                 function loadPage(url) {
+                    if (!tableContainer) {
+                        console.error('Table container not found');
+                        window.location.href = url;
+                        return;
+                    }
+
                     // Show loading state
                     tableContainer.style.opacity = '0.5';
 
-                    fetch(url + '?ajax=1', {
+                    const ajaxUrl = url + (url.includes('?') ? '&' : '?') + 'ajax=1';
+                    console.log('Fetching:', ajaxUrl);
+
+                    fetch(ajaxUrl, {
                             headers: {
                                 'X-Requested-With': 'XMLHttpRequest',
                                 'Accept': 'text/html'
                             }
                         })
-                        .then(response => response.text())
+                        .then(response => {
+                            console.log('Response status:', response.status);
+                            if (!response.ok) {
+                                throw new Error('HTTP error! status: ' + response.status);
+                            }
+                            return response.text();
+                        })
                         .then(html => {
+                            console.log('Received HTML length:', html.length);
+                            console.log('HTML preview:', html.substring(0, 500));
+
                             const parser = new DOMParser();
                             const doc = parser.parseFromString(html, 'text/html');
 
                             // Update table
                             const newTable = doc.querySelector('.overflow-x-auto');
+                            console.log('Found new table:', newTable);
+
                             if (newTable && tableContainer) {
                                 const currentTable = tableContainer.querySelector('.overflow-x-auto');
                                 if (currentTable) {
                                     currentTable.replaceWith(newTable);
+                                    console.log('Table updated successfully');
+                                } else {
+                                    console.error('Could not find current table');
                                 }
+                            } else {
+                                console.error('Could not find new table, falling back to page reload');
+                                window.location.href = url;
+                                return;
                             }
 
                             // Update pagination
                             const newPagination = doc.querySelector('#pagination-container');
+                            console.log('Found new pagination:', newPagination);
+
                             if (newPagination && paginationContainer) {
                                 paginationContainer.innerHTML = newPagination.innerHTML;
+                                console.log('Pagination updated successfully');
+                            } else {
+                                console.error('Could not find new pagination');
                             }
 
                             // Update URL without reload
