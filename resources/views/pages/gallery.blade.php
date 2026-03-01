@@ -61,9 +61,22 @@
 
                 if (paginationContainer) {
                     paginationContainer.addEventListener('click', function(e) {
-                        const link = e.target.closest('a');
+                        // Find the closest anchor tag, checking both the target and its parents
+                        let target = e.target;
+                        let link = null;
+
+                        // Traverse up to find the link
+                        while (target && target !== paginationContainer) {
+                            if (target.tagName === 'A' && target.href) {
+                                link = target;
+                                break;
+                            }
+                            target = target.parentElement;
+                        }
+
                         if (link && link.href) {
                             e.preventDefault();
+                            e.stopPropagation();
                             console.log('Loading page:', link.href);
                             loadPage(link.href);
                         }
@@ -73,13 +86,17 @@
                 function loadPage(url) {
                     if (!eventsGrid) {
                         console.error('Events grid not found');
+                        window.location.href = url;
                         return;
                     }
 
                     // Show loading state
                     eventsGrid.style.opacity = '0.5';
 
-                    fetch(url + '?ajax=1', {
+                    const ajaxUrl = url + (url.includes('?') ? '&' : '?') + 'ajax=1';
+                    console.log('Fetching:', ajaxUrl);
+
+                    fetch(ajaxUrl, {
                             headers: {
                                 'X-Requested-With': 'XMLHttpRequest',
                                 'Accept': 'text/html'
@@ -87,27 +104,45 @@
                         })
                         .then(response => {
                             console.log('Response status:', response.status);
+                            if (!response.ok) {
+                                throw new Error('HTTP error! status: ' + response.status);
+                            }
                             return response.text();
                         })
                         .then(html => {
-                            console.log('Received HTML:', html.substring(0, 200));
+                            console.log('Received HTML length:', html.length);
+                            console.log('HTML preview:', html.substring(0, 500));
+
                             const parser = new DOMParser();
                             const doc = parser.parseFromString(html, 'text/html');
 
-                            // Update events grid
-                            const newEventsGrid = doc.querySelector('.grid.grid-cols-2');
+                            // Try multiple selectors to find the grid
+                            let newEventsGrid = doc.querySelector('.grid.grid-cols-2');
+                            if (!newEventsGrid) {
+                                newEventsGrid = doc.querySelector('[class*="grid-cols-2"]');
+                            }
+                            if (!newEventsGrid) {
+                                newEventsGrid = doc.querySelector('.grid');
+                            }
+
+                            console.log('Found new events grid:', newEventsGrid);
+
                             if (newEventsGrid && eventsGrid) {
                                 eventsGrid.innerHTML = newEventsGrid.innerHTML;
-                                console.log('Events grid updated');
+                                console.log('Events grid updated successfully');
                             } else {
-                                console.error('Could not find new events grid');
+                                console.error('Could not find new events grid, falling back to page reload');
+                                window.location.href = url;
+                                return;
                             }
 
                             // Update pagination
                             const newPagination = doc.querySelector('#pagination-container');
+                            console.log('Found new pagination:', newPagination);
+
                             if (newPagination && paginationContainer) {
                                 paginationContainer.innerHTML = newPagination.innerHTML;
-                                console.log('Pagination updated');
+                                console.log('Pagination updated successfully');
                             } else {
                                 console.error('Could not find new pagination');
                             }
