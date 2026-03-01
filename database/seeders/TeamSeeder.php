@@ -23,14 +23,6 @@ class TeamSeeder extends Seeder
                 'is_active' => true,
             ],
             [
-                'name' => 'Mohammad Iqbal Alimyar',
-                'position' => 'Sustainability Advisor',
-                'image' => 'team-photos/Iqbal.jpeg',
-                'bio' => 'Specialized in native Afghan flora and ecosystem restoration with a PhD in Environmental Science.',
-                'message' => 'Nature has its own wisdom; we just need to listen and learn from it.',
-                'is_active' => true,
-            ],
-            [
                 'name' => 'Mohammad Edris Alimyar',
                 'position' => 'Media & outreach coordianotr',
                 'image' => 'team-photos/edris.jpeg',
@@ -39,9 +31,17 @@ class TeamSeeder extends Seeder
                 'is_active' => true,
             ],
             [
+                'name' => 'Mohammad Iqbal Alimyar',
+                'position' => 'Sustainability Advisor',
+                'image' => 'team-photos/Iqbal.jpeg',
+                'bio' => 'Specialized in native Afghan flora and ecosystem restoration with a PhD in Environmental Science.',
+                'message' => 'Nature has its own wisdom; we just need to listen and learn from it.',
+                'is_active' => true,
+            ],
+            [
                 'name' => 'Mohammad Ozair Khurami',
                 'position' => 'Website Manager & Developer',
-                'image' => 'team-photos/ozair.JPG',
+                'image' => 'team-photos/khurami.jpg',
                 'bio' => 'Efficient operations manager ensuring smooth execution of all tree planting initiatives.',
                 'message' => 'Behind every successful tree planted is a team of dedicated people working seamlessly.',
                 'is_active' => true,
