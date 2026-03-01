@@ -9,12 +9,12 @@
             class="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-background-light dark:to-background-dark">
         </div>
         <div class="relative z-10 text-center max-w-4xl px-4">
-            <span class="inline-block text-primary font-bold tracking-[0.3em] uppercase mb-4 drop-shadow-md">Our
-                Legacy</span>
-            <h1 class="text-7xl md:text-9xl font-display text-white mb-8 leading-tight">The Heart <br />Behind the Green
+            <span
+                class="inline-block text-primary font-bold tracking-[0.3em] uppercase mb-4 drop-shadow-md">{{ __('messages.our_legacy') }}</span>
+            <h1 class="text-7xl md:text-9xl font-display text-white mb-8 leading-tight">{!! __('messages.the_heart_behind_the_green') !!}
             </h1>
             <p class="text-xl md:text-2xl text-white/90 font-light max-w-2xl mx-auto italic">
-                Restoring the lungs of Kabul, one seedling at a time.
+                {{ __('messages.restoring_the_lungs_of_kabul') }}
             </p>
         </div>
         <!-- Floating Leaf Elements (Decorative) -->
@@ -37,24 +37,21 @@
                 </div>
             </div>
             <div class="lg:col-span-7">
-                <span class="text-accent-gold font-bold tracking-widest uppercase text-sm mb-4 block">Our Origin
-                    Story</span>
-                <h2 class="text-5xl md:text-6xl font-display mb-8 text-stone-900 dark:text-white">A Grassroots Movement
-                    Reimagined.</h2>
+                <span
+                    class="text-accent-gold font-bold tracking-widest uppercase text-sm mb-4 block">{{ __('messages.our_origin_story') }}</span>
+                <h2 class="text-5xl md:text-6xl font-display mb-8 text-stone-900 dark:text-white">
+                    {{ __('messages.a_grassroots_movement_reimagined') }}</h2>
                 <div class="space-y-6 text-lg text-stone-600 dark:text-stone-300 leading-relaxed font-light">
                     <p>
-                        It began in the spring of 2025—not in a boardroom, but on the dusty slopes of Haji‑Nabi town. A
-                        handful of Kabul residents, weary of smog‑filled horizons, set out to reclaim their city’s natural
-                        heritage.
+                        {{ __('messages.origin_story_paragraph_1') }}
                     </p>
                     <p>
-                        What started with fifty saplings carried by hand has grown into a dynamic tree‑planting
-                        movement. By blending ancient Afghan agricultural wisdom with modern ecological knowledge, we ensure
-                        every tree planted can withstand the harsh seasons of our capital.
+                        {{ __('messages.origin_story_paragraph_2') }}
                     </p>
                     <div class="flex items-center gap-6 pt-6">
                         <div class="h-px flex-1 bg-accent-gold/30"></div>
-                        <span class="text-accent-gold italic font-display text-2xl">Rooted in Resilience</span>
+                        <span
+                            class="text-accent-gold italic font-display text-2xl">{{ __('messages.rooted_in_resilience') }}</span>
                         <div class="h-px flex-1 bg-accent-gold/30"></div>
                     </div>
                 </div>
@@ -72,14 +69,14 @@
                         class="absolute top-0 right-0 p-8 text-accent-gold/20 group-hover:text-accent-gold/40 transition-colors">
                         <span class="material-symbols-outlined text-8xl">landscape</span>
                     </div>
-                    <h3 class="text-3xl font-display mb-6 text-stone-900 dark:text-white">Our Mission</h3>
+                    <h3 class="text-3xl font-display mb-6 text-stone-900 dark:text-white">
+                        {{ __('messages.our_mission_title') }}</h3>
                     <p class="text-xl text-stone-600 dark:text-stone-300 leading-relaxed font-light relative z-10">
-                        To transform Kabul's urban landscape through sustainable reforestation, fostering a culture of
-                        environmental stewardship that secures a breathable future for all citizens.
+                        {{ __('messages.mission_statement') }}
                     </p>
                     <div class="mt-8 flex items-center gap-2 text-accent-gold">
                         <div class="w-8 h-px bg-accent-gold"></div>
-                        <span class="uppercase tracking-widest text-xs font-bold">The Promise</span>
+                        <span class="uppercase tracking-widest text-xs font-bold">{{ __('messages.the_promise') }}</span>
                     </div>
                 </div>
                 <!-- Vision Card -->
@@ -88,14 +85,14 @@
                     <div class="absolute top-0 right-0 p-8 text-primary/20 group-hover:text-primary/40 transition-colors">
                         <span class="material-symbols-outlined text-8xl">visibility</span>
                     </div>
-                    <h3 class="text-3xl font-display mb-6 text-stone-900 dark:text-white">Our Vision</h3>
+                    <h3 class="text-3xl font-display mb-6 text-stone-900 dark:text-white">
+                        {{ __('messages.our_vision_title') }}</h3>
                     <p class="text-xl text-stone-600 dark:text-stone-300 leading-relaxed font-light relative z-10">
-                        A Kabul where the hills are permanently green, the air is pristine, and every neighborhood
-                        thrives under the shade of a resilient, native urban forest.
+                        {{ __('messages.vision_statement') }}
                     </p>
                     <div class="mt-8 flex items-center gap-2 text-primary">
                         <div class="w-8 h-px bg-primary"></div>
-                        <span class="uppercase tracking-widest text-xs font-bold">The Horizon</span>
+                        <span class="uppercase tracking-widest text-xs font-bold">{{ __('messages.the_horizon') }}</span>
                     </div>
                 </div>
             </div>
