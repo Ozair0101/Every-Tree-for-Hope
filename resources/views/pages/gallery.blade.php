@@ -18,25 +18,21 @@
                     <div
                         class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gold-accent/20 border border-gold-accent/40 text-white text-xs font-bold uppercase tracking-widest mb-6 backdrop-blur-sm">
                         <span class="material-symbols-outlined text-xs">event</span>
-                        Event Gallery
+                        {{ __('messages.event_gallery') }}
                     </div>
                     <h1 class="text-6xl md:text-7xl font-serif text-white mb-6 leading-[1.1] drop-shadow-2xl">
-                        Our <br />
-                        <span class="italic text-gold-accent">Events</span>
-                    </h1>
+                        {{ __('messages.our_events') }}</h1>
                     <p class="text-lg md:text-xl text-gray-200 font-medium leading-relaxed max-w-lg mb-8 drop-shadow-lg">
-                        Explore our collection of tree planting events and environmental initiatives. Each event represents
-                        our commitment to creating a greener Kabul.
-                    </p>
+                        {{ __('messages.gallery_description') }}</p>
                     <div class="flex gap-4">
                         <a href="{{ route('donators') }}"
                             class="bg-gold-accent hover:bg-gold-accent/90 text-deep-green px-8 py-4 rounded-lg text-sm font-bold transition-all uppercase tracking-wider shadow-lg hover:shadow-xl">
-                            Support Our Work
+                            {{ __('messages.support_our_work') }}
                         </a>
                         <a href="{{ route('contact') }}"
                             class="flex items-center gap-2 px-6 py-4 bg-white/10 backdrop-blur-sm text-white border border-white/20 hover:bg-white/20 transition-all rounded-lg text-sm font-bold uppercase tracking-wider">
                             <span class="material-symbols-outlined">volunteer_activism</span>
-                            Get Involved
+                            {{ __('messages.get_involved') }}
                         </a>
                     </div>
                 </div>
@@ -46,10 +42,8 @@
         <!-- Events Grid -->
         <section class="py-16 max-w-7xl mx-auto px-6">
             <div class="text-center mb-12">
-                <h2 class="text-4xl md:text-5xl font-serif text-deep-green mb-4">All Our Events</h2>
-                <p class="text-lg text-charcoal/70 max-w-2xl mx-auto">
-                    Browse through our complete collection of environmental events and tree planting initiatives.
-                </p>
+                <h2 class="text-4xl md:text-5xl font-serif text-deep-green mb-4">{{ __('messages.all_our_events') }}</h2>
+                <p class="text-lg text-charcoal/70 max-w-2xl mx-auto">{{ __('messages.browse_events_description') }}</p>
             </div>
 
             @include('partials.events-grid', ['events' => $events])
