@@ -12,16 +12,13 @@
                 <div
                     class="inline-flex items-center gap-3 bg-white/80 px-5 py-2 rounded-full border border-gold-accent/20 backdrop-blur-sm">
                     <span class="material-symbols-outlined text-gold-accent text-sm">auto_awesome</span>
-                    <p class="text-deep-green text-[10px] font-bold uppercase tracking-[0.2em]">Accountability in every
-                        petal</p>
+                    <p class="text-deep-green text-[10px] font-bold uppercase tracking-[0.2em]">
+                        {{ __('messages.accountability_in_every_petal') }}</p>
                 </div>
                 <h1 class="text-deep-green text-6xl md:text-8xl font-serif font-bold leading-tight">
-                    Transparency <br />
-                    <span class="text-gold-accent italic font-light">in Bloom.</span>
-                </h1>
+                    {{ __('messages.transparency_in_bloom') }}</h1>
                 <p class="text-deep-green/80 text-lg md:text-xl font-medium max-w-2xl mx-auto">
-                    A detailed chronicle of our ecological footprint and financial stewardship across the hills of
-                    Kabul.
+                    {{ __('messages.report_description') }}
                 </p>
             </div>
         </section>
@@ -78,23 +75,22 @@
                             @elseif(request('region') && request('region') !== 'all')
                                 {{ request('region') }}
                             @else
-                                All Time
+                                {{ __('messages.all_time_report') }}
                             @endif
-                            Report
+                            {{ __('messages.report') }}
                         </h4>
-                        <h2 class="text-4xl md:text-6xl font-serif text-deep-green leading-tight">Yearly Growth
-                            <br /><span class="italic font-light">By The Numbers</span>
+                        <h2 class="text-4xl md:text-6xl font-serif text-deep-green leading-tight">
+                            {{ __('messages.yearly_growth_by_numbers') }}</h2>
                         </h2>
                         <p class="text-charcoal/70 text-lg leading-relaxed">
                             @if (request('year') && request('year') !== 'all')
-                                Showing results for {{ request('year') }}. We've expanded our efforts and achieved
-                                remarkable results across all our planting initiatives.
+                                {{ __('messages.showing_results_for_year') }} {{ request('year') }}.
+                                {{ __('messages.we_expanded_our_efforts') }}
                             @elseif(request('region') && request('region') !== 'all')
-                                Showing results for {{ request('region') }} province. Our regional teams have made
-                                significant impact in local communities.
+                                {{ __('messages.showing_results_for_region') }} {{ request('region') }}.
+                                {{ __('messages.our_regional_teams_made_impact') }}
                             @else
-                                Our most successful year yet. We've expanded our nursery capacity by 40% and achieved a
-                                record survival rate for our native almond and pine saplings in the northern ridges.
+                                {{ __('messages.most_successful_year') }}
                             @endif
                         </p>
                         <button
@@ -115,7 +111,8 @@
                             </p>
                         </div>
                         <div class="p-8 border-l border-gold-accent/20">
-                            <p class="text-5xl font-serif text-deep-green mb-2">{{ number_format($filteredVolunteers) }}</p>
+                            <p class="text-5xl font-serif text-deep-green mb-2">{{ number_format($filteredVolunteers) }}
+                            </p>
                             <p class="text-charcoal/40 text-[10px] font-bold uppercase tracking-widest">Volunteers
                             </p>
                         </div>

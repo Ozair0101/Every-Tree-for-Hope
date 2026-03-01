@@ -7,34 +7,33 @@
             <div class="flex flex-wrap justify-between gap-4 p-4">
                 <div class="flex flex-col gap-3">
                     <p class="text-[#1A535C] dark:text-white text-4xl font-black leading-tight tracking-[-0.033em]">
-                        See Your Impact in Action</p>
+                        {{ __('messages.see_your_impact_in_action') }}</p>
                     <p class="text-[#648772] dark:text-gray-400 text-base font-normal leading-normal max-w-2xl">
-                        Explore our ongoing and completed projects around the globe and see how your support is
-                        helping to green our neighborhoods.</p>
+                        {{ __('messages.explore_projects_description') }}</p>
                 </div>
             </div>
             <!-- Stats -->
             <div class="flex flex-wrap gap-4 p-4">
                 <div
                     class="flex min-w-[158px] flex-1 flex-col gap-2 rounded-lg p-6 border border-[#E0E0E0] dark:border-gray-700 bg-white dark:bg-background-dark/50">
-                    <p class="text-[#2B2B2B] dark:text-gray-300 text-base font-medium leading-normal">Total Trees
-                        Planted Globally</p>
+                    <p class="text-[#2B2B2B] dark:text-gray-300 text-base font-medium leading-normal">
+                        {{ __('messages.total_trees_planted_globally') }}</p>
                     <p class="text-[#1A535C] dark:text-white tracking-light text-3xl font-bold leading-tight">
                         1,245,890</p>
-                    <p class="text-[#4ECDC4] text-base font-medium leading-normal">+12.5% this month</p>
+                    <p class="text-[#4ECDC4] text-base font-medium leading-normal">{{ __('messages.this_month') }}</p>
                 </div>
                 <div
                     class="flex min-w-[158px] flex-1 flex-col gap-2 rounded-lg p-6 border border-[#E0E0E0] dark:border-gray-700 bg-white dark:bg-background-dark/50">
-                    <p class="text-[#2B2B2B] dark:text-gray-300 text-base font-medium leading-normal">Total
-                        Donations Raised</p>
+                    <p class="text-[#2B2B2B] dark:text-gray-300 text-base font-medium leading-normal">
+                        {{ __('messages.total_donations_raised') }}</p>
                     <p class="text-[#1A535C] dark:text-white tracking-light text-3xl font-bold leading-tight">$3.4M
                     </p>
                     <p class="text-[#4ECDC4] text-base font-medium leading-normal">+8.2% this month</p>
                 </div>
                 <div
                     class="flex min-w-[158px] flex-1 flex-col gap-2 rounded-lg p-6 border border-[#E0E0E0] dark:border-gray-700 bg-white dark:bg-background-dark/50">
-                    <p class="text-[#2B2B2B] dark:text-gray-300 text-base font-medium leading-normal">Active
-                        Volunteers</p>
+                    <p class="text-[#2B2B2B] dark:text-gray-300 text-base font-medium leading-normal">
+                        {{ __('messages.active_volunteers') }}</p>
                     <p class="text-[#1A535C] dark:text-white tracking-light text-3xl font-bold leading-tight">15,230
                     </p>
                     <p class="text-[#4ECDC4] text-base font-medium leading-normal">+5.1% this month</p>
@@ -48,17 +47,20 @@
                     <div class="flex gap-3 flex-wrap">
                         <button
                             class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-white dark:bg-gray-700 dark:text-white px-4 border border-[#E0E0E0] dark:border-gray-600">
-                            <p class="text-sm font-medium leading-normal">Status: All</p>
+                            <p class="text-sm font-medium leading-normal">{{ __('messages.status') }}:
+                                {{ __('messages.all') }}</p>
                             <span class="material-symbols-outlined text-xl"> expand_more </span>
                         </button>
                         <button
                             class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-white dark:bg-gray-700 dark:text-white px-4 border border-[#E0E0E0] dark:border-gray-600">
-                            <p class="text-sm font-medium leading-normal">Region: All</p>
+                            <p class="text-sm font-medium leading-normal">{{ __('messages.region') }}:
+                                {{ __('messages.all') }}</p>
                             <span class="material-symbols-outlined text-xl"> expand_more </span>
                         </button>
                         <button
                             class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-white dark:bg-gray-700 dark:text-white px-4 border border-[#E0E0E0] dark:border-gray-600">
-                            <p class="text-sm font-medium leading-normal">Type: All</p>
+                            <p class="text-sm font-medium leading-normal">{{ __('messages.type') }}:
+                                {{ __('messages.all') }}</p>
                             <span class="material-symbols-outlined text-xl"> expand_more </span>
                         </button>
                     </div>
@@ -135,7 +137,7 @@
                                 </div>
                                 <input
                                     class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#111714] focus:outline-0 focus:ring-0 border-none bg-white focus:border-none h-full placeholder:text-[#648772] px-4 rounded-l-none border-l-0 pl-2 text-base font-normal leading-normal"
-                                    placeholder="Search for a project" value="" />
+                                    placeholder="{{ __('messages.search_for_project') }}" value="" />
                             </div>
                         </label>
                         <div class="flex flex-col items-end gap-3">

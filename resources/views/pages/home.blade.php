@@ -14,28 +14,27 @@
                     class="inline-flex items-center gap-2 bg-deep-green/5 border border-deep-green/10 px-4 py-2 rounded-full">
                     <span class="flex h-2 w-2 rounded-full bg-primary animate-pulse"></span>
                     <p class="text-deep-green text-[10px] font-bold uppercase tracking-[0.2em]">
-                        Global Reforestation Mission
+                        {{ __('messages.global_reforestation_mission') }}
                     </p>
                 </div>
                 <h1
                     class="text-deep-green text-6xl md:text-7xl lg:text-8xl font-serif font-bold leading-[1.05] tracking-tight">
-                    Rooting for <br />
-                    <span class="text-vibrant-lime italic font-black">the Future</span>
+                    {!! __('messages.rooting_for') !!} <br />
+                    <span class="text-vibrant-lime italic font-black">{{ __('messages.the_future') }}</span>
                 </h1>
                 <p class="text-charcoal/80 text-lg md:text-xl max-w-xl font-medium leading-relaxed">
-                    Every Tree for a Hope is about bringing life to barren land. Each tree is a symbol of resilience and a
-                    call to Afghans to build a greener future—join our team and grow hope with us.
+                    {{ __('messages.hero_description') }}
                 </p>
                 <div class="flex flex-col sm:flex-row gap-4 pt-4">
                     <button
                         class="flex min-w-[220px] h-14 items-center justify-center rounded-lg bg-primary hover:bg-primary/90 text-white text-lg font-extrabold transition-all shadow-xl shadow-primary/20 group">
-                        Plant a Tree Today
+                        {{ __('messages.plant_a_tree_today') }}
                         <span
-                            class="material-symbols-outlined ml-2 group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                            class="material-symbols-outlined {{ $is_rtl ? 'mr-2' : 'ml-2' }} group-hover:translate-x-1 transition-transform">arrow_forward</span>
                     </button>
                     <button
                         class="flex min-w-[220px] h-14 items-center justify-center rounded-lg border border-charcoal/30 hover:bg-charcoal/5 text-charcoal text-lg font-bold transition-all">
-                        View Our Projects
+                        {{ __('messages.view_our_projects') }}
                     </button>
                 </div>
             </div>
@@ -49,7 +48,7 @@
                         {{ number_format(App\Models\Donator::sum('trees_sponsored') + App\Models\Event::sum('trees_planted')) }}
                     </p>
                     <p class="text-charcoal/50 text-[10px] font-bold uppercase tracking-[0.2em] mt-1">
-                        Trees Planted
+                        {{ __('messages.trees_planted') }}
                     </p>
                 </div>
                 <div class="flex flex-col">
@@ -57,20 +56,20 @@
                         {{ number_format(App\Models\Donator::sum('trees_sponsored') * 0.02) }}
                     </p>
                     <p class="text-charcoal/50 text-[10px] font-bold uppercase tracking-[0.2em] mt-1">
-                        Tons CO2 Offset
+                        {{ __('messages.tons_co2_offset') }}
                     </p>
                 </div>
             </div>
             <div class="hidden md:flex flex-col items-center gap-3 absolute left-1/2 -translate-x-1/2 bottom-12">
                 <p class="text-charcoal/30 text-[10px] font-bold uppercase tracking-[0.3em]">
-                    Explore
+                    {{ __('messages.explore') }}
                 </p>
                 <div class="w-[1px] h-14 bg-gradient-to-b from-deep-green/30 to-transparent">
                 </div>
             </div>
             <div class="hidden lg:flex flex-col items-end">
                 <p class="text-charcoal/40 text-[10px] font-bold mb-5 uppercase tracking-[0.15em]">
-                    Trusted by Environmental Leaders
+                    {{ __('messages.trusted_by_environmental_leaders') }}
                 </p>
                 <div class="flex gap-8 opacity-40 grayscale contrast-125">
                     <span class="material-symbols-outlined text-deep-green text-3xl">eco</span>
@@ -91,16 +90,15 @@
             <div class="text-center space-y-6 mb-20 max-w-3xl mx-auto">
                 <div class="inline-flex items-center gap-3">
                     <div class="h-[1px] w-8 bg-gold-accent"></div>
-                    <span class="text-gold-accent font-bold tracking-[0.3em] text-xs uppercase">Documenting the
-                        Change</span>
+                    <span
+                        class="text-gold-accent font-bold tracking-[0.3em] text-xs uppercase">{{ __('messages.documenting_the_change') }}</span>
                     <div class="h-[1px] w-8 bg-gold-accent"></div>
                 </div>
                 <h2 class="text-5xl md:text-6xl font-serif font-bold text-deep-green leading-tight">
-                    Watch Our Mission <br /><span class="font-light italic">in Action</span>
+                    {!! __('messages.watch_our_mission_in_action') !!}
                 </h2>
                 <p class="text-charcoal/70 text-lg leading-relaxed font-medium">
-                    From the foothills of Kabul to the urban centers, witness the healing power of reforestation. Every
-                    seedling planted is a breath of hope restored to our historic landscape.
+                    {{ __('messages.media_description') }}
                 </p>
             </div>
             <div class="relative">
@@ -157,7 +155,8 @@
                                         <span class="text-gray-400 text-center">No media items available</span>
                                     </div>
                                     <div class="px-2 pb-2">
-                                        <h4 class="text-deep-green font-bold text-lg">No Media Available</h4>
+                                        <h4 class="text-deep-green font-bold text-lg">
+                                            {{ __('messages.no_media_available') }}</h4>
                                     </div>
                                 </div>
                             </div>
@@ -207,11 +206,11 @@
                                 class="absolute top-0 left-0 w-full h-full flex flex-col justify-end p-8 bg-gradient-to-t from-white/90 via-white/60 to-transparent">
                                 <div class="flex items-center gap-4 mb-3">
                                     <span class="material-symbols-outlined text-primary">favorite</span>
-                                    <h3 class="font-serif text-3xl font-bold text-deep-green">Mission</h3>
+                                    <h3 class="font-serif text-3xl font-bold text-deep-green">
+                                        {{ __('messages.mission_label') }}</h3>
                                 </div>
                                 <p class="text-charcoal/80 font-light leading-relaxed">
-                                    Cultivating a greener tomorrow by empowering global communities to restore
-                                    biodiversity through science.
+                                    {{ __('messages.mission_text') }}
                                 </p>
                             </div>
                         </div>
@@ -222,12 +221,11 @@
                     <div class="lg:col-span-5 space-y-12 lg:pl-12">
                         <div class="space-y-4">
                             <h4 class="text-primary font-bold tracking-[0.3em] text-xs uppercase">
-                                Our Core Purpose
+                                {{ __('messages.our_core_purpose') }}
                             </h4>
                             <div class="relative">
                                 <h2 class="text-5xl md:text-7xl font-serif font-light text-deep-green leading-tight">
-                                    Growing <br />
-                                    <span class="font-bold italic">Intentionally.</span>
+                                    {!! __('messages.growing_intentionally') !!}
                                 </h2>
                                 <div class="w-24 h-[1px] bg-vibrant-lime mt-8"></div>
                             </div>
@@ -237,26 +235,24 @@
                                 <div class="flex items-center gap-6 mb-4">
                                     <span
                                         class="text-vibrant-lime/40 text-4xl font-serif italic group-hover:text-vibrant-lime transition-colors">01.</span>
-                                    <h5 class="text-xl font-bold text-deep-green uppercase tracking-wider">The
-                                        Mission</h5>
+                                    <h5 class="text-xl font-bold text-deep-green uppercase tracking-wider">
+                                        {{ __('messages.the_mission') }}</h5>
                                 </div>
-                                <p class="text-charcoal/60 text-lg font-light leading-relaxed pl-16">
-                                    To plant with purpose. We don't just put seeds in the ground; we restore entire
-                                    ecosystems by selecting native species that support local fauna and repair
-                                    depleted soil.
+                                <p
+                                    class="text-charcoal/60 text-lg font-light leading-relaxed {{ $is_rtl ? 'pr-16' : 'pl-16' }}">
+                                    {{ __('messages.mission_description') }}
                                 </p>
                             </div>
                             <div class="group">
                                 <div class="flex items-center gap-6 mb-4">
                                     <span
                                         class="text-vibrant-lime/40 text-4xl font-serif italic group-hover:text-vibrant-lime transition-colors">02.</span>
-                                    <h5 class="text-xl font-bold text-deep-green uppercase tracking-wider">The
-                                        Vision</h5>
+                                    <h5 class="text-xl font-bold text-deep-green uppercase tracking-wider">
+                                        {{ __('messages.the_vision') }}</h5>
                                 </div>
-                                <p class="text-charcoal/60 text-lg font-light leading-relaxed pl-16">
-                                    we envision Afghanistan where both cities and hills flourish with greenery. By planting
-                                    trees and inspiring communities, we aim to restore nature, strengthen society, and
-                                    create a sustainable future filled with hope
+                                <p
+                                    class="text-charcoal/60 text-lg font-light leading-relaxed {{ $is_rtl ? 'pr-16' : 'pl-16' }}">
+                                    {{ __('messages.vision_description') }}
                                 </p>
                             </div>
                         </div>
@@ -281,25 +277,22 @@
                             <div class="max-w-3xl">
                                 <p
                                     class="inline-flex items-center rounded-full bg-primary/10 px-3 py-1 text-sm font-semibold text-primary">
-                                    Our Mission
+                                    {{ __('messages.our_mission') }}
                                 </p>
                                 <h2 class="mt-4 text-3xl sm:text-4xl font-extrabold text-gray-900 dark:text-white">
-                                    Turning barren land into green hope
+                                    {{ __('messages.turning_barren_land_into_green_hope') }}
                                 </h2>
                                 <p class="mt-4 text-lg text-gray-700 dark:text-gray-300">
-                                    We are a grassroots environmental movement dedicated to planting six drought-resistant
-                                    trees every week in the hills surrounding Kabul, Afghanistan. Our mission is clear:
+                                    {{ __('messages.about_description') }}
                                 </p>
                                 <div
                                     class="mt-6 rounded-2xl bg-background-light dark:bg-background-dark p-6 border border-gray-200/70 dark:border-gray-800">
                                     <p class="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white">
-                                        To transform barren land into living hope—one tree at a time.
+                                        {{ __('messages.transform_barren_land') }}
                                     </p>
                                 </div>
                                 <p class="mt-6 text-lg text-gray-700 dark:text-gray-300">
-                                    As young members of civil society, we believe tree planting is more than an
-                                    environmental act—it is a way to heal communities, spark collective action, and create a
-                                    more livable future for all Afghans.
+                                    {{ __('messages.community_description') }}
                                 </p>
                             </div>
 
@@ -314,10 +307,11 @@
                                             class="h-full w-full object-cover" src="{{ asset('images/4.jpeg') }}" />
                                     </div>
                                     <div class="p-5 sm:p-6">
-                                        <p class="text-sm font-semibold text-gray-900 dark:text-white">Kabul, Afghanistan
+                                        <p class="text-sm font-semibold text-gray-900 dark:text-white">
+                                            {{ __('messages.kabul_afghanistan') }}
                                         </p>
-                                        <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">Small weekly action that
-                                            grows into lasting change.</p>
+                                        <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
+                                            {{ __('messages.small_weekly_action') }}</p>
                                     </div>
                                 </div>
                             </div>
@@ -334,10 +328,11 @@
                                                 d="M12 3v18m9-9H3" />
                                         </svg>
                                     </div>
-                                    <h3 class="text-base font-bold text-gray-900 dark:text-white">6 trees every week</h3>
+                                    <h3 class="text-base font-bold text-gray-900 dark:text-white">
+                                        {{ __('messages.six_trees_every_week') }}</h3>
                                 </div>
-                                <p class="mt-3 text-sm text-gray-600 dark:text-gray-400">Consistent, measurable action—week
-                                    after week.</p>
+                                <p class="mt-3 text-sm text-gray-600 dark:text-gray-400">
+                                    {{ __('messages.consistent_action') }}</p>
                             </div>
                             <div
                                 class="rounded-2xl bg-white dark:bg-background-dark p-6 border border-gray-200/70 dark:border-gray-800 shadow-sm">
@@ -349,10 +344,11 @@
                                                 d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0h6" />
                                         </svg>
                                     </div>
-                                    <h3 class="text-base font-bold text-gray-900 dark:text-white">Kabul’s hills</h3>
+                                    <h3 class="text-base font-bold text-gray-900 dark:text-white">
+                                        {{ __('messages.kabuls_hills') }}</h3>
                                 </div>
-                                <p class="mt-3 text-sm text-gray-600 dark:text-gray-400">Restoring the land around our
-                                    communities.</p>
+                                <p class="mt-3 text-sm text-gray-600 dark:text-gray-400">
+                                    {{ __('messages.restoring_land') }}</p>
                             </div>
                             <div
                                 class="rounded-2xl bg-white dark:bg-background-dark p-6 border border-gray-200/70 dark:border-gray-800 shadow-sm">
@@ -364,10 +360,11 @@
                                                 d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-10V6m0 12v2" />
                                         </svg>
                                     </div>
-                                    <h3 class="text-base font-bold text-gray-900 dark:text-white">Drought-tolerant</h3>
+                                    <h3 class="text-base font-bold text-gray-900 dark:text-white">
+                                        {{ __('messages.drought_tolerant') }}</h3>
                                 </div>
-                                <p class="mt-3 text-sm text-gray-600 dark:text-gray-400">Choosing trees that can thrive
-                                    with limited water.</p>
+                                <p class="mt-3 text-sm text-gray-600 dark:text-gray-400">
+                                    {{ __('messages.choosing_trees') }}</p>
                             </div>
                         </div>
                     </div>
@@ -383,10 +380,10 @@
                 <div class="absolute inset-0 bg-white/95"></div>
             </div>
             <div class="relative max-w-4xl mx-auto text-center mb-20">
-                <h4 class="text-sage-green font-bold tracking-[0.4em] text-xs uppercase mb-4">Support the Canopy</h4>
+                <h4 class="text-sage-green font-bold tracking-[0.4em] text-xs uppercase mb-4">
+                    {{ __('messages.support_the_canopy') }}</h4>
                 <h2 class="text-5xl md:text-7xl font-serif text-deep-green leading-tight">
-                    Your Contribution <br />
-                    <span class="font-bold italic">Roots Our Change.</span>
+                    {!! __('messages.your_contribution_roots_our_change') !!}
                 </h2>
                 <div class="w-24 h-[1px] bg-gold-accent mx-auto mt-8 opacity-40"></div>
             </div>
@@ -407,29 +404,31 @@
                     </div>
                     <div class="mb-8">
                         <span class="material-symbols-outlined text-gold-accent text-3xl mb-4">distance</span>
-                        <h3 class="font-serif text-2xl font-bold text-deep-green mb-2">Local Handover</h3>
-                        <p class="text-sage-green text-xs font-bold uppercase tracking-widest">Kabul, Afghanistan</p>
+                        <h3 class="font-serif text-2xl font-bold text-deep-green mb-2">{{ __('messages.local_handover') }}
+                        </h3>
+                        <p class="text-sage-green text-xs font-bold uppercase tracking-widest">
+                            {{ __('messages.kabul_afghanistan_location') }}</p>
                     </div>
                     <div class="gold-line-art mb-8"></div>
                     <div class="space-y-6 flex-grow">
                         <div>
-                            <p class="text-[10px] text-charcoal/40 font-bold uppercase tracking-widest mb-1">Primary
-                                Location</p>
-                            <p class="font-serif text-lg text-charcoal/80">Haidari Market</p>
-                            <p class="text-sm text-charcoal/60 italic">District 4, Kabul</p>
+                            <p class="text-[10px] text-charcoal/40 font-bold uppercase tracking-widest mb-1">
+                                {{ __('messages.primary_location') }}</p>
+                            <p class="font-serif text-lg text-charcoal/80">{{ __('messages.haidari_market') }}</p>
+                            <p class="text-sm text-charcoal/60 italic">{{ __('messages.district_4_kabul') }}</p>
                         </div>
                         <div>
-                            <p class="text-[10px] text-charcoal/40 font-bold uppercase tracking-widest mb-1">Exchange
-                                Office</p>
-                            <p class="font-serif text-lg text-charcoal/80">Saray Shazada</p>
-                            <p class="text-sm text-charcoal/60">Main Financial Hub</p>
+                            <p class="text-[10px] text-charcoal/40 font-bold uppercase tracking-widest mb-1">
+                                {{ __('messages.exchange_office') }}</p>
+                            <p class="font-serif text-lg text-charcoal/80">{{ __('messages.saray_shazada') }}</p>
+                            <p class="text-sm text-charcoal/60">{{ __('messages.main_financial_hub') }}</p>
                         </div>
                     </div>
                     <div class="mt-10 pt-6 border-t border-charcoal/5">
                         <button
                             class="w-full py-3 rounded-full border border-gold-accent/30 text-gold-accent text-sm font-bold hover:bg-gold-accent hover:text-white transition-all flex items-center justify-center gap-2">
                             <span class="material-symbols-outlined text-lg">map</span>
-                            Get Directions
+                            {{ __('messages.get_directions') }}
                         </button>
                     </div>
                 </div>
@@ -441,32 +440,33 @@
                     </div>
                     <div class="mb-8">
                         <span class="material-symbols-outlined text-sage-green text-3xl mb-4">payments</span>
-                        <h3 class="font-serif text-2xl font-bold text-deep-green mb-2">MoneyGram &amp; WU</h3>
-                        <p class="text-sage-green text-xs font-bold uppercase tracking-widest">Global Remittance</p>
+                        <h3 class="font-serif text-2xl font-bold text-deep-green mb-2">{{ __('messages.moneygram_wu') }}
+                        </h3>
+                        <p class="text-sage-green text-xs font-bold uppercase tracking-widest">
+                            {{ __('messages.global_remittance') }}</p>
                     </div>
                     <div class="gold-line-art mb-8"></div>
                     <div class="space-y-8 flex-grow">
                         <div>
-                            <p class="text-[10px] text-charcoal/40 font-bold uppercase tracking-widest mb-3">Receiver
-                                Name</p>
-                            <p class="font-serif text-3xl font-bold text-deep-green leading-tight">Mohammad Iqbal
-                                Alimyar</p>
-                            <p class="text-xs text-sage-green mt-2 font-medium">Verify spelling for secure
-                                transfer</p>
+                            <p class="text-[10px] text-charcoal/40 font-bold uppercase tracking-widest mb-3">
+                                {{ __('messages.receiver_name') }}</p>
+                            <p class="font-serif text-3xl font-bold text-deep-green leading-tight">
+                                {{ __('messages.mohammad_iqbal_alimyar') }}</p>
+                            <p class="text-xs text-sage-green mt-2 font-medium">{{ __('messages.verify_spelling') }}</p>
                         </div>
                         <div class="bg-sage-green/5 p-4 rounded-xl border border-sage-green/10">
-                            <p class="text-[10px] text-sage-green font-bold uppercase tracking-widest mb-2">Instructions
+                            <p class="text-[10px] text-sage-green font-bold uppercase tracking-widest mb-2">
+                                {{ __('messages.instructions') }}
                             </p>
-                            <p class="text-xs text-charcoal/60 leading-relaxed">Please share the MTCN or Reference
-                                Number via our secure contact portal after the transaction is complete.</p>
+                            <p class="text-xs text-charcoal/60 leading-relaxed">{{ __('messages.share_mtcn') }}</p>
                         </div>
                     </div>
                     <div class="mt-10 pt-6">
                         <button
                             class="w-full py-4 rounded-full bg-deep-green text-white text-sm font-bold hover:bg-deep-green/90 transition-all shadow-lg shadow-deep-green/20 flex items-center justify-center gap-2 js-copy-trigger"
-                            data-copy-text="Mohammad Iqbal Alimyar">
+                            data-copy-text="{{ __('messages.mohammad_iqbal_alimyar') }}">
                             <span class="material-symbols-outlined text-lg">content_copy</span>
-                            Copy Full Name
+                            {{ __('messages.copy_full_name') }}
                         </button>
                     </div>
                 </div>
@@ -478,15 +478,16 @@
                     </div>
                     <div class="mb-8">
                         <span class="material-symbols-outlined text-charcoal/70 text-3xl mb-4">assured_workload</span>
-                        <h3 class="font-serif text-2xl font-bold text-deep-green mb-2">Bank Transfer</h3>
-                        <p class="text-sage-green text-xs font-bold uppercase tracking-widest">International Ziraat
-                            Bankası</p>
+                        <h3 class="font-serif text-2xl font-bold text-deep-green mb-2">{{ __('messages.bank_transfer') }}
+                        </h3>
+                        <p class="text-sage-green text-xs font-bold uppercase tracking-widest">
+                            {{ __('messages.international_ziraat_bank') }}</p>
                     </div>
                     <div class="gold-line-art mb-8"></div>
                     <div class="space-y-5 flex-grow">
                         <div class="relative">
-                            <p class="text-[10px] text-charcoal/40 font-bold uppercase tracking-widest mb-1">IBAN
-                                Number</p>
+                            <p class="text-[10px] text-charcoal/40 font-bold uppercase tracking-widest mb-1">
+                                {{ __('messages.iban_number') }}</p>
                             <div
                                 class="flex items-center justify-between bg-white/40 p-3 rounded-lg border border-charcoal/5">
                                 <p class="font-mono text-xs text-charcoal font-bold">TR76 0001 0021 2193 4812 5001</p>
@@ -496,8 +497,8 @@
                             </div>
                         </div>
                         <div class="relative">
-                            <p class="text-[10px] text-charcoal/40 font-bold uppercase tracking-widest mb-1">Swift /
-                                BIC Code</p>
+                            <p class="text-[10px] text-charcoal/40 font-bold uppercase tracking-widest mb-1">
+                                {{ __('messages.swift_bic_code') }}</p>
                             <div
                                 class="flex items-center justify-between bg-white/40 p-3 rounded-lg border border-charcoal/5">
                                 <p class="font-mono text-xs text-charcoal font-bold">TCZRTRA2</p>
@@ -507,8 +508,8 @@
                             </div>
                         </div>
                         <div class="relative">
-                            <p class="text-[10px] text-charcoal/40 font-bold uppercase tracking-widest mb-1">Account
-                                Holder</p>
+                            <p class="text-[10px] text-charcoal/40 font-bold uppercase tracking-widest mb-1">
+                                {{ __('messages.account_holder') }}</p>
                             <p class="font-serif text-sm text-charcoal/80">EverGreen Conservation Fund</p>
                         </div>
                     </div>
