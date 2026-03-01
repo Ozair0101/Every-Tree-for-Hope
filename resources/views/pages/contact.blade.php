@@ -22,15 +22,14 @@
             <section
                 class="w-full max-w-7xl mx-auto px-6 md:px-12 lg:px-24 pt-16 pb-24 flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
                 <div class="w-full lg:w-5/12 text-left z-10">
-                    <h4 class="text-sage-green font-bold tracking-[0.4em] text-xs uppercase mb-6">Connect with Kabul
+                    <h4 class="text-sage-green font-bold tracking-[0.4em] text-xs uppercase mb-6">
+                        {{ __('messages.connect_with_kabul') }}
                     </h4>
                     <h1 class="text-6xl md:text-7xl lg:text-8xl font-serif text-charcoal leading-[1.1] mb-8">
-                        Let's Grow <br />
-                        <span class="italic font-normal text-deep-green">Together</span>
+                        {!! __('messages.lets_grow_together') !!}
                     </h1>
                     <p class="text-charcoal/70 text-lg max-w-md font-light leading-relaxed">
-                        Join us in our mission to reforest the rugged hills of Kabul. Every connection planted today
-                        blossoms into a greener future for Afghanistan.
+                        {{ __('messages.contact_description') }}
                     </p>
                     <div class="w-24 h-[1px] bg-gold-accent mt-12 opacity-60"></div>
                 </div>
@@ -53,12 +52,12 @@
                         class="w-16 h-16 bg-off-white border border-gold-accent/20 rounded-full flex items-center justify-center mx-auto mb-6">
                         <span class="material-symbols-outlined text-gold-accent text-3xl">location_on</span>
                     </div>
-                    <h3 class="font-serif text-xl text-deep-green mb-3">Visit Us</h3>
+                    <h3 class="font-serif text-xl text-deep-green mb-3">{{ __('messages.visit_us') }}</h3>
                     <p class="text-charcoal/70 text-sm leading-relaxed">
-                        Kabul, Afghanistan<br />
-                        DarulAman, District 7
+                        {!! __('messages.kabul_afghanistan_district_7') !!}
                     </p>
-                    <p class="text-[10px] font-bold text-sage-green uppercase tracking-widest mt-4">By Appointment Only
+                    <p class="text-[10px] font-bold text-sage-green uppercase tracking-widest mt-4">
+                        {{ __('messages.by_appointment_only') }}
                     </p>
                 </div>
                 <div
@@ -67,12 +66,13 @@
                         class="w-16 h-16 bg-off-white border border-gold-accent/20 rounded-full flex items-center justify-center mx-auto mb-6">
                         <span class="material-symbols-outlined text-gold-accent text-3xl">chat</span>
                     </div>
-                    <h3 class="font-serif text-xl text-deep-green mb-3">Call Us</h3>
+                    <h3 class="font-serif text-xl text-deep-green mb-3">{{ __('messages.call_us') }}</h3>
                     <a class="text-charcoal/70 text-sm hover:text-deep-green transition-colors"
                         href="https://wa.me/93749290591">
-                        WhatsApp: +93 749 290 591
+                        {{ __('messages.whatsapp_number') }}
                     </a>
-                    <p class="text-[10px] font-bold text-sage-green uppercase tracking-widest mt-4">Available Sat-Thu
+                    <p class="text-[10px] font-bold text-sage-green uppercase tracking-widest mt-4">
+                        {{ __('messages.available_sat_thu') }}
                     </p>
                 </div>
                 <div
@@ -81,13 +81,13 @@
                         class="w-16 h-16 bg-off-white border border-gold-accent/20 rounded-full flex items-center justify-center mx-auto mb-6">
                         <span class="material-symbols-outlined text-gold-accent text-3xl">mail</span>
                     </div>
-                    <h3 class="font-serif text-xl text-deep-green mb-3">Write Us</h3>
+                    <h3 class="font-serif text-xl text-deep-green mb-3">{{ __('messages.write_us') }}</h3>
                     <a class="text-charcoal/70 text-sm hover:text-deep-green transition-colors"
                         href="mailto:everytreeforahope@gmail.com">
                         everytreeforahope@gmail.com
                     </a>
-                    <p class="text-[10px] font-bold text-sage-green uppercase tracking-widest mt-4">Typical Response:
-                        24h</p>
+                    <p class="text-[10px] font-bold text-sage-green uppercase tracking-widest mt-4">
+                        {{ __('messages.response_time') }}</p>
                 </div>
             </section>
 
@@ -98,37 +98,40 @@
                             src="https://lh3.googleusercontent.com/aida-public/AB6AXuCp83JCfKCRYgHZuZA8dzBJ3Ih5yeidFw9eQGrfMH89CUBjfUnGXPlxXvfb0DmVToP0iwQwPaK0W5XabUIrIKFxbSwRZd0LqiyyCermKdbgrB2uPKlC48Z7W_on-lUkUOnlJd62ok3dkmH7JXdQxf63fiy8lTJ7mxggLO5Vjo_p7uKwbi43Dl3GWm8aiiPqcYvOfRpQgKV513yPQakVJ-1w2d86ue27OPY3p8N9H5sr5Mg5oew18KgTO2Ehhj7cSGj-2a6ht7DOZOs" />
                     </div>
                     <div class="max-w-2xl relative z-10">
-                        <h2 class="font-serif text-4xl text-deep-green mb-10">Send a Message</h2>
+                        <h2 class="font-serif text-4xl text-deep-green mb-10">{{ __('messages.send_a_message') }}</h2>
                         <form action="{{ route('contact.submit') }}" method="POST" class="space-y-6">
                             @csrf
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div>
                                     <input
                                         class="w-full bg-white/60 backdrop-blur-sm border border-gray-300 rounded-xl px-4 py-3 focus:border-deep-green focus:ring-2 focus:ring-deep-green/20 transition-all text-charcoal placeholder:text-charcoal/40"
-                                        placeholder="Your Name" type="text" name="name" required />
+                                        placeholder="{{ __('messages.your_name') }}" type="text" name="name"
+                                        required />
                                 </div>
                                 <div>
                                     <input
                                         class="w-full bg-white/60 backdrop-blur-sm border border-gray-300 rounded-xl px-4 py-3 focus:border-deep-green focus:ring-2 focus:ring-deep-green/20 transition-all text-charcoal placeholder:text-charcoal/40"
-                                        placeholder="Email Address" type="email" name="email" required />
+                                        placeholder="{{ __('messages.email_address') }}" type="email" name="email"
+                                        required />
                                 </div>
                             </div>
                             <div>
                                 <input
                                     class="w-full bg-white/60 backdrop-blur-sm border border-gray-300 rounded-xl px-4 py-3 focus:border-deep-green focus:ring-2 focus:ring-deep-green/20 transition-all text-charcoal placeholder:text-charcoal/40"
-                                    placeholder="Subject" type="text" name="subject" required />
+                                    placeholder="{{ __('messages.subject') }}" type="text" name="subject" required />
                             </div>
                             <div>
                                 <textarea
                                     class="w-full bg-white/60 backdrop-blur-sm border border-gray-300 rounded-xl px-4 py-3 focus:border-deep-green focus:ring-2 focus:ring-deep-green/20 transition-all text-charcoal placeholder:text-charcoal/40 resize-none"
-                                    placeholder="How can we help you plant the future?" rows="4" name="message" required></textarea>
+                                    placeholder="{{ __('messages.how_can_we_help') }}" rows="4" name="message" required></textarea>
                             </div>
                             <div class="pt-4">
                                 <button
                                     class="bg-deep-green text-white px-8 py-3 rounded-xl font-semibold text-sm hover:bg-deep-green/90 transition-all shadow-lg shadow-deep-green/20 flex items-center gap-2"
                                     type="submit">
-                                    Send Message
-                                    <span class="material-symbols-outlined">arrow_right_alt</span>
+                                    {{ __('messages.send_message') }}
+                                    <span
+                                        class="material-symbols-outlined {{ $is_rtl ? 'mr-2' : 'ml-2' }}">arrow_right_alt</span>
                                 </button>
                             </div>
                         </form>
