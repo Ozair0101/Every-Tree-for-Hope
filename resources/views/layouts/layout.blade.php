@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ $current_locale ?? 'en' }}" dir="{{ $is_rtl ? 'rtl' : 'ltr' }}">
 
 <head>
     <meta charset="utf-8" />
@@ -8,7 +8,7 @@
     <link href="https://fonts.googleapis.com" rel="preconnect" />
     <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
     <link
-        href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&amp;family=Playfair+Display:ital,wght@0,700;1,900&amp;display=swap"
+        href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Playfair+Display:ital,wght@0,700;1,900&display=swap"
         rel="stylesheet" />
     <link
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
@@ -157,23 +157,43 @@
                 <!-- Desktop Navigation -->
                 <div class="hidden md:flex items-center gap-8">
                     <a class="text-sm font-medium hover:text-primary transition-colors"
-                        href="{{ route('home') }}">Home</a>
+                        href="{{ route('home') }}">{{ __('messages.home') }}</a>
                     <a class="text-sm font-medium hover:text-primary transition-colors"
-                        href="{{ route('about') }}">About</a>
+                        href="{{ route('about') }}">{{ __('messages.about') }}</a>
                     <a class="text-sm font-medium hover:text-primary transition-colors"
-                        href="{{ route('gallery') }}">Our Works</a>
+                        href="{{ route('gallery') }}">{{ __('messages.works') }}</a>
                     <a class="text-sm font-medium hover:text-primary transition-colors"
-                        href="{{ route('donators') }}">Donators</a>
+                        href="{{ route('donators') }}">{{ __('messages.donators') }}</a>
                     <a class="text-sm font-medium hover:text-primary transition-colors"
-                        href="{{ route('report') }}">Report</a>
+                        href="{{ route('report') }}">{{ __('messages.report') }}</a>
                     <a class="text-sm font-medium hover:text-primary transition-colors"
-                        href="{{ route('contact') }}">Contact</a>
+                        href="{{ route('contact') }}">{{ __('messages.contact') }}</a>
                 </div>
 
-                <!-- Desktop Action Buttons -->
+                <!-- Desktop Action Buttons & Language Switcher -->
                 <div class="hidden md:flex items-center gap-2">
+                    <!-- Language Switcher -->
+                    <div class="relative group mr-4">
+                        <button
+                            class="flex items-center gap-1 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-primary transition-colors border border-gray-200 dark:border-gray-700 rounded-lg">
+                            <span class="material-symbols-outlined text-lg">language</span>
+                            <span>{{ $current_language ?? 'English' }}</span>
+                            <span class="material-symbols-outlined text-sm">expand_more</span>
+                        </button>
+                        <div
+                            class="absolute right-0 top-full mt-1 w-32 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50">
+                            <a href="{{ request()->fullUrlWithQuery(['lang' => 'en']) }}"
+                                class="block px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-700 {{ $current_locale === 'en' ? 'text-primary font-bold' : 'text-gray-700 dark:text-gray-300' }}">English</a>
+                            <a href="{{ request()->fullUrlWithQuery(['lang' => 'fa']) }}"
+                                class="block px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-700 {{ $current_locale === 'fa' ? 'text-primary font-bold' : 'text-gray-700 dark:text-gray-300' }}">Dari
+                                (فارسی)</a>
+                            <a href="{{ request()->fullUrlWithQuery(['lang' => 'ps']) }}"
+                                class="block px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-700 {{ $current_locale === 'ps' ? 'text-primary font-bold' : 'text-gray-700 dark:text-gray-300' }}">Pashto
+                                (پښتو)</a>
+                        </div>
+                    </div>
                     <button
-                        class="px-4 py-2 text-sm font-bold text-white bg-primary rounded-lg hover:bg-primary/90 transition-colors">Donate</button>
+                        class="px-4 py-2 text-sm font-bold text-white bg-primary rounded-lg hover:bg-primary/90 transition-colors">{{ __('messages.donate_now') }}</button>
                     <button
                         class="px-4 py-2 hidden text-sm font-bold text-gray-900 dark:text-white bg-gray-200 dark:bg-gray-700 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors">Join
                         Us</button>
@@ -195,21 +215,35 @@
                 class="hidden md:hidden bg-background-light/95 dark:bg-background-dark/95 backdrop-blur-sm border-t border-gray-200 dark:border-gray-800">
                 <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-4 space-y-3">
                     <a class="block text-sm font-medium hover:text-primary transition-colors py-2"
-                        href="{{ route('home') }}">Home</a>
+                        href="{{ route('home') }}">{{ __('messages.home') }}</a>
                     <a class="block text-sm font-medium hover:text-primary transition-colors py-2"
-                        href="{{ route('about') }}">About</a>
+                        href="{{ route('about') }}">{{ __('messages.about') }}</a>
                     <a class="block text-sm font-medium hover:text-primary transition-colors py-2"
-                        href="{{ route('gallery') }}">Our
-                        Works</a>
+                        href="{{ route('gallery') }}">{{ __('messages.works') }}</a>
                     <a class="block text-sm font-medium hover:text-primary transition-colors py-2"
-                        href="{{ route('donators') }}">Donators</a>
+                        href="{{ route('donators') }}">{{ __('messages.donators') }}</a>
                     <a class="block text-sm font-medium hover:text-primary transition-colors py-2"
-                        href="{{ route('report') }}">Report</a>
+                        href="{{ route('report') }}">{{ __('messages.report') }}</a>
                     <a class="block text-sm font-medium hover:text-primary transition-colors py-2"
-                        href="{{ route('contact') }}">Contact</a>
+                        href="{{ route('contact') }}">{{ __('messages.contact') }}</a>
+
+                    <!-- Mobile Language Switcher -->
+                    <div class="border-t border-gray-200 dark:border-gray-700 pt-3">
+                        <p class="text-xs font-medium text-gray-500 dark:text-gray-400 mb-2">
+                            {{ $current_language ?? 'Select Language' }}</p>
+                        <div class="flex gap-2">
+                            <a href="{{ request()->fullUrlWithQuery(['lang' => 'en']) }}"
+                                class="px-3 py-1.5 text-sm rounded-lg border {{ $current_locale === 'en' ? 'bg-primary text-white border-primary' : 'border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300' }}">EN</a>
+                            <a href="{{ request()->fullUrlWithQuery(['lang' => 'fa']) }}"
+                                class="px-3 py-1.5 text-sm rounded-lg border {{ $current_locale === 'fa' ? 'bg-primary text-white border-primary' : 'border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300' }}">FA</a>
+                            <a href="{{ request()->fullUrlWithQuery(['lang' => 'ps']) }}"
+                                class="px-3 py-1.5 text-sm rounded-lg border {{ $current_locale === 'ps' ? 'bg-primary text-white border-primary' : 'border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300' }}">PS</a>
+                        </div>
+                    </div>
+
                     <div class="flex flex-col gap-2 pt-4 border-t border-gray-200 dark:border-gray-700">
                         <button
-                            class="w-full px-4 py-2 text-sm font-bold text-white bg-primary rounded-lg hover:bg-primary/90 transition-colors">Donate</button>
+                            class="w-full px-4 py-2 text-sm font-bold text-white bg-primary rounded-lg hover:bg-primary/90 transition-colors">{{ __('messages.donate_now') }}</button>
                         <button
                             class="w-full px-4 py-2 hidden text-sm font-bold text-gray-900 dark:text-white bg-gray-200 dark:bg-gray-700 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors">Join
                             Us</button>
