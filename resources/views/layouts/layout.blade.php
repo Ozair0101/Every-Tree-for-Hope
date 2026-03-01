@@ -216,8 +216,8 @@
                                 (پښتو)</a>
                         </div>
                     </div>
-                    <button
-                        class="px-4 py-2 text-sm font-bold text-white bg-primary rounded-lg hover:bg-primary/90 transition-colors">{{ __('messages.donate_now') }}</button>
+                    <a href="{{ route('donate') }}"
+                        class="px-4 py-2 text-sm font-bold text-white bg-primary rounded-lg hover:bg-primary/90 transition-colors">{{ __('messages.donate_now') }}</a>
                     <button
                         class="px-4 py-2 hidden text-sm font-bold text-gray-900 dark:text-white bg-gray-200 dark:bg-gray-700 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors">Join
                         Us</button>
@@ -266,8 +266,8 @@
                     </div>
 
                     <div class="flex flex-col gap-2 pt-4 border-t border-gray-200 dark:border-gray-700">
-                        <button
-                            class="w-full px-4 py-2 text-sm font-bold text-white bg-primary rounded-lg hover:bg-primary/90 transition-colors">{{ __('messages.donate_now') }}</button>
+                        <a href="{{ route('donate') }}"
+                            class="w-full px-4 py-2 text-sm font-bold text-white bg-primary rounded-lg hover:bg-primary/90 transition-colors text-center">{{ __('messages.donate_now') }}</a>
                         <button
                             class="w-full px-4 py-2 hidden text-sm font-bold text-gray-900 dark:text-white bg-gray-200 dark:bg-gray-700 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors">Join
                             Us</button>

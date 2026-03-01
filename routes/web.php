@@ -28,4 +28,8 @@ Route::get('/contact', function () {
     return view('pages.contact');
 })->name('contact');
 
+Route::get('/donate', function () {
+    return view('pages.aidos-campaign');
+})->name('donate');
+
 Route::post('/contact', [App\Http\Controllers\ContactController::class, 'submit'])->name('contact.submit');
