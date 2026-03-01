@@ -8,7 +8,7 @@
     <link href="https://fonts.googleapis.com" rel="preconnect" />
     <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
     <link
-        href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Playfair+Display:ital,wght@0,700;1,900&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Playfair+Display:ital,wght@0,700;1,900&family=Vazirmatn:wght@400;500;700;800&family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap"
         rel="stylesheet" />
     <link
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
@@ -30,8 +30,9 @@
                         "background-dark": "#112118",
                     },
                     fontFamily: {
-                        sans: ["Manrope", "sans-serif"],
-                        serif: ["Playfair Display", "serif"],
+                        sans: ["Manrope", "Vazirmatn", "Noto Naskh Arabic", "sans-serif"],
+                        serif: ["Playfair Display", "Vazirmatn", "Noto Naskh Arabic", "serif"],
+                        vazir: ["Vazirmatn", "Noto Naskh Arabic", "sans-serif"],
                     },
                     borderRadius: {
                         DEFAULT: "0.25rem",
@@ -46,6 +47,29 @@
     <style>
         body {
             font-family: 'Manrope', sans-serif;
+        }
+
+        /* RTL Language Font Support */
+        html[dir="rtl"] body {
+            font-family: 'Vazirmatn', 'Noto Naskh Arabic', 'Manrope', sans-serif;
+        }
+
+        html[dir="rtl"] h1,
+        html[dir="rtl"] h2,
+        html[dir="rtl"] h3,
+        html[dir="rtl"] h4,
+        html[dir="rtl"] h5,
+        html[dir="rtl"] h6 {
+            font-family: 'Vazirmatn', 'Noto Naskh Arabic', 'Playfair Display', serif;
+        }
+
+        /* Ensure proper text alignment for RTL */
+        html[dir="rtl"] .text-left {
+            text-align: right;
+        }
+
+        html[dir="rtl"] .text-right {
+            text-align: left;
         }
 
         .text-shadow {
