@@ -102,7 +102,7 @@
     <section class="py-32 px-8 bg-white dark:bg-background-dark">
         <div class="max-w-5xl mx-auto">
             @php
-                $founder = \App\Models\Team::active()->where('position', 'Founder & CEO')->first();
+                $founder = \App\Models\Team::active()->where('position', 'Founder Project Leader')->first();
             @endphp
             @if ($founder)
                 <div class="flex flex-col md:flex-row items-center gap-16">
@@ -150,10 +150,7 @@
             </div>
             <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-12">
                 @php
-                    $teamMembers = \App\Models\Team::active()
-                        ->where('position', '!=', 'Founder & CEO')
-                        ->ordered()
-                        ->get();
+                    $teamMembers = \App\Models\Team::active()->where('position', '!=', 'Founder Project Leader')->get();
                 @endphp
                 @forelse($teamMembers as $member)
                     <div class="group text-center">
