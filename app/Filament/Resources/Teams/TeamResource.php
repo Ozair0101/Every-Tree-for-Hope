@@ -36,26 +36,11 @@ class TeamResource extends Resource
                     ->required()
                     ->maxLength(255)
                     ->columnSpanFull(),
-                Components\Select::make('position')
+                Components\TextInput::make('position')
                     ->label('Position/Title')
                     ->required()
-                    ->options([
-                        'Founder & CEO' => 'Founder & CEO',
-                        'Director of Operations' => 'Director of Operations',
-                        'Community Engagement Manager' => 'Community Engagement Manager',
-                        'Lead Ecologist' => 'Lead Ecologist',
-                        'Community Director' => 'Community Director',
-                        'Operations Manager' => 'Operations Manager',
-                        'Botanist' => 'Botanist',
-                        'Environmental Scientist' => 'Environmental Scientist',
-                        'Project Coordinator' => 'Project Coordinator',
-                        'Communications Director' => 'Communications Director',
-                        'Research Lead' => 'Research Lead',
-                        'Volunteer Coordinator' => 'Volunteer Coordinator',
-                        'Other' => 'Other (Please specify in bio)',
-                    ])
-                    ->searchable()
-                    ->placeholder('Select a position')
+                    ->maxLength(255)
+                    ->placeholder('Enter position/title')
                     ->columnSpanFull(),
                 Components\FileUpload::make('image')
                     ->label('Profile Photo')

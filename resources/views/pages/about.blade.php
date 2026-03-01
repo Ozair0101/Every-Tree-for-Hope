@@ -157,7 +157,7 @@
                         <div
                             class="relative mb-6 mx-auto w-48 h-48 sm:w-64 sm:h-64 rounded-full overflow-hidden border-4 border-transparent group-hover:border-primary transition-all duration-500 p-2">
                             <img alt="{{ $member->name }}"
-                                class="w-full h-full object-cover rounded-full filter grayscale group-hover:grayscale-0 transition-all duration-500"
+                                class="w-full h-full object-cover rounded-full filter group-hover:grayscale-0 transition-all duration-500"
                                 data-alt="Professional portrait of {{ $member->name }}"
                                 src="{{ $member->full_image_url }}" />
                             @if ($member->social_media_url || $member->email)
