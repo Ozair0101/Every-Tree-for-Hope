@@ -161,10 +161,11 @@ return [
     
     // Event Details Page
     'back_to_gallery' => 'بېرته گالري ته',
-    'event_details' => 'د پیښې جزئیات',
+    'event_details' => 'د پیښې توضیحات',
     'about_this_event' => 'د دې پیښې په اړه',
-    'event_gallery_title' => 'د پیښې گالري',
-    'tree_species_planted' => 'د کښت شوو ونو ډولونه',
+    'event_gallery_title' => 'د پیښې ګالري',
+    'watch_event_video' => 'د پیښې ویډیو وګورئ',
+    'tree_species_planted' => 'کښینول شوي د ونو ډولونه',
     
     // Donators Page
     'transparency_recognition' => 'شفافیت او مننه',

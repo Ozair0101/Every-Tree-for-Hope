@@ -58,10 +58,42 @@
                     <!-- Description -->
                     <div>
                         <h2 class="text-3xl font-serif text-deep-green mb-6">{{ __('messages.about_this_event') }}</h2>
-                        <div class="prose prose-lg max-w-none text-charcoal/80 leading-relaxed">
+                        <div class="prose prose-lg max-w-none text-charcoal/80 leading-relaxed mb-8">
                             {!! nl2br(e($event->description)) !!}
                         </div>
                     </div>
+
+                    <!-- YouTube Video -->
+                    @if ($event->video_url)
+                        @php
+                            $videoId = null;
+                            if (
+                                preg_match(
+                                    '/(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/',
+                                    $event->video_url,
+                                    $matches,
+                                )
+                            ) {
+                                $videoId = $matches[1];
+                            }
+                        @endphp
+
+                        @if ($videoId)
+                            <div class="mb-12">
+                                <h3 class="text-2xl font-serif text-deep-green mb-6">{{ __('messages.watch_event_video') }}
+                                </h3>
+                                <div
+                                    class="relative aspect-video w-full rounded-2xl overflow-hidden shadow-xl bg-stone-100">
+                                    <iframe class="absolute inset-0 w-full h-full border-0"
+                                        src="https://www.youtube.com/embed/{{ $videoId }}?rel=0"
+                                        title="{{ $event->title }}" frameborder="0"
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                        allowfullscreen>
+                                    </iframe>
+                                </div>
+                            </div>
+                        @endif
+                    @endif
 
                     <!-- Event Gallery -->
                     @if ($event->images->count() > 1)

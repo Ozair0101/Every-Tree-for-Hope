@@ -164,7 +164,9 @@ return [
     'event_details' => 'Event Details',
     'about_this_event' => 'About This Event',
     'event_gallery_title' => 'Event Gallery',
+    'watch_event_video' => 'Watch Event Video',
     'tree_species_planted' => 'Tree Species Planted',
+    'event_video_title' => 'Event Video Title',
     
     // Donators Page
     'transparency_recognition' => 'Transparency & Recognition',

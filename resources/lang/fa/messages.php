@@ -164,6 +164,7 @@ return [
     'event_details' => 'جزئیات رویداد',
     'about_this_event' => 'درباره این رویداد',
     'event_gallery_title' => 'گالری رویداد',
+    'watch_event_video' => 'مشاهده ویدیوی رویداد',
     'tree_species_planted' => 'گونه‌های درخت کاشته شده',
     
     // Donators Page
