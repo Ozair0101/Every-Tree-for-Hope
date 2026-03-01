@@ -15,15 +15,14 @@
                 <div
                     class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20">
                     <span class="material-symbols-outlined text-gold-accent text-sm">verified</span>
-                    <span class="text-white text-[9px] font-bold uppercase tracking-[0.25em]">Transparency &amp;
-                        Recognition</span>
+                    <span
+                        class="text-white text-[9px] font-bold uppercase tracking-[0.25em]">{{ __('messages.transparency_recognition') }}</span>
                 </div>
                 <h1 class="text-white text-6xl md:text-9xl font-serif font-bold tracking-tight drop-shadow-2xl">
-                    Meet the <span class="italic font-light text-gold-accent">Guardians</span>
+                    {{ __('messages.meet_the_guardians') }}
                 </h1>
                 <p class="text-white/90 text-lg md:text-2xl font-light max-w-2xl mx-auto leading-relaxed drop-shadow-lg">
-                    Celebrating the individuals and families who fuel the restoration of Kabul's green heritage through
-                    dedicated tree planting and environmental stewardship.
+                    {{ __('messages.guardians_description') }}
                 </p>
                 <div class="pt-8">
                     <span
@@ -35,9 +34,9 @@
         <section class="py-32 px-6 md:px-12 lg:px-24 bg-white relative botanical-pattern">
             <div class="negative-space-container">
                 <div class="text-center mb-20 space-y-4">
-                    <h4 class="text-gold-accent font-bold tracking-[0.4em] text-[10px] uppercase">Institutional Support
-                    </h4>
-                    <h2 class="text-5xl font-serif text-deep-green">Our Visionary Sponsors</h2>
+                    <h4 class="text-gold-accent font-bold tracking-[0.4em] text-[10px] uppercase">
+                        {{ __('messages.institutional_support') }}</h4>
+                    <h2 class="text-5xl font-serif text-deep-green">{{ __('messages.our_visionary_sponsors') }}</h2>
                     <div class="w-24 h-1 bg-gold-accent/30 mx-auto mt-6"></div>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
@@ -49,8 +48,7 @@
                                 @if ($loop->first)
                                     <div class="absolute top-8 right-8 flex items-center gap-2">
                                         <span
-                                            class="px-4 py-1.5 rounded-full bg-gold-accent/10 border border-gold-accent/20 text-gold-accent text-[9px] font-bold uppercase tracking-widest">Lead
-                                            Partner</span>
+                                            class="px-4 py-1.5 rounded-full bg-gold-accent/10 border border-gold-accent/20 text-gold-accent text-[9px] font-bold uppercase tracking-widest">{{ __('messages.lead_partner') }}</span>
                                     </div>
                                 @endif
 
@@ -69,7 +67,7 @@
 
                                         <span
                                             class="px-3 py-1 rounded-full bg-stone-100 text-charcoal/60 text-[8px] font-bold uppercase tracking-widest">
-                                            {{ $donator->location_type ?? 'Supporter' }}
+                                            {{ $donator->location_type ?? __('messages.supporter') }}
                                         </span>
                                     </div>
                                     <div class="space-y-3">
@@ -89,7 +87,7 @@
                                 @if (!$loop->first)
                                     <div class="mt-8">
                                         <span class="text-gold-accent font-bold text-[9px] uppercase tracking-widest">
-                                            {{ $donator->location ?? 'International Support' }}
+                                            {{ $donator->location ?? __('messages.international_support') }}
                                         </span>
                                     </div>
                                 @endif
@@ -97,7 +95,7 @@
                         </div>
                     @empty
                         <div class="md:col-span-12 text-center py-12">
-                            <p class="text-charcoal/60">No featured donators yet. Check back soon!</p>
+                            <p class="text-charcoal/60">{{ __('messages.no_featured_donators') }}</p>
                         </div>
                     @endforelse
                 </div>
@@ -131,9 +129,9 @@
                     </div>
                     <div class="space-y-8">
                         <div class="space-y-4">
-                            <h4 class="text-gold-accent font-bold tracking-[0.4em] text-[10px] uppercase">Individual Impact
-                            </h4>
-                            <h2 class="text-5xl font-serif text-deep-green">Making a Difference</h2>
+                            <h4 class="text-gold-accent font-bold tracking-[0.4em] text-[10px] uppercase">
+                                {{ __('messages.individual_impact') }}</h4>
+                            <h2 class="text-5xl font-serif text-deep-green">{{ __('messages.making_a_difference') }}</h2>
                             <div class="w-24 h-1 bg-gold-accent/30"></div>
                         </div>
                         @if ($topSupporter)
