@@ -36,6 +36,19 @@ class EventResource extends Resource
                     ->required()
                     ->maxLength(255)
                     ->columnSpanFull(),
+                Components\Select::make('event_type')
+                    ->label('Event Type')
+                    ->required()
+                    ->options([
+                        'Planting' => 'Planting',
+                        'Care & Watering' => 'Care & Watering',
+                        'Planting (OaK)' => 'Planting (OaK)',
+                        'Planting & trimming' => 'Planting & trimming',
+                        'Advertisements' => 'Advertisements',
+                    ])
+                    ->searchable()
+                    ->placeholder('Select event type')
+                    ->columnSpanFull(),
                 Components\Textarea::make('description')
                     ->required()
                     ->rows(4)
@@ -157,6 +170,12 @@ class EventResource extends Resource
                     ->label('Sponsor/Partner')
                     ->maxLength(255)
                     ->helperText('Name of sponsoring organization or partner')
+                    ->columnSpanFull(),
+                Components\TextInput::make('video_url')
+                    ->label('Video URL')
+                    ->url()
+                    ->placeholder('https://youtube.com/watch?v=... or https://vimeo.com/...')
+                    ->helperText('Optional: Link to event video')
                     ->columnSpanFull(),
                 Components\Repeater::make('images')
                     ->label('Event Images')
