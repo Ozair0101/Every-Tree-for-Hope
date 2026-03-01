@@ -21,6 +21,15 @@
                         {{ $event->date->format('M d, Y') }}
                     </span>
                 </div>
+
+                <!-- Event Type Badge -->
+                @if ($event->event_type)
+                    <div class="absolute top-4 right-4 bg-gold-accent/90 backdrop-blur rounded-full px-3 py-1">
+                        <span class="text-xs font-bold text-white">
+                            {{ $event->event_type }}
+                        </span>
+                    </div>
+                @endif
             </div>
 
             <!-- Event Content -->
