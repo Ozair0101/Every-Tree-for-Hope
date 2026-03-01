@@ -186,4 +186,14 @@ return [
     'donate_now' => 'Donate Now',
     'join_us' => 'Join Us',
     'follow_us' => 'Follow Us',
+
+    // Donation Page
+    'support_our_campaign' => 'Support Our Campaign',
+    'support_our_campaign_desc' => 'Join us in making a difference. Your contribution helps us plant more trees and create a greener future for Afghanistan.',
+    'how_you_can_help' => 'How You Can Help',
+    'donate_to_initiatives' => 'Donate to our tree planting initiatives',
+    'share_campaign' => 'Share the campaign with friends and family',
+    'volunteer_events' => 'Volunteer at our planting events',
+    'your_impact' => 'Your Impact',
+    'loading_campaign' => 'Loading campaign...',
 ];

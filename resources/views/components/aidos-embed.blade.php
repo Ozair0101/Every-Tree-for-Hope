@@ -29,7 +29,7 @@
             </div>
             {{-- Loading Text --}}
             <span class="text-sm text-gray-500 dark:text-gray-400 font-medium">
-                Loading campaign...
+                {{ __('messages.loading_campaign') }}
             </span>
         </div>
     </div>
