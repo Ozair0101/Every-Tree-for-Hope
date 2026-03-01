@@ -17,6 +17,8 @@ return new class extends Migration
             $table->text('description');
             $table->string('location');
             $table->date('date');
+            $table->string('event_type')->nullable();
+            $table->string('video_url')->nullable();
             $table->integer('trees_planted')->default(0);
             $table->integer('volunteers')->default(0);
             $table->string('sponsor_partner')->nullable();
