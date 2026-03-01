@@ -169,7 +169,15 @@
                                     <p class="text-charcoal/60">{{ $event->date->format('l, F j, Y') }}</p>
                                 </div>
                             </div>
-
+                            @if ($event->event_type)
+                                <div class="flex items-start gap-3">
+                                    <span class="material-symbols-outlined text-gold-accent mt-1">location_on</span>
+                                    <div>
+                                        <p class="font-medium text-deep-green">Event</p>
+                                        <p class="text-charcoal/60">{{ $event->event_type }}</p>
+                                    </div>
+                                </div>
+                            @endif
                             @if ($event->location)
                                 <div class="flex items-start gap-3">
                                     <span class="material-symbols-outlined text-gold-accent mt-1">location_on</span>
