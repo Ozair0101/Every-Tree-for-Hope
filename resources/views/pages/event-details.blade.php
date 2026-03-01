@@ -19,7 +19,7 @@
                 <a href="{{ route('gallery') }}"
                     class="flex items-center gap-2 bg-white/10 backdrop-blur-sm text-white border border-white/20 hover:bg-white/20 transition-all rounded-lg px-4 py-2">
                     <span class="material-symbols-outlined">arrow_back</span>
-                    <span class="text-sm font-medium">Back to Gallery</span>
+                    <span class="text-sm font-medium">{{ __('messages.back_to_gallery') }}</span>
                 </a>
             </div>
 
@@ -29,7 +29,7 @@
                     <div
                         class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gold-accent/20 border border-gold-accent/40 text-white text-xs font-bold uppercase tracking-widest mb-4 backdrop-blur-sm">
                         <span class="material-symbols-outlined text-xs">event</span>
-                        Event Details
+                        {{ __('messages.event_details') }}
                     </div>
                     <h1 class="text-4xl md:text-6xl font-serif text-white mb-4 leading-tight">
                         {{ $event->title }}
@@ -57,7 +57,7 @@
                 <div class="lg:col-span-2 space-y-8">
                     <!-- Description -->
                     <div>
-                        <h2 class="text-3xl font-serif text-deep-green mb-6">About This Event</h2>
+                        <h2 class="text-3xl font-serif text-deep-green mb-6">{{ __('messages.about_this_event') }}</h2>
                         <div class="prose prose-lg max-w-none text-charcoal/80 leading-relaxed">
                             {!! nl2br(e($event->description)) !!}
                         </div>
@@ -66,7 +66,8 @@
                     <!-- Event Gallery -->
                     @if ($event->images->count() > 1)
                         <div>
-                            <h3 class="text-2xl font-serif text-deep-green mb-6">Event Gallery</h3>
+                            <h3 class="text-2xl font-serif text-deep-green mb-6">{{ __('messages.event_gallery_title') }}
+                            </h3>
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 @foreach ($event->images->skip(1) as $image)
                                     <div class="relative aspect-video bg-stone-100 rounded-lg overflow-hidden">
@@ -87,7 +88,8 @@
                     <!-- Tree Species -->
                     @if ($event->all_tree_species)
                         <div>
-                            <h3 class="text-2xl font-serif text-deep-green mb-6">Tree Species Planted</h3>
+                            <h3 class="text-2xl font-serif text-deep-green mb-6">{{ __('messages.tree_species_planted') }}
+                            </h3>
                             <div class="flex flex-wrap gap-2">
                                 @foreach ($event->all_tree_species as $species)
                                     <span
