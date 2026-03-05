@@ -170,12 +170,7 @@
             class="sticky top-0 z-50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-sm border-b border-gray-200 dark:border-gray-800">
             <nav class="container mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between">
                 <a class="flex items-center gap-3" href="{{ route('home') }}">
-                    <svg class="h-6 w-6 text-primary" fill="none" viewBox="0 0 48 48"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M24 4C25.7818 14.2173 33.7827 22.2182 44 24C33.7827 25.7818 25.7818 33.7827 24 44C22.2182 33.7827 14.2173 25.7818 4 24C14.2173 22.2182 22.2182 14.2173 24 4Z"
-                            fill="currentColor"></path>
-                    </svg>
+                    <img src="{{ asset('everytree.png') }}" alt="Every Tree for Hope" class="h-12 w-auto">
                     <h2 class="text-xl font-bold text-gray-900 dark:text-white">Every Tree for Hope</h2>
                 </a>
 
@@ -287,10 +282,8 @@
             <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-16 mb-20 relative z-10">
                 <div class="space-y-6">
                     <div class="flex items-center gap-2">
-                        <div class="bg-white/20 p-1.5 rounded-lg">
-                            <span class="material-symbols-outlined text-white text-xl">nature</span>
-                        </div>
-                        <h3 class="text-white text-xl font-extrabold tracking-tight">EverGreen</h3>
+                        <img src="{{ asset('everytree.png') }}" alt="Every Tree for Hope" class="h-16 w-auto">
+                        <h3 class="text-white text-xl font-extrabold tracking-tight">Every Tree for Hope</h3>
                     </div>
                     <p class="text-white/80 leading-relaxed max-w-sm">
                         Dedicated to restoring Kabul's natural heritage, one tree at a time. We bridge the gap between
