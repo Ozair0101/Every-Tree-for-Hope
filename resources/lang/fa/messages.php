@@ -71,7 +71,7 @@ return [
     'moneygram_wu' => 'مانی‌گرام و وسترن یونیون',
     'global_remittance' => 'حواله جهانی',
     'receiver_name' => 'نام گیرنده',
-    'mohammad_iqbal_alimyar' => 'محمد اقبب عالمیار',
+    'mohammad_iqbal_alimyar' => 'محمد اقبال عالمیار',
     'verify_spelling' => 'املا را برای انتقال امن تأیید کنید',
     'instructions' => 'دستورالعمل‌ها',
     'share_mtcn' => 'لطفاً شماره MTCN یا شماره مرجع را از طریق پورتال تماس امن ما پس از تکمیل تراکنش به اشتراک بگذارید.',
