@@ -283,15 +283,15 @@
                 <div class="space-y-6">
                     <div class="flex items-center gap-2">
                         <img src="{{ asset('everytree.png') }}" alt="Every Tree for Hope" class="h-16 w-auto">
-                        <h3 class="text-white text-xl font-extrabold tracking-tight">Every Tree for Hope</h3>
+                        <h3 class="text-white text-xl font-extrabold tracking-tight">{{ __('messages.site_name') }}
+                        </h3>
                     </div>
                     <p class="text-white/80 leading-relaxed max-w-sm">
-                        Dedicated to restoring Kabul's natural heritage, one tree at a time. We bridge the gap between
-                        global support and local ecological restoration in Afghanistan.
+                        {{ __('messages.footer_description') }}
                     </p>
                 </div>
                 <div class="space-y-6">
-                    <h4 class="font-serif text-lg font-bold text-white">Contact Us</h4>
+                    <h4 class="font-serif text-lg font-bold text-white">{{ __('messages.contact_us') }}</h4>
                     <ul class="space-y-4 text-sm text-white/80">
                         <li class="flex items-center gap-3">
                             <span class="material-symbols-outlined text-gold-accent text-lg">mail</span>
@@ -306,19 +306,20 @@
                         </li>
                         <li class="flex items-start gap-3">
                             <span class="material-symbols-outlined text-gold-accent text-lg">location_on</span>
-                            <span class="text-white/80">Kabul, Afghanistan<br /><span
-                                    class="text-[10px] font-bold uppercase tracking-wider text-white/60">Visits by
-                                    appointment only</span></span>
+                            <span class="text-white/80">{{ __('messages.kabul_afghanistan') }}<br /><span
+                                    class="text-[10px] font-bold uppercase tracking-wider text-white/60">{{ __('messages.visits_by_appointment') }}</span></span>
                         </li>
                     </ul>
                 </div>
                 <div class="space-y-6">
-                    <h4 class="font-serif text-lg font-bold text-white">Quick Links</h4>
+                    <h4 class="font-serif text-lg font-bold text-white">{{ __('messages.quick_links') }}</h4>
                     <ul class="space-y-3 text-sm font-bold uppercase tracking-widest text-white/80">
-                        <li><a class="hover:text-gold-accent transition-colors" href="#">Impact</a></li>
-                        <li><a class="hover:text-gold-accent transition-colors" href="#">Projects</a></li>
+                        <li><a class="hover:text-gold-accent transition-colors"
+                                href="#">{{ __('messages.impact') }}</a></li>
+                        <li><a class="hover:text-gold-accent transition-colors"
+                                href="#">{{ __('messages.projects') }}</a></li>
                         <li><a class="hover:text-gold-accent transition-colors text-gold-accent"
-                                href="#">Donation</a>
+                                href="#">{{ __('messages.donation') }}</a>
                         </li>
                     </ul>
                     <div class="flex items-center gap-8">

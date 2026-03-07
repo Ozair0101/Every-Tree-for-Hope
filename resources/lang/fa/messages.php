@@ -10,6 +10,9 @@ return [
     'report' => 'گزارش',
     'contact' => 'تماس با ما',
     
+    // Site Info
+    'site_name' => 'Every Tree for Hope',
+    
     // Hero Section
     'global_reforestation_mission' => 'مأموریت جهانی جنگل‌کاری مجدد',
     'rooting_for' => 'ریشه‌دار کردن برای',
@@ -187,6 +190,15 @@ return [
     'donate_now' => 'همین حالا کمک مالی کنید',
     'join_us' => 'به ما بپیوندید',
     'follow_us' => 'تعقیب ما',
+    
+    // Footer
+    'footer_description' => 'اختصاص به احیای میراث طبیعی کابل، یک درخت در یک زمان. ما شکاف بین حمایت جهانی و احیای زیست‌محیطی محلی در افغانستان را پر می‌کنیم.',
+    'kabul_afghanistan' => 'کابل، افغانستان',
+    'visits_by_appointment' => 'بازدید فقط با قرار ملاقات',
+    'quick_links' => 'لینک‌های سریع',
+    'impact' => 'تأثیر',
+    'projects' => 'پروژه‌ها',
+    'donation' => 'کمک مالی',
 
     // Donation Page
     'support_our_campaign' => 'حمایت از کمپین ما',

@@ -10,6 +10,9 @@ return [
     'report' => 'Report',
     'contact' => 'Contact',
     
+    // Site Info
+    'site_name' => 'Every Tree for Hope',
+    
     // Hero Section
     'global_reforestation_mission' => 'Global Reforestation Mission',
     'rooting_for' => 'Rooting for',
@@ -188,6 +191,15 @@ return [
     'donate_now' => 'Donate Now',
     'join_us' => 'Join Us',
     'follow_us' => 'Follow Us',
+    
+    // Footer
+    'footer_description' => 'Dedicated to restoring Kabul\'s natural heritage, one tree at a time. We bridge the gap between global support and local ecological restoration in Afghanistan.',
+    'kabul_afghanistan' => 'Kabul, Afghanistan',
+    'visits_by_appointment' => 'Visits by appointment only',
+    'quick_links' => 'Quick Links',
+    'impact' => 'Impact',
+    'projects' => 'Projects',
+    'donation' => 'Donation',
 
     // Donation Page
     'support_our_campaign' => 'Support Our Campaign',

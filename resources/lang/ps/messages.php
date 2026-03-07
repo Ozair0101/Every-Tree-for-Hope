@@ -10,6 +10,9 @@ return [
     'report' => 'رپورټ',
     'contact' => 'اړیکه',
     
+    // Site Info
+    'site_name' => 'Every Tree for Hope',
+    
     // Hero Section
     'global_reforestation_mission' => 'نړیوال د جنگلونو بیاکې مأموریت',
     'rooting_for' => 'ریشه کول لپاره',
@@ -71,7 +74,7 @@ return [
     'moneygram_wu' => 'مانيګرام او ویسټرن یونین',
     'global_remittance' => 'نړیوال لېږد',
     'receiver_name' => 'د منونکي نوم',
-    'mohammad_iqbal_alimyar' => 'محمد اقبب عالمیار',
+    'mohammad_iqbal_alimyar' => 'محمد اقبال عالمیار',
     'verify_spelling' => 'د امن لېږد لپاره املا تأیید کړئ',
     'instructions' => 'لارښوونې',
     'share_mtcn' => 'لطفاً د MTCN یا مرجع شمیره د معاملې د تکمیل وروسته زموږ د امن اړیکې پortal له لارې شریک کړئ.',
@@ -187,6 +190,15 @@ return [
     'donate_now' => 'اوس مرسته وکړئ',
     'join_us' => 'موږ سره یوځای شئ',
     'follow_us' => 'موږ تعقیب کړئ',
+    
+    // Footer
+    'footer_description' => 'د کابل د طبیعي میراث بیاژوندي ته وقف، یوه ونه په یوه وخت کې. موږ د نړیوال ملاتړ او محلي چاپیریال بیاژوندي ترمنځ توپیر پر کبو.',
+    'kabul_afghanistan' => 'کابل، افغانستان',
+    'visits_by_appointment' => 'لیدل یوازې د دندې په وقف',
+    'quick_links' => 'ژر لینکونه',
+    'impact' => 'اغیز',
+    'projects' => 'پروژې',
+    'donation' => 'مرسته',
 
     // Donation Page
     'support_our_campaign' => 'زموږ د کمپاین ملاتړ وکړئ',
