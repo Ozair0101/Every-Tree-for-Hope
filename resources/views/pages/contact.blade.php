@@ -149,10 +149,11 @@
             <div class="absolute inset-0 bg-white/95"></div>
         </div>
         <div class="relative max-w-4xl mx-auto text-center mb-20">
-            <h4 class="text-sage-green font-bold tracking-[0.4em] text-xs uppercase mb-4">Support the Canopy</h4>
+            <h4 class="text-sage-green font-bold tracking-[0.4em] text-xs uppercase mb-4">
+                {{ __('messages.support_the_canopy') }}</h4>
             <h2 class="text-5xl md:text-7xl font-serif text-deep-green leading-tight">
-                Your Contribution <br />
-                <span class="font-bold italic">Roots Our Change.</span>
+                {{ __('messages.your_contribution') }} <br />
+                <span class="font-bold italic">{{ __('messages.roots_our_change') }}</span>
             </h2>
             <div class="w-24 h-[1px] bg-gold-accent mx-auto mt-8 opacity-40"></div>
         </div>
@@ -173,20 +174,21 @@
                 </div>
                 <div class="mb-8">
                     <span class="material-symbols-outlined text-gold-accent text-3xl mb-4">distance</span>
-                    <h3 class="font-serif text-2xl font-bold text-deep-green mb-2">Local Handover</h3>
-                    <p class="text-sage-green text-xs font-bold uppercase tracking-widest">Kabul, Afghanistan</p>
+                    <h3 class="font-serif text-2xl font-bold text-deep-green mb-2">{{ __('messages.local_handover') }}</h3>
+                    <p class="text-sage-green text-xs font-bold uppercase tracking-widest">
+                        {{ __('messages.kabul_afghanistan') }}</p>
                 </div>
                 <div class="gold-line-art mb-8"></div>
                 <div class="space-y-6 flex-grow">
                     <div>
-                        <p class="text-[10px] text-charcoal/40 font-bold uppercase tracking-widest mb-1">Primary
-                            Location</p>
+                        <p class="text-[10px] text-charcoal/40 font-bold uppercase tracking-widest mb-1">
+                            {{ __('messages.primary_location') }}</p>
                         <p class="font-serif text-lg text-charcoal/80">Haidari Market</p>
                         <p class="text-sm text-charcoal/60 italic">District 4, Kabul</p>
                     </div>
                     <div>
-                        <p class="text-[10px] text-charcoal/40 font-bold uppercase tracking-widest mb-1">Exchange
-                            Office</p>
+                        <p class="text-[10px] text-charcoal/40 font-bold uppercase tracking-widest mb-1">
+                            {{ __('messages.exchange_office') }}</p>
                         <p class="font-serif text-lg text-charcoal/80">Saray Shazada</p>
                         <p class="text-sm text-charcoal/60">Main Financial Hub</p>
                     </div>
@@ -195,7 +197,7 @@
                     <button
                         class="w-full py-3 rounded-full border border-gold-accent/30 text-gold-accent text-sm font-bold hover:bg-gold-accent hover:text-white transition-all flex items-center justify-center gap-2">
                         <span class="material-symbols-outlined text-lg">map</span>
-                        Get Directions
+                        {{ __('messages.get_directions') }}
                     </button>
                 </div>
             </div>
@@ -207,25 +209,24 @@
                 </div>
                 <div class="mb-8">
                     <span class="material-symbols-outlined text-sage-green text-3xl mb-4">payments</span>
-                    <h3 class="font-serif text-2xl font-bold text-deep-green mb-2">MoneyGram &amp; WU</h3>
-                    <p class="text-sage-green text-xs font-bold uppercase tracking-widest">Global Remittance</p>
+                    <h3 class="font-serif text-2xl font-bold text-deep-green mb-2">{{ __('messages.moneygram_wu') }}</h3>
+                    <p class="text-sage-green text-xs font-bold uppercase tracking-widest">
+                        {{ __('messages.global_remittance') }}</p>
                 </div>
                 <div class="gold-line-art mb-8"></div>
                 <div class="space-y-8 flex-grow">
                     <div>
-                        <p class="text-[10px] text-charcoal/40 font-bold uppercase tracking-widest mb-3">Receiver
-                            Name</p>
-                        <p class="font-serif text-3xl font-bold text-deep-green leading-tight">Mohammad Iqbal
-                            Alimyar</p>
-                        <p class="text-xs text-sage-green mt-2 font-medium">Verify spelling for secure
-                            transfer</p>
+                        <p class="text-[10px] text-charcoal/40 font-bold uppercase tracking-widest mb-3">
+                            {{ __('messages.receiver_name') }}</p>
+                        <p class="font-serif text-3xl font-bold text-deep-green leading-tight">
+                            {{ __('messages.mohammad_iqbal_alimyar') }}</p>
+                        <p class="text-xs text-sage-green mt-2 font-medium">{{ __('messages.verify_spelling') }}</p>
                     </div>
                     <div class="bg-sage-green/5 p-4 rounded-xl border border-sage-green/10">
                         <p class="text-[10px] text-sage-green font-bold uppercase tracking-widest mb-2">
-                            Instructions
+                            {{ __('messages.instructions') }}
                         </p>
-                        <p class="text-xs text-charcoal/60 leading-relaxed">Please share the MTCN or Reference
-                            Number via our secure contact portal after the transaction is complete.</p>
+                        <p class="text-xs text-charcoal/60 leading-relaxed">{{ __('messages.share_mtcn') }}</p>
                     </div>
                 </div>
                 <div class="mt-10 pt-6">
@@ -233,7 +234,7 @@
                         class="w-full py-4 rounded-full bg-deep-green text-white text-sm font-bold hover:bg-deep-green/90 transition-all shadow-lg shadow-deep-green/20 flex items-center justify-center gap-2 js-copy-trigger"
                         data-copy-text="Mohammad Iqbal Alimyar">
                         <span class="material-symbols-outlined text-lg">content_copy</span>
-                        Copy Full Name
+                        {{ __('messages.copy_full_name') }}
                     </button>
                 </div>
             </div>
@@ -245,15 +246,15 @@
                 </div>
                 <div class="mb-8">
                     <span class="material-symbols-outlined text-charcoal/70 text-3xl mb-4">assured_workload</span>
-                    <h3 class="font-serif text-2xl font-bold text-deep-green mb-2">Bank Transfer</h3>
-                    <p class="text-sage-green text-xs font-bold uppercase tracking-widest">International Ziraat
-                        Bankası</p>
+                    <h3 class="font-serif text-2xl font-bold text-deep-green mb-2">{{ __('messages.bank_transfer') }}</h3>
+                    <p class="text-sage-green text-xs font-bold uppercase tracking-widest">
+                        {{ __('messages.international_ziraat_bank') }}</p>
                 </div>
                 <div class="gold-line-art mb-8"></div>
                 <div class="space-y-5 flex-grow">
                     <div class="relative">
-                        <p class="text-[10px] text-charcoal/40 font-bold uppercase tracking-widest mb-1">IBAN
-                            Number</p>
+                        <p class="text-[10px] text-charcoal/40 font-bold uppercase tracking-widest mb-1">
+                            {{ __('messages.iban_number') }}</p>
                         <div class="flex items-center justify-between bg-white/40 p-3 rounded-lg border border-charcoal/5">
                             <p class="font-mono text-xs text-charcoal font-bold">TR76 0001 0021 2193 4812 5001</p>
                             <span
@@ -262,8 +263,8 @@
                         </div>
                     </div>
                     <div class="relative">
-                        <p class="text-[10px] text-charcoal/40 font-bold uppercase tracking-widest mb-1">Swift /
-                            BIC Code</p>
+                        <p class="text-[10px] text-charcoal/40 font-bold uppercase tracking-widest mb-1">
+                            {{ __('messages.swift_bic_code') }}</p>
                         <div class="flex items-center justify-between bg-white/40 p-3 rounded-lg border border-charcoal/5">
                             <p class="font-mono text-xs text-charcoal font-bold">TCZRTRA2</p>
                             <span
@@ -272,8 +273,8 @@
                         </div>
                     </div>
                     <div class="relative">
-                        <p class="text-[10px] text-charcoal/40 font-bold uppercase tracking-widest mb-1">Account
-                            Holder</p>
+                        <p class="text-[10px] text-charcoal/40 font-bold uppercase tracking-widest mb-1">
+                            {{ __('messages.account_holder') }}</p>
                         <p class="font-serif text-sm text-charcoal/80">EverGreen Conservation Fund</p>
                     </div>
                 </div>
@@ -282,7 +283,7 @@
                         class="w-full py-3 rounded-full bg-white border border-charcoal/10 text-charcoal text-sm font-bold hover:bg-charcoal/5 transition-all flex items-center justify-center gap-2 js-copy-all-bank"
                         type="button">
                         <span class="material-symbols-outlined text-lg">content_copy</span>
-                        Copy All Bank Details
+                        {{ __('messages.copy_all_bank_details') }}
                     </button>
                 </div>
             </div>
@@ -299,17 +300,18 @@
                     <span class="material-symbols-outlined text-sm">shield_with_heart</span>
                 </div>
             </div>
-            <p class="text-charcoal/40 text-[10px] font-bold uppercase tracking-[0.3em]">Fully Encrypted &amp;
-                Secure Transfers</p>
+            <p class="text-charcoal/40 text-[10px] font-bold uppercase tracking-[0.3em]">
+                {{ __('messages.fully_encrypted_secure_transfers') }}</p>
         </div>
     </section>
 
     <section class="w-full py-16 bg-white border-y border-charcoal/5">
         <div class="max-w-7xl mx-auto px-6 text-center">
-            <p class="text-[10px] font-bold text-sage-green uppercase tracking-[0.3em] mb-10">Follow the
-                Journey</p>
+            <p class="text-[10px] font-bold text-sage-green uppercase tracking-[0.3em] mb-10">
+                {{ __('messages.follow_the_journey') }}</p>
             <div class="flex justify-center items-center gap-10 md:gap-16">
-                <a class="group flex flex-col items-center gap-3" href="#">
+                <a class="group flex flex-col items-center gap-3"
+                    href="https://www.facebook.com/share/1AZo3YKok2/?mibextid=wwXIfr">
                     <div
                         class="w-12 h-12 flex items-center justify-center rounded-full bg-off-white shadow-sm group-hover:bg-deep-green group-hover:text-white transition-all text-sage-green">
                         <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
@@ -321,7 +323,7 @@
                     <span
                         class="text-[10px] font-bold text-charcoal/40 uppercase group-hover:text-deep-green">Facebook</span>
                 </a>
-                <a class="group flex flex-col items-center gap-3" href="#">
+                {{-- <a class="group flex flex-col items-center gap-3" href="#">
                     <div
                         class="w-12 h-12 flex items-center justify-center rounded-full bg-off-white shadow-sm group-hover:bg-deep-green group-hover:text-white transition-all text-sage-green">
                         <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
@@ -332,8 +334,8 @@
                     </div>
                     <span
                         class="text-[10px] font-bold text-charcoal/40 uppercase group-hover:text-deep-green">TikTok</span>
-                </a>
-                <a class="group flex flex-col items-center gap-3" href="#">
+                </a> --}}
+                <a class="group flex flex-col items-center gap-3" href="http://www.youtube.com/@EveryTreeForAHope">
                     <div
                         class="w-12 h-12 flex items-center justify-center rounded-full bg-off-white shadow-sm group-hover:bg-deep-green group-hover:text-white transition-all text-sage-green">
                         <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
@@ -345,7 +347,8 @@
                     <span
                         class="text-[10px] font-bold text-charcoal/40 uppercase group-hover:text-deep-green">YouTube</span>
                 </a>
-                <a class="group flex flex-col items-center gap-3" href="#">
+                <a class="group flex flex-col items-center gap-3"
+                    href="https://www.instagram.com/every_treeforahope?igsh=MXNhbjFuY3NlYWJldw==">
                     <div
                         class="w-12 h-12 flex items-center justify-center rounded-full bg-off-white shadow-sm group-hover:bg-deep-green group-hover:text-white transition-all text-sage-green">
                         <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
