@@ -175,21 +175,23 @@
         <section class="py-24 px-6 md:px-12 lg:px-24 bg-stone-50 relative">
             <div class="negative-space-container">
                 <div class="text-center mb-16 space-y-4">
-                    <h4 class="text-gold-accent font-bold tracking-[0.4em] text-[10px] uppercase">Community of Support</h4>
-                    <h2 class="text-5xl font-serif text-deep-green">All Our Donators</h2>
+                    <h4 class="text-gold-accent font-bold tracking-[0.4em] text-[10px] uppercase">
+                        {{ __('messages.community_of_support') }}</h4>
+                    <h2 class="text-5xl font-serif text-deep-green">{{ __('messages.all_our_donators') }}</h2>
                     <div class="w-24 h-1 bg-gold-accent/30 mx-auto mt-6"></div>
                     <div class="flex justify-center gap-6 md:gap-8 lg:gap-12 text-deep-green flex-wrap">
                         <div class="text-center">
                             <div class="text-2xl md:text-3xl font-bold">{{ $totalDonators }}</div>
-                            <div class="text-xs md:text-sm uppercase tracking-wider">Donators</div>
+                            <div class="text-xs md:text-sm uppercase tracking-wider">{{ __('messages.donators') }}</div>
                         </div>
                         <div class="text-center">
                             <div class="text-2xl md:text-3xl font-bold">{{ number_format($totalTrees) }}</div>
-                            <div class="text-xs md:text-sm uppercase tracking-wider">Trees</div>
+                            <div class="text-xs md:text-sm uppercase tracking-wider">{{ __('messages.trees') }}</div>
                         </div>
                         <div class="text-center">
                             <div class="text-2xl md:text-3xl font-bold">${{ number_format($totalFinancial, 0) }}</div>
-                            <div class="text-xs md:text-sm uppercase tracking-wider">Total Support</div>
+                            <div class="text-xs md:text-sm uppercase tracking-wider">{{ __('messages.total_support') }}
+                            </div>
                         </div>
                     </div>
                 </div>
