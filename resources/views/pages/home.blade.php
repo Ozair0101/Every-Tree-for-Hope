@@ -190,32 +190,47 @@
                 class="material-symbols-outlined absolute bottom-20 left-[15%] text-primary/10 text-6xl animate-pulse">psychology_alt</span>
             <div class="max-w-7xl mx-auto relative">
                 <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-                    <div class="lg:col-span-7 relative min-h-[500px] md:min-h-[700px] flex items-center">
-                        <div
-                            class="absolute top-0 right-0 w-[85%] h-[400px] md:h-[550px] rounded-3xl overflow-hidden shadow-2xl group transition-transform duration-1000 hover:scale-[1.02]">
-                            <img alt="Wide forest vision" class="w-full h-full object-cover"
-                                src="{{ asset('images/10.jpeg') }}" />
-                            <div class="absolute inset-0 bg-deep-green/10"></div>
-                        </div>
-                        <div
-                            class="absolute bottom-0 left-0 w-[75%] h-[350px] md:h-[450px] rounded-3xl overflow-hidden shadow-2xl border-[8px] border-white group transition-transform duration-1000 hover:scale-[1.05] z-10">
-                            <img alt="Sprout mission" class="w-full h-full object-cover"
-                                src="{{ asset('images/1.jpeg') }}" />
-                            <div class="absolute inset-0 bg-primary/10"></div>
-                            <div
-                                class="absolute top-0 left-0 w-full h-full flex flex-col justify-end p-8 bg-gradient-to-t from-white/90 via-white/60 to-transparent">
-                                <div class="flex items-center gap-4 mb-3">
-                                    <span class="material-symbols-outlined text-primary">favorite</span>
-                                    <h3 class="font-serif text-3xl font-bold text-deep-green">
-                                        {{ __('messages.mission_label') }}</h3>
+                    <div class="lg:col-span-7 relative">
+                        <!-- Vertical stacked images with style -->
+                        <div class="space-y-6">
+                            <!-- Top image -->
+                            <div class="relative group">
+                                <div
+                                    class="rounded-3xl overflow-hidden shadow-2xl border-[8px] border-white transition-all duration-700 hover:scale-[1.02] hover:shadow-3xl">
+                                    <img alt="Wide forest vision" class="w-full h-[300px] md:h-[400px] object-cover"
+                                        src="{{ asset('images/10.jpeg') }}" />
+                                    <div class="absolute inset-0 bg-gradient-to-t from-deep-green/20 to-transparent"></div>
                                 </div>
-                                <p class="text-charcoal/80 font-light leading-relaxed">
-                                    {{ __('messages.mission_text') }}
-                                </p>
+                                <div
+                                    class="absolute -bottom-3 -right-3 w-20 h-20 border-r-2 border-b-2 border-vibrant-lime/40 rounded-br-3xl">
+                                </div>
                             </div>
-                        </div>
-                        <div
-                            class="absolute -bottom-6 -left-6 w-32 h-32 border-l-2 border-b-2 border-vibrant-lime/40 rounded-bl-3xl -z-10">
+
+                            <!-- Bottom image with content -->
+                            <div class="relative group">
+                                <div
+                                    class="rounded-3xl overflow-hidden shadow-2xl border-[8px] border-white transition-all duration-700 hover:scale-[1.02] hover:shadow-3xl">
+                                    <img alt="Sprout mission" class="w-full h-[250px] md:h-[350px] object-cover"
+                                        src="{{ asset('images/1.jpeg') }}" />
+                                    <div
+                                        class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-transparent">
+                                    </div>
+                                    <div class="absolute bottom-0 left-0 w-full p-6 md:p-8">
+                                        <div class="flex items-center gap-3 mb-2">
+                                            <span
+                                                class="material-symbols-outlined text-white bg-primary/90 p-2 rounded-full">favorite</span>
+                                            <h3 class="font-serif text-2xl md:text-3xl font-bold text-white">
+                                                {{ __('messages.mission_label') }}</h3>
+                                        </div>
+                                        <p class="text-white/90 font-light leading-relaxed text-sm md:text-base">
+                                            {{ __('messages.mission_text') }}
+                                        </p>
+                                    </div>
+                                </div>
+                                <div
+                                    class="absolute -top-3 -left-3 w-20 h-20 border-l-2 border-t-2 border-primary/40 rounded-tl-3xl">
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="lg:col-span-5 space-y-12 lg:pl-12">
