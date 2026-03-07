@@ -96,41 +96,41 @@
                         <button
                             class="group flex items-center gap-4 bg-deep-green text-white px-8 py-4 rounded-xl font-bold text-xs uppercase tracking-widest hover:bg-deep-green/90 transition-all">
                             <span class="material-symbols-outlined text-gold-accent">eco</span>
-                            Download Full PDF Report
+                            {{ __('messages.download_full_pdf_report') }}
                         </button>
                     </div>
                     <div class="flex-1 grid grid-cols-2 gap-8 w-full">
                         <div class="p-8 border-l border-gold-accent/20">
                             <p class="text-5xl font-serif text-deep-green mb-2">{{ $survivalRate }}%</p>
-                            <p class="text-charcoal/40 text-[10px] font-bold uppercase tracking-widest">Survival Rate
-                            </p>
+                            <p class="text-charcoal/40 text-[10px] font-bold uppercase tracking-widest">
+                                {{ __('messages.survival_rate') }}</p>
                         </div>
                         <div class="p-8 border-l border-gold-accent/20">
                             <p class="text-5xl font-serif text-deep-green mb-2">{{ number_format($filteredTrees) }}</p>
-                            <p class="text-charcoal/40 text-[10px] font-bold uppercase tracking-widest">Trees Planted
-                            </p>
+                            <p class="text-charcoal/40 text-[10px] font-bold uppercase tracking-widest">
+                                {{ __('messages.trees_planted') }}</p>
                         </div>
                         <div class="p-8 border-l border-gold-accent/20">
                             <p class="text-5xl font-serif text-deep-green mb-2">{{ number_format($filteredVolunteers) }}
                             </p>
-                            <p class="text-charcoal/40 text-[10px] font-bold uppercase tracking-widest">Volunteers
-                            </p>
+                            <p class="text-charcoal/40 text-[10px] font-bold uppercase tracking-widest">
+                                {{ __('messages.volunteers') }}</p>
                         </div>
                         <div class="p-8 border-l border-gold-accent/20">
                             <p class="text-5xl font-serif text-deep-green mb-2">{{ number_format($filteredEvents) }}</p>
-                            <p class="text-charcoal/40 text-[10px] font-bold uppercase tracking-widest">Events Completed
-                            </p>
+                            <p class="text-charcoal/40 text-[10px] font-bold uppercase tracking-widest">
+                                {{ __('messages.events_completed') }}</p>
                         </div>
                         <div class="p-8 border-l border-gold-accent/20">
                             <p class="text-5xl font-serif text-deep-green mb-2">{{ number_format($filteredCO2, 1) }}</p>
-                            <p class="text-charcoal/40 text-[10px] font-bold uppercase tracking-widest">Tons CO₂ Offset
-                            </p>
+                            <p class="text-charcoal/40 text-[10px] font-bold uppercase tracking-widest">
+                                {{ __('messages.tons_co2_offset') }}</p>
                         </div>
                         <div class="p-8 border-l border-gold-accent/20">
                             <p class="text-5xl font-serif text-deep-green mb-2">
                                 {{ number_format(($filteredTrees * $survivalRate) / 100) }}</p>
-                            <p class="text-charcoal/40 text-[10px] font-bold uppercase tracking-widest">Trees Surviving
-                            </p>
+                            <p class="text-charcoal/40 text-[10px] font-bold uppercase tracking-widest">
+                                {{ __('messages.trees_surviving') }}</p>
                         </div>
                     </div>
                 </div>
@@ -147,17 +147,16 @@
                             <div class="flex flex-wrap justify-between gap-3 p-4">
                                 <h1
                                     class="text-[#111714] dark:text-[#f6f8f7] text-4xl sm:text-5xl font-black leading-tight tracking-[-0.033em] w-full text-center">
-                                    Our Impact Report</h1>
+                                    {{ __('messages.our_impact_report') }}</h1>
                             </div>
                             <!-- BodyText -->
                             <p
                                 class="text-center text-base font-normal leading-normal pb-6 pt-2 px-4 text-[#111714]/80 dark:text-[#f6f8f7]/80 max-w-3xl mx-auto">
-                                This table shows the cumulative results of community efforts, events, and donations. Thank
-                                you for helping us green our neighborhoods. Total: {{ number_format($filteredTrees) }}
-                                trees
-                                planted by {{ number_format($filteredVolunteers) }} volunteers across
-                                {{ $filteredEvents }}
-                                events.
+                                {{ __('messages.impact_report_description', [
+                                    'trees' => number_format($filteredTrees),
+                                    'volunteers' => number_format($filteredVolunteers),
+                                    'events' => $filteredEvents,
+                                ]) }}
                             </p>
                             <!-- Chips -->
                             <div
@@ -447,7 +446,8 @@
                     });
                 @endphp
                 <div class="text-center space-y-4">
-                    <h4 class="text-gold-accent font-bold tracking-[0.3em] text-xs uppercase">Progress Visualized</h4>
+                    <h4 class="text-gold-accent font-bold tracking-[0.3em] text-xs uppercase">
+                        {{ __('messages.progress_visualized') }}</h4>
                     <h2 class="text-4xl md:text-5xl font-serif text-deep-green">Monthly Analysis {{ date('Y') }}</h2>
                     <p class="text-charcoal/60 max-w-2xl mx-auto">
                         Tracking {{ number_format($filteredTrees) }} trees planted across {{ $monthlyStats->count() }}
@@ -562,73 +562,36 @@
         <section class="py-24 px-6 md:px-12 lg:px-24 bg-white border-t border-charcoal/5">
             <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
                 <div class="space-y-8">
-                    <h4 class="text-gold-accent font-bold tracking-[0.3em] text-xs uppercase">Financial Integrity</h4>
-                    <h2 class="text-4xl md:text-5xl font-serif text-deep-green leading-tight">Where your <br /><span
-                            class="italic font-light">contributions go.</span></h2>
-                    <p class="text-charcoal/70 text-lg leading-relaxed font-light">We maintain a lean administrative
-                        structure to ensure that 85% of all funds are deployed directly into Kabul's soil through
-                        seedlings and local labor.</p>
+                    <h4 class="text-gold-accent font-bold tracking-[0.3em] text-xs uppercase">
+                        {{ __('messages.financial_integrity') }}</h4>
+                    <h2 class="text-4xl md:text-5xl font-serif text-deep-green leading-tight">
+                        {{ __('messages.where_your') }} <br /><span
+                            class="italic font-light">{{ __('messages.contributions_go') }}</span></h2>
+                    <p class="text-charcoal/70 text-lg leading-relaxed font-light">
+                        {{ __('messages.financial_description') }}</p>
                     <div class="flex items-center gap-6 pt-4">
                         <div class="text-center">
                             <p class="text-3xl font-serif text-deep-green">85%</p>
-                            <p class="text-[10px] font-bold text-charcoal/40 uppercase tracking-widest">Direct Impact
+                            <p class="text-[10px] font-bold text-charcoal/40 uppercase tracking-widest">
+                                {{ __('messages.direct_impact') }}
                             </p>
                         </div>
                         <div class="w-[1px] h-12 bg-gold-accent/20"></div>
                         <div class="text-center">
                             <p class="text-3xl font-serif text-deep-green">10%</p>
-                            <p class="text-[10px] font-bold text-charcoal/40 uppercase tracking-widest">Maintenance</p>
+                            <p class="text-[10px] font-bold text-charcoal/40 uppercase tracking-widest">
+                                {{ __('messages.maintenance') }}</p>
                         </div>
                         <div class="w-[1px] h-12 bg-gold-accent/20"></div>
                         <div class="text-center">
                             <p class="text-3xl font-serif text-deep-green">5%</p>
-                            <p class="text-[10px] font-bold text-charcoal/40 uppercase tracking-widest">Admin</p>
+                            <p class="text-[10px] font-bold text-charcoal/40 uppercase tracking-widest">
+                                {{ __('messages.admin') }}</p>
                         </div>
                     </div>
                 </div>
                 <div class="bg-background-light rounded-[2rem] p-8 md:p-12 border border-charcoal/5 shadow-sm">
-                    <table class="w-full">
-                        <thead class="border-b border-charcoal/10">
-                            <tr>
-                                <th
-                                    class="text-left py-4 text-[10px] font-bold uppercase tracking-widest text-charcoal/40">
-                                    Allocation</th>
-                                <th
-                                    class="text-right py-4 text-[10px] font-bold uppercase tracking-widest text-charcoal/40">
-                                    Amount (USD)</th>
-                            </tr>
-                        </thead>
-                        <tbody class="text-sm font-medium">
-                            <tr class="border-b border-charcoal/5">
-                                <td class="py-6 flex items-center gap-3">
-                                    <span class="material-symbols-outlined text-gold-accent text-sm">potted_plant</span>
-                                    Seedlings &amp; Nursery
-                                </td>
-                                <td class="text-right py-6 text-deep-green font-bold">$124,500</td>
-                            </tr>
-                            <tr class="border-b border-charcoal/5">
-                                <td class="py-6 flex items-center gap-3">
-                                    <span class="material-symbols-outlined text-gold-accent text-sm">groups</span>
-                                    Local Labor &amp; Wages
-                                </td>
-                                <td class="text-right py-6 text-deep-green font-bold">$98,200</td>
-                            </tr>
-                            <tr class="border-b border-charcoal/5">
-                                <td class="py-6 flex items-center gap-3">
-                                    <span class="material-symbols-outlined text-gold-accent text-sm">water_drop</span>
-                                    Irrigation &amp; Tools
-                                </td>
-                                <td class="text-right py-6 text-deep-green font-bold">$42,100</td>
-                            </tr>
-                            <tr>
-                                <td class="py-6 flex items-center gap-3">
-                                    <span class="material-symbols-outlined text-gold-accent text-sm">hub</span>
-                                    Logistics &amp; Ops
-                                </td>
-                                <td class="text-right py-6 text-deep-green font-bold">$15,400</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <img src="{{ asset('images/21.jpeg') }}" alt="Financial Overview" class="w-full h-auto rounded-xl">
                 </div>
             </div>
         </section>
@@ -638,8 +601,9 @@
             <span
                 class="material-symbols-outlined absolute -bottom-10 -right-10 text-[15rem] text-gold-accent/5">leaf_spark</span>
             <div class="max-w-3xl mx-auto relative z-10 space-y-10">
-                <h2 class="text-5xl font-serif text-deep-green italic">Every dollar planted today <br /><span
-                        class="font-bold not-italic">is a forest for tomorrow.</span></h2>
+                <h2 class="text-5xl font-serif text-deep-green italic">{{ __('messages.every_tree_planted_today') }}
+                    <br /><span class="font-bold not-italic">{{ __('messages.is_a_forest_for_tomorrow') }}</span>
+                </h2>
                 <div class="flex flex-col sm:flex-row items-center justify-center gap-6">
                     <button
                         class="w-full sm:w-auto px-10 py-5 bg-deep-green text-white rounded-xl font-bold text-xs uppercase tracking-[0.2em] shadow-lg shadow-deep-green/20">Invest
