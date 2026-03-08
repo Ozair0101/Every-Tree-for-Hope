@@ -387,7 +387,262 @@
             </div>
         </section>
 
-        <section class="relative py-18 md:py-24 px-6 overflow-hidden bg-background-light" id="donation-section">
+        <!-- ===== OUR WORKS IMAGE GALLERY SECTION ===== -->
+        <section class="relative py-24 md:py-36 px-6 overflow-hidden" id="our-works"
+            style="background: linear-gradient(160deg, #f0fdf4 0%, #ffffff 40%, #f7fce8 100%);">
+
+            <!-- Decorative background blobs -->
+            <div class="absolute inset-0 pointer-events-none overflow-hidden">
+                <div class="absolute -top-32 -left-32 w-[500px] h-[500px] rounded-full opacity-[0.06]"
+                    style="background: radial-gradient(circle, #22c55e, transparent 70%)"></div>
+                <div class="absolute -bottom-32 -right-32 w-[600px] h-[600px] rounded-full opacity-[0.05]"
+                    style="background: radial-gradient(circle, #84cc16, transparent 70%)"></div>
+                <span
+                    class="material-symbols-outlined absolute top-16 right-[4%] text-primary/[0.06] text-[280px] select-none leading-none">forest</span>
+                <span
+                    class="material-symbols-outlined absolute bottom-16 left-[2%] text-vibrant-lime/[0.06] text-[200px] select-none leading-none">park</span>
+            </div>
+
+            <!-- Top decorative line -->
+            <div class="absolute top-0 left-0 w-full h-[2px]"
+                style="background: linear-gradient(90deg, transparent, #84cc16 30%, #22c55e 50%, #84cc16 70%, transparent)">
+            </div>
+
+            <div class="max-w-7xl mx-auto relative z-10">
+
+                <!-- Section Header -->
+                <div class="text-center space-y-6 mb-20 max-w-3xl mx-auto">
+                    <div class="inline-flex items-center gap-3">
+                        <div class="h-[1px] w-10 bg-gradient-to-r from-transparent to-vibrant-lime"></div>
+                        <div
+                            class="flex items-center gap-2 bg-deep-green/5 border border-deep-green/10 px-4 py-2 rounded-full">
+                            <span class="flex h-2 w-2 rounded-full bg-primary animate-pulse"></span>
+                            <span
+                                class="text-deep-green font-bold tracking-[0.25em] text-[10px] uppercase">{{ __('messages.our_work_in_the_field') ?? 'Our Work in the Field' }}</span>
+                        </div>
+                        <div class="h-[1px] w-10 bg-gradient-to-l from-transparent to-vibrant-lime"></div>
+                    </div>
+
+                    <h2 class="text-5xl md:text-6xl lg:text-7xl font-serif font-bold text-deep-green leading-tight">
+                        Every Tree Tells<br />
+                        <span class="text-vibrant-lime italic font-black">a Story</span>
+                    </h2>
+
+                    <p class="text-charcoal/70 text-lg leading-relaxed font-medium max-w-2xl mx-auto">
+                        Each photograph captures a moment of transformation — hands in the soil, roots taking hold, and
+                        communities coming together to build a greener tomorrow for Afghanistan.
+                    </p>
+                </div>
+
+                <!-- Masonry-style Image Grid -->
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4"
+                    style="grid-auto-rows: 200px;">
+
+                    <!-- HERO image: 2 cols × 2 rows -->
+                    <div class="col-span-2 row-span-2 group relative overflow-hidden rounded-3xl shadow-2xl cursor-pointer gallery-item"
+                        onclick="openLightbox('{{ asset('images/1.jpeg') }}', 'Restoring Life, One Tree at a Time', 'Every planting session is a step forward — a collective act of hope rooted into the earth of Kabul.')">
+                        <img src="{{ asset('images/1.jpeg') }}" alt="Restoring Life"
+                            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                        <div
+                            class="absolute inset-0 transition-all duration-500 opacity-0 group-hover:opacity-100"
+                            style="background: linear-gradient(to top, rgba(6,78,59,0.85) 0%, rgba(6,78,59,0.3) 50%, transparent 100%)">
+                        </div>
+                        <!-- Always-visible gradient at bottom -->
+                        <div class="absolute bottom-0 left-0 w-full h-40"
+                            style="background: linear-gradient(to top, rgba(6,78,59,0.6), transparent)"></div>
+                        <!-- Label -->
+                        <div class="absolute bottom-0 left-0 p-6 md:p-8">
+                            <div class="flex items-center gap-2 mb-2">
+                                <span
+                                    class="flex h-2 w-2 rounded-full bg-vibrant-lime animate-pulse"></span>
+                                <span
+                                    class="text-vibrant-lime text-[10px] font-bold uppercase tracking-[0.25em]">Featured Moment</span>
+                            </div>
+                            <h3
+                                class="text-white font-serif text-2xl md:text-3xl font-bold leading-snug drop-shadow-lg">
+                                Restoring Life,<br />One Tree at a Time
+                            </h3>
+                        </div>
+                        <!-- Hover expand icon -->
+                        <div
+                            class="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500 border border-white/30">
+                            <span class="material-symbols-outlined text-white text-base">open_in_full</span>
+                        </div>
+                    </div>
+
+                    <!-- Image: 1 col × 1 row -->
+                    <div class="group relative overflow-hidden rounded-2xl shadow-lg cursor-pointer gallery-item"
+                        onclick="openLightbox('{{ asset('images/5.jpeg') }}', 'Community in Action', 'Volunteers and families stand together, proving that change begins with a single act of planting.')">
+                        <img src="{{ asset('images/5.jpeg') }}" alt="Community Planting"
+                            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                        <div class="absolute inset-0 transition-opacity duration-500 opacity-0 group-hover:opacity-100"
+                            style="background: linear-gradient(to top, rgba(6,78,59,0.8), transparent 70%)"></div>
+                        <div
+                            class="absolute bottom-0 left-0 p-4 translate-y-2 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-500">
+                            <p class="text-white font-bold text-sm drop-shadow">Community in Action</p>
+                        </div>
+                    </div>
+
+                    <!-- Image: 1 col × 1 row -->
+                    <div class="group relative overflow-hidden rounded-2xl shadow-lg cursor-pointer gallery-item"
+                        onclick="openLightbox('{{ asset('images/7.jpeg') }}', 'Nurturing New Growth', 'With patience and care, young seedlings are tended to — each one a promise to the future.')">
+                        <img src="{{ asset('images/7.jpeg') }}" alt="Seedling Care"
+                            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                        <div class="absolute inset-0 transition-opacity duration-500 opacity-0 group-hover:opacity-100"
+                            style="background: linear-gradient(to top, rgba(6,78,59,0.8), transparent 70%)"></div>
+                        <div
+                            class="absolute bottom-0 left-0 p-4 translate-y-2 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-500">
+                            <p class="text-white font-bold text-sm drop-shadow">Nurturing New Growth</p>
+                        </div>
+                    </div>
+
+                    <!-- Image: 2 cols × 1 row (wide) -->
+                    <div class="col-span-2 group relative overflow-hidden rounded-2xl shadow-lg cursor-pointer gallery-item"
+                        onclick="openLightbox('{{ asset('images/10.jpeg') }}', 'Transforming the Landscape', 'The hills of Kabul are being reborn. What was once barren is now becoming a living testament to collective will.')">
+                        <img src="{{ asset('images/10.jpeg') }}" alt="Kabul Hills"
+                            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                        <div class="absolute inset-0 transition-opacity duration-500 opacity-0 group-hover:opacity-100"
+                            style="background: linear-gradient(to top, rgba(6,78,59,0.8), transparent 60%)"></div>
+                        <div
+                            class="absolute bottom-0 left-0 p-5 translate-y-2 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-500">
+                            <span
+                                class="text-vibrant-lime text-[10px] font-bold uppercase tracking-widest">Kabul Hills</span>
+                            <p class="text-white font-serif font-bold mt-1">Transforming the Landscape of Tomorrow</p>
+                        </div>
+                    </div>
+
+                    <!-- Image: 1 col × 1 row -->
+                    <div class="group relative overflow-hidden rounded-2xl shadow-lg cursor-pointer gallery-item"
+                        onclick="openLightbox('{{ asset('images/3.jpeg') }}', 'Growing Together', 'Side by side, our volunteers demonstrate that environmental restoration is a shared responsibility.')">
+                        <img src="{{ asset('images/3.jpeg') }}" alt="Teamwork"
+                            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                        <div class="absolute inset-0 transition-opacity duration-500 opacity-0 group-hover:opacity-100"
+                            style="background: linear-gradient(to top, rgba(6,78,59,0.8), transparent 70%)"></div>
+                        <div
+                            class="absolute bottom-0 left-0 p-4 translate-y-2 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-500">
+                            <p class="text-white font-bold text-sm drop-shadow">Growing Together</p>
+                        </div>
+                    </div>
+
+                    <!-- Image: 1 col × 1 row -->
+                    <div class="group relative overflow-hidden rounded-2xl shadow-lg cursor-pointer gallery-item"
+                        onclick="openLightbox('{{ asset('images/6.jpeg') }}', 'Roots of Hope', 'Every root planted is a declaration of faith in the future — a living act of resistance against desertification.')">
+                        <img src="{{ asset('images/6.jpeg') }}" alt="Planting Roots"
+                            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                        <div class="absolute inset-0 transition-opacity duration-500 opacity-0 group-hover:opacity-100"
+                            style="background: linear-gradient(to top, rgba(6,78,59,0.8), transparent 70%)"></div>
+                        <div
+                            class="absolute bottom-0 left-0 p-4 translate-y-2 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-500">
+                            <p class="text-white font-bold text-sm drop-shadow">Roots of Hope</p>
+                        </div>
+                    </div>
+
+                    <!-- Image: 1 col × 1 row -->
+                    <div class="group relative overflow-hidden rounded-2xl shadow-lg cursor-pointer gallery-item"
+                        onclick="openLightbox('{{ asset('images/8.jpeg') }}', 'Seeds of Change', 'Tiny seedlings today, mighty forests tomorrow. Each seed we sow carries the weight of a brighter future.')">
+                        <img src="{{ asset('images/8.jpeg') }}" alt="Young Trees"
+                            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                        <div class="absolute inset-0 transition-opacity duration-500 opacity-0 group-hover:opacity-100"
+                            style="background: linear-gradient(to top, rgba(6,78,59,0.8), transparent 70%)"></div>
+                        <div
+                            class="absolute bottom-0 left-0 p-4 translate-y-2 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-500">
+                            <p class="text-white font-bold text-sm drop-shadow">Seeds of Change</p>
+                        </div>
+                    </div>
+
+                    <!-- Image: 1 col × 1 row -->
+                    <div class="group relative overflow-hidden rounded-2xl shadow-lg cursor-pointer gallery-item"
+                        onclick="openLightbox('{{ asset('images/9.jpeg') }}', 'United for Nature', 'When hearts unite around a shared purpose, mountains can truly become green again.')">
+                        <img src="{{ asset('images/9.jpeg') }}" alt="Collaboration"
+                            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                        <div class="absolute inset-0 transition-opacity duration-500 opacity-0 group-hover:opacity-100"
+                            style="background: linear-gradient(to top, rgba(6,78,59,0.8), transparent 70%)"></div>
+                        <div
+                            class="absolute bottom-0 left-0 p-4 translate-y-2 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-500">
+                            <p class="text-white font-bold text-sm drop-shadow">United for Nature</p>
+                        </div>
+                    </div>
+
+                    <!-- Image: 1 col × 1 row -->
+                    <div class="group relative overflow-hidden rounded-2xl shadow-lg cursor-pointer gallery-item hidden md:block"
+                        onclick="openLightbox('{{ asset('images/11.jpeg') }}', 'Green Beginnings', 'From the first dig to the last pat of earth — every step matters in this journey of renewal.')">
+                        <img src="{{ asset('images/11.jpeg') }}" alt="Green Beginnings"
+                            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                        <div class="absolute inset-0 transition-opacity duration-500 opacity-0 group-hover:opacity-100"
+                            style="background: linear-gradient(to top, rgba(6,78,59,0.8), transparent 70%)"></div>
+                        <div
+                            class="absolute bottom-0 left-0 p-4 translate-y-2 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-500">
+                            <p class="text-white font-bold text-sm drop-shadow">Green Beginnings</p>
+                        </div>
+                    </div>
+
+                    <!-- Image: 1 col × 1 row -->
+                    <div class="group relative overflow-hidden rounded-2xl shadow-lg cursor-pointer gallery-item hidden md:block"
+                        onclick="openLightbox('{{ asset('images/12.jpeg') }}', 'A Forest of Hands', 'Every tree planted is a handshake with the future — made by the hands of those who believe in a living Earth.')">
+                        <img src="{{ asset('images/12.jpeg') }}" alt="A Forest of Hands"
+                            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                        <div class="absolute inset-0 transition-opacity duration-500 opacity-0 group-hover:opacity-100"
+                            style="background: linear-gradient(to top, rgba(6,78,59,0.8), transparent 70%)"></div>
+                        <div
+                            class="absolute bottom-0 left-0 p-4 translate-y-2 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-500">
+                            <p class="text-white font-bold text-sm drop-shadow">A Forest of Hands</p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Inspiring quote + CTA -->
+                <div class="mt-20 flex flex-col items-center gap-8 text-center">
+                    <div class="relative max-w-2xl">
+                        <span
+                            class="absolute -top-6 -left-4 text-6xl text-vibrant-lime/20 font-serif leading-none select-none">"</span>
+                        <p class="text-charcoal/60 text-lg font-medium italic leading-relaxed relative z-10 px-6">
+                            The best time to plant a tree was twenty years ago. The second best time is now.
+                        </p>
+                        <span
+                            class="absolute -bottom-8 -right-4 text-6xl text-vibrant-lime/20 font-serif leading-none select-none">"</span>
+                        <p class="text-charcoal/40 text-xs font-bold uppercase tracking-widest mt-4">— Ancient Proverb
+                        </p>
+                    </div>
+
+                    <a href="{{ route('gallery') }}"
+                        class="group inline-flex items-center gap-3 px-8 py-4 bg-deep-green text-white font-bold rounded-full hover:bg-deep-green/90 transition-all shadow-xl shadow-deep-green/20 hover:shadow-2xl hover:shadow-deep-green/30 hover:-translate-y-0.5">
+                        <span class="material-symbols-outlined text-vibrant-lime text-xl">photo_library</span>
+                        View Full Works
+                        <span
+                            class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Lightbox Modal -->
+        <div id="galleryLightbox"
+            class="fixed inset-0 z-[100] hidden bg-black/90 backdrop-blur-md flex items-center justify-center p-4"
+            onclick="closeLightbox(event)">
+            <div class="relative w-full max-w-5xl mx-auto" onclick="event.stopPropagation()">
+                <!-- Close button -->
+                <button onclick="closeLightboxBtn()"
+                    class="absolute -top-14 right-0 text-white/70 hover:text-white transition-colors flex items-center gap-2">
+                    <span class="text-sm font-medium">Close</span>
+                    <span class="material-symbols-outlined text-3xl">close</span>
+                </button>
+                <!-- Image -->
+                <div class="rounded-2xl overflow-hidden shadow-2xl">
+                    <img id="lightboxImage" src="" alt=""
+                        class="w-full max-h-[70vh] object-contain bg-black" />
+                </div>
+                <!-- Caption -->
+                <div class="mt-4 text-center space-y-2 px-4">
+                    <h3 id="lightboxTitle" class="text-white font-serif text-xl font-bold"></h3>
+                    <p id="lightboxDesc" class="text-white/60 text-sm font-medium leading-relaxed max-w-2xl mx-auto">
+                    </p>
+                </div>
+            </div>
+        </div>
+        <!-- ===== END OUR WORKS GALLERY SECTION ===== -->
+
+        <section class="relative py-24 md:py-24 px-6 overflow-hidden bg-background-light" id="donation-section">
             <div class="absolute inset-0 z-0">
                 <div class="w-full h-full bg-cover bg-center"
                     style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCp83JCfKCRYgHZuZA8dzBJ3Ih5yeidFw9eQGrfMH89CUBjfUnGXPlxXvfb0DmVToP0iwQwPaK0W5XabUIrIKFxbSwRZd0LqiyyCermKdbgrB2uPKlC48Z7W_on-lUkUOnlJd62ok3dkmH7JXdQxf63fiy8lTJ7mxggLO5Vjo_p7uKwbi43Dl3GWm8aiiPqcYvOfRpQgKV513yPQakVJ-1w2d86ue27OPY3p8N9H5sr5Mg5oew18KgTO2Ehhj7cSGj-2a6ht7DOZOs');">
@@ -652,6 +907,53 @@
 @endsection
 
 @push('scripts')
+    <script>
+        // Gallery Lightbox
+        function openLightbox(src, title, desc) {
+            document.getElementById('lightboxImage').src = src;
+            document.getElementById('lightboxTitle').textContent = title;
+            document.getElementById('lightboxDesc').textContent = desc;
+            const lb = document.getElementById('galleryLightbox');
+            lb.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightboxBtn() {
+            const lb = document.getElementById('galleryLightbox');
+            lb.classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+
+        function closeLightbox(event) {
+            if (event.target === document.getElementById('galleryLightbox')) {
+                closeLightboxBtn();
+            }
+        }
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeLightboxBtn();
+        });
+
+        // Gallery item entrance animation on scroll
+        const galleryObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry, i) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }, i * 80);
+                    galleryObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.gallery-item').forEach((el, idx) => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = `opacity 0.6s ease ${idx * 0.07}s, transform 0.6s ease ${idx * 0.07}s`;
+            galleryObserver.observe(el);
+        });
+    </script>
     <script>
         // Video carousel scroll functionality
         document.addEventListener('DOMContentLoaded', function() {
