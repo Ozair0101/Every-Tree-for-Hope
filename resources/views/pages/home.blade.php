@@ -123,23 +123,23 @@
                                 $isShort = $media->is_short;
                             @endphp
                             @if ($videoId)
-                                <div class="flex-shrink-0 {{ $isShort ? 'w-44' : 'w-80' }} group cursor-pointer"
+                                <div class="flex-shrink-0 w-80 group cursor-pointer"
                                     data-video-id="{{ $videoId }}"
                                     data-is-short="{{ $isShort ? 'true' : 'false' }}"
                                     data-title="{{ $media->title }}"
                                     data-date="{{ $media->date->format('M d, Y') }}">
                                     <div
                                         class="bg-white rounded-2xl overflow-hidden shadow-lg border border-white p-2 transition-all duration-300 group-hover:-translate-y-2 group-hover:shadow-xl">
-                                        <div class="relative {{ $isShort ? 'aspect-[9/16]' : 'aspect-[16/10]' }} rounded-xl overflow-hidden mb-4">
+                                        <div class="relative aspect-[16/10] rounded-xl overflow-hidden mb-4">
                                             <img alt="{{ $media->title }}" class="w-full h-full object-cover"
                                                 src="{{ $media->thumbnail_url ?? 'https://via.placeholder.com/320x180/1a4a2e/ffffff?text=Video' }}" />
                                             <div
-                                                class="absolute inset-0 flex flex-col items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity gap-2">
+                                                class="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity">
                                                 <span class="material-symbols-outlined text-white text-4xl">play_circle</span>
                                             </div>
                                             @if ($isShort)
                                                 <div class="absolute top-2 left-2 flex items-center gap-1 bg-black/70 backdrop-blur-sm px-2 py-0.5 rounded-full">
-                                                    <svg class="w-3 h-3 text-red-500 fill-red-500" viewBox="0 0 24 24"><path d="M10 9.8 15.2 12 10 14.2V9.8zM17 3H7C4.8 3 3 4.8 3 7v10c0 2.2 1.8 4 4 4h10c2.2 0 4-1.8 4-4V7c0-2.2-1.8-4-4-4z"/></svg>
+                                                    <svg class="w-3 h-3 fill-red-500" viewBox="0 0 24 24"><path d="M10 9.8 15.2 12 10 14.2V9.8zM17 3H7C4.8 3 3 4.8 3 7v10c0 2.2 1.8 4 4 4h10c2.2 0 4-1.8 4-4V7c0-2.2-1.8-4-4-4z"/></svg>
                                                     <span class="text-white text-[9px] font-bold uppercase tracking-wide">Shorts</span>
                                                 </div>
                                             @endif
@@ -148,11 +148,10 @@
                                             <span class="text-[10px] font-bold text-gold-accent uppercase tracking-widest">
                                                 {{ $media->date->format('M d, Y') }}
                                             </span>
-                                            <h4
-                                                class="text-deep-green font-bold {{ $isShort ? 'text-sm' : 'text-lg' }} mt-1 group-hover:text-primary transition-colors">
-                                                {{ Str::limit($media->title, $isShort ? 20 : 30) }}
+                                            <h4 class="text-deep-green font-bold text-lg mt-1 group-hover:text-primary transition-colors">
+                                                {{ Str::limit($media->title, 30) }}
                                             </h4>
-                                            @if ($media->description && !$isShort)
+                                            @if ($media->description)
                                                 <p class="text-charcoal/60 text-sm mt-2 line-clamp-2">
                                                     {{ Str::limit($media->description, 80) }}
                                                 </p>
