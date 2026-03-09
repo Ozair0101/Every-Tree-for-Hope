@@ -20,31 +20,50 @@ class Media extends Model
     ];
 
     /**
-     * Get YouTube video ID from URL
+     * Get YouTube video ID from URL (supports regular videos, Shorts, youtu.be, embed)
      */
     public function getYoutubeVideoIdAttribute()
     {
         $url = $this->video_youtube_url;
-        
-        // Handle different YouTube URL formats
-        if (preg_match('/youtube\.com\/watch\?v=([a-zA-Z0-9_-]+)/', $url, $matches)) {
+
+        if (!$url) return null;
+
+        // youtube.com/shorts/ID
+        if (preg_match('/youtube\.com\/shorts\/([a-zA-Z0-9_-]+)/', $url, $matches)) {
             return $matches[1];
         }
-        
+
+        // youtube.com/watch?v=ID
+        if (preg_match('/youtube\.com\/watch\?.*v=([a-zA-Z0-9_-]+)/', $url, $matches)) {
+            return $matches[1];
+        }
+
+        // youtu.be/ID
         if (preg_match('/youtu\.be\/([a-zA-Z0-9_-]+)/', $url, $matches)) {
             return $matches[1];
         }
-        
+
+        // youtube.com/embed/ID
         if (preg_match('/youtube\.com\/embed\/([a-zA-Z0-9_-]+)/', $url, $matches)) {
             return $matches[1];
         }
-        
-        // If it's already just the ID, return it
-        if (preg_match('/^[a-zA-Z0-9_-]+$/', $url)) {
+
+        // Plain ID (11-char alphanumeric)
+        if (preg_match('/^[a-zA-Z0-9_-]{11}$/', $url)) {
             return $url;
         }
-        
+
         return null;
+    }
+
+    /**
+     * Detect if the stored URL is a YouTube Short
+     */
+    public function getIsShortAttribute(): bool
+    {
+        return $this->video_youtube_url
+            ? str_contains($this->video_youtube_url, '/shorts/')
+            : false;
     }
 
     /**
