@@ -198,7 +198,7 @@
                                 <div
                                     class="rounded-3xl overflow-hidden shadow-2xl border-[8px] border-white transition-all duration-700 hover:scale-[1.02] hover:shadow-3xl">
                                     <img alt="Wide forest vision" class="w-full h-[300px] md:h-[400px] object-cover"
-                                        src="{{ asset('images/10.jpeg') }}" />
+                                        src="{{ asset('images/16.jpeg') }}" />
                                     <div class="absolute inset-0 bg-gradient-to-t from-deep-green/20 to-transparent"></div>
                                 </div>
                                 <div
@@ -211,7 +211,7 @@
                                 <div
                                     class="rounded-3xl overflow-hidden shadow-2xl border-[8px] border-white transition-all duration-700 hover:scale-[1.02] hover:shadow-3xl">
                                     <img alt="Sprout mission" class="w-full h-[250px] md:h-[350px] object-cover"
-                                        src="{{ asset('images/1.jpeg') }}" />
+                                        src="{{ asset('images/22.jpeg') }}" />
                                     <div
                                         class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-transparent">
                                     </div>
@@ -418,33 +418,31 @@
                             class="flex items-center gap-2 bg-deep-green/5 border border-deep-green/10 px-4 py-2 rounded-full">
                             <span class="flex h-2 w-2 rounded-full bg-primary animate-pulse"></span>
                             <span
-                                class="text-deep-green font-bold tracking-[0.25em] text-[10px] uppercase">{{ __('messages.our_work_in_the_field') ?? 'Our Work in the Field' }}</span>
+                                class="text-deep-green font-bold tracking-[0.25em] text-[10px] uppercase">{{ __('messages.gallery_section_badge') }}</span>
                         </div>
                         <div class="h-[1px] w-10 bg-gradient-to-l from-transparent to-vibrant-lime"></div>
                     </div>
 
                     <h2 class="text-5xl md:text-6xl lg:text-7xl font-serif font-bold text-deep-green leading-tight">
-                        Every Tree Tells<br />
-                        <span class="text-vibrant-lime italic font-black">a Story</span>
+                        {{ __('messages.gallery_section_title_1') }}<br />
+                        <span
+                            class="text-vibrant-lime italic font-black">{{ __('messages.gallery_section_title_2') }}</span>
                     </h2>
 
                     <p class="text-charcoal/70 text-lg leading-relaxed font-medium max-w-2xl mx-auto">
-                        Each photograph captures a moment of transformation — hands in the soil, roots taking hold, and
-                        communities coming together to build a greener tomorrow for Afghanistan.
+                        {{ __('messages.gallery_section_description') }}
                     </p>
                 </div>
 
                 <!-- Masonry-style Image Grid -->
-                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4"
-                    style="grid-auto-rows: 200px;">
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4" style="grid-auto-rows: 200px;">
 
                     <!-- HERO image: 2 cols × 2 rows -->
                     <div class="col-span-2 row-span-2 group relative overflow-hidden rounded-3xl shadow-2xl cursor-pointer gallery-item"
-                        onclick="openLightbox('{{ asset('images/1.jpeg') }}', 'Restoring Life, One Tree at a Time', 'Every planting session is a step forward — a collective act of hope rooted into the earth of Kabul.')">
+                        onclick="openLightbox('{{ asset('images/1.jpeg') }}', '{{ __('messages.gallery_hero_title_line1') }} {{ __('messages.gallery_hero_title_line2') }}', '{{ __('messages.gallery_hero_desc') }}')">
                         <img src="{{ asset('images/1.jpeg') }}" alt="Restoring Life"
                             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
-                        <div
-                            class="absolute inset-0 transition-all duration-500 opacity-0 group-hover:opacity-100"
+                        <div class="absolute inset-0 transition-all duration-500 opacity-0 group-hover:opacity-100"
                             style="background: linear-gradient(to top, rgba(6,78,59,0.85) 0%, rgba(6,78,59,0.3) 50%, transparent 100%)">
                         </div>
                         <!-- Always-visible gradient at bottom -->
@@ -453,14 +451,12 @@
                         <!-- Label -->
                         <div class="absolute bottom-0 left-0 p-6 md:p-8">
                             <div class="flex items-center gap-2 mb-2">
+                                <span class="flex h-2 w-2 rounded-full bg-vibrant-lime animate-pulse"></span>
                                 <span
-                                    class="flex h-2 w-2 rounded-full bg-vibrant-lime animate-pulse"></span>
-                                <span
-                                    class="text-vibrant-lime text-[10px] font-bold uppercase tracking-[0.25em]">Featured Moment</span>
+                                    class="text-vibrant-lime text-[10px] font-bold uppercase tracking-[0.25em]">{{ __('messages.gallery_featured_moment') }}</span>
                             </div>
-                            <h3
-                                class="text-white font-serif text-2xl md:text-3xl font-bold leading-snug drop-shadow-lg">
-                                Restoring Life,<br />One Tree at a Time
+                            <h3 class="text-white font-serif text-2xl md:text-3xl font-bold leading-snug drop-shadow-lg">
+                                {{ __('messages.gallery_hero_title_line1') }}<br />{{ __('messages.gallery_hero_title_line2') }}
                             </h3>
                         </div>
                         <!-- Hover expand icon -->
@@ -472,120 +468,154 @@
 
                     <!-- Image: 1 col × 1 row -->
                     <div class="group relative overflow-hidden rounded-2xl shadow-lg cursor-pointer gallery-item"
-                        onclick="openLightbox('{{ asset('images/5.jpeg') }}', 'Community in Action', 'Volunteers and families stand together, proving that change begins with a single act of planting.')">
+                        onclick="openLightbox('{{ asset('images/5.jpeg') }}', '{{ __('messages.gallery_img_community') }}', '{{ __('messages.gallery_img_community_desc') }}')">
                         <img src="{{ asset('images/5.jpeg') }}" alt="Community Planting"
                             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
                         <div class="absolute inset-0 transition-opacity duration-500 opacity-0 group-hover:opacity-100"
                             style="background: linear-gradient(to top, rgba(6,78,59,0.8), transparent 70%)"></div>
                         <div
                             class="absolute bottom-0 left-0 p-4 translate-y-2 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-500">
-                            <p class="text-white font-bold text-sm drop-shadow">Community in Action</p>
+                            <p class="text-white font-bold text-sm drop-shadow">{{ __('messages.gallery_img_community') }}
+                            </p>
                         </div>
                     </div>
 
                     <!-- Image: 1 col × 1 row -->
                     <div class="group relative overflow-hidden rounded-2xl shadow-lg cursor-pointer gallery-item"
-                        onclick="openLightbox('{{ asset('images/7.jpeg') }}', 'Nurturing New Growth', 'With patience and care, young seedlings are tended to — each one a promise to the future.')">
+                        onclick="openLightbox('{{ asset('images/7.jpeg') }}', '{{ __('messages.gallery_img_growth') }}', '{{ __('messages.gallery_img_growth_desc') }}')">
                         <img src="{{ asset('images/7.jpeg') }}" alt="Seedling Care"
                             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
                         <div class="absolute inset-0 transition-opacity duration-500 opacity-0 group-hover:opacity-100"
                             style="background: linear-gradient(to top, rgba(6,78,59,0.8), transparent 70%)"></div>
                         <div
                             class="absolute bottom-0 left-0 p-4 translate-y-2 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-500">
-                            <p class="text-white font-bold text-sm drop-shadow">Nurturing New Growth</p>
+                            <p class="text-white font-bold text-sm drop-shadow">{{ __('messages.gallery_img_growth') }}
+                            </p>
                         </div>
                     </div>
 
                     <!-- Image: 2 cols × 1 row (wide) -->
                     <div class="col-span-2 group relative overflow-hidden rounded-2xl shadow-lg cursor-pointer gallery-item"
-                        onclick="openLightbox('{{ asset('images/10.jpeg') }}', 'Transforming the Landscape', 'The hills of Kabul are being reborn. What was once barren is now becoming a living testament to collective will.')">
-                        <img src="{{ asset('images/10.jpeg') }}" alt="Kabul Hills"
+                        onclick="openLightbox('{{ asset('images/10.jpeg') }}', '{{ __('messages.gallery_img_landscape') }}', '{{ __('messages.gallery_img_landscape_desc') }}')">
+                        <img src="{{ asset('images/27.jpeg') }}" alt="Kabul Hills"
                             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
                         <div class="absolute inset-0 transition-opacity duration-500 opacity-0 group-hover:opacity-100"
                             style="background: linear-gradient(to top, rgba(6,78,59,0.8), transparent 60%)"></div>
                         <div
                             class="absolute bottom-0 left-0 p-5 translate-y-2 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-500">
                             <span
-                                class="text-vibrant-lime text-[10px] font-bold uppercase tracking-widest">Kabul Hills</span>
-                            <p class="text-white font-serif font-bold mt-1">Transforming the Landscape of Tomorrow</p>
+                                class="text-vibrant-lime text-[10px] font-bold uppercase tracking-widest">{{ __('messages.gallery_img_kabul_hills') }}</span>
+                            <p class="text-white font-serif font-bold mt-1">{{ __('messages.gallery_img_landscape') }}</p>
                         </div>
                     </div>
 
                     <!-- Image: 1 col × 1 row -->
                     <div class="group relative overflow-hidden rounded-2xl shadow-lg cursor-pointer gallery-item"
-                        onclick="openLightbox('{{ asset('images/3.jpeg') }}', 'Growing Together', 'Side by side, our volunteers demonstrate that environmental restoration is a shared responsibility.')">
+                        onclick="openLightbox('{{ asset('images/3.jpeg') }}', '{{ __('messages.gallery_img_together') }}', '{{ __('messages.gallery_img_together_desc') }}')">
                         <img src="{{ asset('images/3.jpeg') }}" alt="Teamwork"
                             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
                         <div class="absolute inset-0 transition-opacity duration-500 opacity-0 group-hover:opacity-100"
                             style="background: linear-gradient(to top, rgba(6,78,59,0.8), transparent 70%)"></div>
                         <div
                             class="absolute bottom-0 left-0 p-4 translate-y-2 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-500">
-                            <p class="text-white font-bold text-sm drop-shadow">Growing Together</p>
+                            <p class="text-white font-bold text-sm drop-shadow">{{ __('messages.gallery_img_together') }}
+                            </p>
                         </div>
                     </div>
 
                     <!-- Image: 1 col × 1 row -->
                     <div class="group relative overflow-hidden rounded-2xl shadow-lg cursor-pointer gallery-item"
-                        onclick="openLightbox('{{ asset('images/6.jpeg') }}', 'Roots of Hope', 'Every root planted is a declaration of faith in the future — a living act of resistance against desertification.')">
+                        onclick="openLightbox('{{ asset('images/6.jpeg') }}', '{{ __('messages.gallery_img_roots') }}', '{{ __('messages.gallery_img_roots_desc') }}')">
                         <img src="{{ asset('images/6.jpeg') }}" alt="Planting Roots"
                             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
                         <div class="absolute inset-0 transition-opacity duration-500 opacity-0 group-hover:opacity-100"
                             style="background: linear-gradient(to top, rgba(6,78,59,0.8), transparent 70%)"></div>
                         <div
                             class="absolute bottom-0 left-0 p-4 translate-y-2 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-500">
-                            <p class="text-white font-bold text-sm drop-shadow">Roots of Hope</p>
+                            <p class="text-white font-bold text-sm drop-shadow">{{ __('messages.gallery_img_roots') }}</p>
                         </div>
                     </div>
 
                     <!-- Image: 1 col × 1 row -->
                     <div class="group relative overflow-hidden rounded-2xl shadow-lg cursor-pointer gallery-item"
-                        onclick="openLightbox('{{ asset('images/8.jpeg') }}', 'Seeds of Change', 'Tiny seedlings today, mighty forests tomorrow. Each seed we sow carries the weight of a brighter future.')">
-                        <img src="{{ asset('images/8.jpeg') }}" alt="Young Trees"
+                        onclick="openLightbox('{{ asset('images/8.jpeg') }}', '{{ __('messages.gallery_img_seeds') }}', '{{ __('messages.gallery_img_seeds_desc') }}')">
+                        <img src="{{ asset('images/38.jpeg') }}" alt="Young Trees"
                             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
                         <div class="absolute inset-0 transition-opacity duration-500 opacity-0 group-hover:opacity-100"
                             style="background: linear-gradient(to top, rgba(6,78,59,0.8), transparent 70%)"></div>
                         <div
                             class="absolute bottom-0 left-0 p-4 translate-y-2 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-500">
-                            <p class="text-white font-bold text-sm drop-shadow">Seeds of Change</p>
+                            <p class="text-white font-bold text-sm drop-shadow">{{ __('messages.gallery_img_seeds') }}</p>
                         </div>
                     </div>
 
                     <!-- Image: 1 col × 1 row -->
                     <div class="group relative overflow-hidden rounded-2xl shadow-lg cursor-pointer gallery-item"
-                        onclick="openLightbox('{{ asset('images/9.jpeg') }}', 'United for Nature', 'When hearts unite around a shared purpose, mountains can truly become green again.')">
-                        <img src="{{ asset('images/9.jpeg') }}" alt="Collaboration"
+                        onclick="openLightbox('{{ asset('images/9.jpeg') }}', '{{ __('messages.gallery_img_united') }}', '{{ __('messages.gallery_img_united_desc') }}')">
+                        <img src="{{ asset('images/21.jpeg') }}" alt="Collaboration"
                             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
                         <div class="absolute inset-0 transition-opacity duration-500 opacity-0 group-hover:opacity-100"
                             style="background: linear-gradient(to top, rgba(6,78,59,0.8), transparent 70%)"></div>
                         <div
                             class="absolute bottom-0 left-0 p-4 translate-y-2 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-500">
-                            <p class="text-white font-bold text-sm drop-shadow">United for Nature</p>
+                            <p class="text-white font-bold text-sm drop-shadow">{{ __('messages.gallery_img_united') }}
+                            </p>
                         </div>
                     </div>
 
                     <!-- Image: 1 col × 1 row -->
                     <div class="group relative overflow-hidden rounded-2xl shadow-lg cursor-pointer gallery-item hidden md:block"
-                        onclick="openLightbox('{{ asset('images/11.jpeg') }}', 'Green Beginnings', 'From the first dig to the last pat of earth — every step matters in this journey of renewal.')">
+                        onclick="openLightbox('{{ asset('images/11.jpeg') }}', '{{ __('messages.gallery_img_beginnings') }}', '{{ __('messages.gallery_img_beginnings_desc') }}')">
                         <img src="{{ asset('images/11.jpeg') }}" alt="Green Beginnings"
                             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
                         <div class="absolute inset-0 transition-opacity duration-500 opacity-0 group-hover:opacity-100"
                             style="background: linear-gradient(to top, rgba(6,78,59,0.8), transparent 70%)"></div>
                         <div
                             class="absolute bottom-0 left-0 p-4 translate-y-2 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-500">
-                            <p class="text-white font-bold text-sm drop-shadow">Green Beginnings</p>
+                            <p class="text-white font-bold text-sm drop-shadow">
+                                {{ __('messages.gallery_img_beginnings') }}</p>
                         </div>
                     </div>
 
                     <!-- Image: 1 col × 1 row -->
                     <div class="group relative overflow-hidden rounded-2xl shadow-lg cursor-pointer gallery-item hidden md:block"
-                        onclick="openLightbox('{{ asset('images/12.jpeg') }}', 'A Forest of Hands', 'Every tree planted is a handshake with the future — made by the hands of those who believe in a living Earth.')">
+                        onclick="openLightbox('{{ asset('images/12.jpeg') }}', '{{ __('messages.gallery_img_hands') }}', '{{ __('messages.gallery_img_hands_desc') }}')">
                         <img src="{{ asset('images/12.jpeg') }}" alt="A Forest of Hands"
                             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
                         <div class="absolute inset-0 transition-opacity duration-500 opacity-0 group-hover:opacity-100"
                             style="background: linear-gradient(to top, rgba(6,78,59,0.8), transparent 70%)"></div>
                         <div
                             class="absolute bottom-0 left-0 p-4 translate-y-2 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-500">
-                            <p class="text-white font-bold text-sm drop-shadow">A Forest of Hands</p>
+                            <p class="text-white font-bold text-sm drop-shadow">{{ __('messages.gallery_img_hands') }}
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Image: 1 col × 1 row -->
+                    <div class="group relative overflow-hidden rounded-2xl shadow-lg cursor-pointer gallery-item hidden md:block"
+                        onclick="openLightbox('{{ asset('images/12.jpeg') }}', '{{ __('messages.gallery_img_hands') }}', '{{ __('messages.gallery_img_hands_desc') }}')">
+                        <img src="{{ asset('images/22.jpeg') }}" alt="A Forest of Hands"
+                            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                        <div class="absolute inset-0 transition-opacity duration-500 opacity-0 group-hover:opacity-100"
+                            style="background: linear-gradient(to top, rgba(6,78,59,0.8), transparent 70%)"></div>
+                        <div
+                            class="absolute bottom-0 left-0 p-4 translate-y-2 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-500">
+                            <p class="text-white font-bold text-sm drop-shadow">{{ __('messages.gallery_img_hands') }}
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Image: 1 col × 1 row -->
+                    <div class="group relative overflow-hidden rounded-2xl shadow-lg cursor-pointer gallery-item hidden md:block"
+                        onclick="openLightbox('{{ asset('images/12.jpeg') }}', '{{ __('messages.gallery_img_hands') }}', '{{ __('messages.gallery_img_hands_desc') }}')">
+                        <img src="{{ asset('images/18.jpeg') }}" alt="A Forest of Hands"
+                            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                        <div class="absolute inset-0 transition-opacity duration-500 opacity-0 group-hover:opacity-100"
+                            style="background: linear-gradient(to top, rgba(6,78,59,0.8), transparent 70%)"></div>
+                        <div
+                            class="absolute bottom-0 left-0 p-4 translate-y-2 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-500">
+                            <p class="text-white font-bold text-sm drop-shadow">{{ __('messages.gallery_img_hands') }}
+                            </p>
                         </div>
                     </div>
 
@@ -597,18 +627,18 @@
                         <span
                             class="absolute -top-6 -left-4 text-6xl text-vibrant-lime/20 font-serif leading-none select-none">"</span>
                         <p class="text-charcoal/60 text-lg font-medium italic leading-relaxed relative z-10 px-6">
-                            The best time to plant a tree was twenty years ago. The second best time is now.
+                            {{ __('messages.gallery_quote') }}
                         </p>
                         <span
                             class="absolute -bottom-8 -right-4 text-6xl text-vibrant-lime/20 font-serif leading-none select-none">"</span>
-                        <p class="text-charcoal/40 text-xs font-bold uppercase tracking-widest mt-4">— Ancient Proverb
-                        </p>
+                        <p class="text-charcoal/40 text-xs font-bold uppercase tracking-widest mt-4">
+                            {{ __('messages.gallery_quote_attribution') }}</p>
                     </div>
 
                     <a href="{{ route('gallery') }}"
                         class="group inline-flex items-center gap-3 px-8 py-4 bg-deep-green text-white font-bold rounded-full hover:bg-deep-green/90 transition-all shadow-xl shadow-deep-green/20 hover:shadow-2xl hover:shadow-deep-green/30 hover:-translate-y-0.5">
                         <span class="material-symbols-outlined text-vibrant-lime text-xl">photo_library</span>
-                        View Full Works
+                        {{ __('messages.gallery_view_full') }}
                         <span
                             class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
                     </a>
@@ -674,7 +704,8 @@
                     </div>
                     <div class="mb-8">
                         <span class="material-symbols-outlined text-gold-accent text-3xl mb-4">distance</span>
-                        <h3 class="font-serif text-2xl font-bold text-deep-green mb-2">{{ __('messages.local_handover') }}
+                        <h3 class="font-serif text-2xl font-bold text-deep-green mb-2">
+                            {{ __('messages.local_handover') }}
                         </h3>
                         <p class="text-sage-green text-xs font-bold uppercase tracking-widest">
                             {{ __('messages.kabul_afghanistan_location') }}</p>
@@ -945,7 +976,9 @@
                     galleryObserver.unobserve(entry.target);
                 }
             });
-        }, { threshold: 0.1 });
+        }, {
+            threshold: 0.1
+        });
 
         document.querySelectorAll('.gallery-item').forEach((el, idx) => {
             el.style.opacity = '0';
