@@ -118,35 +118,55 @@
                             $mediaItems = \App\Models\Media::active()->ordered()->take(10)->get();
                         @endphp
                         @forelse($mediaItems as $index => $media)
-                            <div class="flex-shrink-0 w-80 group cursor-pointer"
-                                data-video-id="{{ $media->youtube_video_id }}" data-title="{{ $media->title }}"
-                                data-date="{{ $media->date->format('M d, Y') }}">
-                                <div
-                                    class="bg-white rounded-2xl overflow-hidden shadow-lg border border-white p-2 transition-all duration-300 group-hover:-translate-y-2 group-hover:shadow-xl">
-                                    <div class="relative aspect-[16/10] rounded-xl overflow-hidden mb-4">
-                                        <img alt="{{ $media->title }}" class="w-full h-full object-cover"
-                                            src="{{ $media->thumbnail_url ?? 'https://via.placeholder.com/320x180/deep-green/white?text=Video' }}" />
-                                        <div
-                                            class="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity">
-                                            <span class="material-symbols-outlined text-white text-4xl">play_circle</span>
+                            @php
+                                $videoId = null;
+                                if ($media->youtube_video_id) {
+                                    $url = $media->youtube_video_id;
+                                    // If it's already a clean 11-character ID, use it directly
+    if (preg_match('/^[a-zA-Z0-9_-]{11}$/', $url)) {
+        $videoId = $url;
+    } else {
+        // Use comprehensive regex to extract video ID from any YouTube URL
+        // Handles: shorts, watch, embed, youtu.be, and more
+        $pattern =
+            '/(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=|shorts\/)|youtu\.be\/)([^"&?\/\s]{11})/';
+                                        if (preg_match($pattern, $url, $matches)) {
+                                            $videoId = $matches[1];
+                                        }
+                                    }
+                                }
+                            @endphp
+                            @if ($videoId)
+                                <div class="flex-shrink-0 w-80 group cursor-pointer" data-video-id="{{ $videoId }}"
+                                    data-title="{{ $media->title }}" data-date="{{ $media->date->format('M d, Y') }}">
+                                    <div
+                                        class="bg-white rounded-2xl overflow-hidden shadow-lg border border-white p-2 transition-all duration-300 group-hover:-translate-y-2 group-hover:shadow-xl">
+                                        <div class="relative aspect-[16/10] rounded-xl overflow-hidden mb-4">
+                                            <img alt="{{ $media->title }}" class="w-full h-full object-cover"
+                                                src="{{ $media->thumbnail_url ?? 'https://via.placeholder.com/320x180/deep-green/white?text=Video' }}" />
+                                            <div
+                                                class="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity">
+                                                <span
+                                                    class="material-symbols-outlined text-white text-4xl">play_circle</span>
+                                            </div>
+                                        </div>
+                                        <div class="px-2 pb-2">
+                                            <span class="text-[10px] font-bold text-gold-accent uppercase tracking-widest">
+                                                {{ $media->date->format('M d, Y') }}
+                                            </span>
+                                            <h4
+                                                class="text-deep-green font-bold text-lg mt-1 group-hover:text-primary transition-colors">
+                                                {{ Str::limit($media->title, 30) }}
+                                            </h4>
+                                            @if ($media->description)
+                                                <p class="text-charcoal/60 text-sm mt-2 line-clamp-2">
+                                                    {{ Str::limit($media->description, 80) }}
+                                                </p>
+                                            @endif
                                         </div>
                                     </div>
-                                    <div class="px-2 pb-2">
-                                        <span class="text-[10px] font-bold text-gold-accent uppercase tracking-widest">
-                                            {{ $media->date->format('M d, Y') }}
-                                        </span>
-                                        <h4
-                                            class="text-deep-green font-bold text-lg mt-1 group-hover:text-primary transition-colors">
-                                            {{ Str::limit($media->title, 30) }}
-                                        </h4>
-                                        @if ($media->description)
-                                            <p class="text-charcoal/60 text-sm mt-2 line-clamp-2">
-                                                {{ Str::limit($media->description, 80) }}
-                                            </p>
-                                        @endif
-                                    </div>
                                 </div>
-                            </div>
+                            @endif
                         @empty
                             <div class="flex-shrink-0 w-80">
                                 <div class="bg-white rounded-2xl overflow-hidden shadow-lg border border-white p-2">
@@ -526,7 +546,7 @@
                     <!-- Image: 1 col × 1 row -->
                     <div class="group relative overflow-hidden rounded-2xl shadow-lg cursor-pointer gallery-item"
                         onclick="openLightbox('{{ asset('images/6.jpeg') }}', '{{ __('messages.gallery_img_roots') }}', '{{ __('messages.gallery_img_roots_desc') }}')">
-                        <img src="{{ asset('images/6.jpeg') }}" alt="Planting Roots"
+                        <img src="{{ asset('images/14.jpeg') }}" alt="Planting Roots"
                             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
                         <div class="absolute inset-0 transition-opacity duration-500 opacity-0 group-hover:opacity-100"
                             style="background: linear-gradient(to top, rgba(6,78,59,0.8), transparent 70%)"></div>
@@ -565,7 +585,7 @@
 
                     <!-- Image: 1 col × 1 row -->
                     <div class="group relative overflow-hidden rounded-2xl shadow-lg cursor-pointer gallery-item hidden md:block"
-                        onclick="openLightbox('{{ asset('images/11.jpeg') }}', '{{ __('messages.gallery_img_beginnings') }}', '{{ __('messages.gallery_img_beginnings_desc') }}')">
+                        onclick="openLightbox('{{ asset('images/11. jpeg') }}', '{{ __('messages.gallery_img_beginnings') }}', '{{ __('messages.gallery_img_beginnings_desc') }}')">
                         <img src="{{ asset('images/11.jpeg') }}" alt="Green Beginnings"
                             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
                         <div class="absolute inset-0 transition-opacity duration-500 opacity-0 group-hover:opacity-100"
@@ -580,7 +600,7 @@
                     <!-- Image: 1 col × 1 row -->
                     <div class="group relative overflow-hidden rounded-2xl shadow-lg cursor-pointer gallery-item hidden md:block"
                         onclick="openLightbox('{{ asset('images/12.jpeg') }}', '{{ __('messages.gallery_img_hands') }}', '{{ __('messages.gallery_img_hands_desc') }}')">
-                        <img src="{{ asset('images/12.jpeg') }}" alt="A Forest of Hands"
+                        <img src="{{ asset('images/23.jpeg') }}" alt="A Forest of Hands"
                             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
                         <div class="absolute inset-0 transition-opacity duration-500 opacity-0 group-hover:opacity-100"
                             style="background: linear-gradient(to top, rgba(6,78,59,0.8), transparent 70%)"></div>
@@ -1046,16 +1066,19 @@
                 card.addEventListener('click', function() {
                     const videoId = this.getAttribute('data-video-id');
 
-                    // Set iframe src with autoplay
-                    modalIframe.setAttribute('src', 'https://www.youtube.com/embed/' + videoId +
-                        '?autoplay=1&rel=0');
+                    // Video ID is already extracted server-side, use directly
+                    if (videoId) {
+                        // Set iframe src with autoplay
+                        modalIframe.setAttribute('src', 'https://www.youtube.com/embed/' + videoId +
+                            '?autoplay=1&rel=0');
 
-                    // Show modal
-                    videoModal.classList.remove('hidden');
-                    videoModal.classList.add('flex');
+                        // Show modal
+                        videoModal.classList.remove('hidden');
+                        videoModal.classList.add('flex');
 
-                    // Prevent body scroll
-                    document.body.style.overflow = 'hidden';
+                        // Prevent body scroll
+                        document.body.style.overflow = 'hidden';
+                    }
                 });
             });
 
