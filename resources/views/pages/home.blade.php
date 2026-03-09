@@ -119,46 +119,40 @@
                         @endphp
                         @forelse($mediaItems as $index => $media)
                             @php
-                                $videoId = null;
-                                if ($media->youtube_video_id) {
-                                    $url = $media->youtube_video_id;
-                                    // If it's already a clean 11-character ID, use it directly
-    if (preg_match('/^[a-zA-Z0-9_-]{11}$/', $url)) {
-        $videoId = $url;
-    } else {
-        // Use comprehensive regex to extract video ID from any YouTube URL
-        // Handles: shorts, watch, embed, youtu.be, and more
-        $pattern =
-            '/(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=|shorts\/)|youtu\.be\/)([^"&?\/\s]{11})/';
-                                        if (preg_match($pattern, $url, $matches)) {
-                                            $videoId = $matches[1];
-                                        }
-                                    }
-                                }
+                                $videoId = $media->youtube_video_id;
+                                $isShort = $media->is_short;
                             @endphp
                             @if ($videoId)
-                                <div class="flex-shrink-0 w-80 group cursor-pointer" data-video-id="{{ $videoId }}"
-                                    data-title="{{ $media->title }}" data-date="{{ $media->date->format('M d, Y') }}">
+                                <div class="flex-shrink-0 {{ $isShort ? 'w-44' : 'w-80' }} group cursor-pointer"
+                                    data-video-id="{{ $videoId }}"
+                                    data-is-short="{{ $isShort ? 'true' : 'false' }}"
+                                    data-title="{{ $media->title }}"
+                                    data-date="{{ $media->date->format('M d, Y') }}">
                                     <div
                                         class="bg-white rounded-2xl overflow-hidden shadow-lg border border-white p-2 transition-all duration-300 group-hover:-translate-y-2 group-hover:shadow-xl">
-                                        <div class="relative aspect-[16/10] rounded-xl overflow-hidden mb-4">
+                                        <div class="relative {{ $isShort ? 'aspect-[9/16]' : 'aspect-[16/10]' }} rounded-xl overflow-hidden mb-4">
                                             <img alt="{{ $media->title }}" class="w-full h-full object-cover"
-                                                src="{{ $media->thumbnail_url ?? 'https://via.placeholder.com/320x180/deep-green/white?text=Video' }}" />
+                                                src="{{ $media->thumbnail_url ?? 'https://via.placeholder.com/320x180/1a4a2e/ffffff?text=Video' }}" />
                                             <div
-                                                class="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity">
-                                                <span
-                                                    class="material-symbols-outlined text-white text-4xl">play_circle</span>
+                                                class="absolute inset-0 flex flex-col items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity gap-2">
+                                                <span class="material-symbols-outlined text-white text-4xl">play_circle</span>
                                             </div>
+                                            @if ($isShort)
+                                                <div class="absolute top-2 left-2 flex items-center gap-1 bg-black/70 backdrop-blur-sm px-2 py-0.5 rounded-full">
+                                                    <svg class="w-3 h-3 text-red-500 fill-red-500" viewBox="0 0 24 24"><path d="M10 9.8 15.2 12 10 14.2V9.8zM17 3H7C4.8 3 3 4.8 3 7v10c0 2.2 1.8 4 4 4h10c2.2 0 4-1.8 4-4V7c0-2.2-1.8-4-4-4z"/></svg>
+                                                    <span class="text-white text-[9px] font-bold uppercase tracking-wide">Shorts</span>
+                                                </div>
+                                            @endif
                                         </div>
                                         <div class="px-2 pb-2">
                                             <span class="text-[10px] font-bold text-gold-accent uppercase tracking-widest">
                                                 {{ $media->date->format('M d, Y') }}
                                             </span>
                                             <h4
-                                                class="text-deep-green font-bold text-lg mt-1 group-hover:text-primary transition-colors">
-                                                {{ Str::limit($media->title, 30) }}
+                                                class="text-deep-green font-bold {{ $isShort ? 'text-sm' : 'text-lg' }} mt-1 group-hover:text-primary transition-colors">
+                                                {{ Str::limit($media->title, $isShort ? 20 : 30) }}
                                             </h4>
-                                            @if ($media->description)
+                                            @if ($media->description && !$isShort)
                                                 <p class="text-charcoal/60 text-sm mt-2 line-clamp-2">
                                                     {{ Str::limit($media->description, 80) }}
                                                 </p>
@@ -190,12 +184,13 @@
     <!-- Video Modal -->
     <div id="videoModal"
         class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
-        <div class="relative w-full max-w-4xl">
+        <div id="videoModalInner" class="relative w-full max-w-4xl transition-all duration-300">
             <button id="closeModal" class="absolute -top-12 right-0 text-white hover:text-gray-300 transition-colors">
                 <span class="material-symbols-outlined text-4xl">close</span>
             </button>
-            <div class="relative aspect-video bg-black rounded-lg overflow-hidden">
-                <iframe id="modalIframe" class="w-full h-full" frameborder="0" allowfullscreen></iframe>
+            <div id="videoModalAspect" class="relative aspect-video bg-black rounded-lg overflow-hidden">
+                <iframe id="modalIframe" class="w-full h-full" frameborder="0" allowfullscreen
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
             </div>
         </div>
     </div>
@@ -516,7 +511,7 @@
 
                     <!-- Image: 2 cols × 1 row (wide) -->
                     <div class="col-span-2 group relative overflow-hidden rounded-2xl shadow-lg cursor-pointer gallery-item"
-                        onclick="openLightbox('{{ asset('images/10.jpeg') }}', '{{ __('messages.gallery_img_landscape') }}', '{{ __('messages.gallery_img_landscape_desc') }}')">
+                        onclick="openLightbox('{{ asset('images/27.jpeg') }}', '{{ __('messages.gallery_img_landscape') }}', '{{ __('messages.gallery_img_landscape_desc') }}')">
                         <img src="{{ asset('images/27.jpeg') }}" alt="Kabul Hills"
                             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
                         <div class="absolute inset-0 transition-opacity duration-500 opacity-0 group-hover:opacity-100"
@@ -545,7 +540,7 @@
 
                     <!-- Image: 1 col × 1 row -->
                     <div class="group relative overflow-hidden rounded-2xl shadow-lg cursor-pointer gallery-item"
-                        onclick="openLightbox('{{ asset('images/6.jpeg') }}', '{{ __('messages.gallery_img_roots') }}', '{{ __('messages.gallery_img_roots_desc') }}')">
+                        onclick="openLightbox('{{ asset('images/14.jpeg') }}', '{{ __('messages.gallery_img_roots') }}', '{{ __('messages.gallery_img_roots_desc') }}')">
                         <img src="{{ asset('images/14.jpeg') }}" alt="Planting Roots"
                             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
                         <div class="absolute inset-0 transition-opacity duration-500 opacity-0 group-hover:opacity-100"
@@ -558,7 +553,7 @@
 
                     <!-- Image: 1 col × 1 row -->
                     <div class="group relative overflow-hidden rounded-2xl shadow-lg cursor-pointer gallery-item"
-                        onclick="openLightbox('{{ asset('images/8.jpeg') }}', '{{ __('messages.gallery_img_seeds') }}', '{{ __('messages.gallery_img_seeds_desc') }}')">
+                        onclick="openLightbox('{{ asset('images/38.jpeg') }}', '{{ __('messages.gallery_img_seeds') }}', '{{ __('messages.gallery_img_seeds_desc') }}')">
                         <img src="{{ asset('images/38.jpeg') }}" alt="Young Trees"
                             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
                         <div class="absolute inset-0 transition-opacity duration-500 opacity-0 group-hover:opacity-100"
@@ -571,7 +566,7 @@
 
                     <!-- Image: 1 col × 1 row -->
                     <div class="group relative overflow-hidden rounded-2xl shadow-lg cursor-pointer gallery-item"
-                        onclick="openLightbox('{{ asset('images/9.jpeg') }}', '{{ __('messages.gallery_img_united') }}', '{{ __('messages.gallery_img_united_desc') }}')">
+                        onclick="openLightbox('{{ asset('images/21.jpeg') }}', '{{ __('messages.gallery_img_united') }}', '{{ __('messages.gallery_img_united_desc') }}')">
                         <img src="{{ asset('images/21.jpeg') }}" alt="Collaboration"
                             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
                         <div class="absolute inset-0 transition-opacity duration-500 opacity-0 group-hover:opacity-100"
@@ -585,7 +580,7 @@
 
                     <!-- Image: 1 col × 1 row -->
                     <div class="group relative overflow-hidden rounded-2xl shadow-lg cursor-pointer gallery-item hidden md:block"
-                        onclick="openLightbox('{{ asset('images/11. jpeg') }}', '{{ __('messages.gallery_img_beginnings') }}', '{{ __('messages.gallery_img_beginnings_desc') }}')">
+                        onclick="openLightbox('{{ asset('images/11.jpeg') }}', '{{ __('messages.gallery_img_beginnings') }}', '{{ __('messages.gallery_img_beginnings_desc') }}')">
                         <img src="{{ asset('images/11.jpeg') }}" alt="Green Beginnings"
                             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
                         <div class="absolute inset-0 transition-opacity duration-500 opacity-0 group-hover:opacity-100"
@@ -599,7 +594,7 @@
 
                     <!-- Image: 1 col × 1 row -->
                     <div class="group relative overflow-hidden rounded-2xl shadow-lg cursor-pointer gallery-item hidden md:block"
-                        onclick="openLightbox('{{ asset('images/12.jpeg') }}', '{{ __('messages.gallery_img_hands') }}', '{{ __('messages.gallery_img_hands_desc') }}')">
+                        onclick="openLightbox('{{ asset('images/23.jpeg') }}', '{{ __('messages.gallery_img_hands') }}', '{{ __('messages.gallery_img_hands_desc') }}')">
                         <img src="{{ asset('images/23.jpeg') }}" alt="A Forest of Hands"
                             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
                         <div class="absolute inset-0 transition-opacity duration-500 opacity-0 group-hover:opacity-100"
@@ -613,7 +608,7 @@
 
                     <!-- Image: 1 col × 1 row -->
                     <div class="group relative overflow-hidden rounded-2xl shadow-lg cursor-pointer gallery-item hidden md:block"
-                        onclick="openLightbox('{{ asset('images/12.jpeg') }}', '{{ __('messages.gallery_img_hands') }}', '{{ __('messages.gallery_img_hands_desc') }}')">
+                        onclick="openLightbox('{{ asset('images/22.jpeg') }}', '{{ __('messages.gallery_img_hands') }}', '{{ __('messages.gallery_img_hands_desc') }}')">
                         <img src="{{ asset('images/22.jpeg') }}" alt="A Forest of Hands"
                             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
                         <div class="absolute inset-0 transition-opacity duration-500 opacity-0 group-hover:opacity-100"
@@ -627,7 +622,7 @@
 
                     <!-- Image: 1 col × 1 row -->
                     <div class="group relative overflow-hidden rounded-2xl shadow-lg cursor-pointer gallery-item hidden md:block"
-                        onclick="openLightbox('{{ asset('images/12.jpeg') }}', '{{ __('messages.gallery_img_hands') }}', '{{ __('messages.gallery_img_hands_desc') }}')">
+                        onclick="openLightbox('{{ asset('images/18.jpeg') }}', '{{ __('messages.gallery_img_hands') }}', '{{ __('messages.gallery_img_hands_desc') }}')">
                         <img src="{{ asset('images/18.jpeg') }}" alt="A Forest of Hands"
                             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
                         <div class="absolute inset-0 transition-opacity duration-500 opacity-0 group-hover:opacity-100"
@@ -1062,21 +1057,35 @@
             const modalIframe = document.getElementById('modalIframe');
             const closeModal = document.getElementById('closeModal');
 
+            const videoModalInner = document.getElementById('videoModalInner');
+            const videoModalAspect = document.getElementById('videoModalAspect');
+
             videoCards.forEach(function(card) {
                 card.addEventListener('click', function() {
                     const videoId = this.getAttribute('data-video-id');
+                    const isShort = this.getAttribute('data-is-short') === 'true';
 
-                    // Video ID is already extracted server-side, use directly
                     if (videoId) {
-                        // Set iframe src with autoplay
-                        modalIframe.setAttribute('src', 'https://www.youtube.com/embed/' + videoId +
-                            '?autoplay=1&rel=0');
+                        // Shorts use /shorts/ embed path; regular videos use /embed/
+                        const embedBase = isShort
+                            ? 'https://www.youtube.com/embed/' + videoId + '?autoplay=1&rel=0'
+                            : 'https://www.youtube.com/embed/' + videoId + '?autoplay=1&rel=0';
 
-                        // Show modal
+                        modalIframe.setAttribute('src', embedBase);
+
+                        // Switch modal size: portrait for Shorts, landscape for videos
+                        if (isShort) {
+                            videoModalInner.className = 'relative w-full max-w-sm mx-auto transition-all duration-300';
+                            videoModalAspect.className = 'relative bg-black rounded-lg overflow-hidden';
+                            videoModalAspect.style.aspectRatio = '9/16';
+                        } else {
+                            videoModalInner.className = 'relative w-full max-w-4xl transition-all duration-300';
+                            videoModalAspect.className = 'relative aspect-video bg-black rounded-lg overflow-hidden';
+                            videoModalAspect.style.aspectRatio = '';
+                        }
+
                         videoModal.classList.remove('hidden');
                         videoModal.classList.add('flex');
-
-                        // Prevent body scroll
                         document.body.style.overflow = 'hidden';
                     }
                 });
