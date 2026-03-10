@@ -16,7 +16,7 @@ class Event extends Model
         'event_type',
         'video_url',
         'custom_tree_species',
-        'date',
+        '   ',
         'trees_planted',
         'volunteers',
         'sponsor_partner',
