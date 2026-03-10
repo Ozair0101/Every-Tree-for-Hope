@@ -13,7 +13,7 @@ class EventController extends Controller
     public function index()
     {
         // Get active events with pagination (9 per page)
-        $events = Event::active()->latest()->paginate(9);   
+        $events = Event::active()->orderBy('date', 'desc')->paginate(9);   
         
         // Handle AJAX request - return only events grid content
         if (request()->ajax() || request()->get('ajax')) {
