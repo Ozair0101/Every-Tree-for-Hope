@@ -1,88 +1,149 @@
 @extends('layouts.layout')
 @section('title', 'Home Page')
 @section('content')
-    <div class="relative min-h-screen w-full flex flex-col overflow-hidden">
+    <!-- ===== HERO SECTION ===== -->
+    <div class="relative min-h-screen w-full flex flex-col overflow-hidden bg-deep-green">
+
+        <!-- Background image -->
         <div class="absolute inset-0 z-0">
-            <div class="w-full h-full bg-cover bg-center"
-                style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCp83JCfKCRYgHZuZA8dzBJ3Ih5yeidFw9eQGrfMH89CUBjfUnGXPlxXvfb0DmVToP0iwQwPaK0W5XabUIrIKFxbSwRZd0LqiyyCermKdbgrB2uPKlC48Z7W_on-lUkUOnlJd62ok3dkmH7JXdQxf63fiy8lTJ7mxggLO5Vjo_p7uKwbi43Dl3GWm8aiiPqcYvOfRpQgKV513yPQakVJ-1w2d86ue27OPY3p8N9H5sr5Mg5oew18KgTO2Ehhj7cSGj-2a6ht7DOZOs');">
+            <img src="{{ asset('images/1.jpeg') }}" alt="Every Tree for Hope team"
+                class="w-full h-full object-cover" style="object-position: center 30%;" />
+            <div class="absolute inset-0"
+                style="background: linear-gradient(135deg, rgba(6,46,34,0.92) 0%, rgba(6,46,34,0.75) 35%, rgba(6,46,34,0.4) 65%, rgba(6,46,34,0.25) 100%);">
             </div>
-            <div class="absolute inset-0 hero-white-overlay"></div>
+            <!-- Subtle pattern overlay -->
+            <div class="absolute inset-0 opacity-[0.03]"
+                style="background-image: radial-gradient(rgba(255,255,255,0.4) 1px, transparent 1px); background-size: 20px 20px;">
+            </div>
         </div>
-        <main class="relative z-10 flex flex-1 flex-col justify-center px-6 md:px-12 lg:px-24 pb-20">
-            <div class="max-w-3xl space-y-8">
-                <div
-                    class="inline-flex items-center gap-2 bg-deep-green/5 border border-deep-green/10 px-4 py-2 rounded-full">
-                    <span class="flex h-2 w-2 rounded-full bg-primary animate-pulse"></span>
-                    <p class="text-deep-green text-[10px] font-bold uppercase tracking-[0.2em]">
-                        {{ __('messages.global_reforestation_mission') }}
-                    </p>
-                </div>
-                <h1
-                    class="text-deep-green text-6xl md:text-7xl lg:text-8xl font-serif font-bold leading-[1.05] tracking-tight">
-                    {!! __('messages.rooting_for') !!} <br />
-                    <span class="text-vibrant-lime italic font-black">{{ __('messages.the_future') }}</span>
-                </h1>
-                <p class="text-charcoal/80 text-lg md:text-xl max-w-xl font-medium leading-relaxed">
-                    {{ __('messages.hero_description') }}
-                </p>
-                <div class="flex flex-col sm:flex-row gap-4 pt-4">
-                    <button
-                        class="flex min-w-[220px] h-14 items-center justify-center rounded-lg bg-primary hover:bg-primary/90 text-white text-lg font-extrabold transition-all shadow-xl shadow-primary/20 group">
-                        {{ __('messages.plant_a_tree_today') }}
-                        <span
-                            class="material-symbols-outlined {{ $is_rtl ? 'mr-2' : 'ml-2' }} group-hover:translate-x-1 transition-transform">arrow_forward</span>
-                    </button>
-                    <button
-                        class="flex min-w-[220px] h-14 items-center justify-center rounded-lg border border-charcoal/30 hover:bg-charcoal/5 text-charcoal text-lg font-bold transition-all">
-                        {{ __('messages.view_our_projects') }}
-                    </button>
+
+        <!-- Decorative floating elements -->
+        <div class="absolute inset-0 z-[1] pointer-events-none overflow-hidden">
+            <div class="absolute top-[15%] right-[8%] w-64 h-64 rounded-full opacity-10"
+                style="background: radial-gradient(circle, #84cc16, transparent 70%); animation: float 8s ease-in-out infinite;">
+            </div>
+            <div class="absolute bottom-[20%] left-[5%] w-48 h-48 rounded-full opacity-[0.07]"
+                style="background: radial-gradient(circle, #22c55e, transparent 70%); animation: float 6s ease-in-out infinite reverse;">
+            </div>
+        </div>
+
+        <!-- Main hero content -->
+        <main class="relative z-10 flex flex-1 items-center">
+            <div class="w-full px-6 md:px-12 lg:px-24 py-20">
+                <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+
+                    <!-- Left: Text Content -->
+                    <div class="space-y-8 hero-text-animate">
+                        <!-- Badge -->
+                        <div
+                            class="inline-flex items-center gap-2 bg-white/10 border border-white/15 px-4 py-2 rounded-full backdrop-blur-sm">
+                            <span class="flex h-2 w-2 rounded-full bg-vibrant-lime animate-pulse"></span>
+                            <p class="text-white/90 text-[10px] font-bold uppercase tracking-[0.25em]">
+                                {{ __('messages.global_reforestation_mission') }}
+                            </p>
+                        </div>
+
+                        <!-- Heading -->
+                        <h1 class="text-white text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-serif font-bold leading-[1.05] tracking-tight">
+                            {!! __('messages.rooting_for') !!} <br />
+                            <span class="text-vibrant-lime italic font-black">{{ __('messages.the_future') }}</span>
+                        </h1>
+
+                        <!-- Description -->
+                        <p class="text-white/70 text-lg md:text-xl max-w-lg font-medium leading-relaxed">
+                            {{ __('messages.hero_description') }}
+                        </p>
+
+                        <!-- Buttons -->
+                        <div class="flex flex-col sm:flex-row gap-4 pt-2">
+                            <a href="#donation-section"
+                                class="flex min-w-[220px] h-14 items-center justify-center rounded-full bg-vibrant-lime hover:bg-vibrant-lime/90 text-deep-green text-lg font-extrabold transition-all shadow-xl shadow-vibrant-lime/20 group hover:-translate-y-0.5">
+                                {{ __('messages.plant_a_tree_today') }}
+                                <span
+                                    class="material-symbols-outlined {{ $is_rtl ? 'mr-2' : 'ml-2' }} group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                            </a>
+                            <a href="#our-works"
+                                class="flex min-w-[220px] h-14 items-center justify-center rounded-full border border-white/25 hover:bg-white/10 text-white text-lg font-bold transition-all backdrop-blur-sm hover:-translate-y-0.5">
+                                {{ __('messages.view_our_projects') }}
+                            </a>
+                        </div>
+
+                        <!-- Stats row -->
+                        <div class="flex flex-wrap gap-8 md:gap-14 pt-6 border-t border-white/10">
+                            <div class="flex flex-col">
+                                <p class="text-white text-4xl md:text-5xl font-extrabold tabular-nums">
+                                    {{ number_format(App\Models\Donator::sum('trees_sponsored') + App\Models\Event::sum('trees_planted')) }}
+                                </p>
+                                <p class="text-white/40 text-[10px] font-bold uppercase tracking-[0.2em] mt-1">
+                                    {{ __('messages.trees_planted') }}
+                                </p>
+                            </div>
+                            <div class="flex flex-col">
+                                <p class="text-vibrant-lime text-4xl md:text-5xl font-extrabold tabular-nums">
+                                    {{ number_format(App\Models\Donator::sum('trees_sponsored') * 0.02) }}
+                                </p>
+                                <p class="text-white/40 text-[10px] font-bold uppercase tracking-[0.2em] mt-1">
+                                    {{ __('messages.tons_co2_offset') }}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right: Image Collage -->
+                    <div class="hidden lg:block relative hero-images-animate">
+                        <!-- Main large image -->
+                        <div class="relative z-10 rounded-3xl overflow-hidden shadow-2xl border-2 border-white/10 transform rotate-2 hover:rotate-0 transition-transform duration-700">
+                            <img src="{{ asset('images/5.jpeg') }}" alt="Our Team"
+                                class="w-full h-[420px] object-cover" />
+                            <div class="absolute inset-0 bg-gradient-to-t from-deep-green/60 via-transparent to-transparent"></div>
+                            <div class="absolute bottom-4 left-4 right-4">
+                                <div class="flex items-center gap-2 bg-white/15 backdrop-blur-md rounded-full px-4 py-2 border border-white/20">
+                                    <span class="material-symbols-outlined text-vibrant-lime text-sm">groups</span>
+                                    <span class="text-white text-xs font-bold">{{ __('messages.trusted_by_environmental_leaders') }}</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Floating small image 1 (top-right) -->
+                        <!-- <div class="absolute -top-6 -right-6 z-20 rounded-2xl overflow-hidden shadow-xl border-2 border-white/15 w-40 h-40 transform -rotate-6 hover:rotate-0 transition-transform duration-700"
+                            style="animation: float 6s ease-in-out infinite;">
+                            <img src="{{ asset('images/37.jpeg') }}" alt="Tree Planting"
+                                class="w-full h-full object-cover" />
+                        </div> -->
+
+                        <!-- Floating small image 2 (bottom-left) -->
+                        <div class="absolute -bottom-8 -left-8 z-20 rounded-2xl overflow-hidden shadow-xl border-2 border-white/15 w-48 h-32 transform rotate-3 hover:rotate-0 transition-transform duration-700"
+                            style="animation: float 7s ease-in-out 1s infinite reverse;">
+                            <img src="{{ asset('images/4.jpeg') }}" alt="Community Work"
+                                class="w-full h-full object-cover" />
+                        </div>
+
+                        <!-- Decorative ring -->
+                        <div class="absolute -top-12 -left-12 w-24 h-24 rounded-full border-2 border-vibrant-lime/20 z-0"></div>
+                        <div class="absolute -bottom-16 -right-10 w-32 h-32 rounded-full border border-white/10 z-0"></div>
+                    </div>
                 </div>
             </div>
         </main>
 
-        <div
-            class="relative z-10 w-full px-6 md:px-12 lg:px-24 pb-12 flex flex-col md:flex-row items-end justify-between gap-8">
-            <div class="grid grid-cols-2 md:flex gap-12 md:gap-20">
-                <div class="flex flex-col">
-                    <p class="text-deep-green text-4xl font-extrabold tabular-nums">
-                        {{ number_format(App\Models\Donator::sum('trees_sponsored') + App\Models\Event::sum('trees_planted')) }}
-                    </p>
-                    <p class="text-charcoal/50 text-[10px] font-bold uppercase tracking-[0.2em] mt-1">
-                        {{ __('messages.trees_planted') }}
-                    </p>
-                </div>
-                <div class="flex flex-col">
-                    <p class="text-deep-green text-4xl font-extrabold tabular-nums">
-                        {{ number_format(App\Models\Donator::sum('trees_sponsored') * 0.02) }}
-                    </p>
-                    <p class="text-charcoal/50 text-[10px] font-bold uppercase tracking-[0.2em] mt-1">
-                        {{ __('messages.tons_co2_offset') }}
-                    </p>
-                </div>
-            </div>
-            <div class="hidden md:flex flex-col items-center gap-3 absolute left-1/2 -translate-x-1/2 bottom-12">
-                <p class="text-charcoal/30 text-[10px] font-bold uppercase tracking-[0.3em]">
+        <!-- Bottom scroll indicator -->
+        <div class="relative z-10 w-full pb-8 flex justify-center">
+            <a href="#media-stories"
+                class="flex flex-col items-center gap-2 text-white/30 hover:text-white/60 transition-colors group">
+                <p class="text-[10px] font-bold uppercase tracking-[0.3em]">
                     {{ __('messages.explore') }}
                 </p>
-                <div class="w-[1px] h-14 bg-gradient-to-b from-deep-green/30 to-transparent">
+                <div class="w-6 h-10 rounded-full border border-white/20 flex items-start justify-center p-1.5 group-hover:border-white/40 transition-colors">
+                    <div class="w-1 h-2.5 rounded-full bg-white/50" style="animation: scrollBounce 2s ease-in-out infinite;"></div>
                 </div>
-            </div>
-            <div class="hidden lg:flex flex-col items-end">
-                <p class="text-charcoal/40 text-[10px] font-bold mb-5 uppercase tracking-[0.15em]">
-                    {{ __('messages.trusted_by_environmental_leaders') }}
-                </p>
-                <div class="flex gap-8 opacity-40 grayscale contrast-125">
-                    <span class="material-symbols-outlined text-deep-green text-3xl">eco</span>
-                    <span class="material-symbols-outlined text-deep-green text-3xl">public</span>
-                    <span class="material-symbols-outlined text-deep-green text-3xl">water_drop</span>
-                </div>
-            </div>
+            </a>
         </div>
     </div>
+    <!-- ===== END HERO SECTION ===== -->
     <section class="relative bg-white pb-18 pt-28 px-6 botanical-bg overflow-hidden" id="media-stories">
         <div class="absolute top-0 right-0 w-96 h-96 opacity-[0.03] pointer-events-none">
             <span class="material-symbols-outlined text-[300px] text-deep-green">potted_plant</span>
-        </div>
+         </div>
         <div class="absolute bottom-0 left-0 w-96 h-96 opacity-[0.03] pointer-events-none translate-y-20 -translate-x-20">
             <span class="material-symbols-outlined text-[350px] text-gold-accent">forest</span>
         </div>
