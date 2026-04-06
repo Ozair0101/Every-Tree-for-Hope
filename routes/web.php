@@ -32,4 +32,8 @@ Route::get('/donate', function () {
     return view('pages.aidos-campaign');
 })->name('donate');
 
+Route::get('/history', function () {
+    return view('pages.history');
+})->name('history');
+
 Route::post('/contact', [App\Http\Controllers\ContactController::class, 'submit'])->name('contact.submit');
