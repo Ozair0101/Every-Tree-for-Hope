@@ -293,4 +293,82 @@ return [
     'gallery_quote' => 'The best time to plant a tree was twenty years ago. The second best time is now.',
     'gallery_quote_attribution' => '— Ancient Proverb',
     'gallery_view_full' => 'View Full Works',
+
+    // Navigation
+    'our_story' => 'Our Story',
+
+    // History Page
+    'history_page_title' => 'Our Story - Every Tree for Hope',
+    'history_badge' => 'The Story Behind the Movement',
+    'history_hero_title_1' => 'How It All',
+    'history_hero_title_2' => 'Began',
+    'history_hero_subtitle' => 'From 12 trees on a barren hillside to a movement that has planted over 1,000 trees across Kabul — this is the story of Every Tree for a Hope.',
+    'history_chapter' => 'Chapter',
+
+    // Chapter 1: The Spark
+    'history_ch1_title' => 'The Spark',
+    'history_ch1_p1' => 'It started with a conversation. After watching environmental and travel content from Emran Wadan, a discussion between Tamim Alimyar and his brother, Mohammad Iqbal Alimyar, led to a realization that would change the course of their lives: instead of only observing nature, they should take action to restore it.',
+    'history_ch1_p2' => 'The very next day, with nothing but determination and minimal resources, they planted their first 12 trees in the barren hills of Haji Nabi Town — an area with no visible greenery whatsoever. No funding, no organization, no plan beyond a simple belief: if we plant it, hope will grow.',
+    'history_ch1_quote' => 'Instead of only observing nature, we should take action to restore it. The next day, we planted our first 12 trees.',
+    'history_ch1_p3' => 'That small act — two brothers, twelve trees, one dusty hillside — marked the beginning of Every Tree for a Hope. What began as a personal commitment quickly resonated with others who shared the same frustration about Kabul\'s vanishing green spaces.',
+    'history_ch1_img_caption' => 'Early planting efforts in Kabul\'s communities',
+
+    // Stats
+    'history_stat_first_trees' => 'First Trees Planted',
+    'history_stat_total_trees' => 'Trees & Growing',
+    'history_stat_core_members' => 'Core Members',
+    'history_stat_volunteers' => 'Active Volunteers',
+
+    // Chapter 2: The Why
+    'history_ch2_title' => 'Why This Matters',
+    'history_ch2_p1' => 'The motivation behind Every Tree for a Hope is rooted in the urgent environmental challenges facing Afghanistan, particularly in Kabul. The signs of environmental degradation are everywhere — and they are accelerating.',
+    'history_ch2_p2' => 'Increasing air pollution, loss of green areas, rising temperatures, and declining groundwater levels are all visible consequences of decades of neglect. These local challenges are directly connected to the broader global crisis of climate change.',
+    'history_challenge_pollution' => 'Air Pollution',
+    'history_challenge_pollution_desc' => 'Kabul ranks among the most polluted cities in the world',
+    'history_challenge_temp' => 'Rising Temperatures',
+    'history_challenge_temp_desc' => 'Urban heat islands growing without tree cover',
+    'history_challenge_water' => 'Declining Groundwater',
+    'history_challenge_water_desc' => 'Water tables dropping as soil loses retention',
+    'history_challenge_green' => 'Vanishing Green Spaces',
+    'history_challenge_green_desc' => 'Rapid urbanization destroying natural habitats',
+    'history_ch2_p3' => 'The project was created with the belief that meaningful change starts with individuals and communities. If each person takes responsibility, even small actions — like planting and caring for a tree — can lead to large-scale transformation.',
+    'history_ch2_img_caption' => 'Planting trees by Qargha Dam — restoring life to barren shores',
+
+    // Mid-section quote
+    'history_midquote' => 'Every Tree for a Hope is more than a project — it is a movement. It represents the belief that global challenges like climate change can be addressed through local action.',
+    'history_midquote_author' => 'Tamim Alimyar, Founder',
+
+    // Chapter 3: Growth
+    'history_ch3_title' => 'From 12 to 1,000+',
+    'history_ch3_p1' => 'Since its inception, the initiative has grown steadily. In its early phase, the team organized 8 planting campaigns and planted 142 trees. Today, Every Tree for a Hope has successfully planted over 1,000 trees across multiple locations in Kabul.',
+    'history_loc_haji_nabi' => 'Haji Nabi Hills',
+    'history_loc_qargha' => 'Qargha Dam',
+    'history_loc_sakhi' => 'Sakhi Shrine',
+    'history_loc_karte_se' => 'Karte Se',
+    'history_loc_community' => 'Mosques & Schools',
+    'history_ch3_p2' => 'These activities are carried out through a structured system that includes site surveys, planning, and coordinated team efforts. The project is supported by 10 core members and around 20 active volunteers from inside and outside the country.',
+    'history_ch3_p3' => 'Team members come from diverse academic backgrounds — engineering, economics, and medical studies — and contribute across different operational areas. Activities are planned in advance and coordinated using tools such as WhatsApp and Trello, ensuring organization and accountability.',
+
+    // Chapter 4: Sustainability
+    'history_ch4_title' => 'Built to Last',
+    'history_ch4_p1' => 'A key strength of Every Tree for a Hope is its focus on sustainability. The project recognizes that planting trees alone is not enough — long-term survival is critical. To address this, the team uses practical, proven solutions.',
+    'history_method_irrigation' => 'Drip Irrigation Systems',
+    'history_method_irrigation_desc' => 'Water-efficient systems ensure each tree receives consistent hydration, even in Kabul\'s dry climate.',
+    'history_method_community' => 'Community-Based Maintenance',
+    'history_method_community_desc' => 'Local communities are trained and empowered to care for trees long after the planting day is over.',
+    'history_method_native' => 'Native Species Selection',
+    'history_method_native_desc' => 'Drought-tolerant, ecologically balanced species like almond and pine are prioritized for long-term value.',
+    'history_ch4_p2' => 'Beyond environmental impact, the initiative promotes a deeper cultural and social message. Tree planting is encouraged as a form of ongoing charity (Sadaqah Jariyah), benefiting people, animals, and future generations. This approach strengthens community engagement and fosters a sense of responsibility and patriotism among participants.',
+    'history_ch4_img_caption' => 'A freshly planted sapling receiving its first water — the start of a long journey',
+
+    // Chapter 5: The Vision
+    'history_ch5_title' => 'Looking Ahead',
+    'history_ch5_p1' => 'Looking ahead, Every Tree for a Hope is evolving from a local initiative into a global environmental movement. The long-term vision is bold and uncompromising: to inspire millions of people worldwide to take part in tree planting and environmental protection.',
+    'history_ch5_vision_highlight' => 'Over the next five years, the project aims to organize large-scale campaigns where millions of people plant millions of trees in a single coordinated day — creating a powerful collective impact against climate change.',
+    'history_ch5_p2' => 'In addition, the project plans to expand its activities across Afghanistan and beyond, establish nurseries, develop efficient irrigation systems, and collaborate with schools, universities, and international partners to promote environmental education.',
+    'history_ch5_p3' => 'Despite the challenges — water shortages, rising maintenance costs, limited public cooperation — the team has remained resilient, adapting its strategies and continuing its work. Because Every Tree for a Hope is more than a project — it is a movement built on the belief that one person, one tree, and one day at a time can change the world.',
+
+    // CTA
+    'history_cta_title' => 'Be Part of the Story',
+    'history_cta_desc' => 'Every tree planted is a chapter written in the story of hope. Join the movement, sponsor a tree, or volunteer with us — and help us turn barren land into forests for future generations.',
 ];
