@@ -111,6 +111,24 @@
             }
         }
 
+        @keyframes scrollBounce {
+            0%, 100% { transform: translateY(0); opacity: 0.5; }
+            50% { transform: translateY(6px); opacity: 1; }
+        }
+
+        .hero-text-animate {
+            animation: heroFadeUp 1s ease-out both;
+        }
+
+        .hero-images-animate {
+            animation: heroFadeUp 1s ease-out 0.3s both;
+        }
+
+        @keyframes heroFadeUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         .parallax-leaf {
             pointer-events: none;
             z-index: 1;
@@ -181,6 +199,8 @@
                     <a class="text-sm font-medium hover:text-primary transition-colors"
                         href="{{ route('about') }}">{{ __('messages.about') }}</a>
                     <a class="text-sm font-medium hover:text-primary transition-colors"
+                        href="{{ route('history') }}">{{ __('messages.our_story') }}</a>
+                    <a class="text-sm font-medium hover:text-primary transition-colors"
                         href="{{ route('gallery') }}">{{ __('messages.works') }}</a>
                     <a class="text-sm font-medium hover:text-primary transition-colors"
                         href="{{ route('donators') }}">{{ __('messages.donators') }}</a>
@@ -238,6 +258,8 @@
                         href="{{ route('home') }}">{{ __('messages.home') }}</a>
                     <a class="block text-sm font-medium hover:text-primary transition-colors py-2"
                         href="{{ route('about') }}">{{ __('messages.about') }}</a>
+                    <a class="block text-sm font-medium hover:text-primary transition-colors py-2"
+                        href="{{ route('history') }}">{{ __('messages.our_story') }}</a>
                     <a class="block text-sm font-medium hover:text-primary transition-colors py-2"
                         href="{{ route('gallery') }}">{{ __('messages.works') }}</a>
                     <a class="block text-sm font-medium hover:text-primary transition-colors py-2"
