@@ -370,4 +370,27 @@ return [
     // CTA
     'history_cta_title' => 'د کیسې برخه اوسئ',
     'history_cta_desc' => 'هره کرل شوې ونه د هیل کیسه کې لیکل شوی فصل دی. غورځنګ سره یوځای شئ، یوه ونه حمایت کړئ یا موږ سره داوطلب شئ — او موږ سره مرسته وکړئ چې بنجر ځمکه د راتلونکو نسلونو لپاره جنگلونو ته بدله کړو.',
+
+    // Expenses Section
+    'expense_section_badge' => 'مالي شفافیت',
+    'expense_section_title' => 'د مصارفو راپور',
+    'expense_section_desc' => 'د هر افغانۍ بشپړ تفصیلات — له نهالونو او وسیلو څخه تر ترانسپورت او داوطلبانو ملاتړ پورې. تل بشپړ شفافیت.',
+    'expense_total' => 'مجموع',
+    'expense_col_date' => 'نیټه',
+    'expense_col_description' => 'توضیحات',
+    'expense_col_quantity' => 'مقدار',
+    'expense_col_unit_price' => 'واحد قیمت (افغانۍ)',
+    'expense_col_total' => 'ټول لګښت (افغانۍ)',
+    'expense_col_paid_by' => 'ورکړه شوې لخوا',
+    'expense_col_notes' => 'یادونه',
+    'expense_no_data' => 'تر اوسه هیڅ مصارف ثبت شوي ندي.',
+    'expense_quick_filter' => 'ګړندی فلټر',
+    'expense_range_week' => 'دا اونۍ',
+    'expense_range_month' => 'دا میاشت',
+    'expense_range_all' => 'ټول',
+    'expense_from' => 'له نیټې',
+    'expense_to' => 'تر نیټې',
+    'expense_apply_filter' => 'پلي کول',
+    'expense_showing' => 'ښودل',
+    'expense_records' => 'سوابق',
 ];
