@@ -371,4 +371,27 @@ return [
     // CTA
     'history_cta_title' => 'Be Part of the Story',
     'history_cta_desc' => 'Every tree planted is a chapter written in the story of hope. Join the movement, sponsor a tree, or volunteer with us — and help us turn barren land into forests for future generations.',
+
+    // Expenses Section
+    'expense_section_badge' => 'Financial Transparency',
+    'expense_section_title' => 'Expense Report',
+    'expense_section_desc' => 'A complete breakdown of every Afghani spent — from seedlings and tools to transportation and volunteer support. Full transparency, always.',
+    'expense_total' => 'Total',
+    'expense_col_date' => 'Date',
+    'expense_col_description' => 'Description',
+    'expense_col_quantity' => 'Quantity',
+    'expense_col_unit_price' => 'Unit Price (AFN)',
+    'expense_col_total' => 'Total Cost (AFN)',
+    'expense_col_paid_by' => 'Paid By',
+    'expense_col_notes' => 'Notes',
+    'expense_no_data' => 'No expense records available yet.',
+    'expense_quick_filter' => 'Quick Filter',
+    'expense_range_week' => 'This Week',
+    'expense_range_month' => 'This Month',
+    'expense_range_all' => 'All Time',
+    'expense_from' => 'From',
+    'expense_to' => 'To',
+    'expense_apply_filter' => 'Apply',
+    'expense_showing' => 'Showing',
+    'expense_records' => 'records',
 ];
