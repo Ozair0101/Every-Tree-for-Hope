@@ -137,19 +137,19 @@
             </div>
         </section>
 
-        <section class="relative bg-green-50 flex h-auto min-h-screen w-full flex-col group/design-root overflow-x-visible">
+        <!-- <section class="relative bg-green-50 flex h-auto min-h-screen w-full flex-col group/design-root overflow-x-visible">
             <div class="layout-container flex h-full grow flex-col">
                 <div class="flex flex-1 justify-center py-5 sm:px-10 lg:px-20 xl:px-40">
                     <div class="layout-content-container flex flex-col w-full max-w-5xl flex-1">
-                        <!-- TopNavBar -->
+                       
                         <main class="flex-grow px-4 py-8 sm:py-12">
-                            <!-- PageHeading -->
+                         
                             <div class="flex flex-wrap justify-between gap-3 p-4">
                                 <h1
                                     class="text-[#111714] dark:text-[#f6f8f7] text-4xl sm:text-5xl font-black leading-tight tracking-[-0.033em] w-full text-center">
                                     {{ __('messages.our_impact_report') }}</h1>
                             </div>
-                            <!-- BodyText -->
+                          
                             <p
                                 class="text-center text-base font-normal leading-normal pb-6 pt-2 px-4 text-[#111714]/80 dark:text-[#f6f8f7]/80 max-w-3xl mx-auto">
                                 {{ __('messages.impact_report_description', [
@@ -158,10 +158,10 @@
                                     'events' => $filteredEvents,
                                 ]) }}
                             </p>
-                            <!-- Chips -->
+                         
                             <div
                                 class="flex flex-wrap items-center justify-center gap-3 p-3 overflow-x-visible relative z-[100]">
-                                <!-- Year Filter Dropdown -->
+                               
                                 <div class="relative">
                                     <button onclick="toggleDropdown('year-dropdown')"
                                         class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-primary/20 dark:bg-primary/30 px-4 hover:bg-primary/30 dark:hover:bg-primary/40 transition-colors">
@@ -183,7 +183,7 @@
                                     </div>
                                 </div>
 
-                                <!-- Region Filter Dropdown -->
+                                
                                 <div class="relative">
                                     <button onclick="toggleDropdown('region-dropdown')"
                                         class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-primary/20 dark:bg-primary/30 px-4 hover:bg-primary/30 dark:hover:bg-primary/40 transition-colors">
@@ -272,7 +272,7 @@
                                     </div>
                                 </div>
 
-                                <!-- Clear Filters Button -->
+                               
                                 <button onclick="clearFilters()"
                                     class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-lg border border-primary/20 dark:border-primary/30 px-4 hover:bg-primary/10 dark:hover:bg-primary/20 transition-colors">
                                     <p class="text-[#111714] dark:text-[#f6f8f7] text-sm font-medium leading-normal">Clear
@@ -281,7 +281,7 @@
                                         style="font-size: 20px;">clear</span>
                                 </button>
                             </div>
-                            <!-- Table -->
+                           
                             <div id="events-table-container" class="px-4 py-6 @container">
                                 <div
                                     class="overflow-hidden rounded-xl border border-primary/20 dark:border-primary/30 bg-white dark:bg-background-dark shadow-sm">
@@ -362,7 +362,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <!-- Pagination and CTA -->
+                          
                             <div class="flex flex-col sm:flex-row items-center justify-between gap-6 px-4 py-8">
                                 <div class="flex items-center gap-2" id="pagination-container">
                                     @if ($events->hasPages())
@@ -404,7 +404,196 @@
                     </div>
                 </div>
             </div>
+        </section> -->
+
+        <!-- ===== EXPENSES SECTION ===== -->
+        <section class="py-24 px-6 md:px-12 lg:px-24 bg-white" id="expenses-section">
+            <div class="max-w-7xl mx-auto">
+                @php
+                    // Default to current week (Monday → Sunday)
+                    $defaultFrom = now()->startOfWeek(\Carbon\Carbon::MONDAY)->format('Y-m-d');
+                    $defaultTo = now()->endOfWeek(\Carbon\Carbon::SUNDAY)->format('Y-m-d');
+
+                    $expenseFrom = request('expense_from', $defaultFrom);
+                    $expenseTo = request('expense_to', $defaultTo);
+                    $expenseRange = request('expense_range', 'week');
+
+                    $expensesQuery = \App\Models\Expense::ordered();
+
+                    if ($expenseRange === 'all') {
+                        $rangeLabel = __('messages.expense_range_all');
+                    } elseif ($expenseRange === 'month') {
+                        $expenseFrom = now()->startOfMonth()->format('Y-m-d');
+                        $expenseTo = now()->endOfMonth()->format('Y-m-d');
+                        $expensesQuery = $expensesQuery->whereBetween('date', [$expenseFrom, $expenseTo]);
+                        $rangeLabel = __('messages.expense_range_month') . ' (' . now()->format('F Y') . ')';
+                    } else {
+                        $expensesQuery = $expensesQuery->whereBetween('date', [$expenseFrom, $expenseTo]);
+                        $rangeLabel = ($expenseRange === 'week' ? __('messages.expense_range_week') . ' — ' : '') . \Carbon\Carbon::parse($expenseFrom)->format('M d') . ' – ' . \Carbon\Carbon::parse($expenseTo)->format('M d, Y');
+                    }
+
+                    $expenses = $expensesQuery->get();
+                    $totalExpenses = $expenses->sum('total_cost');
+                @endphp
+
+                <div class="glass-panel rounded-[2rem] p-8 md:p-12 relative overflow-hidden">
+                    <!-- Header -->
+                    <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
+                        <div class="space-y-3">
+                            <div class="inline-flex items-center gap-2">
+                                <span class="material-symbols-outlined text-gold-accent text-lg">receipt_long</span>
+                                <h4 class="text-gold-accent font-bold tracking-[0.3em] text-xs uppercase">
+                                    {{ __('messages.expense_section_badge') }}
+                                </h4>
+                            </div>
+                            <h2 class="text-3xl md:text-4xl font-serif text-deep-green leading-tight">
+                                {{ __('messages.expense_section_title') }}
+                            </h2>
+                            <p class="text-charcoal/60 text-sm max-w-lg">
+                                {{ __('messages.expense_section_desc') }}
+                            </p>
+                        </div>
+                        <div class="flex-shrink-0 p-6 bg-deep-green rounded-2xl text-center min-w-[180px]">
+                            <p class="text-white/50 text-[10px] font-bold uppercase tracking-widest mb-1">
+                                {{ __('messages.expense_total') }}
+                            </p>
+                            <p class="text-vibrant-lime text-3xl font-extrabold">
+                                {{ number_format($totalExpenses, 0) }}
+                            </p>
+                            <p class="text-white/60 text-xs font-bold">AFN</p>
+                        </div>
+                    </div>
+
+                    <!-- Date Filter Bar -->
+                    <div class="mb-8 p-5 rounded-xl bg-background-light border border-gray-200/70">
+                        <form method="GET" action="{{ route('report') }}#expenses-section" class="flex flex-col md:flex-row items-end gap-4">
+                            @if(request('year'))<input type="hidden" name="year" value="{{ request('year') }}">@endif
+                            @if(request('region'))<input type="hidden" name="region" value="{{ request('region') }}">@endif
+
+                            <!-- Quick range buttons -->
+                            <div class="flex-shrink-0">
+                                <p class="text-charcoal/50 text-[10px] font-bold uppercase tracking-widest mb-2">{{ __('messages.expense_quick_filter') }}</p>
+                                <div class="flex gap-2">
+                                    <a href="{{ route('report') }}?expense_range=week#expenses-section"
+                                        class="px-3 py-2 text-xs font-bold rounded-lg border transition-all {{ $expenseRange === 'week' ? 'bg-deep-green text-white border-deep-green' : 'bg-white text-charcoal border-gray-200 hover:border-deep-green/30' }}">
+                                        {{ __('messages.expense_range_week') }}
+                                    </a>
+                                    <a href="{{ route('report') }}?expense_range=month#expenses-section"
+                                        class="px-3 py-2 text-xs font-bold rounded-lg border transition-all {{ $expenseRange === 'month' ? 'bg-deep-green text-white border-deep-green' : 'bg-white text-charcoal border-gray-200 hover:border-deep-green/30' }}">
+                                        {{ __('messages.expense_range_month') }}
+                                    </a>
+                                    <a href="{{ route('report') }}?expense_range=all#expenses-section"
+                                        class="px-3 py-2 text-xs font-bold rounded-lg border transition-all {{ $expenseRange === 'all' ? 'bg-deep-green text-white border-deep-green' : 'bg-white text-charcoal border-gray-200 hover:border-deep-green/30' }}">
+                                        {{ __('messages.expense_range_all') }}
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="hidden md:block w-px h-10 bg-gray-200"></div>
+
+                            <!-- Custom date range -->
+                            <div class="flex-1 flex flex-col sm:flex-row items-end gap-3">
+                                <div class="flex-1 w-full sm:w-auto">
+                                    <label class="text-charcoal/50 text-[10px] font-bold uppercase tracking-widest mb-2 block">{{ __('messages.expense_from') }}</label>
+                                    <input type="date" name="expense_from" value="{{ $expenseFrom }}"
+                                        class="w-full h-10 px-3 text-sm border border-gray-200 rounded-lg focus:border-deep-green focus:ring-1 focus:ring-deep-green/20 outline-none transition-colors bg-white" />
+                                </div>
+                                <div class="flex-1 w-full sm:w-auto">
+                                    <label class="text-charcoal/50 text-[10px] font-bold uppercase tracking-widest mb-2 block">{{ __('messages.expense_to') }}</label>
+                                    <input type="date" name="expense_to" value="{{ $expenseTo }}"
+                                        class="w-full h-10 px-3 text-sm border border-gray-200 rounded-lg focus:border-deep-green focus:ring-1 focus:ring-deep-green/20 outline-none transition-colors bg-white" />
+                                </div>
+                                <input type="hidden" name="expense_range" value="custom">
+                                <button type="submit"
+                                    class="h-10 px-5 bg-deep-green text-white text-xs font-bold uppercase tracking-wider rounded-lg hover:bg-deep-green/90 transition-colors flex items-center gap-2 whitespace-nowrap">
+                                    <span class="material-symbols-outlined text-base">filter_alt</span>
+                                    {{ __('messages.expense_apply_filter') }}
+                                </button>
+                            </div>
+                        </form>
+
+                        <div class="mt-3 flex items-center gap-2">
+                            <span class="material-symbols-outlined text-gold-accent text-sm">date_range</span>
+                            <p class="text-charcoal/50 text-xs font-medium">
+                                {{ __('messages.expense_showing') }}: <span class="text-deep-green font-bold">{{ $rangeLabel }}</span>
+                                — <span class="text-deep-green font-bold">{{ $expenses->count() }}</span> {{ __('messages.expense_records') }}
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Table -->
+                    @if ($expenses->count() > 0)
+                        <div class="overflow-x-auto rounded-xl border border-gray-200/70">
+                            <table class="w-full text-left">
+                                <thead class="bg-deep-green/5">
+                                    <tr>
+                                        <th class="px-4 py-3.5 text-deep-green text-xs font-bold uppercase tracking-wider">#</th>
+                                        <th class="px-4 py-3.5 text-deep-green text-xs font-bold uppercase tracking-wider">{{ __('messages.expense_col_date') }}</th>
+                                        <th class="px-4 py-3.5 text-deep-green text-xs font-bold uppercase tracking-wider">{{ __('messages.expense_col_description') }}</th>
+                                        <th class="px-4 py-3.5 text-deep-green text-xs font-bold uppercase tracking-wider text-center">{{ __('messages.expense_col_quantity') }}</th>
+                                        <th class="px-4 py-3.5 text-deep-green text-xs font-bold uppercase tracking-wider text-right">{{ __('messages.expense_col_unit_price') }}</th>
+                                        <th class="px-4 py-3.5 text-deep-green text-xs font-bold uppercase tracking-wider text-right">{{ __('messages.expense_col_total') }}</th>
+                                        <th class="px-4 py-3.5 text-deep-green text-xs font-bold uppercase tracking-wider">{{ __('messages.expense_col_paid_by') }}</th>
+                                        <th class="px-4 py-3.5 text-deep-green text-xs font-bold uppercase tracking-wider">{{ __('messages.expense_col_notes') }}</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-100">
+                                    @foreach ($expenses as $index => $expense)
+                                        <tr class="hover:bg-primary/[0.02] transition-colors">
+                                            <td class="px-4 py-3 text-charcoal/50 text-sm">{{ $index + 1 }}</td>
+                                            <td class="px-4 py-3 text-charcoal text-sm font-medium whitespace-nowrap">
+                                                {{ $expense->date->format('M d, Y') }}
+                                            </td>
+                                            <td class="px-4 py-3 text-deep-green text-sm font-bold">
+                                                {{ $expense->description }}
+                                            </td>
+                                            <td class="px-4 py-3 text-charcoal/70 text-sm text-center">
+                                                {{ $expense->quantity ?? '-' }}
+                                            </td>
+                                            <td class="px-4 py-3 text-charcoal/70 text-sm text-right tabular-nums">
+                                                {{ number_format($expense->unit_price, 0) }}
+                                            </td>
+                                            <td class="px-4 py-3 text-deep-green text-sm font-bold text-right tabular-nums">
+                                                {{ number_format($expense->total_cost, 0) }}
+                                            </td>
+                                            <td class="px-4 py-3 text-sm">
+                                                @if ($expense->who_paid)
+                                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-primary/10 text-deep-green">
+                                                        {{ $expense->who_paid }}
+                                                    </span>
+                                                @else
+                                                    <span class="text-charcoal/30">-</span>
+                                                @endif
+                                            </td>
+                                            <td class="px-4 py-3 text-charcoal/60 text-xs max-w-[200px]">
+                                                {{ $expense->notes ?? '-' }}
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                                <tfoot class="bg-deep-green/5 border-t-2 border-deep-green/20">
+                                    <tr>
+                                        <td colspan="5" class="px-4 py-4 text-right text-deep-green font-extrabold text-sm uppercase tracking-wider">
+                                            {{ __('messages.expense_total') }}
+                                        </td>
+                                        <td class="px-4 py-4 text-deep-green text-lg font-extrabold text-right tabular-nums">
+                                            {{ number_format($totalExpenses, 0) }} AFN
+                                        </td>
+                                        <td colspan="2"></td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    @else
+                        <div class="text-center py-16 text-charcoal/40">
+                            <span class="material-symbols-outlined text-5xl mb-3">receipt_long</span>
+                            <p class="font-medium">{{ __('messages.expense_no_data') }}</p>
+                        </div>
+                    @endif
+                </div>
+            </div>
         </section>
+        <!-- ===== END EXPENSES SECTION ===== -->
 
         <section class="py-24 px-6 md:px-12 lg:px-24 bg-white">
             <div class="max-w-7xl mx-auto space-y-20">
