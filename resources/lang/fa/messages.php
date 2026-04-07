@@ -370,4 +370,27 @@ return [
     // CTA
     'history_cta_title' => 'بخشی از داستان باشید',
     'history_cta_desc' => 'هر درختی که کاشته می‌شود فصلی است که در داستان امید نوشته شده. به جنبش بپیوندید، یک درخت حمایت کنید یا با ما داوطلب شوید — و به ما کمک کنید تا زمین بایر را به جنگل‌هایی برای نسل‌های آینده تبدیل کنیم.',
+
+    // Expenses Section
+    'expense_section_badge' => 'شفافیت مالی',
+    'expense_section_title' => 'گزارش مصارف',
+    'expense_section_desc' => 'یک جزئیات کامل از هر افغانی مصرف شده — از نهال‌ها و ابزار تا ترانسپورت و حمایت داوطلبان. شفافیت کامل، همیشه.',
+    'expense_total' => 'مجموع',
+    'expense_col_date' => 'تاریخ',
+    'expense_col_description' => 'توضیحات',
+    'expense_col_quantity' => 'تعداد',
+    'expense_col_unit_price' => 'قیمت واحد (افغانی)',
+    'expense_col_total' => 'قیمت مجموعی (افغانی)',
+    'expense_col_paid_by' => 'پرداخت شده توسط',
+    'expense_col_notes' => 'یادداشت',
+    'expense_no_data' => 'هنوز هیچ سوابق مصارف ثبت نشده است.',
+    'expense_quick_filter' => 'فیلتر سریع',
+    'expense_range_week' => 'این هفته',
+    'expense_range_month' => 'این ماه',
+    'expense_range_all' => 'همه',
+    'expense_from' => 'از تاریخ',
+    'expense_to' => 'تا تاریخ',
+    'expense_apply_filter' => 'اعمال',
+    'expense_showing' => 'نمایش',
+    'expense_records' => 'سوابق',
 ];
