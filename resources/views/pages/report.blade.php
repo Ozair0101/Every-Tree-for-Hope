@@ -23,13 +23,13 @@
             </div>
         </section>
 
-        <section class="py-24 px-6 md:px-12 lg:px-24 botanical-bg">
+        <section class="py-24 px-0 md:px-12 lg:px-24 botanical-bg">
             <div class="max-w-7xl mx-auto">
                 <div
-                    class="glass-panel rounded-[3rem] p-12 md:p-20 relative overflow-hidden flex flex-col lg:flex-row items-center gap-16 border-gold-accent/10">
+                    class="glass-panel p-12 md:p-20 relative overflow-hidden flex flex-col lg:flex-row items-center gap-16 border-gold-accent/10">
                     <div class="flex-1 space-y-8">
                         @php
-                            // First, build the events query with filters
+                            // First, build the events query with filters   
                             $events = \App\Models\Event::active();
 
                             // Apply year filter
@@ -420,7 +420,7 @@
         </style>
 
         <!-- ===== EXPENSES SECTION ===== -->
-        <section class="py-12 sm:py-16 md:py-20 px-3 sm:px-4 md:px-6 lg:px-8 bg-white" id="expenses-section">
+        <section class="py-12 sm:py-16 md:py-20" id="expenses-section">
             <div class="max-w-[1400px] mx-auto">
                 @php
                     // Default to current week (Monday → Sunday)
@@ -445,8 +445,14 @@
                         $rangeLabel = ($expenseRange === 'week' ? __('messages.expense_range_week') . ' — ' : '') . \Carbon\Carbon::parse($expenseFrom)->format('M d') . ' – ' . \Carbon\Carbon::parse($expenseTo)->format('M d, Y');
                     }
 
-                    $expenses = $expensesQuery->get();
-                    $totalExpenses = $expenses->sum('total_cost');
+                    // Total cost & count are across the FULL filtered set, not just current page
+                    $totalExpenses = (clone $expensesQuery)->sum('total_cost');
+                    $expensesCount = (clone $expensesQuery)->count();
+
+                    // Paginate 20 per page (unique page name to avoid clash with events pagination)
+                    $expenses = $expensesQuery
+                        ->paginate(20, ['*'], 'expense_page')
+                        ->withQueryString();
                 @endphp
 
                 <div class="glass-panel rounded-2xl sm:rounded-3xl p-3 sm:p-5 md:p-8 relative overflow-hidden">
@@ -529,12 +535,13 @@
                             <span class="material-symbols-outlined text-gold-accent text-sm">date_range</span>
                             <p class="text-charcoal/50 text-xs font-medium">
                                 {{ __('messages.expense_showing') }}: <span class="text-deep-green font-bold">{{ $rangeLabel }}</span>
-                                — <span class="text-deep-green font-bold">{{ $expenses->count() }}</span> {{ __('messages.expense_records') }}
+                                — <span class="text-deep-green font-bold">{{ $expensesCount }}</span> {{ __('messages.expense_records') }}
                             </p>
                         </div>
                     </div>
 
-                    <!-- Expense Table -->
+                    <!-- Expense Table (AJAX container) -->
+                    <div id="expenses-table-container" class="transition-opacity duration-200">
                     @if ($expenses->count() > 0)
                         <div class="rounded-xl border border-gray-200 shadow-sm overflow-hidden bg-white">
                             <div class="overflow-x-auto expense-table-wrapper">
@@ -605,12 +612,80 @@
                                 </table>
                             </div>
                         </div>
+
+                        <!-- Pagination -->
+                        @if ($expenses->hasPages())
+                            <div class="mt-5 flex flex-col sm:flex-row items-center justify-between gap-3">
+                                <p class="text-charcoal/50 text-xs">
+                                    {{ __('messages.expense_showing_page', ['from' => $expenses->firstItem(), 'to' => $expenses->lastItem(), 'total' => $expensesCount]) }}
+                                </p>
+                                <nav class="flex items-center gap-1" id="expenses-pagination">
+                                    {{-- Previous --}}
+                                    @if ($expenses->onFirstPage())
+                                        <span class="px-3 py-2 text-xs font-bold rounded-lg bg-gray-100 text-charcoal/30 cursor-not-allowed flex items-center gap-1">
+                                            <span class="material-symbols-outlined text-base">chevron_left</span>
+                                        </span>
+                                    @else
+                                        <a href="{{ $expenses->previousPageUrl() }}" data-expense-page
+                                            class="px-3 py-2 text-xs font-bold rounded-lg bg-white border border-gray-200 text-deep-green hover:bg-deep-green hover:text-white hover:border-deep-green transition-all flex items-center gap-1">
+                                            <span class="material-symbols-outlined text-base">chevron_left</span>
+                                        </a>
+                                    @endif
+
+                                    {{-- Page numbers --}}
+                                    @php
+                                        $current = $expenses->currentPage();
+                                        $last = $expenses->lastPage();
+                                        $start = max(1, $current - 2);
+                                        $end = min($last, $current + 2);
+                                    @endphp
+
+                                    @if ($start > 1)
+                                        <a href="{{ $expenses->url(1) }}" data-expense-page
+                                            class="px-3 py-2 text-xs font-bold rounded-lg bg-white border border-gray-200 text-deep-green hover:bg-deep-green hover:text-white transition-all min-w-[36px] text-center">1</a>
+                                        @if ($start > 2)
+                                            <span class="text-charcoal/30 text-xs px-1">…</span>
+                                        @endif
+                                    @endif
+
+                                    @for ($i = $start; $i <= $end; $i++)
+                                        @if ($i === $current)
+                                            <span class="px-3 py-2 text-xs font-bold rounded-lg bg-deep-green text-white border border-deep-green min-w-[36px] text-center">{{ $i }}</span>
+                                        @else
+                                            <a href="{{ $expenses->url($i) }}" data-expense-page
+                                                class="px-3 py-2 text-xs font-bold rounded-lg bg-white border border-gray-200 text-deep-green hover:bg-deep-green hover:text-white transition-all min-w-[36px] text-center">{{ $i }}</a>
+                                        @endif
+                                    @endfor
+
+                                    @if ($end < $last)
+                                        @if ($end < $last - 1)
+                                            <span class="text-charcoal/30 text-xs px-1">…</span>
+                                        @endif
+                                        <a href="{{ $expenses->url($last) }}" data-expense-page
+                                            class="px-3 py-2 text-xs font-bold rounded-lg bg-white border border-gray-200 text-deep-green hover:bg-deep-green hover:text-white transition-all min-w-[36px] text-center">{{ $last }}</a>
+                                    @endif
+
+                                    {{-- Next --}}
+                                    @if ($expenses->hasMorePages())
+                                        <a href="{{ $expenses->nextPageUrl() }}" data-expense-page
+                                            class="px-3 py-2 text-xs font-bold rounded-lg bg-white border border-gray-200 text-deep-green hover:bg-deep-green hover:text-white hover:border-deep-green transition-all flex items-center gap-1">
+                                            <span class="material-symbols-outlined text-base">chevron_right</span>
+                                        </a>
+                                    @else
+                                        <span class="px-3 py-2 text-xs font-bold rounded-lg bg-gray-100 text-charcoal/30 cursor-not-allowed flex items-center gap-1">
+                                            <span class="material-symbols-outlined text-base">chevron_right</span>
+                                        </span>
+                                    @endif
+                                </nav>
+                            </div>
+                        @endif
                     @else
                         <div class="text-center py-12 sm:py-16 text-charcoal/40 rounded-2xl border border-dashed border-gray-200">
                             <span class="material-symbols-outlined text-4xl sm:text-5xl mb-3">receipt_long</span>
                             <p class="font-medium text-sm">{{ __('messages.expense_no_data') }}</p>
                         </div>
                     @endif
+                    </div><!-- /#expenses-table-container -->
                 </div>
             </div>
         </section>
@@ -955,5 +1030,62 @@
                 e.preventDefault();
             }
         });
+
+        // ===== EXPENSES TABLE — AJAX PAGINATION =====
+        function loadExpensesPage(url) {
+            const container = document.getElementById('expenses-table-container');
+            if (!container) return;
+
+            container.style.opacity = '0.4';
+            container.style.pointerEvents = 'none';
+
+            fetch(url, {
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'Accept': 'text/html'
+                }
+            })
+            .then(r => r.text())
+            .then(html => {
+                const tempDiv = document.createElement('div');
+                tempDiv.innerHTML = html;
+                const newContent = tempDiv.querySelector('#expenses-table-container');
+                if (newContent) {
+                    container.innerHTML = newContent.innerHTML;
+                    // Re-bind handlers on the new pagination links
+                    bindExpensePagination();
+                }
+                container.style.opacity = '1';
+                container.style.pointerEvents = '';
+
+                // Update browser URL without full reload
+                try {
+                    window.history.replaceState({}, '', url + '#expenses-section');
+                } catch (e) {}
+
+                // Smooth scroll to keep the table in view
+                document.getElementById('expenses-section')?.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            })
+            .catch(err => {
+                console.error('Error loading expense page:', err);
+                container.style.opacity = '1';
+                container.style.pointerEvents = '';
+            });
+        }
+
+        function bindExpensePagination() {
+            document.querySelectorAll('a[data-expense-page]').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    loadExpensesPage(this.href);
+                });
+            });
+        }
+
+        // Initial bind
+        bindExpensePagination();
     </script>
 @endsection
