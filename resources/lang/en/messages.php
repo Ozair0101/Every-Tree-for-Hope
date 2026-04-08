@@ -394,4 +394,6 @@ return [
     'expense_apply_filter' => 'Apply',
     'expense_showing' => 'Showing',
     'expense_records' => 'records',
+    'expense_swipe_hint' => 'Swipe horizontally to see all columns',
+    'expense_showing_page' => 'Showing :from–:to of :total',
 ];

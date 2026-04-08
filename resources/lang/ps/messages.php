@@ -393,4 +393,6 @@ return [
     'expense_apply_filter' => 'پلي کول',
     'expense_showing' => 'ښودل',
     'expense_records' => 'سوابق',
+    'expense_swipe_hint' => 'د ټولو کالمونو لیدلو لپاره کیڼ او ښي ته راوکاږئ',
+    'expense_showing_page' => 'د :total څخه :from تر :to ښودل',
 ];

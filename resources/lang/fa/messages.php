@@ -393,4 +393,6 @@ return [
     'expense_apply_filter' => 'اعمال',
     'expense_showing' => 'نمایش',
     'expense_records' => 'سوابق',
+    'expense_swipe_hint' => 'برای دیدن همه ستون‌ها به طرفین بکشید',
+    'expense_showing_page' => 'نمایش :from تا :to از :total',
 ];
