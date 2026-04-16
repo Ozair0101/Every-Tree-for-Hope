@@ -691,12 +691,34 @@
         </section>
         <!-- ===== END EXPENSES SECTION ===== -->
 
-        <section class="py-24 px-6 md:px-12 lg:px-24 bg-white">
+        <section class="py-24 px-6 md:px-12 lg:px-24 bg-white" id="analysis-section">
             <div class="max-w-7xl mx-auto space-y-20">
                 @php
-                    // Calculate monthly statistics for current year
+                    // Determine the analysis year from query param, default to current year
+                    $analysisYear = request('analysis_year', date('Y'));
+
+                    // Build list of available years from events AND expenses
+                    $eventYears = \App\Models\Event::active()
+                        ->selectRaw('YEAR(date) as yr')
+                        ->distinct()
+                        ->pluck('yr');
+                    $expenseYears = \App\Models\Expense::selectRaw('YEAR(date) as yr')
+                        ->distinct()
+                        ->pluck('yr');
+                    $availableYears = $eventYears->merge($expenseYears)
+                        ->unique()
+                        ->sort()
+                        ->reverse()
+                        ->values();
+
+                    // If the requested year has no data, fall back to the latest available year
+                    if ($availableYears->isNotEmpty() && !$availableYears->contains($analysisYear)) {
+                        $analysisYear = $availableYears->first();
+                    }
+
+                    // Calculate monthly statistics for the selected year
                     $monthlyStats = \App\Models\Event::active()
-                        ->whereYear('date', date('Y'))
+                        ->whereYear('date', $analysisYear)
                         ->get()
                         ->groupBy(function ($event) {
                             return \Carbon\Carbon::parse($event->date)->format('M');
@@ -723,14 +745,28 @@
                         ];
                     });
                 @endphp
+
+                <!-- Year Selector + Section Title -->
                 <div class="text-center space-y-4">
                     <h4 class="text-gold-accent font-bold tracking-[0.3em] text-xs uppercase">
                         {{ __('messages.progress_visualized') }}</h4>
-                    <h2 class="text-4xl md:text-5xl font-serif text-deep-green">Monthly Analysis {{ date('Y') }}</h2>
+                    <h2 class="text-4xl md:text-5xl font-serif text-deep-green">Monthly Analysis {{ $analysisYear }}</h2>
                     <p class="text-charcoal/60 max-w-2xl mx-auto">
-                        Tracking {{ number_format($filteredTrees) }} trees planted across {{ $monthlyStats->count() }}
-                        months in {{ date('Y') }} with {{ number_format($filteredVolunteers) }} volunteers
+                        Tracking {{ number_format($monthlyStats->sum('total_trees')) }} trees planted across {{ $monthlyStats->count() }}
+                        months in {{ $analysisYear }} with {{ number_format($monthlyStats->sum('total_volunteers')) }} volunteers
                     </p>
+
+                    <!-- Year pills -->
+                    @if ($availableYears->count() > 1)
+                        <div class="flex items-center justify-center gap-2 pt-4">
+                            @foreach ($availableYears as $yr)
+                                <a href="{{ request()->fullUrlWithQuery(['analysis_year' => $yr]) }}#analysis-section"
+                                    class="px-4 py-2 text-xs font-bold rounded-full border transition-all {{ (string)$yr === (string)$analysisYear ? 'bg-deep-green text-white border-deep-green shadow-md' : 'bg-white text-charcoal border-gray-200 hover:border-deep-green/40' }}">
+                                    {{ $yr }}
+                                </a>
+                            @endforeach
+                        </div>
+                    @endif
                 </div>
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
                     <div class="space-y-6">
@@ -772,14 +808,14 @@
                             </div>
                         </div>
                         <p class="text-charcoal/60 text-sm font-light italic leading-relaxed">
-                            Monthly tree planting progress for {{ date('Y') }}.
+                            Monthly tree planting progress for {{ $analysisYear }}.
                             {{ $monthlyStats->count() }} active months with
                             {{ number_format($monthlyStats->sum('total_trees')) }} trees planted.
                         </p>
                     </div>
                     <div class="space-y-6">
                         @php
-                            $expenseByType = \App\Models\Expense::whereYear('date', date('Y'))
+                            $expenseByType = \App\Models\Expense::whereYear('date', $analysisYear)
                                 ->selectRaw('expense_type, SUM(total_cost) as total')
                                 ->whereNotNull('expense_type')
                                 ->groupBy('expense_type')
@@ -801,7 +837,7 @@
                         @endphp
                         <h5 class="text-deep-green font-bold text-lg px-2 flex items-center gap-2">
                             <span class="material-symbols-outlined text-primary">pie_chart</span>
-                            Expense Distribution {{ date('Y') }}
+                            Expense Distribution {{ $analysisYear }}
                         </h5>
 
                         @if ($expenseByType->count() > 0)
@@ -856,12 +892,12 @@
                                 </div>
                             </div>
                             <p class="text-charcoal/60 text-sm font-light italic leading-relaxed">
-                                Total expenses for {{ date('Y') }}: {{ number_format($expenseGrandTotal, 0) }} AFN across {{ $expenseByType->count() }} categories.
+                                Total expenses for {{ $analysisYear }}: {{ number_format($expenseGrandTotal, 0) }} AFN across {{ $expenseByType->count() }} categories.
                             </p>
                         @else
                             <div class="text-center py-12 text-charcoal/40">
                                 <span class="material-symbols-outlined text-3xl mb-2">pie_chart</span>
-                                <p class="text-xs font-medium">No expense data for {{ date('Y') }} yet.</p>
+                                <p class="text-xs font-medium">No expense data for {{ $analysisYear }} yet.</p>
                             </div>
                         @endif
                     </div>
