@@ -714,13 +714,6 @@
                         })
                         ->values();
 
-                    // Calculate species distribution (mock data for now - could be added to events table)
-                    $speciesDistribution = [
-                        'Almond' => 45,
-                        'Pine' => 30,
-                        'Pomegranate' => 25,
-                    ];
-
                     // Calculate monthly CO2 sequestration
                     $monthlyCO2Data = $monthlyStats->map(function ($stat) {
                         return [
@@ -785,59 +778,92 @@
                         </p>
                     </div>
                     <div class="space-y-6">
+                        @php
+                            $expenseByType = \App\Models\Expense::whereYear('date', date('Y'))
+                                ->selectRaw('expense_type, SUM(total_cost) as total')
+                                ->whereNotNull('expense_type')
+                                ->groupBy('expense_type')
+                                ->orderByDesc('total')
+                                ->get();
+
+                            $expenseGrandTotal = $expenseByType->sum('total');
+
+                            // Colors for each type
+                            $typeColors = [
+                                'Tree' => '#064e3b',
+                                'Transportation' => '#d4af37',
+                                'Watering for trees' => '#3b82f6',
+                                'Tools' => '#f59e0b',
+                                'Snack' => '#ec4899',
+                                'Pipe' => '#8b5cf6',
+                                'Other' => '#6b7280',
+                            ];
+                        @endphp
                         <h5 class="text-deep-green font-bold text-lg px-2 flex items-center gap-2">
                             <span class="material-symbols-outlined text-primary">pie_chart</span>
-                            Species Distribution {{ date('Y') }}
+                            Expense Distribution {{ date('Y') }}
                         </h5>
-                        <div class="flex items-center gap-12">
-                            <div class="relative w-48 h-48">
-                                @php
-                                    $totalPercentage = array_sum($speciesDistribution);
-                                    $dashOffset = 0;
-                                @endphp
-                                <svg class="w-full h-full transform -rotate-90" viewBox="0 0 36 36">
-                                    @foreach ($speciesDistribution as $species => $percentage)
+
+                        @if ($expenseByType->count() > 0)
+                            <div class="flex flex-col sm:flex-row items-center gap-8 sm:gap-12">
+                                <!-- Donut Chart -->
+                                <div class="relative w-44 h-44 sm:w-48 sm:h-48 flex-shrink-0">
+                                    @php $dashOffset = 0; @endphp
+                                    <svg class="w-full h-full transform -rotate-90" viewBox="0 0 36 36">
+                                        @foreach ($expenseByType as $item)
+                                            @php
+                                                $pct = $expenseGrandTotal > 0 ? ($item->total / $expenseGrandTotal) * 100 : 0;
+                                                $dashArray = $pct . ' ' . (100 - $pct);
+                                                $color = $typeColors[$item->expense_type] ?? '#6b7280';
+                                            @endphp
+                                            <circle cx="18" cy="18" fill="transparent" r="15.9"
+                                                stroke="{{ $color }}"
+                                                stroke-dasharray="{{ $dashArray }}"
+                                                stroke-dashoffset="-{{ $dashOffset }}"
+                                                stroke-width="3.5"
+                                                stroke-linecap="round"></circle>
+                                            @php $dashOffset += $pct; @endphp
+                                        @endforeach
+                                    </svg>
+                                    <div class="absolute inset-0 flex flex-col items-center justify-center">
+                                        <span class="text-deep-green text-lg font-black tabular-nums leading-none">{{ number_format($expenseGrandTotal, 0) }}</span>
+                                        <span class="text-charcoal/40 text-[9px] font-bold mt-0.5">AFN</span>
+                                    </div>
+                                </div>
+
+                                <!-- Legend -->
+                                <div class="space-y-2.5 flex-1 w-full">
+                                    @foreach ($expenseByType as $item)
                                         @php
-                                            $dashArray = $percentage . ' ' . (100 - $percentage);
+                                            $pct = $expenseGrandTotal > 0 ? round(($item->total / $expenseGrandTotal) * 100, 1) : 0;
+                                            $color = $typeColors[$item->expense_type] ?? '#6b7280';
                                         @endphp
-                                        <circle cx="18" cy="18" fill="transparent" r="15.9"
-                                            @if ($species == 'Almond') stroke="#064e3b"
-                                            @elseif($species == 'Pine') stroke="#84cc16" 
-                                            @else stroke="#d4af37" @endif
-                                            stroke-dasharray="{{ $dashArray }}"
-                                            stroke-dashoffset="-{{ $dashOffset }}" stroke-width="3.5"></circle>
-                                        @php
-                                            $dashOffset += $percentage;
-                                        @endphp
+                                        <div class="flex items-center gap-3">
+                                            <div class="w-2.5 h-2.5 rounded-full flex-shrink-0" style="background: {{ $color }};"></div>
+                                            <div class="flex-1 min-w-0">
+                                                <div class="flex items-center justify-between gap-2">
+                                                    <span class="text-[11px] font-bold text-charcoal/80 truncate">{{ $item->expense_type }}</span>
+                                                    <span class="text-[11px] font-extrabold text-deep-green tabular-nums whitespace-nowrap">{{ number_format($item->total, 0) }} AFN</span>
+                                                </div>
+                                                <!-- Progress bar -->
+                                                <div class="mt-1 h-1 w-full bg-gray-100 rounded-full overflow-hidden">
+                                                    <div class="h-full rounded-full" style="width: {{ $pct }}%; background: {{ $color }};"></div>
+                                                </div>
+                                            </div>
+                                            <span class="text-[10px] font-bold text-charcoal/40 tabular-nums w-10 text-right flex-shrink-0">{{ $pct }}%</span>
+                                        </div>
                                     @endforeach
-                                </svg>
-                                <div class="absolute inset-0 flex items-center justify-center">
-                                    <span
-                                        class="material-symbols-outlined text-deep-green opacity-20 text-5xl">forest</span>
                                 </div>
                             </div>
-                            <div class="space-y-3">
-                                @foreach ($speciesDistribution as $species => $percentage)
-                                    <div class="flex items-center gap-3">
-                                        <div
-                                            class="w-3 h-3 
-                                            @if ($species == 'Almond') bg-deep-green 
-                                            @elseif($species == 'Pine') bg-vibrant-lime 
-                                            @else bg-gold-accent @endif 
-                                            rounded-full">
-                                        </div>
-                                        <span
-                                            class="text-xs font-bold text-charcoal/80 uppercase tracking-widest">{{ $species }}
-                                            ({{ $percentage }}%)
-                                        </span>
-                                    </div>
-                                @endforeach
+                            <p class="text-charcoal/60 text-sm font-light italic leading-relaxed">
+                                Total expenses for {{ date('Y') }}: {{ number_format($expenseGrandTotal, 0) }} AFN across {{ $expenseByType->count() }} categories.
+                            </p>
+                        @else
+                            <div class="text-center py-12 text-charcoal/40">
+                                <span class="material-symbols-outlined text-3xl mb-2">pie_chart</span>
+                                <p class="text-xs font-medium">No expense data for {{ date('Y') }} yet.</p>
                             </div>
-                        </div>
-                        <p class="text-charcoal/60 text-sm font-light italic leading-relaxed">
-                            Species distribution optimized for local climate conditions and community needs.
-                            {{ number_format($filteredTrees) }} total trees planted across all species.
-                        </p>
+                        @endif
                     </div>
                 </div>
             </div>
