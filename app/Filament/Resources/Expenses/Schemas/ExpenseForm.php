@@ -2,7 +2,9 @@
 
 namespace App\Filament\Resources\Expenses\Schemas;
 
+use App\Enums\ExpenseType;
 use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
@@ -25,6 +27,13 @@ class ExpenseForm
                     ->required()
                     ->maxLength(255)
                     ->placeholder('e.g., Tree, Transportation, Pipe...'),
+
+                Select::make('expense_type')
+                    ->label('Expense Type')
+                    ->options(ExpenseType::options())
+                    ->searchable()
+                    ->required()
+                    ->native(false),
 
                 TextInput::make('quantity')
                     ->label('Quantity')
