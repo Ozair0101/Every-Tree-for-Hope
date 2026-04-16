@@ -37,3 +37,6 @@ Route::get('/history', function () {
 })->name('history');
 
 Route::post('/contact', [App\Http\Controllers\ContactController::class, 'submit'])->name('contact.submit');
+
+Route::get('/faq', [App\Http\Controllers\FaqController::class, 'index'])->name('faq');
+Route::post('/faq', [App\Http\Controllers\FaqController::class, 'submit'])->name('faq.submit');
