@@ -208,6 +208,8 @@
                         href="{{ route('report') }}">{{ __('messages.report') }}</a>
                     <a class="text-sm font-medium hover:text-primary transition-colors"
                         href="{{ route('contact') }}">{{ __('messages.contact') }}</a>
+                    <a class="text-sm font-medium hover:text-primary transition-colors"
+                        href="{{ route('faq') }}">{{ __('messages.faq_nav') }}</a>
                 </div>
 
                 <!-- Desktop Action Buttons & Language Switcher -->
@@ -268,6 +270,8 @@
                         href="{{ route('report') }}">{{ __('messages.report') }}</a>
                     <a class="block text-sm font-medium hover:text-primary transition-colors py-2"
                         href="{{ route('contact') }}">{{ __('messages.contact') }}</a>
+                    <a class="block text-sm font-medium hover:text-primary transition-colors py-2"
+                        href="{{ route('faq') }}">{{ __('messages.faq_nav') }}</a>
 
                     <!-- Mobile Language Switcher -->
                     <div class="border-t border-gray-200 dark:border-gray-700 pt-3">
