@@ -108,6 +108,7 @@ class ExpenseImportService
             Expense::create([
                 'date' => $date,
                 'description' => $description,
+                'expense_type' => self::guessExpenseType($description),
                 'quantity' => $quantity ?: null,
                 'unit_price' => $unitPrice,
                 'total_cost' => $totalCost,
@@ -174,6 +175,32 @@ class ExpenseImportService
         // If there's a newline, take the first line (English) and trim
         $lines = preg_split('/[\r\n]+/', $desc);
         return trim($lines[0] ?? $desc);
+    }
+
+    private static function guessExpenseType(string $description): string
+    {
+        $lower = strtolower($description);
+
+        if (str_contains($lower, 'tree') || str_contains($lower, 'درخت') || str_contains($lower, 'sapling') || str_contains($lower, 'نهال')) {
+            return \App\Enums\ExpenseType::TREE->value;
+        }
+        if (str_contains($lower, 'transport') || str_contains($lower, 'ترانسپورت') || str_contains($lower, 'trip')) {
+            return \App\Enums\ExpenseType::TRANSPORTATION->value;
+        }
+        if (str_contains($lower, 'water') || str_contains($lower, 'آبیاری') || str_contains($lower, 'اوبو')) {
+            return \App\Enums\ExpenseType::WATER->value;
+        }
+        if (str_contains($lower, 'pipe') || str_contains($lower, 'پایپ')) {
+            return \App\Enums\ExpenseType::PIPE->value;
+        }
+        if (str_contains($lower, 'pick') || str_contains($lower, 'tool') || str_contains($lower, 'کلند') || str_contains($lower, 'shovel') || str_contains($lower, 'bottle')) {
+            return \App\Enums\ExpenseType::TOOLS->value;
+        }
+        if (str_contains($lower, 'snack') || str_contains($lower, 'refresh') || str_contains($lower, 'خوراک') || str_contains($lower, 'food') || str_contains($lower, 'آب و')) {
+            return \App\Enums\ExpenseType::SNACK->value;
+        }
+
+        return \App\Enums\ExpenseType::OTHER->value;
     }
 
     private static function parseNumber($val): float
