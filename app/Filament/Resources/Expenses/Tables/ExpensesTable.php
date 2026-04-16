@@ -30,6 +30,21 @@ class ExpensesTable
                     ->weight('bold')
                     ->wrap(),
 
+                TextColumn::make('expense_type')
+                    ->label('Type')
+                    ->badge()
+                    ->color(fn (?string $state): string => match ($state) {
+                        'Tree' => 'success',
+                        'Transportation' => 'warning',
+                        'Watering for trees' => 'info',
+                        'Tools' => 'warning',
+                        'Snack' => 'danger',
+                        'Pipe' => 'primary',
+                        default => 'gray',
+                    })
+                    ->sortable()
+                    ->searchable(),
+
                 TextColumn::make('quantity')
                     ->label('Quantity')
                     ->alignCenter(),
@@ -64,6 +79,10 @@ class ExpensesTable
                     ->wrap(),
             ])
             ->filters([
+                SelectFilter::make('expense_type')
+                    ->label('Expense Type')
+                    ->options(\App\Enums\ExpenseType::options()),
+
                 SelectFilter::make('who_paid')
                     ->label('Paid By')
                     ->options(fn () => \App\Models\Expense::distinct()->pluck('who_paid', 'who_paid')->filter()->toArray()),
