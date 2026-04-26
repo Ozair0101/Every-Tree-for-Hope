@@ -2,46 +2,208 @@
 @section('title', __('messages.history_page_title'))
 @section('content')
 
-    <!-- ===== HERO ===== -->
-    <header class="relative h-[85vh] md:h-screen w-full flex items-end overflow-hidden bg-deep-green">
-        <img src="{{ asset('images/4.jpeg') }}" alt="Every Tree for Hope team"
-            class="absolute inset-0 w-full h-full object-cover" style="object-position: center 35%;" />
-        <div class="absolute inset-0"
-            style="background: linear-gradient(to top, rgba(6,46,34,0.95) 0%, rgba(6,46,34,0.5) 40%, rgba(6,46,34,0.2) 100%);">
-        </div>
-        <div class="absolute inset-0 opacity-[0.03]"
-            style="background-image: radial-gradient(rgba(255,255,255,0.4) 1px, transparent 1px); background-size: 20px 20px;">
+    <!-- ===== HERO — Journey Timeline (Visual Story Path) ===== -->
+    <header class="relative w-full overflow-hidden py-16 md:py-20"
+        style="background: linear-gradient(180deg, #fefdf8 0%, #f5f1e3 100%);">
+
+        <!-- Hand-drawn paper texture -->
+        <div class="absolute inset-0 pointer-events-none opacity-[0.4]"
+            style="background-image: radial-gradient(rgba(6,46,34,0.06) 1px, transparent 1px); background-size: 16px 16px;"></div>
+
+        <!-- Decorative botanical borders -->
+        <span class="material-symbols-outlined absolute top-[-30px] right-[-20px] text-vibrant-lime/[0.06] text-[300px] select-none pointer-events-none rotate-12">forest</span>
+        <span class="material-symbols-outlined absolute bottom-[-40px] left-[-30px] text-deep-green/[0.05] text-[280px] select-none pointer-events-none -rotate-12">park</span>
+
+        <!-- Watermark "HISTORY" diagonal text -->
+        <div class="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden">
+            <span class="text-deep-green/[0.025] font-serif font-black tracking-widest uppercase whitespace-nowrap"
+                style="font-size: clamp(8rem, 18vw, 20rem); transform: rotate(-8deg);">
+                {{ __('messages.history_watermark') }}
+            </span>
         </div>
 
-        <div class="relative z-10 w-full px-6 md:px-12 lg:px-24 pb-16 md:pb-24">
-            <div class="max-w-4xl">
-                <div
-                    class="inline-flex items-center gap-2 bg-white/10 border border-white/15 px-4 py-2 rounded-full backdrop-blur-sm mb-6">
-                    <span class="material-symbols-outlined text-vibrant-lime text-sm">auto_stories</span>
-                    <span
-                        class="text-white/90 text-[10px] font-bold uppercase tracking-[0.25em]">{{ __('messages.history_badge') }}</span>
+        <div class="relative z-10 max-w-7xl mx-auto px-6">
+
+            <!-- Top status / chapter marker bar -->
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-12 history-fade-in">
+                <div class="flex items-center gap-3">
+                    <span class="material-symbols-outlined text-vibrant-lime">auto_stories</span>
+                    <div class="flex items-center gap-2">
+                        <span class="text-deep-green/40 text-[10px] font-bold uppercase tracking-[0.4em]">
+                            {{ __('messages.history_badge') }}
+                        </span>
+                        <div class="h-[1px] w-8 bg-deep-green/20"></div>
+                        <span class="text-deep-green text-[10px] font-bold uppercase tracking-[0.4em]">
+                            {{ __('messages.history_volume_label') }}
+                        </span>
+                    </div>
                 </div>
-                <h1 class="text-white text-5xl md:text-7xl lg:text-8xl font-serif font-bold leading-[1.05] mb-6">
-                    {{ __('messages.history_hero_title_1') }}<br />
-                    <span class="text-vibrant-lime italic">{{ __('messages.history_hero_title_2') }}</span>
-                </h1>
-                <p class="text-white/60 text-lg md:text-xl max-w-2xl font-medium leading-relaxed">
-                    {{ __('messages.history_hero_subtitle') }}
-                </p>
+                <div class="flex items-center gap-2 text-deep-green/40 text-[10px] font-bold uppercase tracking-[0.3em]">
+                    <span>2025</span>
+                    <span class="material-symbols-outlined text-vibrant-lime/60 text-base">arrow_right_alt</span>
+                    <span>{{ date('Y') }}</span>
+                </div>
             </div>
-        </div>
 
-        <!-- Scroll hint -->
-        <div class="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2">
-            <div class="w-6 h-10 rounded-full border border-white/20 flex items-start justify-center p-1.5">
-                <div class="w-1 h-2.5 rounded-full bg-white/50"
-                    style="animation: scrollBounce 2s ease-in-out infinite;"></div>
+            <!-- Headline + subtitle -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-16 history-fade-in" style="animation-delay: 0.15s;">
+                <div class="lg:col-span-7">
+                    <h1 class="font-serif font-bold text-deep-green leading-[0.95] tracking-tight"
+                        style="font-size: clamp(3rem, 7vw, 6.5rem);">
+                        {{ __('messages.history_hero_title_1') }}
+                        <span class="block italic font-black relative inline-block text-vibrant-lime">
+                            <span class="relative z-10">{{ __('messages.history_hero_title_2') }}</span>
+                            <!-- Hand-drawn squiggle -->
+                            <svg class="absolute -bottom-2 left-0 w-full h-3 z-0" preserveAspectRatio="none" viewBox="0 0 200 10">
+                                <path d="M2,8 Q50,2 100,5 T198,4" fill="none" stroke="#84cc16" stroke-width="3" stroke-linecap="round" />
+                            </svg>
+                        </span>
+                    </h1>
+                </div>
+                <div class="lg:col-span-5 lg:pl-8 lg:border-l border-deep-green/10 flex items-end">
+                    <p class="text-charcoal/70 text-base md:text-lg leading-[1.7] font-medium">
+                        {{ __('messages.history_hero_subtitle') }}
+                    </p>
+                </div>
+            </div>
+
+            <!-- ===== JOURNEY TIMELINE STRIP ===== -->
+            <div class="relative history-fade-in" style="animation-delay: 0.3s;">
+
+                <!-- Curved dashed connecting line (SVG) — visible only on md+ -->
+                <svg class="absolute top-[60px] left-0 w-full h-20 hidden md:block pointer-events-none z-0"
+                    preserveAspectRatio="none" viewBox="0 0 1200 80">
+                    <path d="M 60,40 Q 350,5 550,40 T 1140,40"
+                        fill="none" stroke="#064e3b" stroke-width="2"
+                        stroke-dasharray="4 6" stroke-linecap="round" opacity="0.25" />
+                </svg>
+
+                <!-- Milestones grid -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-4 relative z-10">
+
+                    <!-- Milestone 1 — 2025 / The Spark -->
+                    <div class="text-center group">
+                        <!-- Polaroid-style image -->
+                        <div class="relative inline-block bg-white p-1.5 pb-7 shadow-xl transform -rotate-[3deg] group-hover:rotate-0 transition-transform duration-500"
+                            style="animation: gentleSway 8s ease-in-out infinite;">
+                            <div class="w-full aspect-square overflow-hidden bg-stone-100">
+                                <img src="{{ asset('images/22.jpeg') }}" alt="The Spark"
+                                    class="w-full h-full object-cover" style="filter: sepia(0.15);" />
+                            </div>
+                            <p class="absolute bottom-0.5 left-0 right-0 text-center text-charcoal/50 text-[8px] font-handwriting">
+                                {{ __('messages.history_milestone_1_caption') }}
+                            </p>
+                        </div>
+                        <!-- Big number -->
+                        <div class="mt-4">
+                            <p class="text-deep-green text-3xl md:text-4xl font-serif font-black leading-none">
+                                12
+                            </p>
+                            <p class="text-vibrant-lime text-[9px] font-bold uppercase tracking-widest mt-1">
+                                2025
+                            </p>
+                            <p class="text-charcoal/60 text-xs font-bold mt-2">
+                                {{ __('messages.history_milestone_1_title') }}
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Milestone 2 — 142 trees / First campaigns -->
+                    <div class="text-center group md:mt-12">
+                        <div class="relative inline-block bg-white p-1.5 pb-7 shadow-xl transform rotate-[2deg] group-hover:rotate-0 transition-transform duration-500"
+                            style="animation: gentleSway 9s ease-in-out 0.5s infinite reverse;">
+                            <div class="w-full aspect-square overflow-hidden bg-stone-100">
+                                <img src="{{ asset('images/4.jpeg') }}" alt="First Campaigns"
+                                    class="w-full h-full object-cover" style="filter: sepia(0.1);" />
+                            </div>
+                            <p class="absolute bottom-0.5 left-0 right-0 text-center text-charcoal/50 text-[8px] font-handwriting">
+                                {{ __('messages.history_milestone_2_caption') }}
+                            </p>
+                        </div>
+                        <div class="mt-4">
+                            <p class="text-deep-green text-3xl md:text-4xl font-serif font-black leading-none">
+                                142
+                            </p>
+                            <p class="text-vibrant-lime text-[9px] font-bold uppercase tracking-widest mt-1">
+                                {{ __('messages.history_milestone_2_period') }}
+                            </p>
+                            <p class="text-charcoal/60 text-xs font-bold mt-2">
+                                {{ __('messages.history_milestone_2_title') }}
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Milestone 3 — 1000+ / The Movement -->
+                    <div class="text-center group">
+                        <div class="relative inline-block bg-white p-1.5 pb-7 shadow-xl transform -rotate-[2deg] group-hover:rotate-0 transition-transform duration-500"
+                            style="animation: gentleSway 7s ease-in-out 1s infinite;">
+                            <div class="w-full aspect-square overflow-hidden bg-stone-100">
+                                <img src="{{ asset('images/10.jpeg') }}" alt="The Movement"
+                                    class="w-full h-full object-cover" />
+                            </div>
+                            <p class="absolute bottom-0.5 left-0 right-0 text-center text-charcoal/50 text-[8px] font-handwriting">
+                                {{ __('messages.history_milestone_3_caption') }}
+                            </p>
+                        </div>
+                        <div class="mt-4">
+                            <p class="text-deep-green text-3xl md:text-4xl font-serif font-black leading-none">
+                                1,000<span class="text-vibrant-lime">+</span>
+                            </p>
+                            <p class="text-vibrant-lime text-[9px] font-bold uppercase tracking-widest mt-1">
+                                {{ date('Y') }}
+                            </p>
+                            <p class="text-charcoal/60 text-xs font-bold mt-2">
+                                {{ __('messages.history_milestone_3_title') }}
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Milestone 4 — Future / Vision -->
+                    <div class="text-center group md:mt-12">
+                        <div class="relative inline-block bg-deep-green p-1.5 pb-7 shadow-xl transform rotate-[3deg] group-hover:rotate-0 transition-transform duration-500"
+                            style="animation: gentleSway 8s ease-in-out 1.5s infinite reverse;">
+                            <div class="w-full aspect-square overflow-hidden bg-deep-green flex items-center justify-center">
+                                <span class="material-symbols-outlined text-vibrant-lime" style="font-size: 80px;">
+                                    rocket_launch
+                                </span>
+                            </div>
+                            <p class="absolute bottom-0.5 left-0 right-0 text-center text-vibrant-lime/70 text-[8px] font-handwriting">
+                                {{ __('messages.history_milestone_4_caption') }}
+                            </p>
+                        </div>
+                        <div class="mt-4">
+                            <p class="text-deep-green text-3xl md:text-4xl font-serif font-black italic leading-none">
+                                ∞
+                            </p>
+                            <p class="text-vibrant-lime text-[9px] font-bold uppercase tracking-widest mt-1">
+                                {{ __('messages.history_milestone_4_period') }}
+                            </p>
+                            <p class="text-charcoal/60 text-xs font-bold mt-2">
+                                {{ __('messages.history_milestone_4_title') }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom CTA -->
+            <div class="mt-16 flex flex-col sm:flex-row items-center justify-center gap-4 history-fade-in" style="animation-delay: 0.5s;">
+                <a href="#chapter-1"
+                    class="group inline-flex items-center gap-3 px-7 py-4 bg-deep-green text-white text-sm font-extrabold uppercase tracking-wider rounded-full shadow-xl shadow-deep-green/20 hover:bg-deep-green/90 hover:-translate-y-0.5 transition-all">
+                    <span class="material-symbols-outlined text-vibrant-lime text-base">menu_book</span>
+                    {{ __('messages.history_read_chapters') }}
+                    <span class="material-symbols-outlined text-base group-hover:translate-y-0.5 transition-transform">arrow_downward</span>
+                </a>
+                <span class="text-charcoal/40 text-xs italic">
+                    {{ __('messages.history_chapters_count', ['count' => 5]) }}
+                </span>
             </div>
         </div>
     </header>
+    <!-- ===== END HERO ===== -->
 
     <!-- ===== CHAPTER 1: THE SPARK ===== -->
-    <section class="relative py-24 md:py-36 px-6 bg-white overflow-hidden">
+    <section id="chapter-1" class="relative py-24 md:py-36 px-6 bg-white overflow-hidden scroll-mt-20">
         <!-- Decorative -->
         <div class="absolute top-0 left-0 w-full h-[2px]"
             style="background: linear-gradient(90deg, transparent, #84cc16 50%, transparent)"></div>
