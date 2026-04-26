@@ -9,7 +9,7 @@
     <link href="https://fonts.googleapis.com" rel="preconnect" />
     <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
     <link
-        href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Playfair+Display:ital,wght@0,700;1,900&family=Vazirmatn:wght@400;500;700;800&family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Playfair+Display:ital,wght@0,700;1,900&family=Vazirmatn:wght@400;500;700;800&family=Noto+Naskh+Arabic:wght@400;500;600;700&family=Caveat:wght@400;600&display=swap"
         rel="stylesheet" />
     <link
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
@@ -146,6 +146,48 @@
         @keyframes heroBgZoom {
             from { transform: scale(1); }
             to { transform: scale(1.08); }
+        }
+
+        /* About page hero — letter & polaroids */
+        .about-fade-in {
+            opacity: 0;
+            animation: aboutFadeIn 1.1s ease-out forwards;
+        }
+
+        @keyframes aboutFadeIn {
+            from { opacity: 0; transform: translateY(24px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes gentleSway {
+            0%, 100% { transform: translateY(0) rotate(var(--rot, 0deg)); }
+            50% { transform: translateY(-6px) rotate(calc(var(--rot, 0deg) + 1deg)); }
+        }
+
+        .font-handwriting {
+            font-family: 'Caveat', 'Kalam', cursive, serif;
+        }
+
+        /* History page hero — journey timeline */
+        .history-fade-in {
+            opacity: 0;
+            animation: historyFadeIn 1.1s ease-out forwards;
+        }
+
+        @keyframes historyFadeIn {
+            from { opacity: 0; transform: translateY(24px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Donators page hero — honor roll */
+        .donor-fade-in {
+            opacity: 0;
+            animation: donorFadeIn 1.1s ease-out forwards;
+        }
+
+        @keyframes donorFadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .parallax-leaf {
