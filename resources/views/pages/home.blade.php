@@ -72,15 +72,19 @@
                         <div class="flex flex-wrap gap-8 md:gap-14 pt-6 border-t border-white/10">
                             <div class="flex flex-col">
                                 <p class="text-white text-4xl md:text-5xl font-extrabold tabular-nums">
-                                    {{ number_format(App\Models\Donator::sum('trees_sponsored') + App\Models\Event::sum('trees_planted')) }}
+                                    {{ number_format(App\Models\Event::sum('trees_planted')) }}
                                 </p>
                                 <p class="text-white/40 text-[10px] font-bold uppercase tracking-[0.2em] mt-1">
                                     {{ __('messages.trees_planted') }}
                                 </p>
                             </div>
                             <div class="flex flex-col">
+                                @php
+                                    $totalTrees = App\Models\Donator::sum('trees_sponsored') + App\Models\Event::sum('trees_planted');
+                                    $co2Tons = $totalTrees * 0.021; // ~21 kg CO2 absorbed per tree per year
+                                @endphp
                                 <p class="text-vibrant-lime text-4xl md:text-5xl font-extrabold tabular-nums">
-                                    {{ number_format(App\Models\Donator::sum('trees_sponsored') * 0.02) }}
+                                    {{ $co2Tons >= 10 ? number_format($co2Tons) : number_format($co2Tons, 1) }}
                                 </p>
                                 <p class="text-white/40 text-[10px] font-bold uppercase tracking-[0.2em] mt-1">
                                     {{ __('messages.tons_co2_offset') }}
@@ -92,7 +96,7 @@
                     <!-- Right: Image Collage -->
                     <div class="hidden lg:block relative hero-images-animate">
                         <!-- Main large image -->
-                        <div class="relative z-10 rounded-3xl overflow-hidden shadow-2xl border-2 border-white/10 transform rotate-2 hover:rotate-0 transition-transform duration-700">
+                        <!-- <div class="relative z-10 rounded-3xl overflow-hidden shadow-2xl border-2 border-white/10 transform rotate-2 hover:rotate-0 transition-transform duration-700">
                             <img src="{{ asset('images/5.jpeg') }}" alt="Our Team"
                                 class="w-full h-[420px] object-cover" />
                             <div class="absolute inset-0 bg-gradient-to-t from-deep-green/60 via-transparent to-transparent"></div>
@@ -102,7 +106,7 @@
                                     <span class="text-white text-xs font-bold">{{ __('messages.trusted_by_environmental_leaders') }}</span>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
 
                         <!-- Floating small image 1 (top-right) -->
                         <!-- <div class="absolute -top-6 -right-6 z-20 rounded-2xl overflow-hidden shadow-xl border-2 border-white/15 w-40 h-40 transform -rotate-6 hover:rotate-0 transition-transform duration-700"
@@ -112,15 +116,15 @@
                         </div> -->
 
                         <!-- Floating small image 2 (bottom-left) -->
-                        <div class="absolute -bottom-8 -left-8 z-20 rounded-2xl overflow-hidden shadow-xl border-2 border-white/15 w-48 h-32 transform rotate-3 hover:rotate-0 transition-transform duration-700"
+                        <!-- <div class="absolute -bottom-8 -left-8 z-20 rounded-2xl overflow-hidden shadow-xl border-2 border-white/15 w-48 h-32 transform rotate-3 hover:rotate-0 transition-transform duration-700"
                             style="animation: float 7s ease-in-out 1s infinite reverse;">
                             <img src="{{ asset('images/4.jpeg') }}" alt="Community Work"
                                 class="w-full h-full object-cover" />
-                        </div>
+                        </div> -->
 
                         <!-- Decorative ring -->
-                        <div class="absolute -top-12 -left-12 w-24 h-24 rounded-full border-2 border-vibrant-lime/20 z-0"></div>
-                        <div class="absolute -bottom-16 -right-10 w-32 h-32 rounded-full border border-white/10 z-0"></div>
+                        <!-- <div class="absolute -top-12 -left-12 w-24 h-24 rounded-full border-2 border-vibrant-lime/20 z-0"></div>
+                        <div class="absolute -bottom-16 -right-10 w-32 h-32 rounded-full border border-white/10 z-0"></div> -->
                     </div>
                 </div>
             </div>
