@@ -3,35 +3,155 @@
 @section('content')
 
     <main>
-        <section class="relative min-h-[85vh] flex items-center justify-center overflow-hidden">
-            <div class="absolute inset-0 z-0">
-                <img alt="Sun-drenched hills of Kabul" class="w-full h-full object-cover scale-105"
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuCp83JCfKCRYgHZuZA8dzBJ3Ih5yeidFw9eQGrfMH89CUBjfUnGXPlxXvfb0DmVToP0iwQwPaK0W5XabUIrIKFxbSwRZd0LqiyyCermKdbgrB2uPKlC48Z7W_on-lUkUOnlJd62ok3dkmH7JXdQxf63fiy8lTJ7mxggLO5Vjo_p7uKwbi43Dl3GWm8aiiPqcYvOfRpQgKV513yPQakVJ-1w2d86ue27OPY3p8N9H5sr5Mg5oew18KgTO2Ehhj7cSGj-2a6ht7DOZOs" />
-                <div class="absolute inset-0 bg-gradient-to-t from-deep-green/60 via-deep-green/20 to-transparent">
-                </div>
-                <div class="absolute inset-0 bg-black/20"></div>
+        <!-- ===== HERO — Honor Roll / Gratitude Wall ===== -->
+        <section class="relative w-full overflow-hidden py-20 md:py-28"
+            style="background: linear-gradient(180deg, #1a3d2e 0%, #0a2a1d 100%);">
+
+            <!-- Marble/stone texture overlay -->
+            <div class="absolute inset-0 pointer-events-none opacity-[0.06]"
+                style="background-image:
+                    radial-gradient(circle at 20% 30%, #d4af37 0%, transparent 50%),
+                    radial-gradient(circle at 80% 60%, #d4af37 0%, transparent 50%),
+                    repeating-linear-gradient(45deg, transparent, transparent 80px, rgba(255,255,255,0.02) 80px, rgba(255,255,255,0.02) 81px);">
             </div>
-            <div class="relative z-10 text-center space-y-8 negative-space-container pt-20">
-                <div
-                    class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20">
-                    <span class="material-symbols-outlined text-gold-accent text-sm">verified</span>
-                    <span
-                        class="text-white text-[9px] font-bold uppercase tracking-[0.25em]">{{ __('messages.transparency_recognition') }}</span>
+
+            <!-- Subtle dot pattern -->
+            <div class="absolute inset-0 pointer-events-none opacity-[0.04]"
+                style="background-image: radial-gradient(rgba(212,175,55,0.6) 1px, transparent 1px); background-size: 24px 24px;">
+            </div>
+
+            <!-- Decorative classical ornaments -->
+            <span class="material-symbols-outlined absolute top-12 left-[5%] text-gold-accent/[0.08] text-[180px] select-none pointer-events-none rotate-12">workspace_premium</span>
+            <span class="material-symbols-outlined absolute bottom-12 right-[5%] text-gold-accent/[0.08] text-[200px] select-none pointer-events-none -rotate-12">military_tech</span>
+
+            <div class="relative z-10 max-w-7xl mx-auto px-6">
+
+                <!-- Top brass plaque label -->
+                <div class="flex flex-col items-center mb-10 donor-fade-in">
+                    <div class="flex items-center gap-3 mb-2">
+                        <div class="h-[1px] w-12 bg-gold-accent/40"></div>
+                        <span class="material-symbols-outlined text-gold-accent text-base">verified</span>
+                        <span class="text-gold-accent text-[10px] font-bold uppercase tracking-[0.5em]">
+                            {{ __('messages.transparency_recognition') }}
+                        </span>
+                        <span class="material-symbols-outlined text-gold-accent text-base">verified</span>
+                        <div class="h-[1px] w-12 bg-gold-accent/40"></div>
+                    </div>
                 </div>
-                <h1 class="text-white text-6xl md:text-9xl font-serif font-bold tracking-tight drop-shadow-2xl">
-                    {{ __('messages.meet_the_guardians') }}
-                </h1>
-                <p class="text-white/90 text-lg md:text-2xl font-light max-w-2xl mx-auto leading-relaxed drop-shadow-lg">
-                    {{ __('messages.guardians_description') }}
-                </p>
-                <div class="pt-8">
-                    <span
-                        class="material-symbols-outlined text-white animate-bounce text-3xl">keyboard_double_arrow_down</span>
+
+                <!-- Massive "WITH GRATITUDE" heading -->
+                <div class="text-center mb-10 donor-fade-in" style="animation-delay: 0.1s;">
+                    <p class="text-gold-accent/60 text-[11px] font-bold uppercase tracking-[0.6em] mb-3 font-serif">
+                        {{ __('messages.donors_overline') }}
+                    </p>
+                    <h1 class="font-serif text-white leading-[0.9] tracking-tight"
+                        style="font-size: clamp(3.5rem, 11vw, 9rem);">
+                        <span class="font-bold">{{ __('messages.donors_with') }}</span>
+                        <span class="block italic text-gold-accent font-black mt-1 relative inline-block">
+                            <span class="relative z-10">{{ __('messages.donors_gratitude') }}</span>
+                            <!-- Gold flourish underline -->
+                            <svg class="absolute -bottom-3 left-0 w-full h-4 z-0" preserveAspectRatio="none" viewBox="0 0 220 16">
+                                <path d="M5,11 Q60,2 110,8 T215,7" fill="none" stroke="#d4af37" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
+                                <circle cx="5" cy="11" r="2.5" fill="#d4af37" opacity="0.7"/>
+                                <circle cx="215" cy="7" r="2.5" fill="#d4af37" opacity="0.7"/>
+                            </svg>
+                        </span>
+                    </h1>
+                    <p class="text-white/60 text-base md:text-lg max-w-2xl mx-auto mt-8 leading-relaxed font-light italic">
+                        {{ __('messages.guardians_description') }}
+                    </p>
+                </div>
+
+                <!-- Engraved brass plaque with stats -->
+                <div class="max-w-3xl mx-auto donor-fade-in" style="animation-delay: 0.25s;">
+                    <div class="relative rounded-2xl overflow-hidden"
+                        style="background: linear-gradient(135deg, rgba(212,175,55,0.15) 0%, rgba(212,175,55,0.05) 50%, rgba(212,175,55,0.15) 100%);
+                               border: 1px solid rgba(212,175,55,0.25);
+                               box-shadow: 0 0 40px rgba(212,175,55,0.08), inset 0 1px 0 rgba(212,175,55,0.2);">
+
+                        <!-- Top corner ornaments -->
+                        <span class="absolute top-3 left-3 text-gold-accent/30 text-2xl select-none">❦</span>
+                        <span class="absolute top-3 right-3 text-gold-accent/30 text-2xl select-none">❦</span>
+                        <span class="absolute bottom-3 left-3 text-gold-accent/30 text-2xl select-none">❦</span>
+                        <span class="absolute bottom-3 right-3 text-gold-accent/30 text-2xl select-none">❦</span>
+
+                        <div class="px-8 py-8 md:px-12 md:py-10">
+                            <p class="text-center text-gold-accent text-[10px] font-bold uppercase tracking-[0.4em] mb-6">
+                                — {{ __('messages.donors_plaque_label') }} —
+                            </p>
+
+                            <div class="grid grid-cols-3 gap-4 md:gap-8">
+                                <!-- Stat 1: Donators -->
+                                <div class="text-center">
+                                    <p class="text-white text-3xl md:text-5xl font-serif font-black tabular-nums leading-none">
+                                        {{ $totalDonators ?? 0 }}
+                                    </p>
+                                    <p class="text-gold-accent/70 text-[9px] md:text-[10px] font-bold uppercase tracking-[0.25em] mt-2">
+                                        {{ __('messages.donators') }}
+                                    </p>
+                                </div>
+                                <!-- Vertical divider -->
+                                <div class="text-center border-x border-gold-accent/20">
+                                    <p class="text-white text-3xl md:text-5xl font-serif font-black tabular-nums leading-none">
+                                        {{ number_format($totalTrees ?? 0) }}
+                                    </p>
+                                    <p class="text-gold-accent/70 text-[9px] md:text-[10px] font-bold uppercase tracking-[0.25em] mt-2">
+                                        {{ __('messages.trees') }}
+                                    </p>
+                                </div>
+                                <!-- Stat 3: Total support -->
+                                <div class="text-center">
+                                    <p class="text-white text-3xl md:text-5xl font-serif font-black tabular-nums leading-none">
+                                        ${{ number_format($totalFinancial ?? 0, 0) }}
+                                    </p>
+                                    <p class="text-gold-accent/70 text-[9px] md:text-[10px] font-bold uppercase tracking-[0.25em] mt-2">
+                                        {{ __('messages.total_support') }}
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Bottom inscription -->
+                            <p class="text-center text-white/40 text-[10px] italic mt-6 font-serif">
+                                {{ __('messages.donors_inscription') }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Floating supporter name strips (decorative) -->
+                @if($verifiedDonators && $verifiedDonators->count() > 0)
+                    <div class="mt-14 donor-fade-in" style="animation-delay: 0.4s;">
+                        <p class="text-center text-gold-accent/40 text-[9px] font-bold uppercase tracking-[0.5em] mb-5">
+                            ✦ {{ __('messages.donors_recognition_label') }} ✦
+                        </p>
+                        <div class="flex flex-wrap justify-center gap-2 max-w-5xl mx-auto">
+                            @foreach($verifiedDonators->take(15) as $donator)
+                                <span class="px-3 py-1.5 rounded-full bg-white/[0.04] border border-gold-accent/15 text-white/70 text-xs font-serif italic hover:bg-gold-accent/10 hover:border-gold-accent/40 hover:text-white transition-all"
+                                    style="animation: gentleSway {{ 6 + ($loop->index % 3) }}s ease-in-out {{ $loop->index * 0.1 }}s infinite;">
+                                    {{ $donator->full_name }}
+                                </span>
+                            @endforeach
+                            @if($verifiedDonators->count() > 15)
+                                <span class="px-3 py-1.5 rounded-full bg-gold-accent/10 border border-gold-accent/30 text-gold-accent text-xs font-bold">
+                                    + {{ $verifiedDonators->count() - 15 }}
+                                </span>
+                            @endif
+                        </div>
+                    </div>
+                @endif
+
+                <!-- Bottom scroll hint -->
+                <div class="mt-14 flex justify-center donor-fade-in" style="animation-delay: 0.55s;">
+                    <a href="#sponsors" class="group flex flex-col items-center gap-2 text-white/40 hover:text-gold-accent transition-colors">
+                        <span class="text-[10px] font-bold uppercase tracking-[0.3em]">{{ __('messages.donors_meet_them') }}</span>
+                        <span class="material-symbols-outlined text-2xl group-hover:translate-y-1 transition-transform">expand_more</span>
+                    </a>
                 </div>
             </div>
         </section>
+        <!-- ===== END HERO ===== -->
 
-        <section class="py-32 px-6 md:px-12 lg:px-24 bg-white relative botanical-pattern">
+        <section id="sponsors" class="py-32 px-6 md:px-12 lg:px-24 bg-white relative botanical-pattern scroll-mt-20">
             <div class="negative-space-container">
                 <div class="text-center mb-20 space-y-4">
                     <h4 class="text-gold-accent font-bold tracking-[0.4em] text-[10px] uppercase">
