@@ -11,7 +11,7 @@ return [
     'contact' => 'Contact',
     
     // Site Info
-    'site_name' => 'Every Tree for Hope',
+    'site_name' => 'Every Tree for a Hope',
     
     // Hero Section
     'global_reforestation_mission' => 'Global Reforestation Mission',
@@ -298,7 +298,7 @@ return [
     'our_story' => 'Our Story',
 
     // History Page
-    'history_page_title' => 'Our Story - Every Tree for Hope',
+    'history_page_title' => 'Our Story - Every Tree for a Hope',
     'history_badge' => 'The Story Behind the Movement',
     'history_hero_title_1' => 'How It All',
     'history_hero_title_2' => 'Began',
@@ -399,7 +399,7 @@ return [
 
     // FAQ Page
     'faq_nav' => 'FAQ',
-    'faq_page_title' => 'FAQ - Every Tree for Hope',
+    'faq_page_title' => 'FAQ - Every Tree for a Hope',
     'faq_badge' => 'Frequently Asked Questions',
     'faq_hero_title' => 'Got Questions?',
     'faq_hero_desc' => 'Everything you want to know about Every Tree for a Hope — our mission, methods, team, challenges, and vision for a greener Afghanistan.',

@@ -11,7 +11,7 @@ return [
     'contact' => 'تماس با ما',
     
     // Site Info
-    'site_name' => 'Every Tree for Hope',
+    'site_name' => 'Every Tree for a Hope',
     
     // Hero Section
     'global_reforestation_mission' => 'مأموریت جهانی جنگل‌کاری مجدد',
