@@ -1,148 +1,210 @@
 @extends('layouts.layout')
 @section('title', 'Home Page')
 @section('content')
-    <!-- ===== HERO SECTION ===== -->
-    <div class="relative min-h-screen w-full flex flex-col overflow-hidden bg-deep-green">
+    <!-- ===== HERO SECTION — Editorial / Magazine Style ===== -->
+    @php
+        $totalEventTrees = App\Models\Event::sum('trees_planted');
+        $totalTrees = $totalEventTrees;
+        $co2Tons = $totalTrees * 0.021;
+        $eventCount = App\Models\Event::count();
+    @endphp
 
-        <!-- Background image -->
-        <div class="absolute inset-0 z-0">
-            <img src="{{ asset('images/1.jpeg') }}" alt="Every Tree for Hope team"
-                class="w-full h-full object-cover" style="object-position: center 30%;" />
-            <div class="absolute inset-0"
-                style="background: linear-gradient(135deg, rgba(6,46,34,0.92) 0%, rgba(6,46,34,0.75) 35%, rgba(6,46,34,0.4) 65%, rgba(6,46,34,0.25) 100%);">
-            </div>
-            <!-- Subtle pattern overlay -->
-            <div class="absolute inset-0 opacity-[0.03]"
-                style="background-image: radial-gradient(rgba(255,255,255,0.4) 1px, transparent 1px); background-size: 20px 20px;">
+    <section class="relative w-full overflow-hidden" style="background: #fafaf5;">
+
+        <!-- Subtle paper grain -->
+        <div class="absolute inset-0 pointer-events-none opacity-[0.5]"
+            style="background-image: radial-gradient(rgba(6,46,34,0.04) 1px, transparent 1px); background-size: 14px 14px;">
+        </div>
+
+        <!-- Top editorial bar -->
+        <div class="relative z-10 border-b border-deep-green/10">
+            <div class="max-w-7xl mx-auto px-6 py-3 flex items-center justify-between text-[10px] font-bold tracking-[0.25em] uppercase">
+                <div class="flex items-center gap-2 text-deep-green">
+                    <span class="material-symbols-outlined text-vibrant-lime text-sm">eco</span>
+                    <span>Issue No. 001</span>
+                </div>
+                <div class="hidden md:flex items-center gap-6 text-charcoal/40">
+                    <span>Kabul · Afghanistan</span>
+                    <!-- <span class="hidden lg:inline">·</span> -->
+                    <!-- <span class="hidden lg:inline">{{ now()->format('M Y') }}</span> -->
+                </div>
+                <div class="flex items-center gap-2 text-charcoal/40">
+                    <span class="relative flex h-2 w-2">
+                        <span class="absolute inline-flex h-full w-full rounded-full bg-primary opacity-60 animate-ping"></span>
+                        <span class="relative inline-flex h-2 w-2 rounded-full bg-primary"></span>
+                    </span>
+                    <span>Live</span>
+                </div>
             </div>
         </div>
 
-        <!-- Decorative floating elements -->
-        <div class="absolute inset-0 z-[1] pointer-events-none overflow-hidden">
-            <div class="absolute top-[15%] right-[8%] w-64 h-64 rounded-full opacity-10"
-                style="background: radial-gradient(circle, #84cc16, transparent 70%); animation: float 8s ease-in-out infinite;">
-            </div>
-            <div class="absolute bottom-[20%] left-[5%] w-48 h-48 rounded-full opacity-[0.07]"
-                style="background: radial-gradient(circle, #22c55e, transparent 70%); animation: float 6s ease-in-out infinite reverse;">
-            </div>
-        </div>
+        <!-- Main editorial content -->
+        <div class="relative z-10 max-w-7xl mx-auto px-6 py-12 lg:py-20">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
 
-        <!-- Main hero content -->
-        <main class="relative z-10 flex flex-1 items-center">
-            <div class="w-full px-6 md:px-12 lg:px-24 py-20">
-                <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+                <!-- LEFT COLUMN — Text/typography 7/12 -->
+                <div class="lg:col-span-7 relative hero-fade-in">
 
-                    <!-- Left: Text Content -->
-                    <div class="space-y-8 hero-text-animate">
-                        <!-- Badge -->
-                        <div
-                            class="inline-flex items-center gap-2 bg-white/10 border border-white/15 px-4 py-2 rounded-full backdrop-blur-sm">
-                            <span class="flex h-2 w-2 rounded-full bg-vibrant-lime animate-pulse"></span>
-                            <p class="text-white/90 text-[10px] font-bold uppercase tracking-[0.25em]">
-                                {{ __('messages.global_reforestation_mission') }}
+                    <!-- Issue meta line -->
+                    <div class="flex items-center gap-3 mb-8">
+                        <div class="h-[1px] w-10 bg-vibrant-lime"></div>
+                        <span class="text-vibrant-lime text-[10px] font-bold uppercase tracking-[0.4em]">
+                            {{ __('messages.global_reforestation_mission') }}
+                        </span>
+                    </div>
+
+                    <!-- Massive editorial headline -->
+                    <h1 class="font-serif font-bold text-deep-green leading-[0.92] tracking-tight mb-8"
+                        style="font-size: clamp(3rem, 8vw, 7.5rem);">
+                        {!! __('messages.rooting_for') !!}<br />
+                        <span class="italic font-black relative inline-block">
+                            <span class="relative z-10">{{ __('messages.the_future') }}</span>
+                            <!-- Hand-drawn underline -->
+                            <svg class="absolute -bottom-3 left-0 w-full h-3 z-0" preserveAspectRatio="none" viewBox="0 0 200 10">
+                                <path d="M2,8 Q50,2 100,5 T198,4" fill="none" stroke="#84cc16" stroke-width="3" stroke-linecap="round" />
+                            </svg>
+                        </span>
+                    </h1>
+
+                    <!-- Lead paragraph -->
+                    <p class="text-charcoal/70 text-lg md:text-xl font-medium leading-[1.6] max-w-xl mb-10 hero-fade-in" style="animation-delay: 0.15s;">
+                        {{ __('messages.hero_description') }}
+                    </p>
+
+                    <!-- Action row -->
+                    <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-10 hero-fade-in" style="animation-delay: 0.25s;">
+                        <a href="#donation-section"
+                            class="group inline-flex items-center gap-2 px-7 py-4 bg-deep-green text-white font-extrabold text-sm tracking-wide uppercase rounded-full shadow-lg shadow-deep-green/20 hover:bg-deep-green/90 hover:-translate-y-0.5 transition-all">
+                            <span class="material-symbols-outlined text-vibrant-lime text-base">park</span>
+                            {{ __('messages.plant_a_tree_today') }}
+                            <span class="material-symbols-outlined text-base group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                        </a>
+                        <a href="#our-works"
+                            class="inline-flex items-center gap-2 text-deep-green text-sm font-bold uppercase tracking-wide hover:gap-3 transition-all border-b-2 border-deep-green/20 hover:border-vibrant-lime pb-1">
+                            {{ __('messages.view_our_projects') }}
+                            <span class="material-symbols-outlined text-base">north_east</span>
+                        </a>
+                    </div>
+
+                    <!-- Quote / pullquote -->
+                    <div class="hidden md:block relative pl-8 max-w-md hero-fade-in" style="animation-delay: 0.4s;">
+                        <span class="absolute left-0 top-0 text-6xl font-serif text-vibrant-lime/40 leading-none select-none">"</span>
+                        <p class="text-charcoal/60 text-sm italic leading-relaxed">
+                            We started with 12 trees on a barren hillside.<br/>Today, we're planting forests of hope.
+                        </p>
+                        <p class="text-charcoal/40 text-[10px] font-bold uppercase tracking-widest mt-3">
+                            — Tamim Alimyar, Founder
+                        </p>
+                    </div>
+                </div>
+
+                <!-- RIGHT COLUMN — Photo card 5/12 -->
+                <div class="lg:col-span-5 relative hero-fade-in" style="animation-delay: 0.2s;">
+                    <div class="relative">
+                        <!-- Decorative back card -->
+                        <div class="absolute -top-4 -right-4 w-full h-full rounded-2xl bg-vibrant-lime/20 hidden md:block"></div>
+                        <div class="absolute -bottom-4 -left-4 w-full h-full rounded-2xl border-2 border-deep-green/15 hidden md:block"></div>
+
+                        <!-- Main photo card -->
+                        <div class="relative rounded-2xl overflow-hidden shadow-2xl group">
+                            <img src="{{ asset('images/1.jpeg') }}"
+                                alt="Every Tree for Hope team"
+                                class="w-full h-[420px] sm:h-[480px] lg:h-[560px] object-cover group-hover:scale-105 transition-transform duration-[1500ms]" />
+
+                            <!-- Photo bottom gradient -->
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+
+                            <!-- Photo caption (top-left) -->
+                            <div class="absolute top-5 left-5">
+                                <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/90 backdrop-blur-md">
+                                    <span class="material-symbols-outlined text-deep-green text-sm">camera_alt</span>
+                                    <!-- <span class="text-deep-green text-[10px] font-extrabold uppercase tracking-widest">Field Day · Kabul</span> -->
+                                </div>
+                            </div>
+
+                            <!-- Photo caption (bottom) -->
+                            <!-- <div class="absolute bottom-0 left-0 right-0 p-5 text-white">
+                                <p class="text-[10px] font-bold uppercase tracking-[0.25em] text-vibrant-lime mb-1">Photograph No. 01</p>
+                                <p class="text-sm font-medium">The team that planted hope into the hills of Haji Nabi</p>
+                            </div> -->
+                        </div>
+
+                        <!-- Floating stat badge — top-right -->
+                        <div class="absolute -top-5 -right-5 sm:-right-8 z-20 bg-white rounded-2xl shadow-xl px-5 py-3 border border-deep-green/10 hidden sm:flex flex-col items-end"
+                            style="animation: float 6s ease-in-out infinite;">
+                            <p class="text-deep-green text-2xl font-black tabular-nums leading-none">
+                                {{ number_format($totalTrees) }}
+                            </p>
+                            <p class="text-charcoal/50 text-[9px] font-bold uppercase tracking-widest mt-1">
+                                {{ __('messages.trees_planted') }}
                             </p>
                         </div>
 
-                        <!-- Heading -->
-                        <h1 class="text-white text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-serif font-bold leading-[1.05] tracking-tight">
-                            {!! __('messages.rooting_for') !!} <br />
-                            <span class="text-vibrant-lime italic font-black">{{ __('messages.the_future') }}</span>
-                        </h1>
-
-                        <!-- Description -->
-                        <p class="text-white/70 text-lg md:text-xl max-w-lg font-medium leading-relaxed">
-                            {{ __('messages.hero_description') }}
-                        </p>
-
-                        <!-- Buttons -->
-                        <div class="flex flex-col sm:flex-row gap-4 pt-2">
-                            <a href="#donation-section"
-                                class="flex min-w-[220px] h-14 items-center justify-center rounded-full bg-vibrant-lime hover:bg-vibrant-lime/90 text-deep-green text-lg font-extrabold transition-all shadow-xl shadow-vibrant-lime/20 group hover:-translate-y-0.5">
-                                {{ __('messages.plant_a_tree_today') }}
-                                <span
-                                    class="material-symbols-outlined {{ $is_rtl ? 'mr-2' : 'ml-2' }} group-hover:translate-x-1 transition-transform">arrow_forward</span>
-                            </a>
-                            <a href="#our-works"
-                                class="flex min-w-[220px] h-14 items-center justify-center rounded-full border border-white/25 hover:bg-white/10 text-white text-lg font-bold transition-all backdrop-blur-sm hover:-translate-y-0.5">
-                                {{ __('messages.view_our_projects') }}
-                            </a>
-                        </div>
-
-                        <!-- Stats row -->
-                        <div class="flex flex-wrap gap-8 md:gap-14 pt-6 border-t border-white/10">
-                            <div class="flex flex-col">
-                                <p class="text-white text-4xl md:text-5xl font-extrabold tabular-nums">
-                                    {{ number_format(App\Models\Event::sum('trees_planted')) }}
-                                </p>
-                                <p class="text-white/40 text-[10px] font-bold uppercase tracking-[0.2em] mt-1">
-                                    {{ __('messages.trees_planted') }}
-                                </p>
-                            </div>
-                            <div class="flex flex-col">
-                                @php
-                                    $totalTrees = App\Models\Donator::sum('trees_sponsored') + App\Models\Event::sum('trees_planted');
-                                    $co2Tons = $totalTrees * 0.021; // ~21 kg CO2 absorbed per tree per year
-                                @endphp
-                                <p class="text-vibrant-lime text-4xl md:text-5xl font-extrabold tabular-nums">
-                                    {{ $co2Tons >= 10 ? number_format($co2Tons) : number_format($co2Tons, 1) }}
-                                </p>
-                                <p class="text-white/40 text-[10px] font-bold uppercase tracking-[0.2em] mt-1">
-                                    {{ __('messages.tons_co2_offset') }}
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Right: Image Collage -->
-                    <div class="hidden lg:block relative hero-images-animate">
-                        <!-- Main large image -->
-                        <!-- <div class="relative z-10 rounded-3xl overflow-hidden shadow-2xl border-2 border-white/10 transform rotate-2 hover:rotate-0 transition-transform duration-700">
-                            <img src="{{ asset('images/5.jpeg') }}" alt="Our Team"
-                                class="w-full h-[420px] object-cover" />
-                            <div class="absolute inset-0 bg-gradient-to-t from-deep-green/60 via-transparent to-transparent"></div>
-                            <div class="absolute bottom-4 left-4 right-4">
-                                <div class="flex items-center gap-2 bg-white/15 backdrop-blur-md rounded-full px-4 py-2 border border-white/20">
-                                    <span class="material-symbols-outlined text-vibrant-lime text-sm">groups</span>
-                                    <span class="text-white text-xs font-bold">{{ __('messages.trusted_by_environmental_leaders') }}</span>
-                                </div>
-                            </div>
-                        </div> -->
-
-                        <!-- Floating small image 1 (top-right) -->
-                        <!-- <div class="absolute -top-6 -right-6 z-20 rounded-2xl overflow-hidden shadow-xl border-2 border-white/15 w-40 h-40 transform -rotate-6 hover:rotate-0 transition-transform duration-700"
-                            style="animation: float 6s ease-in-out infinite;">
-                            <img src="{{ asset('images/37.jpeg') }}" alt="Tree Planting"
-                                class="w-full h-full object-cover" />
-                        </div> -->
-
-                        <!-- Floating small image 2 (bottom-left) -->
-                        <!-- <div class="absolute -bottom-8 -left-8 z-20 rounded-2xl overflow-hidden shadow-xl border-2 border-white/15 w-48 h-32 transform rotate-3 hover:rotate-0 transition-transform duration-700"
+                        <!-- Floating signature — bottom-left -->
+                        <div class="absolute -bottom-6 -left-4 sm:-left-8 z-20 bg-deep-green rounded-2xl shadow-xl px-5 py-3 hidden sm:block"
                             style="animation: float 7s ease-in-out 1s infinite reverse;">
-                            <img src="{{ asset('images/4.jpeg') }}" alt="Community Work"
-                                class="w-full h-full object-cover" />
-                        </div> -->
-
-                        <!-- Decorative ring -->
-                        <!-- <div class="absolute -top-12 -left-12 w-24 h-24 rounded-full border-2 border-vibrant-lime/20 z-0"></div>
-                        <div class="absolute -bottom-16 -right-10 w-32 h-32 rounded-full border border-white/10 z-0"></div> -->
+                            <p class="text-vibrant-lime text-[9px] font-bold uppercase tracking-widest">Est. 2025</p>
+                            <p class="text-white text-base font-serif italic leading-tight">Every Tree<br/>for a Hope</p>
+                        </div>
                     </div>
                 </div>
             </div>
-        </main>
-
-        <!-- Bottom scroll indicator -->
-        <div class="relative z-10 w-full pb-8 flex justify-center">
-            <a href="#media-stories"
-                class="flex flex-col items-center gap-2 text-white/30 hover:text-white/60 transition-colors group">
-                <p class="text-[10px] font-bold uppercase tracking-[0.3em]">
-                    {{ __('messages.explore') }}
-                </p>
-                <div class="w-6 h-10 rounded-full border border-white/20 flex items-start justify-center p-1.5 group-hover:border-white/40 transition-colors">
-                    <div class="w-1 h-2.5 rounded-full bg-white/50" style="animation: scrollBounce 2s ease-in-out infinite;"></div>
-                </div>
-            </a>
         </div>
-    </div>
+
+        <!-- Bottom impact ticker bar -->
+        <div class="relative z-10 border-t border-deep-green/10 bg-deep-green/[0.02]">
+            <div class="max-w-7xl mx-auto px-6 py-5">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-0 md:divide-x md:divide-deep-green/10 text-center md:text-left">
+                    <!-- Stat 1 -->
+                    <div class="md:px-6 first:md:pl-0 flex md:items-center gap-3 justify-center md:justify-start">
+                        <span class="material-symbols-outlined text-vibrant-lime text-2xl">park</span>
+                        <div>
+                            <p class="text-deep-green text-xl md:text-2xl font-black tabular-nums leading-none">
+                                {{ number_format($totalTrees) }}
+                            </p>
+                            <p class="text-charcoal/40 text-[9px] font-bold uppercase tracking-widest mt-1">
+                                {{ __('messages.trees_planted') }}
+                            </p>
+                        </div>
+                    </div>
+                    <!-- Stat 2 -->
+                    <div class="md:px-6 flex md:items-center gap-3 justify-center md:justify-start">
+                        <span class="material-symbols-outlined text-vibrant-lime text-2xl">co2</span>
+                        <div>
+                            <p class="text-deep-green text-xl md:text-2xl font-black tabular-nums leading-none">
+                                {{ $co2Tons >= 10 ? number_format($co2Tons) : number_format($co2Tons, 1) }}
+                            </p>
+                            <p class="text-charcoal/40 text-[9px] font-bold uppercase tracking-widest mt-1">
+                                {{ __('messages.tons_co2_offset') }}
+                            </p>
+                        </div>
+                    </div>
+                    <!-- Stat 3 -->
+                    <div class="md:px-6 flex md:items-center gap-3 justify-center md:justify-start">
+                        <span class="material-symbols-outlined text-vibrant-lime text-2xl">groups</span>
+                        <div>
+                            <p class="text-deep-green text-xl md:text-2xl font-black tabular-nums leading-none">30+</p>
+                            <p class="text-charcoal/40 text-[9px] font-bold uppercase tracking-widest mt-1">
+                                Volunteers
+                            </p>
+                        </div>
+                    </div>
+                    <!-- Stat 4 -->
+                    <div class="md:px-6 flex md:items-center gap-3 justify-center md:justify-start">
+                        <span class="material-symbols-outlined text-vibrant-lime text-2xl">flag</span>
+                        <div>
+                            <p class="text-deep-green text-xl md:text-2xl font-black tabular-nums leading-none">
+                                {{ number_format($eventCount) }}
+                            </p>
+                            <p class="text-charcoal/40 text-[9px] font-bold uppercase tracking-widest mt-1">
+                                {{ __('messages.events_completed') }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
     <!-- ===== END HERO SECTION ===== -->
     <section class="relative bg-white pb-18 pt-28 px-6 botanical-bg overflow-hidden" id="media-stories">
         <div class="absolute top-0 right-0 w-96 h-96 opacity-[0.03] pointer-events-none">

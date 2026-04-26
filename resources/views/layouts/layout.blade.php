@@ -129,6 +129,25 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
+        .hero-fade-in {
+            opacity: 0;
+            animation: heroFadeIn 1.2s ease-out forwards;
+        }
+
+        @keyframes heroFadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero-bg-zoom {
+            animation: heroBgZoom 20s ease-out infinite alternate;
+        }
+
+        @keyframes heroBgZoom {
+            from { transform: scale(1); }
+            to { transform: scale(1.08); }
+        }
+
         .parallax-leaf {
             pointer-events: none;
             z-index: 1;
