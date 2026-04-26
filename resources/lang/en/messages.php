@@ -15,6 +15,12 @@ return [
     
     // Hero Section
     'global_reforestation_mission' => 'Global Reforestation Mission',
+    'hero_issue_no' => 'Issue No. 001',
+    'hero_live' => 'Live',
+    'hero_pullquote' => 'We started with 12 trees on a barren hillside.<br/>Today, we\'re planting forests of hope.',
+    'hero_pullquote_author' => 'Tamim Alimyar, Founder',
+    'hero_est_year' => 'Est. 2025',
+    'hero_brand_signature' => 'Every Tree<br/>for a Hope',
     'rooting_for' => 'Rooting for',
     'the_future' => 'the Future',
     'hero_description' => 'Every Tree for a Hope is about bringing life to barren land. Each tree is a symbol of resilience and a call to Afghans to build a greener future—join our team and grow hope with us.',

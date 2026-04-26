@@ -21,19 +21,17 @@
             <div class="max-w-7xl mx-auto px-6 py-3 flex items-center justify-between text-[10px] font-bold tracking-[0.25em] uppercase">
                 <div class="flex items-center gap-2 text-deep-green">
                     <span class="material-symbols-outlined text-vibrant-lime text-sm">eco</span>
-                    <span>Issue No. 001</span>
+                    <span>{{ __('messages.hero_issue_no') }}</span>
                 </div>
                 <div class="hidden md:flex items-center gap-6 text-charcoal/40">
-                    <span>Kabul · Afghanistan</span>
-                    <!-- <span class="hidden lg:inline">·</span> -->
-                    <!-- <span class="hidden lg:inline">{{ now()->format('M Y') }}</span> -->
+                    <span>{{ __('messages.kabul_afghanistan') }}</span>
                 </div>
                 <div class="flex items-center gap-2 text-charcoal/40">
                     <span class="relative flex h-2 w-2">
                         <span class="absolute inline-flex h-full w-full rounded-full bg-primary opacity-60 animate-ping"></span>
                         <span class="relative inline-flex h-2 w-2 rounded-full bg-primary"></span>
                     </span>
-                    <span>Live</span>
+                    <span>{{ __('messages.hero_live') }}</span>
                 </div>
             </div>
         </div>
@@ -90,10 +88,10 @@
                     <div class="hidden md:block relative pl-8 max-w-md hero-fade-in" style="animation-delay: 0.4s;">
                         <span class="absolute left-0 top-0 text-6xl font-serif text-vibrant-lime/40 leading-none select-none">"</span>
                         <p class="text-charcoal/60 text-sm italic leading-relaxed">
-                            We started with 12 trees on a barren hillside.<br/>Today, we're planting forests of hope.
+                            {!! __('messages.hero_pullquote') !!}
                         </p>
                         <p class="text-charcoal/40 text-[10px] font-bold uppercase tracking-widest mt-3">
-                            — Tamim Alimyar, Founder
+                            — {{ __('messages.hero_pullquote_author') }}
                         </p>
                     </div>
                 </div>
@@ -143,8 +141,8 @@
                         <!-- Floating signature — bottom-left -->
                         <div class="absolute -bottom-6 -left-4 sm:-left-8 z-20 bg-deep-green rounded-2xl shadow-xl px-5 py-3 hidden sm:block"
                             style="animation: float 7s ease-in-out 1s infinite reverse;">
-                            <p class="text-vibrant-lime text-[9px] font-bold uppercase tracking-widest">Est. 2025</p>
-                            <p class="text-white text-base font-serif italic leading-tight">Every Tree<br/>for a Hope</p>
+                            <p class="text-vibrant-lime text-[9px] font-bold uppercase tracking-widest">{{ __('messages.hero_est_year') }}</p>
+                            <p class="text-white text-base font-serif italic leading-tight">{!! __('messages.hero_brand_signature') !!}</p>
                         </div>
                     </div>
                 </div>
@@ -185,7 +183,7 @@
                         <div>
                             <p class="text-deep-green text-xl md:text-2xl font-black tabular-nums leading-none">30+</p>
                             <p class="text-charcoal/40 text-[9px] font-bold uppercase tracking-widest mt-1">
-                                Volunteers
+                                {{ __('messages.volunteers') }}
                             </p>
                         </div>
                     </div>
