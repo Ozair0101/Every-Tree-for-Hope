@@ -247,14 +247,14 @@
     <div class="flex flex-col min-h-screen">
         <header
             class="sticky top-0 z-50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-sm border-b border-gray-200 dark:border-gray-800">
-            <nav class="container mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between">
-                <a class="flex items-center gap-3" href="{{ route('home') }}">
-                    <img src="{{ asset('everytree.png') }}" alt="Every Tree for Hope" class="h-12 w-auto">
-                    <h2 class="text-xl font-bold text-gray-900 dark:text-white">Every Tree for Hope</h2>
+            <nav class="container mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between gap-4">
+                <a class="flex items-center gap-2 sm:gap-3 min-w-0 flex-shrink-0" href="{{ route('home') }}">
+                    <img src="{{ asset('everytree.png') }}" alt="Every Tree for Hope" class="h-10 sm:h-12 w-auto flex-shrink-0">
+                    <h2 class="text-base sm:text-lg lg:text-xl font-bold text-gray-900 dark:text-white whitespace-nowrap">Every Tree for Hope</h2>
                 </a>
 
                 <!-- Desktop Navigation -->
-                <div class="hidden md:flex items-center gap-8">
+                <div class="hidden lg:flex items-center gap-6 xl:gap-8">
                     <a class="text-sm font-medium hover:text-primary transition-colors"
                         href="{{ route('home') }}">{{ __('messages.home') }}</a>
                     <a class="text-sm font-medium hover:text-primary transition-colors"
@@ -274,7 +274,7 @@
                 </div>
 
                 <!-- Desktop Action Buttons & Language Switcher -->
-                <div class="hidden md:flex items-center gap-2">
+                <div class="hidden lg:flex items-center gap-2">
                     <!-- Language Switcher -->
                     <div class="relative group mr-4">
                         <button
@@ -304,7 +304,7 @@
 
                 <!-- Mobile Menu Button -->
                 <button id="mobile-menu-button"
-                    class="md:hidden p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+                    class="lg:hidden p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors flex-shrink-0">
                     <svg class="h-6 w-6 text-gray-900 dark:text-white" fill="none" viewBox="0 0 24 24"
                         stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -315,7 +315,7 @@
 
             <!-- Mobile Menu -->
             <div id="mobile-menu"
-                class="hidden md:hidden bg-background-light/95 dark:bg-background-dark/95 backdrop-blur-sm border-t border-gray-200 dark:border-gray-800">
+                class="hidden lg:hidden bg-background-light/95 dark:bg-background-dark/95 backdrop-blur-sm border-t border-gray-200 dark:border-gray-800">
                 <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-4 space-y-3">
                     <a class="block text-sm font-medium hover:text-primary transition-colors py-2"
                         href="{{ route('home') }}">{{ __('messages.home') }}</a>
