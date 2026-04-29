@@ -255,21 +255,21 @@
 
                 <!-- Desktop Navigation -->
                 <div class="hidden lg:flex items-center gap-6 xl:gap-8">
-                    <a class="text-sm font-medium hover:text-primary transition-colors"
+                    <a class="text-sm font-medium hover:text-primary transition-colors whitespace-nowrap"
                         href="{{ route('home') }}">{{ __('messages.home') }}</a>
-                    <a class="text-sm font-medium hover:text-primary transition-colors"
+                    <a class="text-sm font-medium hover:text-primary transition-colors whitespace-nowrap"
                         href="{{ route('about') }}">{{ __('messages.about') }}</a>
-                    <a class="text-sm font-medium hover:text-primary transition-colors"
+                    <a class="text-sm font-medium hover:text-primary transition-colors whitespace-nowrap"
                         href="{{ route('history') }}">{{ __('messages.our_story') }}</a>
-                    <a class="text-sm font-medium hover:text-primary transition-colors"
+                    <a class="text-sm font-medium hover:text-primary transition-colors whitespace-nowrap"
                         href="{{ route('gallery') }}">{{ __('messages.works') }}</a>
-                    <a class="text-sm font-medium hover:text-primary transition-colors"
+                    <a class="text-sm font-medium hover:text-primary transition-colors whitespace-nowrap"
                         href="{{ route('donators') }}">{{ __('messages.donators') }}</a>
-                    <a class="text-sm font-medium hover:text-primary transition-colors"
+                    <a class="text-sm font-medium hover:text-primary transition-colors whitespace-nowrap"
                         href="{{ route('report') }}">{{ __('messages.report') }}</a>
-                    <a class="text-sm font-medium hover:text-primary transition-colors"
+                    <a class="text-sm font-medium hover:text-primary transition-colors whitespace-nowrap"
                         href="{{ route('contact') }}">{{ __('messages.contact') }}</a>
-                    <a class="text-sm font-medium hover:text-primary transition-colors"
+                    <a class="text-sm font-medium hover:text-primary transition-colors whitespace-nowrap"
                         href="{{ route('faq') }}">{{ __('messages.faq_nav') }}</a>
                 </div>
 
