@@ -247,7 +247,7 @@
     <div class="flex flex-col min-h-screen">
         <header
             class="sticky top-0 z-50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-sm border-b border-gray-200 dark:border-gray-800">
-            <nav class="container mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between gap-4">
+            <nav class="max-w-7xl mx-auto px-6 py-3 flex items-center justify-between gap-4">
                 <a class="flex items-center gap-2 sm:gap-3 min-w-0 flex-shrink-0" href="{{ route('home') }}">
                     <img src="{{ asset('everytree.png') }}" alt="Every Tree for Hope" class="h-10 sm:h-12 w-auto flex-shrink-0">
                     <h2 class="text-base sm:text-lg lg:text-xl font-bold text-gray-900 dark:text-white whitespace-nowrap">Every Tree for Hope</h2>
@@ -316,7 +316,7 @@
             <!-- Mobile Menu -->
             <div id="mobile-menu"
                 class="hidden lg:hidden bg-background-light/95 dark:bg-background-dark/95 backdrop-blur-sm border-t border-gray-200 dark:border-gray-800">
-                <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-4 space-y-3">
+                <div class="max-w-7xl mx-auto px-6 py-4 space-y-3">
                     <a class="block text-sm font-medium hover:text-primary transition-colors py-2"
                         href="{{ route('home') }}">{{ __('messages.home') }}</a>
                     <a class="block text-sm font-medium hover:text-primary transition-colors py-2"
