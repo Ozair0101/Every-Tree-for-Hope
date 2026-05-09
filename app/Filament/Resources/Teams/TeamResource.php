@@ -24,6 +24,10 @@ class TeamResource extends Resource
 
     protected static ?string $navigationLabel = 'Team';
 
+    protected static string|\UnitEnum|null $navigationGroup = 'Content Management';
+
+    protected static ?int $navigationSort = 3;
+
     protected static ?string $modelLabel = 'Team Member';
 
     protected static ?string $pluralModelLabel = 'Team Members';
