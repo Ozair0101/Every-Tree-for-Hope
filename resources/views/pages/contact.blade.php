@@ -644,7 +644,9 @@
                                             activeBtn.insertAdjacentElement('afterend', activePanel);
                                         }
                                         if (shouldScroll) {
-                                            activePanel.scrollIntoView({
+                                            // Scroll to sidebar so user sees the "~ now reading ~" section first
+                                            const scrollTarget = sidebar || activePanel;
+                                            scrollTarget.scrollIntoView({
                                                 behavior: 'smooth',
                                                 block: 'start'
                                             });
