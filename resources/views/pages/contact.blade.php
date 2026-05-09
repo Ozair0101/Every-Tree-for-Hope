@@ -135,40 +135,40 @@
                             @php
                                 $intentions = [
                                     [
-                                        'tab' => 'tree',
+                                        'tab' => 'message',
                                         'num' => '01',
+                                        'label' => 'tab_message',
+                                        'hint' => 'tab_message_hint',
+                                    ],
+                                    [
+                                        'tab' => 'tree',
+                                        'num' => '02',
                                         'label' => 'tab_tree_request',
                                         'hint' => 'tab_tree_request_hint',
                                     ],
                                     [
                                         'tab' => 'volunteer',
-                                        'num' => '02',
+                                        'num' => '03',
                                         'label' => 'tab_volunteer',
                                         'hint' => 'tab_volunteer_hint',
                                     ],
                                     [
                                         'tab' => 'donate',
-                                        'num' => '03',
+                                        'num' => '04',
                                         'label' => 'tab_donate',
                                         'hint' => 'tab_donate_hint',
                                     ],
                                     [
                                         'tab' => 'sponsor',
-                                        'num' => '04',
+                                        'num' => '05',
                                         'label' => 'tab_sponsor',
                                         'hint' => 'tab_sponsor_hint',
                                     ],
                                     [
                                         'tab' => 'collaborate',
-                                        'num' => '05',
+                                        'num' => '06',
                                         'label' => 'tab_collaborate',
                                         'hint' => 'tab_collaborate_hint',
-                                    ],
-                                    [
-                                        'tab' => 'message',
-                                        'num' => '06',
-                                        'label' => 'tab_message',
-                                        'hint' => 'tab_message_hint',
                                     ],
                                 ];
                             @endphp
