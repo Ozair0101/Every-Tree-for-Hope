@@ -146,20 +146,24 @@ class InvolvementRequestResource extends Resource
             ])
             ->filters([
                 Tables\Filters\SelectFilter::make('type')
+                    ->label('Type')
                     ->options([
                         'volunteer' => 'Volunteer',
                         'sponsor' => 'Sponsor',
                         'collaborate' => 'Collaborate',
-                    ]),
+                    ])
+                    ->searchable(),
 
                 Tables\Filters\SelectFilter::make('status')
+                    ->label('Status')
                     ->options([
                         'pending' => 'Pending',
                         'reviewing' => 'Under Review',
                         'approved' => 'Approved',
                         'rejected' => 'Rejected',
                         'completed' => 'Completed',
-                    ]),
+                    ])
+                    ->searchable(),
             ])
             ->actions([
                 Actions\ViewAction::make(),
