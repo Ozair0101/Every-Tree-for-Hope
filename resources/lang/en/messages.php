@@ -604,6 +604,12 @@ return [
     'nav_group_about' => 'About',
     'nav_group_our_work' => 'Our Work',
 
+    // Get Involved — editorial index
+    'involve_index_handwritten' => 'choose your path',
+    'involve_toc_label' => 'Index of Intentions',
+    'involve_active_marker' => 'now reading',
+    'involve_index_footnote' => 'Tap any line to open its page.',
+
     // ===== Children & Awareness page (Baren and the Tree of Hope) =====
     'baren_page_title' => 'Children & Awareness — Baren and the Tree of Hope',
     'baren_back_home' => 'Back to home',
