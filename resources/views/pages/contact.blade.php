@@ -612,6 +612,12 @@
                             buttons.forEach(btn => {
                                 const active = btn.getAttribute('data-tab') === tab;
                                 btn.dataset.active = active ? 'true' : 'false';
+                                // Add/remove explicit active class for styling reliability
+                                if (active) {
+                                    btn.classList.add('active');
+                                } else {
+                                    btn.classList.remove('active');
+                                }
                             });
 
                             panels.forEach(panel => {
@@ -957,6 +963,28 @@
         </div>
     </section>
 @endsection
+
+@push('styles')
+    <style>
+        /* Active tab styling - ensure selected tab is clearly visible */
+        .involve-tab-btn.active {
+            border-color: rgba(34, 197, 94, 0.4) !important;
+        }
+
+        .involve-tab-btn.active .font-serif.font-black {
+            color: #84cc16 !important;
+        }
+
+        .involve-tab-btn.active .material-symbols-outlined {
+            color: #84cc16 !important;
+            transform: translateX(2px);
+        }
+
+        .involve-tab-btn.active .absolute.h-\[2px\] {
+            transform: scaleX(1) !important;
+        }
+    </style>
+@endpush
 
 @push('scripts')
     <script>
