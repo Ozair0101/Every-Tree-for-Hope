@@ -24,6 +24,10 @@ class PartnerResource extends Resource
 
     protected static ?string $navigationLabel = 'Partners';
 
+    protected static string|\UnitEnum|null $navigationGroup = 'Content Management';
+
+    protected static ?int $navigationSort = 4;
+
     protected static ?string $modelLabel = 'Partner';
 
     protected static ?string $pluralModelLabel = 'Global Partners';
