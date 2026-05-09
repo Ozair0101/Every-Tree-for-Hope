@@ -581,6 +581,12 @@ return [
     'nav_group_about' => 'زموږ په اړه',
     'nav_group_our_work' => 'زموږ کار',
 
+    // ګډون — د تحریر فهرست
+    'involve_index_handwritten' => 'خپله لاره وټاکه',
+    'involve_toc_label' => 'د نیتونو فهرست',
+    'involve_active_marker' => 'اوس مهال لوستل کیږي',
+    'involve_index_footnote' => 'د هرې کرښې پر سر کېکاږئ څو هغې پاڼه پرانیستل شي.',
+
     // ===== د ماشومانو او پوهاوي پاڼه (بارن او د هیلې ونه) =====
     'baren_page_title' => 'ماشومان او پوهاوی — بارن او د هیلې ونه',
     'baren_back_home' => 'کور ته بېرته',
