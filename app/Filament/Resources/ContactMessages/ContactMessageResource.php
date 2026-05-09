@@ -22,6 +22,10 @@ class ContactMessageResource extends Resource
 
     protected static ?string $navigationLabel = 'Contact Messages';
 
+    protected static string|\UnitEnum|null $navigationGroup = 'User Engagement';
+
+    protected static ?int $navigationSort = 1;
+
     protected static ?string $modelLabel = 'Contact Message';
 
     protected static ?string $pluralModelLabel = 'Contact Messages';
