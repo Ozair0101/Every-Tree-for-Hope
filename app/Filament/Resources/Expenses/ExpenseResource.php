@@ -21,11 +21,13 @@ class ExpenseResource extends Resource
 
     protected static ?string $navigationLabel = 'Expenses';
 
+    protected static string|\UnitEnum|null $navigationGroup = 'Financial';
+
+    protected static ?int $navigationSort = 2;
+
     protected static ?string $modelLabel = 'Expense';
 
     protected static ?string $pluralModelLabel = 'Expenses';
-
-    protected static ?int $navigationSort = 5;
 
     protected static ?string $recordTitleAttribute = 'description';
 
