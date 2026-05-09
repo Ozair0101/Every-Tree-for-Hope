@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\ContactMessages;
 
 use App\Filament\Resources\ContactMessages\Pages\ListContactMessages;
+use App\Filament\Resources\ContactMessages\Pages\ViewContactMessage;
 use App\Models\ContactMessage;
 use BackedEnum;
 use Filament\Actions;
@@ -138,6 +139,7 @@ class ContactMessageResource extends Resource
     {
         return [
             'index' => ListContactMessages::route('/'),
+            'view' => ViewContactMessage::route('/{record}'),
         ];
     }
 
