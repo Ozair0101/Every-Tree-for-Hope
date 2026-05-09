@@ -582,6 +582,12 @@ return [
     'nav_group_about' => 'دربارهٔ ما',
     'nav_group_our_work' => 'کار ما',
 
+    // مشارکت — فهرست تحریریه‌ای
+    'involve_index_handwritten' => 'مسیر خود را برگزینید',
+    'involve_toc_label' => 'فهرستِ نیّت‌ها',
+    'involve_active_marker' => 'در حال خواندن',
+    'involve_index_footnote' => 'بر هر سطر بزنید تا صفحه‌اش گشوده شود.',
+
     // ===== صفحهٔ کودکان و آگاهی (بارن و درختِ امید) =====
     'baren_page_title' => 'کودکان و آگاهی — بارن و درختِ امید',
     'baren_back_home' => 'بازگشت به خانه',
