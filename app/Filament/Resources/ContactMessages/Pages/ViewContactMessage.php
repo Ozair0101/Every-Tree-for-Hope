@@ -60,7 +60,7 @@ class ViewContactMessage extends ViewRecord
 
                 TextEntry::make('created_at')
                     ->label('Received')
-                    ->dateTime('M j, Y g:i A')
+                    ->formatStateUsing(fn (?string $state): ?string => $state ? \Carbon\Carbon::parse($state)->format('d/m/Y') : null)
                     ->columnSpan(1),
 
                 TextEntry::make('message')
