@@ -91,57 +91,561 @@
                 </div>
             </section>
 
-            <section class="w-full max-w-5xl mx-auto px-6 mb-32">
-                <div class="glass-panel p-12 md:p-20 rounded-[3rem] relative overflow-hidden">
-                    <div class="absolute top-0 right-0 w-64 h-64 opacity-5 pointer-events-none botanical-mask">
-                        <img alt="nature" class="object-cover w-full h-full"
-                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCp83JCfKCRYgHZuZA8dzBJ3Ih5yeidFw9eQGrfMH89CUBjfUnGXPlxXvfb0DmVToP0iwQwPaK0W5XabUIrIKFxbSwRZd0LqiyyCermKdbgrB2uPKlC48Z7W_on-lUkUOnlJd62ok3dkmH7JXdQxf63fiy8lTJ7mxggLO5Vjo_p7uKwbi43Dl3GWm8aiiPqcYvOfRpQgKV513yPQakVJ-1w2d86ue27OPY3p8N9H5sr5Mg5oew18KgTO2Ehhj7cSGj-2a6ht7DOZOs" />
+            <section class="w-full max-w-7xl mx-auto px-6 mb-32" id="get-involved">
+                <div
+                    class="relative overflow-hidden rounded-[3rem] border border-gold-accent/15 bg-white/60 backdrop-blur-sm shadow-2xl">
+                    <div class="absolute inset-0 pointer-events-none">
+                        <div class="absolute -top-24 -left-24 w-72 h-72 rounded-full bg-vibrant-lime/10 blur-3xl"></div>
+                        <div class="absolute -bottom-24 -right-24 w-80 h-80 rounded-full bg-gold-accent/10 blur-3xl"></div>
+                        <div class="absolute top-12 right-10 opacity-10">
+                            <span class="material-symbols-outlined text-[10rem] text-deep-green">handshake</span>
+                        </div>
                     </div>
-                    <div class="max-w-2xl relative z-10">
-                        <h2 class="font-serif text-4xl text-deep-green mb-10">{{ __('messages.send_a_message') }}</h2>
-                        <form action="{{ route('contact.submit') }}" method="POST" class="space-y-6">
-                            @csrf
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                <div>
-                                    <input
-                                        class="w-full bg-white/60 backdrop-blur-sm border border-gray-300 rounded-xl px-4 py-3 focus:border-deep-green focus:ring-2 focus:ring-deep-green/20 transition-all text-charcoal placeholder:text-charcoal/40"
-                                        placeholder="{{ __('messages.your_name') }}" type="text" name="name"
-                                        required />
+
+                    <div class="relative p-10 md:p-16 lg:p-20">
+                        <div class="text-center max-w-3xl mx-auto mb-12">
+                            <h4 class="text-sage-green font-bold tracking-[0.4em] text-xs uppercase mb-4">
+                                {{ __('messages.get_involved_badge') }}
+                            </h4>
+                            <h2 class="text-5xl md:text-7xl font-serif text-deep-green leading-tight">
+                                {!! __('messages.get_involved_title') !!}
+                            </h2>
+                            <p class="mt-6 text-charcoal/70 text-lg font-light leading-relaxed">
+                                {{ __('messages.get_involved_description') }}
+                            </p>
+                            <div class="w-24 h-[1px] bg-gold-accent mx-auto mt-8 opacity-40"></div>
+                        </div>
+
+                        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-10" id="involveQuickLinks">
+                            <button type="button" data-tab="tree"
+                                class="involve-tab-btn rounded-2xl border border-charcoal/10 bg-white/70 px-4 py-4 text-left hover:bg-white transition-all">
+                                <span class="material-symbols-outlined text-sage-green">forest</span>
+                                <p class="mt-2 font-semibold text-deep-green text-sm">{{ __('messages.tab_tree_request') }}
+                                </p>
+                                <p class="text-xs text-charcoal/60">{{ __('messages.tab_tree_request_hint') }}</p>
+                            </button>
+                            <button type="button" data-tab="volunteer"
+                                class="involve-tab-btn rounded-2xl border border-charcoal/10 bg-white/70 px-4 py-4 text-left hover:bg-white transition-all">
+                                <span class="material-symbols-outlined text-sage-green">volunteer_activism</span>
+                                <p class="mt-2 font-semibold text-deep-green text-sm">{{ __('messages.tab_volunteer') }}
+                                </p>
+                                <p class="text-xs text-charcoal/60">{{ __('messages.tab_volunteer_hint') }}</p>
+                            </button>
+                            <button type="button" data-tab="donate"
+                                class="involve-tab-btn rounded-2xl border border-charcoal/10 bg-white/70 px-4 py-4 text-left hover:bg-white transition-all">
+                                <span class="material-symbols-outlined text-sage-green">favorite</span>
+                                <p class="mt-2 font-semibold text-deep-green text-sm">{{ __('messages.tab_donate') }}</p>
+                                <p class="text-xs text-charcoal/60">{{ __('messages.tab_donate_hint') }}</p>
+                            </button>
+                            <button type="button" data-tab="sponsor"
+                                class="involve-tab-btn rounded-2xl border border-charcoal/10 bg-white/70 px-4 py-4 text-left hover:bg-white transition-all">
+                                <span class="material-symbols-outlined text-sage-green">workspace_premium</span>
+                                <p class="mt-2 font-semibold text-deep-green text-sm">{{ __('messages.tab_sponsor') }}</p>
+                                <p class="text-xs text-charcoal/60">{{ __('messages.tab_sponsor_hint') }}</p>
+                            </button>
+                            <button type="button" data-tab="collaborate"
+                                class="involve-tab-btn rounded-2xl border border-charcoal/10 bg-white/70 px-4 py-4 text-left hover:bg-white transition-all">
+                                <span class="material-symbols-outlined text-sage-green">hub</span>
+                                <p class="mt-2 font-semibold text-deep-green text-sm">{{ __('messages.tab_collaborate') }}
+                                </p>
+                                <p class="text-xs text-charcoal/60">{{ __('messages.tab_collaborate_hint') }}</p>
+                            </button>
+                            <button type="button" data-tab="message"
+                                class="involve-tab-btn rounded-2xl border border-charcoal/10 bg-white/70 px-4 py-4 text-left hover:bg-white transition-all">
+                                <span class="material-symbols-outlined text-sage-green">mail</span>
+                                <p class="mt-2 font-semibold text-deep-green text-sm">{{ __('messages.tab_message') }}</p>
+                                <p class="text-xs text-charcoal/60">{{ __('messages.tab_message_hint') }}</p>
+                            </button>
+                        </div>
+
+                        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+                            <div class="lg:col-span-4">
+                                <div class="rounded-[2rem] border border-charcoal/10 bg-white/70 p-8 space-y-5"
+                                    id="involveSidebar">
+                                    <h3 class="font-serif text-2xl font-bold text-deep-green" id="involveSidebarTitle">
+                                    </h3>
+                                    <p class="text-charcoal/70 leading-relaxed" id="involveSidebarText"></p>
+                                    <div class="gold-line-art"></div>
+                                    <div class="space-y-4 text-sm text-charcoal/70" id="involveSidebarList"></div>
                                 </div>
-                                <div>
-                                    <input
-                                        class="w-full bg-white/60 backdrop-blur-sm border border-gray-300 rounded-xl px-4 py-3 focus:border-deep-green focus:ring-2 focus:ring-deep-green/20 transition-all text-charcoal placeholder:text-charcoal/40"
-                                        placeholder="{{ __('messages.email_address') }}" type="email" name="email"
-                                        required />
+                            </div>
+
+                            <div class="lg:col-span-8">
+                                <div class="rounded-[2rem] border border-charcoal/10 bg-white/70 p-8 md:p-10">
+                                    <div class="space-y-8">
+                                        <div class="involve-tab-panel" data-panel="volunteer">
+                                            @if ($errors->involvement->has('type') && old('type') === 'volunteer')
+                                                <div
+                                                    class="mb-6 rounded-2xl border border-red-200 bg-red-50 px-6 py-4 text-red-800">
+                                                    <ul class="text-sm list-disc list-inside space-y-1">
+                                                        @foreach ($errors->involvement->all() as $error)
+                                                            <li>{{ $error }}</li>
+                                                        @endforeach
+                                                    </ul>
+                                                </div>
+                                            @endif
+                                            <form action="{{ route('involvement.store') }}" method="POST"
+                                                class="space-y-6">
+                                                @csrf
+                                                <input type="hidden" name="type" value="volunteer" />
+                                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                                    <div>
+                                                        <label
+                                                            class="block text-[11px] font-bold uppercase tracking-widest text-charcoal/60 mb-2">{{ __('messages.your_name') }}</label>
+                                                        <input
+                                                            class="w-full bg-white/80 border border-gray-300 rounded-2xl px-5 py-4 focus:border-deep-green focus:ring-2 focus:ring-deep-green/20 transition-all"
+                                                            placeholder="{{ __('messages.your_name') }}" type="text"
+                                                            name="name"
+                                                            value="{{ old('type') === 'volunteer' ? old('name') : '' }}"
+                                                            required />
+                                                    </div>
+                                                    <div>
+                                                        <label
+                                                            class="block text-[11px] font-bold uppercase tracking-widest text-charcoal/60 mb-2">{{ __('messages.email_address') }}</label>
+                                                        <input
+                                                            class="w-full bg-white/80 border border-gray-300 rounded-2xl px-5 py-4 focus:border-deep-green focus:ring-2 focus:ring-deep-green/20 transition-all"
+                                                            placeholder="{{ __('messages.email_address') }}"
+                                                            type="email" name="email"
+                                                            value="{{ old('type') === 'volunteer' ? old('email') : '' }}"
+                                                            required />
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <label
+                                                        class="block text-[11px] font-bold uppercase tracking-widest text-charcoal/60 mb-2">{{ __('messages.phone_number') }}</label>
+                                                    <input
+                                                        class="w-full bg-white/80 border border-gray-300 rounded-2xl px-5 py-4 focus:border-deep-green focus:ring-2 focus:ring-deep-green/20 transition-all"
+                                                        placeholder="{{ __('messages.phone_placeholder') }}"
+                                                        type="text" name="phone"
+                                                        value="{{ old('type') === 'volunteer' ? old('phone') : '' }}"
+                                                        required />
+                                                </div>
+                                                <div>
+                                                    <label
+                                                        class="block text-[11px] font-bold uppercase tracking-widest text-charcoal/60 mb-2">{{ __('messages.message') }}</label>
+                                                    <textarea
+                                                        class="w-full bg-white/80 border border-gray-300 rounded-2xl px-5 py-4 focus:border-deep-green focus:ring-2 focus:ring-deep-green/20 transition-all resize-none"
+                                                        placeholder="{{ __('messages.volunteer_message_placeholder') }}" rows="5" name="message" required>{{ old('type') === 'volunteer' ? old('message') : '' }}</textarea>
+                                                </div>
+                                                <button
+                                                    class="bg-deep-green text-white px-10 py-4 rounded-2xl font-semibold text-sm hover:bg-deep-green/90 transition-all shadow-lg shadow-deep-green/20 flex items-center gap-2"
+                                                    type="submit">
+                                                    {{ __('messages.submit_volunteer') }}
+                                                    <span
+                                                        class="material-symbols-outlined {{ $is_rtl ? 'mr-2' : 'ml-2' }}">arrow_right_alt</span>
+                                                </button>
+                                            </form>
+                                        </div>
+
+                                        <div class="involve-tab-panel hidden" data-panel="donate">
+                                            <div class="rounded-2xl border border-gold-accent/20 bg-white/80 p-8">
+                                                <div class="flex items-start gap-4">
+                                                    <span
+                                                        class="material-symbols-outlined text-gold-accent">favorite</span>
+                                                    <div>
+                                                        <p class="font-semibold text-deep-green">
+                                                            {{ __('messages.donate_panel_title') }}</p>
+                                                        <p class="text-charcoal/70 mt-1">
+                                                            {{ __('messages.donate_panel_text') }}</p>
+                                                        <a href="#donation-section"
+                                                            class="inline-flex items-center gap-2 mt-6 bg-gold-accent text-white px-8 py-3 rounded-xl text-sm font-bold hover:opacity-90 transition-all">
+                                                            {{ __('messages.go_to_donation_section') }}
+                                                            <span class="material-symbols-outlined text-base">south</span>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="involve-tab-panel hidden" data-panel="sponsor">
+                                            @if ($errors->involvement->has('type') && old('type') === 'sponsor')
+                                                <div
+                                                    class="mb-6 rounded-2xl border border-red-200 bg-red-50 px-6 py-4 text-red-800">
+                                                    <ul class="text-sm list-disc list-inside space-y-1">
+                                                        @foreach ($errors->involvement->all() as $error)
+                                                            <li>{{ $error }}</li>
+                                                        @endforeach
+                                                    </ul>
+                                                </div>
+                                            @endif
+                                            <form action="{{ route('involvement.store') }}" method="POST"
+                                                class="space-y-6">
+                                                @csrf
+                                                <input type="hidden" name="type" value="sponsor" />
+                                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                                    <div>
+                                                        <label
+                                                            class="block text-[11px] font-bold uppercase tracking-widest text-charcoal/60 mb-2">{{ __('messages.your_name') }}</label>
+                                                        <input
+                                                            class="w-full bg-white/80 border border-gray-300 rounded-2xl px-5 py-4 focus:border-deep-green focus:ring-2 focus:ring-deep-green/20 transition-all"
+                                                            placeholder="{{ __('messages.your_name') }}" type="text"
+                                                            name="name"
+                                                            value="{{ old('type') === 'sponsor' ? old('name') : '' }}"
+                                                            required />
+                                                    </div>
+                                                    <div>
+                                                        <label
+                                                            class="block text-[11px] font-bold uppercase tracking-widest text-charcoal/60 mb-2">{{ __('messages.email_address') }}</label>
+                                                        <input
+                                                            class="w-full bg-white/80 border border-gray-300 rounded-2xl px-5 py-4 focus:border-deep-green focus:ring-2 focus:ring-deep-green/20 transition-all"
+                                                            placeholder="{{ __('messages.email_address') }}"
+                                                            type="email" name="email"
+                                                            value="{{ old('type') === 'sponsor' ? old('email') : '' }}"
+                                                            required />
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <label
+                                                        class="block text-[11px] font-bold uppercase tracking-widest text-charcoal/60 mb-2">{{ __('messages.phone_number') }}</label>
+                                                    <input
+                                                        class="w-full bg-white/80 border border-gray-300 rounded-2xl px-5 py-4 focus:border-deep-green focus:ring-2 focus:ring-deep-green/20 transition-all"
+                                                        placeholder="{{ __('messages.phone_placeholder') }}"
+                                                        type="text" name="phone"
+                                                        value="{{ old('type') === 'sponsor' ? old('phone') : '' }}"
+                                                        required />
+                                                </div>
+                                                <div>
+                                                    <label
+                                                        class="block text-[11px] font-bold uppercase tracking-widest text-charcoal/60 mb-2">{{ __('messages.message') }}</label>
+                                                    <textarea
+                                                        class="w-full bg-white/80 border border-gray-300 rounded-2xl px-5 py-4 focus:border-deep-green focus:ring-2 focus:ring-deep-green/20 transition-all resize-none"
+                                                        placeholder="{{ __('messages.sponsor_message_placeholder') }}" rows="5" name="message" required>{{ old('type') === 'sponsor' ? old('message') : '' }}</textarea>
+                                                </div>
+                                                <button
+                                                    class="bg-deep-green text-white px-10 py-4 rounded-2xl font-semibold text-sm hover:bg-deep-green/90 transition-all shadow-lg shadow-deep-green/20 flex items-center gap-2"
+                                                    type="submit">
+                                                    {{ __('messages.submit_sponsor') }}
+                                                    <span
+                                                        class="material-symbols-outlined {{ $is_rtl ? 'mr-2' : 'ml-2' }}">arrow_right_alt</span>
+                                                </button>
+                                            </form>
+                                        </div>
+
+                                        <div class="involve-tab-panel hidden" data-panel="collaborate">
+                                            @if ($errors->involvement->has('type') && old('type') === 'collaborate')
+                                                <div
+                                                    class="mb-6 rounded-2xl border border-red-200 bg-red-50 px-6 py-4 text-red-800">
+                                                    <ul class="text-sm list-disc list-inside space-y-1">
+                                                        @foreach ($errors->involvement->all() as $error)
+                                                            <li>{{ $error }}</li>
+                                                        @endforeach
+                                                    </ul>
+                                                </div>
+                                            @endif
+                                            <form action="{{ route('involvement.store') }}" method="POST"
+                                                class="space-y-6">
+                                                @csrf
+                                                <input type="hidden" name="type" value="collaborate" />
+                                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                                    <div>
+                                                        <label
+                                                            class="block text-[11px] font-bold uppercase tracking-widest text-charcoal/60 mb-2">{{ __('messages.your_name') }}</label>
+                                                        <input
+                                                            class="w-full bg-white/80 border border-gray-300 rounded-2xl px-5 py-4 focus:border-deep-green focus:ring-2 focus:ring-deep-green/20 transition-all"
+                                                            placeholder="{{ __('messages.your_name') }}" type="text"
+                                                            name="name"
+                                                            value="{{ old('type') === 'collaborate' ? old('name') : '' }}"
+                                                            required />
+                                                    </div>
+                                                    <div>
+                                                        <label
+                                                            class="block text-[11px] font-bold uppercase tracking-widest text-charcoal/60 mb-2">{{ __('messages.email_address') }}</label>
+                                                        <input
+                                                            class="w-full bg-white/80 border border-gray-300 rounded-2xl px-5 py-4 focus:border-deep-green focus:ring-2 focus:ring-deep-green/20 transition-all"
+                                                            placeholder="{{ __('messages.email_address') }}"
+                                                            type="email" name="email"
+                                                            value="{{ old('type') === 'collaborate' ? old('email') : '' }}"
+                                                            required />
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <label
+                                                        class="block text-[11px] font-bold uppercase tracking-widest text-charcoal/60 mb-2">{{ __('messages.phone_number') }}</label>
+                                                    <input
+                                                        class="w-full bg-white/80 border border-gray-300 rounded-2xl px-5 py-4 focus:border-deep-green focus:ring-2 focus:ring-deep-green/20 transition-all"
+                                                        placeholder="{{ __('messages.phone_placeholder') }}"
+                                                        type="text" name="phone"
+                                                        value="{{ old('type') === 'collaborate' ? old('phone') : '' }}"
+                                                        required />
+                                                </div>
+                                                <div>
+                                                    <label
+                                                        class="block text-[11px] font-bold uppercase tracking-widest text-charcoal/60 mb-2">{{ __('messages.message') }}</label>
+                                                    <textarea
+                                                        class="w-full bg-white/80 border border-gray-300 rounded-2xl px-5 py-4 focus:border-deep-green focus:ring-2 focus:ring-deep-green/20 transition-all resize-none"
+                                                        placeholder="{{ __('messages.collaborate_message_placeholder') }}" rows="5" name="message" required>{{ old('type') === 'collaborate' ? old('message') : '' }}</textarea>
+                                                </div>
+                                                <button
+                                                    class="bg-deep-green text-white px-10 py-4 rounded-2xl font-semibold text-sm hover:bg-deep-green/90 transition-all shadow-lg shadow-deep-green/20 flex items-center gap-2"
+                                                    type="submit">
+                                                    {{ __('messages.submit_collaborate') }}
+                                                    <span
+                                                        class="material-symbols-outlined {{ $is_rtl ? 'mr-2' : 'ml-2' }}">arrow_right_alt</span>
+                                                </button>
+                                            </form>
+                                        </div>
+
+                                        <div class="involve-tab-panel hidden" data-panel="tree">
+                                            <form action="{{ route('tree-request.submit') }}" method="POST"
+                                                enctype="multipart/form-data" class="space-y-6">
+                                                @csrf
+                                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                                    <div class="md:col-span-2">
+                                                        <label
+                                                            class="block text-[11px] font-bold uppercase tracking-widest text-charcoal/60 mb-2">
+                                                            {{ __('messages.tree_request_location') }}
+                                                        </label>
+                                                        <input name="location" value="{{ old('location') }}" required
+                                                            class="w-full bg-white/80 border border-gray-300 rounded-2xl px-5 py-4 focus:border-deep-green focus:ring-2 focus:ring-deep-green/20 transition-all"
+                                                            placeholder="{{ __('messages.tree_request_location_placeholder') }}"
+                                                            type="text" />
+                                                    </div>
+                                                    <div>
+                                                        <label
+                                                            class="block text-[11px] font-bold uppercase tracking-widest text-charcoal/60 mb-2">
+                                                            {{ __('messages.tree_request_number_of_trees') }}
+                                                        </label>
+                                                        <input name="number_of_trees"
+                                                            value="{{ old('number_of_trees') }}" required
+                                                            class="w-full bg-white/80 border border-gray-300 rounded-2xl px-5 py-4 focus:border-deep-green focus:ring-2 focus:ring-deep-green/20 transition-all"
+                                                            placeholder="{{ __('messages.tree_request_number_of_trees_placeholder') }}"
+                                                            type="number" min="1" />
+                                                    </div>
+                                                    <div>
+                                                        <label
+                                                            class="block text-[11px] font-bold uppercase tracking-widest text-charcoal/60 mb-2">
+                                                            {{ __('messages.tree_request_water_source') }}
+                                                        </label>
+                                                        <input name="water_source" value="{{ old('water_source') }}"
+                                                            class="w-full bg-white/80 border border-gray-300 rounded-2xl px-5 py-4 focus:border-deep-green focus:ring-2 focus:ring-deep-green/20 transition-all"
+                                                            placeholder="{{ __('messages.tree_request_water_source_placeholder') }}"
+                                                            type="text" />
+                                                    </div>
+                                                    <div>
+                                                        <label
+                                                            class="block text-[11px] font-bold uppercase tracking-widest text-charcoal/60 mb-2">
+                                                            {{ __('messages.tree_request_responsible_person') }}
+                                                        </label>
+                                                        <input name="responsible_person"
+                                                            value="{{ old('responsible_person') }}" required
+                                                            class="w-full bg-white/80 border border-gray-300 rounded-2xl px-5 py-4 focus:border-deep-green focus:ring-2 focus:ring-deep-green/20 transition-all"
+                                                            placeholder="{{ __('messages.tree_request_responsible_person_placeholder') }}"
+                                                            type="text" />
+                                                    </div>
+                                                    <div>
+                                                        <label
+                                                            class="block text-[11px] font-bold uppercase tracking-widest text-charcoal/60 mb-2">
+                                                            {{ __('messages.tree_request_phone_whatsapp') }}
+                                                        </label>
+                                                        <input name="phone_whatsapp" value="{{ old('phone_whatsapp') }}"
+                                                            required
+                                                            class="w-full bg-white/80 border border-gray-300 rounded-2xl px-5 py-4 focus:border-deep-green focus:ring-2 focus:ring-deep-green/20 transition-all"
+                                                            placeholder="{{ __('messages.tree_request_phone_whatsapp_placeholder') }}"
+                                                            type="text" />
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <label
+                                                        class="block text-[11px] font-bold uppercase tracking-widest text-charcoal/60 mb-2">
+                                                        {{ __('messages.tree_request_photos_videos') }}
+                                                    </label>
+                                                    <div class="space-y-3" id="treeMediaInputs">
+                                                        <input name="media[]"
+                                                            class="block w-full text-sm text-charcoal/70 file:mr-4 file:py-3 file:px-5 file:rounded-xl file:border-0 file:text-xs file:font-bold file:uppercase file:tracking-widest file:bg-deep-green file:text-white hover:file:bg-deep-green/90"
+                                                            type="file" accept="image/*,video/*" />
+                                                    </div>
+                                                    <button type="button" id="addTreeMediaInput"
+                                                        class="mt-4 inline-flex items-center gap-2 rounded-xl border border-deep-green/20 bg-white px-5 py-3 text-xs font-bold uppercase tracking-widest text-deep-green hover:bg-deep-green/5 transition-all">
+                                                        <span class="material-symbols-outlined text-base">add</span>
+                                                        Add another file
+                                                    </button>
+                                                </div>
+                                                <button type="submit"
+                                                    class="bg-deep-green text-white px-10 py-4 rounded-2xl font-semibold text-sm hover:bg-deep-green/90 transition-all shadow-lg shadow-deep-green/20 flex items-center gap-2">
+                                                    {{ __('messages.tree_request_submit') }}
+                                                    <span
+                                                        class="material-symbols-outlined {{ $is_rtl ? 'mr-2' : 'ml-2' }}">arrow_right_alt</span>
+                                                </button>
+                                            </form>
+                                        </div>
+
+                                        <div class="involve-tab-panel hidden" data-panel="message">
+                                            <form action="{{ route('contact.submit') }}" method="POST"
+                                                class="space-y-6">
+                                                @csrf
+                                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                                    <div>
+                                                        <input
+                                                            class="w-full bg-white/80 border border-gray-300 rounded-2xl px-5 py-4 focus:border-deep-green focus:ring-2 focus:ring-deep-green/20 transition-all"
+                                                            placeholder="{{ __('messages.your_name') }}" type="text"
+                                                            name="name" value="{{ old('name') }}" required />
+                                                    </div>
+                                                    <div>
+                                                        <input
+                                                            class="w-full bg-white/80 border border-gray-300 rounded-2xl px-5 py-4 focus:border-deep-green focus:ring-2 focus:ring-deep-green/20 transition-all"
+                                                            placeholder="{{ __('messages.email_address') }}"
+                                                            type="email" name="email" value="{{ old('email') }}"
+                                                            required />
+                                                    </div>
+                                                </div>
+                                                <input
+                                                    class="w-full bg-white/80 border border-gray-300 rounded-2xl px-5 py-4 focus:border-deep-green focus:ring-2 focus:ring-deep-green/20 transition-all"
+                                                    placeholder="{{ __('messages.subject') }}" type="text"
+                                                    name="subject" value="{{ old('subject') }}" required />
+                                                <textarea
+                                                    class="w-full bg-white/80 border border-gray-300 rounded-2xl px-5 py-4 focus:border-deep-green focus:ring-2 focus:ring-deep-green/20 transition-all resize-none"
+                                                    placeholder="{{ __('messages.how_can_we_help') }}" rows="5" name="message" required>{{ old('message') }}</textarea>
+                                                <button
+                                                    class="bg-deep-green text-white px-10 py-4 rounded-2xl font-semibold text-sm hover:bg-deep-green/90 transition-all shadow-lg shadow-deep-green/20 flex items-center gap-2"
+                                                    type="submit">
+                                                    {{ __('messages.send_message') }}
+                                                    <span
+                                                        class="material-symbols-outlined {{ $is_rtl ? 'mr-2' : 'ml-2' }}">arrow_right_alt</span>
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div>
-                                <input
-                                    class="w-full bg-white/60 backdrop-blur-sm border border-gray-300 rounded-xl px-4 py-3 focus:border-deep-green focus:ring-2 focus:ring-deep-green/20 transition-all text-charcoal placeholder:text-charcoal/40"
-                                    placeholder="{{ __('messages.subject') }}" type="text" name="subject" required />
-                            </div>
-                            <div>
-                                <textarea
-                                    class="w-full bg-white/60 backdrop-blur-sm border border-gray-300 rounded-xl px-4 py-3 focus:border-deep-green focus:ring-2 focus:ring-deep-green/20 transition-all text-charcoal placeholder:text-charcoal/40 resize-none"
-                                    placeholder="{{ __('messages.how_can_we_help') }}" rows="4" name="message" required></textarea>
-                            </div>
-                            <div class="pt-4">
-                                <button
-                                    class="bg-deep-green text-white px-8 py-3 rounded-xl font-semibold text-sm hover:bg-deep-green/90 transition-all shadow-lg shadow-deep-green/20 flex items-center gap-2"
-                                    type="submit">
-                                    {{ __('messages.send_message') }}
-                                    <span
-                                        class="material-symbols-outlined {{ $is_rtl ? 'mr-2' : 'ml-2' }}">arrow_right_alt</span>
-                                </button>
-                            </div>
-                        </form>
+                        </div>
                     </div>
                 </div>
+
+                <script>
+                    (function() {
+                        const buttons = Array.from(document.querySelectorAll('#involveQuickLinks .involve-tab-btn'));
+                        const panels = Array.from(document.querySelectorAll('#get-involved .involve-tab-panel'));
+
+                        const sidebarTitle = document.getElementById('involveSidebarTitle');
+                        const sidebarText = document.getElementById('involveSidebarText');
+                        const sidebarList = document.getElementById('involveSidebarList');
+
+                        const copy = {
+                            volunteer: {
+                                title: @json(__('messages.sidebar_volunteer_title')),
+                                text: @json(__('messages.sidebar_volunteer_text')),
+                                items: [
+                                    @json(__('messages.sidebar_volunteer_item_1')),
+                                    @json(__('messages.sidebar_volunteer_item_2')),
+                                    @json(__('messages.sidebar_volunteer_item_3')),
+                                ],
+                            },
+                            donate: {
+                                title: @json(__('messages.sidebar_donate_title')),
+                                text: @json(__('messages.sidebar_donate_text')),
+                                items: [
+                                    @json(__('messages.sidebar_donate_item_1')),
+                                    @json(__('messages.sidebar_donate_item_2')),
+                                    @json(__('messages.sidebar_donate_item_3')),
+                                ],
+                            },
+                            sponsor: {
+                                title: @json(__('messages.sidebar_sponsor_title')),
+                                text: @json(__('messages.sidebar_sponsor_text')),
+                                items: [
+                                    @json(__('messages.sidebar_sponsor_item_1')),
+                                    @json(__('messages.sidebar_sponsor_item_2')),
+                                    @json(__('messages.sidebar_sponsor_item_3')),
+                                ],
+                            },
+                            collaborate: {
+                                title: @json(__('messages.sidebar_collaborate_title')),
+                                text: @json(__('messages.sidebar_collaborate_text')),
+                                items: [
+                                    @json(__('messages.sidebar_collaborate_item_1')),
+                                    @json(__('messages.sidebar_collaborate_item_2')),
+                                    @json(__('messages.sidebar_collaborate_item_3')),
+                                ],
+                            },
+                            tree: {
+                                title: @json(__('messages.sidebar_tree_title')),
+                                text: @json(__('messages.sidebar_tree_text')),
+                                items: [
+                                    @json(__('messages.sidebar_tree_item_1')),
+                                    @json(__('messages.sidebar_tree_item_2')),
+                                    @json(__('messages.sidebar_tree_item_3')),
+                                ],
+                            },
+                            message: {
+                                title: @json(__('messages.sidebar_message_title')),
+                                text: @json(__('messages.sidebar_message_text')),
+                                items: [
+                                    @json(__('messages.sidebar_message_item_1')),
+                                    @json(__('messages.sidebar_message_item_2')),
+                                    @json(__('messages.sidebar_message_item_3')),
+                                ],
+                            },
+                        };
+
+                        function setTab(tab) {
+                            buttons.forEach(btn => {
+                                const active = btn.getAttribute('data-tab') === tab;
+                                btn.classList.toggle('ring-2', active);
+                                btn.classList.toggle('ring-deep-green/20', active);
+                                btn.classList.toggle('bg-white', active);
+                            });
+
+                            panels.forEach(panel => {
+                                panel.classList.toggle('hidden', panel.getAttribute('data-panel') !== tab);
+                            });
+
+                            if (copy[tab]) {
+                                sidebarTitle.textContent = copy[tab].title;
+                                sidebarText.textContent = copy[tab].text;
+                                sidebarList.innerHTML = copy[tab].items
+                                    .map(item =>
+                                        `<div class="flex items-start gap-3"><span class="material-symbols-outlined text-gold-accent">check_circle</span><p>${item}</p></div>`
+                                    )
+                                    .join('');
+                            }
+                        }
+
+                        buttons.forEach(btn => {
+                            btn.addEventListener('click', function() {
+                                const tab = this.getAttribute('data-tab');
+                                setTab(tab);
+                                history.replaceState(null, '', '#get-involved');
+                                // Clear any stored tab when user manually clicks
+                                sessionStorage.removeItem('openInvolvementTab');
+                            });
+                        });
+
+                        // Check for stored tab from home page
+                        const storedTab = sessionStorage.getItem('openInvolvementTab');
+                        const validTabs = ['volunteer', 'sponsor', 'collaborate', 'tree', 'donate', 'message'];
+                        if (storedTab && validTabs.includes(storedTab)) {
+                            setTab(storedTab);
+                            sessionStorage.removeItem('openInvolvementTab'); // Clear after use
+                        } else {
+                            setTab('volunteer');
+                        }
+
+                        // Tree request media inputs (add one-by-one)
+                        const addMediaBtn = document.getElementById('addTreeMediaInput');
+                        const mediaInputsWrap = document.getElementById('treeMediaInputs');
+                        if (addMediaBtn && mediaInputsWrap) {
+                            addMediaBtn.addEventListener('click', function() {
+                                const currentCount = mediaInputsWrap.querySelectorAll('input[type="file"]').length;
+                                if (currentCount >= 10) {
+                                    return;
+                                }
+
+                                const input = document.createElement('input');
+                                input.name = 'media[]';
+                                input.type = 'file';
+                                input.accept = 'image/*,video/*';
+                                input.className =
+                                    'block w-full text-sm text-charcoal/70 file:mr-4 file:py-3 file:px-5 file:rounded-xl file:border-0 file:text-xs file:font-bold file:uppercase file:tracking-widest file:bg-deep-green file:text-white hover:file:bg-deep-green/90';
+                                mediaInputsWrap.appendChild(input);
+                            });
+                        }
+                    })();
+                </script>
             </section>
 
         </main>
     </div>
-    <section class="relative py-12 md:py-16 px-6 overflow-hidden bg-background-light" id="donation-section">
+    <section class="relative py-12 md:py-16 overflow-hidden bg-background-light" id="donation-section">
         <div class="absolute inset-0 z-0">
             <div class="w-full h-full bg-cover bg-center"
                 style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCp83JCfKCRYgHZuZA8dzBJ3Ih5yeidFw9eQGrfMH89CUBjfUnGXPlxXvfb0DmVToP0iwQwPaK0W5XabUIrIKFxbSwRZd0LqiyyCermKdbgrB2uPKlC48Z7W_on-lUkUOnlJd62ok3dkmH7JXdQxf63fiy8lTJ7mxggLO5Vjo_p7uKwbi43Dl3GWm8aiiPqcYvOfRpQgKV513yPQakVJ-1w2d86ue27OPY3p8N9H5sr5Mg5oew18KgTO2Ehhj7cSGj-2a6ht7DOZOs');">
@@ -174,7 +678,8 @@
                 </div>
                 <div class="mb-8">
                     <span class="material-symbols-outlined text-gold-accent text-3xl mb-4">distance</span>
-                    <h3 class="font-serif text-2xl font-bold text-deep-green mb-2">{{ __('messages.local_handover') }}</h3>
+                    <h3 class="font-serif text-2xl font-bold text-deep-green mb-2">{{ __('messages.local_handover') }}
+                    </h3>
                     <p class="text-sage-green text-xs font-bold uppercase tracking-widest">
                         {{ __('messages.kabul_afghanistan') }}</p>
                 </div>
@@ -246,7 +751,8 @@
                 </div>
                 <div class="mb-8">
                     <span class="material-symbols-outlined text-charcoal/70 text-3xl mb-4">assured_workload</span>
-                    <h3 class="font-serif text-2xl font-bold text-deep-green mb-2">{{ __('messages.bank_transfer') }}</h3>
+                    <h3 class="font-serif text-2xl font-bold text-deep-green mb-2">{{ __('messages.bank_transfer') }}
+                    </h3>
                     <p class="text-sage-green text-xs font-bold uppercase tracking-widest">
                         {{ __('messages.international_ziraat_bank') }}</p>
                 </div>
