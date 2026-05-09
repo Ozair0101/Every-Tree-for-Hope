@@ -24,6 +24,10 @@ class EventResource extends Resource
 
     protected static ?string $navigationLabel = 'Events';
 
+    protected static string|\UnitEnum|null $navigationGroup = 'Content Management';
+
+    protected static ?int $navigationSort = 1;
+
     protected static ?string $modelLabel = 'Event';
 
     protected static ?string $pluralModelLabel = 'Events & Initiatives';
