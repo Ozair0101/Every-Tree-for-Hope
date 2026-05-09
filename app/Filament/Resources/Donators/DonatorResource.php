@@ -24,11 +24,13 @@ class DonatorResource extends Resource
 
     protected static ?string $navigationLabel = 'Donators';
 
+    protected static string|\UnitEnum|null $navigationGroup = 'Financial';
+
+    protected static ?int $navigationSort = 1;
+
     protected static ?string $modelLabel = 'Donator';
 
     protected static ?string $pluralModelLabel = 'Donators';
-
-    protected static ?int $navigationSort = 3;
 
     protected static ?string $recordTitleAttribute = 'full_name';
 
