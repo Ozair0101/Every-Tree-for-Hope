@@ -151,6 +151,180 @@
         </section>
         <!-- ===== END HERO ===== -->
 
+        @php
+            $sponsorPackages = \App\Models\SponsorPackage::query()
+                ->where('is_active', true)
+                ->orderBy('sort_order')
+                ->orderBy('price')
+                ->get();
+            $toneClasses = [
+                'green' => ['bar' => 'bg-deep-green', 'dot' => 'bg-deep-green', 'text' => 'text-deep-green'],
+                'lime' => ['bar' => 'bg-vibrant-lime', 'dot' => 'bg-vibrant-lime', 'text' => 'text-vibrant-lime'],
+                'gold' => ['bar' => 'bg-gold-accent', 'dot' => 'bg-gold-accent', 'text' => 'text-gold-accent'],
+                'charcoal' => ['bar' => 'bg-charcoal', 'dot' => 'bg-charcoal', 'text' => 'text-charcoal'],
+            ];
+        @endphp
+
+        @if ($sponsorPackages->count() > 0)
+            {{-- ===== SPONSOR PACKAGES ===== --}}
+            <section id="sponsor-packages" class="relative py-24 md:py-32 px-6 md:px-12 lg:px-24 overflow-hidden scroll-mt-20" style="background: #fafaf5;">
+                {{-- Paper grain --}}
+                <div class="absolute inset-0 pointer-events-none opacity-[0.5]"
+                    style="background-image: radial-gradient(rgba(6,46,34,0.04) 1px, transparent 1px); background-size: 14px 14px;">
+                </div>
+                <div class="absolute top-12 right-10 text-vibrant-lime/10 select-none pointer-events-none floating hidden md:block">
+                    <span class="material-symbols-outlined" style="font-size: 9rem;">redeem</span>
+                </div>
+
+                <div class="relative z-10 max-w-7xl mx-auto">
+
+                    {{-- Editorial header --}}
+                    <div class="text-center max-w-3xl mx-auto mb-14 md:mb-20">
+                        <p class="font-handwriting text-2xl md:text-3xl text-vibrant-lime mb-2 leading-none">
+                            ~ {{ __('messages.packages_eyebrow') }} ~
+                        </p>
+                        <div class="inline-flex items-center gap-3 mb-5">
+                            <div class="h-[1px] w-10 bg-vibrant-lime"></div>
+                            <span class="text-vibrant-lime font-bold tracking-[0.4em] text-[10px] uppercase">
+                                {{ __('messages.packages_kicker') }}
+                            </span>
+                            <div class="h-[1px] w-10 bg-vibrant-lime"></div>
+                        </div>
+                        <h2 class="text-4xl sm:text-5xl md:text-6xl font-serif text-deep-green leading-[1.05] mb-5">
+                            {{ __('messages.packages_title_part1') }}
+                            <span class="italic font-black relative inline-block">
+                                <span class="relative z-10">{{ __('messages.packages_title_part2') }}</span>
+                                <svg class="absolute -bottom-2 left-0 w-full h-3 z-0" preserveAspectRatio="none" viewBox="0 0 200 10">
+                                    <path d="M2,8 Q50,2 100,5 T198,4" fill="none" stroke="#84cc16" stroke-width="3" stroke-linecap="round" />
+                                </svg>
+                            </span>
+                        </h2>
+                        <p class="text-charcoal/70 text-base md:text-lg font-light leading-relaxed">
+                            {{ __('messages.packages_description') }}
+                        </p>
+                    </div>
+
+                    {{-- Packages grid --}}
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-{{ min($sponsorPackages->count(), 3) }} gap-7 md:gap-8">
+
+                        @foreach ($sponsorPackages as $pkg)
+                            @php
+                                $allocations = is_array($pkg->allocations) ? $pkg->allocations : [];
+                                $featured = (bool) $pkg->is_featured;
+                            @endphp
+
+                            <article class="group relative {{ $featured ? 'md:scale-[1.03] z-10' : '' }} transition-transform duration-500">
+
+                                {{-- Decorative ribbon for badge --}}
+                                @if (!empty($pkg->badge_label))
+                                    <div class="absolute -top-4 left-1/2 -translate-x-1/2 z-20 inline-flex items-center gap-1.5 px-4 py-1.5 {{ $featured ? 'bg-gold-accent text-deep-green' : 'bg-deep-green text-white' }} text-[10px] font-black tracking-[0.3em] uppercase shadow-lg whitespace-nowrap">
+                                        <span class="material-symbols-outlined text-xs">workspace_premium</span>
+                                        {{ $pkg->badge_label }}
+                                    </div>
+                                @endif
+
+                                <div class="relative bg-white {{ $featured ? 'border-[3px] border-deep-green' : 'border border-deep-green/15' }} rounded-[2rem] p-8 md:p-10 h-full flex flex-col shadow-[0_15px_40px_rgba(6,46,34,0.08)] hover:shadow-[0_25px_60px_rgba(6,46,34,0.15)] hover:-translate-y-1 transition-all duration-500 overflow-hidden">
+
+                                    {{-- Top corner ornament --}}
+                                    <div class="absolute top-5 end-5 text-gold-accent/25">
+                                        <span class="material-symbols-outlined text-3xl">eco</span>
+                                    </div>
+
+                                    {{-- Title --}}
+                                    <p class="text-[10px] font-bold tracking-[0.35em] uppercase text-charcoal/55 mb-2">
+                                        {{ __('messages.packages_tier_label') }}
+                                    </p>
+                                    <h3 class="font-serif text-2xl md:text-3xl font-bold text-deep-green leading-tight mb-6">
+                                        {{ $pkg->title }}
+                                    </h3>
+
+                                    {{-- Price + trees --}}
+                                    <div class="mb-7">
+                                        <div class="flex items-baseline gap-2 mb-1">
+                                            <span class="font-serif font-black text-deep-green leading-none" style="font-size: clamp(3rem, 7vw, 5rem);">
+                                                {{ $pkg->formatted_price }}
+                                            </span>
+                                            <span class="text-charcoal/50 text-sm font-medium">{{ __('messages.packages_per_donation') }}</span>
+                                        </div>
+                                        <div class="inline-flex items-center gap-2 mt-2 px-4 py-1.5 bg-vibrant-lime/12 border border-vibrant-lime/30 rounded-full">
+                                            <span class="material-symbols-outlined text-vibrant-lime text-base">park</span>
+                                            <span class="font-serif font-bold text-deep-green">
+                                                {{ __('messages.packages_sponsors') }} <span class="font-black">{{ number_format($pkg->trees_count) }}</span> {{ __('messages.packages_trees') }}
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                    {{-- Description --}}
+                                    @if (!empty($pkg->description))
+                                        <p class="text-charcoal/75 text-sm md:text-base leading-relaxed mb-7">
+                                            {{ $pkg->description }}
+                                        </p>
+                                    @endif
+
+                                    {{-- Allocations --}}
+                                    @if (count($allocations) > 0)
+                                        <div class="mb-7 mt-auto">
+                                            <p class="text-[10px] font-bold tracking-[0.35em] uppercase text-charcoal/55 mb-3 flex items-center gap-2">
+                                                <span class="material-symbols-outlined text-base text-gold-accent">pie_chart</span>
+                                                {{ __('messages.packages_how_spent') }}
+                                            </p>
+
+                                            {{-- Stacked horizontal bar --}}
+                                            <div class="relative h-3 rounded-full overflow-hidden bg-stone-100 flex mb-4">
+                                                @foreach ($allocations as $alloc)
+                                                    @php
+                                                        $pct = (float) ($alloc['percentage'] ?? 0);
+                                                        $tone = $alloc['tone'] ?? 'green';
+                                                        $cls = $toneClasses[$tone] ?? $toneClasses['green'];
+                                                    @endphp
+                                                    @if ($pct > 0)
+                                                        <div class="h-full {{ $cls['bar'] }}" style="width: {{ $pct }}%;" title="{{ $alloc['label'] ?? '' }} — {{ $pct }}%"></div>
+                                                    @endif
+                                                @endforeach
+                                            </div>
+
+                                            {{-- Legend --}}
+                                            <ul class="space-y-2.5">
+                                                @foreach ($allocations as $alloc)
+                                                    @php
+                                                        $tone = $alloc['tone'] ?? 'green';
+                                                        $cls = $toneClasses[$tone] ?? $toneClasses['green'];
+                                                    @endphp
+                                                    <li class="flex items-center justify-between gap-3 text-sm">
+                                                        <span class="flex items-center gap-2 flex-1 min-w-0">
+                                                            <span class="w-2.5 h-2.5 rounded-full {{ $cls['dot'] }} flex-shrink-0"></span>
+                                                            <span class="text-charcoal/85 truncate">{{ $alloc['label'] ?? '' }}</span>
+                                                        </span>
+                                                        <span class="font-serif font-bold {{ $cls['text'] }}">
+                                                            {{ (int) ($alloc['percentage'] ?? 0) }}%
+                                                        </span>
+                                                    </li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                    @endif
+
+                                    {{-- CTA --}}
+                                    <a href="{{ route('donate') }}"
+                                        class="group/btn inline-flex items-center justify-center gap-2 mt-auto w-full px-6 py-4 {{ $featured ? 'bg-deep-green text-white hover:bg-deep-green/90' : 'bg-white text-deep-green border-2 border-deep-green hover:bg-deep-green hover:text-white' }} font-black text-xs tracking-[0.35em] uppercase rounded-full transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5">
+                                        <span class="material-symbols-outlined text-base {{ $featured ? 'text-vibrant-lime' : 'group-hover/btn:text-vibrant-lime' }}">favorite</span>
+                                        {{ __('messages.packages_sponsor_btn') }}
+                                        <span class="material-symbols-outlined text-base group-hover/btn:translate-x-1 transition-transform">arrow_forward</span>
+                                    </a>
+                                </div>
+                            </article>
+                        @endforeach
+
+                    </div>
+
+                    {{-- Handwritten subline --}}
+                    <p class="text-center mt-10 md:mt-14 font-handwriting text-xl md:text-2xl text-charcoal/55">
+                        ~ {{ __('messages.packages_subline') }} ~
+                    </p>
+                </div>
+            </section>
+        @endif
+
         <section id="sponsors" class="py-32 px-6 md:px-12 lg:px-24 bg-white relative botanical-pattern scroll-mt-20">
             <div class="negative-space-container">
                 <div class="text-center mb-20 space-y-4">

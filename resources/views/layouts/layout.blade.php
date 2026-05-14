@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Every Tree for Hope</title>
+    <title>{{ __('messages.site_name') }}</title>
     <link rel="icon" type="image/png" href="/favicon.ico">
     <link href="https://fonts.googleapis.com" rel="preconnect" />
     <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
@@ -331,11 +331,11 @@
             class="sticky top-0 z-50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-sm border-b border-gray-200 dark:border-gray-800">
             <nav class="max-w-7xl mx-auto px-6 py-3 flex items-center justify-between gap-4">
                 <a class="flex items-center gap-2 sm:gap-3 min-w-0 flex-shrink-0" href="{{ route('home') }}">
-                    <img src="{{ asset('everytree.png') }}" alt="Every Tree for Hope"
+                    <img src="{{ asset('everytree.png') }}" alt="{{ __('messages.site_name') }}"
                         class="h-10 sm:h-12 w-auto flex-shrink-0">
                     <h2
                         class="text-base sm:text-lg lg:text-xl font-bold text-gray-900 dark:text-white whitespace-nowrap">
-                        Every Tree for Hope</h2>
+                       {{ __('messages.site_name') }}</h2>
                 </a>
 
                 <!-- Desktop Navigation -->
@@ -528,7 +528,7 @@
             <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-16 mb-20 relative z-10">
                 <div class="space-y-6">
                     <div class="flex items-center gap-2">
-                        <img src="{{ asset('everytree.png') }}" alt="Every Tree for Hope" class="h-16 w-auto">
+                        <img src="{{ asset('everytree.png') }}" alt="{{ __('messages.site_name') }}" class="h-16 w-auto">
                         <h3 class="text-white text-xl font-extrabold tracking-tight">{{ __('messages.site_name') }}
                         </h3>
                     </div>

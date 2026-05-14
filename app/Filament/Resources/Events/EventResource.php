@@ -11,6 +11,7 @@ use Filament\Actions;
 use Filament\Forms;
 use Filament\Forms\Components;
 use Filament\Resources\Resource;
+use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -163,6 +164,91 @@ class EventResource extends Resource
                     ->default(0)
                     ->helperText('Number of trees planted in this event')
                     ->columnSpanFull(),
+
+                // ── Maintenance & Health ──
+                Section::make('Maintenance & Health')
+                    ->description('Track follow-up visits, tree survival, and current state of the planting site.')
+                    ->icon('heroicon-o-heart')
+                    ->columnSpanFull()
+                    ->schema([
+                        Components\TextInput::make('trees_lost')
+                            ->label('Trees Lost')
+                            ->numeric()
+                            ->default(0)
+                            ->minValue(0)
+                            ->helperText('Cumulative count of trees that did not survive')
+                            ->columnSpan(1),
+                        Components\DatePicker::make('last_maintained_at')
+                            ->label('Last Maintenance Date')
+                            ->native(false)
+                            ->helperText('When the most recent visit took place')
+                            ->columnSpan(1),
+                        Components\Textarea::make('maintenance_notes')
+                            ->label('Maintenance Summary')
+                            ->rows(3)
+                            ->placeholder('e.g. Most saplings doing well after winter; replacement planned for spring.')
+                            ->helperText('Brief narrative shown on the public event page')
+                            ->columnSpanFull(),
+                        Components\Repeater::make('maintenance_visits')
+                            ->label('Maintenance Visits (timeline)')
+                            ->schema([
+                                Components\DatePicker::make('date')
+                                    ->label('Visit Date')
+                                    ->native(false)
+                                    ->required()
+                                    ->columnSpan(1),
+                                Components\Select::make('action')
+                                    ->label('Action')
+                                    ->options([
+                                        'watering' => 'Watering',
+                                        'pruning' => 'Pruning',
+                                        'inspection' => 'Inspection',
+                                        'replanting' => 'Replanting',
+                                        'fencing' => 'Fencing / Protection',
+                                        'fertilizing' => 'Fertilizing',
+                                        'pest_control' => 'Pest Control',
+                                        'other' => 'Other',
+                                    ])
+                                    ->required()
+                                    ->columnSpan(1),
+                                Components\TextInput::make('trees_lost_this_visit')
+                                    ->label('Trees Lost (this visit)')
+                                    ->numeric()
+                                    ->default(0)
+                                    ->minValue(0)
+                                    ->columnSpan(1),
+                                Components\Textarea::make('notes')
+                                    ->label('Notes')
+                                    ->rows(2)
+                                    ->placeholder('What did the team observe or do?')
+                                    ->columnSpanFull(),
+                            ])
+                            ->columns(3)
+                            ->collapsible()
+                            ->itemLabel(fn (array $state): ?string =>
+                                ($state['date'] ?? null)
+                                    ? (string) $state['date'] . ' · ' . ($state['action'] ?? 'visit')
+                                    : 'New visit'
+                            )
+                            ->addActionLabel('Add a maintenance visit')
+                            ->defaultItems(0)
+                            ->columnSpanFull(),
+                        Components\FileUpload::make('maintenance_photos')
+                            ->label('Current-State Photos')
+                            ->multiple()
+                            ->reorderable()
+                            ->image()
+                            ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/gif', 'image/webp'])
+                            ->directory('event-maintenance')
+                            ->disk('public')
+                            ->visibility('public')
+                            ->imageEditor()
+                            ->maxFiles(8)
+                            ->helperText('Photos of the trees today — shown on the public event page')
+                            ->columnSpanFull(),
+                    ])
+                    ->columns(2),
+
                 Components\TextInput::make('volunteers')
                     ->label('Number of Volunteers')
                     ->required()

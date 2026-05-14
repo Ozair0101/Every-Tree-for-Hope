@@ -18,6 +18,11 @@ class Event extends Model
         'custom_tree_species',
         'date',
         'trees_planted',
+        'trees_lost',
+        'last_maintained_at',
+        'maintenance_notes',
+        'maintenance_visits',
+        'maintenance_photos',
         'volunteers',
         'sponsor_partner',
         'is_active',
@@ -26,12 +31,30 @@ class Event extends Model
 
     protected $casts = [
         'date' => 'date',
+        'last_maintained_at' => 'date',
         'tree_names' => 'array',
+        'maintenance_visits' => 'array',
+        'maintenance_photos' => 'array',
         'trees_planted' => 'integer',
+        'trees_lost' => 'integer',
         'volunteers' => 'integer',
         'is_active' => 'boolean',
         'sort_order' => 'integer',
     ];
+
+    public function getTreesAliveAttribute(): int
+    {
+        return max(0, (int) ($this->trees_planted ?? 0) - (int) ($this->trees_lost ?? 0));
+    }
+
+    public function getSurvivalRateAttribute(): ?float
+    {
+        $planted = (int) ($this->trees_planted ?? 0);
+        if ($planted <= 0) {
+            return null;
+        }
+        return round((($planted - (int) ($this->trees_lost ?? 0)) / $planted) * 100, 1);
+    }
 
     /**
      * Get the route key for the model.
