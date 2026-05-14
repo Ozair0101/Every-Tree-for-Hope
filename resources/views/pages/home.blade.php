@@ -248,34 +248,29 @@
             </div>
 
             <!-- Three Cards Grid -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+                {{-- COMMENTED OUT: Tree Request card — keep for future re-enable.
                 <!-- Card 1: Request Trees -->
-                <a href="{{ route('contact') }}#get-involved" data-involve-tab="tree"
+                <a href="#" data-involve-tab="tree"
                     class="group relative overflow-hidden rounded-[2rem] bg-white border border-charcoal/5 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
-                    <div
-                        class="absolute inset-0 bg-gradient-to-br from-deep-green/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
-                    </div>
+                    <div class="absolute inset-0 bg-gradient-to-br from-deep-green/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
                     <div class="absolute top-0 right-0 p-6 opacity-10 group-hover:opacity-20 transition-opacity">
                         <span class="material-symbols-outlined text-7xl text-deep-green">forest</span>
                     </div>
                     <div class="p-8 lg:p-10 relative z-10">
-                        <div
-                            class="w-16 h-16 rounded-2xl bg-deep-green/10 flex items-center justify-center mb-6 group-hover:bg-deep-green/20 transition-colors">
+                        <div class="w-16 h-16 rounded-2xl bg-deep-green/10 flex items-center justify-center mb-6 group-hover:bg-deep-green/20 transition-colors">
                             <span class="material-symbols-outlined text-3xl text-deep-green">park</span>
                         </div>
-                        <h3 class="font-serif text-2xl font-bold text-deep-green mb-3">
-                            {{ __('messages.card_request_trees_title') }}</h3>
-                        <p class="text-charcoal/70 leading-relaxed mb-6">{{ __('messages.card_request_trees_desc') }}</p>
-                        <div
-                            class="flex items-center gap-2 text-deep-green font-bold text-sm group-hover:gap-3 transition-all">
-                            <span>{{ __('messages.card_request_trees_cta') }}</span>
+                        <h3 class="font-serif text-2xl font-bold text-deep-green mb-3">Request Trees</h3>
+                        <p class="text-charcoal/70 leading-relaxed mb-6">Request a tree for your area.</p>
+                        <div class="flex items-center gap-2 text-deep-green font-bold text-sm group-hover:gap-3 transition-all">
+                            <span>Request Now</span>
                             <span class="material-symbols-outlined">arrow_forward</span>
                         </div>
                     </div>
-                    <div
-                        class="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-deep-green via-vibrant-lime to-gold-accent transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500">
-                    </div>
+                    <div class="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-deep-green via-vibrant-lime to-gold-accent transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500"></div>
                 </a>
+                --}}
 
                 <!-- Card 2: Sponsor Trees -->
                 <a href="{{ route('contact') }}#get-involved" data-involve-tab="sponsor"

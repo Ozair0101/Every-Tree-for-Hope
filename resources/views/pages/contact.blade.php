@@ -133,42 +133,32 @@
 
                         <div class="border-t border-charcoal/10" id="involveQuickLinks">
                             @php
+                                // COMMENTED OUT: 'tree' (Tree Request) and 'collaborate' tabs are temporarily disabled.
+                                // To re-enable, add their entries back to this array.
                                 $intentions = [
                                     [
-                                        'tab' => 'message',
-                                        'num' => '01',
-                                        'label' => 'tab_message',
-                                        'hint' => 'tab_message_hint',
-                                    ],
-                                    [
-                                        'tab' => 'tree',
-                                        'num' => '02',
-                                        'label' => 'tab_tree_request',
-                                        'hint' => 'tab_tree_request_hint',
-                                    ],
-                                    [
-                                        'tab' => 'volunteer',
-                                        'num' => '03',
-                                        'label' => 'tab_volunteer',
-                                        'hint' => 'tab_volunteer_hint',
-                                    ],
-                                    [
                                         'tab' => 'donate',
-                                        'num' => '04',
+                                        'num' => '01',
                                         'label' => 'tab_donate',
                                         'hint' => 'tab_donate_hint',
                                     ],
                                     [
                                         'tab' => 'sponsor',
-                                        'num' => '05',
+                                        'num' => '02',
                                         'label' => 'tab_sponsor',
                                         'hint' => 'tab_sponsor_hint',
                                     ],
                                     [
-                                        'tab' => 'collaborate',
-                                        'num' => '06',
-                                        'label' => 'tab_collaborate',
-                                        'hint' => 'tab_collaborate_hint',
+                                        'tab' => 'message',
+                                        'num' => '03',
+                                        'label' => 'tab_message',
+                                        'hint' => 'tab_message_hint',
+                                    ],
+                                    [
+                                        'tab' => 'volunteer',
+                                        'num' => '04',
+                                        'label' => 'tab_volunteer',
+                                        'hint' => 'tab_volunteer_hint',
                                     ],
                                 ];
                             @endphp
@@ -358,6 +348,7 @@
                                 </form>
                             </div>
 
+                            @if (false) {{-- COMMENTED OUT: 'collaborate' tab/panel temporarily disabled. --}}
                             <div class="involve-tab-panel hidden" data-panel="collaborate">
                                 @if ($errors->involvement->has('type') && old('type') === 'collaborate')
                                     <div class="mb-6 rounded-2xl border border-red-200 bg-red-50 px-6 py-4 text-red-800">
@@ -417,7 +408,9 @@
                                     </button>
                                 </form>
                             </div>
+                            @endif {{-- END COMMENTED OUT: collaborate panel --}}
 
+                            @if (false) {{-- COMMENTED OUT: 'tree' (Tree Request) tab/panel temporarily disabled. --}}
                             <div class="involve-tab-panel hidden" data-panel="tree">
                                 <form action="{{ route('tree-request.submit') }}" method="POST"
                                     enctype="multipart/form-data" class="space-y-6">
