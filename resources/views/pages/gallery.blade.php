@@ -39,6 +39,8 @@
             </div>
         </section>
 
+        @include('partials.future-events', ['limit' => 6])
+
         <!-- Events Grid -->
         <section class="py-16 max-w-7xl mx-auto px-6">
             <div class="text-center mb-12">
@@ -48,6 +50,8 @@
 
             @include('partials.events-grid', ['events' => $events])
         </section>
+
+        @include('partials.little-guardians')
     </main>
 
     @push('scripts')

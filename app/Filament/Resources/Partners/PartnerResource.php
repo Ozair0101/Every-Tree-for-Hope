@@ -44,6 +44,7 @@ class PartnerResource extends Resource
                     ->label('Company Logo')
                     ->required()
                     ->image()
+                    ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/gif', 'image/webp'])
                     ->directory('partner-logos')
                     ->disk('public')
                     ->visibility('public')

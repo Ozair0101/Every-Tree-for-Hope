@@ -189,6 +189,7 @@ class EventResource extends Resource
                             ->label('Image')
                             ->required()
                             ->image()
+                            ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/gif', 'image/webp'])
                             ->directory('event-images')
                             ->disk('public')
                             ->visibility('public')

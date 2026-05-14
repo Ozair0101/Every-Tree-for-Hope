@@ -18,7 +18,8 @@
 
         <!-- Top editorial bar -->
         <div class="relative z-10 border-b border-deep-green/10">
-            <div class="max-w-7xl mx-auto px-6 py-3 flex items-center justify-between text-[10px] font-bold tracking-[0.25em] uppercase">
+            <div
+                class="max-w-7xl mx-auto px-6 py-3 flex items-center justify-between text-[10px] font-bold tracking-[0.25em] uppercase">
                 <div class="flex items-center gap-2 text-deep-green">
                     <span class="material-symbols-outlined text-vibrant-lime text-sm">eco</span>
                     <span>{{ __('messages.hero_issue_no') }}</span>
@@ -28,7 +29,8 @@
                 </div>
                 <div class="flex items-center gap-2 text-charcoal/40">
                     <span class="relative flex h-2 w-2">
-                        <span class="absolute inline-flex h-full w-full rounded-full bg-primary opacity-60 animate-ping"></span>
+                        <span
+                            class="absolute inline-flex h-full w-full rounded-full bg-primary opacity-60 animate-ping"></span>
                         <span class="relative inline-flex h-2 w-2 rounded-full bg-primary"></span>
                     </span>
                     <span>{{ __('messages.hero_live') }}</span>
@@ -58,24 +60,29 @@
                         <span class="italic font-black relative inline-block">
                             <span class="relative z-10">{{ __('messages.the_future') }}</span>
                             <!-- Hand-drawn underline -->
-                            <svg class="absolute -bottom-3 left-0 w-full h-3 z-0" preserveAspectRatio="none" viewBox="0 0 200 10">
-                                <path d="M2,8 Q50,2 100,5 T198,4" fill="none" stroke="#84cc16" stroke-width="3" stroke-linecap="round" />
+                            <svg class="absolute -bottom-3 left-0 w-full h-3 z-0" preserveAspectRatio="none"
+                                viewBox="0 0 200 10">
+                                <path d="M2,8 Q50,2 100,5 T198,4" fill="none" stroke="#84cc16" stroke-width="3"
+                                    stroke-linecap="round" />
                             </svg>
                         </span>
                     </h1>
 
                     <!-- Lead paragraph -->
-                    <p class="text-charcoal/70 text-lg md:text-xl font-medium leading-[1.6] max-w-xl mb-10 hero-fade-in" style="animation-delay: 0.15s;">
+                    <p class="text-charcoal/70 text-lg md:text-xl font-medium leading-[1.6] max-w-xl mb-10 hero-fade-in"
+                        style="animation-delay: 0.15s;">
                         {{ __('messages.hero_description') }}
                     </p>
 
                     <!-- Action row -->
-                    <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-10 hero-fade-in" style="animation-delay: 0.25s;">
+                    <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-10 hero-fade-in"
+                        style="animation-delay: 0.25s;">
                         <a href="#donation-section"
                             class="group inline-flex items-center gap-2 px-7 py-4 bg-deep-green text-white font-extrabold text-sm tracking-wide uppercase rounded-full shadow-lg shadow-deep-green/20 hover:bg-deep-green/90 hover:-translate-y-0.5 transition-all">
                             <span class="material-symbols-outlined text-vibrant-lime text-base">park</span>
                             {{ __('messages.plant_a_tree_today') }}
-                            <span class="material-symbols-outlined text-base group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                            <span
+                                class="material-symbols-outlined text-base group-hover:translate-x-1 transition-transform">arrow_forward</span>
                         </a>
                         <a href="#our-works"
                             class="inline-flex items-center gap-2 text-deep-green text-sm font-bold uppercase tracking-wide hover:gap-3 transition-all border-b-2 border-deep-green/20 hover:border-vibrant-lime pb-1">
@@ -86,7 +93,8 @@
 
                     <!-- Quote / pullquote -->
                     <div class="hidden md:block relative pl-8 max-w-md hero-fade-in" style="animation-delay: 0.4s;">
-                        <span class="absolute left-0 top-0 text-6xl font-serif text-vibrant-lime/40 leading-none select-none">"</span>
+                        <span
+                            class="absolute left-0 top-0 text-6xl font-serif text-vibrant-lime/40 leading-none select-none">"</span>
                         <p class="text-charcoal/60 text-sm italic leading-relaxed">
                             {!! __('messages.hero_pullquote') !!}
                         </p>
@@ -100,21 +108,25 @@
                 <div class="lg:col-span-5 relative hero-fade-in" style="animation-delay: 0.2s;">
                     <div class="relative">
                         <!-- Decorative back card -->
-                        <div class="absolute -top-4 -right-4 w-full h-full rounded-2xl bg-vibrant-lime/20 hidden md:block"></div>
-                        <div class="absolute -bottom-4 -left-4 w-full h-full rounded-2xl border-2 border-deep-green/15 hidden md:block"></div>
+                        <div class="absolute -top-4 -right-4 w-full h-full rounded-2xl bg-vibrant-lime/20 hidden md:block">
+                        </div>
+                        <div
+                            class="absolute -bottom-4 -left-4 w-full h-full rounded-2xl border-2 border-deep-green/15 hidden md:block">
+                        </div>
 
                         <!-- Main photo card -->
                         <div class="relative rounded-2xl overflow-hidden shadow-2xl group">
-                            <img src="{{ asset('images/1.jpeg') }}"
-                                alt="Every Tree for Hope team"
+                            <img src="{{ asset('images/1.jpeg') }}" alt="Every Tree for Hope team"
                                 class="w-full h-[420px] sm:h-[480px] lg:h-[560px] object-cover group-hover:scale-105 transition-transform duration-[1500ms]" />
 
                             <!-- Photo bottom gradient -->
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent">
+                            </div>
 
                             <!-- Photo caption (top-left) -->
                             <div class="absolute top-5 left-5">
-                                <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/90 backdrop-blur-md">
+                                <div
+                                    class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/90 backdrop-blur-md">
                                     <span class="material-symbols-outlined text-deep-green text-sm">camera_alt</span>
                                     <!-- <span class="text-deep-green text-[10px] font-extrabold uppercase tracking-widest">Field Day · Kabul</span> -->
                                 </div>
@@ -122,9 +134,9 @@
 
                             <!-- Photo caption (bottom) -->
                             <!-- <div class="absolute bottom-0 left-0 right-0 p-5 text-white">
-                                <p class="text-[10px] font-bold uppercase tracking-[0.25em] text-vibrant-lime mb-1">Photograph No. 01</p>
-                                <p class="text-sm font-medium">The team that planted hope into the hills of Haji Nabi</p>
-                            </div> -->
+                                            <p class="text-[10px] font-bold uppercase tracking-[0.25em] text-vibrant-lime mb-1">Photograph No. 01</p>
+                                            <p class="text-sm font-medium">The team that planted hope into the hills of Haji Nabi</p>
+                                        </div> -->
                         </div>
 
                         <!-- Floating stat badge — top-right -->
@@ -141,7 +153,8 @@
                         <!-- Floating signature — bottom-left -->
                         <div class="absolute -bottom-6 -left-4 sm:-left-8 z-20 bg-deep-green rounded-2xl shadow-xl px-5 py-3 hidden sm:block"
                             style="animation: float 7s ease-in-out 1s infinite reverse;">
-                            <p class="text-vibrant-lime text-[9px] font-bold uppercase tracking-widest">{{ __('messages.hero_est_year') }}</p>
+                            <p class="text-vibrant-lime text-[9px] font-bold uppercase tracking-widest">
+                                {{ __('messages.hero_est_year') }}</p>
                             <p class="text-white text-base font-serif italic leading-tight">{!! __('messages.hero_brand_signature') !!}</p>
                         </div>
                     </div>
@@ -152,7 +165,8 @@
         <!-- Bottom impact ticker bar -->
         <div class="relative z-10 border-t border-deep-green/10 bg-deep-green/[0.02]">
             <div class="max-w-7xl mx-auto px-6 py-5">
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-0 md:divide-x md:divide-deep-green/10 text-center md:text-left">
+                <div
+                    class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-0 md:divide-x md:divide-deep-green/10 text-center md:text-left">
                     <!-- Stat 1 -->
                     <div class="md:px-6 first:md:pl-0 flex md:items-center gap-3 justify-center md:justify-start">
                         <span class="material-symbols-outlined text-vibrant-lime text-2xl">park</span>
@@ -204,10 +218,145 @@
         </div>
     </section>
     <!-- ===== END HERO SECTION ===== -->
+
+    @include('partials.future-events', ['limit' => 4])
+
+    <!-- ===== GET INVOLVED CARDS SECTION ===== -->
+    <section class="relative py-20 px-6 overflow-hidden"
+        style="background: linear-gradient(180deg, #fafaf5 0%, #f5f7f0 100%);">
+        <!-- Decorative elements -->
+        <div class="absolute inset-0 pointer-events-none">
+            <div class="absolute top-0 left-1/4 w-96 h-96 rounded-full bg-vibrant-lime/5 blur-3xl"></div>
+            <div class="absolute bottom-0 right-1/4 w-80 h-80 rounded-full bg-gold-accent/5 blur-3xl"></div>
+        </div>
+
+        <div class="max-w-7xl mx-auto relative z-10">
+            <!-- Section Header -->
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <div class="inline-flex items-center gap-3 mb-6">
+                    <div class="h-[1px] w-10 bg-vibrant-lime"></div>
+                    <span
+                        class="text-vibrant-lime font-bold tracking-[0.3em] text-xs uppercase">{{ __('messages.get_involved_badge') }}</span>
+                    <div class="h-[1px] w-10 bg-vibrant-lime"></div>
+                </div>
+                <h2 class="text-4xl md:text-5xl font-serif font-bold text-deep-green leading-tight mb-4">
+                    {!! __('messages.three_ways_to_help_title') !!}
+                </h2>
+                <p class="text-charcoal/70 text-lg leading-relaxed">
+                    {{ __('messages.three_ways_to_help_desc') }}
+                </p>
+            </div>
+
+            <!-- Three Cards Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+                <!-- Card 1: Request Trees -->
+                <a href="{{ route('contact') }}#get-involved" data-involve-tab="tree"
+                    class="group relative overflow-hidden rounded-[2rem] bg-white border border-charcoal/5 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-br from-deep-green/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+                    </div>
+                    <div class="absolute top-0 right-0 p-6 opacity-10 group-hover:opacity-20 transition-opacity">
+                        <span class="material-symbols-outlined text-7xl text-deep-green">forest</span>
+                    </div>
+                    <div class="p-8 lg:p-10 relative z-10">
+                        <div
+                            class="w-16 h-16 rounded-2xl bg-deep-green/10 flex items-center justify-center mb-6 group-hover:bg-deep-green/20 transition-colors">
+                            <span class="material-symbols-outlined text-3xl text-deep-green">park</span>
+                        </div>
+                        <h3 class="font-serif text-2xl font-bold text-deep-green mb-3">
+                            {{ __('messages.card_request_trees_title') }}</h3>
+                        <p class="text-charcoal/70 leading-relaxed mb-6">{{ __('messages.card_request_trees_desc') }}</p>
+                        <div
+                            class="flex items-center gap-2 text-deep-green font-bold text-sm group-hover:gap-3 transition-all">
+                            <span>{{ __('messages.card_request_trees_cta') }}</span>
+                            <span class="material-symbols-outlined">arrow_forward</span>
+                        </div>
+                    </div>
+                    <div
+                        class="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-deep-green via-vibrant-lime to-gold-accent transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500">
+                    </div>
+                </a>
+
+                <!-- Card 2: Sponsor Trees -->
+                <a href="{{ route('contact') }}#get-involved" data-involve-tab="sponsor"
+                    class="group relative overflow-hidden rounded-[2rem] bg-white border border-gold-accent/20 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-br from-gold-accent/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+                    </div>
+                    <div class="absolute top-0 right-0 p-6 opacity-10 group-hover:opacity-20 transition-opacity">
+                        <span class="material-symbols-outlined text-7xl text-gold-accent">workspace_premium</span>
+                    </div>
+                    <div class="p-8 lg:p-10 relative z-10">
+                        <div
+                            class="w-16 h-16 rounded-2xl bg-gold-accent/10 flex items-center justify-center mb-6 group-hover:bg-gold-accent/20 transition-colors">
+                            <span class="material-symbols-outlined text-3xl text-gold-accent">favorite</span>
+                        </div>
+                        <h3 class="font-serif text-2xl font-bold text-deep-green mb-3">
+                            {{ __('messages.card_sponsor_trees_title') }}</h3>
+                        <p class="text-charcoal/70 leading-relaxed mb-6">{{ __('messages.card_sponsor_trees_desc') }}</p>
+                        <div
+                            class="flex items-center gap-2 text-gold-accent font-bold text-sm group-hover:gap-3 transition-all">
+                            <span>{{ __('messages.card_sponsor_trees_cta') }}</span>
+                            <span class="material-symbols-outlined">arrow_forward</span>
+                        </div>
+                    </div>
+                    <div
+                        class="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-gold-accent via-deep-green to-vibrant-lime transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500">
+                    </div>
+                </a>
+
+                <!-- Card 3: Become a Volunteer -->
+                <a href="{{ route('contact') }}#get-involved" data-involve-tab="volunteer"
+                    class="group relative overflow-hidden rounded-[2rem] bg-white border border-charcoal/5 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-br from-vibrant-lime/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+                    </div>
+                    <div class="absolute top-0 right-0 p-6 opacity-10 group-hover:opacity-20 transition-opacity">
+                        <span class="material-symbols-outlined text-7xl text-vibrant-lime">volunteer_activism</span>
+                    </div>
+                    <div class="p-8 lg:p-10 relative z-10">
+                        <div
+                            class="w-16 h-16 rounded-2xl bg-vibrant-lime/10 flex items-center justify-center mb-6 group-hover:bg-vibrant-lime/20 transition-colors">
+                            <span class="material-symbols-outlined text-3xl text-vibrant-lime">groups</span>
+                        </div>
+                        <h3 class="font-serif text-2xl font-bold text-deep-green mb-3">
+                            {{ __('messages.card_volunteer_title') }}</h3>
+                        <p class="text-charcoal/70 leading-relaxed mb-6">{{ __('messages.card_volunteer_desc') }}</p>
+                        <div
+                            class="flex items-center gap-2 text-vibrant-lime font-bold text-sm group-hover:gap-3 transition-all">
+                            <span>{{ __('messages.card_volunteer_cta') }}</span>
+                            <span class="material-symbols-outlined">arrow_forward</span>
+                        </div>
+                    </div>
+                    <div
+                        class="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-vibrant-lime via-gold-accent to-deep-green transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500">
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- JavaScript to handle tab switching from home page links -->
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                // Store the intended tab when clicking from home page
+                const involvementCards = document.querySelectorAll('[data-involve-tab]');
+                involvementCards.forEach(card => {
+                    card.addEventListener('click', function(e) {
+                        const tab = this.getAttribute('data-involve-tab');
+                        sessionStorage.setItem('openInvolvementTab', tab);
+                    });
+                });
+            });
+        </script>
+    </section>
+    <!-- ===== END GET INVOLVED CARDS SECTION ===== -->
+
+    @include('partials.little-guardians')
+
     <section class="relative bg-white pb-18 pt-28 px-6 botanical-bg overflow-hidden" id="media-stories">
         <div class="absolute top-0 right-0 w-96 h-96 opacity-[0.03] pointer-events-none">
             <span class="material-symbols-outlined text-[300px] text-deep-green">potted_plant</span>
-         </div>
+        </div>
         <div class="absolute bottom-0 left-0 w-96 h-96 opacity-[0.03] pointer-events-none translate-y-20 -translate-x-20">
             <span class="material-symbols-outlined text-[350px] text-gold-accent">forest</span>
         </div>
@@ -248,10 +397,8 @@
                                 $isShort = $media->is_short;
                             @endphp
                             @if ($videoId)
-                                <div class="flex-shrink-0 w-80 group cursor-pointer"
-                                    data-video-id="{{ $videoId }}"
-                                    data-is-short="{{ $isShort ? 'true' : 'false' }}"
-                                    data-title="{{ $media->title }}"
+                                <div class="flex-shrink-0 w-80 group cursor-pointer" data-video-id="{{ $videoId }}"
+                                    data-is-short="{{ $isShort ? 'true' : 'false' }}" data-title="{{ $media->title }}"
                                     data-date="{{ $media->date->format('M d, Y') }}">
                                     <div
                                         class="bg-white rounded-2xl overflow-hidden shadow-lg border border-white p-2 transition-all duration-300 group-hover:-translate-y-2 group-hover:shadow-xl">
@@ -260,12 +407,18 @@
                                                 src="{{ $media->thumbnail_url ?? 'https://via.placeholder.com/320x180/1a4a2e/ffffff?text=Video' }}" />
                                             <div
                                                 class="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity">
-                                                <span class="material-symbols-outlined text-white text-4xl">play_circle</span>
+                                                <span
+                                                    class="material-symbols-outlined text-white text-4xl">play_circle</span>
                                             </div>
                                             @if ($isShort)
-                                                <div class="absolute top-2 left-2 flex items-center gap-1 bg-black/70 backdrop-blur-sm px-2 py-0.5 rounded-full">
-                                                    <svg class="w-3 h-3 fill-red-500" viewBox="0 0 24 24"><path d="M10 9.8 15.2 12 10 14.2V9.8zM17 3H7C4.8 3 3 4.8 3 7v10c0 2.2 1.8 4 4 4h10c2.2 0 4-1.8 4-4V7c0-2.2-1.8-4-4-4z"/></svg>
-                                                    <span class="text-white text-[9px] font-bold uppercase tracking-wide">Shorts</span>
+                                                <div
+                                                    class="absolute top-2 left-2 flex items-center gap-1 bg-black/70 backdrop-blur-sm px-2 py-0.5 rounded-full">
+                                                    <svg class="w-3 h-3 fill-red-500" viewBox="0 0 24 24">
+                                                        <path
+                                                            d="M10 9.8 15.2 12 10 14.2V9.8zM17 3H7C4.8 3 3 4.8 3 7v10c0 2.2 1.8 4 4 4h10c2.2 0 4-1.8 4-4V7c0-2.2-1.8-4-4-4z" />
+                                                    </svg>
+                                                    <span
+                                                        class="text-white text-[9px] font-bold uppercase tracking-wide">Shorts</span>
                                                 </div>
                                             @endif
                                         </div>
@@ -273,7 +426,8 @@
                                             <span class="text-[10px] font-bold text-gold-accent uppercase tracking-widest">
                                                 {{ $media->date->format('M d, Y') }}
                                             </span>
-                                            <h4 class="text-deep-green font-bold text-lg mt-1 group-hover:text-primary transition-colors">
+                                            <h4
+                                                class="text-deep-green font-bold text-lg mt-1 group-hover:text-primary transition-colors">
                                                 {{ Str::limit($media->title, 30) }}
                                             </h4>
                                             @if ($media->description)
@@ -671,7 +825,8 @@
                             style="background: linear-gradient(to top, rgba(6,78,59,0.8), transparent 70%)"></div>
                         <div
                             class="absolute bottom-0 left-0 p-4 translate-y-2 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-500">
-                            <p class="text-white font-bold text-sm drop-shadow">{{ __('messages.gallery_img_roots') }}</p>
+                            <p class="text-white font-bold text-sm drop-shadow">{{ __('messages.gallery_img_roots') }}
+                            </p>
                         </div>
                     </div>
 
@@ -684,7 +839,8 @@
                             style="background: linear-gradient(to top, rgba(6,78,59,0.8), transparent 70%)"></div>
                         <div
                             class="absolute bottom-0 left-0 p-4 translate-y-2 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-500">
-                            <p class="text-white font-bold text-sm drop-shadow">{{ __('messages.gallery_img_seeds') }}</p>
+                            <p class="text-white font-bold text-sm drop-shadow">{{ __('messages.gallery_img_seeds') }}
+                            </p>
                         </div>
                     </div>
 
@@ -1191,20 +1347,24 @@
 
                     if (videoId) {
                         // Shorts use /shorts/ embed path; regular videos use /embed/
-                        const embedBase = isShort
-                            ? 'https://www.youtube.com/embed/' + videoId + '?autoplay=1&rel=0'
-                            : 'https://www.youtube.com/embed/' + videoId + '?autoplay=1&rel=0';
+                        const embedBase = isShort ?
+                            'https://www.youtube.com/embed/' + videoId + '?autoplay=1&rel=0' :
+                            'https://www.youtube.com/embed/' + videoId + '?autoplay=1&rel=0';
 
                         modalIframe.setAttribute('src', embedBase);
 
                         // Switch modal size: portrait for Shorts, landscape for videos
                         if (isShort) {
-                            videoModalInner.className = 'relative w-full max-w-sm mx-auto transition-all duration-300';
-                            videoModalAspect.className = 'relative bg-black rounded-lg overflow-hidden';
+                            videoModalInner.className =
+                                'relative w-full max-w-sm mx-auto transition-all duration-300';
+                            videoModalAspect.className =
+                                'relative bg-black rounded-lg overflow-hidden';
                             videoModalAspect.style.aspectRatio = '9/16';
                         } else {
-                            videoModalInner.className = 'relative w-full max-w-4xl transition-all duration-300';
-                            videoModalAspect.className = 'relative aspect-video bg-black rounded-lg overflow-hidden';
+                            videoModalInner.className =
+                                'relative w-full max-w-4xl transition-all duration-300';
+                            videoModalAspect.className =
+                                'relative aspect-video bg-black rounded-lg overflow-hidden';
                             videoModalAspect.style.aspectRatio = '';
                         }
 

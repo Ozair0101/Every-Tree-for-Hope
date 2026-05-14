@@ -33,6 +33,7 @@ class TeamForm
                     ->searchable(),
                 FileUpload::make('image_url')
                     ->image()
+                    ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/gif', 'image/webp'])
                     ->required(),
                 TextInput::make('linkedin_url')
                     ->url(),

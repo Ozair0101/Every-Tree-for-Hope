@@ -50,11 +50,12 @@ class TeamResource extends Resource
                     ->label('Profile Photo')
                     ->required()
                     ->image()
+                    ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/gif', 'image/webp'])
                     ->directory('team-photos')
                     ->disk('public')
                     ->visibility('public')
                     ->imageEditor()
-                    ->helperText('Upload the team member\'s profile photo')
+                    ->helperText('Upload the team member\'s profile photo (JPG, PNG, GIF, or WebP)')
                     ->columnSpanFull(),
                 Components\TextInput::make('social_media_url')
                     ->label('Social Media URL')

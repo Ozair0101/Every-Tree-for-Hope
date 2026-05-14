@@ -36,7 +36,15 @@ Route::get('/history', function () {
     return view('pages.history');
 })->name('history');
 
+Route::get('/children-awareness', function () {
+    return view('pages.children-awareness');
+})->name('awareness');
+
 Route::post('/contact', [App\Http\Controllers\ContactController::class, 'submit'])->name('contact.submit');
+
+Route::post('/tree-request', [App\Http\Controllers\TreeRequestController::class, 'submit'])->name('tree-request.submit');
+
+Route::post('/get-involved', [App\Http\Controllers\InvolvementController::class, 'store'])->name('involvement.store');
 
 Route::get('/faq', [App\Http\Controllers\FaqController::class, 'index'])->name('faq');
 Route::post('/faq', [App\Http\Controllers\FaqController::class, 'submit'])->name('faq.submit');

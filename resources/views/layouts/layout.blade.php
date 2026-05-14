@@ -8,6 +8,12 @@
     <link rel="icon" type="image/png" href="/favicon.ico">
     <link href="https://fonts.googleapis.com" rel="preconnect" />
     <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    @if (in_array($current_locale ?? 'en', ['fa', 'ps']))
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400..700&display=swap"
+            rel="stylesheet">
+    @endif
     <link
         href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Playfair+Display:ital,wght@0,700;1,900&family=Vazirmatn:wght@400;500;700;800&family=Noto+Naskh+Arabic:wght@400;500;600;700&family=Caveat:wght@400;600&display=swap"
         rel="stylesheet" />
@@ -55,6 +61,11 @@
             font-family: 'Vazirmatn', 'Noto Naskh Arabic', 'Manrope', sans-serif;
         }
 
+        html[lang="fa"] body,
+        html[lang="ps"] body {
+            font-family: 'Noto Naskh Arabic', 'Vazirmatn', 'Manrope', sans-serif;
+        }
+
         html[dir="rtl"] h1,
         html[dir="rtl"] h2,
         html[dir="rtl"] h3,
@@ -62,6 +73,21 @@
         html[dir="rtl"] h5,
         html[dir="rtl"] h6 {
             font-family: 'Vazirmatn', 'Noto Naskh Arabic', 'Playfair Display', serif;
+        }
+
+        html[lang="fa"] h1,
+        html[lang="fa"] h2,
+        html[lang="fa"] h3,
+        html[lang="fa"] h4,
+        html[lang="fa"] h5,
+        html[lang="fa"] h6,
+        html[lang="ps"] h1,
+        html[lang="ps"] h2,
+        html[lang="ps"] h3,
+        html[lang="ps"] h4,
+        html[lang="ps"] h5,
+        html[lang="ps"] h6 {
+            font-family: 'Noto Naskh Arabic', 'Vazirmatn', 'Playfair Display', serif;
         }
 
         /* Ensure proper text alignment for RTL */
@@ -112,8 +138,17 @@
         }
 
         @keyframes scrollBounce {
-            0%, 100% { transform: translateY(0); opacity: 0.5; }
-            50% { transform: translateY(6px); opacity: 1; }
+
+            0%,
+            100% {
+                transform: translateY(0);
+                opacity: 0.5;
+            }
+
+            50% {
+                transform: translateY(6px);
+                opacity: 1;
+            }
         }
 
         .hero-text-animate {
@@ -125,8 +160,15 @@
         }
 
         @keyframes heroFadeUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .hero-fade-in {
@@ -135,8 +177,15 @@
         }
 
         @keyframes heroFadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .hero-bg-zoom {
@@ -144,8 +193,13 @@
         }
 
         @keyframes heroBgZoom {
-            from { transform: scale(1); }
-            to { transform: scale(1.08); }
+            from {
+                transform: scale(1);
+            }
+
+            to {
+                transform: scale(1.08);
+            }
         }
 
         /* About page hero — letter & polaroids */
@@ -155,13 +209,27 @@
         }
 
         @keyframes aboutFadeIn {
-            from { opacity: 0; transform: translateY(24px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(24px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         @keyframes gentleSway {
-            0%, 100% { transform: translateY(0) rotate(var(--rot, 0deg)); }
-            50% { transform: translateY(-6px) rotate(calc(var(--rot, 0deg) + 1deg)); }
+
+            0%,
+            100% {
+                transform: translateY(0) rotate(var(--rot, 0deg));
+            }
+
+            50% {
+                transform: translateY(-6px) rotate(calc(var(--rot, 0deg) + 1deg));
+            }
         }
 
         .font-handwriting {
@@ -175,8 +243,15 @@
         }
 
         @keyframes historyFadeIn {
-            from { opacity: 0; transform: translateY(24px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(24px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         /* Donators page hero — honor roll */
@@ -186,8 +261,15 @@
         }
 
         @keyframes donorFadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .parallax-leaf {
@@ -249,24 +331,71 @@
             class="sticky top-0 z-50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-sm border-b border-gray-200 dark:border-gray-800">
             <nav class="max-w-7xl mx-auto px-6 py-3 flex items-center justify-between gap-4">
                 <a class="flex items-center gap-2 sm:gap-3 min-w-0 flex-shrink-0" href="{{ route('home') }}">
-                    <img src="{{ asset('everytree.png') }}" alt="Every Tree for Hope" class="h-10 sm:h-12 w-auto flex-shrink-0">
-                    <h2 class="text-base sm:text-lg lg:text-xl font-bold text-gray-900 dark:text-white whitespace-nowrap">Every Tree for Hope</h2>
+                    <img src="{{ asset('everytree.png') }}" alt="Every Tree for Hope"
+                        class="h-10 sm:h-12 w-auto flex-shrink-0">
+                    <h2
+                        class="text-base sm:text-lg lg:text-xl font-bold text-gray-900 dark:text-white whitespace-nowrap">
+                        Every Tree for Hope</h2>
                 </a>
 
                 <!-- Desktop Navigation -->
-                <div class="hidden lg:flex items-center gap-6 xl:gap-8">
+                <div class="hidden lg:flex items-center gap-5 xl:gap-7">
                     <a class="text-sm font-medium hover:text-primary transition-colors whitespace-nowrap"
                         href="{{ route('home') }}">{{ __('messages.home') }}</a>
-                    <a class="text-sm font-medium hover:text-primary transition-colors whitespace-nowrap"
-                        href="{{ route('about') }}">{{ __('messages.about') }}</a>
-                    <a class="text-sm font-medium hover:text-primary transition-colors whitespace-nowrap"
-                        href="{{ route('history') }}">{{ __('messages.our_story') }}</a>
-                    <a class="text-sm font-medium hover:text-primary transition-colors whitespace-nowrap"
-                        href="{{ route('gallery') }}">{{ __('messages.works') }}</a>
+
+                    {{-- About dropdown --}}
+                    <div class="relative group">
+                        <button type="button"
+                            class="inline-flex items-center gap-1 text-sm font-medium hover:text-primary transition-colors whitespace-nowrap">
+                            {{ __('messages.nav_group_about') }}
+                            <span class="material-symbols-outlined text-base group-hover:rotate-180 transition-transform">expand_more</span>
+                        </button>
+                        <div class="absolute left-0 top-full pt-2 w-56 invisible opacity-0 group-hover:visible group-hover:opacity-100 transition-all z-50">
+                            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl border border-gray-200 dark:border-gray-700 py-2 overflow-hidden">
+                                <a href="{{ route('about') }}"
+                                    class="flex items-center gap-3 px-4 py-2.5 text-sm hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 hover:text-primary transition-colors">
+                                    <span class="material-symbols-outlined text-base text-deep-green/70">info</span>
+                                    {{ __('messages.about') }}
+                                </a>
+                                <a href="{{ route('history') }}"
+                                    class="flex items-center gap-3 px-4 py-2.5 text-sm hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 hover:text-primary transition-colors">
+                                    <span class="material-symbols-outlined text-base text-deep-green/70">auto_stories</span>
+                                    {{ __('messages.our_story') }}
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    {{-- Our Work dropdown --}}
+                    <div class="relative group">
+                        <button type="button"
+                            class="inline-flex items-center gap-1 text-sm font-medium hover:text-primary transition-colors whitespace-nowrap">
+                            {{ __('messages.nav_group_our_work') }}
+                            <span class="material-symbols-outlined text-base group-hover:rotate-180 transition-transform">expand_more</span>
+                        </button>
+                        <div class="absolute left-0 top-full pt-2 w-60 invisible opacity-0 group-hover:visible group-hover:opacity-100 transition-all z-50">
+                            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl border border-gray-200 dark:border-gray-700 py-2 overflow-hidden">
+                                <a href="{{ route('gallery') }}"
+                                    class="flex items-center gap-3 px-4 py-2.5 text-sm hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 hover:text-primary transition-colors">
+                                    <span class="material-symbols-outlined text-base text-deep-green/70">photo_library</span>
+                                    {{ __('messages.works') }}
+                                </a>
+                                <a href="{{ route('report') }}"
+                                    class="flex items-center gap-3 px-4 py-2.5 text-sm hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 hover:text-primary transition-colors">
+                                    <span class="material-symbols-outlined text-base text-deep-green/70">analytics</span>
+                                    {{ __('messages.report') }}
+                                </a>
+                                <a href="{{ route('awareness') }}"
+                                    class="flex items-center gap-3 px-4 py-2.5 text-sm hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 hover:text-primary transition-colors">
+                                    <span class="material-symbols-outlined text-base text-vibrant-lime">menu_book</span>
+                                    {{ __('messages.nav_awareness') }}
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
                     <a class="text-sm font-medium hover:text-primary transition-colors whitespace-nowrap"
                         href="{{ route('donators') }}">{{ __('messages.donators') }}</a>
-                    <a class="text-sm font-medium hover:text-primary transition-colors whitespace-nowrap"
-                        href="{{ route('report') }}">{{ __('messages.report') }}</a>
                     <a class="text-sm font-medium hover:text-primary transition-colors whitespace-nowrap"
                         href="{{ route('contact') }}">{{ __('messages.contact') }}</a>
                     <a class="text-sm font-medium hover:text-primary transition-colors whitespace-nowrap"
@@ -316,19 +445,49 @@
             <!-- Mobile Menu -->
             <div id="mobile-menu"
                 class="hidden lg:hidden bg-background-light/95 dark:bg-background-dark/95 backdrop-blur-sm border-t border-gray-200 dark:border-gray-800">
-                <div class="max-w-7xl mx-auto px-6 py-4 space-y-3">
+                <div class="max-w-7xl mx-auto px-6 py-4 space-y-1">
                     <a class="block text-sm font-medium hover:text-primary transition-colors py-2"
                         href="{{ route('home') }}">{{ __('messages.home') }}</a>
-                    <a class="block text-sm font-medium hover:text-primary transition-colors py-2"
-                        href="{{ route('about') }}">{{ __('messages.about') }}</a>
-                    <a class="block text-sm font-medium hover:text-primary transition-colors py-2"
-                        href="{{ route('history') }}">{{ __('messages.our_story') }}</a>
-                    <a class="block text-sm font-medium hover:text-primary transition-colors py-2"
-                        href="{{ route('gallery') }}">{{ __('messages.works') }}</a>
+
+                    {{-- Mobile: About group --}}
+                    <p class="text-[10px] font-bold tracking-[0.25em] uppercase text-vibrant-lime pt-3 pb-1">
+                        {{ __('messages.nav_group_about') }}
+                    </p>
+                    <a class="flex items-center gap-2 text-sm font-medium hover:text-primary transition-colors py-2 ps-3"
+                        href="{{ route('about') }}">
+                        <span class="material-symbols-outlined text-base text-deep-green/60">info</span>
+                        {{ __('messages.about') }}
+                    </a>
+                    <a class="flex items-center gap-2 text-sm font-medium hover:text-primary transition-colors py-2 ps-3"
+                        href="{{ route('history') }}">
+                        <span class="material-symbols-outlined text-base text-deep-green/60">auto_stories</span>
+                        {{ __('messages.our_story') }}
+                    </a>
+
+                    {{-- Mobile: Our Work group --}}
+                    <p class="text-[10px] font-bold tracking-[0.25em] uppercase text-vibrant-lime pt-3 pb-1">
+                        {{ __('messages.nav_group_our_work') }}
+                    </p>
+                    <a class="flex items-center gap-2 text-sm font-medium hover:text-primary transition-colors py-2 ps-3"
+                        href="{{ route('gallery') }}">
+                        <span class="material-symbols-outlined text-base text-deep-green/60">photo_library</span>
+                        {{ __('messages.works') }}
+                    </a>
+                    <a class="flex items-center gap-2 text-sm font-medium hover:text-primary transition-colors py-2 ps-3"
+                        href="{{ route('report') }}">
+                        <span class="material-symbols-outlined text-base text-deep-green/60">analytics</span>
+                        {{ __('messages.report') }}
+                    </a>
+                    <a class="flex items-center gap-2 text-sm font-medium hover:text-primary transition-colors py-2 ps-3"
+                        href="{{ route('awareness') }}">
+                        <span class="material-symbols-outlined text-base text-vibrant-lime">menu_book</span>
+                        {{ __('messages.nav_awareness') }}
+                    </a>
+
+                    {{-- Mobile: standalone items --}}
+                    <div class="pt-3 mt-2 border-t border-gray-200 dark:border-gray-700"></div>
                     <a class="block text-sm font-medium hover:text-primary transition-colors py-2"
                         href="{{ route('donators') }}">{{ __('messages.donators') }}</a>
-                    <a class="block text-sm font-medium hover:text-primary transition-colors py-2"
-                        href="{{ route('report') }}">{{ __('messages.report') }}</a>
                     <a class="block text-sm font-medium hover:text-primary transition-colors py-2"
                         href="{{ route('contact') }}">{{ __('messages.contact') }}</a>
                     <a class="block text-sm font-medium hover:text-primary transition-colors py-2"

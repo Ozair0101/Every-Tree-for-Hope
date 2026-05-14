@@ -647,7 +647,7 @@
                                         if (sidebar) {
                                             sidebar.insertAdjacentElement('afterend', activePanel);
                                         } else {
-                                            activeBtn.insertAdjacentElement('afterend', activePanel);
+                                               activeBtn.insertAdjacentElement('afterend', activePanel);
                                         }
                                         if (shouldScroll) {
                                             // Scroll to sidebar so user sees the "~ now reading ~" section first

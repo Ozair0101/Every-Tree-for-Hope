@@ -29,7 +29,7 @@
                     class="glass-panel p-12 md:p-20 relative overflow-hidden flex flex-col lg:flex-row items-center gap-16 border-gold-accent/10">
                     <div class="flex-1 space-y-8">
                         @php
-                            // First, build the events query with filters   
+                            // First, build the events query with filters
                             $events = \App\Models\Event::active();
 
                             // Apply year filter
@@ -138,279 +138,296 @@
         </section>
 
         <!-- <section class="relative bg-green-50 flex h-auto min-h-screen w-full flex-col group/design-root overflow-x-visible">
-            <div class="layout-container flex h-full grow flex-col">
-                <div class="flex flex-1 justify-center py-5 sm:px-10 lg:px-20 xl:px-40">
-                    <div class="layout-content-container flex flex-col w-full max-w-5xl flex-1">
-                       
-                        <main class="flex-grow px-4 py-8 sm:py-12">
-                         
-                            <div class="flex flex-wrap justify-between gap-3 p-4">
-                                <h1
-                                    class="text-[#111714] dark:text-[#f6f8f7] text-4xl sm:text-5xl font-black leading-tight tracking-[-0.033em] w-full text-center">
-                                    {{ __('messages.our_impact_report') }}</h1>
-                            </div>
-                          
-                            <p
-                                class="text-center text-base font-normal leading-normal pb-6 pt-2 px-4 text-[#111714]/80 dark:text-[#f6f8f7]/80 max-w-3xl mx-auto">
-                                {{ __('messages.impact_report_description', [
-                                    'trees' => number_format($filteredTrees),
-                                    'volunteers' => number_format($filteredVolunteers),
-                                    'events' => $filteredEvents,
-                                ]) }}
-                            </p>
-                         
-                            <div
-                                class="flex flex-wrap items-center justify-center gap-3 p-3 overflow-x-visible relative z-[100]">
-                               
-                                <div class="relative">
-                                    <button onclick="toggleDropdown('year-dropdown')"
-                                        class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-primary/20 dark:bg-primary/30 px-4 hover:bg-primary/30 dark:hover:bg-primary/40 transition-colors">
-                                        <p class="text-[#111714] dark:text-[#f6f8f7] text-sm font-medium leading-normal">
-                                            Filter
-                                            by Year</p>
-                                        <span class="material-symbols-outlined text-[#111714] dark:text-[#f6f8f7]"
-                                            style="font-size: 20px;">keyboard_arrow_down</span>
-                                    </button>
-                                    <div id="year-dropdown"
-                                        class="absolute top-full left-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-lg shadow-xl border border-primary/20 dark:border-primary/30 hidden z-[9999] shadow-2xl">
-                                        <button onclick="filterByYear('all')"
-                                            class="w-full text-left px-4 py-2 text-sm hover:bg-primary/10 dark:hover:bg-primary/20 transition-colors">All
-                                            Years</button>
-                                        @foreach ($years as $year)
-                                            <button onclick="filterByYear('{{ $year }}')"
-                                                class="w-full text-left px-4 py-2 text-sm hover:bg-primary/10 dark:hover:bg-primary/20 transition-colors">{{ $year }}</button>
-                                        @endforeach
-                                    </div>
-                                </div>
+                                <div class="layout-container flex h-full grow flex-col">
+                                    <div class="flex flex-1 justify-center py-5 sm:px-10 lg:px-20 xl:px-40">
+                                        <div class="layout-content-container flex flex-col w-full max-w-5xl flex-1">
+                                           
+                                            <main class="flex-grow px-4 py-8 sm:py-12">
+                                             
+                                                <div class="flex flex-wrap justify-between gap-3 p-4">
+                                                    <h1
+                                                        class="text-[#111714] dark:text-[#f6f8f7] text-4xl sm:text-5xl font-black leading-tight tracking-[-0.033em] w-full text-center">
+                                                        {{ __('messages.our_impact_report') }}</h1>
+                                                </div>
+                                              
+                                                <p
+                                                    class="text-center text-base font-normal leading-normal pb-6 pt-2 px-4 text-[#111714]/80 dark:text-[#f6f8f7]/80 max-w-3xl mx-auto">
+                                                    {{ __('messages.impact_report_description', [
+                                                        'trees' => number_format($filteredTrees),
+                                                        'volunteers' => number_format($filteredVolunteers),
+                                                        'events' => $filteredEvents,
+                                                    ]) }}
+                                                </p>
+                                             
+                                                <div
+                                                    class="flex flex-wrap items-center justify-center gap-3 p-3 overflow-x-visible relative z-[100]">
+                                                   
+                                                    <div class="relative">
+                                                        <button onclick="toggleDropdown('year-dropdown')"
+                                                            class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-primary/20 dark:bg-primary/30 px-4 hover:bg-primary/30 dark:hover:bg-primary/40 transition-colors">
+                                                            <p class="text-[#111714] dark:text-[#f6f8f7] text-sm font-medium leading-normal">
+                                                                Filter
+                                                                by Year</p>
+                                                            <span class="material-symbols-outlined text-[#111714] dark:text-[#f6f8f7]"
+                                                                style="font-size: 20px;">keyboard_arrow_down</span>
+                                                        </button>
+                                                        <div id="year-dropdown"
+                                                            class="absolute top-full left-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-lg shadow-xl border border-primary/20 dark:border-primary/30 hidden z-[9999] shadow-2xl">
+                                                            <button onclick="filterByYear('all')"
+                                                                class="w-full text-left px-4 py-2 text-sm hover:bg-primary/10 dark:hover:bg-primary/20 transition-colors">All
+                                                                Years</button>
+                                                            @foreach ($years as $year)
+    <button onclick="filterByYear('{{ $year }}')"
+                                                                    class="w-full text-left px-4 py-2 text-sm hover:bg-primary/10 dark:hover:bg-primary/20 transition-colors">{{ $year }}</button>
+    @endforeach
+                                                        </div>
+                                                    </div>
 
-                                
-                                <div class="relative">
-                                    <button onclick="toggleDropdown('region-dropdown')"
-                                        class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-primary/20 dark:bg-primary/30 px-4 hover:bg-primary/30 dark:hover:bg-primary/40 transition-colors">
-                                        <p class="text-[#111714] dark:text-[#f6f8f7] text-sm font-medium leading-normal">
-                                            Filter
-                                            by Region</p>
-                                        <span class="material-symbols-outlined text-[#111714] dark:text-[#f6f8f7]"
-                                            style="font-size: 20px;">keyboard_arrow_down</span>
-                                    </button>
-                                    <div id="region-dropdown"
-                                        class="absolute top-full left-0 mt-2 w-64 bg-white dark:bg-gray-800 rounded-lg shadow-xl border border-primary/20 dark:border-primary/30 hidden z-[9999] max-h-64 overflow-y-auto shadow-2xl">
-                                        <button onclick="filterByRegion('all')"
-                                            class="w-full text-left px-4 py-2 text-sm hover:bg-primary/10 dark:hover:bg-primary/20 transition-colors">All
-                                            Regions</button>
-                                        <button onclick="filterByRegion('Badakhshan')"
-                                            class="w-full text-left px-4 py-2 text-sm hover:bg-primary/10 dark:hover:bg-primary/20 transition-colors">Badakhshan</button>
-                                        <button onclick="filterByRegion('Badghis')"
-                                            class="w-full text-left px-4 py-2 text-sm hover:bg-primary/10 dark:hover:bg-primary/20 transition-colors">Badghis</button>
-                                        <button onclick="filterByRegion('Baghlan')"
-                                            class="w-full text-left px-4 py-2 text-sm hover:bg-primary/10 dark:hover:bg-primary-20 transition-colors">Baghlan</button>
-                                        <button onclick="filterByRegion('Balkh')"
-                                            class="w-full text-left px-4 py-2 text-sm hover:bg-primary/10 dark:hover:bg-primary-20 transition-colors">Balkh</button>
-                                        <button onclick="filterByRegion('Bamyan')"
-                                            class="w-full text-left px-4 py-2 text-sm hover:bg-primary/10 dark:hover:bg-primary-20 transition-colors">Bamyan</button>
-                                        <button onclick="filterByRegion('Daykundi')"
-                                            class="w-full text-left px-4 py-2 text-sm hover:bg-primary/10 dark:hover:bg-primary-20 transition-colors">Daykundi</button>
-                                        <button onclick="filterByRegion('Farah')"
-                                            class="w-full text-left px-4 py-2 text-sm hover:bg-primary/10 dark:hover:bg-primary-20 transition-colors">Farah</button>
-                                        <button onclick="filterByRegion('Faryab')"
-                                            class="w-full text-left px-4 py-2 text-sm hover:bg-primary/10 dark:hover:bg-primary-20 transition-colors">Faryab</button>
-                                        <button onclick="filterByRegion('Ghazni')"
-                                            class="w-full text-left px-4 py-2 text-sm hover:bg-primary/10 dark:hover:bg-primary-20 transition-colors">Ghazni</button>
-                                        <button onclick="filterByRegion('Ghor')"
-                                            class="w-full text-left px-4 py-2 text-sm hover:bg-primary/10 dark:hover:bg-primary-20 transition-colors">Ghor</button>
-                                        <button onclick="filterByRegion('Helmand')"
-                                            class="w-full text-left px-4 py-2 text-sm hover:bg-primary/10 dark:hover:bg-primary-20 transition-colors">Helmand</button>
-                                        <button onclick="filterByRegion('Herat')"
-                                            class="w-full text-left px-4 py-2 text-sm hover:bg-primary/10 dark:hover:bg-primary-20 transition-colors">Herat</button>
-                                        <button onclick="filterByRegion('Jowzjan')"
-                                            class="w-full text-left px-4 py-2 text-sm hover:bg-primary/10 dark:hover:bg-primary-20 transition-colors">Jowzjan</button>
-                                        <button onclick="filterByRegion('Kabul')"
-                                            class="w-full text-left px-4 py-2 text-sm hover:bg-primary/10 dark:hover:bg-primary-20 transition-colors">Kabul</button>
-                                        <button onclick="filterByRegion('Kandahar')"
-                                            class="w-full text-left px-4 py-2 text-sm hover:bg-primary/10 dark:hover:bg-primary-20 transition-colors">Kandahar</button>
-                                        <button onclick="filterByRegion('Kapisa')"
-                                            class="w-full text-left px-4 py-2 text-sm hover:bg-primary/10 dark:hover:bg-primary-20 transition-colors">Kapisa</button>
-                                        <button onclick="filterByRegion('Khost')"
-                                            class="w-full text-left px-4 py-2 text-sm hover:bg-primary/10 dark:hover:bg-primary-20 transition-colors">Khost</button>
-                                        <button onclick="filterByRegion('Kunar')"
-                                            class="w-full text-left px-4 py-2 text-sm hover:bg-primary/10 dark:hover:bg-primary-20 transition-colors">Kunar</button>
-                                        <button onclick="filterByRegion('Kunduz')"
-                                            class="w-full text-left px-4 py-2 text-sm hover:bg-primary/10 dark:hover:bg-primary-20 transition-colors">Kunduz</button>
-                                        <button onclick="filterByRegion('Laghman')"
-                                            class="w-full text-left px-4 py-2 text-sm hover:bg-primary/10 dark:hover:bg-primary-20 transition-colors">Laghman</button>
-                                        <button onclick="filterByRegion('Logar')"
-                                            class="w-full text-left px-4 py-2 text-sm hover:bg-primary/10 dark:hover:bg-primary-20 transition-colors">Logar</button>
-                                        <button onclick="filterByRegion('Maimana')"
-                                            class="w-full text-left px-4 py-2 text-sm hover:bg-primary/10 dark:hover:bg-primary-20 transition-colors">Maimana</button>
-                                        <button onclick="filterByRegion('Nangarhar')"
-                                            class="w-full text-left px-4 py-2 text-sm hover:bg-primary/10 dark:hover:bg-primary-20 transition-colors">Nangarhar</button>
-                                        <button onclick="filterByRegion('Nimruz')"
-                                            class="w-full text-left px-4 py-2 text-sm hover:bg-primary/10 dark:hover:bg-primary-20 transition-colors">Nimruz</button>
-                                        <button onclick="filterByRegion('Nuristan')"
-                                            class="w-full text-left px-4 py-2 text-sm hover:bg-primary/10 dark:hover:bg-primary-20 transition-colors">Nuristan</button>
-                                        <button onclick="filterByRegion('Paktia')"
-                                            class="w-full text-left px-4 py-2 text-sm hover:bg-primary/10 dark:hover:bg-primary-20 transition-colors">Paktia</button>
-                                        <button onclick="filterByRegion('Paktika')"
-                                            class="w-full text-left px-4 py-2 text-sm hover:bg-primary/10 dark:hover:bg-primary-20 transition-colors">Paktika</button>
-                                        <button onclick="filterByRegion('Panjshir')"
-                                            class="w-full text-left px-4 py-2 text-sm hover:bg-primary/10 dark:hover:bg-primary-20 transition-colors">Panjshir</button>
-                                        <button onclick="filterByRegion('Parwan')"
-                                            class="w-full text-left px-4 py-2 text-sm hover:bg-primary/10 dark:hover:bg-primary-20 transition-colors">Parwan</button>
-                                        <button onclick="filterByRegion('Samangan')"
-                                            class="w-full text-left px-4 py-2 text-sm hover:bg-primary/10 dark:hover:bg-primary-20 transition-colors">Samangan</button>
-                                        <button onclick="filterByRegion('Sar-e Pol')"
-                                            class="w-full text-left px-4 py-2 text-sm hover:bg-primary/10 dark:hover:bg-primary-20 transition-colors">Sar-e
-                                            Pol</button>
-                                        <button onclick="filterByRegion('Takhar')"
-                                            class="w-full text-left px-4 py-2 text-sm hover:bg-primary/10 dark:hover:bg-primary-20 transition-colors">Takhar</button>
-                                        <button onclick="filterByRegion('Urozgan')"
-                                            class="w-full text-left px-4 py-2 text-sm hover:bg-primary/10 dark:hover:bg-primary-20 transition-colors">Urozgan</button>
-                                        <button onclick="filterByRegion('Wardak')"
-                                            class="w-full text-left px-4 py-2 text-sm hover:bg-primary/10 dark:hover:bg-primary-20 transition-colors">Wardak</button>
-                                        <button onclick="filterByRegion('Zabul')"
-                                            class="w-full text-left px-4 py-2 text-sm hover:bg-primary/10 dark:hover:bg-primary-20 transition-colors">Zabul</button>
-                                    </div>
-                                </div>
+                                                    
+                                                    <div class="relative">
+                                                        <button onclick="toggleDropdown('region-dropdown')"
+                                                            class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-primary/20 dark:bg-primary/30 px-4 hover:bg-primary/30 dark:hover:bg-primary/40 transition-colors">
+                                                            <p class="text-[#111714] dark:text-[#f6f8f7] text-sm font-medium leading-normal">
+                                                                Filter
+                                                                by Region</p>
+                                                            <span class="material-symbols-outlined text-[#111714] dark:text-[#f6f8f7]"
+                                                                style="font-size: 20px;">keyboard_arrow_down</span>
+                                                        </button>
+                                                        <div id="region-dropdown"
+                                                            class="absolute top-full left-0 mt-2 w-64 bg-white dark:bg-gray-800 rounded-lg shadow-xl border border-primary/20 dark:border-primary/30 hidden z-[9999] max-h-64 overflow-y-auto shadow-2xl">
+                                                            <button onclick="filterByRegion('all')"
+                                                                class="w-full text-left px-4 py-2 text-sm hover:bg-primary/10 dark:hover:bg-primary/20 transition-colors">All
+                                                                Regions</button>
+                                                            <button onclick="filterByRegion('Badakhshan')"
+                                                                class="w-full text-left px-4 py-2 text-sm hover:bg-primary/10 dark:hover:bg-primary/20 transition-colors">Badakhshan</button>
+                                                            <button onclick="filterByRegion('Badghis')"
+                                                                class="w-full text-left px-4 py-2 text-sm hover:bg-primary/10 dark:hover:bg-primary/20 transition-colors">Badghis</button>
+                                                            <button onclick="filterByRegion('Baghlan')"
+                                                                class="w-full text-left px-4 py-2 text-sm hover:bg-primary/10 dark:hover:bg-primary-20 transition-colors">Baghlan</button>
+                                                            <button onclick="filterByRegion('Balkh')"
+                                                                class="w-full text-left px-4 py-2 text-sm hover:bg-primary/10 dark:hover:bg-primary-20 transition-colors">Balkh</button>
+                                                            <button onclick="filterByRegion('Bamyan')"
+                                                                class="w-full text-left px-4 py-2 text-sm hover:bg-primary/10 dark:hover:bg-primary-20 transition-colors">Bamyan</button>
+                                                            <button onclick="filterByRegion('Daykundi')"
+                                                                class="w-full text-left px-4 py-2 text-sm hover:bg-primary/10 dark:hover:bg-primary-20 transition-colors">Daykundi</button>
+                                                            <button onclick="filterByRegion('Farah')"
+                                                                class="w-full text-left px-4 py-2 text-sm hover:bg-primary/10 dark:hover:bg-primary-20 transition-colors">Farah</button>
+                                                            <button onclick="filterByRegion('Faryab')"
+                                                                class="w-full text-left px-4 py-2 text-sm hover:bg-primary/10 dark:hover:bg-primary-20 transition-colors">Faryab</button>
+                                                            <button onclick="filterByRegion('Ghazni')"
+                                                                class="w-full text-left px-4 py-2 text-sm hover:bg-primary/10 dark:hover:bg-primary-20 transition-colors">Ghazni</button>
+                                                            <button onclick="filterByRegion('Ghor')"
+                                                                class="w-full text-left px-4 py-2 text-sm hover:bg-primary/10 dark:hover:bg-primary-20 transition-colors">Ghor</button>
+                                                            <button onclick="filterByRegion('Helmand')"
+                                                                class="w-full text-left px-4 py-2 text-sm hover:bg-primary/10 dark:hover:bg-primary-20 transition-colors">Helmand</button>
+                                                            <button onclick="filterByRegion('Herat')"
+                                                                class="w-full text-left px-4 py-2 text-sm hover:bg-primary/10 dark:hover:bg-primary-20 transition-colors">Herat</button>
+                                                            <button onclick="filterByRegion('Jowzjan')"
+                                                                class="w-full text-left px-4 py-2 text-sm hover:bg-primary/10 dark:hover:bg-primary-20 transition-colors">Jowzjan</button>
+                                                            <button onclick="filterByRegion('Kabul')"
+                                                                class="w-full text-left px-4 py-2 text-sm hover:bg-primary/10 dark:hover:bg-primary-20 transition-colors">Kabul</button>
+                                                            <button onclick="filterByRegion('Kandahar')"
+                                                                class="w-full text-left px-4 py-2 text-sm hover:bg-primary/10 dark:hover:bg-primary-20 transition-colors">Kandahar</button>
+                                                            <button onclick="filterByRegion('Kapisa')"
+                                                                class="w-full text-left px-4 py-2 text-sm hover:bg-primary/10 dark:hover:bg-primary-20 transition-colors">Kapisa</button>
+                                                            <button onclick="filterByRegion('Khost')"
+                                                                class="w-full text-left px-4 py-2 text-sm hover:bg-primary/10 dark:hover:bg-primary-20 transition-colors">Khost</button>
+                                                            <button onclick="filterByRegion('Kunar')"
+                                                                class="w-full text-left px-4 py-2 text-sm hover:bg-primary/10 dark:hover:bg-primary-20 transition-colors">Kunar</button>
+                                                            <button onclick="filterByRegion('Kunduz')"
+                                                                class="w-full text-left px-4 py-2 text-sm hover:bg-primary/10 dark:hover:bg-primary-20 transition-colors">Kunduz</button>
+                                                            <button onclick="filterByRegion('Laghman')"
+                                                                class="w-full text-left px-4 py-2 text-sm hover:bg-primary/10 dark:hover:bg-primary-20 transition-colors">Laghman</button>
+                                                            <button onclick="filterByRegion('Logar')"
+                                                                class="w-full text-left px-4 py-2 text-sm hover:bg-primary/10 dark:hover:bg-primary-20 transition-colors">Logar</button>
+                                                            <button onclick="filterByRegion('Maimana')"
+                                                                class="w-full text-left px-4 py-2 text-sm hover:bg-primary/10 dark:hover:bg-primary-20 transition-colors">Maimana</button>
+                                                            <button onclick="filterByRegion('Nangarhar')"
+                                                                class="w-full text-left px-4 py-2 text-sm hover:bg-primary/10 dark:hover:bg-primary-20 transition-colors">Nangarhar</button>
+                                                            <button onclick="filterByRegion('Nimruz')"
+                                                                class="w-full text-left px-4 py-2 text-sm hover:bg-primary/10 dark:hover:bg-primary-20 transition-colors">Nimruz</button>
+                                                            <button onclick="filterByRegion('Nuristan')"
+                                                                class="w-full text-left px-4 py-2 text-sm hover:bg-primary/10 dark:hover:bg-primary-20 transition-colors">Nuristan</button>
+                                                            <button onclick="filterByRegion('Paktia')"
+                                                                class="w-full text-left px-4 py-2 text-sm hover:bg-primary/10 dark:hover:bg-primary-20 transition-colors">Paktia</button>
+                                                            <button onclick="filterByRegion('Paktika')"
+                                                                class="w-full text-left px-4 py-2 text-sm hover:bg-primary/10 dark:hover:bg-primary-20 transition-colors">Paktika</button>
+                                                            <button onclick="filterByRegion('Panjshir')"
+                                                                class="w-full text-left px-4 py-2 text-sm hover:bg-primary/10 dark:hover:bg-primary-20 transition-colors">Panjshir</button>
+                                                            <button onclick="filterByRegion('Parwan')"
+                                                                class="w-full text-left px-4 py-2 text-sm hover:bg-primary/10 dark:hover:bg-primary-20 transition-colors">Parwan</button>
+                                                            <button onclick="filterByRegion('Samangan')"
+                                                                class="w-full text-left px-4 py-2 text-sm hover:bg-primary/10 dark:hover:bg-primary-20 transition-colors">Samangan</button>
+                                                            <button onclick="filterByRegion('Sar-e Pol')"
+                                                                class="w-full text-left px-4 py-2 text-sm hover:bg-primary/10 dark:hover:bg-primary-20 transition-colors">Sar-e
+                                                                Pol</button>
+                                                            <button onclick="filterByRegion('Takhar')"
+                                                                class="w-full text-left px-4 py-2 text-sm hover:bg-primary/10 dark:hover:bg-primary-20 transition-colors">Takhar</button>
+                                                            <button onclick="filterByRegion('Urozgan')"
+                                                                class="w-full text-left px-4 py-2 text-sm hover:bg-primary/10 dark:hover:bg-primary-20 transition-colors">Urozgan</button>
+                                                            <button onclick="filterByRegion('Wardak')"
+                                                                class="w-full text-left px-4 py-2 text-sm hover:bg-primary/10 dark:hover:bg-primary-20 transition-colors">Wardak</button>
+                                                            <button onclick="filterByRegion('Zabul')"
+                                                                class="w-full text-left px-4 py-2 text-sm hover:bg-primary/10 dark:hover:bg-primary-20 transition-colors">Zabul</button>
+                                                        </div>
+                                                    </div>
 
-                               
-                                <button onclick="clearFilters()"
-                                    class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-lg border border-primary/20 dark:border-primary/30 px-4 hover:bg-primary/10 dark:hover:bg-primary/20 transition-colors">
-                                    <p class="text-[#111714] dark:text-[#f6f8f7] text-sm font-medium leading-normal">Clear
-                                        Filters</p>
-                                    <span class="material-symbols-outlined text-[#111714] dark:text-[#f6f8f7]"
-                                        style="font-size: 20px;">clear</span>
-                                </button>
-                            </div>
-                           
-                            <div id="events-table-container" class="px-4 py-6 @container">
-                                <div
-                                    class="overflow-hidden rounded-xl border border-primary/20 dark:border-primary/30 bg-white dark:bg-background-dark shadow-sm">
-                                    <div class="overflow-x-auto">
-                                        <table class="w-full text-left">
-                                            <thead class="hidden md:table-header-group bg-primary/20 dark:bg-primary/30">
-                                                <tr>
-                                                    <th class="px-6 py-4 text-left text-[#111714] dark:text-[#f6f8f7] text-sm font-medium leading-normal"
-                                                        scope="col">#</th>
-                                                    <th class="px-6 py-4 text-left text-[#111714] dark:text-[#f6f8f7] text-sm font-medium leading-normal"
-                                                        scope="col">Event/Initiative</th>
-                                                    <th class="px-6 py-4 text-left text-[#111714] dark:text-[#f6f8f7] text-sm font-medium leading-normal"
-                                                        scope="col">Location</th>
-                                                    <th class="px-6 py-4 text-left text-[#111714] dark:text-[#f6f8f7] text-sm font-medium leading-normal"
-                                                        scope="col">Province</th>
-                                                    <th class="px-6 py-4 text-left text-[#111714] dark:text-[#f6f8f7] text-sm font-medium leading-normal"
-                                                        scope="col">Tree Species</th>
-                                                    <th class="px-6 py-4 text-left text-[#111714] dark:text-[#f6f8f7] text-sm font-medium leading-normal"
-                                                        scope="col">Date</th>
-                                                    <th class="px-6 py-4 text-left text-[#111714] dark:text-[#f6f8f7] text-sm font-medium leading-normal text-right"
-                                                        scope="col">Trees Planted</th>
-                                                    <th class="px-6 py-4 text-left text-[#111714] dark:text-[#f6f8f7] text-sm font-medium leading-normal text-right"
-                                                        scope="col">Volunteers</th>
-                                                    <th class="px-6 py-4 text-left text-[#111714] dark:text-[#f6f8f7] text-sm font-medium leading-normal"
-                                                        scope="col">Sponsor/Partner</th>
-                                                </tr>
-                                            </thead>
-                                            @php
-                                                $counter = ($events->currentPage() - 1) * $events->perPage() + 1;
-                                            @endphp
-                                            <tbody class="divide-y divide-primary/20 dark:divide-primary/30">
-                                                @forelse($events as $event)
-                                                    <tr
-                                                        class="block md:table-row p-4 border-b border-primary/20 dark:border-primary/30 md:border-none">
-                                                        <td class="block md:table-cell px-2 md:px-6 py-2 md:py-4 text-[#111714] dark:text-[#f6f8f7] text-sm font-medium md:font-normal leading-normal before:content-[attr(data-label)] before:font-bold before:mr-2 before:md:hidden"
-                                                            data-label="#">#{{ $counter }}</td>
-                                                        <td class="block md:table-cell px-2 md:px-6 py-2 md:py-4 text-[#111714] dark:text-[#f6f8f7] text-sm font-medium md:font-normal leading-normal before:content-[attr(data-label)] before:font-bold before:mr-2 before:md:hidden"
-                                                            data-label="Event/Initiative">{{ $event->title }}</td>
-                                                        <td class="block md:table-cell px-2 md:px-6 py-2 md:py-4 text-[#111714]/80 dark:text-[#f6f8f7]/80 text-sm font-normal leading-normal before:content-[attr(data-label)] before:font-bold before:mr-2 before:md:hidden"
-                                                            data-label="Location">{{ $event->location }}</td>
-                                                        <td class="block md:table-cell px-2 md:px-6 py-2 md:py-4 text-[#111714]/80 dark:text-[#f6f8f7]/80 text-sm font-normal leading-normal before:content-[attr(data-label)] before:font-bold before:mr-2 before:md:hidden"
-                                                            data-label="Province">{{ $event->province ?? 'N/A' }}</td>
-                                                        <td class="block md:table-cell px-2 md:px-6 py-2 md:py-4 text-[#111714]/80 dark:text-[#f6f8f7]/80 text-sm font-normal leading-normal before:content-[attr(data-label)] before:font-bold before:mr-2 before:md:hidden"
-                                                            data-label="Tree Species">
-                                                            @if ($event->all_tree_species && count($event->all_tree_species) > 0)
-                                                                {{ implode(', ', array_slice($event->all_tree_species, 0, 3)) }}
-                                                                @if (count($event->all_tree_species) > 3)
-                                                                    +{{ count($event->all_tree_species) - 3 }}
-                                                                @endif
-                                                            @else
-                                                                N/A
-                                                            @endif
-                                                        </td>
-                                                        <td class="block md:table-cell px-2 md:px-6 py-2 md:py-4 text-[#111714]/80 dark:text-[#f6f8f7]/80 text-sm font-normal leading-normal before:content-[attr(data-label)] before:font-bold before:mr-2 before:md:hidden"
-                                                            data-label="Date">{{ $event->formatted_date }}</td>
-                                                        <td class="block md:table-cell px-2 md:px-6 py-2 md:py-4 text-[#111714]/80 dark:text-[#f6f8f7]/80 text-sm font-normal leading-normal md:text-right before:content-[attr(data-label)] before:font-bold before:mr-2 before:md:hidden"
-                                                            data-label="Trees Planted">
-                                                            {{ number_format($event->trees_planted) }}</td>
-                                                        <td class="block md:table-cell px-2 md:px-6 py-2 md:py-4 text-[#111714]/80 dark:text-[#f6f8f7]/80 text-sm font-normal leading-normal md:text-right before:content-[attr(data-label)] before:font-bold before:mr-2 before:md:hidden"
-                                                            data-label="Volunteers">
-                                                            {{ number_format($event->volunteers) }}
-                                                        </td>
-                                                        <td class="block md:table-cell px-2 md:px-6 py-2 md:py-4 text-[#111714]/80 dark:text-[#f6f8f7]/80 text-sm font-normal leading-normal before:content-[attr(data-label)] before:font-bold before:mr-2 before:md:hidden"
-                                                            data-label="Sponsor/Partner">
-                                                            {{ $event->sponsor_partner ?? 'N/A' }}</td>
-                                                    </tr>
-                                                    @php $counter++; @endphp
+                                                   
+                                                    <button onclick="clearFilters()"
+                                                        class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-lg border border-primary/20 dark:border-primary/30 px-4 hover:bg-primary/10 dark:hover:bg-primary/20 transition-colors">
+                                                        <p class="text-[#111714] dark:text-[#f6f8f7] text-sm font-medium leading-normal">Clear
+                                                            Filters</p>
+                                                        <span class="material-symbols-outlined text-[#111714] dark:text-[#f6f8f7]"
+                                                            style="font-size: 20px;">clear</span>
+                                                    </button>
+                                                </div>
+                                               
+                                                <div id="events-table-container" class="px-4 py-6 @container">
+                                                    <div
+                                                        class="overflow-hidden rounded-xl border border-primary/20 dark:border-primary/30 bg-white dark:bg-background-dark shadow-sm">
+                                                        <div class="overflow-x-auto">
+                                                            <table class="w-full text-left">
+                                                                <thead class="hidden md:table-header-group bg-primary/20 dark:bg-primary/30">
+                                                                    <tr>
+                                                                        <th class="px-6 py-4 text-left text-[#111714] dark:text-[#f6f8f7] text-sm font-medium leading-normal"
+                                                                            scope="col">#</th>
+                                                                        <th class="px-6 py-4 text-left text-[#111714] dark:text-[#f6f8f7] text-sm font-medium leading-normal"
+                                                                            scope="col">Event/Initiative</th>
+                                                                        <th class="px-6 py-4 text-left text-[#111714] dark:text-[#f6f8f7] text-sm font-medium leading-normal"
+                                                                            scope="col">Location</th>
+                                                                        <th class="px-6 py-4 text-left text-[#111714] dark:text-[#f6f8f7] text-sm font-medium leading-normal"
+                                                                            scope="col">Province</th>
+                                                                        <th class="px-6 py-4 text-left text-[#111714] dark:text-[#f6f8f7] text-sm font-medium leading-normal"
+                                                                            scope="col">Tree Species</th>
+                                                                        <th class="px-6 py-4 text-left text-[#111714] dark:text-[#f6f8f7] text-sm font-medium leading-normal"
+                                                                            scope="col">Date</th>
+                                                                        <th class="px-6 py-4 text-left text-[#111714] dark:text-[#f6f8f7] text-sm font-medium leading-normal text-right"
+                                                                            scope="col">Trees Planted</th>
+                                                                        <th class="px-6 py-4 text-left text-[#111714] dark:text-[#f6f8f7] text-sm font-medium leading-normal text-right"
+                                                                            scope="col">Volunteers</th>
+                                                                        <th class="px-6 py-4 text-left text-[#111714] dark:text-[#f6f8f7] text-sm font-medium leading-normal"
+                                                                            scope="col">Sponsor/Partner</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                @php
+                                                                    $counter =
+                                                                        ($events->currentPage() - 1) *
+                                                                            $events->perPage() +
+                                                                        1;
+                                                                @endphp
+                                                                <tbody class="divide-y divide-primary/20 dark:divide-primary/30">
+                                                                    @forelse($events as $event)
+                                                                        <tr
+                                                                            class="block md:table-row p-4 border-b border-primary/20 dark:border-primary/30 md:border-none">
+                                                                            <td class="block md:table-cell px-2 md:px-6 py-2 md:py-4 text-[#111714] dark:text-[#f6f8f7] text-sm font-medium md:font-normal leading-normal before:content-[attr(data-label)] before:font-bold before:mr-2 before:md:hidden"
+                                                                                data-label="#">#{{ $counter }}</td>
+                                                                            <td class="block md:table-cell px-2 md:px-6 py-2 md:py-4 text-[#111714] dark:text-[#f6f8f7] text-sm font-medium md:font-normal leading-normal before:content-[attr(data-label)] before:font-bold before:mr-2 before:md:hidden"
+                                                                                data-label="Event/Initiative">{{ $event->title }}</td>
+                                                                            <td class="block md:table-cell px-2 md:px-6 py-2 md:py-4 text-[#111714]/80 dark:text-[#f6f8f7]/80 text-sm font-normal leading-normal before:content-[attr(data-label)] before:font-bold before:mr-2 before:md:hidden"
+                                                                                data-label="Location">{{ $event->location }}</td>
+                                                                            <td class="block md:table-cell px-2 md:px-6 py-2 md:py-4 text-[#111714]/80 dark:text-[#f6f8f7]/80 text-sm font-normal leading-normal before:content-[attr(data-label)] before:font-bold before:mr-2 before:md:hidden"
+                                                                                data-label="Province">{{ $event->province ?? 'N/A' }}</td>
+                                                                            <td class="block md:table-cell px-2 md:px-6 py-2 md:py-4 text-[#111714]/80 dark:text-[#f6f8f7]/80 text-sm font-normal leading-normal before:content-[attr(data-label)] before:font-bold before:mr-2 before:md:hidden"
+                                                                                data-label="Tree Species">
+                                                                                @if ($event->all_tree_species && count($event->all_tree_species) > 0)
+    {{ implode(', ', array_slice($event->all_tree_species, 0, 3)) }}
+                                                                                    @if (count($event->all_tree_species) > 3)
+    +{{ count($event->all_tree_species) - 3 }}
+    @endif
+@else
+    N/A
+    @endif
+                                                                            </td>
+                                                                            <td class="block md:table-cell px-2 md:px-6 py-2 md:py-4 text-[#111714]/80 dark:text-[#f6f8f7]/80 text-sm font-normal leading-normal before:content-[attr(data-label)] before:font-bold before:mr-2 before:md:hidden"
+                                                                                data-label="Date">{{ $event->formatted_date }}</td>
+                                                                            <td class="block md:table-cell px-2 md:px-6 py-2 md:py-4 text-[#111714]/80 dark:text-[#f6f8f7]/80 text-sm font-normal leading-normal md:text-right before:content-[attr(data-label)] before:font-bold before:mr-2 before:md:hidden"
+                                                                                data-label="Trees Planted">
+                                                                                {{ number_format($event->trees_planted) }}</td>
+                                                                            <td class="block md:table-cell px-2 md:px-6 py-2 md:py-4 text-[#111714]/80 dark:text-[#f6f8f7]/80 text-sm font-normal leading-normal md:text-right before:content-[attr(data-label)] before:font-bold before:mr-2 before:md:hidden"
+                                                                                data-label="Volunteers">
+                                                                                {{ number_format($event->volunteers) }}
+                                                                            </td>
+                                                                            <td class="block md:table-cell px-2 md:px-6 py-2 md:py-4 text-[#111714]/80 dark:text-[#f6f8f7]/80 text-sm font-normal leading-normal before:content-[attr(data-label)] before:font-bold before:mr-2 before:md:hidden"
+                                                                                data-label="Sponsor/Partner">
+                                                                                {{ $event->sponsor_partner ?? 'N/A' }}</td>
+                                                                        </tr>
+                                                                        @php $counter++; @endphp
                                                 @empty
-                                                    <tr>
-                                                        <td colspan="9"
-                                                            class="text-center py-8 text-[#111714]/60 dark:text-[#f6f8f7]/60">
-                                                            No events found. Check back soon for updates!
-                                                        </td>
-                                                    </tr>
-                                                @endforelse
-                                            </tbody>
-                                        </table>
+                                                                        <tr>
+                                                                            <td colspan="9"
+                                                                                class="text-center py-8 text-[#111714]/60 dark:text-[#f6f8f7]/60">
+                                                                                No events found. Check back soon for updates!
+                                                                            </td>
+                                                                        </tr>
+                                                                    @endforelse
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                              
+                                                <div class="flex flex-col sm:flex-row items-center justify-between gap-6 px-4 py-8">
+                                                    <div class="flex items-center gap-2" id="pagination-container">
+                                                        @if ($events->hasPages())
+                                                            <button onclick="loadPage({{ $events->currentPage() - 1 }})"
+                                                                class="flex h-9 w-9 items-center justify-center rounded-lg border border-primary/20 dark:border-primary/30 hover:bg-primary/20 dark:hover:bg-primary/30 transition-colors {{ $events->onFirstPage() ? 'opacity-50 cursor-not-allowed' : '' }}"
+                                                                {{ $events->onFirstPage() ? 'disabled' : '' }}>
+                                                                <span class="material-symbols-outlined text-[#111714] dark:text-[#f6f8f7]"
+                                                                    style="font-size: 20px;">chevron_left</span>
+                                                            </button>
+
+                                                            @for ($i = 1; $i <= $events->lastPage(); $i++)
+    @if ($i == $events->currentPage())
+    <button
+                                                                        class="flex h-9 w-9 items-center justify-center rounded-lg border border-primary/20 dark:border-primary/30 bg-primary/20 dark:bg-primary/30 text-sm font-bold text-primary dark:text-primary">{{ $i }}</button>
+@elseif(abs($i - $events->currentPage()) <= 2 || $i == 1 || $i == $events->lastPage())
+    <button onclick="loadPage({{ $i }})"
+                                                                        class="flex h-9 w-9 items-center justify-center rounded-lg border border-primary/20 dark:border-primary/30 text-sm font-medium text-[#111714]/80 dark:text-[#f6f8f7]/80 hover:bg-primary/20 dark:hover:bg-primary/30 transition-colors">{{ $i }}</button>
+@elseif(abs($i - $events->currentPage()) == 3)
+    <span
+                                                                        class="flex h-9 w-9 items-center justify-center text-sm text-[#111714]/60 dark:text-[#f6f8f7]/60">...</span>
+    @endif
+    @endfor
+
+                                                            <button onclick="loadPage({{ $events->currentPage() + 1 }})"
+                                                                class="flex h-9 w-9 items-center justify-center rounded-lg border border-primary/20 dark:border-primary/30 hover:bg-primary/20 dark:hover:bg-primary/30 transition-colors {{ $events->hasMorePages() ? '' : 'opacity-50 cursor-not-allowed' }}"
+                                                                {{ $events->hasMorePages() ? '' : 'disabled' }}>
+                                                                <span class="material-symbols-outlined text-[#111714] dark:text-[#f6f8f7]"
+                                                                    style="font-size: 20px;">chevron_right</span>
+                                                            </button>
+                                                        @endif
+                                                    </div>
+                                                    <a href="{{ route('home') }}#events"
+                                                        class="flex w-full sm:w-auto min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center gap-2 overflow-hidden rounded-lg h-12 px-6 bg-primary text-white text-base font-bold leading-normal tracking-[0.015em] hover:bg-opacity-90 transition-opacity">
+                                                        <span>Join an Event Near You</span>
+                                                        <span class="material-symbols-outlined">arrow_forward</span>
+                                                    </a>
+                                                </div>
+                                            </main>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                          
-                            <div class="flex flex-col sm:flex-row items-center justify-between gap-6 px-4 py-8">
-                                <div class="flex items-center gap-2" id="pagination-container">
-                                    @if ($events->hasPages())
-                                        <button onclick="loadPage({{ $events->currentPage() - 1 }})"
-                                            class="flex h-9 w-9 items-center justify-center rounded-lg border border-primary/20 dark:border-primary/30 hover:bg-primary/20 dark:hover:bg-primary/30 transition-colors {{ $events->onFirstPage() ? 'opacity-50 cursor-not-allowed' : '' }}"
-                                            {{ $events->onFirstPage() ? 'disabled' : '' }}>
-                                            <span class="material-symbols-outlined text-[#111714] dark:text-[#f6f8f7]"
-                                                style="font-size: 20px;">chevron_left</span>
-                                        </button>
-
-                                        @for ($i = 1; $i <= $events->lastPage(); $i++)
-                                            @if ($i == $events->currentPage())
-                                                <button
-                                                    class="flex h-9 w-9 items-center justify-center rounded-lg border border-primary/20 dark:border-primary/30 bg-primary/20 dark:bg-primary/30 text-sm font-bold text-primary dark:text-primary">{{ $i }}</button>
-                                            @elseif(abs($i - $events->currentPage()) <= 2 || $i == 1 || $i == $events->lastPage())
-                                                <button onclick="loadPage({{ $i }})"
-                                                    class="flex h-9 w-9 items-center justify-center rounded-lg border border-primary/20 dark:border-primary/30 text-sm font-medium text-[#111714]/80 dark:text-[#f6f8f7]/80 hover:bg-primary/20 dark:hover:bg-primary/30 transition-colors">{{ $i }}</button>
-                                            @elseif(abs($i - $events->currentPage()) == 3)
-                                                <span
-                                                    class="flex h-9 w-9 items-center justify-center text-sm text-[#111714]/60 dark:text-[#f6f8f7]/60">...</span>
-                                            @endif
-                                        @endfor
-
-                                        <button onclick="loadPage({{ $events->currentPage() + 1 }})"
-                                            class="flex h-9 w-9 items-center justify-center rounded-lg border border-primary/20 dark:border-primary/30 hover:bg-primary/20 dark:hover:bg-primary/30 transition-colors {{ $events->hasMorePages() ? '' : 'opacity-50 cursor-not-allowed' }}"
-                                            {{ $events->hasMorePages() ? '' : 'disabled' }}>
-                                            <span class="material-symbols-outlined text-[#111714] dark:text-[#f6f8f7]"
-                                                style="font-size: 20px;">chevron_right</span>
-                                        </button>
-                                    @endif
-                                </div>
-                                <a href="{{ route('home') }}#events"
-                                    class="flex w-full sm:w-auto min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center gap-2 overflow-hidden rounded-lg h-12 px-6 bg-primary text-white text-base font-bold leading-normal tracking-[0.015em] hover:bg-opacity-90 transition-opacity">
-                                    <span>Join an Event Near You</span>
-                                    <span class="material-symbols-outlined">arrow_forward</span>
-                                </a>
-                            </div>
-                        </main>
-                    </div>
-                </div>
-            </div>
-        </section> -->
+                            </section> -->
 
         <style>
-            .expense-table-wrapper::-webkit-scrollbar { height: 8px; }
-            .expense-table-wrapper::-webkit-scrollbar-track { background: #f3f4f6; border-radius: 4px; }
-            .expense-table-wrapper::-webkit-scrollbar-thumb { background: #064e3b40; border-radius: 4px; }
-            .expense-table-wrapper::-webkit-scrollbar-thumb:hover { background: #064e3b80; }
+            .expense-table-wrapper::-webkit-scrollbar {
+                height: 8px;
+            }
+
+            .expense-table-wrapper::-webkit-scrollbar-track {
+                background: #f3f4f6;
+                border-radius: 4px;
+            }
+
+            .expense-table-wrapper::-webkit-scrollbar-thumb {
+                background: #064e3b40;
+                border-radius: 4px;
+            }
+
+            .expense-table-wrapper::-webkit-scrollbar-thumb:hover {
+                background: #064e3b80;
+            }
+
             .line-clamp-2 {
                 display: -webkit-box;
                 -webkit-line-clamp: 2;
@@ -442,7 +459,11 @@
                         $rangeLabel = __('messages.expense_range_month') . ' (' . now()->format('F Y') . ')';
                     } else {
                         $expensesQuery = $expensesQuery->whereBetween('date', [$expenseFrom, $expenseTo]);
-                        $rangeLabel = ($expenseRange === 'week' ? __('messages.expense_range_week') . ' — ' : '') . \Carbon\Carbon::parse($expenseFrom)->format('M d') . ' – ' . \Carbon\Carbon::parse($expenseTo)->format('M d, Y');
+                        $rangeLabel =
+                            ($expenseRange === 'week' ? __('messages.expense_range_week') . ' — ' : '') .
+                            \Carbon\Carbon::parse($expenseFrom)->format('M d') .
+                            ' – ' .
+                            \Carbon\Carbon::parse($expenseTo)->format('M d, Y');
                     }
 
                     // Total cost & count are across the FULL filtered set, not just current page
@@ -450,9 +471,7 @@
                     $expensesCount = (clone $expensesQuery)->count();
 
                     // Paginate 20 per page (unique page name to avoid clash with events pagination)
-                    $expenses = $expensesQuery
-                        ->paginate(20, ['*'], 'expense_page')
-                        ->withQueryString();
+                    $expenses = $expensesQuery->paginate(20, ['*'], 'expense_page')->withQueryString();
                 @endphp
 
                 <div class="glass-panel rounded-2xl sm:rounded-3xl p-3 sm:p-5 md:p-8 relative overflow-hidden">
@@ -472,7 +491,8 @@
                                 {{ __('messages.expense_section_desc') }}
                             </p>
                         </div>
-                        <div class="flex-shrink-0 p-4 sm:p-5 bg-deep-green rounded-xl sm:rounded-2xl text-center sm:min-w-[160px] self-start sm:self-auto">
+                        <div
+                            class="flex-shrink-0 p-4 sm:p-5 bg-deep-green rounded-xl sm:rounded-2xl text-center sm:min-w-[160px] self-start sm:self-auto">
                             <p class="text-white/50 text-[10px] font-bold uppercase tracking-widest mb-1">
                                 {{ __('messages.expense_total') }}
                             </p>
@@ -485,13 +505,19 @@
 
                     <!-- Date Filter Bar -->
                     <div class="mb-6 sm:mb-8 p-3 sm:p-4 md:p-5 rounded-xl bg-background-light border border-gray-200/70">
-                        <form method="GET" action="{{ route('report') }}#expenses-section" class="flex flex-col lg:flex-row lg:items-end gap-4">
-                            @if(request('year'))<input type="hidden" name="year" value="{{ request('year') }}">@endif
-                            @if(request('region'))<input type="hidden" name="region" value="{{ request('region') }}">@endif
+                        <form method="GET" action="{{ route('report') }}#expenses-section"
+                            class="flex flex-col lg:flex-row lg:items-end gap-4">
+                            @if (request('year'))
+                                <input type="hidden" name="year" value="{{ request('year') }}">
+                            @endif
+                            @if (request('region'))
+                                <input type="hidden" name="region" value="{{ request('region') }}">
+                            @endif
 
                             <!-- Quick range buttons -->
                             <div class="flex-shrink-0">
-                                <p class="text-charcoal/50 text-[10px] font-bold uppercase tracking-widest mb-2">{{ __('messages.expense_quick_filter') }}</p>
+                                <p class="text-charcoal/50 text-[10px] font-bold uppercase tracking-widest mb-2">
+                                    {{ __('messages.expense_quick_filter') }}</p>
                                 <div class="flex flex-wrap gap-2">
                                     <a href="{{ route('report') }}?expense_range=week#expenses-section"
                                         class="px-3 py-2 text-xs font-bold rounded-lg border transition-all {{ $expenseRange === 'week' ? 'bg-deep-green text-white border-deep-green' : 'bg-white text-charcoal border-gray-200 hover:border-deep-green/30' }}">
@@ -512,179 +538,215 @@
 
                             <!-- Custom date range -->
                             <!-- <div class="flex-1 grid grid-cols-2 sm:grid-cols-[1fr_1fr_auto] gap-2 sm:gap-3 items-end">
-                                <div class="min-w-0">
-                                    <label class="text-charcoal/50 text-[10px] font-bold uppercase tracking-widest mb-2 block">{{ __('messages.expense_from') }}</label>
-                                    <input type="date" name="expense_from" value="{{ $expenseFrom }}"
-                                        class="w-full h-10 px-2 sm:px-3 text-xs sm:text-sm border border-gray-200 rounded-lg focus:border-deep-green focus:ring-1 focus:ring-deep-green/20 outline-none transition-colors bg-white" />
-                                </div>
-                                <div class="min-w-0">
-                                    <label class="text-charcoal/50 text-[10px] font-bold uppercase tracking-widest mb-2 block">{{ __('messages.expense_to') }}</label>
-                                    <input type="date" name="expense_to" value="{{ $expenseTo }}"
-                                        class="w-full h-10 px-2 sm:px-3 text-xs sm:text-sm border border-gray-200 rounded-lg focus:border-deep-green focus:ring-1 focus:ring-deep-green/20 outline-none transition-colors bg-white" />
-                                </div>
-                                <input type="hidden" name="expense_range" value="custom">
-                                <button type="submit"
-                                    class="col-span-2 sm:col-span-1 h-10 px-4 sm:px-5 bg-deep-green text-white text-xs font-bold uppercase tracking-wider rounded-lg hover:bg-deep-green/90 transition-colors flex items-center justify-center gap-2 whitespace-nowrap">
-                                    <span class="material-symbols-outlined text-base">filter_alt</span>
-                                    {{ __('messages.expense_apply_filter') }}
-                                </button>
-                            </div> -->
+                                                    <div class="min-w-0">
+                                                        <label class="text-charcoal/50 text-[10px] font-bold uppercase tracking-widest mb-2 block">{{ __('messages.expense_from') }}</label>
+                                                        <input type="date" name="expense_from" value="{{ $expenseFrom }}"
+                                                            class="w-full h-10 px-2 sm:px-3 text-xs sm:text-sm border border-gray-200 rounded-lg focus:border-deep-green focus:ring-1 focus:ring-deep-green/20 outline-none transition-colors bg-white" />
+                                                    </div>
+                                                    <div class="min-w-0">
+                                                        <label class="text-charcoal/50 text-[10px] font-bold uppercase tracking-widest mb-2 block">{{ __('messages.expense_to') }}</label>
+                                                        <input type="date" name="expense_to" value="{{ $expenseTo }}"
+                                                            class="w-full h-10 px-2 sm:px-3 text-xs sm:text-sm border border-gray-200 rounded-lg focus:border-deep-green focus:ring-1 focus:ring-deep-green/20 outline-none transition-colors bg-white" />
+                                                    </div>
+                                                    <input type="hidden" name="expense_range" value="custom">
+                                                    <button type="submit"
+                                                        class="col-span-2 sm:col-span-1 h-10 px-4 sm:px-5 bg-deep-green text-white text-xs font-bold uppercase tracking-wider rounded-lg hover:bg-deep-green/90 transition-colors flex items-center justify-center gap-2 whitespace-nowrap">
+                                                        <span class="material-symbols-outlined text-base">filter_alt</span>
+                                                        {{ __('messages.expense_apply_filter') }}
+                                                    </button>
+                                                </div> -->
                         </form>
 
                         <div class="mt-3 flex items-center gap-2">
                             <span class="material-symbols-outlined text-gold-accent text-sm">date_range</span>
                             <p class="text-charcoal/50 text-xs font-medium">
-                                {{ __('messages.expense_showing') }}: <span class="text-deep-green font-bold">{{ $rangeLabel }}</span>
-                                — <span class="text-deep-green font-bold">{{ $expensesCount }}</span> {{ __('messages.expense_records') }}
+                                {{ __('messages.expense_showing') }}: <span
+                                    class="text-deep-green font-bold">{{ $rangeLabel }}</span>
+                                — <span class="text-deep-green font-bold">{{ $expensesCount }}</span>
+                                {{ __('messages.expense_records') }}
                             </p>
                         </div>
                     </div>
 
                     <!-- Expense Table (AJAX container) -->
                     <div id="expenses-table-container" class="transition-opacity duration-200">
-                    @if ($expenses->count() > 0)
-                        <div class="rounded-xl border border-gray-200 shadow-sm overflow-hidden bg-white">
-                            <div class="overflow-x-auto expense-table-wrapper">
-                                <table class="w-full text-left border-collapse text-xs">
-                                    <colgroup>
-                                        <col style="width: 36px;">
-                                        <col style="width: 70px;">
-                                        <col>
-                                        <col style="width: 70px;">
-                                        <col style="width: 80px;">
-                                        <col style="width: 90px;">
-                                        <col style="width: 95px;">
-                                        <col>
-                                    </colgroup>
-                                    <thead>
-                                        <tr class="bg-deep-green">
-                                            <th class="px-2 py-2.5 text-white text-[9px] font-extrabold uppercase tracking-wider text-center">#</th>
-                                            <th class="px-2 py-2.5 text-white text-[9px] font-extrabold uppercase tracking-wider whitespace-nowrap">{{ __('messages.expense_col_date') }}</th>
-                                            <th class="px-2 py-2.5 text-white text-[9px] font-extrabold uppercase tracking-wider">{{ __('messages.expense_col_description') }}</th>
-                                            <th class="px-2 py-2.5 text-white text-[9px] font-extrabold uppercase tracking-wider text-center">{{ __('messages.expense_col_quantity') }}</th>
-                                            <th class="px-2 py-2.5 text-white text-[9px] font-extrabold uppercase tracking-wider text-right whitespace-nowrap">{{ __('messages.expense_col_unit_price') }}</th>
-                                            <th class="px-2 py-2.5 text-white text-[9px] font-extrabold uppercase tracking-wider text-right whitespace-nowrap">{{ __('messages.expense_col_total') }}</th>
-                                            <th class="px-2 py-2.5 text-white text-[9px] font-extrabold uppercase tracking-wider whitespace-nowrap">{{ __('messages.expense_col_paid_by') }}</th>
-                                            <th class="px-2 py-2.5 text-white text-[9px] font-extrabold uppercase tracking-wider">{{ __('messages.expense_col_notes') }}</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($expenses as $index => $expense)
-                                            <tr class="border-b border-gray-100 last:border-b-0 transition-colors hover:bg-vibrant-lime/[0.05] {{ $index % 2 === 1 ? 'bg-gray-50/50' : '' }}">
-                                                <td class="px-2 py-2 text-center text-charcoal/50 text-[11px] font-semibold">{{ $index + 1 }}</td>
-                                                <td class="px-2 py-2 text-charcoal text-[11px] font-semibold whitespace-nowrap">{{ $expense->date->format('M d, y') }}</td>
-                                                <td class="px-2 py-2 text-deep-green text-[11px] font-bold leading-tight">{{ $expense->description }}</td>
-                                                <td class="px-2 py-2 text-center text-charcoal/70 text-[11px] whitespace-nowrap">
-                                                    {{ $expense->quantity ?? '—' }}
-                                                </td>
-                                                <td class="px-2 py-2 text-right text-charcoal/70 text-[11px] tabular-nums whitespace-nowrap">
-                                                    {{ number_format($expense->unit_price, 0) }}
-                                                </td>
-                                                <td class="px-2 py-2 text-right text-deep-green text-xs font-extrabold tabular-nums whitespace-nowrap">
-                                                    {{ number_format($expense->total_cost, 0) }}
-                                                </td>
-                                                <td class="px-2 py-2 whitespace-nowrap">
-                                                    @if ($expense->who_paid)
-                                                        <span class="inline-flex items-center px-1.5 py-0.5 rounded text-[9px] font-bold bg-primary/10 text-deep-green">
-                                                            {{ $expense->who_paid }}
-                                                        </span>
-                                                    @else
-                                                        <span class="text-charcoal/30">—</span>
-                                                    @endif
-                                                </td>
-                                                <td class="px-2 py-2 text-charcoal/60 text-[10px] italic leading-snug">
-                                                    <span class="line-clamp-2">{{ $expense->notes ?? '—' }}</span>
-                                                </td>
+                        @if ($expenses->count() > 0)
+                            <div class="rounded-xl border border-gray-200 shadow-sm overflow-hidden bg-white">
+                                <div class="overflow-x-auto expense-table-wrapper">
+                                    <table class="w-full text-left border-collapse text-xs">
+                                        <colgroup>
+                                            <col style="width: 36px;">
+                                            <col style="width: 70px;">
+                                            <col>
+                                            <col style="width: 70px;">
+                                            <col style="width: 80px;">
+                                            <col style="width: 90px;">
+                                            <col style="width: 95px;">
+                                            <col>
+                                        </colgroup>
+                                        <thead>
+                                            <tr class="bg-deep-green">
+                                                <th
+                                                    class="px-2 py-2.5 text-white text-[9px] font-extrabold uppercase tracking-wider text-center">
+                                                    #</th>
+                                                <th
+                                                    class="px-2 py-2.5 text-white text-[9px] font-extrabold uppercase tracking-wider whitespace-nowrap">
+                                                    {{ __('messages.expense_col_date') }}</th>
+                                                <th
+                                                    class="px-2 py-2.5 text-white text-[9px] font-extrabold uppercase tracking-wider">
+                                                    {{ __('messages.expense_col_description') }}</th>
+                                                <th
+                                                    class="px-2 py-2.5 text-white text-[9px] font-extrabold uppercase tracking-wider text-center">
+                                                    {{ __('messages.expense_col_quantity') }}</th>
+                                                <th
+                                                    class="px-2 py-2.5 text-white text-[9px] font-extrabold uppercase tracking-wider text-right whitespace-nowrap">
+                                                    {{ __('messages.expense_col_unit_price') }}</th>
+                                                <th
+                                                    class="px-2 py-2.5 text-white text-[9px] font-extrabold uppercase tracking-wider text-right whitespace-nowrap">
+                                                    {{ __('messages.expense_col_total') }}</th>
+                                                <th
+                                                    class="px-2 py-2.5 text-white text-[9px] font-extrabold uppercase tracking-wider whitespace-nowrap">
+                                                    {{ __('messages.expense_col_paid_by') }}</th>
+                                                <th
+                                                    class="px-2 py-2.5 text-white text-[9px] font-extrabold uppercase tracking-wider">
+                                                    {{ __('messages.expense_col_notes') }}</th>
                                             </tr>
-                                        @endforeach
-                                    </tbody>
-                                    <tfoot>
-                                        <tr class="bg-vibrant-lime/15 border-t-2 border-vibrant-lime/40">
-                                            <td colspan="5" class="px-2 py-2.5 text-right text-deep-green font-extrabold text-[10px] uppercase tracking-wider">
-                                                {{ __('messages.expense_total') }}
-                                            </td>
-                                            <td class="px-2 py-2.5 text-right text-deep-green text-sm font-black tabular-nums whitespace-nowrap">
-                                                {{ number_format($totalExpenses, 0) }} <span class="text-vibrant-lime text-[9px]">AFN</span>
-                                            </td>
-                                            <td colspan="2"></td>
-                                        </tr>
-                                    </tfoot>
-                                </table>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($expenses as $index => $expense)
+                                                <tr
+                                                    class="border-b border-gray-100 last:border-b-0 transition-colors hover:bg-vibrant-lime/[0.05] {{ $index % 2 === 1 ? 'bg-gray-50/50' : '' }}">
+                                                    <td
+                                                        class="px-2 py-2 text-center text-charcoal/50 text-[11px] font-semibold">
+                                                        {{ $index + 1 }}</td>
+                                                    <td
+                                                        class="px-2 py-2 text-charcoal text-[11px] font-semibold whitespace-nowrap">
+                                                        {{ $expense->date->format('M d, y') }}</td>
+                                                    <td
+                                                        class="px-2 py-2 text-deep-green text-[11px] font-bold leading-tight">
+                                                        {{ $expense->description }}</td>
+                                                    <td
+                                                        class="px-2 py-2 text-center text-charcoal/70 text-[11px] whitespace-nowrap">
+                                                        {{ $expense->quantity ?? '—' }}
+                                                    </td>
+                                                    <td
+                                                        class="px-2 py-2 text-right text-charcoal/70 text-[11px] tabular-nums whitespace-nowrap">
+                                                        {{ number_format($expense->unit_price, 0) }}
+                                                    </td>
+                                                    <td
+                                                        class="px-2 py-2 text-right text-deep-green text-xs font-extrabold tabular-nums whitespace-nowrap">
+                                                        {{ number_format($expense->total_cost, 0) }}
+                                                    </td>
+                                                    <td class="px-2 py-2 whitespace-nowrap">
+                                                        @if ($expense->who_paid)
+                                                            <span
+                                                                class="inline-flex items-center px-1.5 py-0.5 rounded text-[9px] font-bold bg-primary/10 text-deep-green">
+                                                                {{ $expense->who_paid }}
+                                                            </span>
+                                                        @else
+                                                            <span class="text-charcoal/30">—</span>
+                                                        @endif
+                                                    </td>
+                                                    <td class="px-2 py-2 text-charcoal/60 text-[10px] italic leading-snug">
+                                                        <span class="line-clamp-2">{{ $expense->notes ?? '—' }}</span>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                        <tfoot>
+                                            <tr class="bg-vibrant-lime/15 border-t-2 border-vibrant-lime/40">
+                                                <td colspan="5"
+                                                    class="px-2 py-2.5 text-right text-deep-green font-extrabold text-[10px] uppercase tracking-wider">
+                                                    {{ __('messages.expense_total') }}
+                                                </td>
+                                                <td
+                                                    class="px-2 py-2.5 text-right text-deep-green text-sm font-black tabular-nums whitespace-nowrap">
+                                                    {{ number_format($totalExpenses, 0) }} <span
+                                                        class="text-vibrant-lime text-[9px]">AFN</span>
+                                                </td>
+                                                <td colspan="2"></td>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
                             </div>
-                        </div>
 
-                        <!-- Pagination -->
-                        @if ($expenses->hasPages())
-                            <div class="mt-5 flex flex-col sm:flex-row items-center justify-between gap-3">
-                                <p class="text-charcoal/50 text-xs">
-                                    {{ __('messages.expense_showing_page', ['from' => $expenses->firstItem(), 'to' => $expenses->lastItem(), 'total' => $expensesCount]) }}
-                                </p>
-                                <nav class="flex items-center gap-1" id="expenses-pagination">
-                                    {{-- Previous --}}
-                                    @if ($expenses->onFirstPage())
-                                        <span class="px-3 py-2 text-xs font-bold rounded-lg bg-gray-100 text-charcoal/30 cursor-not-allowed flex items-center gap-1">
-                                            <span class="material-symbols-outlined text-base">chevron_left</span>
-                                        </span>
-                                    @else
-                                        <a href="{{ $expenses->previousPageUrl() }}" data-expense-page
-                                            class="px-3 py-2 text-xs font-bold rounded-lg bg-white border border-gray-200 text-deep-green hover:bg-deep-green hover:text-white hover:border-deep-green transition-all flex items-center gap-1">
-                                            <span class="material-symbols-outlined text-base">chevron_left</span>
-                                        </a>
-                                    @endif
-
-                                    {{-- Page numbers --}}
-                                    @php
-                                        $current = $expenses->currentPage();
-                                        $last = $expenses->lastPage();
-                                        $start = max(1, $current - 2);
-                                        $end = min($last, $current + 2);
-                                    @endphp
-
-                                    @if ($start > 1)
-                                        <a href="{{ $expenses->url(1) }}" data-expense-page
-                                            class="px-3 py-2 text-xs font-bold rounded-lg bg-white border border-gray-200 text-deep-green hover:bg-deep-green hover:text-white transition-all min-w-[36px] text-center">1</a>
-                                        @if ($start > 2)
-                                            <span class="text-charcoal/30 text-xs px-1">…</span>
-                                        @endif
-                                    @endif
-
-                                    @for ($i = $start; $i <= $end; $i++)
-                                        @if ($i === $current)
-                                            <span class="px-3 py-2 text-xs font-bold rounded-lg bg-deep-green text-white border border-deep-green min-w-[36px] text-center">{{ $i }}</span>
+                            <!-- Pagination -->
+                            @if ($expenses->hasPages())
+                                <div class="mt-5 flex flex-col sm:flex-row items-center justify-between gap-3">
+                                    <p class="text-charcoal/50 text-xs">
+                                        {{ __('messages.expense_showing_page', ['from' => $expenses->firstItem(), 'to' => $expenses->lastItem(), 'total' => $expensesCount]) }}
+                                    </p>
+                                    <nav class="flex items-center gap-1" id="expenses-pagination">
+                                        {{-- Previous --}}
+                                        @if ($expenses->onFirstPage())
+                                            <span
+                                                class="px-3 py-2 text-xs font-bold rounded-lg bg-gray-100 text-charcoal/30 cursor-not-allowed flex items-center gap-1">
+                                                <span class="material-symbols-outlined text-base">chevron_left</span>
+                                            </span>
                                         @else
-                                            <a href="{{ $expenses->url($i) }}" data-expense-page
-                                                class="px-3 py-2 text-xs font-bold rounded-lg bg-white border border-gray-200 text-deep-green hover:bg-deep-green hover:text-white transition-all min-w-[36px] text-center">{{ $i }}</a>
+                                            <a href="{{ $expenses->previousPageUrl() }}" data-expense-page
+                                                class="px-3 py-2 text-xs font-bold rounded-lg bg-white border border-gray-200 text-deep-green hover:bg-deep-green hover:text-white hover:border-deep-green transition-all flex items-center gap-1">
+                                                <span class="material-symbols-outlined text-base">chevron_left</span>
+                                            </a>
                                         @endif
-                                    @endfor
 
-                                    @if ($end < $last)
-                                        @if ($end < $last - 1)
-                                            <span class="text-charcoal/30 text-xs px-1">…</span>
+                                        {{-- Page numbers --}}
+                                        @php
+                                            $current = $expenses->currentPage();
+                                            $last = $expenses->lastPage();
+                                            $start = max(1, $current - 2);
+                                            $end = min($last, $current + 2);
+                                        @endphp
+
+                                        @if ($start > 1)
+                                            <a href="{{ $expenses->url(1) }}" data-expense-page
+                                                class="px-3 py-2 text-xs font-bold rounded-lg bg-white border border-gray-200 text-deep-green hover:bg-deep-green hover:text-white transition-all min-w-[36px] text-center">1</a>
+                                            @if ($start > 2)
+                                                <span class="text-charcoal/30 text-xs px-1">…</span>
+                                            @endif
                                         @endif
-                                        <a href="{{ $expenses->url($last) }}" data-expense-page
-                                            class="px-3 py-2 text-xs font-bold rounded-lg bg-white border border-gray-200 text-deep-green hover:bg-deep-green hover:text-white transition-all min-w-[36px] text-center">{{ $last }}</a>
-                                    @endif
 
-                                    {{-- Next --}}
-                                    @if ($expenses->hasMorePages())
-                                        <a href="{{ $expenses->nextPageUrl() }}" data-expense-page
-                                            class="px-3 py-2 text-xs font-bold rounded-lg bg-white border border-gray-200 text-deep-green hover:bg-deep-green hover:text-white hover:border-deep-green transition-all flex items-center gap-1">
-                                            <span class="material-symbols-outlined text-base">chevron_right</span>
-                                        </a>
-                                    @else
-                                        <span class="px-3 py-2 text-xs font-bold rounded-lg bg-gray-100 text-charcoal/30 cursor-not-allowed flex items-center gap-1">
-                                            <span class="material-symbols-outlined text-base">chevron_right</span>
-                                        </span>
-                                    @endif
-                                </nav>
+                                        @for ($i = $start; $i <= $end; $i++)
+                                            @if ($i === $current)
+                                                <span
+                                                    class="px-3 py-2 text-xs font-bold rounded-lg bg-deep-green text-white border border-deep-green min-w-[36px] text-center">{{ $i }}</span>
+                                            @else
+                                                <a href="{{ $expenses->url($i) }}" data-expense-page
+                                                    class="px-3 py-2 text-xs font-bold rounded-lg bg-white border border-gray-200 text-deep-green hover:bg-deep-green hover:text-white transition-all min-w-[36px] text-center">{{ $i }}</a>
+                                            @endif
+                                        @endfor
+
+                                        @if ($end < $last)
+                                            @if ($end < $last - 1)
+                                                <span class="text-charcoal/30 text-xs px-1">…</span>
+                                            @endif
+                                            <a href="{{ $expenses->url($last) }}" data-expense-page
+                                                class="px-3 py-2 text-xs font-bold rounded-lg bg-white border border-gray-200 text-deep-green hover:bg-deep-green hover:text-white transition-all min-w-[36px] text-center">{{ $last }}</a>
+                                        @endif
+
+                                        {{-- Next --}}
+                                        @if ($expenses->hasMorePages())
+                                            <a href="{{ $expenses->nextPageUrl() }}" data-expense-page
+                                                class="px-3 py-2 text-xs font-bold rounded-lg bg-white border border-gray-200 text-deep-green hover:bg-deep-green hover:text-white hover:border-deep-green transition-all flex items-center gap-1">
+                                                <span class="material-symbols-outlined text-base">chevron_right</span>
+                                            </a>
+                                        @else
+                                            <span
+                                                class="px-3 py-2 text-xs font-bold rounded-lg bg-gray-100 text-charcoal/30 cursor-not-allowed flex items-center gap-1">
+                                                <span class="material-symbols-outlined text-base">chevron_right</span>
+                                            </span>
+                                        @endif
+                                    </nav>
+                                </div>
+                            @endif
+                        @else
+                            <div
+                                class="text-center py-12 sm:py-16 text-charcoal/40 rounded-2xl border border-dashed border-gray-200">
+                                <span class="material-symbols-outlined text-4xl sm:text-5xl mb-3">receipt_long</span>
+                                <p class="font-medium text-sm">{{ __('messages.expense_no_data') }}</p>
                             </div>
                         @endif
-                    @else
-                        <div class="text-center py-12 sm:py-16 text-charcoal/40 rounded-2xl border border-dashed border-gray-200">
-                            <span class="material-symbols-outlined text-4xl sm:text-5xl mb-3">receipt_long</span>
-                            <p class="font-medium text-sm">{{ __('messages.expense_no_data') }}</p>
-                        </div>
-                    @endif
                     </div><!-- /#expenses-table-container -->
                 </div>
             </div>
@@ -698,18 +760,9 @@
                     $analysisYear = request('analysis_year', date('Y'));
 
                     // Build list of available years from events AND expenses
-                    $eventYears = \App\Models\Event::active()
-                        ->selectRaw('YEAR(date) as yr')
-                        ->distinct()
-                        ->pluck('yr');
-                    $expenseYears = \App\Models\Expense::selectRaw('YEAR(date) as yr')
-                        ->distinct()
-                        ->pluck('yr');
-                    $availableYears = $eventYears->merge($expenseYears)
-                        ->unique()
-                        ->sort()
-                        ->reverse()
-                        ->values();
+                    $eventYears = \App\Models\Event::active()->selectRaw('YEAR(date) as yr')->distinct()->pluck('yr');
+                    $expenseYears = \App\Models\Expense::selectRaw('YEAR(date) as yr')->distinct()->pluck('yr');
+                    $availableYears = $eventYears->merge($expenseYears)->unique()->sort()->reverse()->values();
 
                     // If the requested year has no data, fall back to the latest available year
                     if ($availableYears->isNotEmpty() && !$availableYears->contains($analysisYear)) {
@@ -752,8 +805,10 @@
                         {{ __('messages.progress_visualized') }}</h4>
                     <h2 class="text-4xl md:text-5xl font-serif text-deep-green">Monthly Analysis {{ $analysisYear }}</h2>
                     <p class="text-charcoal/60 max-w-2xl mx-auto">
-                        Tracking {{ number_format($monthlyStats->sum('total_trees')) }} trees planted across {{ $monthlyStats->count() }}
-                        months in {{ $analysisYear }} with {{ number_format($monthlyStats->sum('total_volunteers')) }} volunteers
+                        Tracking {{ number_format($monthlyStats->sum('total_trees')) }} trees planted across
+                        {{ $monthlyStats->count() }}
+                        months in {{ $analysisYear }} with {{ number_format($monthlyStats->sum('total_volunteers')) }}
+                        volunteers
                     </p>
 
                     <!-- Year pills -->
@@ -761,7 +816,7 @@
                         <div class="flex items-center justify-center gap-2 pt-4">
                             @foreach ($availableYears as $yr)
                                 <a href="{{ request()->fullUrlWithQuery(['analysis_year' => $yr]) }}#analysis-section"
-                                    class="px-4 py-2 text-xs font-bold rounded-full border transition-all {{ (string)$yr === (string)$analysisYear ? 'bg-deep-green text-white border-deep-green shadow-md' : 'bg-white text-charcoal border-gray-200 hover:border-deep-green/40' }}">
+                                    class="px-4 py-2 text-xs font-bold rounded-full border transition-all {{ (string) $yr === (string) $analysisYear ? 'bg-deep-green text-white border-deep-green shadow-md' : 'bg-white text-charcoal border-gray-200 hover:border-deep-green/40' }}">
                                     {{ $yr }}
                                 </a>
                             @endforeach
@@ -848,21 +903,23 @@
                                     <svg class="w-full h-full transform -rotate-90" viewBox="0 0 36 36">
                                         @foreach ($expenseByType as $item)
                                             @php
-                                                $pct = $expenseGrandTotal > 0 ? ($item->total / $expenseGrandTotal) * 100 : 0;
+                                                $pct =
+                                                    $expenseGrandTotal > 0
+                                                        ? ($item->total / $expenseGrandTotal) * 100
+                                                        : 0;
                                                 $dashArray = $pct . ' ' . (100 - $pct);
                                                 $color = $typeColors[$item->expense_type] ?? '#6b7280';
                                             @endphp
                                             <circle cx="18" cy="18" fill="transparent" r="15.9"
-                                                stroke="{{ $color }}"
-                                                stroke-dasharray="{{ $dashArray }}"
-                                                stroke-dashoffset="-{{ $dashOffset }}"
-                                                stroke-width="3.5"
+                                                stroke="{{ $color }}" stroke-dasharray="{{ $dashArray }}"
+                                                stroke-dashoffset="-{{ $dashOffset }}" stroke-width="3.5"
                                                 stroke-linecap="round"></circle>
                                             @php $dashOffset += $pct; @endphp
                                         @endforeach
                                     </svg>
                                     <div class="absolute inset-0 flex flex-col items-center justify-center">
-                                        <span class="text-deep-green text-lg font-black tabular-nums leading-none">{{ number_format($expenseGrandTotal, 0) }}</span>
+                                        <span
+                                            class="text-deep-green text-lg font-black tabular-nums leading-none">{{ number_format($expenseGrandTotal, 0) }}</span>
                                         <span class="text-charcoal/40 text-[9px] font-bold mt-0.5">AFN</span>
                                     </div>
                                 </div>
@@ -871,28 +928,39 @@
                                 <div class="space-y-2.5 flex-1 w-full">
                                     @foreach ($expenseByType as $item)
                                         @php
-                                            $pct = $expenseGrandTotal > 0 ? round(($item->total / $expenseGrandTotal) * 100, 1) : 0;
+                                            $pct =
+                                                $expenseGrandTotal > 0
+                                                    ? round(($item->total / $expenseGrandTotal) * 100, 1)
+                                                    : 0;
                                             $color = $typeColors[$item->expense_type] ?? '#6b7280';
                                         @endphp
                                         <div class="flex items-center gap-3">
-                                            <div class="w-2.5 h-2.5 rounded-full flex-shrink-0" style="background: {{ $color }};"></div>
+                                            <div class="w-2.5 h-2.5 rounded-full flex-shrink-0"
+                                                style="background: {{ $color }};"></div>
                                             <div class="flex-1 min-w-0">
                                                 <div class="flex items-center justify-between gap-2">
-                                                    <span class="text-[11px] font-bold text-charcoal/80 truncate">{{ $item->expense_type }}</span>
-                                                    <span class="text-[11px] font-extrabold text-deep-green tabular-nums whitespace-nowrap">{{ number_format($item->total, 0) }} AFN</span>
+                                                    <span
+                                                        class="text-[11px] font-bold text-charcoal/80 truncate">{{ $item->expense_type }}</span>
+                                                    <span
+                                                        class="text-[11px] font-extrabold text-deep-green tabular-nums whitespace-nowrap">{{ number_format($item->total, 0) }}
+                                                        AFN</span>
                                                 </div>
                                                 <!-- Progress bar -->
                                                 <div class="mt-1 h-1 w-full bg-gray-100 rounded-full overflow-hidden">
-                                                    <div class="h-full rounded-full" style="width: {{ $pct }}%; background: {{ $color }};"></div>
+                                                    <div class="h-full rounded-full"
+                                                        style="width: {{ $pct }}%; background: {{ $color }};">
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <span class="text-[10px] font-bold text-charcoal/40 tabular-nums w-10 text-right flex-shrink-0">{{ $pct }}%</span>
+                                            <span
+                                                class="text-[10px] font-bold text-charcoal/40 tabular-nums w-10 text-right flex-shrink-0">{{ $pct }}%</span>
                                         </div>
                                     @endforeach
                                 </div>
                             </div>
                             <p class="text-charcoal/60 text-sm font-light italic leading-relaxed">
-                                Total expenses for {{ $analysisYear }}: {{ number_format($expenseGrandTotal, 0) }} AFN across {{ $expenseByType->count() }} categories.
+                                Total expenses for {{ $analysisYear }}: {{ number_format($expenseGrandTotal, 0) }} AFN
+                                across {{ $expenseByType->count() }} categories.
                             </p>
                         @else
                             <div class="text-center py-12 text-charcoal/40">
@@ -1102,40 +1170,40 @@
             container.style.pointerEvents = 'none';
 
             fetch(url, {
-                headers: {
-                    'X-Requested-With': 'XMLHttpRequest',
-                    'Accept': 'text/html'
-                }
-            })
-            .then(r => r.text())
-            .then(html => {
-                const tempDiv = document.createElement('div');
-                tempDiv.innerHTML = html;
-                const newContent = tempDiv.querySelector('#expenses-table-container');
-                if (newContent) {
-                    container.innerHTML = newContent.innerHTML;
-                    // Re-bind handlers on the new pagination links
-                    bindExpensePagination();
-                }
-                container.style.opacity = '1';
-                container.style.pointerEvents = '';
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest',
+                        'Accept': 'text/html'
+                    }
+                })
+                .then(r => r.text())
+                .then(html => {
+                    const tempDiv = document.createElement('div');
+                    tempDiv.innerHTML = html;
+                    const newContent = tempDiv.querySelector('#expenses-table-container');
+                    if (newContent) {
+                        container.innerHTML = newContent.innerHTML;
+                        // Re-bind handlers on the new pagination links
+                        bindExpensePagination();
+                    }
+                    container.style.opacity = '1';
+                    container.style.pointerEvents = '';
 
-                // Update browser URL without full reload
-                try {
-                    window.history.replaceState({}, '', url + '#expenses-section');
-                } catch (e) {}
+                    // Update browser URL without full reload
+                    try {
+                        window.history.replaceState({}, '', url + '#expenses-section');
+                    } catch (e) {}
 
-                // Smooth scroll to keep the table in view
-                document.getElementById('expenses-section')?.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
+                    // Smooth scroll to keep the table in view
+                    document.getElementById('expenses-section')?.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                })
+                .catch(err => {
+                    console.error('Error loading expense page:', err);
+                    container.style.opacity = '1';
+                    container.style.pointerEvents = '';
                 });
-            })
-            .catch(err => {
-                console.error('Error loading expense page:', err);
-                container.style.opacity = '1';
-                container.style.pointerEvents = '';
-            });
         }
 
         function bindExpensePagination() {

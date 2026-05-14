@@ -8,6 +8,7 @@ class InvolvementRequest extends Model
 {
     protected $fillable = [
         'type',
+        'upcoming_event_id',
         'name',
         'email',
         'phone',
@@ -20,6 +21,11 @@ class InvolvementRequest extends Model
     protected $casts = [
         'reviewed_at' => 'datetime',
     ];
+
+    public function upcomingEvent()
+    {
+        return $this->belongsTo(UpcomingEvent::class);
+    }
 
     public const TYPES = [
         'volunteer' => 'Volunteer',
