@@ -124,6 +124,18 @@
                         <div class="absolute -bottom-6 left-1/2 -translate-x-1/2 w-[80%] h-6 bg-deep-green/20 blur-xl rounded-full"></div>
 
                         <!-- Tilted, gently swaying book -->
+                        @php
+                            // Use the real book cover image if available, otherwise show a styled mock
+                            $coverExtensions = ['jpg', 'jpeg', 'png', 'webp'];
+                            $realCover = null;
+                            foreach ($coverExtensions as $ext) {
+                                if (file_exists(public_path('storybook-cover.' . $ext))) {
+                                    $realCover = 'storybook-cover.' . $ext;
+                                    break;
+                                }
+                            }
+                        @endphp
+
                         <div class="relative" style="animation: gentleSway 6s ease-in-out infinite; --rot: -4deg;">
                             <!-- Page thickness -->
                             <div class="absolute top-2 -right-2 bottom-2 w-3 bg-gradient-to-b from-gray-100 via-white to-gray-300 rounded-r-sm shadow-md"></div>
@@ -131,29 +143,44 @@
 
                             <!-- Cover -->
                             <div class="relative aspect-[3/4] w-full overflow-hidden rounded-sm shadow-[0_40px_80px_rgba(6,46,34,0.35)]">
-                                <div class="absolute inset-0 bg-gradient-to-br from-deep-green via-deep-green/95 to-[#0a3d2c]"></div>
-                                <!-- Decorative cover frame -->
-                                <div class="absolute inset-4 border border-gold-accent/40 rounded-sm pointer-events-none"></div>
-                                <div class="absolute inset-6 border border-gold-accent/20 rounded-sm pointer-events-none"></div>
-                                <!-- Cover content -->
-                                <div class="absolute inset-0 flex flex-col items-center justify-between p-10 text-center">
-                                    <div>
-                                        <p class="font-handwriting text-vibrant-lime text-xl tracking-wide mb-1">~ a tale ~</p>
-                                        <p class="text-gold-accent text-[10px] font-bold tracking-[0.4em] uppercase">{{ __('messages.baren_cover_subtitle') }}</p>
+
+                                @if ($realCover)
+                                    {{-- Real book cover image --}}
+                                    <img src="{{ asset($realCover) }}"
+                                        alt="{{ __('messages.baren_cover_alt') }}"
+                                        class="absolute inset-0 w-full h-full object-cover">
+                                @else
+                                    {{-- Fallback styled mock cover (yellow title in the spirit of the real book) --}}
+                                    <div class="absolute inset-0 bg-gradient-to-b from-[#7fb8d4] via-[#a7c98b] to-[#5a8c4a]"></div>
+                                    {{-- Mountain silhouettes --}}
+                                    <svg class="absolute bottom-1/3 left-0 right-0 w-full" viewBox="0 0 200 60" preserveAspectRatio="none">
+                                        <path d="M0,60 L0,40 L25,15 L40,35 L60,10 L80,30 L100,20 L120,40 L145,15 L170,35 L200,25 L200,60 Z" fill="#6b7e6c" opacity="0.8"/>
+                                        <path d="M0,60 L0,50 L30,30 L50,45 L75,25 L100,40 L130,30 L160,45 L185,35 L200,45 L200,60 Z" fill="#516554" opacity="0.7"/>
+                                    </svg>
+                                    {{-- Grass --}}
+                                    <div class="absolute bottom-0 left-0 right-0 h-1/3 bg-gradient-to-t from-[#3d6b3b] to-transparent"></div>
+                                    {{-- Brand badge top-left --}}
+                                    <div class="absolute top-4 left-4 bg-white/90 rounded-md px-2 py-1.5 shadow-md flex items-center gap-1.5">
+                                        <span class="material-symbols-outlined text-deep-green" style="font-size: 1.25rem;">park</span>
+                                        <span class="text-[8px] font-bold leading-tight text-deep-green">Every Tree<br>for a Hope</span>
                                     </div>
-                                    <div class="flex flex-col items-center gap-4">
-                                        <span class="material-symbols-outlined text-vibrant-lime" style="font-size: 5rem;">park</span>
-                                        <h2 class="font-serif text-white text-3xl md:text-4xl font-bold leading-tight">
-                                            {{ __('messages.baren_cover_title_l1') }}<br>
-                                            <span class="italic">{{ __('messages.baren_cover_title_l2') }}</span>
-                                        </h2>
+                                    {{-- Cover content --}}
+                                    <div class="absolute inset-0 flex flex-col items-center justify-between p-6 text-center">
+                                        <div class="pt-8">
+                                            <h2 class="font-serif text-7xl md:text-[5.5rem] font-black leading-none drop-shadow-2xl" style="color: #f5d24a; text-shadow: 2px 3px 0 rgba(0,0,0,0.25);">
+                                                {{ __('messages.baren_cover_title_l1') }}
+                                            </h2>
+                                            <p class="font-serif text-white text-lg md:text-xl font-bold mt-1 drop-shadow-lg">
+                                                {{ __('messages.baren_cover_title_l2') }}
+                                            </p>
+                                        </div>
+                                        <div>
+                                            <p class="text-white/90 text-[10px] font-bold tracking-[0.3em] uppercase drop-shadow">{{ __('messages.baren_cover_byline') }}</p>
+                                            <p class="text-white text-sm font-bold tracking-wider mt-1 drop-shadow">{{ __('messages.baren_makers_writer_name') }}</p>
+                                        </div>
                                     </div>
-                                    <div>
-                                        <div class="w-12 h-[1px] bg-gold-accent/60 mx-auto mb-2"></div>
-                                        <p class="text-white/70 text-[10px] font-bold tracking-[0.3em] uppercase">{{ __('messages.baren_cover_byline') }}</p>
-                                        <p class="text-gold-accent text-sm font-bold tracking-wider mt-1">{{ __('messages.baren_makers_writer_name') }}</p>
-                                    </div>
-                                </div>
+                                @endif
+
                                 <!-- Bookmark ribbon -->
                                 <div class="absolute top-0 right-10 w-3 h-16 bg-gold-accent shadow-md"
                                     style="clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 80%, 0 100%);"></div>
