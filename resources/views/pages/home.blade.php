@@ -134,9 +134,9 @@
 
                             <!-- Photo caption (bottom) -->
                             <!-- <div class="absolute bottom-0 left-0 right-0 p-5 text-white">
-                                            <p class="text-[10px] font-bold uppercase tracking-[0.25em] text-vibrant-lime mb-1">Photograph No. 01</p>
-                                            <p class="text-sm font-medium">The team that planted hope into the hills of Haji Nabi</p>
-                                        </div> -->
+                                                <p class="text-[10px] font-bold uppercase tracking-[0.25em] text-vibrant-lime mb-1">Photograph No. 01</p>
+                                                <p class="text-sm font-medium">The team that planted hope into the hills of Haji Nabi</p>
+                                            </div> -->
                         </div>
 
                         <!-- Floating stat badge — top-right -->
@@ -353,7 +353,7 @@
 
     @include('partials.little-guardians')
 
-    <section class="relative bg-white pb-18 pt-28 px-6 botanical-bg overflow-hidden" id="media-stories">
+    {{-- <section class="relative bg-white pb-18 pt-28 px-6 botanical-bg overflow-hidden" id="media-stories">
         <div class="absolute top-0 right-0 w-96 h-96 opacity-[0.03] pointer-events-none">
             <span class="material-symbols-outlined text-[300px] text-deep-green">potted_plant</span>
         </div>
@@ -457,10 +457,10 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
 
     <!-- Video Modal -->
-    <div id="videoModal"
+    {{-- <div id="videoModal"
         class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
         <div id="videoModalInner" class="relative w-full max-w-4xl transition-all duration-300">
             <button id="closeModal" class="absolute -top-12 right-0 text-white hover:text-gray-300 transition-colors">
@@ -471,7 +471,7 @@
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
             </div>
         </div>
-    </div>
+    </div> --}}
 
     <main class="flex-grow">
         <section class="relative bg-white py-32 md:py-48 px-6 overflow-hidden" id="mission-vision">
