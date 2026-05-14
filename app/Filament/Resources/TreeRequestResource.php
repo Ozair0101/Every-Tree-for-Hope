@@ -18,6 +18,10 @@ class TreeRequestResource extends Resource
 {
     protected static ?string $model = TreeRequest::class;
 
+    // COMMENTED OUT: Tree Request resource navigation link temporarily hidden.
+    // Set to `true` (or remove this line) to re-enable the admin sidebar entry.
+    protected static bool $shouldRegisterNavigation = false;
+
     protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-map-pin';
 
     protected static ?string $navigationLabel = 'Tree Requests';

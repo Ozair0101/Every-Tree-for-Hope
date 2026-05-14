@@ -492,6 +492,7 @@
                                     </button>
                                 </form>
                             </div>
+                            @endif {{-- END COMMENTED OUT: tree panel --}}
 
                             <div class="involve-tab-panel hidden" data-panel="message">
                                 <form action="{{ route('contact.submit') }}" method="POST" class="space-y-6">
@@ -567,24 +568,26 @@
                                     @json(__('messages.sidebar_sponsor_item_3')),
                                 ],
                             },
-                            collaborate: {
-                                title: @json(__('messages.sidebar_collaborate_title')),
-                                text: @json(__('messages.sidebar_collaborate_text')),
-                                items: [
-                                    @json(__('messages.sidebar_collaborate_item_1')),
-                                    @json(__('messages.sidebar_collaborate_item_2')),
-                                    @json(__('messages.sidebar_collaborate_item_3')),
-                                ],
-                            },
-                            tree: {
-                                title: @json(__('messages.sidebar_tree_title')),
-                                text: @json(__('messages.sidebar_tree_text')),
-                                items: [
-                                    @json(__('messages.sidebar_tree_item_1')),
-                                    @json(__('messages.sidebar_tree_item_2')),
-                                    @json(__('messages.sidebar_tree_item_3')),
-                                ],
-                            },
+                            // COMMENTED OUT: 'collaborate' tab/copy temporarily disabled.
+                            // collaborate: {
+                            //     title: @json(__('messages.sidebar_collaborate_title')),
+                            //     text: @json(__('messages.sidebar_collaborate_text')),
+                            //     items: [
+                            //         @json(__('messages.sidebar_collaborate_item_1')),
+                            //         @json(__('messages.sidebar_collaborate_item_2')),
+                            //         @json(__('messages.sidebar_collaborate_item_3')),
+                            //     ],
+                            // },
+                            // COMMENTED OUT: 'tree' (Tree Request) tab/copy temporarily disabled.
+                            // tree: {
+                            //     title: @json(__('messages.sidebar_tree_title')),
+                            //     text: @json(__('messages.sidebar_tree_text')),
+                            //     items: [
+                            //         @json(__('messages.sidebar_tree_item_1')),
+                            //         @json(__('messages.sidebar_tree_item_2')),
+                            //         @json(__('messages.sidebar_tree_item_3')),
+                            //     ],
+                            // },
                             message: {
                                 title: @json(__('messages.sidebar_message_title')),
                                 text: @json(__('messages.sidebar_message_text')),
@@ -689,7 +692,8 @@
 
                         // Check for stored tab from home page
                         const storedTab = sessionStorage.getItem('openInvolvementTab');
-                        const validTabs = ['volunteer', 'sponsor', 'collaborate', 'tree', 'donate', 'message'];
+                        // 'collaborate' and 'tree' are commented out — only the 4 active tabs.
+                        const validTabs = ['donate', 'sponsor', 'message', 'volunteer'];
                         const defaultTab = buttons[0]?.getAttribute('data-tab') || 'volunteer';
                         if (storedTab && validTabs.includes(storedTab)) {
                             setTab(storedTab, false);
