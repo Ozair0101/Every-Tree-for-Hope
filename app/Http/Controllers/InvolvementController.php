@@ -17,13 +17,32 @@ class InvolvementController extends Controller
             'email' => 'required|email|max:255',
             'phone' => 'required|string|max:50',
             'message' => 'nullable|string|max:3000',
+            // Volunteer-specific fields (required only for the volunteer form)
+            'experience' => 'nullable|required_if:type,volunteer|string|max:3000',
+            'province' => 'nullable|required_if:type,volunteer|string|max:120',
+            'home_address' => 'nullable|required_if:type,volunteer|string|max:255',
+            'leisure_time' => 'nullable|required_if:type,volunteer|string|max:255',
+            'current_job' => 'nullable|required_if:type,volunteer|string|max:255',
+            'cv' => 'nullable|required_if:type,volunteer|file|mimes:pdf|max:5120',
         ], [], [
             'type' => __('messages.involvement_type'),
             'name' => __('messages.your_name'),
             'email' => __('messages.email_address'),
             'phone' => __('messages.phone_number'),
             'message' => __('messages.message'),
+            'experience' => __('messages.vol_experience'),
+            'province' => __('messages.vol_province'),
+            'home_address' => __('messages.vol_home_address'),
+            'leisure_time' => __('messages.vol_leisure_time'),
+            'current_job' => __('messages.vol_current_job'),
+            'cv' => __('messages.vol_cv'),
         ]);
+
+        // Store the uploaded CV (PDF) on the public disk and keep the path.
+        if ($request->hasFile('cv')) {
+            $validated['cv_path'] = $request->file('cv')->store('volunteer-cvs', 'public');
+        }
+        unset($validated['cv']); // not a column — only cv_path is persisted
 
         // If the registration is tied to a specific upcoming event, prepend event details
         // to the message so admins see the context at a glance.
