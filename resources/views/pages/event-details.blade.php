@@ -146,6 +146,69 @@
                             </div>
                         </div>
                     @endif
+
+                    {{-- Volunteer names --}}
+                    @php
+                        $volunteerNames = collect(is_array($event->volunteer_names) ? $event->volunteer_names : [])
+                            ->map(fn ($v) => is_array($v) ? trim($v['name'] ?? '') : trim((string) $v))
+                            ->filter()
+                            ->values();
+                    @endphp
+                    @if ($volunteerNames->count() > 0)
+                        <div>
+                            <h3 class="text-2xl font-serif text-deep-green mb-6">{{ __('messages.event_volunteer_names') }}</h3>
+                            <div class="flex flex-wrap gap-3">
+                                @foreach ($volunteerNames as $vName)
+                                    <span class="inline-flex items-center gap-2 px-4 py-2 bg-vibrant-lime/10 text-deep-green rounded-full text-sm font-medium border border-vibrant-lime/25">
+                                        <span class="material-symbols-outlined text-base text-vibrant-lime">volunteer_activism</span>
+                                        {{ $vName }}
+                                    </span>
+                                @endforeach
+                            </div>
+                        </div>
+                    @endif
+
+                    {{-- Location on Google Maps --}}
+                    @php
+                        $mapEmbed = trim((string) ($event->map_embed ?? ''));
+                        $mapSrc = null;
+                        $mapLink = null;
+                        if ($mapEmbed !== '') {
+                            if (stripos($mapEmbed, '<iframe') !== false
+                                && preg_match('/src=["\']([^"\']+)["\']/i', $mapEmbed, $m)) {
+                                $mapSrc = $m[1];
+                            } elseif (preg_match('/^\s*(-?\d{1,3}(?:\.\d+)?)\s*,\s*(-?\d{1,3}(?:\.\d+)?)\s*$/', $mapEmbed, $c)) {
+                                $mapSrc = 'https://maps.google.com/maps?q=' . $c[1] . ',' . $c[2] . '&z=15&output=embed';
+                                $mapLink = 'https://www.google.com/maps?q=' . $c[1] . ',' . $c[2];
+                            } elseif (preg_match('#^https?://#i', $mapEmbed)) {
+                                if (stripos($mapEmbed, '/maps/embed') !== false) {
+                                    $mapSrc = $mapEmbed;
+                                } else {
+                                    $mapLink = $mapEmbed;
+                                }
+                            }
+                        }
+                    @endphp
+                    @if ($mapSrc || $mapLink)
+                        <div>
+                            <h3 class="text-2xl font-serif text-deep-green mb-6">{{ __('messages.event_location_map') }}</h3>
+                            @if ($mapSrc)
+                                <div class="relative w-full overflow-hidden rounded-2xl shadow-lg border border-deep-green/10"
+                                    style="aspect-ratio: 16 / 9;">
+                                    <iframe src="{{ $mapSrc }}" class="absolute inset-0 w-full h-full" style="border:0;"
+                                        allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+                                        title="{{ $event->title }} location"></iframe>
+                                </div>
+                            @endif
+                            @if ($mapLink)
+                                <a href="{{ $mapLink }}" target="_blank" rel="noopener noreferrer"
+                                    class="inline-flex items-center gap-2 mt-4 px-6 py-3 rounded-full bg-deep-green text-white text-sm font-bold hover:bg-deep-green/90 transition-all shadow-md">
+                                    <span class="material-symbols-outlined text-base">location_on</span>
+                                    {{ __('messages.event_open_in_maps') }}
+                                </a>
+                            @endif
+                        </div>
+                    @endif
                 </div>
 
                 <!-- Sidebar -->
