@@ -379,6 +379,20 @@ return [
     'sponsor_message_placeholder' => 'Tell us what you want to sponsor (trees, event, tools) and your budget range…',
     'collaborate_message_placeholder' => 'Tell us about your organization, idea, and preferred timeline…',
 
+    // Volunteer extra fields
+    'vol_experience' => 'Experience',
+    'vol_experience_placeholder' => 'Any volunteering, planting, or relevant experience…',
+    'vol_province' => 'Province',
+    'vol_province_placeholder' => 'e.g. Kabul',
+    'vol_home_address' => 'Home Address',
+    'vol_home_address_placeholder' => 'Area, district, street…',
+    'vol_leisure_time' => 'Leisure Time',
+    'vol_leisure_time_placeholder' => 'e.g. Weekends, Fridays, evenings',
+    'vol_current_job' => 'Current Job',
+    'vol_current_job_placeholder' => 'e.g. Student, Teacher, Engineer',
+    'vol_cv' => 'Upload CV (PDF)',
+    'vol_cv_hint' => 'PDF only · max 5 MB',
+
     'submit_volunteer' => 'Send Volunteer Request',
     'submit_sponsor' => 'Send Sponsorship Request',
     'submit_collaborate' => 'Send Collaboration Request',

@@ -357,6 +357,20 @@ return [
     'sponsor_message_placeholder' => 'چه چیزی را می‌خواهید اسپانسر کنید و حدود بودجه را بنویسید…',
     'collaborate_message_placeholder' => 'دربارهٔ نهاد/ایده و زمان‌بندی پیشنهادی بنویسید…',
 
+    // فیلدهای اضافی داوطلب
+    'vol_experience' => 'تجربه',
+    'vol_experience_placeholder' => 'هرگونه تجربهٔ داوطلبی، نهال‌کاری یا مرتبط…',
+    'vol_province' => 'ولایت',
+    'vol_province_placeholder' => 'مثلاً کابل',
+    'vol_home_address' => 'آدرس خانه',
+    'vol_home_address_placeholder' => 'ساحه، ناحیه، سرک…',
+    'vol_leisure_time' => 'وقت فراغت',
+    'vol_leisure_time_placeholder' => 'مثلاً آخر هفته، جمعه‌ها، شام‌ها',
+    'vol_current_job' => 'شغل فعلی',
+    'vol_current_job_placeholder' => 'مثلاً محصل، معلم، انجنیر',
+    'vol_cv' => 'بارگذاری سی‌وی (PDF)',
+    'vol_cv_hint' => 'فقط PDF · حداکثر ۵ مگابایت',
+
     'submit_volunteer' => 'ارسال درخواست داوطلبی',
     'submit_sponsor' => 'ارسال درخواست اسپانسری',
     'submit_collaborate' => 'ارسال درخواست همکاری',

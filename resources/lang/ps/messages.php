@@ -356,6 +356,20 @@ return [
     'sponsor_message_placeholder' => 'څه شی سپانسر کوئ او د بودیجې حد ولیکئ…',
     'collaborate_message_placeholder' => 'د خپلې ادارې/ایډیا او مهالویش په اړه ولیکئ…',
 
+    // د رضاکار اضافي ساحې
+    'vol_experience' => 'تجربه',
+    'vol_experience_placeholder' => 'د رضاکارۍ، ونه‌کارلو یا اړوند تجربه…',
+    'vol_province' => 'ولایت',
+    'vol_province_placeholder' => 'لکه کابل',
+    'vol_home_address' => 'د کور پته',
+    'vol_home_address_placeholder' => 'سیمه، ناحیه، سړک…',
+    'vol_leisure_time' => 'د فراغت وخت',
+    'vol_leisure_time_placeholder' => 'لکه اونۍ پای، جمعې، ماښامونه',
+    'vol_current_job' => 'اوسنۍ دنده',
+    'vol_current_job_placeholder' => 'لکه زده‌کوونکی، ښوونکی، انجنیر',
+    'vol_cv' => 'سي‌وي پورته کول (PDF)',
+    'vol_cv_hint' => 'یوازې PDF · تر ۵ MB پورې',
+
     'submit_volunteer' => 'د داوطلبۍ غوښتنه ولېږئ',
     'submit_sponsor' => 'د سپانسرۍ غوښتنه ولېږئ',
     'submit_collaborate' => 'د همکارۍ غوښتنه ولېږئ',

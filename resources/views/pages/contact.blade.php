@@ -219,9 +219,11 @@
                                         </ul>
                                     </div>
                                 @endif
-                                <form action="{{ route('involvement.store') }}" method="POST" class="space-y-6">
+                                <form action="{{ route('involvement.store') }}" method="POST"
+                                    enctype="multipart/form-data" class="space-y-6">
                                     @csrf
                                     <input type="hidden" name="type" value="volunteer" />
+                                    @php $isVol = old('type') === 'volunteer'; @endphp
                                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                                         <div>
                                             <label
@@ -230,7 +232,7 @@
                                                 class="w-full bg-transparent border-0 border-b-2 border-charcoal/15 rounded-none px-0 py-3 focus:border-deep-green focus:ring-0 focus:outline-none transition-colors text-charcoal placeholder:text-charcoal/40 placeholder:font-light"
                                                 placeholder="{{ __('messages.your_name') }}" type="text"
                                                 name="name"
-                                                value="{{ old('type') === 'volunteer' ? old('name') : '' }}" required />
+                                                value="{{ $isVol ? old('name') : '' }}" required />
                                         </div>
                                         <div>
                                             <label
@@ -239,24 +241,74 @@
                                                 class="w-full bg-transparent border-0 border-b-2 border-charcoal/15 rounded-none px-0 py-3 focus:border-deep-green focus:ring-0 focus:outline-none transition-colors text-charcoal placeholder:text-charcoal/40 placeholder:font-light"
                                                 placeholder="{{ __('messages.email_address') }}" type="email"
                                                 name="email"
-                                                value="{{ old('type') === 'volunteer' ? old('email') : '' }}" required />
+                                                value="{{ $isVol ? old('email') : '' }}" required />
+                                        </div>
+                                    </div>
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                        <div>
+                                            <label
+                                                class="block text-[11px] font-bold uppercase tracking-widest text-charcoal/60 mb-2">{{ __('messages.phone_number') }}</label>
+                                            <input
+                                                class="w-full bg-transparent border-0 border-b-2 border-charcoal/15 rounded-none px-0 py-3 focus:border-deep-green focus:ring-0 focus:outline-none transition-colors text-charcoal placeholder:text-charcoal/40 placeholder:font-light"
+                                                placeholder="{{ __('messages.phone_placeholder') }}" type="text"
+                                                name="phone" value="{{ $isVol ? old('phone') : '' }}" required />
+                                        </div>
+                                        <div>
+                                            <label
+                                                class="block text-[11px] font-bold uppercase tracking-widest text-charcoal/60 mb-2">{{ __('messages.vol_current_job') }}</label>
+                                            <input
+                                                class="w-full bg-transparent border-0 border-b-2 border-charcoal/15 rounded-none px-0 py-3 focus:border-deep-green focus:ring-0 focus:outline-none transition-colors text-charcoal placeholder:text-charcoal/40 placeholder:font-light"
+                                                placeholder="{{ __('messages.vol_current_job_placeholder') }}" type="text"
+                                                name="current_job" value="{{ $isVol ? old('current_job') : '' }}" required />
+                                        </div>
+                                    </div>
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                        <div>
+                                            <label
+                                                class="block text-[11px] font-bold uppercase tracking-widest text-charcoal/60 mb-2">{{ __('messages.vol_province') }}</label>
+                                            <input
+                                                class="w-full bg-transparent border-0 border-b-2 border-charcoal/15 rounded-none px-0 py-3 focus:border-deep-green focus:ring-0 focus:outline-none transition-colors text-charcoal placeholder:text-charcoal/40 placeholder:font-light"
+                                                placeholder="{{ __('messages.vol_province_placeholder') }}" type="text"
+                                                name="province" value="{{ $isVol ? old('province') : '' }}" required />
+                                        </div>
+                                        <div>
+                                            <label
+                                                class="block text-[11px] font-bold uppercase tracking-widest text-charcoal/60 mb-2">{{ __('messages.vol_leisure_time') }}</label>
+                                            <input
+                                                class="w-full bg-transparent border-0 border-b-2 border-charcoal/15 rounded-none px-0 py-3 focus:border-deep-green focus:ring-0 focus:outline-none transition-colors text-charcoal placeholder:text-charcoal/40 placeholder:font-light"
+                                                placeholder="{{ __('messages.vol_leisure_time_placeholder') }}" type="text"
+                                                name="leisure_time" value="{{ $isVol ? old('leisure_time') : '' }}" required />
                                         </div>
                                     </div>
                                     <div>
                                         <label
-                                            class="block text-[11px] font-bold uppercase tracking-widest text-charcoal/60 mb-2">{{ __('messages.phone_number') }}</label>
+                                            class="block text-[11px] font-bold uppercase tracking-widest text-charcoal/60 mb-2">{{ __('messages.vol_home_address') }}</label>
                                         <input
                                             class="w-full bg-transparent border-0 border-b-2 border-charcoal/15 rounded-none px-0 py-3 focus:border-deep-green focus:ring-0 focus:outline-none transition-colors text-charcoal placeholder:text-charcoal/40 placeholder:font-light"
-                                            placeholder="{{ __('messages.phone_placeholder') }}" type="text"
-                                            name="phone" value="{{ old('type') === 'volunteer' ? old('phone') : '' }}"
-                                            required />
+                                            placeholder="{{ __('messages.vol_home_address_placeholder') }}" type="text"
+                                            name="home_address" value="{{ $isVol ? old('home_address') : '' }}" required />
+                                    </div>
+                                    <div>
+                                        <label
+                                            class="block text-[11px] font-bold uppercase tracking-widest text-charcoal/60 mb-2">{{ __('messages.vol_experience') }}</label>
+                                        <textarea
+                                            class="w-full bg-transparent border-0 border-b-2 border-charcoal/15 rounded-none px-0 py-3 focus:border-deep-green focus:ring-0 focus:outline-none transition-colors text-charcoal placeholder:text-charcoal/40 placeholder:font-light resize-none"
+                                            placeholder="{{ __('messages.vol_experience_placeholder') }}" rows="3" name="experience" required>{{ $isVol ? old('experience') : '' }}</textarea>
+                                    </div>
+                                    <div>
+                                        <label
+                                            class="block text-[11px] font-bold uppercase tracking-widest text-charcoal/60 mb-2">{{ __('messages.vol_cv') }}</label>
+                                        <input
+                                            class="block w-full text-sm text-charcoal/70 file:me-4 file:py-3 file:px-5 file:rounded-full file:border-0 file:text-[11px] file:font-bold file:uppercase file:tracking-widest file:bg-deep-green file:text-white hover:file:bg-deep-green/90 file:cursor-pointer cursor-pointer"
+                                            type="file" name="cv" accept="application/pdf" required />
+                                        <p class="text-[11px] text-charcoal/45 mt-2">{{ __('messages.vol_cv_hint') }}</p>
                                     </div>
                                     <div>
                                         <label
                                             class="block text-[11px] font-bold uppercase tracking-widest text-charcoal/60 mb-2">{{ __('messages.message') }}</label>
                                         <textarea
                                             class="w-full bg-transparent border-0 border-b-2 border-charcoal/15 rounded-none px-0 py-3 focus:border-deep-green focus:ring-0 focus:outline-none transition-colors text-charcoal placeholder:text-charcoal/40 placeholder:font-light resize-none"
-                                            placeholder="{{ __('messages.volunteer_message_placeholder') }}" rows="5" name="message" required>{{ old('type') === 'volunteer' ? old('message') : '' }}</textarea>
+                                            placeholder="{{ __('messages.volunteer_message_placeholder') }}" rows="5" name="message" required>{{ $isVol ? old('message') : '' }}</textarea>
                                     </div>
                                     <button
                                         class="group inline-flex items-center gap-2 px-8 py-4 bg-deep-green text-white font-extrabold text-xs tracking-[0.2em] uppercase rounded-full shadow-lg shadow-deep-green/25 hover:bg-deep-green/90 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-deep-green/30 transition-all"

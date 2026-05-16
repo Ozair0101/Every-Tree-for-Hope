@@ -209,31 +209,7 @@
                 </div>
             </div>
         </div>
-        <!-- ===== END Storybook spotlight ===== -->
-
-        <!-- Inspirational counter strip -->
-        <div class="text-center mb-10">
-            <p class="font-handwriting text-2xl md:text-3xl text-charcoal/80 leading-snug">
-                ~ {{ __('messages.guardians_count_intro') }}
-                <span class="text-vibrant-lime font-bold">{{ __('messages.guardians_count_outro') }}</span> ~
-            </p>
-        </div>
-
-        <!-- CTA Buttons -->
-        <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-6">
-            <a href="{{ route('contact') }}#get-involved"
-                class="group inline-flex items-center gap-2 px-7 py-4 bg-deep-green text-white font-extrabold text-sm tracking-wide uppercase rounded-full shadow-lg shadow-deep-green/25 hover:bg-deep-green/90 hover:-translate-y-0.5 transition-all">
-                <span class="material-symbols-outlined text-vibrant-lime text-base">favorite</span>
-                {{ __('messages.guardians_pledge_btn') }}
-                <span
-                    class="material-symbols-outlined text-base group-hover:translate-x-1 transition-transform">arrow_forward</span>
-            </a>
-            <a href="#"
-                class="inline-flex items-center gap-2 px-7 py-4 border-2 border-deep-green text-deep-green font-extrabold text-sm tracking-wide uppercase rounded-full hover:bg-deep-green hover:text-white transition-all">
-                <span class="material-symbols-outlined text-base">download</span>
-                {{ __('messages.guardians_activity_btn') }}
-            </a>
-        </div>
+        <!-- ===== END Storybook spotlight ===== -->    
 
         <!-- Schools micro-link -->
         <div class="text-center">
