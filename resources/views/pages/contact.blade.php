@@ -752,135 +752,132 @@
             <div class="w-24 h-[1px] bg-gold-accent mx-auto mt-8 opacity-40"></div>
         </div>
 
-        <div class="relative grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+        <div class="relative max-w-5xl mx-auto">
+            {{-- Decorative floating leaves --}}
             <span
-                class="material-symbols-outlined absolute -top-12 -left-12 text-sage-green/20 text-7xl floating parallax-leaf">eco</span>
+                class="material-symbols-outlined absolute -top-14 -left-8 md:-left-16 text-sage-green/15 text-7xl floating parallax-leaf select-none pointer-events-none">eco</span>
             <span
-                class="material-symbols-outlined absolute -bottom-12 -right-12 text-gold-accent/20 text-8xl floating parallax-leaf"
+                class="material-symbols-outlined absolute -bottom-14 -right-8 md:-right-16 text-gold-accent/15 text-8xl floating parallax-leaf select-none pointer-events-none"
                 style="animation-delay: 2s;">spa</span>
-            <span
-                class="material-symbols-outlined absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-primary/5 text-[300px] parallax-leaf">potted_plant</span>
 
-            <div
-                class="glass-panel rounded-[2rem] p-10 flex flex-col h-full relative group hover:-translate-y-2 transition-transform duration-500 overflow-hidden">
-                <div class="absolute top-0 right-0 p-6 opacity-10">
-                    <span class="material-symbols-outlined text-6xl text-gold-accent">location_on</span>
-                </div>
-                <div class="mb-8">
-                    <span class="material-symbols-outlined text-gold-accent text-3xl mb-4">distance</span>
-                    <h3 class="font-serif text-2xl font-bold text-deep-green mb-2">{{ __('messages.local_handover') }}
-                    </h3>
-                    <p class="text-sage-green text-xs font-bold uppercase tracking-widest">
-                        {{ __('messages.kabul_afghanistan') }}</p>
-                </div>
-                <div class="gold-line-art mb-8"></div>
-                <div class="space-y-6 flex-grow">
-                    <div>
-                        <p class="text-[10px] text-charcoal/40 font-bold uppercase tracking-widest mb-1">
-                            {{ __('messages.primary_location') }}</p>
-                        <p class="font-serif text-lg text-charcoal/80">Haidari Market</p>
-                        <p class="text-sm text-charcoal/60 italic">District 4, Kabul</p>
-                    </div>
-                    <div>
-                        <p class="text-[10px] text-charcoal/40 font-bold uppercase tracking-widest mb-1">
-                            {{ __('messages.exchange_office') }}</p>
-                        <p class="font-serif text-lg text-charcoal/80">Saray Shazada</p>
-                        <p class="text-sm text-charcoal/60">Main Financial Hub</p>
-                    </div>
-                </div>
-                <div class="mt-10 pt-6 border-t border-charcoal/5">
-                    <button
-                        class="w-full py-3 rounded-full border border-gold-accent/30 text-gold-accent text-sm font-bold hover:bg-gold-accent hover:text-white transition-all flex items-center justify-center gap-2">
-                        <span class="material-symbols-outlined text-lg">map</span>
-                        {{ __('messages.get_directions') }}
-                    </button>
-                </div>
-            </div>
+            {{-- ===== Remittance ticket ===== --}}
+            <div class="relative rounded-[2.5rem] overflow-hidden shadow-[0_30px_70px_rgba(6,46,34,0.18)] grid grid-cols-1 lg:grid-cols-[5fr_7fr]">
 
-            <div
-                class="glass-panel rounded-[2rem] p-10 flex flex-col h-full relative group hover:-translate-y-2 transition-transform duration-500 overflow-hidden border-sage-green/20">
-                <div class="absolute top-0 right-0 p-6 opacity-10">
-                    <span class="material-symbols-outlined text-6xl text-sage-green">account_balance_wallet</span>
-                </div>
-                <div class="mb-8">
-                    <span class="material-symbols-outlined text-sage-green text-3xl mb-4">payments</span>
-                    <h3 class="font-serif text-2xl font-bold text-deep-green mb-2">{{ __('messages.moneygram_wu') }}</h3>
-                    <p class="text-sage-green text-xs font-bold uppercase tracking-widest">
-                        {{ __('messages.global_remittance') }}</p>
-                </div>
-                <div class="gold-line-art mb-8"></div>
-                <div class="space-y-8 flex-grow">
-                    <div>
-                        <p class="text-[10px] text-charcoal/40 font-bold uppercase tracking-widest mb-3">
-                            {{ __('messages.receiver_name') }}</p>
-                        <p class="font-serif text-3xl font-bold text-deep-green leading-tight">
-                            {{ __('messages.mohammad_iqbal_alimyar') }}</p>
-                        <p class="text-xs text-sage-green mt-2 font-medium">{{ __('messages.verify_spelling') }}</p>
+                {{-- ── LEFT: editorial / emotional panel ── --}}
+                <div class="relative bg-deep-green text-white p-8 sm:p-10 md:p-12 flex flex-col justify-between overflow-hidden">
+                    {{-- Texture --}}
+                    <div class="absolute inset-0 opacity-[0.07] pointer-events-none"
+                        style="background-image: radial-gradient(rgba(255,255,255,0.6) 1px, transparent 1px); background-size: 16px 16px;"></div>
+                    <div class="absolute -bottom-12 -left-12 opacity-[0.08] select-none pointer-events-none">
+                        <span class="material-symbols-outlined" style="font-size: 16rem;">forest</span>
                     </div>
-                    <div class="bg-sage-green/5 p-4 rounded-xl border border-sage-green/10">
-                        <p class="text-[10px] text-sage-green font-bold uppercase tracking-widest mb-2">
-                            {{ __('messages.instructions') }}
+
+                    <div class="relative">
+                        <p class="font-handwriting text-2xl md:text-3xl text-vibrant-lime mb-3 leading-none">
+                            ~ {{ __('messages.donate_send_meaning') }} ~
                         </p>
-                        <p class="text-xs text-charcoal/60 leading-relaxed">{{ __('messages.share_mtcn') }}</p>
+                        <h3 class="font-serif text-3xl md:text-4xl font-bold leading-tight mb-5">
+                            {{ __('messages.donate_left_headline') }}
+                        </h3>
+                        <p class="text-white/70 text-sm md:text-base leading-relaxed max-w-sm">
+                            {{ __('messages.donate_left_blurb') }}
+                        </p>
                     </div>
-                </div>
-                <div class="mt-10 pt-6">
-                    <button
-                        class="w-full py-4 rounded-full bg-deep-green text-white text-sm font-bold hover:bg-deep-green/90 transition-all shadow-lg shadow-deep-green/20 flex items-center justify-center gap-2 js-copy-trigger"
-                        data-copy-text="Mohammad Iqbal Alimyar">
-                        <span class="material-symbols-outlined text-lg">content_copy</span>
-                        {{ __('messages.copy_full_name') }}
-                    </button>
-                </div>
-            </div>
 
-            <div
-                class="glass-panel rounded-[2rem] p-10 flex flex-col h-full relative group hover:-translate-y-2 transition-transform duration-500 overflow-hidden">
-                <div class="absolute top-0 right-0 p-6 opacity-10">
-                    <span class="material-symbols-outlined text-6xl text-charcoal">account_balance</span>
-                </div>
-                <div class="mb-8">
-                    <span class="material-symbols-outlined text-charcoal/70 text-3xl mb-4">assured_workload</span>
-                    <h3 class="font-serif text-2xl font-bold text-deep-green mb-2">{{ __('messages.bank_transfer') }}
-                    </h3>
-                    <p class="text-sage-green text-xs font-bold uppercase tracking-widest">
-                        {{ __('messages.international_ziraat_bank') }}</p>
-                </div>
-                <div class="gold-line-art mb-8"></div>
-                <div class="space-y-5 flex-grow">
-                    <div class="relative">
-                        <p class="text-[10px] text-charcoal/40 font-bold uppercase tracking-widest mb-1">
-                            {{ __('messages.iban_number') }}</p>
-                        <div class="flex items-center justify-between bg-white/40 p-3 rounded-lg border border-charcoal/5">
-                            <p class="font-mono text-xs text-charcoal font-bold">TR76 0001 0021 2193 4812 5001</p>
-                            <span
-                                class="material-symbols-outlined text-lg text-sage-green cursor-pointer hover:scale-110 transition-transform js-copy-trigger"
-                                data-copy-text="TR76 0001 0021 2193 4812 5001">content_copy</span>
+                    {{-- Accepted services --}}
+                    <div class="relative mt-10">
+                        <p class="text-[10px] font-bold uppercase tracking-[0.35em] text-white/50 mb-4">
+                            {{ __('messages.donate_accepted') }}
+                        </p>
+                        <div class="flex flex-wrap gap-3">
+                            <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/15 text-sm font-bold">
+                                <span class="material-symbols-outlined text-vibrant-lime text-base">check_circle</span>
+                                MoneyGram
+                            </span>
+                            <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/15 text-sm font-bold">
+                                <span class="material-symbols-outlined text-vibrant-lime text-base">check_circle</span>
+                                Western Union
+                            </span>
+                        </div>
+                        <div class="flex items-center gap-2 mt-6 text-white/50 text-[11px] font-bold uppercase tracking-[0.25em]">
+                            <span class="material-symbols-outlined text-sm text-gold-accent">shield_with_heart</span>
+                            {{ __('messages.global_remittance') }}
                         </div>
                     </div>
-                    <div class="relative">
-                        <p class="text-[10px] text-charcoal/40 font-bold uppercase tracking-widest mb-1">
-                            {{ __('messages.swift_bic_code') }}</p>
-                        <div class="flex items-center justify-between bg-white/40 p-3 rounded-lg border border-charcoal/5">
-                            <p class="font-mono text-xs text-charcoal font-bold">TCZRTRA2</p>
-                            <span
-                                class="material-symbols-outlined text-lg text-sage-green cursor-pointer hover:scale-110 transition-transform js-copy-trigger"
-                                data-copy-text="TCZRTRA2">content_copy</span>
+                </div>
+
+                {{-- ── Perforated divider (ticket stub) ── --}}
+                <div class="hidden lg:block absolute top-0 bottom-0 left-[41.666%] -translate-x-1/2 w-0 pointer-events-none z-10">
+                    <div class="absolute inset-y-6 left-1/2 -translate-x-1/2 border-l-2 border-dashed border-white/40"></div>
+                    <div class="absolute -top-3 left-1/2 -translate-x-1/2 w-6 h-6 rounded-full bg-background-light"></div>
+                    <div class="absolute -bottom-3 left-1/2 -translate-x-1/2 w-6 h-6 rounded-full bg-background-light"></div>
+                </div>
+
+                {{-- ── RIGHT: actionable transfer slip ── --}}
+                <div class="relative bg-white p-8 sm:p-10 md:p-12">
+                    {{-- Header --}}
+                    <div class="flex items-center justify-between mb-8">
+                        <div>
+                            <h3 class="font-serif text-2xl md:text-3xl font-bold text-deep-green leading-tight">
+                                {{ __('messages.moneygram_wu') }}
+                            </h3>
+                            <p class="text-sage-green text-[10px] font-bold uppercase tracking-[0.3em] mt-1">
+                                {{ __('messages.donate_steps_label') }}
+                            </p>
+                        </div>
+                        <div class="w-12 h-12 rounded-2xl bg-sage-green/10 border border-sage-green/20 flex items-center justify-center flex-shrink-0">
+                            <span class="material-symbols-outlined text-sage-green">payments</span>
                         </div>
                     </div>
-                    <div class="relative">
-                        <p class="text-[10px] text-charcoal/40 font-bold uppercase tracking-widest mb-1">
-                            {{ __('messages.account_holder') }}</p>
-                        <p class="font-serif text-sm text-charcoal/80">EverGreen Conservation Fund</p>
-                    </div>
-                </div>
-                <div class="mt-10 pt-6">
-                    <button
-                        class="w-full py-3 rounded-full bg-white border border-charcoal/10 text-charcoal text-sm font-bold hover:bg-charcoal/5 transition-all flex items-center justify-center gap-2 js-copy-all-bank"
-                        type="button">
-                        <span class="material-symbols-outlined text-lg">content_copy</span>
-                        {{ __('messages.copy_all_bank_details') }}
+
+                    {{-- Receiver name — tap-to-copy field --}}
+                    <p class="text-[10px] text-charcoal/40 font-bold uppercase tracking-[0.35em] mb-3">
+                        {{ __('messages.receiver_name') }}
+                    </p>
+                    <button type="button"
+                        class="js-copy-trigger group/copy w-full text-start bg-sage-green/[0.06] hover:bg-sage-green/10 border-2 border-dashed border-sage-green/30 hover:border-deep-green/40 rounded-2xl p-5 transition-all mb-3"
+                        data-copy-text="Mohammad Tamim Alimyar">
+                        <div class="flex items-center justify-between gap-4">
+                            <span class="font-serif text-2xl sm:text-3xl font-bold text-deep-green leading-tight">
+                                {{ __('messages.mohammad_tamim_alimyar') }}
+                            </span>
+                            <span class="flex-shrink-0 inline-flex items-center gap-1.5 px-3 py-2 rounded-full bg-deep-green text-white text-[11px] font-bold uppercase tracking-widest group-hover/copy:bg-deep-green/90 transition-colors">
+                                <span class="material-symbols-outlined text-base">content_copy</span>
+                                {{ __('messages.donate_tap_to_copy') }}
+                            </span>
+                        </div>
                     </button>
+                    <p class="text-xs text-sage-green font-medium inline-flex items-center gap-1.5 mb-9">
+                        <span class="material-symbols-outlined text-sm">verified</span>
+                        {{ __('messages.verify_spelling') }}
+                    </p>
+
+                    {{-- Connected step timeline --}}
+                    <div class="relative ps-2">
+                        <ol class="relative border-s-2 border-dashed border-sage-green/30 space-y-7 ms-3">
+                            @foreach (['donate_step_1', 'donate_step_2', 'donate_step_3'] as $i => $stepKey)
+                                <li class="relative ps-7">
+                                    <span class="absolute -start-[15px] top-0 flex items-center justify-center w-7 h-7 rounded-full bg-deep-green text-white font-serif font-bold text-sm shadow-md ring-4 ring-white">
+                                        {{ $i + 1 }}
+                                    </span>
+                                    <p class="text-sm text-charcoal/75 leading-relaxed pt-0.5">
+                                        {{ __('messages.' . $stepKey) }}
+                                    </p>
+                                </li>
+                            @endforeach
+                        </ol>
+                    </div>
+
+                    {{-- Instructions note --}}
+                    <div class="mt-9 bg-gold-accent/[0.07] p-5 rounded-2xl border border-gold-accent/20 flex items-start gap-3">
+                        <span class="material-symbols-outlined text-gold-accent text-lg flex-shrink-0 mt-0.5">priority_high</span>
+                        <div>
+                            <p class="text-[10px] text-gold-accent font-bold uppercase tracking-widest mb-1">
+                                {{ __('messages.instructions') }}
+                            </p>
+                            <p class="text-xs text-charcoal/65 leading-relaxed">{{ __('messages.share_mtcn') }}</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
