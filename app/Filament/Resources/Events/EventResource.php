@@ -61,7 +61,13 @@ class EventResource extends Resource
                 Components\TextInput::make('location')
                     ->required()
                     ->maxLength(255)
-                    ->helperText('Event location or address')
+                    ->helperText('Plain location name, e.g. "Kabul — Main Street"')
+                    ->columnSpanFull(),
+                Components\Textarea::make('map_embed')
+                    ->label('Google Map (optional)')
+                    ->rows(3)
+                    ->placeholder('Paste the Google Maps "Embed a map" iframe, a share link, or "lat,lng" coordinates')
+                    ->helperText('On Google Maps: Share → "Embed a map" → copy the HTML and paste it here. A share link (maps.app.goo.gl / google.com/maps) or "34.5553,69.2075" coordinates also work. Leave empty to skip the map.')
                     ->columnSpanFull(),
                 Components\Select::make('province')
                     ->label('Province')
@@ -255,6 +261,22 @@ class EventResource extends Resource
                     ->numeric()
                     ->default(0)
                     ->helperText('Total number of volunteers participated')
+                    ->columnSpanFull(),
+                Components\Repeater::make('volunteer_names')
+                    ->label('Volunteer Names')
+                    ->schema([
+                        Components\TextInput::make('name')
+                            ->label('Volunteer Name')
+                            ->required()
+                            ->maxLength(255)
+                            ->columnSpanFull(),
+                    ])
+                    ->itemLabel(fn (array $state): ?string => $state['name'] ?? 'New volunteer')
+                    ->addActionLabel('Add a volunteer')
+                    ->defaultItems(0)
+                    ->collapsible()
+                    ->reorderable()
+                    ->helperText('Add one entry per volunteer. You can add as many as you like.')
                     ->columnSpanFull(),
                 Components\TextInput::make('sponsor_partner')
                     ->label('Sponsor/Partner')
