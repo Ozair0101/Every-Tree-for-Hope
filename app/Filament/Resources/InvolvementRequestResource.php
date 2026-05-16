@@ -8,7 +8,9 @@ use BackedEnum;
 use Filament\Actions;
 use Filament\Forms\Components;
 use Filament\Resources\Resource;
+use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
+use Illuminate\Support\HtmlString;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
@@ -59,6 +61,45 @@ class InvolvementRequestResource extends Resource
                 Components\Textarea::make('message')
                     ->required()
                     ->rows(6),
+
+                Section::make('Volunteer Details')
+                    ->description('Only filled in for volunteer applications.')
+                    ->icon('heroicon-o-identification')
+                    ->collapsible()
+                    ->columnSpanFull()
+                    ->schema([
+                        Components\TextInput::make('current_job')
+                            ->label('Current Job')
+                            ->columnSpan(1),
+                        Components\TextInput::make('province')
+                            ->label('Province')
+                            ->columnSpan(1),
+                        Components\TextInput::make('home_address')
+                            ->label('Home Address')
+                            ->columnSpan(1),
+                        Components\TextInput::make('leisure_time')
+                            ->label('Leisure Time')
+                            ->columnSpan(1),
+                        Components\Textarea::make('experience')
+                            ->label('Experience')
+                            ->rows(4)
+                            ->columnSpanFull(),
+                        Components\Placeholder::make('cv_download')
+                            ->label('CV (PDF)')
+                            ->columnSpanFull()
+                            ->content(function ($record): HtmlString {
+                                if (! $record || empty($record->cv_path)) {
+                                    return new HtmlString('<span style="color:#9ca3af;">No CV uploaded</span>');
+                                }
+                                $url = asset('storage/' . ltrim($record->cv_path, '/'));
+                                return new HtmlString(
+                                    '<a href="' . e($url) . '" target="_blank" rel="noopener" '
+                                    . 'style="display:inline-flex;align-items:center;gap:6px;color:#064e3b;font-weight:700;text-decoration:underline;">'
+                                    . '⬇ Download / View CV</a>'
+                                );
+                            }),
+                    ])
+                    ->columns(2),
 
                 Components\Select::make('status')
                     ->label('Status')
@@ -112,6 +153,15 @@ class InvolvementRequestResource extends Resource
 
                 Tables\Columns\TextColumn::make('phone')
                     ->searchable()
+                    ->toggleable(),
+
+                Tables\Columns\TextColumn::make('cv_path')
+                    ->label('CV')
+                    ->badge()
+                    ->state(fn ($record) => empty($record->cv_path) ? '—' : 'Download')
+                    ->color(fn ($record) => empty($record->cv_path) ? 'gray' : 'success')
+                    ->url(fn ($record) => empty($record->cv_path) ? null : asset('storage/' . ltrim($record->cv_path, '/')))
+                    ->openUrlInNewTab()
                     ->toggleable(),
 
                 Tables\Columns\BadgeColumn::make('status')
