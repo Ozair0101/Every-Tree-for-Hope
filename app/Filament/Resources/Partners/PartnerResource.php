@@ -5,6 +5,7 @@ namespace App\Filament\Resources\Partners;
 use App\Filament\Resources\Partners\Pages\CreatePartner;
 use App\Filament\Resources\Partners\Pages\EditPartner;
 use App\Filament\Resources\Partners\Pages\ListPartners;
+use App\Enums\PartnerType;
 use App\Models\Partner;
 use BackedEnum;
 use Filament\Actions;
@@ -40,6 +41,21 @@ class PartnerResource extends Resource
                     ->required()
                     ->maxLength(255)
                     ->columnSpanFull(),
+                Components\Select::make('type')
+                    ->label('Partner Type')
+                    ->options(PartnerType::options())
+                    ->default(PartnerType::SPONSOR->value)
+                    ->required()
+                    ->native(false)
+                    ->helperText('Are they a sponsor, an advisor, or another kind of partner?')
+                    ->columnSpanFull(),
+                Components\Textarea::make('description')
+                    ->label('Description')
+                    ->rows(4)
+                    ->maxLength(2000)
+                    ->placeholder('Briefly describe this partner and how they support the mission…')
+                    ->helperText('Optional — shown on the website where partners are listed')
+                    ->columnSpanFull(),
                 Components\FileUpload::make('logo')
                     ->label('Company Logo')
                     ->required()
@@ -74,6 +90,19 @@ class PartnerResource extends Resource
                 Tables\Columns\TextColumn::make('company_name')
                     ->searchable()
                     ->sortable(),
+                Tables\Columns\TextColumn::make('type')
+                    ->label('Type')
+                    ->badge()
+                    ->formatStateUsing(fn ($state) => $state instanceof PartnerType ? $state->label() : $state)
+                    ->color(fn ($state) => \Filament\Support\Colors\Color::hex(
+                        $state instanceof PartnerType ? $state->color() : '#6b7280'
+                    ))
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('description')
+                    ->label('Description')
+                    ->limit(60)
+                    ->toggleable()
+                    ->wrap(),
                 Tables\Columns\IconColumn::make('is_active')
                     ->label('Active')
                     ->boolean(),
