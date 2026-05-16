@@ -319,43 +319,171 @@
             </div>
         </div>
     </section>
-    <!-- Partners Section -->
-    <section class="py-16 bg-white dark:bg-stone-900">
-        <div class="max-w-7xl mx-auto px-8">
-            <h2 class="text-center text-2xl font-serif text-deep-green dark:text-white mb-12">
-                Global Partners & Allies
-            </h2>
+    {{-- ===== PARTNERS & ALLIES (redesigned) ===== --}}
+    <section class="relative py-24 md:py-32 overflow-hidden" style="background: #fafaf5;">
+        {{-- Paper grain --}}
+        <div class="absolute inset-0 pointer-events-none opacity-[0.5]"
+            style="background-image: radial-gradient(rgba(6,46,34,0.04) 1px, transparent 1px); background-size: 14px 14px;">
+        </div>
+        {{-- Floating botanical decoration --}}
+        <div class="absolute top-16 right-10 text-vibrant-lime/10 select-none pointer-events-none floating hidden md:block">
+            <span class="material-symbols-outlined" style="font-size: 9rem;">diversity_3</span>
+        </div>
+        <div class="absolute bottom-20 left-10 text-gold-accent/10 select-none pointer-events-none floating hidden lg:block"
+            style="animation-delay: 3s;">
+            <span class="material-symbols-outlined" style="font-size: 7rem;">handshake</span>
+        </div>
 
-            <!-- Partners Grid - 5 per row -->
-            <div class="grid grid-cols-5 gap-8 mb-12">
-                @php
-                    $partners = \App\Models\Partner::active()->ordered()->get();
-                @endphp
-                @forelse($partners as $partner)
-                    <div class="text-center group">
-                        @if ($partner->full_logo_url)
-                            <img src="{{ $partner->full_logo_url }}" alt="{{ $partner->company_name }}"
-                                class="h-8 w-auto mx-auto mb-2 opacity-60 group-hover:opacity-100 transition-opacity duration-200 filter grayscale group-hover:grayscale-0">
-                        @else
-                            <span class="material-symbols-outlined text-2xl text-charcoal/40 mb-2">business</span>
-                        @endif
-                        <p
-                            class="text-xs text-charcoal/60 dark:text-stone-400 group-hover:text-deep-green dark:group-hover:text-white transition-colors duration-200">
-                            {{ $partner->company_name }}
-                        </p>
-                    </div>
-                @empty
-                    <div class="col-span-5 text-center py-8">
-                        <p class="text-charcoal/40 dark:text-stone-500 text-sm">Partners coming soon</p>
-                    </div>
-                @endforelse
+        @php
+            $allPartners = \App\Models\Partner::active()->ordered()->get();
+            $advisors = $allPartners->filter(fn($p) => $p->type === \App\Enums\PartnerType::ADVISOR);
+            $otherPartners = $allPartners->reject(fn($p) => $p->type === \App\Enums\PartnerType::ADVISOR);
+            $typeColors = [
+                'Sponsor' => '#d4af37',
+                'Collaborator' => '#84cc16',
+                'Supporter' => '#3b82f6',
+                'Other' => '#6b7280',
+            ];
+        @endphp
+
+        <div class="relative z-10 max-w-7xl mx-auto px-6">
+
+            {{-- Editorial header --}}
+            <div class="text-center max-w-3xl mx-auto mb-16 md:mb-20">
+                <p class="font-handwriting text-2xl md:text-3xl text-vibrant-lime mb-2 leading-none">~ hand in hand ~</p>
+                <div class="inline-flex items-center gap-3 mb-5">
+                    <div class="h-[1px] w-10 bg-vibrant-lime"></div>
+                    <span class="text-vibrant-lime font-bold tracking-[0.4em] text-[10px] uppercase">Global Partners &amp; Allies</span>
+                    <div class="h-[1px] w-10 bg-vibrant-lime"></div>
+                </div>
+                <h2 class="text-4xl sm:text-5xl md:text-6xl font-serif text-deep-green leading-[1.05] mb-5">
+                    The hands that
+                    <span class="italic font-black relative inline-block">
+                        <span class="relative z-10">hold us up.</span>
+                        <svg class="absolute -bottom-2 left-0 w-full h-3 z-0" preserveAspectRatio="none" viewBox="0 0 200 10">
+                            <path d="M2,8 Q50,2 100,5 T198,4" fill="none" stroke="#84cc16" stroke-width="3" stroke-linecap="round" />
+                        </svg>
+                    </span>
+                </h2>
+                <p class="text-charcoal/70 text-base md:text-lg font-light leading-relaxed">
+                    Every forest needs roots beyond the soil. These are the advisors and allies whose guidance and support keep our mission growing.
+                </p>
             </div>
 
-            <!-- Simple Call to Action -->
-            <div class="text-center">
+            {{-- ── Advisors — "The Counsel" ── --}}
+            @if ($advisors->count() > 0)
+                <div class="mb-20 md:mb-28">
+                    <div class="flex items-center gap-4 mb-10">
+                        <span class="material-symbols-outlined text-deep-green text-3xl">workspace_premium</span>
+                        <div>
+                            <h3 class="font-serif text-2xl md:text-3xl font-bold text-deep-green leading-tight">Our Advisors</h3>
+                            <p class="text-charcoal/55 text-sm">The minds that guide every decision we make.</p>
+                        </div>
+                        <div class="flex-1 h-px bg-gradient-to-r from-deep-green/25 to-transparent"></div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+                        @foreach ($advisors as $advisor)
+                            <article class="group relative bg-white border border-deep-green/10 rounded-[1.75rem] p-8 shadow-[0_15px_40px_rgba(6,46,34,0.06)] hover:shadow-[0_25px_55px_rgba(6,46,34,0.14)] hover:-translate-y-1 transition-all duration-500 overflow-hidden">
+                                {{-- Decorative quotation mark --}}
+                                <span class="absolute -top-6 right-2 font-serif text-[7rem] text-gold-accent/10 leading-none select-none pointer-events-none">”</span>
+
+                                {{-- Avatar --}}
+                                <div class="relative w-20 h-20 mb-5">
+                                    <div class="absolute inset-0 rounded-full bg-gold-accent/15 ring-2 ring-gold-accent/30"></div>
+                                    @if ($advisor->full_logo_url)
+                                        <img src="{{ $advisor->full_logo_url }}" alt="{{ $advisor->company_name }}"
+                                            class="absolute inset-1.5 w-[68px] h-[68px] rounded-full object-cover">
+                                    @else
+                                        <span class="absolute inset-0 flex items-center justify-center material-symbols-outlined text-deep-green text-3xl">person</span>
+                                    @endif
+                                </div>
+
+                                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-deep-green/[0.07] border border-deep-green/15 text-deep-green text-[10px] font-bold tracking-[0.25em] uppercase mb-3">
+                                    <span class="material-symbols-outlined text-xs">verified</span>
+                                    Advisor
+                                </span>
+                                <h4 class="font-serif text-xl md:text-2xl font-bold text-deep-green leading-tight mb-3">
+                                    {{ $advisor->company_name }}
+                                </h4>
+                                @if ($advisor->description)
+                                    <p class="text-charcoal/70 text-sm leading-relaxed font-serif italic">
+                                        {{ $advisor->description }}
+                                    </p>
+                                @endif
+
+                                <div class="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-gold-accent via-deep-green to-vibrant-lime scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-500"></div>
+                            </article>
+                        @endforeach
+                    </div>
+                </div>
+            @endif
+
+            {{-- ── Partners & Supporters (all non-advisor types) ── --}}
+            @if ($otherPartners->count() > 0)
+                <div>
+                    <div class="flex items-center gap-4 mb-10">
+                        <span class="material-symbols-outlined text-vibrant-lime text-3xl">handshake</span>
+                        <div>
+                            <h3 class="font-serif text-2xl md:text-3xl font-bold text-deep-green leading-tight">Partners &amp; Supporters</h3>
+                            <p class="text-charcoal/55 text-sm">Organisations standing with us, season after season.</p>
+                        </div>
+                        <div class="flex-1 h-px bg-gradient-to-r from-vibrant-lime/30 to-transparent"></div>
+                    </div>
+
+                    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5 md:gap-6">
+                        @foreach ($otherPartners as $partner)
+                            @php
+                                $typeValue = $partner->type?->value ?? 'Other';
+                                $tc = $typeColors[$typeValue] ?? '#6b7280';
+                            @endphp
+                            <article class="group relative bg-white border border-charcoal/[0.08] rounded-2xl p-6 text-center shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 overflow-hidden">
+                                {{-- Type chip --}}
+                                <span class="absolute top-3 end-3 text-[9px] font-bold tracking-widest uppercase px-2 py-0.5 rounded-full"
+                                    style="color: {{ $tc }}; background: {{ $tc }}1A;">
+                                    {{ $typeValue }}
+                                </span>
+
+                                <div class="h-16 flex items-center justify-center mb-4 mt-4">
+                                    @if ($partner->full_logo_url)
+                                        <img src="{{ $partner->full_logo_url }}" alt="{{ $partner->company_name }}"
+                                            class="max-h-14 w-auto object-contain opacity-70 group-hover:opacity-100 filter grayscale group-hover:grayscale-0 transition-all duration-300">
+                                    @else
+                                        <span class="material-symbols-outlined text-3xl text-charcoal/30">business</span>
+                                    @endif
+                                </div>
+                                <p class="font-serif text-base font-bold text-deep-green leading-tight">
+                                    {{ $partner->company_name }}
+                                </p>
+                                @if ($partner->description)
+                                    <p class="text-charcoal/55 text-xs leading-relaxed line-clamp-2 mt-2">
+                                        {{ $partner->description }}
+                                    </p>
+                                @endif
+
+                                <div class="absolute bottom-0 left-0 right-0 h-1 scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-500"
+                                    style="background: {{ $tc }};"></div>
+                            </article>
+                        @endforeach
+                    </div>
+                </div>
+            @endif
+
+            {{-- Empty state --}}
+            @if ($allPartners->count() === 0)
+                <div class="text-center py-12">
+                    <span class="material-symbols-outlined text-deep-green/20 text-5xl mb-3">groups</span>
+                    <p class="text-charcoal/40 text-sm italic">Partners coming soon</p>
+                </div>
+            @endif
+
+            {{-- CTA --}}
+            <div class="text-center mt-16 md:mt-20">
                 <a href="{{ route('contact') }}"
-                    class="text-sm text-gold-accent hover:text-deep-green dark:hover:text-gold-accent transition-colors duration-200 underline">
-                    Become a Partner →
+                    class="group inline-flex items-center gap-2 px-8 py-4 bg-deep-green text-white text-xs font-extrabold tracking-[0.25em] uppercase rounded-full shadow-lg shadow-deep-green/25 hover:bg-deep-green/90 hover:-translate-y-0.5 transition-all">
+                    <span class="material-symbols-outlined text-base text-vibrant-lime">favorite</span>
+                    Become a Partner
+                    <span class="material-symbols-outlined text-base group-hover:translate-x-1 transition-transform">arrow_forward</span>
                 </a>
             </div>
         </div>
