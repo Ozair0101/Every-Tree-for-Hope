@@ -2,18 +2,22 @@
 
 namespace App\Models;
 
+use App\Enums\PartnerType;
 use Illuminate\Database\Eloquent\Model;
 
 class Partner extends Model
 {
     protected $fillable = [
         'company_name',
+        'type',
+        'description',
         'logo',
         'is_active',
         'sort_order',
     ];
 
     protected $casts = [
+        'type' => PartnerType::class,
         'is_active' => 'boolean',
         'sort_order' => 'integer',
     ];
