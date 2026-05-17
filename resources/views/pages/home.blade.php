@@ -55,7 +55,7 @@
 
                     <!-- Massive editorial headline -->
                     <h1 class="font-serif font-bold text-deep-green leading-[0.92] tracking-tight mb-8"
-                        style="font-size: clamp(3rem, 8vw, 7.5rem);">
+                        style="font-size: clamp(2rem, 4.5vw, 5rem);">
                         {!! __('messages.rooting_for') !!}<br />
                         <span class="italic font-black relative inline-block">
                             <span class="relative z-10">{{ __('messages.the_future') }}</span>

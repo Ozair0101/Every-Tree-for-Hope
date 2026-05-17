@@ -23,9 +23,9 @@ return [
     'hero_pullquote_author' => 'Tamim Alimyar, Founder',
     'hero_est_year' => 'Est. 2025',
     'hero_brand_signature' => 'Every Tree<br/>for a Hope',
-    'rooting_for' => 'Rooting for',
-    'the_future' => 'the Future',
-    'hero_description' => 'Every Tree for a Hope is about bringing life to barren land. Each tree is a symbol of resilience and a call to Afghans to build a greener future—join our team and grow hope with us.',
+    'rooting_for' => 'Let’s make Earth',
+    'the_future' => 'beautiful by planting trees.',
+    'hero_description' => 'Every tree for a hope is working to make tree planting a tradition among all Afghans and people abroad. We are directly involving kids, elders, men, and women to plant trees and care for them.',
     'plant_a_tree_today' => 'Plant a Tree Today',
     'view_our_projects' => 'View Our Projects',
 
