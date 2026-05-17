@@ -9,6 +9,8 @@ return [
     'donators' => 'Donators',
     'report' => 'Report',
     'contact' => 'Contact',
+
+    'cancel' => 'Cancel',
     
     // Site Info
     'site_name' => 'Every Tree for a Hope',

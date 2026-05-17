@@ -10,6 +10,7 @@ return [
     'report' => 'راپور',
     'contact' => 'اړیکه',
 
+    'cancel' => 'لغو',
     // Site Info
     'site_name' => 'هره ونه د یوې هیلې لپاره',
 

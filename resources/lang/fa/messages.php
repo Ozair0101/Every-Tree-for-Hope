@@ -10,6 +10,8 @@ return [
     'report' => 'گزارش',
     'contact' => 'تماس',
 
+    'cancel' => 'لغو',
+
     // Site Info
     'site_name' => 'هر درخت برای یک امید',
 
