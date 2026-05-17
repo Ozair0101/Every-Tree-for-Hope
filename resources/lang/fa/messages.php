@@ -626,6 +626,8 @@ return [
     'future_volunteer_btn' => 'برای این روز داوطلب شوید',
     'future_details_btn' => 'جزئیات',
     'future_closing_note' => 'در تقویم یادداشت کنید — درختان خودشان کاشته نمی‌شوند',
+    'future_share_btn' => 'اشتراک‌گذاری',
+    'future_share_copied' => 'لینک کاپی شد!',
     'future_register_btn' => 'ثبت‌نام برای حضور',
     'future_register_eyebrow' => 'جای خود را رزرو کنید',
     'future_register_subtitle' => 'کوتاه و دوستانه. اطلاعات شما تنها نزد تیم کاشت می‌ماند.',

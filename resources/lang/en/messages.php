@@ -648,6 +648,8 @@ return [
     'future_volunteer_btn' => 'Volunteer for this',
     'future_details_btn' => 'See details',
     'future_closing_note' => "pencil it in — the trees won't plant themselves",
+    'future_share_btn' => 'Share',
+    'future_share_copied' => 'Link copied!',
     'future_register_btn' => 'Register to Participate',
     'future_register_eyebrow' => 'reserve your spot',
     'future_register_subtitle' => 'Quick & friendly. Your details stay with the planting team only.',

@@ -165,13 +165,23 @@
                                 <div class="border-t border-dashed border-charcoal/15 mb-5"></div>
 
                                 {{-- CTA row --}}
-                                <div class="future-register-cta flex flex-wrap items-center gap-4">
+                                <div class="future-register-cta flex flex-wrap items-center gap-3">
                                     <button type="button"
                                         class="future-register-toggle group/btn inline-flex items-center gap-2 px-6 py-3 bg-deep-green text-white text-xs font-extrabold tracking-[0.2em] uppercase rounded-full shadow-md shadow-deep-green/20 hover:bg-deep-green/90 hover:-translate-y-0.5 transition-all">
                                         <span class="material-symbols-outlined text-base text-vibrant-lime">how_to_reg</span>
                                         <span class="toggle-label-open">{{ __('messages.future_register_btn') }}</span>
                                         <span class="toggle-label-close hidden">{{ __('messages.cancel') }}</span>
                                         <span class="material-symbols-outlined text-base toggle-chevron transition-transform">expand_more</span>
+                                    </button>
+
+                                    {{-- Share / copy deep link --}}
+                                    <button type="button"
+                                        class="future-share-btn group/sh inline-flex items-center gap-2 px-5 py-3 border border-deep-green/25 text-deep-green text-xs font-extrabold tracking-[0.2em] uppercase rounded-full hover:bg-deep-green/5 hover:border-deep-green/50 transition-all"
+                                        data-share-url="{{ route('gallery') }}#event-{{ $event->id }}"
+                                        aria-label="{{ __('messages.future_share_btn') }}">
+                                        <span class="material-symbols-outlined text-base share-icon">link</span>
+                                        <span class="share-label-default">{{ __('messages.future_share_btn') }}</span>
+                                        <span class="share-label-copied hidden text-vibrant-lime">{{ __('messages.future_share_copied') }}</span>
                                     </button>
                                 </div>
 
@@ -283,6 +293,47 @@
                 const cards = document.querySelectorAll('.future-event-card');
 
                 cards.forEach(function (card) {
+                    // ── Share / copy deep link ──
+                    const shareBtn = card.querySelector('.future-share-btn');
+                    if (shareBtn) {
+                        shareBtn.addEventListener('click', function () {
+                            const url = shareBtn.getAttribute('data-share-url');
+                            const labelDefault = shareBtn.querySelector('.share-label-default');
+                            const labelCopied = shareBtn.querySelector('.share-label-copied');
+                            const icon = shareBtn.querySelector('.share-icon');
+
+                            const showCopied = function () {
+                                if (labelDefault) labelDefault.classList.add('hidden');
+                                if (labelCopied) labelCopied.classList.remove('hidden');
+                                if (icon) icon.textContent = 'check';
+                                shareBtn.classList.add('border-vibrant-lime', 'bg-vibrant-lime/10');
+                                setTimeout(function () {
+                                    if (labelDefault) labelDefault.classList.remove('hidden');
+                                    if (labelCopied) labelCopied.classList.add('hidden');
+                                    if (icon) icon.textContent = 'link';
+                                    shareBtn.classList.remove('border-vibrant-lime', 'bg-vibrant-lime/10');
+                                }, 2200);
+                            };
+
+                            if (navigator.clipboard && window.isSecureContext) {
+                                navigator.clipboard.writeText(url).then(showCopied).catch(function () {
+                                    window.prompt(@json(__('messages.future_share_btn')), url);
+                                });
+                            } else {
+                                // Fallback for non-secure contexts (http on LAN, etc.)
+                                const ta = document.createElement('textarea');
+                                ta.value = url;
+                                ta.style.position = 'fixed';
+                                ta.style.opacity = '0';
+                                document.body.appendChild(ta);
+                                ta.select();
+                                try { document.execCommand('copy'); showCopied(); }
+                                catch (e) { window.prompt(@json(__('messages.future_share_btn')), url); }
+                                document.body.removeChild(ta);
+                            }
+                        });
+                    }
+
                     const toggleBtn = card.querySelector('.future-register-toggle');
                     const panel = card.querySelector('.future-register-panel');
                     const form = card.querySelector('.future-register-form');
@@ -370,6 +421,25 @@
                         });
                     });
                 });
+
+                // ── Deep link: when opened via #event-ID, scroll to & highlight that card ──
+                function focusHashedEvent() {
+                    const hash = window.location.hash;
+                    if (!hash || hash.indexOf('#event-') !== 0) return;
+                    const target = document.getElementById(hash.slice(1));
+                    if (!target || !target.classList.contains('future-event-card')) return;
+
+                    setTimeout(function () {
+                        target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        target.classList.add('ring-4', 'ring-vibrant-lime', 'ring-offset-4', 'ring-offset-[#fafaf5]');
+                        setTimeout(function () {
+                            target.classList.remove('ring-4', 'ring-vibrant-lime', 'ring-offset-4', 'ring-offset-[#fafaf5]');
+                        }, 2800);
+                    }, 250);
+                }
+
+                focusHashedEvent();
+                window.addEventListener('hashchange', focusHashedEvent);
             })();
         </script>
     </section>
