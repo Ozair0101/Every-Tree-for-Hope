@@ -627,6 +627,8 @@ return [
     'future_closing_note' => 'په تقویم کې یې ولیکئ — ونې پخپله نه کرل کیږي',
     'future_share_btn' => 'شریکول',
     'future_share_copied' => 'لینک کاپي شو!',
+    'future_next_up' => 'راتلونکې پېښه',
+    'future_more_dates' => 'نورې نېټې',
     'future_register_btn' => 'د ګډون لپاره راجستر شه',
     'future_register_eyebrow' => 'خپله ځای خوندي کړه',
     'future_register_subtitle' => 'لنډ او دوستانه. ستاسو معلومات یوازې د ونه‌کاروونکې ډلې سره پاتې کیږي.',
