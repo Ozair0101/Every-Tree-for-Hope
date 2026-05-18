@@ -10,6 +10,7 @@ use BackedEnum;
 use Filament\Actions;
 use Filament\Forms\Components;
 use Filament\Resources\Resource;
+use Filament\Schemas\Components\Tabs;
 use Filament\Schemas\Schema;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -35,16 +36,63 @@ class UpcomingEventResource extends Resource
     {
         return $schema
             ->schema([
-                Components\TextInput::make('title')
-                    ->required()
-                    ->maxLength(255)
-                    ->placeholder('e.g. Spring Planting at Pul-i-Bagh')
-                    ->columnSpanFull(),
-                Components\Textarea::make('description')
-                    ->required()
-                    ->rows(5)
-                    ->helperText('Briefly describe what the event is about, what volunteers will do, what to bring, etc.')
-                    ->columnSpanFull(),
+                Tabs::make('Translations')
+                    ->columnSpanFull()
+                    ->persistTabInQueryString()
+                    ->tabs([
+                        Tabs\Tab::make('English')
+                            ->badge('default')
+                            ->schema([
+                                Components\TextInput::make('title.en')
+                                    ->label('Title (English)')
+                                    ->required()
+                                    ->maxLength(255)
+                                    ->placeholder('e.g. Spring Planting at Pul-i-Bagh')
+                                    ->formatStateUsing(fn ($record) => $record?->getTranslation('title', 'en', false))
+                                    ->columnSpanFull(),
+                                Components\Textarea::make('description.en')
+                                    ->label('Description (English)')
+                                    ->required()
+                                    ->rows(5)
+                                    ->helperText('Shown by default. Visitors see this when their language has no translation.')
+                                    ->formatStateUsing(fn ($record) => $record?->getTranslation('description', 'en', false))
+                                    ->columnSpanFull(),
+                            ]),
+                        Tabs\Tab::make('Dari (دری)')
+                            ->schema([
+                                Components\TextInput::make('title.fa')
+                                    ->label('عنوان (دری)')
+                                    ->maxLength(255)
+                                    ->placeholder('مثلاً نهال‌شانی بهاری در پل باغ')
+                                    ->extraAttributes(['dir' => 'rtl'])
+                                    ->formatStateUsing(fn ($record) => $record?->getTranslation('title', 'fa', false))
+                                    ->columnSpanFull(),
+                                Components\Textarea::make('description.fa')
+                                    ->label('توضیحات (دری)')
+                                    ->rows(5)
+                                    ->extraAttributes(['dir' => 'rtl'])
+                                    ->helperText('در صورت خالی بودن، نسخهٔ انگلیسی نمایش داده می‌شود.')
+                                    ->formatStateUsing(fn ($record) => $record?->getTranslation('description', 'fa', false))
+                                    ->columnSpanFull(),
+                            ]),
+                        Tabs\Tab::make('Pashto (پښتو)')
+                            ->schema([
+                                Components\TextInput::make('title.ps')
+                                    ->label('سرلیک (پښتو)')
+                                    ->maxLength(255)
+                                    ->placeholder('بېلګه: د پسرلي ونه کرل په پل باغ کې')
+                                    ->extraAttributes(['dir' => 'rtl'])
+                                    ->formatStateUsing(fn ($record) => $record?->getTranslation('title', 'ps', false))
+                                    ->columnSpanFull(),
+                                Components\Textarea::make('description.ps')
+                                    ->label('تفصیل (پښتو)')
+                                    ->rows(5)
+                                    ->extraAttributes(['dir' => 'rtl'])
+                                    ->helperText('که خالي وي، انګلیسي نسخه ښودل کیږي.')
+                                    ->formatStateUsing(fn ($record) => $record?->getTranslation('description', 'ps', false))
+                                    ->columnSpanFull(),
+                            ]),
+                    ]),
                 Components\DatePicker::make('date')
                     ->label('Event Date')
                     ->required()
