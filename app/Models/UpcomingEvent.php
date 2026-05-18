@@ -4,9 +4,19 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Spatie\Translatable\HasTranslations;
 
 class UpcomingEvent extends Model
 {
+    use HasTranslations;
+
+    /**
+     * Attributes stored as {"en": "...", "fa": "...", "ps": "..."} JSON.
+     * Reading $event->title returns the value for the current app locale,
+     * falling back to English when a translation is missing.
+     */
+    public array $translatable = ['title', 'description'];
+
     protected $fillable = [
         'title',
         'description',
