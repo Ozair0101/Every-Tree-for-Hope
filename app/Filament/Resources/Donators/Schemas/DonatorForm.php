@@ -7,7 +7,6 @@ use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
-use Filament\Forms\Components\Toggle;
 use Filament\Schemas\Schema;
 
 class DonatorForm
@@ -22,13 +21,7 @@ class DonatorForm
                     ->required()
                     ->maxLength(255)
                     ->columnSpanFull(),
-                
-                TextInput::make('email')
-                    ->label('Email Address')
-                    ->email()
-                    ->maxLength(255)
-                    ->unique(ignoreRecord: true),
-                
+
                 TextInput::make('phone')
                     ->label('Phone Number')
                     ->tel()
@@ -41,19 +34,12 @@ class DonatorForm
                     ->prefix('$')
                     ->step(0.01)
                     ->maxValue(999999.99),
-                
-                TextInput::make('trees_sponsored')
-                    ->label('Trees Sponsored')
-                    ->required()
-                    ->numeric()
-                    ->default(0)
-                    ->minValue(0),
-                
+
                 DatePicker::make('donation_date')
                     ->label('Donation Date')
                     ->native(false)
                     ->displayFormat('M d, Y'),
-                
+
                 Select::make('status')
                     ->label('Verification Status')
                     ->required()
@@ -62,37 +48,19 @@ class DonatorForm
                         'unverified' => 'Unverified',
                     ])
                     ->default('unverified'),
-                
-                // Location Information
+
                 TextInput::make('location')
                     ->label('Location')
                     ->placeholder('e.g., Kabul, Afghanistan')
                     ->maxLength(255),
-                
-                Select::make('location_type')
-                    ->label('Location Type')
-                    ->options([
-                        'Local' => 'Local',
-                        'International' => 'International',
-                        'National' => 'National',
-                        'Regional' => 'Regional',
-                    ])
-                    ->default('Local'),
 
-                // Impact & Notes
+                // Shown publicly
                 Textarea::make('impact')
                     ->label('Impact Description')
                     ->placeholder('Describe the environmental impact...')
                     ->rows(4)
                     ->columnSpanFull(),
-                
-                Textarea::make('notes')
-                    ->label('Additional Notes')
-                    ->placeholder('Any additional notes about the donor...')
-                    ->rows(3)
-                    ->columnSpanFull(),
 
-                // Media & Features
                 FileUpload::make('profile_image')
                     ->label('Profile Image')
                     ->image()
@@ -101,11 +69,6 @@ class DonatorForm
                     ->disk('public')
                     ->maxSize(2048) // 2MB
                     ->columnSpanFull(),
-                
-                Toggle::make('is_featured')
-                    ->label('Featured Donor')
-                    ->helperText('Show this donor on the website homepage')
-                    ->default(false),
             ])
             ->columns(2);
     }
