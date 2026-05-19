@@ -2,7 +2,6 @@
 
 namespace App\Filament\Resources\Donators\Schemas;
 
-use Filament\Infolists\Components\IconEntry;
 use Filament\Infolists\Components\ImageEntry;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Schemas\Schema;
@@ -30,12 +29,6 @@ class DonatorInfolist
                     ->weight('bold')
                     ->columnSpanFull(),
 
-                TextEntry::make('email')
-                    ->label('Email Address')
-                    ->copyable()
-                    ->copyMessage('Email copied')
-                    ->copyMessageDuration(1500),
-
                 TextEntry::make('phone')
                     ->label('Phone Number')
                     ->placeholder('Not provided'),
@@ -45,12 +38,6 @@ class DonatorInfolist
                     ->label('Financial Support')
                     ->formatStateUsing(fn ($state) => '$' . number_format($state, 2))
                     ->weight('semibold'),
-
-                TextEntry::make('trees_sponsored')
-                    ->label('Trees Sponsored')
-                    ->formatStateUsing(fn ($state) => number_format($state) . ' trees')
-                    ->badge()
-                    ->color('success'),
 
                 TextEntry::make('donation_date')
                     ->label('Donation Date')
@@ -63,33 +50,15 @@ class DonatorInfolist
                     ->color(fn ($state) => $state === 'verified' ? 'success' : 'warning')
                     ->formatStateUsing(fn ($state) => ucfirst($state)),
 
-                // Location Information
                 TextEntry::make('location')
                     ->label('Location')
                     ->placeholder('Not specified'),
 
-                TextEntry::make('location_type')
-                    ->label('Location Type')
-                    ->badge()
-                    ->color('primary'),
-
-                // Impact and Notes
+                // Shown publicly
                 TextEntry::make('impact')
                     ->label('Impact Description')
                     ->placeholder('No impact description provided')
                     ->columnSpanFull(),
-
-                TextEntry::make('notes')
-                    ->label('Additional Notes')
-                    ->placeholder('No additional notes')
-                    ->columnSpanFull(),
-
-                // System Information
-                IconEntry::make('is_featured')
-                    ->label('Featured Donor')
-                    ->boolean()
-                    ->trueIcon('heroicon-o-star')
-                    ->falseIcon('heroicon-o-star'),
 
                 TextEntry::make('created_at')
                     ->label('Added On')
