@@ -44,24 +44,11 @@ class TopDonatorsWidget extends TableWidget
                 ->weight('semibold')
                 ->color('success'),
                 
-            \Filament\Tables\Columns\TextColumn::make('trees_sponsored')
-                ->label('Trees Sponsored')
-                ->numeric()
-                ->sortable()
-                ->formatStateUsing(fn ($state) => number_format($state) . ' trees')
-                ->color('primary'),
-                
             \Filament\Tables\Columns\TextColumn::make('location')
                 ->label('Location')
                 ->searchable()
                 ->limit(20),
-                
-            \Filament\Tables\Columns\IconColumn::make('is_featured')
-                ->label('Featured')
-                ->boolean()
-                ->trueIcon('heroicon-o-star')
-                ->falseIcon('heroicon-o-star'),
-                
+
             \Filament\Tables\Columns\TextColumn::make('donation_date')
                 ->label('Last Donation')
                 ->date('M j, Y')
