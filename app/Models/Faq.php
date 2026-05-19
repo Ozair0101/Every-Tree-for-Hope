@@ -3,9 +3,18 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Translatable\HasTranslations;
 
 class Faq extends Model
 {
+    use HasTranslations;
+
+    /**
+     * Stored as {"en": "...", "fa": "...", "ps": "..."} JSON.
+     * Reading the attribute returns the current locale, falling back to English.
+     */
+    public array $translatable = ['category', 'question', 'answer'];
+
     protected $fillable = [
         'category',
         'question',

@@ -23,11 +23,13 @@ class FaqController extends Controller
             'question' => 'required|string|max:2000',
         ]);
 
+        // Store under English (the canonical/source locale) so admins always
+        // see new submissions regardless of the visitor's current language.
         Faq::create([
-            'question' => $validated['question'],
+            'question' => ['en' => $validated['question']],
             'asked_by_name' => $validated['name'] ?? null,
             'asked_by_email' => $validated['email'] ?? null,
-            'category' => 'General',
+            'category' => ['en' => 'General'],
             'is_verified' => false,
         ]);
 
