@@ -11,7 +11,6 @@ use Filament\Actions\ViewAction;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 
@@ -41,14 +40,6 @@ class DonatorsTable
                     ->sortable()
                     ->icon('heroicon-o-map-pin'),
 
-                TextColumn::make('trees_sponsored')
-                    ->label('Trees')
-                    ->numeric()
-                    ->sortable()
-                    ->alignCenter()
-                    ->badge()
-                    ->color('success'),
-
                 TextColumn::make('financial_support')
                     ->label('Support')
                     ->money('USD')
@@ -65,26 +56,10 @@ class DonatorsTable
                     ->falseIcon('heroicon-o-exclamation-circle')
                     ->sortable(),
 
-                ToggleColumn::make('is_featured')
-                    ->label('Featured')
-                    ->alignCenter(),
-
                 TextColumn::make('donation_date')
                     ->label('Date')
                     ->date('M d, Y')
                     ->sortable()
-                    ->toggleable(),
-
-                TextColumn::make('location_type')
-                    ->label('Type')
-                    ->badge()
-                    ->color(fn (string $state): string => match ($state) {
-                        'Local', 'local' => 'primary',
-                        'International', 'international' => 'success',
-                        'National', 'national' => 'warning',
-                        'Regional', 'regional' => 'info',
-                        default => 'gray',
-                    })
                     ->toggleable(),
             ])
             ->filters([
@@ -93,22 +68,6 @@ class DonatorsTable
                     ->options([
                         'verified' => 'Verified',
                         'unverified' => 'Unverified',
-                    ]),
-                
-                SelectFilter::make('location_type')
-                    ->label('Location Type')
-                    ->options([
-                        'Local' => 'Local',
-                        'International' => 'International',
-                        'National' => 'National',
-                        'Regional' => 'Regional',
-                    ]),
-
-                SelectFilter::make('is_featured')
-                    ->label('Featured Status')
-                    ->options([
-                        '1' => 'Featured',
-                        '0' => 'Not Featured',
                     ]),
             ])
             ->actions([
