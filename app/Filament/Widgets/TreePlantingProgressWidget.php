@@ -3,7 +3,6 @@
 namespace App\Filament\Widgets;
 
 use App\Models\Event;
-use App\Models\Donator;
 use Filament\Widgets\ChartWidget;
 use Illuminate\Support\Facades\DB;
 
@@ -25,9 +24,8 @@ class TreePlantingProgressWidget extends ChartWidget
 
     protected function getData(): array
     {
-        $treesFromDonations = Donator::sum('trees_sponsored');
         $treesFromEvents = Event::sum('trees_planted');
-        $totalTrees = $treesFromDonations + $treesFromEvents;
+        $totalTrees = $treesFromEvents;
         
         // Set a goal (you can make this configurable)
         $goal = 10000;
@@ -75,9 +73,8 @@ class TreePlantingProgressWidget extends ChartWidget
 
     protected function getOptions(): array
     {
-        $treesFromDonations = Donator::sum('trees_sponsored');
         $treesFromEvents = Event::sum('trees_planted');
-        $totalTrees = $treesFromDonations + $treesFromEvents;
+        $totalTrees = $treesFromEvents;
         $goal = 10000;
         $progress = min(($totalTrees / $goal) * 100, 100);
         
