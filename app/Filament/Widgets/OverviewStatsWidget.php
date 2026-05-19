@@ -22,7 +22,7 @@ class OverviewStatsWidget extends BaseWidget
     protected function getStats(): array
     {
         $totalDonations = Donator::sum('financial_support');
-        $totalTreesPlanted = Donator::sum('trees_sponsored') + Event::sum('trees_planted');
+        $totalTreesPlanted = Event::sum('trees_planted');
         $totalEvents = Event::where('is_active', true)->count();
         $pendingMessages = ContactMessage::where('status', 'pending')->count();
         $totalDonators = Donator::verified()->count();
