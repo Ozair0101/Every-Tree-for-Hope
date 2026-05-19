@@ -75,39 +75,19 @@
                         <span class="absolute bottom-3 left-3 text-gold-accent/30 text-2xl select-none">❦</span>
                         <span class="absolute bottom-3 right-3 text-gold-accent/30 text-2xl select-none">❦</span>
 
-                        <div class="px-8 py-8 md:px-12 md:py-10">
-                            <p class="text-center text-gold-accent text-[10px] font-bold uppercase tracking-[0.4em] mb-6">
+                        <div class="px-8 py-10 md:px-12 md:py-12">
+                            <p class="text-center text-gold-accent text-[10px] font-bold uppercase tracking-[0.4em] mb-5">
                                 — {{ __('messages.donors_plaque_label') }} —
                             </p>
 
-                            <div class="grid grid-cols-3 gap-4 md:gap-8">
-                                <!-- Stat 1: Donators -->
-                                <div class="text-center">
-                                    <p class="text-white text-3xl md:text-5xl font-serif font-black tabular-nums leading-none">
-                                        {{ $totalDonators ?? 0 }}
-                                    </p>
-                                    <p class="text-gold-accent/70 text-[9px] md:text-[10px] font-bold uppercase tracking-[0.25em] mt-2">
-                                        {{ __('messages.donators') }}
-                                    </p>
-                                </div>
-                                <!-- Vertical divider -->
-                                <div class="text-center border-x border-gold-accent/20">
-                                    <p class="text-white text-3xl md:text-5xl font-serif font-black tabular-nums leading-none">
-                                        {{ number_format($totalTrees ?? 0) }}
-                                    </p>
-                                    <p class="text-gold-accent/70 text-[9px] md:text-[10px] font-bold uppercase tracking-[0.25em] mt-2">
-                                        {{ __('messages.trees') }}
-                                    </p>
-                                </div>
-                                <!-- Stat 3: Total support -->
-                                <div class="text-center">
-                                    <p class="text-white text-3xl md:text-5xl font-serif font-black tabular-nums leading-none">
-                                        ${{ number_format($totalFinancial ?? 0, 0) }}
-                                    </p>
-                                    <p class="text-gold-accent/70 text-[9px] md:text-[10px] font-bold uppercase tracking-[0.25em] mt-2">
-                                        {{ __('messages.total_support') }}
-                                    </p>
-                                </div>
+                            <div class="text-center">
+                                <p class="text-white font-serif font-black tabular-nums leading-none"
+                                    style="font-size: clamp(3rem, 9vw, 6rem);">
+                                    {{ number_format($totalDonators ?? 0) }}
+                                </p>
+                                <p class="text-gold-accent/70 text-[10px] md:text-xs font-bold uppercase tracking-[0.4em] mt-3">
+                                    {{ __('messages.donators') }}
+                                </p>
                             </div>
 
                             <!-- Bottom inscription -->
@@ -325,298 +305,103 @@
             </section>
         @endif
 
-        <section id="sponsors" class="py-32 px-6 md:px-12 lg:px-24 bg-white relative botanical-pattern scroll-mt-20">
-            <div class="negative-space-container">
-                <div class="text-center mb-20 space-y-4">
-                    <h4 class="text-gold-accent font-bold tracking-[0.4em] text-[10px] uppercase">
-                        {{ __('messages.institutional_support') }}</h4>
-                    <h2 class="text-5xl font-serif text-deep-green">{{ __('messages.our_visionary_sponsors') }}</h2>
-                    <div class="w-24 h-1 bg-gold-accent/30 mx-auto mt-6"></div>
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
-                    @forelse($featuredDonators->take(3) as $donator)
-                        <div
-                            class="md:col-span-{{ $loop->first ? '12 bg-stone-50 lg:col-span-8' : '6 bg-stone-50 lg:col-span-4' }} group h-full">
-                            <div
-                                class="glass-sponsor rounded-[2.5rem] p-10 {{ $loop->first ? 'lg:p-16 flex flex-col md:flex-row' : '' }} items-center gap-12 relative">
-                                @if ($loop->first)
-                                    <div class="absolute top-8 right-8 flex items-center gap-2">
-                                        <span
-                                            class="px-4 py-1.5 rounded-full bg-gold-accent/10 border border-gold-accent/20 text-gold-accent text-[9px] font-bold uppercase tracking-widest">{{ __('messages.lead_partner') }}</span>
-                                    </div>
-                                @endif
+        {{-- ===== WALL OF SUPPORTERS ===== --}}
+        <section id="sponsors" class="relative py-24 md:py-32 px-6 md:px-12 lg:px-24 overflow-hidden scroll-mt-20"
+            style="background: #fafaf5;">
 
-                                <div class="space-y-6">
-                                    <div class="flex justify-between items-start">
-                                        @if ($donator->profile_image)
-                                            <img alt="{{ $donator->full_name }} Profile"
-                                                class="max-h-12 w-auto rounded-full object-cover"
-                                                src="{{ asset('storage/' . $donator->profile_image) }}" />
-                                        @else
-                                            <div class="bg-deep-green/5 p-2 rounded-lg">
-                                                <span
-                                                    class="material-symbols-outlined text-deep-green text-3xl">person</span>
-                                            </div>
-                                        @endif
-
-                                        <span
-                                            class="px-3 py-1 rounded-full bg-stone-100 text-charcoal/60 text-[8px] font-bold uppercase tracking-widest">
-                                            {{ $donator->location_type ?? __('messages.supporter') }}
-                                        </span>
-                                    </div>
-                                    <div class="space-y-3">
-                                        <h3 class="text-xl font-serif text-deep-green">{{ $donator->full_name }}</h3>
-                                        <p class="text-charcoal/60 text-sm font-light leading-relaxed">
-                                            {{ $donator->impact ?? 'Dedicated supporter of Kabul\'s green restoration and environmental stewardship initiatives.' }}
-                                        </p>
-                                        @if ($donator->financial_support)
-                                            <p class="text-gold-accent font-semibold">
-                                                ${{ number_format($donator->financial_support, 2) }} •
-                                                {{ $donator->trees_sponsored }} Trees
-                                            </p>
-                                        @endif
-                                    </div>
-                                </div>
-
-                                @if (!$loop->first)
-                                    <div class="mt-8">
-                                        <span class="text-gold-accent font-bold text-[9px] uppercase tracking-widest">
-                                            {{ $donator->location ?? __('messages.international_support') }}
-                                        </span>
-                                    </div>
-                                @endif
-                            </div>
-                        </div>
-                    @empty
-                        <div class="md:col-span-12 text-center py-12">
-                            <p class="text-charcoal/60">{{ __('messages.no_featured_donators') }}</p>
-                        </div>
-                    @endforelse
-                </div>
+            {{-- Paper grain --}}
+            <div class="absolute inset-0 pointer-events-none opacity-[0.5]"
+                style="background-image: radial-gradient(rgba(6,46,34,0.04) 1px, transparent 1px); background-size: 14px 14px;">
             </div>
-        </section>
+            <span class="material-symbols-outlined absolute top-12 right-8 text-vibrant-lime/10 text-[10rem] select-none pointer-events-none floating hidden md:block">volunteer_activism</span>
+            <span class="material-symbols-outlined absolute bottom-16 left-8 text-gold-accent/10 text-[8rem] select-none pointer-events-none floating hidden lg:block" style="animation-delay: 3s;">forest</span>
 
-        <section class="py-24 px-6 md:px-12 lg:px-24 bg-white relative overflow-hidden">
-            <div class="negative-space-container">
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-                    <div class="relative group">
-                        <div
-                            class="absolute -inset-4 bg-gold-accent/5 rounded-[3rem] -z-10 group-hover:scale-105 transition-transform duration-700">
-                        </div>
-                        @forelse($featuredDonators->take(1) as $featuredDonator)
-                            @if ($featuredDonator->profile_image)
-                                <img alt="{{ $featuredDonator->full_name }} Portrait"
-                                    class="w-full h-[600px] object-cover rounded-[2.5rem] shadow-2xl grayscale-[0.2] hover:grayscale-0 transition-all duration-700"
-                                    src="{{ asset('storage/' . $featuredDonator->profile_image) }}" />
-                            @else
-                                <div
-                                    class="w-full h-[600px] bg-gradient-to-br from-deep-green/20 to-gold-accent/20 rounded-[2.5rem] shadow-2xl flex items-center justify-center">
-                                    <span class="material-symbols-outlined text-6xl text-deep-green">person</span>
-                                </div>
-                            @endif
-                        @empty
-                            <div
-                                class="w-full h-[600px] bg-gradient-to-br from-deep-green/20 to-gold-accent/20 rounded-[2.5rem] shadow-2xl flex items-center justify-center">
-                                <span class="material-symbols-outlined text-6xl text-deep-green">person</span>
-                            </div>
-                        @endforelse
-                    </div>
-                    <div class="space-y-8">
-                        <div class="space-y-4">
-                            <h4 class="text-gold-accent font-bold tracking-[0.4em] text-[10px] uppercase">
-                                {{ __('messages.individual_impact') }}</h4>
-                            <h2 class="text-5xl font-serif text-deep-green">{{ __('messages.making_a_difference') }}</h2>
-                            <div class="w-24 h-1 bg-gold-accent/30"></div>
-                        </div>
-                        @if ($topSupporter)
-                            <div class="space-y-6">
-                                <h3 class="text-3xl font-serif text-deep-green">{{ $topSupporter->full_name }}</h3>
-                                <p class="text-charcoal/70 text-lg leading-relaxed font-light">
-                                    {{ $topSupporter->impact ?? 'A passionate advocate for environmental conservation and sustainable urban development in Kabul.' }}
-                                </p>
-                                <div class="grid grid-cols-3 gap-8 py-8">
-                                    <div class="text-center">
-                                        <div class="text-3xl font-bold text-gold-accent">
-                                            {{ $topSupporter->trees_sponsored ?? 0 }}</div>
-                                        <div class="text-sm text-charcoal/60 uppercase tracking-wider">Trees Planted</div>
-                                    </div>
-                                    <div class="text-center">
-                                        <div class="text-3xl font-bold text-gold-accent">
-                                            ${{ number_format($topSupporter->financial_support ?? 0, 0) }}</div>
-                                        <div class="text-sm text-charcoal/60 uppercase tracking-wider">Support</div>
-                                    </div>
-                                    <div class="text-center">
-                                        <div class="text-3xl font-bold text-gold-accent">
-                                            {{ $topSupporter->location ?? 'Kabul' }}</div>
-                                        <div class="text-sm text-charcoal/60 uppercase tracking-wider">Location</div>
-                                    </div>
-                                </div>
-                            </div>
-                        @else
-                            <div class="space-y-6">
-                                <h3 class="text-3xl font-serif text-deep-green">Join Our Mission</h3>
-                                <p class="text-charcoal/70 text-lg leading-relaxed font-light">
-                                    Become part of our growing community of environmental stewards who are making a real
-                                    difference in Kabul's green future.
-                                </p>
-                            </div>
-                        @endif
-                    </div>
-                </div>
-            </div>
-        </section>
+            <div class="relative z-10 max-w-7xl mx-auto">
 
-        <section class="py-24 px-6 md:px-12 lg:px-24 bg-stone-50 relative">
-            <div class="negative-space-container">
-                <div class="text-center mb-16 space-y-4">
-                    <h4 class="text-gold-accent font-bold tracking-[0.4em] text-[10px] uppercase">
-                        {{ __('messages.community_of_support') }}</h4>
-                    <h2 class="text-5xl font-serif text-deep-green">{{ __('messages.all_our_donators') }}</h2>
-                    <div class="w-24 h-1 bg-gold-accent/30 mx-auto mt-6"></div>
-                    <div class="flex justify-center gap-6 md:gap-8 lg:gap-12 text-deep-green flex-wrap">
-                        <div class="text-center">
-                            <div class="text-2xl md:text-3xl font-bold">{{ $totalDonators }}</div>
-                            <div class="text-xs md:text-sm uppercase tracking-wider">{{ __('messages.donators') }}</div>
-                        </div>
-                        <div class="text-center">
-                            <div class="text-2xl md:text-3xl font-bold">{{ number_format($totalTrees) }}</div>
-                            <div class="text-xs md:text-sm uppercase tracking-wider">{{ __('messages.trees') }}</div>
-                        </div>
-                        <div class="text-center">
-                            <div class="text-2xl md:text-3xl font-bold">${{ number_format($totalFinancial, 0) }}</div>
-                            <div class="text-xs md:text-sm uppercase tracking-wider">{{ __('messages.total_support') }}
-                            </div>
-                        </div>
+                {{-- Editorial header --}}
+                <div class="text-center max-w-3xl mx-auto mb-14 md:mb-20">
+                    <p class="font-handwriting text-2xl md:text-3xl text-vibrant-lime mb-2 leading-none">
+                        ~ {{ __('messages.transparency_recognition') }} ~
+                    </p>
+                    <div class="inline-flex items-center gap-3 mb-5">
+                        <div class="h-[1px] w-10 bg-gold-accent/50"></div>
+                        <span class="text-gold-accent font-bold tracking-[0.4em] text-[10px] uppercase">{{ __('messages.community_of_support') }}</span>
+                        <div class="h-[1px] w-10 bg-gold-accent/50"></div>
                     </div>
+                    <h2 class="text-4xl sm:text-5xl md:text-6xl font-serif text-deep-green leading-[1.05]">
+                        {{ __('messages.all_our_donators') }}
+                    </h2>
                 </div>
 
+                @if ($verifiedDonators->count() > 0)
+                    {{-- Supporter cards: photo · name · impact --}}
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+                        @foreach ($verifiedDonators as $donator)
+                            <article class="group relative bg-white border border-deep-green/10 rounded-[1.75rem] p-8 text-center shadow-[0_10px_30px_rgba(6,46,34,0.06)] hover:shadow-[0_22px_55px_rgba(6,46,34,0.14)] hover:-translate-y-1.5 transition-all duration-500 overflow-hidden">
 
-                @include('partials.donators-table', ['verifiedDonators' => $verifiedDonators])
+                                {{-- Top accent --}}
+                                <div class="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-vibrant-lime via-deep-green to-gold-accent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
 
+                                {{-- Portrait --}}
+                                <div class="relative mx-auto mb-6 w-24 h-24">
+                                    <div class="absolute -inset-1.5 rounded-full bg-gradient-to-br from-gold-accent/30 to-vibrant-lime/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                                    @php
+                                        $fallbackAvatar = 'https://ui-avatars.com/api/?name=' . urlencode($donator->full_name)
+                                            . '&size=200&background=064e3b&color=ffffff&bold=true&font-size=0.4';
+                                        $avatarSrc = $donator->profile_image
+                                            ? asset('storage/' . ltrim($donator->profile_image, '/'))
+                                            : $fallbackAvatar;
+                                    @endphp
+                                    <img src="{{ $avatarSrc }}"
+                                        alt="{{ $donator->full_name }}"
+                                        loading="lazy"
+                                        onerror="this.onerror=null;this.src='{{ $fallbackAvatar }}';"
+                                        class="relative w-24 h-24 rounded-full object-cover bg-deep-green/5 ring-2 ring-gold-accent/20 group-hover:ring-gold-accent/50 transition-all duration-500">
+                                    {{-- Verified seal --}}
+                                    <span class="absolute -bottom-1 -end-1 w-7 h-7 rounded-full bg-vibrant-lime text-deep-green flex items-center justify-center shadow-md ring-2 ring-white">
+                                        <span class="material-symbols-outlined text-base">verified</span>
+                                    </span>
+                                </div>
+
+                                {{-- Name --}}
+                                <h3 class="font-serif text-xl md:text-2xl font-bold text-deep-green leading-tight mb-3">
+                                    {{ $donator->full_name }}
+                                </h3>
+
+                                {{-- Decorative divider --}}
+                                <div class="flex items-center justify-center gap-2 mb-4 text-gold-accent/50">
+                                    <span class="h-px w-6 bg-gold-accent/30"></span>
+                                    <span class="material-symbols-outlined text-sm">eco</span>
+                                    <span class="h-px w-6 bg-gold-accent/30"></span>
+                                </div>
+
+                                {{-- Impact --}}
+                                <p class="text-charcoal/70 text-sm leading-relaxed font-light italic">
+                                    {{ $donator->impact ?: __('messages.no_featured_donators') }}
+                                </p>
+                            </article>
+                        @endforeach
+                    </div>
+
+                    {{-- Pagination --}}
+                    @if ($verifiedDonators->hasPages())
+                        <div class="mt-14 flex justify-center">
+                            {{ $verifiedDonators->onEachSide(1)->links() }}
+                        </div>
+                    @endif
+                @else
+                    <div class="text-center py-16">
+                        <span class="material-symbols-outlined text-deep-green/20 text-6xl mb-3">groups</span>
+                        <p class="text-charcoal/60">{{ __('messages.no_featured_donators') }}</p>
+                    </div>
+                @endif
+
+                {{-- Closing note --}}
+                <p class="text-center mt-14 md:mt-16 font-handwriting text-xl md:text-2xl text-charcoal/55">
+                    ~ {{ __('messages.donors_inscription') }} ~
+                </p>
             </div>
         </section>
     </main>
 
-    @push('scripts')
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                const paginationContainer = document.getElementById('pagination-container');
-                const tableContainer = document.querySelector('.overflow-x-auto').parentElement;
-
-                if (paginationContainer) {
-                    paginationContainer.addEventListener('click', function(e) {
-                        // Find the closest anchor tag, checking both the target and its parents
-                        let target = e.target;
-                        let link = null;
-
-                        // Traverse up to find the link
-                        while (target && target !== paginationContainer) {
-                            if (target.tagName === 'A' && target.href) {
-                                link = target;
-                                break;
-                            }
-                            target = target.parentElement;
-                        }
-
-                        if (link && link.href) {
-                            e.preventDefault();
-                            e.stopPropagation();
-                            console.log('Loading page:', link.href);
-                            loadPage(link.href);
-                        }
-                    });
-                }
-
-                function loadPage(url) {
-                    if (!tableContainer) {
-                        console.error('Table container not found');
-                        window.location.href = url;
-                        return;
-                    }
-
-                    // Show loading state
-                    tableContainer.style.opacity = '0.5';
-
-                    const ajaxUrl = url + (url.includes('?') ? '&' : '?') + 'ajax=1';
-                    console.log('Fetching:', ajaxUrl);
-
-                    fetch(ajaxUrl, {
-                            headers: {
-                                'X-Requested-With': 'XMLHttpRequest',
-                                'Accept': 'text/html'
-                            }
-                        })
-                        .then(response => {
-                            console.log('Response status:', response.status);
-                            if (!response.ok) {
-                                throw new Error('HTTP error! status: ' + response.status);
-                            }
-                            return response.text();
-                        })
-                        .then(html => {
-                            console.log('Received HTML length:', html.length);
-                            console.log('HTML preview:', html.substring(0, 500));
-
-                            const parser = new DOMParser();
-                            const doc = parser.parseFromString(html, 'text/html');
-
-                            // Update table
-                            const newTable = doc.querySelector('.overflow-x-auto');
-                            console.log('Found new table:', newTable);
-
-                            if (newTable && tableContainer) {
-                                const currentTable = tableContainer.querySelector('.overflow-x-auto');
-                                if (currentTable) {
-                                    currentTable.replaceWith(newTable);
-                                    console.log('Table updated successfully');
-                                } else {
-                                    console.error('Could not find current table');
-                                }
-                            } else {
-                                console.error('Could not find new table, falling back to page reload');
-                                window.location.href = url;
-                                return;
-                            }
-
-                            // Update pagination
-                            const newPagination = doc.querySelector('#pagination-container');
-                            console.log('Found new pagination:', newPagination);
-
-                            if (newPagination && paginationContainer) {
-                                paginationContainer.innerHTML = newPagination.innerHTML;
-                                console.log('Pagination updated successfully');
-                            } else {
-                                console.error('Could not find new pagination');
-                            }
-
-                            // Update URL without reload
-                            history.pushState({}, '', url);
-
-                            // Remove loading state
-                            tableContainer.style.opacity = '1';
-
-                            // Scroll to top of table
-                            tableContainer.scrollIntoView({
-                                behavior: 'smooth',
-                                block: 'start'
-                            });
-                        })
-                        .catch(error => {
-                            console.error('Error loading page:', error);
-                            tableContainer.style.opacity = '1';
-                            // Fallback: reload the page
-                            window.location.href = url;
-                        });
-                }
-
-                // Handle browser back/forward buttons
-                window.addEventListener('popstate', function(e) {
-                    // Only load page if this is a genuine back/forward navigation
-                    if (e.state !== null) {
-                        loadPage(window.location.href);
-                    }
-                });
-            });
-        </script>
-    @endpush
 @endsection

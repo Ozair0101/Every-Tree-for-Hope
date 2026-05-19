@@ -15,7 +15,7 @@
                     <div class="flex-1">
                         <h3 class="text-sm font-medium text-gray-500 mb-1">Total Trees Planted</h3>
                         <p class="text-2xl font-bold text-gray-900">
-                            {{ number_format(App\Models\Donator::sum('trees_sponsored') + App\Models\Event::sum('trees_planted')) }}
+                            {{ number_format(App\Models\Event::sum('trees_planted')) }}
                         </p>
                     </div>
                     <div class="ml-4">
