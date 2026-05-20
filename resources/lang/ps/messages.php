@@ -28,6 +28,20 @@ return [
     'plant_a_tree_today' => 'نن یو نهال وکرئ',
     'view_our_projects' => 'زموږ پروژې وګورئ',
 
+    // Before & After Section
+    'before_after_eyebrow' => 'یو بدلون',
+    'before_after_kicker' => 'په دوو انځورونو کې یوه کیسه',
+    'before_after_title' => 'له وچې ځمکې څخه<br /><span class="italic font-bold">ژوندۍ هیلې ته.</span>',
+    'before_after_desc' => 'دوه انځورونه. د دوامدارې هڅې دوه موسمونه. هغه غونډۍ چې یوه ورځ خالي ولاړه وه، اوس بیا ساه اخلي — هر پاڼه یوه پوره شوې ژمنه ده.',
+    'before_label' => 'پخوا',
+    'after_label' => 'وروسته',
+    'before_year' => '۱۴۰۲',
+    'after_year' => '۱۴۰۵',
+    'before_caption' => 'د حاجي نبي ښارګوټی — وچ، لوڅ، په تمه.',
+    'after_caption' => 'همدا غونډۍ، اوس له نهالونو څخه ډکه.',
+    'slider_hint' => 'د پرتله کولو لپاره یې کش کړئ',
+    'before_after_stamp' => 'ثبت شوی · هره ونه د یوې هیلې لپاره',
+
     // Home Get Involved Cards
     'three_ways_to_help_title' => 'د <span class="italic font-light">بدلون</span> لپاره درې لارې',
     'three_ways_to_help_desc' => 'وټاکئ چې څنګه د افغانستان د شنګینې کېدو لپاره مرسته وکړئ. هر اقدام، کوچنی یا لوی، د راتلونکو نسلونو لپاره هیله راوړي.',
@@ -176,7 +190,6 @@ return [
     'accountability_in_every_petal' => 'په هره پاڼه کې پاسخګویي',
     'transparency_in_bloom' => 'په غوړیدو کې شفافیت.',
     'report_description' => 'د کابل په غونډیو کې زموږ د کار، اغیز او د هرې افغانۍ د لګښت ریښتیني راپور.',
-    'report' => 'راپور',
     'yearly_growth_by_numbers' => 'کلنۍ وده د شمیرو په ژبه',
     'all_time_report' => 'بشپړ راپور',
     'download_report' => 'راپور ډاونلوډ کړئ',

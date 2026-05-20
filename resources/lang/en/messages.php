@@ -29,6 +29,20 @@ return [
     'plant_a_tree_today' => 'Plant a Tree Today',
     'view_our_projects' => 'View Our Projects',
 
+    // Before & After Section
+    'before_after_eyebrow' => 'The Transformation',
+    'before_after_kicker' => 'The story in two frames',
+    'before_after_title' => 'From Barren Ground<br /><span class="italic font-bold">To Living Hope.</span>',
+    'before_after_desc' => 'Two photographs. Two seasons of patient work. The hillside that once stood empty is breathing again — every leaf a promise kept.',
+    'before_label' => 'Before',
+    'after_label' => 'After',
+    'before_year' => '2023',
+    'after_year' => '2026',
+    'before_caption' => 'Sharak Haji Nabi — dry, exposed, waiting.',
+    'after_caption' => 'The same hillside, now alive with saplings.',
+    'slider_hint' => 'Drag to compare',
+    'before_after_stamp' => 'Documented · Every Tree for a Hope',
+
     // Home Get Involved Cards
     'three_ways_to_help_title' => 'Three Ways to <span class="italic font-light">Make an Impact</span>',
     'three_ways_to_help_desc' => 'Choose how you want to contribute to a greener Afghanistan. Every action, big or small, plants hope for future generations.',

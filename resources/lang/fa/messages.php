@@ -29,6 +29,20 @@ return [
     'plant_a_tree_today' => 'همین حالا یک نهال بکارید',
     'view_our_projects' => 'پروژه‌های ما را ببینید',
 
+    // Before & After Section
+    'before_after_eyebrow' => 'یک دگرگونی',
+    'before_after_kicker' => 'یک داستان در دو قاب',
+    'before_after_title' => 'از زمین خشک<br /><span class="italic font-bold">به امید زنده.</span>',
+    'before_after_desc' => 'دو عکس. دو فصل تلاش پیوسته. تپه‌ای که روزی خالی ایستاده بود، دوباره نفس می‌کشد — هر برگ یک وعدهٔ به‌جا مانده.',
+    'before_label' => 'پیش از',
+    'after_label' => 'پس از',
+    'before_year' => '۱۴۰۲',
+    'after_year' => '۱۴۰۵',
+    'before_caption' => 'شهرک حاجی نبی — خشک، برهنه، در انتظار.',
+    'after_caption' => 'همان تپه، اکنون پر از نهال‌های سبز.',
+    'slider_hint' => 'برای مقایسه بکشید',
+    'before_after_stamp' => 'ثبت‌شده · هر درخت برای یک امید',
+
     // Home Get Involved Cards
     'three_ways_to_help_title' => 'سه راه برای <span class="italic font-light">ایجاد تغییر</span>',
     'three_ways_to_help_desc' => 'انتخاب کنید چگونه می‌خواهید به افغانستان سبزتر کمک کنید. هر اقدام، کوچک یا بزرگ، امیدی برای نسل‌های آینده می‌کارد.',

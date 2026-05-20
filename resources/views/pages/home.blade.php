@@ -219,6 +219,8 @@
     </section>
     <!-- ===== END HERO SECTION ===== -->
 
+    @include('partials.before-after')
+
     @include('partials.future-events', ['limit' => 4])
 
     <!-- ===== GET INVOLVED CARDS SECTION ===== -->
@@ -659,8 +661,8 @@
 
                     <!-- Image: 1 col × 1 row -->
                     <div class="group relative overflow-hidden rounded-2xl shadow-lg cursor-pointer gallery-item"
-                        onclick="openLightbox('{{ asset('images/7.jpeg') }}', '{{ __('messages.gallery_img_growth') }}', '{{ __('messages.gallery_img_growth_desc') }}')">
-                        <img src="{{ asset('images/7.jpeg') }}" alt="Seedling Care"
+                        onclick="openLightbox('{{ asset('images/62.jpeg') }}', '{{ __('messages.gallery_img_growth') }}', '{{ __('messages.gallery_img_growth_desc') }}')">
+                        <img src="{{ asset('images/62.jpeg') }}" alt="Seedling Care"
                             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
                         <div class="absolute inset-0 transition-opacity duration-500 opacity-0 group-hover:opacity-100"
                             style="background: linear-gradient(to top, rgba(6,78,59,0.8), transparent 70%)"></div>
@@ -673,8 +675,8 @@
 
                     <!-- Image: 2 cols × 1 row (wide) -->
                     <div class="col-span-2 group relative overflow-hidden rounded-2xl shadow-lg cursor-pointer gallery-item"
-                        onclick="openLightbox('{{ asset('images/27.jpeg') }}', '{{ __('messages.gallery_img_landscape') }}', '{{ __('messages.gallery_img_landscape_desc') }}')">
-                        <img src="{{ asset('images/27.jpeg') }}" alt="Kabul Hills"
+                        onclick="openLightbox('{{ asset('images/60.jpeg') }}', '{{ __('messages.gallery_img_landscape') }}', '{{ __('messages.gallery_img_landscape_desc') }}')">
+                        <img src="{{ asset('images/60.jpeg') }}" alt="Kabul Hills"
                             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
                         <div class="absolute inset-0 transition-opacity duration-500 opacity-0 group-hover:opacity-100"
                             style="background: linear-gradient(to top, rgba(6,78,59,0.8), transparent 60%)"></div>
@@ -688,8 +690,8 @@
 
                     <!-- Image: 1 col × 1 row -->
                     <div class="group relative overflow-hidden rounded-2xl shadow-lg cursor-pointer gallery-item"
-                        onclick="openLightbox('{{ asset('images/3.jpeg') }}', '{{ __('messages.gallery_img_together') }}', '{{ __('messages.gallery_img_together_desc') }}')">
-                        <img src="{{ asset('images/3.jpeg') }}" alt="Teamwork"
+                        onclick="openLightbox('{{ asset('images/64.jpeg') }}', '{{ __('messages.gallery_img_together') }}', '{{ __('messages.gallery_img_together_desc') }}')">
+                        <img src="{{ asset('images/64.jpeg') }}" alt="Teamwork"
                             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
                         <div class="absolute inset-0 transition-opacity duration-500 opacity-0 group-hover:opacity-100"
                             style="background: linear-gradient(to top, rgba(6,78,59,0.8), transparent 70%)"></div>
@@ -702,8 +704,8 @@
 
                     <!-- Image: 1 col × 1 row -->
                     <div class="group relative overflow-hidden rounded-2xl shadow-lg cursor-pointer gallery-item"
-                        onclick="openLightbox('{{ asset('images/14.jpeg') }}', '{{ __('messages.gallery_img_roots') }}', '{{ __('messages.gallery_img_roots_desc') }}')">
-                        <img src="{{ asset('images/14.jpeg') }}" alt="Planting Roots"
+                        onclick="openLightbox('{{ asset('images/56.jpeg') }}', '{{ __('messages.gallery_img_roots') }}', '{{ __('messages.gallery_img_roots_desc') }}')">
+                        <img src="{{ asset('images/56.jpeg') }}" alt="Planting Roots"
                             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
                         <div class="absolute inset-0 transition-opacity duration-500 opacity-0 group-hover:opacity-100"
                             style="background: linear-gradient(to top, rgba(6,78,59,0.8), transparent 70%)"></div>
@@ -730,8 +732,8 @@
 
                     <!-- Image: 1 col × 1 row -->
                     <div class="group relative overflow-hidden rounded-2xl shadow-lg cursor-pointer gallery-item"
-                        onclick="openLightbox('{{ asset('images/21.jpeg') }}', '{{ __('messages.gallery_img_united') }}', '{{ __('messages.gallery_img_united_desc') }}')">
-                        <img src="{{ asset('images/21.jpeg') }}" alt="Collaboration"
+                        onclick="openLightbox('{{ asset('images/20.jpeg') }}', '{{ __('messages.gallery_img_united') }}', '{{ __('messages.gallery_img_united_desc') }}')">
+                        <img src="{{ asset('images/20.jpeg') }}" alt="Collaboration"
                             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
                         <div class="absolute inset-0 transition-opacity duration-500 opacity-0 group-hover:opacity-100"
                             style="background: linear-gradient(to top, rgba(6,78,59,0.8), transparent 70%)"></div>
@@ -758,8 +760,8 @@
 
                     <!-- Image: 1 col × 1 row -->
                     <div class="group relative overflow-hidden rounded-2xl shadow-lg cursor-pointer gallery-item hidden md:block"
-                        onclick="openLightbox('{{ asset('images/23.jpeg') }}', '{{ __('messages.gallery_img_hands') }}', '{{ __('messages.gallery_img_hands_desc') }}')">
-                        <img src="{{ asset('images/23.jpeg') }}" alt="A Forest of Hands"
+                        onclick="openLightbox('{{ asset('images/55.jpeg') }}', '{{ __('messages.gallery_img_hands') }}', '{{ __('messages.gallery_img_hands_desc') }}')">
+                        <img src="{{ asset('images/55.jpeg') }}" alt="A Forest of Hands"
                             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
                         <div class="absolute inset-0 transition-opacity duration-500 opacity-0 group-hover:opacity-100"
                             style="background: linear-gradient(to top, rgba(6,78,59,0.8), transparent 70%)"></div>
@@ -786,8 +788,8 @@
 
                     <!-- Image: 1 col × 1 row -->
                     <div class="group relative overflow-hidden rounded-2xl shadow-lg cursor-pointer gallery-item hidden md:block"
-                        onclick="openLightbox('{{ asset('images/18.jpeg') }}', '{{ __('messages.gallery_img_hands') }}', '{{ __('messages.gallery_img_hands_desc') }}')">
-                        <img src="{{ asset('images/18.jpeg') }}" alt="A Forest of Hands"
+                        onclick="openLightbox('{{ asset('images/67.jpeg') }}', '{{ __('messages.gallery_img_hands') }}', '{{ __('messages.gallery_img_hands_desc') }}')">
+                        <img src="{{ asset('images/67.jpeg') }}" alt="A Forest of Hands"
                             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
                         <div class="absolute inset-0 transition-opacity duration-500 opacity-0 group-hover:opacity-100"
                             style="background: linear-gradient(to top, rgba(6,78,59,0.8), transparent 70%)"></div>

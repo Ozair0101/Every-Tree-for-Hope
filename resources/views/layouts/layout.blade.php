@@ -335,7 +335,7 @@
                         class="h-10 sm:h-12 w-auto flex-shrink-0">
                     <h2
                         class="text-base sm:text-lg lg:text-xl font-bold text-gray-900 dark:text-white whitespace-nowrap">
-                       {{ __('messages.site_name') }}</h2>
+                        {{ __('messages.site_name') }}</h2>
                 </a>
 
                 <!-- Desktop Navigation -->
@@ -348,10 +348,13 @@
                         <button type="button"
                             class="inline-flex items-center gap-1 text-sm font-medium hover:text-primary transition-colors whitespace-nowrap">
                             {{ __('messages.nav_group_about') }}
-                            <span class="material-symbols-outlined text-base group-hover:rotate-180 transition-transform">expand_more</span>
+                            <span
+                                class="material-symbols-outlined text-base group-hover:rotate-180 transition-transform">expand_more</span>
                         </button>
-                        <div class="absolute left-0 top-full pt-2 w-56 invisible opacity-0 group-hover:visible group-hover:opacity-100 transition-all z-50">
-                            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl border border-gray-200 dark:border-gray-700 py-2 overflow-hidden">
+                        <div
+                            class="absolute left-0 top-full pt-2 w-56 invisible opacity-0 group-hover:visible group-hover:opacity-100 transition-all z-50">
+                            <div
+                                class="bg-white dark:bg-gray-800 rounded-lg shadow-xl border border-gray-200 dark:border-gray-700 py-2 overflow-hidden">
                                 <a href="{{ route('about') }}"
                                     class="flex items-center gap-3 px-4 py-2.5 text-sm hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 hover:text-primary transition-colors">
                                     <span class="material-symbols-outlined text-base text-deep-green/70">info</span>
@@ -359,7 +362,8 @@
                                 </a>
                                 <a href="{{ route('history') }}"
                                     class="flex items-center gap-3 px-4 py-2.5 text-sm hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 hover:text-primary transition-colors">
-                                    <span class="material-symbols-outlined text-base text-deep-green/70">auto_stories</span>
+                                    <span
+                                        class="material-symbols-outlined text-base text-deep-green/70">auto_stories</span>
                                     {{ __('messages.our_story') }}
                                 </a>
                             </div>
@@ -371,31 +375,37 @@
                         <button type="button"
                             class="inline-flex items-center gap-1 text-sm font-medium hover:text-primary transition-colors whitespace-nowrap">
                             {{ __('messages.nav_group_our_work') }}
-                            <span class="material-symbols-outlined text-base group-hover:rotate-180 transition-transform">expand_more</span>
+                            <span
+                                class="material-symbols-outlined text-base group-hover:rotate-180 transition-transform">expand_more</span>
                         </button>
-                        <div class="absolute left-0 top-full pt-2 w-60 invisible opacity-0 group-hover:visible group-hover:opacity-100 transition-all z-50">
-                            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl border border-gray-200 dark:border-gray-700 py-2 overflow-hidden">
+                        <div
+                            class="absolute left-0 top-full pt-2 w-60 invisible opacity-0 group-hover:visible group-hover:opacity-100 transition-all z-50">
+                            <div
+                                class="bg-white dark:bg-gray-800 rounded-lg shadow-xl border border-gray-200 dark:border-gray-700 py-2 overflow-hidden">
                                 <a href="{{ route('gallery') }}"
                                     class="flex items-center gap-3 px-4 py-2.5 text-sm hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 hover:text-primary transition-colors">
-                                    <span class="material-symbols-outlined text-base text-deep-green/70">photo_library</span>
+                                    <span
+                                        class="material-symbols-outlined text-base text-deep-green/70">photo_library</span>
                                     {{ __('messages.works') }}
                                 </a>
                                 <a href="{{ route('report') }}"
                                     class="flex items-center gap-3 px-4 py-2.5 text-sm hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 hover:text-primary transition-colors">
-                                    <span class="material-symbols-outlined text-base text-deep-green/70">analytics</span>
+                                    <span
+                                        class="material-symbols-outlined text-base text-deep-green/70">analytics</span>
                                     {{ __('messages.report') }}
                                 </a>
                                 <a href="{{ route('awareness') }}"
                                     class="flex items-center gap-3 px-4 py-2.5 text-sm hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 hover:text-primary transition-colors">
-                                    <span class="material-symbols-outlined text-base text-vibrant-lime">menu_book</span>
+                                    <span
+                                        class="material-symbols-outlined text-base text-vibrant-lime">menu_book</span>
                                     {{ __('messages.nav_awareness') }}
                                 </a>
                             </div>
                         </div>
                     </div>
 
-                    <a class="text-sm font-medium hover:text-primary transition-colors whitespace-nowrap"
-                        href="{{ route('donators') }}">{{ __('messages.donators') }}</a>
+                    {{-- <a class="text-sm font-medium hover:text-primary transition-colors whitespace-nowrap"
+                        href="{{ route('donators') }}">{{ __('messages.donators') }}</a> --}}
                     <a class="text-sm font-medium hover:text-primary transition-colors whitespace-nowrap"
                         href="{{ route('contact') }}">{{ __('messages.contact') }}</a>
                     <a class="text-sm font-medium hover:text-primary transition-colors whitespace-nowrap"
@@ -486,8 +496,8 @@
 
                     {{-- Mobile: standalone items --}}
                     <div class="pt-3 mt-2 border-t border-gray-200 dark:border-gray-700"></div>
-                    <a class="block text-sm font-medium hover:text-primary transition-colors py-2"
-                        href="{{ route('donators') }}">{{ __('messages.donators') }}</a>
+                    {{-- <a class="block text-sm font-medium hover:text-primary transition-colors py-2"
+                        href="{{ route('donators') }}">{{ __('messages.donators') }}</a> --}}
                     <a class="block text-sm font-medium hover:text-primary transition-colors py-2"
                         href="{{ route('contact') }}">{{ __('messages.contact') }}</a>
                     <a class="block text-sm font-medium hover:text-primary transition-colors py-2"
@@ -528,7 +538,8 @@
             <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-16 mb-20 relative z-10">
                 <div class="space-y-6">
                     <div class="flex items-center gap-2">
-                        <img src="{{ asset('everytree.png') }}" alt="{{ __('messages.site_name') }}" class="h-16 w-auto">
+                        <img src="{{ asset('everytree.png') }}" alt="{{ __('messages.site_name') }}"
+                            class="h-16 w-auto">
                         <h3 class="text-white text-xl font-extrabold tracking-tight">{{ __('messages.site_name') }}
                         </h3>
                     </div>
