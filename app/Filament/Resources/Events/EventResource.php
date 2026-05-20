@@ -279,10 +279,36 @@ class EventResource extends Resource
                     ->helperText('Add one entry per volunteer. You can add as many as you like.')
                     ->columnSpanFull(),
                 Components\TextInput::make('sponsor_partner')
-                    ->label('Sponsor/Partner')
+                    ->label('Sponsor/Partner (free text)')
                     ->maxLength(255)
-                    ->helperText('Name of sponsoring organization or partner')
+                    ->helperText('Optional free-text label. For linked sponsors use the fields below.')
                     ->columnSpanFull(),
+
+                Section::make('Event Sponsors')
+                    ->description('Link the donators / partners who funded this event. They can later look it up using their sponsor code.')
+                    ->icon('heroicon-o-hand-raised')
+                    ->columnSpanFull()
+                    ->schema([
+                        Components\Select::make('donators')
+                            ->label('Sponsoring Donators')
+                            ->relationship('donators', 'full_name')
+                            ->multiple()
+                            ->searchable()
+                            ->preload()
+                            ->getOptionLabelFromRecordUsing(fn ($record) => $record->full_name . ' — ' . $record->code)
+                            ->helperText('Search by name; each donator has a unique sponsor code.')
+                            ->columnSpanFull(),
+                        Components\Select::make('partners')
+                            ->label('Sponsoring Partners')
+                            ->relationship('partners', 'company_name')
+                            ->multiple()
+                            ->searchable()
+                            ->preload()
+                            ->getOptionLabelFromRecordUsing(fn ($record) => $record->company_name . ' — ' . $record->code)
+                            ->helperText('Search by company; each partner has a unique sponsor code.')
+                            ->columnSpanFull(),
+                    ])
+                    ->columns(1),
                 Components\TextInput::make('video_url')
                     ->label('Video URL')
                     ->url()

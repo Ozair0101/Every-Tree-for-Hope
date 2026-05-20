@@ -630,6 +630,17 @@ return [
     'future_share_copied' => 'لینک کاپي شو!',
     'future_next_up' => 'راتلونکې پېښه',
     'future_more_dates' => 'نورې نېټې',
+
+    // د سپانسر کوډ لټون (ګالري)
+    'sponsor_lookup_title' => 'ایا تاسو سپانسر یاست؟',
+    'sponsor_lookup_desc' => 'هغه سپانسر کوډ ولیکئ چې موږ درکړی ترڅو هغه پېښې وګورئ چې تاسو ملاتړ کړی.',
+    'sponsor_lookup_placeholder' => 'بېلګه: ETH-AB12CD',
+    'sponsor_lookup_btn' => 'زما پېښې ومومئ',
+    'sponsor_lookup_not_found' => 'په دې کوډ سره هیڅ سپانسر ونه موندل شو. مهرباني وکړئ بیا یې وګورئ.',
+    'sponsor_lookup_showing' => 'د :name په ملاتړ',
+    'sponsor_lookup_their_events' => 'هغه پېښې چې تاسو ممکنې کړې',
+    'sponsor_lookup_view_all' => 'ټولې پېښې وګورئ',
+    'sponsor_lookup_no_events' => 'تر اوسه هیڅ پېښه له دې سپانسر سره نه ده تړل شوې.',
     'future_register_btn' => 'د ګډون لپاره راجستر شه',
     'future_register_eyebrow' => 'خپله ځای خوندي کړه',
     'future_register_subtitle' => 'لنډ او دوستانه. ستاسو معلومات یوازې د ونه‌کاروونکې ډلې سره پاتې کیږي.',

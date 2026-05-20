@@ -42,13 +42,69 @@
         @include('partials.future-events', ['limit' => 6])
 
         <!-- Events Grid -->
-        <section class="py-16 max-w-7xl mx-auto px-6">
-            <div class="text-center mb-12">
-                <h2 class="text-4xl md:text-5xl font-serif text-deep-green mb-4">{{ __('messages.all_our_events') }}</h2>
-                <p class="text-lg text-charcoal/70 max-w-2xl mx-auto">{{ __('messages.browse_events_description') }}</p>
+        <section id="sponsor-results" class="py-16 max-w-7xl mx-auto px-6 scroll-mt-24">
+
+            {{-- Sponsor code lookup --}}
+            <div class="max-w-2xl mx-auto mb-12">
+                <div class="bg-white border border-deep-green/10 rounded-2xl shadow-[0_10px_30px_rgba(6,46,34,0.06)] p-6 md:p-8">
+                    <div class="text-center mb-5">
+                        <span class="material-symbols-outlined text-gold-accent text-3xl">redeem</span>
+                        <h3 class="font-serif text-xl md:text-2xl font-bold text-deep-green mt-1">
+                            {{ __('messages.sponsor_lookup_title') }}
+                        </h3>
+                        <p class="text-charcoal/60 text-sm mt-1">
+                            {{ __('messages.sponsor_lookup_desc') }}
+                        </p>
+                    </div>
+                    <form method="GET" action="{{ route('gallery') }}"
+                        class="sponsor-search-form flex flex-col sm:flex-row gap-3">
+                        <input type="text" name="sponsor_code" value="{{ $sponsorCode ?? '' }}"
+                            placeholder="{{ __('messages.sponsor_lookup_placeholder') }}"
+                            class="flex-1 bg-transparent border-2 border-deep-green/15 rounded-full px-5 py-3 text-center sm:text-start uppercase tracking-widest text-deep-green font-bold placeholder:font-normal placeholder:tracking-normal placeholder:text-charcoal/35 focus:border-deep-green focus:ring-0 focus:outline-none transition-colors">
+                        <button type="submit"
+                            class="inline-flex items-center justify-center gap-2 px-7 py-3 bg-deep-green text-white text-xs font-extrabold tracking-[0.2em] uppercase rounded-full shadow-md shadow-deep-green/20 hover:bg-deep-green/90 hover:-translate-y-0.5 transition-all">
+                            <span class="material-symbols-outlined text-base">search</span>
+                            {{ __('messages.sponsor_lookup_btn') }}
+                        </button>
+                    </form>
+
+                    @if (!empty($sponsorNotFound) && $sponsorNotFound)
+                        <div class="mt-5 flex items-center gap-2 justify-center text-sm text-red-600 bg-red-50 border border-red-200 rounded-xl px-4 py-3">
+                            <span class="material-symbols-outlined text-base">error</span>
+                            {{ __('messages.sponsor_lookup_not_found') }}
+                        </div>
+                    @endif
+                </div>
             </div>
 
-            @include('partials.events-grid', ['events' => $events])
+            <div class="text-center mb-12">
+                @if (!empty($sponsor))
+                    <span class="inline-flex items-center gap-2 px-4 py-1.5 mb-4 rounded-full bg-vibrant-lime/15 border border-vibrant-lime/30 text-deep-green text-[11px] font-bold uppercase tracking-widest">
+                        <span class="material-symbols-outlined text-sm">verified</span>
+                        {{ __('messages.sponsor_lookup_showing', ['name' => $sponsorName]) }}
+                    </span>
+                    <h2 class="text-4xl md:text-5xl font-serif text-deep-green mb-4">
+                        {{ __('messages.sponsor_lookup_their_events') }}
+                    </h2>
+                    <a href="{{ route('gallery') }}"
+                        class="inline-flex items-center gap-1 text-sm font-bold text-deep-green/70 hover:text-deep-green underline decoration-gold-accent decoration-2 underline-offset-4">
+                        <span class="material-symbols-outlined text-base">arrow_back</span>
+                        {{ __('messages.sponsor_lookup_view_all') }}
+                    </a>
+                @else
+                    <h2 class="text-4xl md:text-5xl font-serif text-deep-green mb-4">{{ __('messages.all_our_events') }}</h2>
+                    <p class="text-lg text-charcoal/70 max-w-2xl mx-auto">{{ __('messages.browse_events_description') }}</p>
+                @endif
+            </div>
+
+            @if (!empty($sponsor) && $events->isEmpty())
+                <div class="text-center py-16">
+                    <span class="material-symbols-outlined text-deep-green/20 text-6xl mb-3">park</span>
+                    <p class="text-charcoal/60">{{ __('messages.sponsor_lookup_no_events') }}</p>
+                </div>
+            @else
+                @include('partials.events-grid', ['events' => $events])
+            @endif
         </section>
 
         @include('partials.little-guardians')
@@ -57,126 +113,88 @@
     @push('scripts')
         <script>
             document.addEventListener('DOMContentLoaded', function() {
-                const paginationContainer = document.getElementById('pagination-container');
-                const eventsGrid = document.querySelector('.grid.grid-cols-1');
+                const results = document.getElementById('sponsor-results');
+                if (!results) return;
 
-                console.log('Pagination container:', paginationContainer);
-                console.log('Events grid:', eventsGrid);
-
-                if (paginationContainer) {
-                    paginationContainer.addEventListener('click', function(e) {
-                        // Find the closest anchor tag, checking both the target and its parents
-                        let target = e.target;
-                        let link = null;
-
-                        // Traverse up to find the link
-                        while (target && target !== paginationContainer) {
-                            if (target.tagName === 'A' && target.href) {
-                                link = target;
-                                break;
-                            }
-                            target = target.parentElement;
-                        }
-
-                        if (link && link.href) {
-                            e.preventDefault();
-                            e.stopPropagation();
-                            console.log('Loading page:', link.href);
-                            loadPage(link.href);
-                        }
-                    });
-                }
-
-                function loadPage(url) {
-                    if (!eventsGrid) {
-                        console.error('Events grid not found');
-                        window.location.href = url;
-                        return;
+                // On a direct/shared sponsor-code URL, jump straight to the results.
+                try {
+                    const p = new URLSearchParams(window.location.search);
+                    if (p.has('sponsor_code') && p.get('sponsor_code').trim() !== '') {
+                        setTimeout(function() {
+                            results.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        }, 150);
                     }
+                } catch (e) { /* no-op */ }
 
-                    // Show loading state
-                    eventsGrid.style.opacity = '0.5';
+                let loading = false;
 
-                    const ajaxUrl = url + (url.includes('?') ? '&' : '?') + 'ajax=1';
-                    console.log('Fetching:', ajaxUrl);
+                function loadResults(url, push) {
+                    if (loading) return;
+                    loading = true;
+                    results.style.opacity = '0.5';
+                    results.style.pointerEvents = 'none';
 
-                    fetch(ajaxUrl, {
-                            headers: {
-                                'X-Requested-With': 'XMLHttpRequest',
-                                'Accept': 'text/html'
-                            }
+                    // Note: no X-Requested-With header — we want the full page
+                    // so we can extract the whole #sponsor-results section
+                    // (banner, heading, grid, pagination, empty/not-found states).
+                    fetch(url, {
+                            headers: { 'Accept': 'text/html' },
+                            credentials: 'same-origin'
                         })
-                        .then(response => {
-                            console.log('Response status:', response.status);
-                            if (!response.ok) {
-                                throw new Error('HTTP error! status: ' + response.status);
-                            }
-                            return response.text();
+                        .then(function(r) {
+                            if (!r.ok) throw new Error('HTTP ' + r.status);
+                            return r.text();
                         })
-                        .then(html => {
-                            console.log('Received HTML length:', html.length);
-                            console.log('HTML preview:', html.substring(0, 500));
-
-                            const parser = new DOMParser();
-                            const doc = parser.parseFromString(html, 'text/html');
-
-                            // Try multiple selectors to find the grid
-                            let newEventsGrid = doc.querySelector('.grid.grid-cols-1');
-                            if (!newEventsGrid) {
-                                newEventsGrid = doc.querySelector('[class*="grid-cols-1"]');
-                            }
-                            if (!newEventsGrid) {
-                                newEventsGrid = doc.querySelector('.grid');
-                            }
-
-                            console.log('Found new events grid:', newEventsGrid);
-
-                            if (newEventsGrid && eventsGrid) {
-                                eventsGrid.innerHTML = newEventsGrid.innerHTML;
-                                console.log('Events grid updated successfully');
-                            } else {
-                                console.error('Could not find new events grid, falling back to page reload');
+                        .then(function(html) {
+                            const doc = new DOMParser().parseFromString(html, 'text/html');
+                            const fresh = doc.getElementById('sponsor-results');
+                            if (!fresh) {
                                 window.location.href = url;
                                 return;
                             }
-
-                            // Update pagination
-                            const newPagination = doc.querySelector('#pagination-container');
-                            console.log('Found new pagination:', newPagination);
-
-                            if (newPagination && paginationContainer) {
-                                paginationContainer.innerHTML = newPagination.innerHTML;
-                                console.log('Pagination updated successfully');
-                            } else {
-                                console.error('Could not find new pagination');
-                            }
-
-                            // Update URL without reload
-                            history.pushState({}, '', url);
-
-                            // Remove loading state
-                            eventsGrid.style.opacity = '1';
-
-                            // Scroll to top of events section
-                            eventsGrid.scrollIntoView({
-                                behavior: 'smooth',
-                                block: 'start'
-                            });
+                            results.innerHTML = fresh.innerHTML;
+                            if (push !== false) history.pushState({ url: url }, '', url);
+                            results.style.opacity = '1';
+                            results.style.pointerEvents = '';
+                            results.scrollIntoView({ behavior: 'smooth', block: 'start' });
                         })
-                        .catch(error => {
-                            console.error('Error loading page:', error);
-                            eventsGrid.style.opacity = '1';
-                            // Fallback: reload the page
+                        .catch(function() {
+                            // Graceful fallback to a normal navigation
                             window.location.href = url;
+                        })
+                        .finally(function() {
+                            loading = false;
                         });
                 }
 
-                // Handle browser back/forward buttons
-                window.addEventListener('popstate', function(e) {
-                    // Only load page if this is a genuine back/forward navigation
-                    if (e.state !== null) {
-                        loadPage(window.location.href);
-                    }
+                // Listeners are bound to the persistent #sponsor-results element,
+                // so they keep working after its innerHTML is swapped.
+
+                // 1. Sponsor-code search submitted via AJAX
+                results.addEventListener('submit', function(e) {
+                    const form = e.target.closest('.sponsor-search-form');
+                    if (!form) return;
+                    e.preventDefault();
+                    const input = form.querySelector('input[name="sponsor_code"]');
+                    const value = input ? input.value.trim() : '';
+                    const base = form.getAttribute('action') || window.location.pathname;
+                    const url = base + (value ? ('?sponsor_code=' + encodeURIComponent(value)) : '');
+                    loadResults(url, true);
+                });
+
+                // 2. Pagination links loaded via AJAX (query string preserved server-side)
+                results.addEventListener('click', function(e) {
+                    const pager = e.target.closest('#pagination-container');
+                    if (!pager) return;
+                    const link = e.target.closest('a[href]');
+                    if (!link) return;
+                    e.preventDefault();
+                    loadResults(link.href, true);
+                });
+
+                // 3. Browser back/forward
+                window.addEventListener('popstate', function() {
+                    loadResults(window.location.href, false);
                 });
             });
         </script>

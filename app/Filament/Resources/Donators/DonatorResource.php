@@ -68,7 +68,7 @@ class DonatorResource extends Resource
 
     public static function getGloballySearchableAttributes(): array
     {
-        return ['full_name', 'email', 'location'];
+        return ['full_name', 'code', 'location'];
     }
 
     public static function getRedirectUrl(): string

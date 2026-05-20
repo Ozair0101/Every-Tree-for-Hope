@@ -17,6 +17,13 @@ class PartnersTable
             ->columns([
                 TextColumn::make('company_name')
                     ->searchable(),
+                TextColumn::make('code')
+                    ->label('Sponsor Code')
+                    ->badge()
+                    ->color('warning')
+                    ->copyable()
+                    ->copyMessage('Sponsor code copied')
+                    ->searchable(),
                 TextColumn::make('logo')
                     ->searchable(),
                 IconColumn::make('is_active')

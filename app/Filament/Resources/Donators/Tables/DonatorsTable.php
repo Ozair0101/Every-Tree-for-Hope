@@ -34,6 +34,14 @@ class DonatorsTable
                     ->weight('bold')
                     ->grow(true),
 
+                TextColumn::make('code')
+                    ->label('Sponsor Code')
+                    ->badge()
+                    ->color('warning')
+                    ->copyable()
+                    ->copyMessage('Sponsor code copied')
+                    ->searchable(),
+
                 TextColumn::make('location')
                     ->label('Location')
                     ->searchable()

@@ -654,6 +654,17 @@ return [
     'future_share_copied' => 'Link copied!',
     'future_next_up' => 'Next up',
     'future_more_dates' => 'More dates',
+
+    // Sponsor code lookup (gallery)
+    'sponsor_lookup_title' => 'Are you a sponsor?',
+    'sponsor_lookup_desc' => 'Enter the sponsor code we gave you to see the events you funded.',
+    'sponsor_lookup_placeholder' => 'e.g. ETH-AB12CD',
+    'sponsor_lookup_btn' => 'Find my events',
+    'sponsor_lookup_not_found' => 'No sponsor found with that code. Please check it and try again.',
+    'sponsor_lookup_showing' => 'Sponsored by :name',
+    'sponsor_lookup_their_events' => 'Events you made possible',
+    'sponsor_lookup_view_all' => 'View all events',
+    'sponsor_lookup_no_events' => 'No events are linked to this sponsor yet.',
     'future_register_btn' => 'Register to Participate',
     'future_register_eyebrow' => 'reserve your spot',
     'future_register_subtitle' => 'Quick & friendly. Your details stay with the planting team only.',

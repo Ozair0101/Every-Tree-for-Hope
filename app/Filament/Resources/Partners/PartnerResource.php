@@ -37,6 +37,13 @@ class PartnerResource extends Resource
     {
         return $schema
             ->schema([
+                Components\TextInput::make('code')
+                    ->label('Sponsor Code')
+                    ->disabled()
+                    ->dehydrated(false)
+                    ->placeholder('Generated automatically when you save')
+                    ->helperText('Give this code to the partner — they can use it on the gallery page to see the events they sponsored.')
+                    ->columnSpanFull(),
                 Components\TextInput::make('company_name')
                     ->required()
                     ->maxLength(255)
@@ -90,6 +97,13 @@ class PartnerResource extends Resource
                 Tables\Columns\TextColumn::make('company_name')
                     ->searchable()
                     ->sortable(),
+                Tables\Columns\TextColumn::make('code')
+                    ->label('Sponsor Code')
+                    ->badge()
+                    ->color('warning')
+                    ->copyable()
+                    ->copyMessage('Sponsor code copied')
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('type')
                     ->label('Type')
                     ->badge()

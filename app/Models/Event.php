@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Event extends Model
@@ -128,6 +129,22 @@ class Event extends Model
     public function images(): HasMany
     {
         return $this->hasMany(EventImage::class)->orderBy('sort_order');
+    }
+
+    /**
+     * Donators who sponsored this event.
+     */
+    public function donators(): BelongsToMany
+    {
+        return $this->belongsToMany(Donator::class, 'event_donator')->withTimestamps();
+    }
+
+    /**
+     * Partners who sponsored this event.
+     */
+    public function partners(): BelongsToMany
+    {
+        return $this->belongsToMany(Partner::class, 'event_partner')->withTimestamps();
     }
 
     /**

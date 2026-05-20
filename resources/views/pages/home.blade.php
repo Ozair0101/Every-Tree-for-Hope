@@ -727,8 +727,8 @@
 
                     <!-- HERO image: 2 cols × 2 rows -->
                     <div class="col-span-2 row-span-2 group relative overflow-hidden rounded-3xl shadow-2xl cursor-pointer gallery-item"
-                        onclick="openLightbox('{{ asset('images/1.jpeg') }}', '{{ __('messages.gallery_hero_title_line1') }} {{ __('messages.gallery_hero_title_line2') }}', '{{ __('messages.gallery_hero_desc') }}')">
-                        <img src="{{ asset('images/1.jpeg') }}" alt="Restoring Life"
+                        onclick="openLightbox('{{ asset('images/53.jpg') }}', '{{ __('messages.gallery_hero_title_line1') }} {{ __('messages.gallery_hero_title_line2') }}', '{{ __('messages.gallery_hero_desc') }}')">
+                        <img src="{{ asset('images/53.jpg') }}" alt="Restoring Life"
                             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
                         <div class="absolute inset-0 transition-all duration-500 opacity-0 group-hover:opacity-100"
                             style="background: linear-gradient(to top, rgba(6,78,59,0.85) 0%, rgba(6,78,59,0.3) 50%, transparent 100%)">

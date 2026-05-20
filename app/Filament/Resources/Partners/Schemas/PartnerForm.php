@@ -12,6 +12,12 @@ class PartnerForm
     {
         return $schema
             ->components([
+                TextInput::make('code')
+                    ->label('Sponsor Code')
+                    ->disabled()
+                    ->dehydrated(false)
+                    ->placeholder('Generated automatically when you save')
+                    ->helperText('Give this code to the partner — they can use it on the gallery page to see the events they sponsored.'),
                 TextInput::make('company_name')
                     ->required(),
                 TextInput::make('logo')

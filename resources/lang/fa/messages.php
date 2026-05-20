@@ -632,6 +632,17 @@ return [
     'future_share_copied' => 'لینک کاپی شد!',
     'future_next_up' => 'رویداد بعدی',
     'future_more_dates' => 'تاریخ‌های بیشتر',
+
+    // جست‌وجوی کد حامی (نگارخانه)
+    'sponsor_lookup_title' => 'آیا شما حامی هستید؟',
+    'sponsor_lookup_desc' => 'کدِ حامی‌ای را که به شما داده‌ایم وارد کنید تا رویدادهایی را که حمایت کرده‌اید ببینید.',
+    'sponsor_lookup_placeholder' => 'مثلاً ETH-AB12CD',
+    'sponsor_lookup_btn' => 'رویدادهای من را پیدا کن',
+    'sponsor_lookup_not_found' => 'حامی‌ای با این کد یافت نشد. لطفاً آن را بررسی و دوباره تلاش کنید.',
+    'sponsor_lookup_showing' => 'با حمایت :name',
+    'sponsor_lookup_their_events' => 'رویدادهایی که شما ممکن ساختید',
+    'sponsor_lookup_view_all' => 'دیدن همهٔ رویدادها',
+    'sponsor_lookup_no_events' => 'هنوز هیچ رویدادی به این حامی پیوند داده نشده است.',
     'future_register_btn' => 'ثبت‌نام برای حضور',
     'future_register_eyebrow' => 'جای خود را رزرو کنید',
     'future_register_subtitle' => 'کوتاه و دوستانه. اطلاعات شما تنها نزد تیم کاشت می‌ماند.',

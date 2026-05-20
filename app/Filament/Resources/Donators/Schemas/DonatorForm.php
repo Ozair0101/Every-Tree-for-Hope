@@ -15,6 +15,14 @@ class DonatorForm
     {
         return $schema
             ->components([
+                TextInput::make('code')
+                    ->label('Sponsor Code')
+                    ->disabled()
+                    ->dehydrated(false)
+                    ->placeholder('Generated automatically when you save')
+                    ->helperText('Give this code to the donator — they can use it on the gallery page to see the events they sponsored.')
+                    ->columnSpanFull(),
+
                 // Basic Information
                 TextInput::make('full_name')
                     ->label('Full Name')

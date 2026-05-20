@@ -2,11 +2,16 @@
 
 namespace App\Models;
 
+use App\Models\Concerns\HasSponsorCode;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Donator extends Model
 {
+    use HasSponsorCode;
+
     protected $fillable = [
+        'code',
         'full_name',
         'impact',
         'location',
@@ -21,6 +26,19 @@ class Donator extends Model
         'financial_support' => 'decimal:2',
         'donation_date' => 'date',
     ];
+
+    public function sponsorCodeSource(): string
+    {
+        return (string) $this->full_name;
+    }
+
+    /**
+     * Events this donator sponsored.
+     */
+    public function events(): BelongsToMany
+    {
+        return $this->belongsToMany(Event::class, 'event_donator')->withTimestamps();
+    }
 
     /**
      * Get verified donators only

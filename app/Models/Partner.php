@@ -3,11 +3,16 @@
 namespace App\Models;
 
 use App\Enums\PartnerType;
+use App\Models\Concerns\HasSponsorCode;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Partner extends Model
 {
+    use HasSponsorCode;
+
     protected $fillable = [
+        'code',
         'company_name',
         'type',
         'description',
@@ -15,6 +20,19 @@ class Partner extends Model
         'is_active',
         'sort_order',
     ];
+
+    public function sponsorCodeSource(): string
+    {
+        return (string) $this->company_name;
+    }
+
+    /**
+     * Events this partner sponsored.
+     */
+    public function events(): BelongsToMany
+    {
+        return $this->belongsToMany(Event::class, 'event_partner')->withTimestamps();
+    }
 
     protected $casts = [
         'type' => PartnerType::class,
