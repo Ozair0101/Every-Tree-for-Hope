@@ -56,7 +56,7 @@
                     <div class="h-[1px] w-10 bg-vibrant-lime"></div>
                     <span class="text-vibrant-lime font-bold tracking-[0.4em] text-[10px] uppercase">{{ __('messages.future_kicker') }}</span>
                 </div>
-                <h2 class="text-4xl sm:text-5xl md:text-6xl font-serif text-deep-green leading-[1.05] mb-5">
+                <h2 class="text-3xl sm:text-4xl md:text-5xl font-serif text-deep-green leading-[1.05] mb-5">
                     {{ __('messages.future_title_part1') }}
                     <span class="italic font-black relative inline-block">
                         <span class="relative z-10">{{ __('messages.future_title_part2') }}</span>

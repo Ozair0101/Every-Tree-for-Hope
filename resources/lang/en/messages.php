@@ -19,13 +19,13 @@ return [
     'global_reforestation_mission' => 'Global Reforestation Mission',
     'hero_issue_no' => 'Issue No. 001',
     'hero_live' => 'Live',
-    'hero_pullquote' => 'We started with 12 trees on a barren hillside.<br/>Today, we\'re planting forests of hope.',
+    'hero_pullquote' => 'We started with 12 trees on Sharak Haji Nabi hillside.<br/>Today, with 2500+ trees we\'re planting forests of hope.',
     'hero_pullquote_author' => 'Tamim Alimyar, Founder',
     'hero_est_year' => 'Est. 2025',
     'hero_brand_signature' => 'Every Tree<br/>for a Hope',
     'rooting_for' => 'Let’s make Earth',
     'the_future' => 'beautiful by planting trees.',
-    'hero_description' => 'Every tree for a hope is working to make tree planting a tradition among all Afghans and people abroad. We are directly involving kids, elders, men, and women to plant trees and care for them.',
+    'hero_description' => 'Every Tree for a Hope is a community-led environmental initiative based in Kabul, founded and led by Tamim Alimyar, a civil engineering graduate. The project is dedicated to restoring green spaces, reducing air pollution, and contributing to the global fight against climate change (global warming) by promoting tree planting as both a local responsibility and a global movement.',
     'plant_a_tree_today' => 'Plant a Tree Today',
     'view_our_projects' => 'View Our Projects',
 
@@ -56,11 +56,11 @@ return [
     
     // Mission & Vision Section
     'our_core_purpose' => 'Our Core Purpose',
-    'growing_intentionally' => 'Growing <br /><span class="font-bold italic">Intentionally.</span>',
+    'growing_intentionally' => 'Turning Dry Lands Into<br /><span class="font-bold italic">Living Hope.</span>',
     'the_mission' => 'The Mission',
     'the_vision' => 'The Vision',
-    'mission_description' => 'To plant with purpose. We don\'t just put seeds in the ground; we restore entire ecosystems by selecting native species that support local fauna and repair depleted soil.',
-    'vision_description' => 'We envision Afghanistan where both cities and hills flourish with greenery. By planting trees and inspiring communities, we aim to restore nature, strengthen society, and create a sustainable future filled with hope',
+    'mission_description' => 'Our mission is to plant trees, raise environmental awareness, and build a culture of tree care in communities. We focus strongly on children and teenagers, teaching them from a young age to plant, protect, and value trees, so they become the leaders of a greener future.',
+    'vision_description' => 'Our vision is to create a green and healthy world where people love, plant, and care for trees as part of their daily lives. We especially focus on children, so they grow up with respect for nature and become responsible for protecting the environment in the future.',
     'mission_label' => 'Mission',
     'mission_text' => 'Cultivating a greener tomorrow by empowering global communities to restore biodiversity through science.',
     
@@ -639,9 +639,9 @@ return [
     // Future Event Plan — Field Dispatches
     'future_eyebrow' => "what's next",
     'future_kicker' => 'Field Dispatches',
-    'future_title_part1' => 'Coming soon to a',
-    'future_title_part2' => 'hillside.',
-    'future_description' => 'A new sapling. A new village. Mark the date, bring a shovel, and let your name become part of the next forest in the making.',
+    'future_title_part1' => 'Join us in upcomming',
+    'future_title_part2' => 'Events.',
+    'future_description' => 'Become a volunteer in tree planting , you will be helping afghanistan to be a better place for living.',
     'future_today' => 'Today',
     'future_tomorrow' => 'Tomorrow',
     'future_in_days' => 'In :count days',

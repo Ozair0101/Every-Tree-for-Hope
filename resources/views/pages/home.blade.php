@@ -195,7 +195,7 @@
                     <div class="md:px-6 flex md:items-center gap-3 justify-center md:justify-start">
                         <span class="material-symbols-outlined text-vibrant-lime text-2xl">groups</span>
                         <div>
-                            <p class="text-deep-green text-xl md:text-2xl font-black tabular-nums leading-none">30+</p>
+                            <p class="text-deep-green text-xl md:text-2xl font-black tabular-nums leading-none">50+</p>
                             <p class="text-charcoal/40 text-[9px] font-bold uppercase tracking-widest mt-1">
                                 {{ __('messages.volunteers') }}
                             </p>
@@ -486,7 +486,7 @@
                                 <div
                                     class="rounded-3xl overflow-hidden shadow-2xl border-[8px] border-white transition-all duration-700 hover:scale-[1.02] hover:shadow-3xl">
                                     <img alt="Wide forest vision" class="w-full h-[300px] md:h-[400px] object-cover"
-                                        src="{{ asset('images/16.jpeg') }}" />
+                                        src="{{ asset('images/55.jpeg') }}" />
                                     <div class="absolute inset-0 bg-gradient-to-t from-deep-green/20 to-transparent"></div>
                                 </div>
                                 <div
@@ -499,7 +499,7 @@
                                 <div
                                     class="rounded-3xl overflow-hidden shadow-2xl border-[8px] border-white transition-all duration-700 hover:scale-[1.02] hover:shadow-3xl">
                                     <img alt="Sprout mission" class="w-full h-[250px] md:h-[350px] object-cover"
-                                        src="{{ asset('images/22.jpeg') }}" />
+                                        src="{{ asset('images/54.jpeg') }}" />
                                     <div
                                         class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-transparent">
                                     </div>
@@ -557,117 +557,6 @@
                                     class="text-charcoal/60 text-lg font-light leading-relaxed {{ $is_rtl ? 'pr-16' : 'pl-16' }}">
                                     {{ __('messages.vision_description') }}
                                 </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="py-16 sm:py-24 bg-background-light/60">
-            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-                <div
-                    class="relative overflow-hidden rounded-3xl border border-gray-200/70 dark:border-gray-800 bg-white/80 dark:bg-background-dark/80 backdrop-blur-sm shadow-sm">
-                    <div
-                        class="pointer-events-none absolute -top-24 -right-24 h-64 w-64 rounded-full bg-primary/15 blur-3xl">
-                    </div>
-                    <div
-                        class="pointer-events-none absolute -bottom-24 -left-24 h-64 w-64 rounded-full bg-emerald-500/10 blur-3xl">
-                    </div>
-
-                    <div class="relative p-8 sm:p-12">
-                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
-                            <div class="max-w-3xl">
-                                <p
-                                    class="inline-flex items-center rounded-full bg-primary/10 px-3 py-1 text-sm font-semibold text-primary">
-                                    {{ __('messages.our_mission') }}
-                                </p>
-                                <h2 class="mt-4 text-3xl sm:text-4xl font-extrabold text-gray-900 dark:text-white">
-                                    {{ __('messages.turning_barren_land_into_green_hope') }}
-                                </h2>
-                                <p class="mt-4 text-lg text-gray-700 dark:text-gray-300">
-                                    {{ __('messages.about_description') }}
-                                </p>
-                                <div
-                                    class="mt-6 rounded-2xl bg-background-light dark:bg-background-dark p-6 border border-gray-200/70 dark:border-gray-800">
-                                    <p class="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white">
-                                        {{ __('messages.transform_barren_land') }}
-                                    </p>
-                                </div>
-                                <p class="mt-6 text-lg text-gray-700 dark:text-gray-300">
-                                    {{ __('messages.community_description') }}
-                                </p>
-                            </div>
-
-                            <div class="relative">
-                                <div
-                                    class="absolute -inset-2 rounded-3xl bg-gradient-to-br from-primary/20 via-emerald-500/10 to-transparent blur-2xl">
-                                </div>
-                                <div
-                                    class="relative overflow-hidden rounded-3xl border border-gray-200/70 dark:border-gray-800 bg-white/60 dark:bg-background-dark/60 shadow-sm">
-                                    <div class="aspect-[4/3]">
-                                        <img alt="Planting drought-tolerant trees in the hills surrounding Kabul"
-                                            class="h-full w-full object-cover" src="{{ asset('images/4.jpeg') }}" />
-                                    </div>
-                                    <div class="p-5 sm:p-6">
-                                        <p class="text-sm font-semibold text-gray-900 dark:text-white">
-                                            {{ __('messages.kabul_afghanistan') }}
-                                        </p>
-                                        <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
-                                            {{ __('messages.small_weekly_action') }}</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="mt-10 grid grid-cols-1 md:grid-cols-3 gap-6">
-                            <div
-                                class="rounded-2xl bg-white dark:bg-background-dark p-6 border border-gray-200/70 dark:border-gray-800 shadow-sm">
-                                <div class="flex items-center gap-3">
-                                    <div class="h-10 w-10 rounded-xl bg-primary/10 flex items-center justify-center">
-                                        <svg class="h-5 w-5 text-primary" fill="none" viewBox="0 0 24 24"
-                                            stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M12 3v18m9-9H3" />
-                                        </svg>
-                                    </div>
-                                    <h3 class="text-base font-bold text-gray-900 dark:text-white">
-                                        {{ __('messages.six_trees_every_week') }}</h3>
-                                </div>
-                                <p class="mt-3 text-sm text-gray-600 dark:text-gray-400">
-                                    {{ __('messages.consistent_action') }}</p>
-                            </div>
-                            <div
-                                class="rounded-2xl bg-white dark:bg-background-dark p-6 border border-gray-200/70 dark:border-gray-800 shadow-sm">
-                                <div class="flex items-center gap-3">
-                                    <div class="h-10 w-10 rounded-xl bg-primary/10 flex items-center justify-center">
-                                        <svg class="h-5 w-5 text-primary" fill="none" viewBox="0 0 24 24"
-                                            stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0h6" />
-                                        </svg>
-                                    </div>
-                                    <h3 class="text-base font-bold text-gray-900 dark:text-white">
-                                        {{ __('messages.kabuls_hills') }}</h3>
-                                </div>
-                                <p class="mt-3 text-sm text-gray-600 dark:text-gray-400">
-                                    {{ __('messages.restoring_land') }}</p>
-                            </div>
-                            <div
-                                class="rounded-2xl bg-white dark:bg-background-dark p-6 border border-gray-200/70 dark:border-gray-800 shadow-sm">
-                                <div class="flex items-center gap-3">
-                                    <div class="h-10 w-10 rounded-xl bg-primary/10 flex items-center justify-center">
-                                        <svg class="h-5 w-5 text-primary" fill="none" viewBox="0 0 24 24"
-                                            stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-10V6m0 12v2" />
-                                        </svg>
-                                    </div>
-                                    <h3 class="text-base font-bold text-gray-900 dark:text-white">
-                                        {{ __('messages.drought_tolerant') }}</h3>
-                                </div>
-                                <p class="mt-3 text-sm text-gray-600 dark:text-gray-400">
-                                    {{ __('messages.choosing_trees') }}</p>
                             </div>
                         </div>
                     </div>
