@@ -32,14 +32,14 @@ return [
     // Before & After Section
     'before_after_eyebrow' => 'The Transformation',
     'before_after_kicker' => 'The story in two frames',
-    'before_after_title' => 'From Barren Ground<br /><span class="italic font-bold">To Living Hope.</span>',
-    'before_after_desc' => 'Two photographs. Two seasons of patient work. The hillside that once stood empty is breathing again — every leaf a promise kept.',
+    'before_after_title' => 'From Dry Ground to <span class="italic font-bold">Green Park — Qasaba, Kabul.</span>',
+    'before_after_desc' => 'Not a single moment, but a continuing journey. These two photographs show just one sample of what we do every day: planting, caring, and returning life to the land — one tree at a time.',
     'before_label' => 'Before',
     'after_label' => 'After',
     'before_year' => '2023',
     'after_year' => '2026',
-    'before_caption' => 'Sharak Haji Nabi — dry, exposed, waiting.',
-    'after_caption' => 'The same hillside, now alive with saplings.',
+    'before_caption' => 'Block 5, Qasaba, Sharak Araba',
+    'after_caption' => 'The same place, before and after planting.',
     'slider_hint' => 'Drag to compare',
     'before_after_stamp' => 'Documented · Every Tree for a Hope',
 
