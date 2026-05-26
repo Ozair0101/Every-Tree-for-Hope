@@ -6,10 +6,10 @@
         <section class="relative h-[600px] flex items-center overflow-hidden bg-neutral-900">
             <div class="absolute right-0 top-0 w-full md:w-2/3 h-full">
 
-                <img alt="Planting event" class="w-full h-full object-cover opacity-70" src="{{ asset('images/5.jpeg') }}" />
+                <img alt="Planting event" class="w-full h-full object-cover opacity-70" src="{{ asset('images/74.jpeg') }}" />
 
                 {{-- <img alt="Sun-drenched forest canopy" class="w-full h-full object-cover opacity-70"
-                    src="{{ asset('images/5.jpeg') }}" /> --}}
+                    src="{{ asset('images/74.jpeg') }}" /> --}}
 
                 <div class="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-transparent"></div>
             </div>
@@ -20,7 +20,7 @@
                         <span class="material-symbols-outlined text-xs">event</span>
                         {{ __('messages.event_gallery') }}
                     </div>
-                    <h1 class="text-6xl md:text-7xl font-serif text-white mb-6 leading-[1.1] drop-shadow-2xl">
+                    <h1 class="text-5xl md:text-6xl font-serif text-white mb-6 leading-[1.1] drop-shadow-2xl">
                         {{ __('messages.our_events') }}</h1>
                     <p class="text-lg md:text-xl text-gray-200 font-medium leading-relaxed max-w-lg mb-8 drop-shadow-lg">
                         {{ __('messages.gallery_description') }}</p>
