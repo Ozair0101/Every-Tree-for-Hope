@@ -20,6 +20,9 @@ Route::get('/gallery', [App\Http\Controllers\EventController::class, 'index'])->
 
 Route::get('/donators', [App\Http\Controllers\DonatorController::class, 'index'])->name('donators');
 
+Route::get('/partners', [App\Http\Controllers\PartnerController::class, 'partners'])->name('partners');
+Route::get('/advisors', [App\Http\Controllers\PartnerController::class, 'advisors'])->name('advisors');
+
 Route::get('/report', function () {
     return view('pages.report');
 })->name('report');
