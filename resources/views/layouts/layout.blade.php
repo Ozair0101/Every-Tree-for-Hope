@@ -404,8 +404,29 @@
                         </div>
                     </div>
 
-                    {{-- <a class="text-sm font-medium hover:text-primary transition-colors whitespace-nowrap"
-                        href="{{ route('donators') }}">{{ __('messages.donators') }}</a> --}}
+                    {{-- Community dropdown (Partners, Advisors, Donators) --}}
+                    <div class="relative group">
+                        <button type="button"
+                            class="inline-flex items-center gap-1 text-sm font-medium hover:text-primary transition-colors whitespace-nowrap">
+                            {{ __('messages.nav_group_community') }}
+                            <span class="material-symbols-outlined text-base group-hover:rotate-180 transition-transform">expand_more</span>
+                        </button>
+                        <div class="absolute left-0 top-full pt-2 w-60 invisible opacity-0 group-hover:visible group-hover:opacity-100 transition-all z-50">
+                            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl border border-gray-200 dark:border-gray-700 py-2 overflow-hidden">
+                                <a href="{{ route('partners') }}"
+                                    class="flex items-center gap-3 px-4 py-2.5 text-sm hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 hover:text-primary transition-colors">
+                                    <span class="material-symbols-outlined text-base text-gold-accent">handshake</span>
+                                    {{ __('messages.nav_partners') }}
+                                </a>
+                                <a href="{{ route('advisors') }}"
+                                    class="flex items-center gap-3 px-4 py-2.5 text-sm hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 hover:text-primary transition-colors">
+                                    <span class="material-symbols-outlined text-base text-deep-green/70">psychology</span>
+                                    {{ __('messages.nav_advisors') }}
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
                     <a class="text-sm font-medium hover:text-primary transition-colors whitespace-nowrap"
                         href="{{ route('contact') }}">{{ __('messages.contact') }}</a>
                     <a class="text-sm font-medium hover:text-primary transition-colors whitespace-nowrap"
@@ -494,10 +515,23 @@
                         {{ __('messages.nav_awareness') }}
                     </a>
 
+                    {{-- Mobile: Community group --}}
+                    <p class="text-[10px] font-bold tracking-[0.25em] uppercase text-vibrant-lime pt-3 pb-1">
+                        {{ __('messages.nav_group_community') }}
+                    </p>
+                    <a class="flex items-center gap-2 text-sm font-medium hover:text-primary transition-colors py-2 ps-3"
+                        href="{{ route('partners') }}">
+                        <span class="material-symbols-outlined text-base text-gold-accent">handshake</span>
+                        {{ __('messages.nav_partners') }}
+                    </a>
+                    <a class="flex items-center gap-2 text-sm font-medium hover:text-primary transition-colors py-2 ps-3"
+                        href="{{ route('advisors') }}">
+                        <span class="material-symbols-outlined text-base text-deep-green/60">psychology</span>
+                        {{ __('messages.nav_advisors') }}
+                    </a>
+
                     {{-- Mobile: standalone items --}}
                     <div class="pt-3 mt-2 border-t border-gray-200 dark:border-gray-700"></div>
-                    {{-- <a class="block text-sm font-medium hover:text-primary transition-colors py-2"
-                        href="{{ route('donators') }}">{{ __('messages.donators') }}</a> --}}
                     <a class="block text-sm font-medium hover:text-primary transition-colors py-2"
                         href="{{ route('contact') }}">{{ __('messages.contact') }}</a>
                     <a class="block text-sm font-medium hover:text-primary transition-colors py-2"
