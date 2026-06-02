@@ -17,35 +17,43 @@ class EventController extends Controller
      */
     public function index(Request $request)
     {
-        $sponsorCode = trim((string) $request->query('sponsor_code', ''));
+        // One search box handles both: a sponsor code OR an event title.
+        // (`sponsor_code` is still accepted for backwards-compatible shared links.)
+        $searchQuery = trim((string) ($request->query('q', $request->query('sponsor_code', ''))));
+
         $sponsor = null;
         $sponsorType = null;
-        $sponsorNotFound = false;
 
-        if ($sponsorCode !== '') {
-            $sponsor = Donator::findByCode($sponsorCode);
+        // A search term is first tried as a sponsor code; if it matches a
+        // donator or partner we show their events, otherwise we fall back
+        // to a title search.
+        if ($searchQuery !== '') {
+            $sponsor = Donator::findByCode($searchQuery);
             if ($sponsor) {
                 $sponsorType = 'donator';
             } else {
-                $sponsor = Partner::findByCode($sponsorCode);
+                $sponsor = Partner::findByCode($searchQuery);
                 if ($sponsor) {
                     $sponsorType = 'partner';
                 }
             }
-            $sponsorNotFound = $sponsor === null;
         }
 
         if ($sponsor) {
             // Only the events this sponsor funded
-            $events = $sponsor->events()
-                ->where('is_active', true)
-                ->orderBy('date', 'desc')
-                ->paginate(9)
-                ->withQueryString();
+            $query = $sponsor->events()->where('is_active', true);
         } else {
-            // All active events
-            $events = Event::active()->orderBy('date', 'desc')->paginate(9);
+            // All active events, optionally filtered by title
+            $query = Event::active();
+
+            if ($searchQuery !== '') {
+                $query->where('title', 'like', '%' . $searchQuery . '%');
+            }
         }
+
+        $events = $query->orderBy('date', 'desc')
+            ->paginate(9)
+            ->withQueryString();
 
         // Handle AJAX request - return only events grid content
         if ($request->ajax() || $request->get('ajax')) {
@@ -58,11 +66,10 @@ class EventController extends Controller
 
         return view('pages.gallery', compact(
             'events',
-            'sponsorCode',
+            'searchQuery',
             'sponsor',
             'sponsorType',
             'sponsorName',
-            'sponsorNotFound',
         ));
     }
 

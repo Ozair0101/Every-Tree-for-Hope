@@ -42,69 +42,76 @@
         @include('partials.future-events', ['limit' => 6])
 
         <!-- Events Grid -->
-        <section id="sponsor-results" class="py-16 max-w-7xl mx-auto px-6 scroll-mt-24">
+        <section class="py-16 max-w-7xl mx-auto px-6 scroll-mt-24">
 
-            {{-- Sponsor code lookup --}}
-            <div class="max-w-2xl mx-auto mb-12">
-                <div class="bg-white border border-deep-green/10 rounded-2xl shadow-[0_10px_30px_rgba(6,46,34,0.06)] p-6 md:p-8">
-                    <div class="text-center mb-5">
-                        <span class="material-symbols-outlined text-gold-accent text-3xl">redeem</span>
-                        <h3 class="font-serif text-xl md:text-2xl font-bold text-deep-green mt-1">
-                            {{ __('messages.sponsor_lookup_title') }}
-                        </h3>
-                        <p class="text-charcoal/60 text-sm mt-1">
-                            {{ __('messages.sponsor_lookup_desc') }}
-                        </p>
-                    </div>
-                    <form method="GET" action="{{ route('gallery') }}"
-                        class="sponsor-search-form flex flex-col sm:flex-row gap-3">
-                        <input type="text" name="sponsor_code" value="{{ $sponsorCode ?? '' }}"
-                            placeholder="{{ __('messages.sponsor_lookup_placeholder') }}"
-                            class="flex-1 bg-transparent border-2 border-deep-green/15 rounded-full px-5 py-3 text-center sm:text-start uppercase tracking-widest text-deep-green font-bold placeholder:font-normal placeholder:tracking-normal placeholder:text-charcoal/35 focus:border-deep-green focus:ring-0 focus:outline-none transition-colors">
-                        <button type="submit"
-                            class="inline-flex items-center justify-center gap-2 px-7 py-3 bg-deep-green text-white text-xs font-extrabold tracking-[0.2em] uppercase rounded-full shadow-md shadow-deep-green/20 hover:bg-deep-green/90 hover:-translate-y-0.5 transition-all">
-                            <span class="material-symbols-outlined text-base">search</span>
-                            {{ __('messages.sponsor_lookup_btn') }}
-                        </button>
-                    </form>
+            {{-- Section toolbar: eyebrow label on the left, search on the right.
+                 The search is kept OUTSIDE #sponsor-results so it keeps focus
+                 and its value while the results below are swapped via AJAX. --}}
+            <style>
+                /* Hide the browser's native search "x" — we use our own button. */
+                #event-search::-webkit-search-cancel-button { -webkit-appearance: none; appearance: none; }
+            </style>
+            <div class="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between mb-12">
+                <span class="inline-flex items-center gap-2 self-center sm:self-auto px-3.5 py-1.5 rounded-full bg-deep-green/5 border border-deep-green/10 text-deep-green text-[11px] font-bold uppercase tracking-[0.18em]">
+                    <span class="material-symbols-outlined text-sm">photo_library</span>
+                    {{ __('messages.event_gallery') }}
+                </span>
 
-                    @if (!empty($sponsorNotFound) && $sponsorNotFound)
-                        <div class="mt-5 flex items-center gap-2 justify-center text-sm text-red-600 bg-red-50 border border-red-200 rounded-xl px-4 py-3">
-                            <span class="material-symbols-outlined text-base">error</span>
-                            {{ __('messages.sponsor_lookup_not_found') }}
-                        </div>
+                <form method="GET" action="{{ route('gallery') }}" role="search"
+                    class="event-search-form group relative w-full sm:w-80 md:w-[26rem]">
+                    <span class="material-symbols-outlined absolute start-4 top-1/2 -translate-y-1/2 text-deep-green/40 text-xl pointer-events-none transition-colors group-focus-within:text-deep-green">search</span>
+                    <input type="search" id="event-search" name="q" value="{{ $searchQuery ?? '' }}"
+                        placeholder="{{ __('messages.event_search_placeholder') }}" autocomplete="off"
+                        title="{{ __('messages.event_search_hint') }}"
+                        class="w-full bg-white border border-deep-green/15 rounded-full ps-12 pe-11 py-3.5 text-sm text-deep-green placeholder:text-charcoal/40 shadow-sm shadow-deep-green/5 focus:border-deep-green/60 focus:ring-4 focus:ring-deep-green/10 focus:outline-none transition-all">
+                    <button type="button" data-search-clear aria-label="{{ __('messages.sponsor_lookup_view_all') }}"
+                        class="@if (empty($searchQuery)) hidden @endif absolute end-3.5 top-1/2 -translate-y-1/2 flex text-charcoal/40 hover:text-deep-green transition-colors">
+                        <span class="material-symbols-outlined text-lg">close</span>
+                    </button>
+                    <span data-search-spinner
+                        class="hidden absolute end-3.5 top-1/2 -translate-y-1/2 h-4 w-4 rounded-full border-2 border-deep-green/20 border-t-deep-green animate-spin"></span>
+                </form>
+            </div>
+
+            <div id="sponsor-results" class="scroll-mt-24">
+                <div class="text-center mb-12">
+                    @if (!empty($sponsor))
+                        <span class="inline-flex items-center gap-2 px-4 py-1.5 mb-4 rounded-full bg-vibrant-lime/15 border border-vibrant-lime/30 text-deep-green text-[11px] font-bold uppercase tracking-widest">
+                            <span class="material-symbols-outlined text-sm">verified</span>
+                            {{ __('messages.sponsor_lookup_showing', ['name' => $sponsorName]) }}
+                        </span>
+                        <h2 class="text-4xl md:text-5xl font-serif text-deep-green mb-4">
+                            {{ __('messages.sponsor_lookup_their_events') }}
+                        </h2>
+                        <a href="{{ route('gallery') }}" data-view-all
+                            class="inline-flex items-center gap-1 text-sm font-bold text-deep-green/70 hover:text-deep-green underline decoration-gold-accent decoration-2 underline-offset-4">
+                            <span class="material-symbols-outlined text-base">arrow_back</span>
+                            {{ __('messages.sponsor_lookup_view_all') }}
+                        </a>
+                    @elseif (!empty($searchQuery))
+                        <h2 class="text-4xl md:text-5xl font-serif text-deep-green mb-4">
+                            {{ __('messages.event_search_results_for', ['term' => $searchQuery]) }}
+                        </h2>
+                        <a href="{{ route('gallery') }}" data-view-all
+                            class="inline-flex items-center gap-1 text-sm font-bold text-deep-green/70 hover:text-deep-green underline decoration-gold-accent decoration-2 underline-offset-4">
+                            <span class="material-symbols-outlined text-base">arrow_back</span>
+                            {{ __('messages.sponsor_lookup_view_all') }}
+                        </a>
+                    @else
+                        <h2 class="text-4xl md:text-5xl font-serif text-deep-green mb-4">{{ __('messages.all_our_events') }}</h2>
+                        <p class="text-lg text-charcoal/70 max-w-2xl mx-auto">{{ __('messages.browse_events_description') }}</p>
                     @endif
                 </div>
-            </div>
 
-            <div class="text-center mb-12">
-                @if (!empty($sponsor))
-                    <span class="inline-flex items-center gap-2 px-4 py-1.5 mb-4 rounded-full bg-vibrant-lime/15 border border-vibrant-lime/30 text-deep-green text-[11px] font-bold uppercase tracking-widest">
-                        <span class="material-symbols-outlined text-sm">verified</span>
-                        {{ __('messages.sponsor_lookup_showing', ['name' => $sponsorName]) }}
-                    </span>
-                    <h2 class="text-4xl md:text-5xl font-serif text-deep-green mb-4">
-                        {{ __('messages.sponsor_lookup_their_events') }}
-                    </h2>
-                    <a href="{{ route('gallery') }}"
-                        class="inline-flex items-center gap-1 text-sm font-bold text-deep-green/70 hover:text-deep-green underline decoration-gold-accent decoration-2 underline-offset-4">
-                        <span class="material-symbols-outlined text-base">arrow_back</span>
-                        {{ __('messages.sponsor_lookup_view_all') }}
-                    </a>
+                @if (!empty($sponsor) && $events->isEmpty())
+                    <div class="text-center py-16">
+                        <span class="material-symbols-outlined text-deep-green/20 text-6xl mb-3">park</span>
+                        <p class="text-charcoal/60">{{ __('messages.sponsor_lookup_no_events') }}</p>
+                    </div>
                 @else
-                    <h2 class="text-4xl md:text-5xl font-serif text-deep-green mb-4">{{ __('messages.all_our_events') }}</h2>
-                    <p class="text-lg text-charcoal/70 max-w-2xl mx-auto">{{ __('messages.browse_events_description') }}</p>
+                    @include('partials.events-grid', ['events' => $events])
                 @endif
             </div>
-
-            @if (!empty($sponsor) && $events->isEmpty())
-                <div class="text-center py-16">
-                    <span class="material-symbols-outlined text-deep-green/20 text-6xl mb-3">park</span>
-                    <p class="text-charcoal/60">{{ __('messages.sponsor_lookup_no_events') }}</p>
-                </div>
-            @else
-                @include('partials.events-grid', ['events' => $events])
-            @endif
         </section>
 
         @include('partials.little-guardians')
@@ -114,29 +121,57 @@
         <script>
             document.addEventListener('DOMContentLoaded', function() {
                 const results = document.getElementById('sponsor-results');
+                const searchInput = document.getElementById('event-search');
                 if (!results) return;
 
-                // On a direct/shared sponsor-code URL, jump straight to the results.
+                const galleryUrl = @json(route('gallery'));
+                let seq = 0;
+                let debounceTimer = null;
+
+                // On a direct/shared search URL, jump straight to the results.
                 try {
-                    const p = new URLSearchParams(window.location.search);
-                    if (p.has('sponsor_code') && p.get('sponsor_code').trim() !== '') {
+                    const q = (new URLSearchParams(window.location.search).get('q') || '').trim();
+                    if (q !== '') {
                         setTimeout(function() {
                             results.scrollIntoView({ behavior: 'smooth', block: 'start' });
                         }, 150);
                     }
                 } catch (e) { /* no-op */ }
 
-                let loading = false;
+                const spinnerEl = document.querySelector('[data-search-spinner]');
+                const clearEl = document.querySelector('[data-search-clear]');
+                let busy = false;
 
-                function loadResults(url, push) {
-                    if (loading) return;
-                    loading = true;
+                function spinner(on) {
+                    busy = on;
+                    if (spinnerEl) spinnerEl.classList.toggle('hidden', !on);
+                    syncClear();
+                }
+
+                // Clear button shows only when there's a query and we're idle.
+                function syncClear() {
+                    if (!clearEl) return;
+                    const hasText = !!(searchInput && searchInput.value.trim());
+                    clearEl.classList.toggle('hidden', busy || !hasText);
+                }
+
+                function buildUrl(q) {
+                    return galleryUrl + (q ? ('?q=' + encodeURIComponent(q)) : '');
+                }
+
+                // Fetch the full page and swap in only the #sponsor-results
+                // section (banner, heading, grid, pagination). The search box
+                // lives outside this element, so it keeps focus and its value.
+                function loadResults(url, opts) {
+                    opts = opts || {};
+                    const push = opts.push !== false;
+                    const scroll = opts.scroll === true;
+                    const mySeq = ++seq;
+
                     results.style.opacity = '0.5';
                     results.style.pointerEvents = 'none';
+                    spinner(true);
 
-                    // Note: no X-Requested-With header — we want the full page
-                    // so we can extract the whole #sponsor-results section
-                    // (banner, heading, grid, pagination, empty/not-found states).
                     fetch(url, {
                             headers: { 'Accept': 'text/html' },
                             credentials: 'same-origin'
@@ -146,6 +181,8 @@
                             return r.text();
                         })
                         .then(function(html) {
+                            // Ignore stale responses if a newer request started.
+                            if (mySeq !== seq) return;
                             const doc = new DOMParser().parseFromString(html, 'text/html');
                             const fresh = doc.getElementById('sponsor-results');
                             if (!fresh) {
@@ -153,48 +190,82 @@
                                 return;
                             }
                             results.innerHTML = fresh.innerHTML;
-                            if (push !== false) history.pushState({ url: url }, '', url);
+                            if (push) history.pushState({ url: url }, '', url);
                             results.style.opacity = '1';
                             results.style.pointerEvents = '';
-                            results.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                            spinner(false);
+                            if (scroll) results.scrollIntoView({ behavior: 'smooth', block: 'start' });
                         })
                         .catch(function() {
+                            if (mySeq !== seq) return;
                             // Graceful fallback to a normal navigation
                             window.location.href = url;
-                        })
-                        .finally(function() {
-                            loading = false;
                         });
                 }
 
-                // Listeners are bound to the persistent #sponsor-results element,
-                // so they keep working after its innerHTML is swapped.
+                // 1. Combined live search (debounced) — title OR sponsor code.
+                if (searchInput) {
+                    searchInput.addEventListener('input', function() {
+                        const q = this.value.trim();
+                        syncClear();
+                        clearTimeout(debounceTimer);
+                        debounceTimer = setTimeout(function() {
+                            loadResults(buildUrl(q), { push: true, scroll: false });
+                        }, 350);
+                    });
+                }
 
-                // 1. Sponsor-code search submitted via AJAX
-                results.addEventListener('submit', function(e) {
-                    const form = e.target.closest('.sponsor-search-form');
+                // Clear (×) button: reset the search and reload all events.
+                if (clearEl) {
+                    clearEl.addEventListener('click', function() {
+                        if (!searchInput) return;
+                        searchInput.value = '';
+                        syncClear();
+                        searchInput.focus();
+                        clearTimeout(debounceTimer);
+                        loadResults(buildUrl(''), { push: true, scroll: false });
+                    });
+                }
+
+                // 2. Enter key: search immediately, no full reload.
+                document.addEventListener('submit', function(e) {
+                    const form = e.target.closest ? e.target.closest('.event-search-form') : null;
                     if (!form) return;
                     e.preventDefault();
-                    const input = form.querySelector('input[name="sponsor_code"]');
-                    const value = input ? input.value.trim() : '';
-                    const base = form.getAttribute('action') || window.location.pathname;
-                    const url = base + (value ? ('?sponsor_code=' + encodeURIComponent(value)) : '');
-                    loadResults(url, true);
+                    clearTimeout(debounceTimer);
+                    loadResults(buildUrl(searchInput ? searchInput.value.trim() : ''), {
+                        push: true,
+                        scroll: false
+                    });
                 });
 
-                // 2. Pagination links loaded via AJAX (query string preserved server-side)
+                // 3. Pagination + "view all" links (delegated — survive swaps).
                 results.addEventListener('click', function(e) {
+                    const viewAll = e.target.closest('a[data-view-all]');
+                    if (viewAll) {
+                        e.preventDefault();
+                        if (searchInput) searchInput.value = '';
+                        syncClear();
+                        loadResults(buildUrl(''), { push: true, scroll: false });
+                        return;
+                    }
+
                     const pager = e.target.closest('#pagination-container');
                     if (!pager) return;
                     const link = e.target.closest('a[href]');
                     if (!link) return;
                     e.preventDefault();
-                    loadResults(link.href, true);
+                    loadResults(link.href, { push: true, scroll: true });
                 });
 
-                // 3. Browser back/forward
+                // 4. Browser back/forward — keep the box in sync with the URL.
                 window.addEventListener('popstate', function() {
-                    loadResults(window.location.href, false);
+                    try {
+                        const q = new URLSearchParams(window.location.search).get('q') || '';
+                        if (searchInput) searchInput.value = q;
+                        syncClear();
+                    } catch (e) { /* no-op */ }
+                    loadResults(window.location.href, { push: false, scroll: false });
                 });
             });
         </script>

@@ -210,6 +210,10 @@ return [
     'get_involved' => 'برخه واخلئ',
     'all_our_events' => 'زموږ ټول پروګرامونه',
     'browse_events_description' => 'زموږ د چاپیریالي پروګرامونو او د ونو کرلو د کارزارونو بشپړه ټولګه وګورئ.',
+    'event_search_placeholder' => 'د پروګرام د سرلیک یا د سپانسر کوډ له مخې لټون…',
+    'event_search_hint' => 'د پروګرام د سرلیک له مخې لټون وکړئ، یا خپل د سپانسر کوډ ولیکئ ترڅو هغه پروګرامونه وګورئ چې تاسو ملاتړ کړي.',
+    'event_search_results_for' => 'د «:term» پایلې',
+    'event_search_no_results' => 'ستاسو د لټون سره سم هیڅ پروګرام و نه موندل شو.',
 
     // Event Details Page
     'back_to_gallery' => 'بیرته انځورتون ته',

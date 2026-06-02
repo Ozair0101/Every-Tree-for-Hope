@@ -211,6 +211,10 @@ return [
     'get_involved' => 'سهم بگیرید',
     'all_our_events' => 'همهٔ برنامه‌های ما',
     'browse_events_description' => 'مجموعهٔ کامل برنامه‌های زیست‌محیطی و کارزارهای نهال‌نشانی ما را ببینید.',
+    'event_search_placeholder' => 'جست‌وجو بر اساس عنوان برنامه یا کد حامی…',
+    'event_search_hint' => 'بر اساس عنوان برنامه جست‌وجو کنید، یا کد حامی خود را وارد کنید تا برنامه‌هایی را که پشتیبانی کرده‌اید ببینید.',
+    'event_search_results_for' => 'نتایج برای «:term»',
+    'event_search_no_results' => 'هیچ برنامه‌ای با جست‌وجوی شما مطابقت ندارد.',
 
     // Event Details Page
     'back_to_gallery' => 'بازگشت به نگارخانه',

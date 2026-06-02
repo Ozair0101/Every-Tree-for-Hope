@@ -214,6 +214,10 @@ return [
     'get_involved' => 'Get Involved',
     'all_our_events' => 'All Our Events',
     'browse_events_description' => 'Browse through our complete collection of environmental events and tree planting initiatives.',
+    'event_search_placeholder' => 'Search by event title or sponsor code…',
+    'event_search_hint' => 'Search by event title, or enter your sponsor code to see the events you funded.',
+    'event_search_results_for' => 'Results for “:term”',
+    'event_search_no_results' => 'No events match your search.',
     
     // Event Details Page
     'back_to_gallery' => 'Back to Gallery',
