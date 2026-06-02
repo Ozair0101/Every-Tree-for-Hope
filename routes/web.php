@@ -31,9 +31,9 @@ Route::get('/contact', function () {
     return view('pages.contact');
 })->name('contact');
 
-Route::get('/donate', function () {
-    return view('pages.aidos-campaign');
-})->name('donate');
+// Route::get('/donate', function () {
+//     return view('pages.aidos-campaign');
+// })->name('donate');
 
 Route::get('/history', function () {
     return view('pages.history');
