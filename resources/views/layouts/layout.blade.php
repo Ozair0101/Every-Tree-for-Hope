@@ -333,6 +333,10 @@
         #mobile-menu {
             overflow: hidden;
             pointer-events: none;
+            /* Fit the VISIBLE viewport (dvh) so the footer buttons aren't hidden
+               behind the mobile browser's address/toolbar. Falls back to vh. */
+            height: 100vh;
+            height: 100dvh;
         }
 
         #mobile-menu.is-open {
