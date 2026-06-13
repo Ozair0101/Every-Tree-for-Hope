@@ -253,6 +253,9 @@ return [
     'learn_more' => 'Learn More',
     'contact_us' => 'Contact Us',
     'donate_now' => 'Donate Now',
+    'donate_cta_support' => 'Support Our Mission',
+    'donate_cta_give_hope' => 'Give Hope Today',
+    'donate_cta_grow_forest' => 'Help a Forest Grow',
     'join_us' => 'Join Us',
     'follow_us' => 'Follow Us',
     
@@ -594,7 +597,7 @@ return [
     'faq_nav' => 'FAQ',
 
     // ── Careers / Jobs ──
-    'careers_nav' => 'Careers',
+    'careers_nav' => 'Career Opportunities',
     'jobs_page_title' => 'Careers - Every Tree for a Hope',
     'jobs_hero_badge' => 'Job board',
     'jobs_hero_title' => 'Find your next opportunity',
