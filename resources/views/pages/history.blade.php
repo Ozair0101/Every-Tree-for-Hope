@@ -564,7 +564,7 @@
                 {{ __('messages.history_cta_desc') }}
             </p>
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <a href="{{ route('donate') }}"
+                <a href="#?campaign=camp_01KT1CQZWEEX5SMARBECPAAA3T"
                     class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-vibrant-lime text-deep-green font-extrabold rounded-full hover:bg-vibrant-lime/90 transition-all shadow-xl shadow-vibrant-lime/20 hover:-translate-y-0.5 text-lg">
                     <span class="material-symbols-outlined">park</span>
                     {{ __('messages.plant_a_tree_today') }}

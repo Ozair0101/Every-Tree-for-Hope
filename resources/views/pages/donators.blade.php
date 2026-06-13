@@ -285,7 +285,7 @@
                                     @endif
 
                                     {{-- CTA --}}
-                                    <a href="{{ route('donate') }}"
+                                    <a href="#?campaign=camp_01KT1CQZWEEX5SMARBECPAAA3T"
                                         class="group/btn inline-flex items-center justify-center gap-2 mt-auto w-full px-6 py-4 {{ $featured ? 'bg-deep-green text-white hover:bg-deep-green/90' : 'bg-white text-deep-green border-2 border-deep-green hover:bg-deep-green hover:text-white' }} font-black text-xs tracking-[0.35em] uppercase rounded-full transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5">
                                         <span class="material-symbols-outlined text-base {{ $featured ? 'text-vibrant-lime' : 'group-hover/btn:text-vibrant-lime' }}">favorite</span>
                                         {{ __('messages.packages_sponsor_btn') }}

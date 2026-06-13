@@ -438,7 +438,7 @@
             </div>
 
             <div class="flex flex-col sm:flex-row items-center justify-center gap-x-8 gap-y-3 text-sm">
-                <a href="{{ route('donate') }}" class="inline-flex items-center gap-2 text-deep-green font-bold underline decoration-vibrant-lime decoration-2 underline-offset-4 hover:decoration-[3px] transition-all">
+                <a href="#?campaign=camp_01KT1CQZWEEX5SMARBECPAAA3T" class="inline-flex items-center gap-2 text-deep-green font-bold underline decoration-vibrant-lime decoration-2 underline-offset-4 hover:decoration-[3px] transition-all">
                     <span class="material-symbols-outlined text-base">favorite</span>
                     {{ __('messages.baren_cta_sponsor_btn') }}
                 </a>
