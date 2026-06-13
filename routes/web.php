@@ -18,6 +18,11 @@ Route::get('/gallery/{event}', [App\Http\Controllers\EventController::class, 'sh
 
 Route::get('/gallery', [App\Http\Controllers\EventController::class, 'index'])->name('gallery');
 
+// Careers / Jobs
+Route::get('/careers', [App\Http\Controllers\CareerController::class, 'index'])->name('careers');
+Route::get('/careers/{job}', [App\Http\Controllers\CareerController::class, 'show'])->name('careers.show');
+Route::post('/careers/{job}/apply', [App\Http\Controllers\CareerController::class, 'apply'])->name('careers.apply');
+
 Route::get('/donators', [App\Http\Controllers\DonatorController::class, 'index'])->name('donators');
 
 Route::get('/partners', [App\Http\Controllers\PartnerController::class, 'partners'])->name('partners');
