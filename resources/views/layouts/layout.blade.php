@@ -330,6 +330,9 @@
             inset: 0;
             z-index: 60;
             pointer-events: none;
+            /* Clip the off-canvas panel so it can't create horizontal scroll
+               (body's overflow-x-hidden does not clip fixed-position children). */
+            overflow: hidden;
         }
 
         #mobile-menu.is-open {
@@ -349,6 +352,8 @@
 
         #mobile-menu-panel {
             top: 0;
+            bottom: 0;
+            /* full-height fallback for browsers without dvh support */
             right: 0;
             left: auto;
             transform: translateX(100%);
