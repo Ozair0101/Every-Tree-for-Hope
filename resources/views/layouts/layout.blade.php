@@ -362,6 +362,8 @@
                                     <span class="material-symbols-outlined text-base text-deep-green/70">info</span>
                                     {{ __('messages.about') }}
                                 </a>
+                                <a class="text-sm font-medium hover:text-primary transition-colors whitespace-nowrap"
+                                href="{{ route('contact') }}">{{ __('messages.contact') }}</a>
                                 <a href="{{ route('history') }}"
                                     class="flex items-center gap-3 px-4 py-2.5 text-sm hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 hover:text-primary transition-colors">
                                     <span
@@ -428,11 +430,10 @@
                             </div>
                         </div>
                     </div>
-
                     <a class="text-sm font-medium hover:text-primary transition-colors whitespace-nowrap"
-                        href="{{ route('contact') }}">{{ __('messages.contact') }}</a>
+                                            href="{{ route('faq') }}">{{ __('messages.faq_nav') }}</a>
                     <a class="text-sm font-medium hover:text-primary transition-colors whitespace-nowrap"
-                        href="{{ route('faq') }}">{{ __('messages.faq_nav') }}</a>
+                        href="{{ route('careers') }}">{{ __('messages.careers_nav') }}</a>
                 </div>
 
                 <!-- Desktop Action Buttons & Language Switcher -->
@@ -487,6 +488,8 @@
                         <span class="material-symbols-outlined text-base text-deep-green/60">info</span>
                         {{ __('messages.about') }}
                     </a>
+                    <a class="block text-sm font-medium hover:text-primary transition-colors py-2"
+                        href="{{ route('contact') }}">{{ __('messages.contact') }}</a>
                     <a class="flex items-center gap-2 text-sm font-medium hover:text-primary transition-colors py-2 ps-3"
                         href="{{ route('history') }}">
                         <span class="material-symbols-outlined text-base text-deep-green/60">auto_stories</span>
@@ -530,11 +533,14 @@
 
                     {{-- Mobile: standalone items --}}
                     <div class="pt-3 mt-2 border-t border-gray-200 dark:border-gray-700"></div>
-                    <a class="block text-sm font-medium hover:text-primary transition-colors py-2"
-                        href="{{ route('contact') }}">{{ __('messages.contact') }}</a>
-                    <a class="block text-sm font-medium hover:text-primary transition-colors py-2"
+                     <a class="block text-sm font-medium hover:text-primary transition-colors py-2"
                         href="{{ route('faq') }}">{{ __('messages.faq_nav') }}</a>
 
+                    <a class="flex items-center gap-2 text-sm font-medium hover:text-primary transition-colors py-2 ps-3"
+                        href="{{ route('careers') }}">
+                        <span class="material-symbols-outlined text-base text-deep-green/60">work</span>
+                        {{ __('messages.careers_nav') }}
+                    </a>
                     <!-- Mobile Language Switcher -->
                     <div class="border-t border-gray-200 dark:border-gray-700 pt-3">
                         <p class="text-xs font-medium text-gray-500 dark:text-gray-400 mb-2">
