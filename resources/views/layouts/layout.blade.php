@@ -325,28 +325,35 @@
         }
 
         /* ===== Mobile navigation drawer ===== */
-        /* Sizing/positioning is set with Tailwind utility classes on the elements
-           (reliable). These rules only drive the open/close animation + state,
-           and stay visibility:hidden while closed (no paint, no pinch-zoom
-           flicker, no stray horizontal scroll). */
+        /* The wrapper is a full-screen, fixed, clipping layer (sizing via the
+           h-screen utility class so it is reliably full height). Its children are
+           ABSOLUTE so the wrapper's overflow:hidden clips the off-canvas panel —
+           this prevents the off-screen panel from adding horizontal scroll / white
+           space when zooming out. The wrapper itself adds no width to the page. */
+        #mobile-menu {
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        #mobile-menu.is-open {
+            pointer-events: auto;
+        }
+
         #mobile-menu-backdrop {
             opacity: 0;
             visibility: hidden;
-            pointer-events: none;
             transition: opacity 0.3s ease, visibility 0s linear 0.3s;
         }
 
         #mobile-menu.is-open #mobile-menu-backdrop {
             opacity: 1;
             visibility: visible;
-            pointer-events: auto;
             transition: opacity 0.3s ease, visibility 0s linear 0s;
         }
 
         #mobile-menu-panel {
             transform: translateX(100%);
             visibility: hidden;
-            pointer-events: none;
             transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), visibility 0s linear 0.35s;
             will-change: transform;
         }
@@ -360,7 +367,6 @@
         #mobile-menu.is-open #mobile-menu-panel {
             transform: translateX(0);
             visibility: visible;
-            pointer-events: auto;
             transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), visibility 0s linear 0s;
         }
 
@@ -543,14 +549,14 @@
                 $childIdle = 'text-gray-600 dark:text-gray-300 hover:text-primary hover:bg-gray-50 dark:hover:bg-gray-800/60';
                 $childActive = 'text-primary font-semibold bg-primary/5';
             @endphp
-            <div id="mobile-menu" class="lg:hidden">
+            <div id="mobile-menu" class="lg:hidden fixed inset-0 h-screen z-[60]">
                 <!-- Backdrop -->
                 <div id="mobile-menu-backdrop"
-                    class="fixed inset-0 h-screen w-screen z-[60] bg-deep-green/50 backdrop-blur-sm"></div>
+                    class="absolute inset-0 h-full w-full bg-deep-green/50 backdrop-blur-sm"></div>
 
                 <!-- Sliding panel -->
                 <aside id="mobile-menu-panel"
-                    class="fixed top-0 right-0 z-[61] h-screen w-[86%] max-w-sm bg-background-light dark:bg-background-dark shadow-2xl flex flex-col">
+                    class="absolute top-0 right-0 h-full w-[86%] max-w-sm bg-background-light dark:bg-background-dark shadow-2xl flex flex-col">
 
                     <!-- Drawer header -->
                     <div
