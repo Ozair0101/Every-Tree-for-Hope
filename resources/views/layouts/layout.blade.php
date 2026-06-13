@@ -325,39 +325,29 @@
         }
 
         /* ===== Mobile navigation drawer ===== */
-        #mobile-menu {
-            position: fixed;
-            inset: 0;
-            z-index: 60;
-            pointer-events: none;
-            /* Clip the off-canvas panel so it can't create horizontal scroll
-               (body's overflow-x-hidden does not clip fixed-position children). */
-            overflow: hidden;
-        }
-
-        #mobile-menu.is-open {
-            pointer-events: auto;
-        }
-
+        /* Sizing/positioning is set with Tailwind utility classes on the elements
+           (reliable). These rules only drive the open/close animation + state,
+           and stay visibility:hidden while closed (no paint, no pinch-zoom
+           flicker, no stray horizontal scroll). */
         #mobile-menu-backdrop {
             opacity: 0;
             visibility: hidden;
-            transition: opacity 0.3s ease, visibility 0.3s ease;
+            pointer-events: none;
+            transition: opacity 0.3s ease, visibility 0s linear 0.3s;
         }
 
         #mobile-menu.is-open #mobile-menu-backdrop {
             opacity: 1;
             visibility: visible;
+            pointer-events: auto;
+            transition: opacity 0.3s ease, visibility 0s linear 0s;
         }
 
         #mobile-menu-panel {
-            top: 0;
-            bottom: 0;
-            /* full-height fallback for browsers without dvh support */
-            right: 0;
-            left: auto;
             transform: translateX(100%);
-            transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            visibility: hidden;
+            pointer-events: none;
+            transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), visibility 0s linear 0.35s;
             will-change: transform;
         }
 
@@ -369,6 +359,9 @@
 
         #mobile-menu.is-open #mobile-menu-panel {
             transform: translateX(0);
+            visibility: visible;
+            pointer-events: auto;
+            transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), visibility 0s linear 0s;
         }
 
         /* Accordion sections inside the drawer */
@@ -552,11 +545,12 @@
             @endphp
             <div id="mobile-menu" class="lg:hidden">
                 <!-- Backdrop -->
-                <div id="mobile-menu-backdrop" class="absolute inset-0 bg-deep-green/50 backdrop-blur-sm"></div>
+                <div id="mobile-menu-backdrop"
+                    class="fixed inset-0 h-screen w-screen z-[60] bg-deep-green/50 backdrop-blur-sm"></div>
 
                 <!-- Sliding panel -->
                 <aside id="mobile-menu-panel"
-                    class="absolute h-[100dvh] w-[86%] max-w-sm bg-background-light dark:bg-background-dark shadow-2xl flex flex-col">
+                    class="fixed top-0 right-0 z-[61] h-screen w-[86%] max-w-sm bg-background-light dark:bg-background-dark shadow-2xl flex flex-col">
 
                     <!-- Drawer header -->
                     <div
