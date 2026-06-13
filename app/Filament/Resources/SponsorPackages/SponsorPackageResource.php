@@ -25,7 +25,7 @@ class SponsorPackageResource extends Resource
 
     protected static string|\UnitEnum|null $navigationGroup = 'Content Management';
 
-    protected static ?int $navigationSort = 3;
+    protected static ?int $navigationSort = 6;
 
     protected static ?string $modelLabel = 'Sponsor Package';
 
