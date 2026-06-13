@@ -248,6 +248,9 @@ return [
     'learn_more' => 'لا نور وپوهیږئ',
     'contact_us' => 'له موږ سره اړیکه',
     'donate_now' => 'همدا اوس مرسته وکړئ',
+    'donate_cta_support' => 'زموږ له ماموریت ملاتړ وکړئ',
+    'donate_cta_give_hope' => 'نن هیله ورکړئ',
+    'donate_cta_grow_forest' => 'د یوې ځنګلې په لویېدو کې مرسته وکړئ',
     'join_us' => 'له موږ سره یوځای شئ',
     'follow_us' => 'موږ تعقیب کړئ',
 
