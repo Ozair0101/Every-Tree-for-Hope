@@ -249,6 +249,9 @@ return [
     'learn_more' => 'بیشتر بدانید',
     'contact_us' => 'تماس با ما',
     'donate_now' => 'همین حالا کمک کنید',
+    'donate_cta_support' => 'از مأموریت ما حمایت کنید',
+    'donate_cta_give_hope' => 'امروز امید ببخشید',
+    'donate_cta_grow_forest' => 'به رویش یک جنگل کمک کنید',
     'join_us' => 'به ما بپیوندید',
     'follow_us' => 'ما را دنبال کنید',
 
