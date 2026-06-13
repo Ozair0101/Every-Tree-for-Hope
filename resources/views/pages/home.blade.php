@@ -77,13 +77,8 @@
                     <!-- Action row -->
                     <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-10 hero-fade-in"
                         style="animation-delay: 0.25s;">
-                        <a href="#donation-section"
-                            class="group inline-flex items-center gap-2 px-7 py-4 bg-deep-green text-white font-extrabold text-sm tracking-wide uppercase rounded-full shadow-lg shadow-deep-green/20 hover:bg-deep-green/90 hover:-translate-y-0.5 transition-all">
-                            <span class="material-symbols-outlined text-vibrant-lime text-base">park</span>
-                            {{ __('messages.plant_a_tree_today') }}
-                            <span
-                                class="material-symbols-outlined text-base group-hover:translate-x-1 transition-transform">arrow_forward</span>
-                        </a>
+                        @include('partials.donate-button', ['label' => __('messages.donate_cta_support')])
+                       
                         <a href="#our-works"
                             class="inline-flex items-center gap-2 text-deep-green text-sm font-bold uppercase tracking-wide hover:gap-3 transition-all border-b-2 border-deep-green/20 hover:border-vibrant-lime pb-1">
                             {{ __('messages.view_our_projects') }}
@@ -329,6 +324,11 @@
                         class="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-vibrant-lime via-gold-accent to-deep-green transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500">
                     </div>
                 </a>
+            </div>
+
+            <!-- Donate CTA below the involvement cards -->
+            <div class="mt-12 flex justify-center">
+                @include('partials.donate-button', ['label' => __('messages.donate_cta_give_hope')])
             </div>
         </div>
 
@@ -868,6 +868,9 @@
                 <span class="font-bold italic">{{ __('messages.roots_our_change') }}</span>
             </h2>
             <div class="w-24 h-[1px] bg-gold-accent mx-auto mt-8 opacity-40"></div>
+            <div class="mt-8 flex justify-center">
+                @include('partials.donate-button', ['label' => __('messages.donate_cta_grow_forest')])
+            </div>
         </div>
 
         <div class="relative max-w-5xl mx-auto">
