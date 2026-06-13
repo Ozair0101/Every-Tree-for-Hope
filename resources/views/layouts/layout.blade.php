@@ -323,6 +323,63 @@
         .no-scrollbar::-webkit-scrollbar {
             display: none;
         }
+
+        /* ===== Mobile navigation drawer ===== */
+        #mobile-menu {
+            position: fixed;
+            inset: 0;
+            z-index: 60;
+            pointer-events: none;
+        }
+
+        #mobile-menu.is-open {
+            pointer-events: auto;
+        }
+
+        #mobile-menu-backdrop {
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        #mobile-menu.is-open #mobile-menu-backdrop {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        #mobile-menu-panel {
+            top: 0;
+            right: 0;
+            left: auto;
+            transform: translateX(100%);
+            transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            will-change: transform;
+        }
+
+        html[dir="rtl"] #mobile-menu-panel {
+            right: auto;
+            left: 0;
+            transform: translateX(-100%);
+        }
+
+        #mobile-menu.is-open #mobile-menu-panel {
+            transform: translateX(0);
+        }
+
+        /* Accordion sections inside the drawer */
+        .mm-acc-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.35s ease;
+        }
+
+        .mm-acc.mm-acc-open .mm-acc-content {
+            max-height: 24rem;
+        }
+
+        .mm-acc.mm-acc-open .mm-acc-chevron {
+            transform: rotate(180deg);
+        }
     </style>
 </head>
 
@@ -475,99 +532,169 @@
                 </button>
             </nav>
 
-            <!-- Mobile Menu -->
-            <div id="mobile-menu"
-                class="hidden lg:hidden bg-background-light/95 dark:bg-background-dark/95 backdrop-blur-sm border-t border-gray-200 dark:border-gray-800">
-                <div class="max-w-7xl mx-auto px-6 py-4 space-y-1">
-                    <a class="block text-sm font-medium hover:text-primary transition-colors py-2"
-                        href="{{ route('home') }}">{{ __('messages.home') }}</a>
-    
-                    {{-- Mobile: About group --}}
-                    <p class="text-[10px] font-bold tracking-[0.25em] uppercase text-vibrant-lime pt-3 pb-1">
-                        {{ __('messages.nav_group_about') }}
-                    </p>
-                    <a class="flex items-center gap-2 text-sm font-medium hover:text-primary transition-colors py-2 ps-3"
-                        href="{{ route('about') }}">
-                        <span class="material-symbols-outlined text-base text-deep-green/60">info</span>
-                        {{ __('messages.about') }}
-                    </a>
-                    <a class="flex items-center gap-2 text-sm font-medium hover:text-primary transition-colors py-2 ps-3"
-                        href="{{ route('contact') }}">
-                        <span class="material-symbols-outlined text-base text-deep-green/60">mail</span>
-                        {{ __('messages.contact') }}
-                    </a>
-                    <a class="flex items-center gap-2 text-sm font-medium hover:text-primary transition-colors py-2 ps-3"
-                        href="{{ route('history') }}">
-                        <span class="material-symbols-outlined text-base text-deep-green/60">auto_stories</span>
-                        {{ __('messages.our_story') }}
-                    </a>
+            <!-- Mobile Menu Drawer -->
+            @php
+                $rn = Route::currentRouteName();
+                $aboutActive = in_array($rn, ['about', 'contact', 'history']);
+                $workActive = in_array($rn, ['gallery', 'report', 'awareness']);
+                $communityActive = in_array($rn, ['partners', 'advisors']);
+                $linkBase = 'flex items-center gap-3 px-4 py-3 rounded-xl text-[15px] font-semibold transition-all active:scale-[.98]';
+                $linkIdle = 'text-gray-800 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-800';
+                $linkActive = 'bg-primary/10 text-primary';
+                $childBase = 'flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-colors';
+                $childIdle = 'text-gray-600 dark:text-gray-300 hover:text-primary hover:bg-gray-50 dark:hover:bg-gray-800/60';
+                $childActive = 'text-primary font-semibold bg-primary/5';
+            @endphp
+            <div id="mobile-menu" class="lg:hidden">
+                <!-- Backdrop -->
+                <div id="mobile-menu-backdrop" class="absolute inset-0 bg-deep-green/50 backdrop-blur-sm"></div>
 
-                    {{-- Mobile: Our Work group --}}
-                    <p class="text-[10px] font-bold tracking-[0.25em] uppercase text-vibrant-lime pt-3 pb-1">
-                        {{ __('messages.nav_group_our_work') }}
-                    </p>
-                    <a class="flex items-center gap-2 text-sm font-medium hover:text-primary transition-colors py-2 ps-3"
-                        href="{{ route('gallery') }}">
-                        <span class="material-symbols-outlined text-base text-deep-green/60">photo_library</span>
-                        {{ __('messages.works') }}
-                    </a>
-                    <a class="flex items-center gap-2 text-sm font-medium hover:text-primary transition-colors py-2 ps-3"
-                        href="{{ route('report') }}">
-                        <span class="material-symbols-outlined text-base text-deep-green/60">analytics</span>
-                        {{ __('messages.report') }}
-                    </a>
-                    <a class="flex items-center gap-2 text-sm font-medium hover:text-primary transition-colors py-2 ps-3"
-                        href="{{ route('awareness') }}">
-                        <span class="material-symbols-outlined text-base text-vibrant-lime">menu_book</span>
-                        {{ __('messages.nav_awareness') }}
-                    </a>
+                <!-- Sliding panel -->
+                <aside id="mobile-menu-panel"
+                    class="absolute h-[100dvh] w-[86%] max-w-sm bg-background-light dark:bg-background-dark shadow-2xl flex flex-col">
 
-                    {{-- Mobile: Community group --}}
-                    <p class="text-[10px] font-bold tracking-[0.25em] uppercase text-vibrant-lime pt-3 pb-1">
-                        {{ __('messages.nav_group_community') }}
-                    </p>
-                    <a class="flex items-center gap-2 text-sm font-medium hover:text-primary transition-colors py-2 ps-3"
-                        href="{{ route('partners') }}">
-                        <span class="material-symbols-outlined text-base text-gold-accent">handshake</span>
-                        {{ __('messages.nav_partners') }}
-                    </a>
-                    <a class="flex items-center gap-2 text-sm font-medium hover:text-primary transition-colors py-2 ps-3"
-                        href="{{ route('advisors') }}">
-                        <span class="material-symbols-outlined text-base text-deep-green/60">psychology</span>
-                        {{ __('messages.nav_advisors') }}
-                    </a>
+                    <!-- Drawer header -->
+                    <div
+                        class="flex items-center justify-between gap-3 px-5 py-4 border-b border-gray-200 dark:border-gray-800 flex-shrink-0">
+                        <a href="{{ route('home') }}" class="flex items-center gap-2 min-w-0">
+                            <img src="{{ asset('everytree.png') }}" alt="{{ __('messages.site_name') }}"
+                                class="h-9 w-auto flex-shrink-0">
+                            <span
+                                class="text-sm font-bold text-gray-900 dark:text-white truncate">{{ __('messages.site_name') }}</span>
+                        </a>
+                        <button type="button" id="mobile-menu-close" aria-label="Close menu"
+                            class="p-2 -me-2 rounded-full text-gray-500 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors flex-shrink-0">
+                            <span class="material-symbols-outlined">close</span>
+                        </button>
+                    </div>
 
-                    {{-- Mobile: standalone items --}}
-                    <div class="pt-3 mt-2 border-t border-gray-200 dark:border-gray-700"></div>
-                    <a class="flex items-center gap-2 text-sm font-medium hover:text-primary transition-colors py-2 ps-3"
-                        href="{{ route('faq') }}">
-                        <span class="material-symbols-outlined text-base text-deep-green/60">help</span>
-                        {{ __('messages.faq_nav') }}
-                    </a>
+                    <!-- Scrollable nav -->
+                    <nav class="flex-1 overflow-y-auto no-scrollbar px-3 py-4 space-y-1">
 
-                    <a class="flex items-center gap-2 text-sm font-medium hover:text-primary transition-colors py-2 ps-3"
-                        href="{{ route('careers') }}">
-                        <span class="material-symbols-outlined text-base text-deep-green/60">work</span>
-                        {{ __('messages.careers_nav') }}
-                    </a>
-                    <!-- Mobile Language Switcher -->
-                    <div class="border-t border-gray-200 dark:border-gray-700 pt-3">
-                        <p class="text-xs font-medium text-gray-500 dark:text-gray-400 mb-2">
-                            {{ $current_language ?? 'Select Language' }}</p>
-                        <div class="flex gap-2">
-                            <a href="{{ request()->fullUrlWithQuery(['lang' => 'en']) }}"
-                                class="px-3 py-1.5 text-sm rounded-lg border {{ $current_locale === 'en' ? 'bg-primary text-white border-primary' : 'border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300' }}">EN</a>
-                            <a href="{{ request()->fullUrlWithQuery(['lang' => 'fa']) }}"
-                                class="px-3 py-1.5 text-sm rounded-lg border {{ $current_locale === 'fa' ? 'bg-primary text-white border-primary' : 'border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300' }}">FA</a>
-                            <a href="{{ request()->fullUrlWithQuery(['lang' => 'ps']) }}"
-                                class="px-3 py-1.5 text-sm rounded-lg border {{ $current_locale === 'ps' ? 'bg-primary text-white border-primary' : 'border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300' }}">PS</a>
+                        {{-- Home --}}
+                        <a href="{{ route('home') }}"
+                            class="{{ $linkBase }} {{ $rn === 'home' ? $linkActive : $linkIdle }}">
+                            {{ __('messages.home') }}
+                        </a>
+
+                        {{-- About accordion --}}
+                        <div class="mm-acc {{ $aboutActive ? 'mm-acc-open' : '' }}">
+                            <button type="button"
+                                class="mm-acc-toggle w-full flex items-center justify-between gap-3 px-4 py-3 rounded-xl text-[15px] font-semibold text-gray-800 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+                                <span>{{ __('messages.nav_group_about') }}</span>
+                                <span
+                                    class="mm-acc-chevron material-symbols-outlined text-xl text-gray-400 transition-transform">expand_more</span>
+                            </button>
+                            <div class="mm-acc-content">
+                                <div class="ms-5 my-1 ps-3 border-s-2 border-primary/15 space-y-0.5">
+                                    <a href="{{ route('about') }}"
+                                        class="{{ $childBase }} {{ $rn === 'about' ? $childActive : $childIdle }}">
+                                        <span class="material-symbols-outlined text-lg text-deep-green/60">info</span>
+                                        {{ __('messages.about') }}
+                                    </a>
+                                    <a href="{{ route('contact') }}"
+                                        class="{{ $childBase }} {{ $rn === 'contact' ? $childActive : $childIdle }}">
+                                        <span class="material-symbols-outlined text-lg text-deep-green/60">mail</span>
+                                        {{ __('messages.contact') }}
+                                    </a>
+                                    <a href="{{ route('history') }}"
+                                        class="{{ $childBase }} {{ $rn === 'history' ? $childActive : $childIdle }}">
+                                        <span
+                                            class="material-symbols-outlined text-lg text-deep-green/60">auto_stories</span>
+                                        {{ __('messages.our_story') }}
+                                    </a>
+                                </div>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="flex flex-col gap-2 pt-4 border-t border-gray-200 dark:border-gray-700">
-                        <a  class="px-4 py-2 text-sm font-bold text-white bg-primary rounded-lg hover:bg-primary/90 transition-colors" href="#?campaign=camp_01KT1CQZWEEX5SMARBECPAAA3T">{{ __('messages.donate_now') }}</a>
+                        {{-- Our Work accordion --}}
+                        <div class="mm-acc {{ $workActive ? 'mm-acc-open' : '' }}">
+                            <button type="button"
+                                class="mm-acc-toggle w-full flex items-center justify-between gap-3 px-4 py-3 rounded-xl text-[15px] font-semibold text-gray-800 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+                                <span>{{ __('messages.nav_group_our_work') }}</span>
+                                <span
+                                    class="mm-acc-chevron material-symbols-outlined text-xl text-gray-400 transition-transform">expand_more</span>
+                            </button>
+                            <div class="mm-acc-content">
+                                <div class="ms-5 my-1 ps-3 border-s-2 border-primary/15 space-y-0.5">
+                                    <a href="{{ route('gallery') }}"
+                                        class="{{ $childBase }} {{ $rn === 'gallery' ? $childActive : $childIdle }}">
+                                        <span
+                                            class="material-symbols-outlined text-lg text-deep-green/60">photo_library</span>
+                                        {{ __('messages.works') }}
+                                    </a>
+                                    <a href="{{ route('report') }}"
+                                        class="{{ $childBase }} {{ $rn === 'report' ? $childActive : $childIdle }}">
+                                        <span class="material-symbols-outlined text-lg text-deep-green/60">analytics</span>
+                                        {{ __('messages.report') }}
+                                    </a>
+                                    <a href="{{ route('awareness') }}"
+                                        class="{{ $childBase }} {{ $rn === 'awareness' ? $childActive : $childIdle }}">
+                                        <span class="material-symbols-outlined text-lg text-vibrant-lime">menu_book</span>
+                                        {{ __('messages.nav_awareness') }}
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        {{-- Community accordion --}}
+                        <div class="mm-acc {{ $communityActive ? 'mm-acc-open' : '' }}">
+                            <button type="button"
+                                class="mm-acc-toggle w-full flex items-center justify-between gap-3 px-4 py-3 rounded-xl text-[15px] font-semibold text-gray-800 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+                                <span>{{ __('messages.nav_group_community') }}</span>
+                                <span
+                                    class="mm-acc-chevron material-symbols-outlined text-xl text-gray-400 transition-transform">expand_more</span>
+                            </button>
+                            <div class="mm-acc-content">
+                                <div class="ms-5 my-1 ps-3 border-s-2 border-primary/15 space-y-0.5">
+                                    <a href="{{ route('partners') }}"
+                                        class="{{ $childBase }} {{ $rn === 'partners' ? $childActive : $childIdle }}">
+                                        <span class="material-symbols-outlined text-lg text-gold-accent">handshake</span>
+                                        {{ __('messages.nav_partners') }}
+                                    </a>
+                                    <a href="{{ route('advisors') }}"
+                                        class="{{ $childBase }} {{ $rn === 'advisors' ? $childActive : $childIdle }}">
+                                        <span class="material-symbols-outlined text-lg text-deep-green/60">psychology</span>
+                                        {{ __('messages.nav_advisors') }}
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="my-2 border-t border-gray-200 dark:border-gray-800"></div>
+
+                        {{-- Standalone parent links --}}
+                        <a href="{{ route('faq') }}"
+                            class="{{ $linkBase }} {{ $rn === 'faq' ? $linkActive : $linkIdle }}">
+                            {{ __('messages.faq_nav') }}
+                        </a>
+                        <a href="{{ route('careers') }}"
+                            class="{{ $linkBase }} {{ $rn === 'careers' ? $linkActive : $linkIdle }}">
+                            {{ __('messages.careers_nav') }}
+                        </a>
+                    </nav>
+
+                    <!-- Drawer footer: language switcher + donate -->
+                    <div
+                        class="flex-shrink-0 border-t border-gray-200 dark:border-gray-800 px-4 py-4 space-y-3 bg-background-light dark:bg-background-dark">
+                        <div class="flex items-center gap-2">
+                            <span class="material-symbols-outlined text-lg text-gray-400 flex-shrink-0">language</span>
+                            <div class="grid grid-cols-3 gap-2 flex-1">
+                                <a href="{{ request()->fullUrlWithQuery(['lang' => 'en']) }}"
+                                    class="text-center px-2 py-2 text-xs font-bold rounded-lg border transition-colors {{ $current_locale === 'en' ? 'bg-primary text-white border-primary' : 'border-gray-300 dark:border-gray-600 text-gray-600 dark:text-gray-300' }}">English</a>
+                                <a href="{{ request()->fullUrlWithQuery(['lang' => 'fa']) }}"
+                                    class="text-center px-2 py-2 text-xs font-bold rounded-lg border transition-colors {{ $current_locale === 'fa' ? 'bg-primary text-white border-primary' : 'border-gray-300 dark:border-gray-600 text-gray-600 dark:text-gray-300' }}">دری</a>
+                                <a href="{{ request()->fullUrlWithQuery(['lang' => 'ps']) }}"
+                                    class="text-center px-2 py-2 text-xs font-bold rounded-lg border transition-colors {{ $current_locale === 'ps' ? 'bg-primary text-white border-primary' : 'border-gray-300 dark:border-gray-600 text-gray-600 dark:text-gray-300' }}">پښتو</a>
+                            </div>
+                        </div>
+                        <a href="#?campaign=camp_01KT1CQZWEEX5SMARBECPAAA3T"
+                            class="flex items-center justify-center gap-2 w-full px-4 py-3.5 rounded-xl text-sm font-bold text-white bg-primary shadow-lg shadow-primary/30 hover:bg-primary/90 active:scale-[.98] transition-all">
+                            <span class="material-symbols-outlined text-xl">volunteer_activism</span>
+                            {{ __('messages.donate_now') }}
+                        </a>
                     </div>
-                </div>
+                </aside>
             </div>
         </header>
 
@@ -674,49 +801,50 @@
     <!-- Mobile Menu JavaScript -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const mobileMenuButton = document.getElementById('mobile-menu-button');
-            const mobileMenu = document.getElementById('mobile-menu');
+            const openBtn = document.getElementById('mobile-menu-button');
+            const closeBtn = document.getElementById('mobile-menu-close');
+            const menu = document.getElementById('mobile-menu');
+            const backdrop = document.getElementById('mobile-menu-backdrop');
 
-            if (mobileMenuButton && mobileMenu) {
-                mobileMenuButton.addEventListener('click', function() {
-                    mobileMenu.classList.toggle('hidden');
+            if (!menu || !openBtn) return;
 
-                    // Toggle hamburger icon
-                    const icon = mobileMenuButton.querySelector('svg');
-                    if (mobileMenu.classList.contains('hidden')) {
-                        // Show hamburger icon
-                        icon.innerHTML =
-                            '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />';
-                    } else {
-                        // Show close icon
-                        icon.innerHTML =
-                            '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />';
-                    }
-                });
-
-                // Close menu when clicking on links
-                const mobileLinks = mobileMenu.querySelectorAll('a');
-                mobileLinks.forEach(link => {
-                    link.addEventListener('click', function() {
-                        mobileMenu.classList.add('hidden');
-                        // Reset to hamburger icon
-                        const icon = mobileMenuButton.querySelector('svg');
-                        icon.innerHTML =
-                            '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />';
-                    });
-                });
-
-                // Close menu when clicking outside
-                document.addEventListener('click', function(event) {
-                    if (!mobileMenuButton.contains(event.target) && !mobileMenu.contains(event.target)) {
-                        mobileMenu.classList.add('hidden');
-                        // Reset to hamburger icon
-                        const icon = mobileMenuButton.querySelector('svg');
-                        icon.innerHTML =
-                            '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />';
-                    }
-                });
+            function openMenu() {
+                menu.classList.add('is-open');
+                document.body.style.overflow = 'hidden';
             }
+
+            function closeMenu() {
+                menu.classList.remove('is-open');
+                document.body.style.overflow = '';
+            }
+
+            openBtn.addEventListener('click', openMenu);
+            if (closeBtn) closeBtn.addEventListener('click', closeMenu);
+            if (backdrop) backdrop.addEventListener('click', closeMenu);
+
+            // Close the drawer after tapping any navigation link
+            menu.querySelectorAll('a').forEach(function(link) {
+                link.addEventListener('click', closeMenu);
+            });
+
+            // Close on Escape
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && menu.classList.contains('is-open')) closeMenu();
+            });
+
+            // Collapsible accordion sections
+            menu.querySelectorAll('.mm-acc-toggle').forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    const acc = btn.closest('.mm-acc');
+                    if (!acc) return;
+                    const isOpen = acc.classList.contains('mm-acc-open');
+                    // Close other open sections for a clean, focused view
+                    menu.querySelectorAll('.mm-acc.mm-acc-open').forEach(function(other) {
+                        if (other !== acc) other.classList.remove('mm-acc-open');
+                    });
+                    acc.classList.toggle('mm-acc-open', !isOpen);
+                });
+            });
         });
     </script>
 
