@@ -43,6 +43,7 @@ class JobPosting extends Model
         'province',
         'is_remote',
         'salary_range',
+        'application_url',
         'openings',
         'application_deadline',
         'is_active',
