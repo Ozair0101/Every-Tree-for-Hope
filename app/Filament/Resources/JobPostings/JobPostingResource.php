@@ -116,6 +116,13 @@ class JobPostingResource extends Resource
                             ->native(false)
                             ->minDate(now())
                             ->helperText('Leave empty for "open until filled". Past the deadline the post is shown as closed.'),
+                        Components\TextInput::make('application_url')
+                            ->label('External application link (optional)')
+                            ->url()
+                            ->prefixIcon('heroicon-o-link')
+                            ->placeholder('https://forms.gle/…')
+                            ->helperText('If the employer collects applications on their own site, paste the link here. Applicants are then sent there instead of using the on-site form.')
+                            ->columnSpanFull(),
                     ]),
 
                 Section::make('Publishing')
