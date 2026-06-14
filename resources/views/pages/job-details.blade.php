@@ -91,11 +91,11 @@
                 </div>
 
                 @if ($job->is_open)
-                    <a href="#apply"
+                    <button type="button" data-apply-open
                         class="inline-flex items-center gap-2 mt-7 px-7 py-3.5 bg-gold-accent text-deep-green text-sm font-bold rounded-full shadow-lg hover:bg-gold-accent/90 hover:-translate-y-0.5 transition-all">
                         <span class="material-symbols-outlined text-base">send</span>
                         {{ __('messages.jobs_apply_now') }}
-                    </a>
+                    </button>
                 @endif
             </div>
         </section>
@@ -220,11 +220,11 @@
                         </dl>
 
                         @if ($job->is_open)
-                            <a href="#apply"
+                            <button type="button" data-apply-open
                                 class="mt-6 w-full inline-flex items-center justify-center gap-2 px-5 py-3 bg-deep-green text-white text-sm font-bold rounded-xl hover:bg-deep-green/90 transition-colors">
                                 <span class="material-symbols-outlined text-base">send</span>
                                 {{ __('messages.jobs_apply_now') }}
-                            </a>
+                            </button>
                         @endif
 
                         <div class="mt-5 pt-5 border-t border-deep-green/5">
@@ -266,91 +266,8 @@
                         </a>
                     </div>
                 @elseif ($job->is_open)
-                    <div class="bg-white border border-deep-green/10 rounded-2xl shadow-sm p-6 sm:p-8">
-                        <h2 class="text-2xl font-serif text-deep-green mb-1">{{ __('messages.jobs_apply_heading') }}</h2>
-                        <p class="text-charcoal/60 text-sm mb-6">{{ __('messages.jobs_apply_sub') }}</p>
-
-                        @if ($errors->any())
-                            <div class="mb-6 flex items-start gap-2 text-sm text-red-700 bg-red-50 border border-red-200 rounded-xl px-4 py-3">
-                                <span class="material-symbols-outlined text-base">error</span>
-                                <span>{{ __('messages.jobs_form_error') }}</span>
-                            </div>
-                        @endif
-
-                        <form method="POST" action="{{ route('careers.apply', $job) }}" enctype="multipart/form-data"
-                            class="space-y-5">
-                            @csrf
-
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                                <div>
-                                    <label for="full_name" class="block text-sm font-semibold text-deep-green mb-1.5">{{ __('messages.jobs_form_name') }} <span class="text-red-500">*</span></label>
-                                    <input type="text" id="full_name" name="full_name" value="{{ old('full_name') }}" required
-                                        class="w-full rounded-xl border border-deep-green/15 px-4 py-2.5 text-sm focus:border-deep-green focus:ring-0 focus:outline-none @error('full_name') border-red-400 @enderror">
-                                    @error('full_name')<p class="text-red-600 text-xs mt-1">{{ $message }}</p>@enderror
-                                </div>
-                                <div>
-                                    <label for="email" class="block text-sm font-semibold text-deep-green mb-1.5">{{ __('messages.jobs_form_email') }} <span class="text-red-500">*</span></label>
-                                    <input type="email" id="email" name="email" value="{{ old('email') }}" required dir="ltr"
-                                        class="w-full rounded-xl border border-deep-green/15 px-4 py-2.5 text-sm focus:border-deep-green focus:ring-0 focus:outline-none @error('email') border-red-400 @enderror">
-                                    @error('email')<p class="text-red-600 text-xs mt-1">{{ $message }}</p>@enderror
-                                </div>
-                                <div>
-                                    <label for="phone" class="block text-sm font-semibold text-deep-green mb-1.5">{{ __('messages.jobs_form_phone') }} <span class="text-red-500">*</span></label>
-                                    <input type="tel" id="phone" name="phone" value="{{ old('phone') }}" required dir="ltr"
-                                        class="w-full rounded-xl border border-deep-green/15 px-4 py-2.5 text-sm focus:border-deep-green focus:ring-0 focus:outline-none @error('phone') border-red-400 @enderror">
-                                    @error('phone')<p class="text-red-600 text-xs mt-1">{{ $message }}</p>@enderror
-                                </div>
-                                <div>
-                                    <label for="location" class="block text-sm font-semibold text-deep-green mb-1.5">{{ __('messages.jobs_form_location') }}</label>
-                                    <input type="text" id="location" name="location" value="{{ old('location') }}"
-                                        class="w-full rounded-xl border border-deep-green/15 px-4 py-2.5 text-sm focus:border-deep-green focus:ring-0 focus:outline-none">
-                                </div>
-                                <div>
-                                    <label for="years_experience" class="block text-sm font-semibold text-deep-green mb-1.5">{{ __('messages.jobs_form_experience') }}</label>
-                                    <input type="number" id="years_experience" name="years_experience" value="{{ old('years_experience') }}" min="0" max="80"
-                                        class="w-full rounded-xl border border-deep-green/15 px-4 py-2.5 text-sm focus:border-deep-green focus:ring-0 focus:outline-none">
-                                </div>
-                                <div>
-                                    <label for="linkedin_url" class="block text-sm font-semibold text-deep-green mb-1.5">{{ __('messages.jobs_form_linkedin') }}</label>
-                                    <input type="url" id="linkedin_url" name="linkedin_url" value="{{ old('linkedin_url') }}" dir="ltr" placeholder="https://"
-                                        class="w-full rounded-xl border border-deep-green/15 px-4 py-2.5 text-sm focus:border-deep-green focus:ring-0 focus:outline-none">
-                                    @error('linkedin_url')<p class="text-red-600 text-xs mt-1">{{ $message }}</p>@enderror
-                                </div>
-                            </div>
-
-                            <div>
-                                <label for="portfolio_url" class="block text-sm font-semibold text-deep-green mb-1.5">{{ __('messages.jobs_form_portfolio') }}</label>
-                                <input type="url" id="portfolio_url" name="portfolio_url" value="{{ old('portfolio_url') }}" dir="ltr" placeholder="https://"
-                                    class="w-full rounded-xl border border-deep-green/15 px-4 py-2.5 text-sm focus:border-deep-green focus:ring-0 focus:outline-none">
-                                @error('portfolio_url')<p class="text-red-600 text-xs mt-1">{{ $message }}</p>@enderror
-                            </div>
-
-                            <div>
-                                <label for="cover_letter" class="block text-sm font-semibold text-deep-green mb-1.5">{{ __('messages.jobs_form_cover') }}</label>
-                                <textarea id="cover_letter" name="cover_letter" rows="5" placeholder="{{ __('messages.jobs_form_cover_ph') }}"
-                                    class="w-full rounded-xl border border-deep-green/15 px-4 py-2.5 text-sm focus:border-deep-green focus:ring-0 focus:outline-none">{{ old('cover_letter') }}</textarea>
-                            </div>
-
-                            {{-- Résumé upload --}}
-                            <div>
-                                <label class="block text-sm font-semibold text-deep-green mb-1.5">{{ __('messages.jobs_form_resume') }} <span class="text-red-500">*</span></label>
-                                <label for="resume" data-resume-drop
-                                    class="flex flex-col items-center justify-center gap-2 w-full rounded-xl border-2 border-dashed border-deep-green/20 bg-stone-50 px-4 py-7 text-center cursor-pointer hover:border-deep-green/40 hover:bg-stone-100 transition-colors @error('resume') border-red-400 @enderror">
-                                    <span class="material-symbols-outlined text-3xl text-deep-green/40">upload_file</span>
-                                    <span data-resume-label class="text-sm text-charcoal/60">{{ __('messages.jobs_form_resume_cta') }}</span>
-                                    <span class="text-xs text-charcoal/40">{{ __('messages.jobs_form_resume_hint') }}</span>
-                                    <input type="file" id="resume" name="resume" accept=".pdf,.doc,.docx" required class="hidden">
-                                </label>
-                                @error('resume')<p class="text-red-600 text-xs mt-1">{{ $message }}</p>@enderror
-                            </div>
-
-                            <button type="submit"
-                                class="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-gold-accent text-deep-green text-sm font-bold rounded-full shadow-md hover:bg-gold-accent/90 hover:-translate-y-0.5 transition-all">
-                                <span class="material-symbols-outlined text-base">send</span>
-                                {{ __('messages.jobs_form_submit') }}
-                            </button>
-                        </form>
-                    </div>
+                    {{-- Form / external link stays hidden until the user opens the apply modal --}}
+                   
                 @else
                     <div class="bg-white border border-deep-green/10 rounded-2xl shadow-sm p-8 text-center">
                         <span class="material-symbols-outlined text-deep-green/25 text-5xl mb-3">lock_clock</span>
@@ -359,6 +276,127 @@
                     </div>
                 @endif
             </div>
+
+            {{-- ===== Apply modal (hidden until "Apply now" is clicked) ===== --}}
+            @if ($job->is_open)
+                <div id="apply-modal" class="fixed inset-0 z-[70] hidden">
+                    <div data-apply-close class="absolute inset-0 bg-deep-green/60 backdrop-blur-sm"></div>
+                    <div class="absolute inset-0 overflow-y-auto p-4 sm:p-6">
+                        <div class="relative mx-auto my-2 sm:my-6 w-full max-w-2xl bg-white rounded-2xl shadow-2xl">
+                            {{-- Modal header --}}
+                            <div class="sticky top-0 z-10 flex items-center justify-between gap-3 px-6 py-4 border-b border-deep-green/10 bg-white rounded-t-2xl">
+                                <h2 class="text-lg font-serif text-deep-green">{{ __('messages.jobs_apply_heading') }}</h2>
+                                <button type="button" data-apply-close aria-label="{{ __('messages.jobs_close') }}"
+                                    class="p-2 -me-2 rounded-full text-charcoal/50 hover:bg-stone-100 transition-colors">
+                                    <span class="material-symbols-outlined">close</span>
+                                </button>
+                            </div>
+
+                            <div class="p-6 sm:p-8">
+                                @if ($job->application_url)
+                                    {{-- External application link --}}
+                                    <div class="text-center">
+                                        <div class="mx-auto h-16 w-16 rounded-full bg-vibrant-lime/15 flex items-center justify-center mb-4">
+                                            <span class="material-symbols-outlined text-vibrant-lime text-4xl">captive_portal</span>
+                                        </div>
+                                        <h3 class="text-xl font-serif text-deep-green mb-2">{{ __('messages.jobs_apply_external_title') }}</h3>
+                                        <p class="text-charcoal/65 text-sm max-w-md mx-auto mb-6">{{ __('messages.jobs_apply_external_desc') }}</p>
+                                        <a href="{{ $job->application_url }}" target="_blank" rel="noopener noreferrer"
+                                            class="inline-flex items-center justify-center gap-2 px-7 py-3.5 bg-gold-accent text-deep-green text-sm font-bold rounded-full shadow-md hover:bg-gold-accent/90 hover:-translate-y-0.5 transition-all">
+                                            <span class="material-symbols-outlined text-base">open_in_new</span>
+                                            {{ __('messages.jobs_apply_external_btn') }}
+                                        </a>
+                                        <p class="mt-4 text-xs text-charcoal/40 break-all" dir="ltr">{{ $job->application_url }}</p>
+                                    </div>
+                                @else
+                                    <p class="text-charcoal/60 text-sm mb-6">{{ __('messages.jobs_apply_sub') }}</p>
+
+                                    @if ($errors->any())
+                                        <div class="mb-6 flex items-start gap-2 text-sm text-red-700 bg-red-50 border border-red-200 rounded-xl px-4 py-3">
+                                            <span class="material-symbols-outlined text-base">error</span>
+                                            <span>{{ __('messages.jobs_form_error') }}</span>
+                                        </div>
+                                    @endif
+
+                                    <form method="POST" action="{{ route('careers.apply', $job) }}" enctype="multipart/form-data"
+                                        class="space-y-5">
+                                        @csrf
+
+                                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                                            <div>
+                                                <label for="full_name" class="block text-sm font-semibold text-deep-green mb-1.5">{{ __('messages.jobs_form_name') }} <span class="text-red-500">*</span></label>
+                                                <input type="text" id="full_name" name="full_name" value="{{ old('full_name') }}" required
+                                                    class="w-full rounded-xl border border-deep-green/15 px-4 py-2.5 text-sm focus:border-deep-green focus:ring-0 focus:outline-none @error('full_name') border-red-400 @enderror">
+                                                @error('full_name')<p class="text-red-600 text-xs mt-1">{{ $message }}</p>@enderror
+                                            </div>
+                                            <div>
+                                                <label for="email" class="block text-sm font-semibold text-deep-green mb-1.5">{{ __('messages.jobs_form_email') }} <span class="text-red-500">*</span></label>
+                                                <input type="email" id="email" name="email" value="{{ old('email') }}" required dir="ltr"
+                                                    class="w-full rounded-xl border border-deep-green/15 px-4 py-2.5 text-sm focus:border-deep-green focus:ring-0 focus:outline-none @error('email') border-red-400 @enderror">
+                                                @error('email')<p class="text-red-600 text-xs mt-1">{{ $message }}</p>@enderror
+                                            </div>
+                                            <div>
+                                                <label for="phone" class="block text-sm font-semibold text-deep-green mb-1.5">{{ __('messages.jobs_form_phone') }} <span class="text-red-500">*</span></label>
+                                                <input type="tel" id="phone" name="phone" value="{{ old('phone') }}" required dir="ltr"
+                                                    class="w-full rounded-xl border border-deep-green/15 px-4 py-2.5 text-sm focus:border-deep-green focus:ring-0 focus:outline-none @error('phone') border-red-400 @enderror">
+                                                @error('phone')<p class="text-red-600 text-xs mt-1">{{ $message }}</p>@enderror
+                                            </div>
+                                            <div>
+                                                <label for="location" class="block text-sm font-semibold text-deep-green mb-1.5">{{ __('messages.jobs_form_location') }}</label>
+                                                <input type="text" id="location" name="location" value="{{ old('location') }}"
+                                                    class="w-full rounded-xl border border-deep-green/15 px-4 py-2.5 text-sm focus:border-deep-green focus:ring-0 focus:outline-none">
+                                            </div>
+                                            <div>
+                                                <label for="years_experience" class="block text-sm font-semibold text-deep-green mb-1.5">{{ __('messages.jobs_form_experience') }}</label>
+                                                <input type="number" id="years_experience" name="years_experience" value="{{ old('years_experience') }}" min="0" max="80"
+                                                    class="w-full rounded-xl border border-deep-green/15 px-4 py-2.5 text-sm focus:border-deep-green focus:ring-0 focus:outline-none">
+                                            </div>
+                                            <div>
+                                                <label for="linkedin_url" class="block text-sm font-semibold text-deep-green mb-1.5">{{ __('messages.jobs_form_linkedin') }}</label>
+                                                <input type="url" id="linkedin_url" name="linkedin_url" value="{{ old('linkedin_url') }}" dir="ltr" placeholder="https://"
+                                                    class="w-full rounded-xl border border-deep-green/15 px-4 py-2.5 text-sm focus:border-deep-green focus:ring-0 focus:outline-none">
+                                                @error('linkedin_url')<p class="text-red-600 text-xs mt-1">{{ $message }}</p>@enderror
+                                            </div>
+                                        </div>
+
+                                        <div>
+                                            <label for="portfolio_url" class="block text-sm font-semibold text-deep-green mb-1.5">{{ __('messages.jobs_form_portfolio') }}</label>
+                                            <input type="url" id="portfolio_url" name="portfolio_url" value="{{ old('portfolio_url') }}" dir="ltr" placeholder="https://"
+                                                class="w-full rounded-xl border border-deep-green/15 px-4 py-2.5 text-sm focus:border-deep-green focus:ring-0 focus:outline-none">
+                                            @error('portfolio_url')<p class="text-red-600 text-xs mt-1">{{ $message }}</p>@enderror
+                                        </div>
+
+                                        <div>
+                                            <label for="cover_letter" class="block text-sm font-semibold text-deep-green mb-1.5">{{ __('messages.jobs_form_cover') }}</label>
+                                            <textarea id="cover_letter" name="cover_letter" rows="5" placeholder="{{ __('messages.jobs_form_cover_ph') }}"
+                                                class="w-full rounded-xl border border-deep-green/15 px-4 py-2.5 text-sm focus:border-deep-green focus:ring-0 focus:outline-none">{{ old('cover_letter') }}</textarea>
+                                        </div>
+
+                                        {{-- Résumé upload --}}
+                                        <div>
+                                            <label class="block text-sm font-semibold text-deep-green mb-1.5">{{ __('messages.jobs_form_resume') }} <span class="text-red-500">*</span></label>
+                                            <label for="resume" data-resume-drop
+                                                class="flex flex-col items-center justify-center gap-2 w-full rounded-xl border-2 border-dashed border-deep-green/20 bg-stone-50 px-4 py-7 text-center cursor-pointer hover:border-deep-green/40 hover:bg-stone-100 transition-colors @error('resume') border-red-400 @enderror">
+                                                <span class="material-symbols-outlined text-3xl text-deep-green/40">upload_file</span>
+                                                <span data-resume-label class="text-sm text-charcoal/60">{{ __('messages.jobs_form_resume_cta') }}</span>
+                                                <span class="text-xs text-charcoal/40">{{ __('messages.jobs_form_resume_hint') }}</span>
+                                                <input type="file" id="resume" name="resume" accept=".pdf,.doc,.docx" required class="hidden">
+                                            </label>
+                                            @error('resume')<p class="text-red-600 text-xs mt-1">{{ $message }}</p>@enderror
+                                        </div>
+
+                                        <button type="submit"
+                                            class="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-gold-accent text-deep-green text-sm font-bold rounded-full shadow-md hover:bg-gold-accent/90 hover:-translate-y-0.5 transition-all">
+                                            <span class="material-symbols-outlined text-base">send</span>
+                                            {{ __('messages.jobs_form_submit') }}
+                                        </button>
+                                    </form>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endif
 
             @if ($relatedJobs->isNotEmpty())
                 <div class="mt-16">
@@ -404,10 +442,33 @@
                     });
                 }
 
-                // Jump to the form if it returned with validation errors
-                @if ($errors->any())
-                    document.getElementById('apply')?.scrollIntoView({ behavior: 'smooth' });
-                @endif
+                // Apply modal: open / close, scroll lock, Escape, backdrop click
+                const applyModal = document.getElementById('apply-modal');
+                if (applyModal) {
+                    const openApply = function() {
+                        applyModal.classList.remove('hidden');
+                        document.body.style.overflow = 'hidden';
+                    };
+                    const closeApply = function() {
+                        applyModal.classList.add('hidden');
+                        document.body.style.overflow = '';
+                    };
+
+                    document.querySelectorAll('[data-apply-open]').forEach(function(btn) {
+                        btn.addEventListener('click', openApply);
+                    });
+                    applyModal.querySelectorAll('[data-apply-close]').forEach(function(el) {
+                        el.addEventListener('click', closeApply);
+                    });
+                    document.addEventListener('keydown', function(e) {
+                        if (e.key === 'Escape' && !applyModal.classList.contains('hidden')) closeApply();
+                    });
+
+                    // Re-open the modal automatically if the form returned with errors
+                    @if ($errors->any())
+                        openApply();
+                    @endif
+                }
             });
         </script>
     @endpush
