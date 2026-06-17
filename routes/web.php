@@ -56,3 +56,11 @@ Route::post('/get-involved', [App\Http\Controllers\InvolvementController::class,
 
 Route::get('/faq', [App\Http\Controllers\FaqController::class, 'index'])->name('faq');
 Route::post('/faq', [App\Http\Controllers\FaqController::class, 'submit'])->name('faq.submit');
+
+// Voices of Nature — community wall (ideas, findings, experiences)
+Route::get('/voices', [App\Http\Controllers\VoiceController::class, 'index'])->name('voices.index');
+Route::get('/voices/share', [App\Http\Controllers\VoiceController::class, 'create'])->name('voices.create');
+Route::post('/voices', [App\Http\Controllers\VoiceController::class, 'store'])->name('voices.store');
+Route::get('/voices/{voice}', [App\Http\Controllers\VoiceController::class, 'show'])->name('voices.show');
+Route::post('/voices/{voice}/like', [App\Http\Controllers\VoiceController::class, 'like'])->name('voices.like');
+Route::post('/voices/{voice}/comment', [App\Http\Controllers\VoiceController::class, 'comment'])->name('voices.comment');
