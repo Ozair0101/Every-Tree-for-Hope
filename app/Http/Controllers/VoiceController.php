@@ -130,7 +130,7 @@ class VoiceController extends Controller
 
         return redirect()->route('voices.index')
             ->with('voice_submitted', true)
-            ->with('success', 'Thank you for sharing! Your voice has been received and will appear on the wall once our team reviews it.');
+            ->with('success', __('messages.voices_submit_success'));
     }
 
     /**
@@ -200,7 +200,7 @@ class VoiceController extends Controller
             ]);
         }
 
-        return back()->with('success', 'Your comment has been posted.')->withFragment('comments');
+        return back()->with('success', __('messages.voices_comment_success'))->withFragment('comments');
     }
 
     /**
