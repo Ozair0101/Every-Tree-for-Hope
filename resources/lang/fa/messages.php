@@ -967,6 +967,8 @@ return [
     'packages_sponsor_btn' => 'حمایت از این بسته',
     'packages_subline' => 'هر پول در دلِ خاک نشانده می‌شود',
 
+    'gallery_sponsored_by' => 'حمایت‌شده توسط',
+
     // ── صدای طبیعت ──
     'voices_nav' => 'صداها',
     'voices_page_title' => 'صدای طبیعت',

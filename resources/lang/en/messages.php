@@ -989,6 +989,8 @@ return [
     'packages_sponsor_btn' => 'Sponsor this package',
     'packages_subline' => 'every penny goes into the soil',
 
+    'gallery_sponsored_by' => 'Sponsored by',
+
     // ── Voices of Nature ──
     'voices_nav' => 'Voices',
     'voices_page_title' => 'Voices of Nature',

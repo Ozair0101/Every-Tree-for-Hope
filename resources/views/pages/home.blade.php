@@ -7,6 +7,11 @@
         $totalTrees = $totalEventTrees;
         $co2Tons = $totalTrees * 0.021;
         $eventCount = App\Models\Event::count();
+        // Overall tree survival rate across all events: surviving / planted.
+        $totalTreesLost = (int) App\Models\Event::sum('trees_lost');
+        $survivalRate = $totalTrees > 0
+            ? round((($totalTrees - $totalTreesLost) / $totalTrees) * 100, 1)
+            : null;
     @endphp
 
     <section class="relative w-full overflow-hidden" style="background: #fafaf5;">
@@ -161,7 +166,7 @@
         <div class="relative z-10 border-t border-deep-green/10 bg-deep-green/[0.02]">
             <div class="max-w-7xl mx-auto px-6 py-5">
                 <div
-                    class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-0 md:divide-x md:divide-deep-green/10 text-center md:text-left">
+                    class="grid grid-cols-2 md:grid-cols-5 gap-4 md:gap-0 md:divide-x md:divide-deep-green/10 text-center md:text-left">
                     <!-- Stat 1 -->
                     <div class="md:px-6 first:md:pl-0 flex md:items-center gap-3 justify-center md:justify-start">
                         <span class="material-symbols-outlined text-vibrant-lime text-2xl">park</span>
@@ -205,6 +210,18 @@
                             </p>
                             <p class="text-charcoal/40 text-[9px] font-bold uppercase tracking-widest mt-1">
                                 {{ __('messages.events_completed') }}
+                            </p>
+                        </div>
+                    </div>
+                    <!-- Stat 5 — Overall tree survival rate -->
+                    <div class="md:px-6 flex md:items-center gap-3 justify-center md:justify-start">
+                        <span class="material-symbols-outlined text-vibrant-lime text-2xl">trending_up</span>
+                        <div>
+                            <p class="text-deep-green text-xl md:text-2xl font-black tabular-nums leading-none">
+                                {{ $survivalRate !== null ? $survivalRate . '%' : '—' }}
+                            </p>
+                            <p class="text-charcoal/40 text-[9px] font-bold uppercase tracking-widest mt-1">
+                                {{ __('messages.survival_rate') }}
                             </p>
                         </div>
                     </div>

@@ -68,6 +68,24 @@
                     </div>
                 @endif
 
+                <!-- Sponsored by -->
+                @php
+                    $sponsorName = $event->sponsor_partner
+                        ?: $event->donators->pluck('full_name')
+                            ->merge($event->partners->pluck('company_name'))
+                            ->filter()
+                            ->implode(', ');
+                @endphp
+                @if ($sponsorName)
+                    <div class="flex items-center gap-2 mb-4 px-3 py-2 bg-gold-accent/10 rounded-lg border border-gold-accent/20">
+                        <span class="material-symbols-outlined text-base text-gold-accent">volunteer_activism</span>
+                        <span class="text-xs text-charcoal/70">
+                            {{ __('messages.gallery_sponsored_by') }}
+                            <span class="font-bold text-deep-green">{{ $sponsorName }}</span>
+                        </span>
+                    </div>
+                @endif
+
                 <!-- View Details Button -->
                 <a href="{{ route('events.show', $event->id) }}"
                     class="w-full bg-deep-green hover:bg-gold-accent text-white py-3 rounded-lg font-bold text-sm transition-all text-center block">

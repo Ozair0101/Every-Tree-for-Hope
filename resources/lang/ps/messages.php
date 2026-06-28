@@ -964,6 +964,8 @@ return [
     'packages_sponsor_btn' => 'د دې بستې ملاتړ',
     'packages_subline' => 'هره افغانۍ په خاوره کې کرل کیږي',
 
+    'gallery_sponsored_by' => 'تمویل شوی له لوري',
+
     // ── د طبیعت غږونه ──
     'voices_nav' => 'غږونه',
     'voices_page_title' => 'د طبیعت غږونه',

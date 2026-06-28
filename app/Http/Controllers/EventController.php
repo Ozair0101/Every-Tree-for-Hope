@@ -51,7 +51,8 @@ class EventController extends Controller
             }
         }
 
-        $events = $query->orderBy('date', 'desc')
+        $events = $query->with(['images', 'donators', 'partners'])
+            ->orderBy('date', 'desc')
             ->paginate(9)
             ->withQueryString();
 
