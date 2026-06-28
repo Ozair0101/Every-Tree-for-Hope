@@ -472,6 +472,12 @@
                                         class="material-symbols-outlined text-base text-deep-green/70">analytics</span>
                                     {{ __('messages.report') }}
                                 </a>
+                                <a href="{{ route('funding') }}"
+                                    class="flex items-center gap-3 px-4 py-2.5 text-sm hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 hover:text-primary transition-colors">
+                                    <span
+                                        class="material-symbols-outlined text-base text-gold-accent">account_balance</span>
+                                    {{ __('messages.fund_nav') }}
+                                </a>
                                 <a href="{{ route('awareness') }}"
                                     class="flex items-center gap-3 px-4 py-2.5 text-sm hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 hover:text-primary transition-colors">
                                     <span
@@ -550,7 +556,7 @@
             @php
                 $rn = Route::currentRouteName();
                 $aboutActive = in_array($rn, ['about', 'contact', 'history', 'faq']);
-                $workActive = in_array($rn, ['gallery', 'report', 'awareness']);
+                $workActive = in_array($rn, ['gallery', 'report', 'awareness', 'funding']);
                 $communityActive = in_array($rn, ['partners', 'advisors']);
                 $linkBase = 'flex items-center gap-3 px-4 py-3 rounded-xl text-[15px] font-semibold transition-all active:scale-[.98]';
                 $linkIdle = 'text-gray-800 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-800';
@@ -648,6 +654,11 @@
                                         class="{{ $childBase }} {{ $rn === 'report' ? $childActive : $childIdle }}">
                                         <span class="material-symbols-outlined text-lg text-deep-green/60">analytics</span>
                                         {{ __('messages.report') }}
+                                    </a>
+                                    <a href="{{ route('funding') }}"
+                                        class="{{ $childBase }} {{ $rn === 'funding' ? $childActive : $childIdle }}">
+                                        <span class="material-symbols-outlined text-lg text-gold-accent">account_balance</span>
+                                        {{ __('messages.fund_nav') }}
                                     </a>
                                     <a href="{{ route('awareness') }}"
                                         class="{{ $childBase }} {{ $rn === 'awareness' ? $childActive : $childIdle }}">

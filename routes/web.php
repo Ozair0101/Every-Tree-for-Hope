@@ -14,9 +14,13 @@ Route::get('/works', function () {
     return view('pages.works');
 })->name('works');
 
-Route::get('/gallery/{event}', [App\Http\Controllers\EventController::class, 'show'])->name('events.show');
+Route::get('/event/{event}', [App\Http\Controllers\EventController::class, 'show'])->name('events.show');
 
-Route::get('/gallery', [App\Http\Controllers\EventController::class, 'index'])->name('gallery');
+Route::get('/event', [App\Http\Controllers\EventController::class, 'index'])->name('gallery');
+
+// Keep old /gallery links working (bookmarks, shared URLs, search engines).
+Route::redirect('/gallery', '/event');
+Route::redirect('/gallery/{event}', '/event/{event}');
 
 // Careers / Jobs
 Route::get('/careers', [App\Http\Controllers\CareerController::class, 'index'])->name('careers');
@@ -31,6 +35,10 @@ Route::get('/advisors', [App\Http\Controllers\PartnerController::class, 'advisor
 Route::get('/report', function () {
     return view('pages.report');
 })->name('report');
+
+Route::get('/funding-model', function () {
+    return view('pages.funding');
+})->name('funding');
 
 Route::get('/contact', function () {
     return view('pages.contact');
