@@ -538,7 +538,7 @@
                                 (پښتو)</a>
                         </div>
                     </div>
-                    <a  class="px-4 py-2 text-sm font-bold text-white bg-primary rounded-lg hover:bg-primary/90 transition-colors" href="#?campaign=camp_01KT1CQZWEEX5SMARBECPAAA3T">{{ __('messages.donate_now') }}</a>
+                    <a  class="px-4 py-2 text-sm font-bold text-white bg-primary rounded-lg hover:bg-primary/90 transition-colors" href="{{ $donateUrl }}">{{ __('messages.donate_now') }}</a>
                 </div>
 
                 <!-- Mobile Menu Button -->
@@ -720,7 +720,7 @@
                                     class="text-center px-2 py-2 text-xs font-bold rounded-lg border transition-colors {{ $current_locale === 'ps' ? 'bg-primary text-white border-primary' : 'border-gray-300 dark:border-gray-600 text-gray-600 dark:text-gray-300' }}">پښتو</a>
                             </div>
                         </div>
-                        <a href="#?campaign=camp_01KT1CQZWEEX5SMARBECPAAA3T"
+                        <a href="{{ $donateUrl }}"
                             class="flex items-center justify-center gap-2 w-full px-4 py-3.5 rounded-xl text-sm font-bold text-white bg-primary shadow-lg shadow-primary/30 hover:bg-primary/90 active:scale-[.98] transition-all">
                             <span class="material-symbols-outlined text-xl">volunteer_activism</span>
                             {{ __('messages.donate_now') }}
