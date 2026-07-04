@@ -8,6 +8,9 @@ use Filament\Actions\Action;
 use Filament\Forms\Components\TextInput;
 use Filament\Notifications\Notification;
 use Filament\Pages\Page;
+use Filament\Schemas\Components\Actions;
+use Filament\Schemas\Components\EmbeddedSchema;
+use Filament\Schemas\Components\Form;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 use UnitEnum;
@@ -26,8 +29,6 @@ class ManageSiteSettings extends Page
     protected static ?string $title = 'Site Settings';
 
     protected static ?int $navigationSort = 99;
-
-    protected string $view = 'filament.pages.site-settings';
 
     /**
      * @var array<string, mixed>|null
@@ -58,6 +59,23 @@ class ManageSiteSettings extends Page
                     ]),
             ])
             ->statePath('data');
+    }
+
+    /**
+     * Render the form (and its Save button) using Filament's default page view,
+     * so this page needs no custom Blade file to deploy.
+     */
+    public function content(Schema $schema): Schema
+    {
+        return $schema
+            ->components([
+                Form::make([EmbeddedSchema::make('form')])
+                    ->id('form')
+                    ->livewireSubmitHandler('save')
+                    ->footer([
+                        Actions::make($this->getFormActions()),
+                    ]),
+            ]);
     }
 
     public function save(): void
