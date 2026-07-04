@@ -1046,7 +1046,7 @@ return [
     'fund_cta_text' => 'Your contribution follows this exact model — every dollar tracked from sapling to standing tree.',
 
     // ── Voices of Nature ──
-    'voices_nav' => 'Voices',
+    'voices_nav' => 'Finding',
     'voices_page_title' => 'Voices of Nature',
     'voices_hero_badge' => 'Read articles from volunteers',
     'voices_hero_title' => 'Findings through Planting and Care',
