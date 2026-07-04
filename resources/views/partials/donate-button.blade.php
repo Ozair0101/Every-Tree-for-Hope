@@ -15,7 +15,7 @@
     $donateIcon = $icon ?? 'volunteer_activism';
     $donateArrow = $arrow ?? true;
 @endphp
-<a href="#?campaign=camp_01KT1CQZWEEX5SMARBECPAAA3T" class="{{ $donateClass }}">
+<a href="{{ $donateUrl }}" class="{{ $donateClass }}">
     <span class="material-symbols-outlined text-base">{{ $donateIcon }}</span>
     {{ $donateLabel }}
     @if ($donateArrow)
