@@ -9,6 +9,11 @@ use Illuminate\Support\Facades\DB;
 class RecentDonationsChart extends ChartWidget
 {
     protected static ?int $sort = 2;
+
+    public static function canView(): bool
+    {
+        return auth()->user()?->can('view_financial_widgets') ?? false;
+    }
     
     protected ?string $heading = 'Donation Trends (Last 6 Months)';
     
