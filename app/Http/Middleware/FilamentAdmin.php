@@ -18,7 +18,9 @@ class FilamentAdmin
     {
         $user = Auth::user();
 
-        if (!$user || !$user->is_admin) {
+        // Access is role-based since the is_admin column was removed. A user
+        // may reach admin surfaces only if they hold at least one role.
+        if (! $user || ! $user->roles()->exists()) {
             abort(403, 'Access denied. Admin privileges required.');
         }
 
