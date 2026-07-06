@@ -9,6 +9,11 @@ use Illuminate\Database\Eloquent\Builder;
 class TopDonatorsWidget extends TableWidget
 {
     protected static ?int $sort = 5;
+
+    public static function canView(): bool
+    {
+        return auth()->user()?->can('view_financial_widgets') ?? false;
+    }
     
     protected static ?string $heading = 'Top Donators';
     
