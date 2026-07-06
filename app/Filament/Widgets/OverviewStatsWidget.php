@@ -14,6 +14,16 @@ class OverviewStatsWidget extends BaseWidget
 {
     protected static ?int $sort = 1;
 
+    /**
+     * Exposes donation totals — gate behind financial access. Returning false
+     * stops Filament rendering the widget AND running its data queries, so
+     * unauthorized users never trigger the underlying reads.
+     */
+    public static function canView(): bool
+    {
+        return auth()->user()?->can('view_financial_widgets') ?? false;
+    }
+
     protected function getPollingInterval(): ?string
     {
         return null; // Disable polling to prevent infinite loop
