@@ -3,14 +3,17 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Filament\Models\Contracts\FilamentUser;
+use Filament\Panel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Spatie\Permission\Traits\HasRoles;
 
-class User extends Authenticatable
+class User extends Authenticatable implements FilamentUser
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -21,7 +24,6 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'is_admin',
     ];
 
     /**
@@ -44,15 +46,27 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
-            'is_admin' => 'boolean',
         ];
     }
 
     /**
-     * Check if user is an admin
+     * Determine whether the user may access the given Filament panel.
+     *
+     * Access is now purely role-based: a user may enter the admin panel only
+     * if they hold at least one role. The Super Admin bypass in
+     * {@see \App\Providers\AuthServiceProvider} does not apply here — panel
+     * entry is an explicit gate, not a Gate ability.
      */
-    public function isAdmin(): bool
+    public function canAccessPanel(Panel $panel): bool
     {
-        return $this->is_admin;
+        return $this->roles()->exists();
+    }
+
+    /**
+     * Convenience helper: is this user the all-powerful Super Admin?
+     */
+    public function isSuperAdmin(): bool
+    {
+        return $this->hasRole(\App\Providers\AuthServiceProvider::SUPER_ADMIN);
     }
 }
