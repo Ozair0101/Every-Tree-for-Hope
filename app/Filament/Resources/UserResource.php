@@ -57,10 +57,18 @@ class UserResource extends Resource
                             ->dehydrated(fn ($state) => filled($state))
                             ->label(fn (string $context): string => $context === 'edit' ? 'New Password' : 'Password'),
                         
-                        Forms\Components\Toggle::make('is_admin')
-                            ->label('Admin Access')
-                            ->helperText('Grant admin access to Filament panel')
-                            ->default(false),
+                        Forms\Components\Select::make('roles')
+                            ->relationship('roles', 'name')
+                            ->multiple()
+                            ->preload()
+                            ->searchable()
+                            ->label('Roles')
+                            ->helperText('A user needs at least one role to access the admin panel.')
+                            // Only operators who can manage roles may assign
+                            // them — prevents privilege escalation by lower roles
+                            // who can otherwise edit user profile fields.
+                            ->visible(fn (): bool => auth()->user()?->can('update_role') ?? false)
+                            ->dehydrated(fn (): bool => auth()->user()?->can('update_role') ?? false),
                     ])
                     ->columns(2),
             ]);
@@ -78,14 +86,12 @@ class UserResource extends Resource
                     ->searchable()
                     ->sortable(),
                 
-                Tables\Columns\IconColumn::make('is_admin')
-                    ->label('Admin')
-                    ->boolean()
-                    ->trueColor('success')
-                    ->falseColor('warning')
-                    ->trueIcon('heroicon-o-shield-check')
-                    ->falseIcon('heroicon-o-shield-exclamation'),
-                
+                Tables\Columns\TextColumn::make('roles.name')
+                    ->label('Roles')
+                    ->badge()
+                    ->color('primary')
+                    ->placeholder('No panel access'),
+
                 Tables\Columns\TextColumn::make('email_verified_at')
                     ->dateTime('M j, Y')
                     ->sortable()
@@ -97,12 +103,12 @@ class UserResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                Tables\Filters\SelectFilter::make('is_admin')
-                    ->options([
-                        '1' => 'Admin Users',
-                        '0' => 'Regular Users',
-                    ]),
-                
+                Tables\Filters\SelectFilter::make('roles')
+                    ->relationship('roles', 'name')
+                    ->multiple()
+                    ->preload()
+                    ->label('Role'),
+
                 Tables\Filters\Filter::make('verified')
                     ->query(fn (Builder $query): Builder => $query->whereNotNull('email_verified_at'))
                     ->label('Verified Email'),
