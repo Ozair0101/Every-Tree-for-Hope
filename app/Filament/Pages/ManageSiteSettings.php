@@ -31,6 +31,15 @@ class ManageSiteSettings extends Page
     protected static ?int $navigationSort = 99;
 
     /**
+     * Gate the settings page + its navigation item behind `manage_site_settings`.
+     * Filament enforces this for direct URL access and menu visibility.
+     */
+    public static function canAccess(): bool
+    {
+        return auth()->user()?->can('manage_site_settings') ?? false;
+    }
+
+    /**
      * @var array<string, mixed>|null
      */
     public ?array $data = [];
