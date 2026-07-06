@@ -13,6 +13,15 @@ use Illuminate\Support\Facades\DB;
 
 class Dashboard extends BaseDashboard
 {
+    /**
+     * Gate the dashboard route + its navigation item behind `view_dashboard`.
+     * Filament calls this for both URL access and menu visibility.
+     */
+    public static function canAccess(): bool
+    {
+        return auth()->user()?->can('view_dashboard') ?? false;
+    }
+
     public function getWidgets(): array
     {
         return [
