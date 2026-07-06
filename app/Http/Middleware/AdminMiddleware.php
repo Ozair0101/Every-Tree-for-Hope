@@ -15,7 +15,8 @@ class AdminMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (!auth()->user()?->isAdmin()) {
+        // Role-based since is_admin was removed: a user must hold at least one role.
+        if (! auth()->user()?->roles()->exists()) {
             abort(403, 'Access denied. Admin privileges required.');
         }
 
