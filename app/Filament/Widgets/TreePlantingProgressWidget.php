@@ -9,6 +9,11 @@ use Illuminate\Support\Facades\DB;
 class TreePlantingProgressWidget extends ChartWidget
 {
     protected static ?int $sort = 3;
+
+    public static function canView(): bool
+    {
+        return auth()->user()?->can('view_activity_widgets') ?? false;
+    }
     
     protected static ?int $columns = 1;
 
