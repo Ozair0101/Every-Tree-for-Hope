@@ -18,8 +18,6 @@ use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
-use App\Models\User;
-use App\Http\Middleware\FilamentAdmin;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -48,6 +46,7 @@ class AdminPanelProvider extends PanelProvider
                 'User Engagement',
                 'Financial',
                 'System',
+                'Access Control',
             ])
             ->middleware([
                 EncryptCookies::class,
@@ -62,7 +61,8 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->authMiddleware([
                 Authenticate::class,
-                FilamentAdmin::class,
+                // Panel access is now enforced by User::canAccessPanel() (role-based).
+                // The old is_admin-based FilamentAdmin middleware has been removed.
             ])
             ->authGuard('web')
             ->maxContentWidth('full')
