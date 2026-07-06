@@ -153,12 +153,14 @@ class VoiceResource extends Resource
                 Actions\Action::make('approve')
                     ->icon('heroicon-o-check-circle')
                     ->color('success')
+                    ->authorize('approve_voice')
                     ->visible(fn (Voice $r) => $r->status !== 'approved')
                     ->action(fn (Voice $r) => $r->update(['status' => 'approved'])),
                 Actions\Action::make('reject')
                     ->icon('heroicon-o-x-circle')
                     ->color('danger')
                     ->requiresConfirmation()
+                    ->authorize('reject_voice')
                     ->visible(fn (Voice $r) => $r->status !== 'rejected')
                     ->action(fn (Voice $r) => $r->update(['status' => 'rejected'])),
                 Actions\EditAction::make(),
@@ -170,6 +172,7 @@ class VoiceResource extends Resource
                         ->label('Approve selected')
                         ->icon('heroicon-o-check-circle')
                         ->color('success')
+                        ->authorize('approve_voice')
                         ->action(fn ($records) => $records->each->update(['status' => 'approved'])),
                     Actions\DeleteBulkAction::make(),
                 ]),
