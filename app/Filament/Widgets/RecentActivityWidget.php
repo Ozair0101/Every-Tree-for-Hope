@@ -13,6 +13,11 @@ use Illuminate\Support\Carbon;
 class RecentActivityWidget extends TableWidget
 {
     protected static ?int $sort = 4;
+
+    public static function canView(): bool
+    {
+        return auth()->user()?->can('view_activity_widgets') ?? false;
+    }
     
     protected static ?string $heading = 'Recent Activity';
     
