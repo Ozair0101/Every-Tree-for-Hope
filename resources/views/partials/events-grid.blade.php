@@ -86,6 +86,16 @@
                     </div>
                 @endif
 
+                <!-- Share Event -->
+               <button
+                    type="button"
+                    data-copy-url="{{ route('events.show', $event->id) }}"
+                    class="copy-link-btn w-full flex items-center justify-center gap-2 mb-2 py-2.5 border border-gold-accent/20 text-gold-accent rounded-lg text-sm font-bold transition-all hover:bg-gold-accent/5">
+
+                    <span class="material-symbols-outlined text-base">content_copy</span>
+                    <span class="copy-label">Copy Link</span>
+                </button>
+
                 <!-- View Details Button -->
                 <a href="{{ route('events.show', $event->id) }}"
                     class="w-full bg-deep-green hover:bg-gold-accent text-white py-3 rounded-lg font-bold text-sm transition-all text-center block">

@@ -267,6 +267,29 @@
                     } catch (e) { /* no-op */ }
                     loadResults(window.location.href, { push: false, scroll: false });
                 });
+
+                // 5. Share buttons (delegated — survives AJAX swaps)
+                document.addEventListener('click', async function(e) {
+                    const btn = e.target.closest('[data-copy-url]');
+                    if (!btn) return;
+    
+                    const url = btn.dataset.copyUrl;
+                    const label = btn.querySelector('.copy-label');
+
+                    try {
+                        await navigator.clipboard.writeText(url);
+
+                        const original = label.textContent;
+                        label.textContent = 'Copied!';
+
+                        setTimeout(() => {
+                            label.textContent = original;
+                        }, 1500);
+
+                    } catch (err) {
+                        alert('Unable to copy link');
+                    }
+                });
             });
         </script>
     @endpush
