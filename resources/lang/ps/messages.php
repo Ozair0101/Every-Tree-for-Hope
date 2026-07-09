@@ -109,7 +109,7 @@ return [
     'global_remittance' => 'د بهر څخه حواله',
     'receiver_name' => 'د اخیستونکي نوم',
     'mohammad_iqbal_alimyar' => 'محمد اقبال عالم‌یار',
-    'mohammad_tamim_alimyar' => 'محمد تمیم عالم‌یار',
+    'mohammad_tamim_alimyar' => 'تمیم عالم‌یار',
     'donate_send_meaning' => 'په معنا یې واستوه',
     'donate_left_headline' => 'هر لیږد یوه ونه کیږي.',
     'donate_left_blurb' => 'ستاسو مرسته مستقیماً د کابل غونډیو ته رسیږي — او نیالګیو، اوبو، او هغو لاسونو ته اوړي چې پاملرنه یې کوي.',

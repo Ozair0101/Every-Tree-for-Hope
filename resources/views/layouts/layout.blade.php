@@ -774,11 +774,11 @@
                     <h4 class="font-serif text-lg font-bold text-white">{{ __('messages.quick_links') }}</h4>
                     <ul class="space-y-3 text-sm font-bold uppercase tracking-widest text-white/80">
                         <li><a class="hover:text-gold-accent transition-colors"
-                                href="#">{{ __('messages.impact') }}</a></li>
+                                href="{{ route('gallery') }}">{{ __('messages.works') }}</a></li>
                         <li><a class="hover:text-gold-accent transition-colors"
-                                href="#">{{ __('messages.projects') }}</a></li>
+                                href="{{ route('contact') }}">{{ __('messages.contact') }}</a></li>
                         <li><a class="hover:text-gold-accent transition-colors text-gold-accent"
-                                href="#">{{ __('messages.donation') }}</a>
+                                href="{{ route('about') }}">{{ __('messages.about') }}</a>
                         </li>
                     </ul>
                     <div class="flex items-center gap-8">

@@ -110,7 +110,7 @@ return [
     'global_remittance' => 'Global Remittance',
     'receiver_name' => 'Receiver Name',
     'mohammad_iqbal_alimyar' => 'Mohammad Iqbal Alimyar',
-    'mohammad_tamim_alimyar' => 'Mohammad Tamim Alimyar',
+    'mohammad_tamim_alimyar' => 'Tamim Alimyar',
     'donate_send_meaning' => 'send with meaning',
     'donate_left_headline' => 'Every transfer becomes a tree.',
     'donate_left_blurb' => 'Your contribution travels straight to the hillsides of Kabul — turning into saplings, water, and the hands that care for them.',

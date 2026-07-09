@@ -110,7 +110,7 @@ return [
     'global_remittance' => 'حواله از خارج',
     'receiver_name' => 'نام گیرنده',
     'mohammad_iqbal_alimyar' => 'محمد اقبال عالم‌یار',
-    'mohammad_tamim_alimyar' => 'محمد تمیم عالم‌یار',
+    'mohammad_tamim_alimyar' => 'تمیم عالم‌یار',
     'donate_send_meaning' => 'با معنا بفرست',
     'donate_left_headline' => 'هر انتقال، به یک درخت بدل می‌شود.',
     'donate_left_blurb' => 'کمک شما مستقیم به دامنه‌های کابل می‌رسد — و به نهال، آب، و دستانی که از آن‌ها مراقبت می‌کنند تبدیل می‌شود.',
