@@ -1,0 +1,1616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Every Tree for Hope — Technology Stack Specification</title>
+<style>
+  @page { size: A4; margin: 0; }
+
+  :root {
+    --ink:        #16202b;
+    --ink-soft:   #47576a;
+    --ink-faint:  #7b8a9a;
+    --rule:       #dde4ea;
+    --rule-soft:  #eef2f6;
+    --green-900:  #0f3d24;
+    --green-700:  #16653c;
+    --green-500:  #22c55e;
+    --green-50:   #f0fbf4;
+    --gold:       #b7791f;
+    --panel:      #f7f9fb;
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0; padding: 0;
+    background: #59636e;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  body {
+    font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    font-size: 9.4pt;
+    line-height: 1.48;
+    color: var(--ink);
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* ─────────── Page frame ─────────── */
+  .page {
+    position: relative;
+    width: 210mm;
+    height: 296mm;
+    padding: 18mm 16mm 17mm 16mm;
+    margin: 0 auto;
+    background: #fff;
+    page-break-after: always;
+    break-after: page;
+    overflow: hidden;
+  }
+  .page:last-child { page-break-after: auto; break-after: auto; }
+
+  @media screen {
+    .page { margin: 10mm auto; box-shadow: 0 4px 24px rgba(0,0,0,.35); }
+  }
+
+  .runhead {
+    position: absolute;
+    top: 9mm; left: 16mm; right: 16mm;
+    display: flex; justify-content: space-between; align-items: baseline;
+    font-size: 7.2pt; letter-spacing: .1em; text-transform: uppercase;
+    color: var(--ink-faint);
+    padding-bottom: 2.5mm;
+    border-bottom: .4pt solid var(--rule);
+  }
+  .runhead b { color: var(--green-700); font-weight: 600; letter-spacing: .1em; }
+
+  .runfoot {
+    position: absolute;
+    bottom: 8mm; left: 16mm; right: 16mm;
+    display: flex; justify-content: space-between; align-items: baseline;
+    font-size: 7.2pt; color: var(--ink-faint);
+    padding-top: 2.5mm;
+    border-top: .4pt solid var(--rule);
+  }
+  .runfoot .pn { font-weight: 600; color: var(--ink-soft); }
+
+  /* ─────────── Typography ─────────── */
+  h1.sec {
+    font-size: 15pt; font-weight: 600; letter-spacing: -.015em;
+    color: var(--green-900); margin: 0 0 1.2mm 0; line-height: 1.18;
+  }
+  .sec-num {
+    display: block; font-size: 7.4pt; font-weight: 700; letter-spacing: .18em;
+    color: var(--green-500); text-transform: uppercase; margin-bottom: 1.4mm;
+  }
+  .sec-rule { height: 2pt; background: var(--green-700); width: 20mm; margin: 0 0 4.4mm 0; }
+
+  h2 {
+    font-size: 10.4pt; font-weight: 600; color: var(--green-900);
+    margin: 5mm 0 1.8mm 0; letter-spacing: -.01em;
+  }
+  h2:first-of-type { margin-top: 0; }
+  h3 {
+    font-size: 8.9pt; font-weight: 700; color: var(--ink);
+    margin: 3.6mm 0 1.2mm 0; letter-spacing: .01em;
+  }
+  p { margin: 0 0 2.3mm 0; text-align: justify; hyphens: auto; }
+  .lead { font-size: 9.9pt; color: var(--ink-soft); line-height: 1.55; }
+  strong { font-weight: 600; color: var(--ink); }
+  code, .mono {
+    font-family: Consolas, "Cascadia Mono", monospace;
+    font-size: 8.6pt; background: var(--rule-soft);
+    padding: .3mm 1.2mm; border-radius: 1.5pt; color: #12507a;
+  }
+
+  ul, ol { margin: 0 0 2.3mm 0; padding-left: 4.6mm; }
+  li { margin-bottom: 1mm; }
+  ul.tight li, ol.tight li { margin-bottom: .5mm; }
+  ul.clean { list-style: none; padding-left: 0; }
+  ul.clean li { padding-left: 4.6mm; position: relative; }
+  ul.clean li::before {
+    content: ""; position: absolute; left: 0; top: 1.8mm;
+    width: 1.8mm; height: 1.8mm; background: var(--green-500); border-radius: 50%;
+  }
+
+  /* ─────────── Tables ─────────── */
+  table { width: 100%; border-collapse: collapse; margin: 0 0 3.2mm 0; font-size: 8.2pt; }
+  caption {
+    caption-side: top; text-align: left; font-size: 7.1pt; font-weight: 700;
+    letter-spacing: .12em; text-transform: uppercase; color: var(--ink-faint);
+    padding-bottom: 1.3mm;
+  }
+  thead th {
+    background: var(--green-900); color: #fff; text-align: left;
+    font-weight: 600; font-size: 7.6pt; letter-spacing: .05em;
+    padding: 1.6mm 2mm; border: none;
+  }
+  tbody td { padding: 1.4mm 2mm; border-bottom: .4pt solid var(--rule); vertical-align: top; }
+  tbody tr:nth-child(even) td { background: #fafcfd; }
+  td.v { font-family: Consolas, monospace; font-size: 7.6pt; color: #12507a; white-space: nowrap; }
+  td.k { font-weight: 600; }
+  .num { text-align: right; font-variant-numeric: tabular-nums; }
+
+  /* ─────────── Components ─────────── */
+  .callout {
+    border-left: 2.4pt solid var(--green-500);
+    background: var(--green-50);
+    padding: 2.4mm 3.2mm; margin: 0 0 3.2mm 0; font-size: 8.6pt;
+  }
+  .callout .t {
+    font-size: 7.1pt; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--green-700); display: block; margin-bottom: .9mm;
+  }
+  .callout p:last-child { margin-bottom: 0; }
+
+  .note {
+    border-left: 2.4pt solid var(--gold);
+    background: #fdf9f0;
+    padding: 2.4mm 3.2mm; margin: 0 0 3.2mm 0; font-size: 8.6pt;
+  }
+  .note .t {
+    font-size: 7.1pt; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--gold); display: block; margin-bottom: .9mm;
+  }
+  .note p:last-child { margin-bottom: 0; }
+
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 3.2mm; margin-bottom: 3.2mm; }
+  .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2.8mm; margin-bottom: 3.2mm; }
+
+  .card {
+    border: .5pt solid var(--rule); border-top: 1.8pt solid var(--green-700);
+    padding: 2.4mm 2.8mm; background: #fff;
+  }
+  .card h4 {
+    margin: 0 0 1.1mm 0; font-size: 8.6pt; font-weight: 700; color: var(--green-900);
+  }
+  .card p { margin: 0; font-size: 8.1pt; color: var(--ink-soft); text-align: left; }
+
+  .stat { text-align: center; border: .5pt solid var(--rule); padding: 2.6mm 2mm; background: var(--panel); }
+  .stat .n { display: block; font-size: 16pt; font-weight: 300; color: var(--green-700); line-height: 1.1; letter-spacing: -.02em; }
+  .stat .l { display: block; font-size: 6.7pt; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-faint); margin-top: 1.1mm; }
+
+  .tag {
+    display: inline-block; font-size: 7.4pt; font-weight: 600; letter-spacing: .06em;
+    padding: .6mm 2mm; border-radius: 2pt; margin: 0 1mm 1mm 0;
+    background: var(--green-50); color: var(--green-700); border: .4pt solid #bfe8cd;
+  }
+  .tag.g { background: #fdf9f0; color: var(--gold); border-color: #eddcb8; }
+
+  /* ─────────── Architecture diagram ─────────── */
+  .arch { border: .5pt solid var(--rule); padding: 3.6mm; background: var(--panel); margin-bottom: 3.2mm; }
+  .tier { margin-bottom: 2.2mm; }
+  .tier:last-child { margin-bottom: 0; }
+  .tier-label {
+    font-size: 6.6pt; font-weight: 700; letter-spacing: .16em; text-transform: uppercase;
+    color: var(--ink-faint); margin-bottom: 1.1mm;
+  }
+  .tier-box {
+    border: .5pt solid #c9d6e0; background: #fff; padding: 2mm 2.4mm;
+    display: flex; gap: 2.2mm;
+  }
+  .tier-box.accent { background: var(--green-900); border-color: var(--green-900); }
+  .tier-box.accent .unit { background: rgba(255,255,255,.1); border-color: rgba(255,255,255,.25); color: #fff; }
+  .tier-box.accent .unit small { color: #a7d9bd; }
+  .unit {
+    flex: 1; border: .5pt solid var(--rule); background: #fdfefe;
+    padding: 1.6mm 1.8mm; font-size: 7.7pt; font-weight: 600; text-align: center; line-height: 1.3;
+  }
+  .unit small { display: block; font-weight: 400; font-size: 6.7pt; color: var(--ink-faint); margin-top: .4mm; }
+  .flow { text-align: center; font-size: 7.5pt; color: var(--green-500); line-height: 1; margin: .8mm 0; letter-spacing: .4em; }
+
+  /* ─────────── Cover ─────────── */
+  .cover { padding: 0; display: flex; flex-direction: column; }
+  .cover-band { background: var(--green-900); color: #fff; padding: 22mm 18mm 16mm 18mm; }
+  .cover-mark { display: flex; align-items: center; gap: 3.5mm; margin-bottom: 26mm; }
+  .cover-mark .glyph {
+    width: 11mm; height: 11mm; border: 1.2pt solid var(--green-500); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13pt; color: var(--green-500);
+  }
+  .cover-mark .txt { font-size: 9.6pt; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; }
+  .cover-mark .txt small { display: block; font-size: 7pt; font-weight: 400; letter-spacing: .16em; color: #8fc7a8; margin-top: .8mm; }
+  .cover-kicker { font-size: 8.4pt; font-weight: 600; letter-spacing: .28em; text-transform: uppercase; color: var(--green-500); margin-bottom: 5mm; }
+  .cover-title { font-size: 33pt; font-weight: 300; line-height: 1.1; letter-spacing: -.025em; margin: 0 0 5mm 0; }
+  .cover-title b { display: block; font-weight: 600; }
+  .cover-sub { font-size: 11pt; color: #c3ddce; font-weight: 300; line-height: 1.5; max-width: 130mm; }
+  .cover-body { flex: 1; padding: 14mm 18mm; }
+  .cover-meta { width: 100%; font-size: 9pt; border-collapse: collapse; }
+  .cover-meta td { padding: 2.6mm 0; border-bottom: .4pt solid var(--rule); }
+  .cover-meta td:first-child {
+    width: 42mm; font-size: 7.6pt; font-weight: 700; letter-spacing: .13em;
+    text-transform: uppercase; color: var(--ink-faint);
+  }
+  .cover-foot { padding: 0 18mm 14mm 18mm; font-size: 7.6pt; color: var(--ink-faint); line-height: 1.6; }
+  .cover-strip { height: 4mm; background: linear-gradient(90deg, var(--green-900) 0%, var(--green-500) 55%, var(--gold) 100%); }
+
+  /* ─────────── TOC ─────────── */
+  .toc { list-style: none; padding: 0; margin: 0; }
+  .toc li {
+    display: flex; align-items: baseline; gap: 2mm;
+    padding: 1.5mm 0; border-bottom: .4pt dotted var(--rule); font-size: 8.7pt;
+  }
+  .toc .n { width: 9mm; font-weight: 700; color: var(--green-500); font-size: 7.9pt; flex-shrink: 0; }
+  .toc .t { flex: 1; }
+  .toc .p { font-weight: 600; color: var(--ink-soft); font-size: 8pt; }
+  .toc li.app .n { color: var(--gold); }
+</style>
+</head>
+<body>
+
+<!-- ══════════════ PAGE 1 — COVER ══════════════ -->
+<section class="page cover">
+  <div class="cover-band">
+    <div class="cover-mark">
+      <div class="glyph">&#9650;</div>
+      <div class="txt">Every Tree for Hope
+        <small>Reforestation &amp; Community Impact Platform</small>
+      </div>
+    </div>
+    <div class="cover-kicker">Technical Specification</div>
+    <h1 class="cover-title">Technology Stack<b>&amp; System Architecture</b></h1>
+    <p class="cover-sub">A comprehensive specification of the platforms, frameworks, libraries and
+      infrastructure components comprising the Every Tree for Hope information system.</p>
+  </div>
+
+  <div class="cover-body">
+    <table class="cover-meta">
+      <tr><td>Document title</td><td><strong>Technology Stack &amp; System Architecture Specification</strong></td></tr>
+      <tr><td>Document reference</td><td class="mono" style="background:none;padding:0">ETFH-TS-001</td></tr>
+      <tr><td>Version</td><td>1.0 &mdash; Released</td></tr>
+      <tr><td>Issue date</td><td>20 July 2026</td></tr>
+      <tr><td>System</td><td>Every Tree for Hope &mdash; Web Platform &amp; Administration Suite</td></tr>
+      <tr><td>Architecture</td><td>Server-rendered modular monolith (PHP&nbsp;8.2 / Laravel&nbsp;12)</td></tr>
+      <tr><td>Classification</td><td>Internal &mdash; Technical Documentation</td></tr>
+      <tr><td>Prepared by</td><td>Engineering</td></tr>
+    </table>
+  </div>
+
+  <div class="cover-foot">
+    This document reflects the state of the codebase as verified at the issue date. All version
+    numbers are taken from the committed dependency manifests and resolved lock files.
+  </div>
+  <div class="cover-strip"></div>
+</section>
+
+<!-- ══════════════ PAGE 2 — CONTROL + TOC ══════════════ -->
+<section class="page">
+  <div class="runhead"><span><b>Every Tree for Hope</b> &nbsp;|&nbsp; Technology Stack Specification</span><span>ETFH-TS-001 &nbsp;v1.0</span></div>
+
+  <span class="sec-num">Front Matter</span>
+  <h1 class="sec">Document Control &amp; Contents</h1>
+  <div class="sec-rule"></div>
+
+  <h2>Purpose and scope</h2>
+  <p>This specification enumerates and describes every significant technology employed in the
+    construction, operation and maintenance of the Every Tree for Hope platform. It is intended for
+    technical stakeholders &mdash; engineers joining the project, technical reviewers, auditors, and
+    partner organisations conducting due diligence.</p>
+  <p>It covers the application runtime, framework layer, data persistence, security model,
+    presentation layer, internationalisation, third-party integrations, containerised infrastructure
+    and quality-assurance tooling. Organisational process, budget and non-technical programme
+    delivery are out of scope.</p>
+
+  <h2>Revision history</h2>
+  <table>
+    <thead><tr><th style="width:18mm">Version</th><th style="width:28mm">Date</th><th>Summary of change</th><th style="width:26mm">Status</th></tr></thead>
+    <tbody>
+      <tr><td class="k">1.0</td><td>20 Jul 2026</td><td>Initial released specification. Full stack inventory verified against committed manifests and lock files.</td><td>Released</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Contents</h2>
+  <ul class="toc">
+    <li><span class="n">1</span><span class="t">Executive Summary</span><span class="p">3</span></li>
+    <li><span class="n">2</span><span class="t">System Architecture</span><span class="p">4</span></li>
+    <li><span class="n">3</span><span class="t">Technology Stack Matrix</span><span class="p">5</span></li>
+    <li><span class="n">4</span><span class="t">Application Runtime &amp; Backend Framework</span><span class="p">6</span></li>
+    <li><span class="n">5</span><span class="t">Administrative Platform</span><span class="p">7</span></li>
+    <li><span class="n">6</span><span class="t">Presentation Layer</span><span class="p">8</span></li>
+    <li><span class="n">7</span><span class="t">Data Architecture &amp; Persistence</span><span class="p">9</span></li>
+    <li><span class="n">8</span><span class="t">Security &amp; Access Control</span><span class="p">11</span></li>
+    <li><span class="n">9</span><span class="t">Internationalisation &amp; Localisation</span><span class="p">13</span></li>
+    <li><span class="n">10</span><span class="t">Third-Party Integrations</span><span class="p">14</span></li>
+    <li><span class="n">11</span><span class="t">Infrastructure, Containerisation &amp; Build Pipeline</span><span class="p">15</span></li>
+    <li><span class="n">12</span><span class="t">Quality Assurance &amp; Code Standards</span><span class="p">16</span></li>
+    <li><span class="n">13</span><span class="t">Functional Module Inventory</span><span class="p">17</span></li>
+    <li><span class="n">14</span><span class="t">Codebase Metrics</span><span class="p">19</span></li>
+    <li><span class="n">15</span><span class="t">Technology Selection Rationale</span><span class="p">20</span></li>
+    <li><span class="n">16</span><span class="t">Technical Debt Register &amp; Roadmap</span><span class="p">21</span></li>
+    <li class="app"><span class="n">A</span><span class="t">Appendix A &mdash; Complete Dependency Manifest</span><span class="p">22</span></li>
+    <li class="app"><span class="n">B</span><span class="t">Appendix B &mdash; Glossary of Terms</span><span class="p">23</span></li>
+  </ul>
+
+  <div class="runfoot"><span>Internal &mdash; Technical Documentation</span><span class="pn">Page 2 of 24</span></div>
+</section>
+
+<!-- ══════════════ PAGE 3 — EXECUTIVE SUMMARY ══════════════ -->
+<section class="page">
+  <div class="runhead"><span><b>Every Tree for Hope</b> &nbsp;|&nbsp; Technology Stack Specification</span><span>Section 1</span></div>
+
+  <span class="sec-num">Section 1</span>
+  <h1 class="sec">Executive Summary</h1>
+  <div class="sec-rule"></div>
+
+  <p class="lead">Every Tree for Hope is a modular monolithic web platform built on PHP&nbsp;8.2 and
+    Laravel&nbsp;12, delivering a trilingual public-facing reforestation website alongside a
+    comprehensive role-based administrative back office powered by Filament&nbsp;5.</p>
+
+  <h2>Architectural position</h2>
+  <p>The system deliberately adopts a <strong>server-rendered modular monolith</strong> rather than a
+    decoupled single-page application. All HTML is generated on the server via the Blade templating
+    engine; the administrative interface uses Livewire to deliver reactive behaviour without a
+    client-side framework. This choice yields a single deployment artefact, a single security
+    boundary, first-class SEO for public content, and a materially lower operational burden &mdash;
+    all appropriate characteristics for a non-governmental organisation platform where content
+    discoverability and maintainability outweigh client-side interactivity.</p>
+
+  <h2>Defining characteristics</h2>
+  <div class="grid2">
+    <div class="card">
+      <h4>Trilingual by design</h4>
+      <p>Full English, Dari and Pashto support with right-to-left layout handling, covering both
+        static interface strings and database-resident content.</p>
+    </div>
+    <div class="card">
+      <h4>Granular authorisation</h4>
+      <p>A 125-permission role-based access control model across 21 resource modules, enforced by
+        22 dedicated policy classes.</p>
+    </div>
+    <div class="card">
+      <h4>Financial transparency</h4>
+      <p>Expenditure tracking with bulk spreadsheet ingestion, surfaced publicly through an
+        auditable reporting page.</p>
+    </div>
+    <div class="card">
+      <h4>Impact measurement</h4>
+      <p>Longitudinal tracking of trees planted, lost and surviving, with maintenance-visit logs and
+        computed survival rates per planting event.</p>
+    </div>
+  </div>
+
+  <h2>Platform at a glance</h2>
+  <div class="grid3">
+    <div class="stat"><span class="n">175</span><span class="l">PHP source files</span></div>
+    <div class="stat"><span class="n">~31.7k</span><span class="l">Lines of own code</span></div>
+    <div class="stat"><span class="n">36</span><span class="l">Database tables</span></div>
+  </div>
+  <div class="grid3">
+    <div class="stat"><span class="n">25</span><span class="l">Admin resources</span></div>
+    <div class="stat"><span class="n">3</span><span class="l">Supported locales</span></div>
+    <div class="stat"><span class="n">153</span><span class="l">Managed packages</span></div>
+  </div>
+
+  <div class="callout">
+    <span class="t">Summary judgement</span>
+    <p>The stack is modern, coherent and current &mdash; every primary framework runs on its latest
+      major release. The architecture is well suited to the domain, and the authorisation subsystem
+      is notably rigorous for a project of this scale. Section&nbsp;16 records the outstanding
+      remediation items required to bring the platform to full production readiness.</p>
+  </div>
+
+  <div class="runfoot"><span>Internal &mdash; Technical Documentation</span><span class="pn">Page 3 of 24</span></div>
+</section>
+
+<!-- ══════════════ PAGE 4 — ARCHITECTURE ══════════════ -->
+<section class="page">
+  <div class="runhead"><span><b>Every Tree for Hope</b> &nbsp;|&nbsp; Technology Stack Specification</span><span>Section 2</span></div>
+
+  <span class="sec-num">Section 2</span>
+  <h1 class="sec">System Architecture</h1>
+  <div class="sec-rule"></div>
+
+  <p>The platform is organised into five logical tiers within a single deployable unit. Requests
+    enter through a common HTTP kernel, are dispatched either to public Blade-rendered controllers or
+    to the Livewire-driven administrative panel, and resolve against a shared Eloquent domain model
+    over a single relational database.</p>
+
+  <div class="arch">
+    <div class="tier">
+      <div class="tier-label">Tier 1 &mdash; Client</div>
+      <div class="tier-box">
+        <div class="unit">Public Website<small>Blade &middot; Tailwind &middot; Alpine.js</small></div>
+        <div class="unit">Admin Console<small>Filament 5 &middot; Livewire 4</small></div>
+        <div class="unit">Embedded Donations<small>AidOS / Aseel widget</small></div>
+      </div>
+    </div>
+    <div class="flow">&#9660;&nbsp;&#9660;&nbsp;&#9660;</div>
+
+    <div class="tier">
+      <div class="tier-label">Tier 2 &mdash; HTTP &amp; Middleware</div>
+      <div class="tier-box">
+        <div class="unit">Routing<small>routes/web.php &middot; 29 routes</small></div>
+        <div class="unit">Locale Middleware<small>SetLocale &middot; LanguageMiddleware</small></div>
+        <div class="unit">Auth &amp; RBAC Guards<small>session &middot; role &middot; permission</small></div>
+      </div>
+    </div>
+    <div class="flow">&#9660;&nbsp;&#9660;&nbsp;&#9660;</div>
+
+    <div class="tier">
+      <div class="tier-label">Tier 3 &mdash; Application</div>
+      <div class="tier-box accent">
+        <div class="unit">Controllers<small>11 classes &middot; 27 actions</small></div>
+        <div class="unit">Filament Resources<small>25 CRUD modules</small></div>
+        <div class="unit">Policies<small>22 authorisation classes</small></div>
+        <div class="unit">Domain Services<small>Expense import &middot; Settings</small></div>
+      </div>
+    </div>
+    <div class="flow">&#9660;&nbsp;&#9660;&nbsp;&#9660;</div>
+
+    <div class="tier">
+      <div class="tier-label">Tier 4 &mdash; Domain Model</div>
+      <div class="tier-box">
+        <div class="unit">Eloquent Models<small>22 entities &middot; 2 enums</small></div>
+        <div class="unit">Translatable Attributes<small>Spatie Translatable</small></div>
+        <div class="unit">Migrations &amp; Seeders<small>44 migrations &middot; 12 seeders</small></div>
+      </div>
+    </div>
+    <div class="flow">&#9660;&nbsp;&#9660;&nbsp;&#9660;</div>
+
+    <div class="tier">
+      <div class="tier-label">Tier 5 &mdash; Infrastructure</div>
+      <div class="tier-box">
+        <div class="unit">Relational Database<small>MySQL 8.0 / SQLite</small></div>
+        <div class="unit">Cache, Session &amp; Queue<small>Redis 7 / database driver</small></div>
+        <div class="unit">Object Storage<small>Local public disk</small></div>
+        <div class="unit">Mail Transport<small>SMTP &middot; MailHog (dev)</small></div>
+      </div>
+    </div>
+  </div>
+
+  <h2>Architectural principles observed</h2>
+  <ul class="clean tight">
+    <li><strong>Single source of truth for permissions.</strong> The entire permission catalogue is
+      generated from one PHP class, eliminating drift between seeders, policies and the admin UI.</li>
+    <li><strong>Convention-driven CRUD.</strong> A shared <code>BasePolicy</code> supplies standard
+      authorisation semantics; per-model policies remain thin subclasses.</li>
+    <li><strong>Content as data.</strong> Public pages read from database-backed, admin-editable
+      entities rather than hard-coded markup, including a key/value site-settings store.</li>
+    <li><strong>Outsourced payment surface.</strong> No cardholder data traverses the application;
+      donation capture is delegated entirely to a sandboxed third-party embed.</li>
+  </ul>
+
+  <div class="runfoot"><span>Internal &mdash; Technical Documentation</span><span class="pn">Page 4 of 24</span></div>
+</section>
+
+<!-- ══════════════ PAGE 5 — STACK MATRIX ══════════════ -->
+<section class="page">
+  <div class="runhead"><span><b>Every Tree for Hope</b> &nbsp;|&nbsp; Technology Stack Specification</span><span>Section 3</span></div>
+
+  <span class="sec-num">Section 3</span>
+  <h1 class="sec">Technology Stack Matrix</h1>
+  <div class="sec-rule"></div>
+
+  <p>The following matrix consolidates every primary technology in the platform, organised by
+    architectural concern. Version numbers denote the resolved release recorded in
+    <code>composer.lock</code>, or the declared constraint where no lock file exists.</p>
+
+  <table>
+    <caption>Table 3.1 &mdash; Consolidated technology matrix</caption>
+    <thead><tr><th style="width:30mm">Layer</th><th style="width:42mm">Technology</th><th style="width:22mm">Version</th><th>Role in the system</th></tr></thead>
+    <tbody>
+      <tr><td class="k">Language</td><td>PHP</td><td class="v">8.2+</td><td>Server-side runtime for all application logic</td></tr>
+      <tr><td class="k">Framework</td><td>Laravel</td><td class="v">12.35.1</td><td>HTTP kernel, routing, ORM, queues, validation, container</td></tr>
+      <tr><td class="k">Admin panel</td><td>Filament</td><td class="v">5.2.0</td><td>Complete administrative back office and CRUD engine</td></tr>
+      <tr><td class="k">Reactivity</td><td>Livewire</td><td class="v">4.1.4</td><td>Server-driven reactive components underpinning Filament</td></tr>
+      <tr><td class="k">Templating</td><td>Blade</td><td class="v">Laravel 12</td><td>Server-side rendering of all public pages</td></tr>
+      <tr><td class="k">Authorisation</td><td>spatie/laravel-permission</td><td class="v">8.3.0</td><td>Role and permission persistence and resolution</td></tr>
+      <tr><td class="k">Translation</td><td>spatie/laravel-translatable</td><td class="v">6.11.4</td><td>Per-locale JSON attributes on domain entities</td></tr>
+      <tr><td class="k">Spreadsheets</td><td>PhpSpreadsheet</td><td class="v">5.5.0</td><td>Bulk XLSX/CSV expense ingestion</td></tr>
+      <tr><td class="k">Rich text</td><td>tiptap-php / CommonMark</td><td class="v">2.1.0 / 2.7.1</td><td>Editor content serialisation and Markdown rendering</td></tr>
+      <tr><td class="k">HTTP client</td><td>Guzzle</td><td class="v">7.10.0</td><td>Outbound HTTP transport</td></tr>
+      <tr><td class="k">Date handling</td><td>Carbon</td><td class="v">3.10.3</td><td>Temporal arithmetic and localisation</td></tr>
+      <tr><td class="k">Logging</td><td>Monolog</td><td class="v">3.9.0</td><td>Structured application logging</td></tr>
+      <tr><td class="k">Icons</td><td>blade-heroicons</td><td class="v">2.6.0</td><td>SVG icon set for admin and views</td></tr>
+      <tr><td class="k">Styling</td><td>Tailwind CSS</td><td class="v">4.x</td><td>Utility-first design system</td></tr>
+      <tr><td class="k">Client scripting</td><td>Alpine.js</td><td class="v">via Livewire</td><td>Lightweight declarative DOM behaviour</td></tr>
+      <tr><td class="k">Build tool</td><td>Vite</td><td class="v">7.x</td><td>Asset bundling, hashing and HMR</td></tr>
+      <tr><td class="k">Build bridge</td><td>laravel-vite-plugin</td><td class="v">2.x</td><td>Manifest integration between Vite and Blade</td></tr>
+      <tr><td class="k">Database</td><td>MySQL / SQLite</td><td class="v">8.0 / 3.x</td><td>Primary relational persistence (per environment)</td></tr>
+      <tr><td class="k">Cache &amp; queue</td><td>Redis</td><td class="v">7-alpine</td><td>Cache store, session store and queue backend</td></tr>
+      <tr><td class="k">Containerisation</td><td>Docker &amp; Compose</td><td class="v">3.8 schema</td><td>Reproducible five-service development environment</td></tr>
+      <tr><td class="k">Web server</td><td>Apache HTTP Server</td><td class="v">php:8.2-apache</td><td>Request serving within the container image</td></tr>
+      <tr><td class="k">Testing</td><td>PHPUnit</td><td class="v">11.5.42</td><td>Unit and feature test execution</td></tr>
+      <tr><td class="k">Mocking</td><td>Mockery</td><td class="v">1.6.12</td><td>Test doubles and expectation mocking</td></tr>
+      <tr><td class="k">Code style</td><td>Laravel Pint</td><td class="v">1.25.1</td><td>Automated PHP formatting to PSR-12</td></tr>
+      <tr><td class="k">Test data</td><td>FakerPHP</td><td class="v">1.24.1</td><td>Seeded and factory-generated fixtures</td></tr>
+      <tr><td class="k">Diagnostics</td><td>Pail / Tinker / Collision</td><td class="v">1.2.3 / 2.10.1 / 8.8.2</td><td>Log tailing, REPL and error presentation</td></tr>
+    </tbody>
+  </table>
+
+  <div class="runfoot"><span>Internal &mdash; Technical Documentation</span><span class="pn">Page 5 of 24</span></div>
+</section>
+
+<!-- ══════════════ PAGE 6 — BACKEND ══════════════ -->
+<section class="page">
+  <div class="runhead"><span><b>Every Tree for Hope</b> &nbsp;|&nbsp; Technology Stack Specification</span><span>Section 4</span></div>
+
+  <span class="sec-num">Section 4</span>
+  <h1 class="sec">Application Runtime &amp; Backend Framework</h1>
+  <div class="sec-rule"></div>
+
+  <h2>4.1 PHP 8.2</h2>
+  <p>The application targets PHP&nbsp;8.2 or later, declared as <code>"php": "^8.2"</code> in the
+    Composer manifest. The codebase makes use of modern language features including backed
+    enumerations (<code>App\Enums\ExpenseType</code>, <code>App\Enums\PartnerType</code>),
+    constructor property promotion, readonly semantics, named arguments and typed properties.</p>
+  <p>The container image installs the following PHP extensions:
+    <span class="tag">pdo</span><span class="tag">pdo_mysql</span><span class="tag">mbstring</span><span class="tag">exif</span><span class="tag">pcntl</span><span class="tag">bcmath</span><span class="tag">gd</span><span class="tag">zip</span><span class="tag">intl</span></p>
+
+  <h2>4.2 Laravel 12</h2>
+  <p>Laravel&nbsp;12 (resolved <code>v12.35.1</code>) provides the application skeleton. The project
+    adopts the <strong>slim bootstrap</strong> introduced in Laravel&nbsp;11, configuring the entire
+    HTTP kernel, middleware stack, route registration and exception handling from a single
+    <code>bootstrap/app.php</code> file rather than dedicated kernel classes.</p>
+
+  <h3>Framework subsystems in active use</h3>
+  <table>
+    <thead><tr><th style="width:44mm">Subsystem</th><th>Application within the platform</th></tr></thead>
+    <tbody>
+      <tr><td class="k">Routing</td><td>29 web route registrations; API route file intentionally absent</td></tr>
+      <tr><td class="k">Eloquent ORM</td><td>22 models with accessors, casts, relationships and traits</td></tr>
+      <tr><td class="k">Migrations</td><td>44 versioned schema migrations spanning Feb&ndash;Jul 2026</td></tr>
+      <tr><td class="k">Validation</td><td>Controller-level request validation on all public form submissions</td></tr>
+      <tr><td class="k">Authorisation gates</td><td>Policy registration plus a <code>Gate::before</code> super-administrator bypass</td></tr>
+      <tr><td class="k">Middleware</td><td>Two global custom middleware plus three Spatie authorisation aliases</td></tr>
+      <tr><td class="k">Filesystem</td><td>Public disk abstraction for CV, résumé, photo and media uploads</td></tr>
+      <tr><td class="k">Queues</td><td>Database-backed in development, Redis-backed under Docker</td></tr>
+      <tr><td class="k">Localisation</td><td>Locale resolution, translation catalogues and fallback chain</td></tr>
+      <tr><td class="k">Service container</td><td>Provider-based binding of policies and panel configuration</td></tr>
+      <tr><td class="k">Health endpoint</td><td><code>/up</code> exposed for external liveness probing</td></tr>
+    </tbody>
+  </table>
+
+  <h2>4.3 HTTP interface design</h2>
+  <p>The platform deliberately exposes <strong>no REST or GraphQL API</strong>. There is no
+    <code>routes/api.php</code>, no token-issuing package (Sanctum or Passport), and no
+    schema-definition layer. All interaction occurs through server-rendered HTML pages and standard
+    form submissions.</p>
+  <p>The public surface comprises 20 <code>GET</code> endpoints, 7 <code>POST</code> endpoints and
+    2 permanent redirects, served by 11 controllers exposing 27 public actions. The administrative
+    surface is generated automatically by Filament across 25 resources.</p>
+
+  <div class="callout">
+    <span class="t">Design rationale</span>
+    <p>Omitting an API layer removes an entire class of authentication, rate-limiting and versioning
+      concerns. Should a mobile client or partner integration be required in future, Laravel Sanctum
+      can be introduced against the existing Eloquent models with no restructuring of the domain.</p>
+  </div>
+
+  <div class="runfoot"><span>Internal &mdash; Technical Documentation</span><span class="pn">Page 6 of 24</span></div>
+</section>
+
+<!-- ══════════════ PAGE 7 — ADMIN PLATFORM ══════════════ -->
+<section class="page">
+  <div class="runhead"><span><b>Every Tree for Hope</b> &nbsp;|&nbsp; Technology Stack Specification</span><span>Section 5</span></div>
+
+  <span class="sec-num">Section 5</span>
+  <h1 class="sec">Administrative Platform</h1>
+  <div class="sec-rule"></div>
+
+  <h2>5.1 Filament 5</h2>
+  <p>The entire back office is built on <strong>Filament&nbsp;5.2.0</strong>, a component-driven
+    administration framework for Laravel. It is configured through
+    <code>AdminPanelProvider</code>, which registers a panel identified as <code>admin</code>
+    mounted at the <code>/admin</code> path, authenticated against the standard <code>web</code>
+    guard and branded as <em>Every Tree for Hope Admin</em> with an amber primary palette.</p>
+  <p>Resources, pages and widgets are auto-discovered from their conventional namespaces, so new
+    administrative modules require no manual registration.</p>
+
+  <h3>Filament component packages in use</h3>
+  <p><span class="tag">filament/forms</span><span class="tag">filament/tables</span><span class="tag">filament/actions</span><span class="tag">filament/infolists</span><span class="tag">filament/notifications</span><span class="tag">filament/schemas</span><span class="tag">filament/support</span><span class="tag">filament/widgets</span> &mdash; all at <code>v5.2.0</code>.</p>
+
+  <h2>5.2 Navigation taxonomy</h2>
+  <p>The 25 administrative resources are organised into six navigation groups, reflecting the
+    operational divisions of the organisation:</p>
+  <table>
+    <thead><tr><th style="width:44mm">Navigation group</th><th>Resources administered</th></tr></thead>
+    <tbody>
+      <tr><td class="k">Content Management</td><td>Events, Event Images, Upcoming Events, Media, Teams, FAQs, Partners</td></tr>
+      <tr><td class="k">Careers</td><td>Companies, Job Categories, Job Postings, Job Applications</td></tr>
+      <tr><td class="k">User Engagement</td><td>Voices, Voice Comments, Contact Messages, Tree Requests, Involvement Requests</td></tr>
+      <tr><td class="k">Financial</td><td>Donators, Expenses, Sponsor Packages</td></tr>
+      <tr><td class="k">System</td><td>Site Settings, application configuration</td></tr>
+      <tr><td class="k">Access Control</td><td>Users, Roles, Permissions</td></tr>
+    </tbody>
+  </table>
+
+  <h2>5.3 Dashboard widgets</h2>
+  <p>Five analytical widgets present operational state on the administrative landing page. Financial
+    and activity widgets are individually gated behind dedicated permissions, so lower-privilege
+    roles receive a reduced dashboard rather than an authorisation error.</p>
+  <table>
+    <thead><tr><th style="width:52mm">Widget</th><th style="width:30mm">Type</th><th>Purpose</th></tr></thead>
+    <tbody>
+      <tr><td class="k">OverviewStatsWidget</td><td>Stat cards</td><td>Headline platform counters</td></tr>
+      <tr><td class="k">RecentDonationsChart</td><td>Chart.js chart</td><td>Donation volume over time</td></tr>
+      <tr><td class="k">TreePlantingProgressWidget</td><td>Chart.js chart</td><td>Cumulative planting progress</td></tr>
+      <tr><td class="k">RecentActivityWidget</td><td>Table</td><td>Latest submissions and changes</td></tr>
+      <tr><td class="k">TopDonatorsWidget</td><td>Table</td><td>Highest-contributing supporters</td></tr>
+    </tbody>
+  </table>
+
+  <h2>5.4 Livewire 4</h2>
+  <p>Filament is built upon <strong>Livewire&nbsp;4.1.4</strong>, which supplies the reactive
+    component model. Livewire maintains component state on the server and exchanges only DOM diffs
+    with the browser, allowing rich interactive behaviour &mdash; live validation, dependent
+    selects, modal actions, real-time table filtering &mdash; without a JavaScript application
+    framework or a separate API contract.</p>
+
+  <div class="runfoot"><span>Internal &mdash; Technical Documentation</span><span class="pn">Page 7 of 24</span></div>
+</section>
+
+<!-- ══════════════ PAGE 8 — PRESENTATION ══════════════ -->
+<section class="page">
+  <div class="runhead"><span><b>Every Tree for Hope</b> &nbsp;|&nbsp; Technology Stack Specification</span><span>Section 6</span></div>
+
+  <span class="sec-num">Section 6</span>
+  <h1 class="sec">Presentation Layer</h1>
+  <div class="sec-rule"></div>
+
+  <h2>6.1 Blade templating</h2>
+  <p>The public website comprises 44 Blade templates, of which 34 are project-authored. Templates are
+    organised into layouts, partials, page views and components. Blade compiles views to plain PHP
+    once and caches them, incurring no per-request parsing cost.</p>
+
+  <h2>6.2 Tailwind CSS 4</h2>
+  <p>Styling follows a <strong>utility-first</strong> methodology using Tailwind CSS&nbsp;4, built
+    through <code>@tailwindcss/vite</code> &mdash; the CSS-first plugin that removes the need for a
+    JavaScript configuration file.</p>
+
+  <h3>Brand design tokens</h3>
+  <table>
+    <thead><tr><th style="width:38mm">Token</th><th style="width:26mm">Value</th><th>Application</th></tr></thead>
+    <tbody>
+      <tr><td class="k">primary</td><td class="v">#22c55e</td><td>Principal brand green &mdash; actions and accents</td></tr>
+      <tr><td class="k">deep-green</td><td class="v">custom</td><td>Headers, footers and high-contrast surfaces</td></tr>
+      <tr><td class="k">vibrant-lime</td><td class="v">custom</td><td>Highlights and interactive states</td></tr>
+      <tr><td class="k">sage-green</td><td class="v">custom</td><td>Muted backgrounds and secondary surfaces</td></tr>
+      <tr><td class="k">gold-accent</td><td class="v">custom</td><td>Sponsorship and recognition emphasis</td></tr>
+      <tr><td class="k">charcoal</td><td class="v">custom</td><td>Body copy and neutral text</td></tr>
+    </tbody>
+  </table>
+
+  <div class="note">
+    <span class="t">Configuration observation</span>
+    <p>Two Tailwind delivery mechanisms are presently wired concurrently: the Vite-compiled
+      pipeline, and the Tailwind Play CDN referenced from the primary layout. The Play CDN is not
+      intended for production use; consolidation is recorded as item TD-01 in Section&nbsp;16.</p>
+  </div>
+
+  <h2>6.3 Typography</h2>
+  <p>The type system pairs Latin faces with dedicated Arabic-script faces for Dari and Pashto.</p>
+  <table>
+    <thead><tr><th style="width:44mm">Typeface</th><th style="width:30mm">Script</th><th>Role</th></tr></thead>
+    <tbody>
+      <tr><td class="k">Manrope</td><td>Latin</td><td>Primary interface and body text</td></tr>
+      <tr><td class="k">Playfair Display</td><td>Latin</td><td>Editorial display headings</td></tr>
+      <tr><td class="k">Caveat</td><td>Latin</td><td>Handwritten accent for testimonial content</td></tr>
+      <tr><td class="k">Vazirmatn</td><td>Arabic / Persian</td><td>Dari and Pashto interface text</td></tr>
+      <tr><td class="k">Noto Naskh Arabic</td><td>Arabic</td><td>Extended Arabic-script coverage</td></tr>
+      <tr><td class="k">Material Symbols Outlined</td><td>Iconographic</td><td>Public-site icon system</td></tr>
+    </tbody>
+  </table>
+
+  <h2>6.4 Client-side behaviour</h2>
+  <p>Client-side JavaScript is intentionally minimal &mdash; the project's own script source totals
+    fewer than ten lines. <strong>Alpine.js</strong>, delivered within the Livewire bundle, supplies
+    declarative interactivity directly in markup through <code>x-data</code>, <code>x-show</code>,
+    <code>x-ref</code> and <code>x-transition</code> directives, used for menus, disclosure panels
+    and the donation embed. No single-page application framework is present: React, Vue, Svelte,
+    Angular and Inertia are all deliberately absent, and no client-side state-management or routing
+    library is required.</p>
+
+  <div class="runfoot"><span>Internal &mdash; Technical Documentation</span><span class="pn">Page 8 of 24</span></div>
+</section>
+
+<!-- ══════════════ PAGE 9 — DATA 1 ══════════════ -->
+<section class="page">
+  <div class="runhead"><span><b>Every Tree for Hope</b> &nbsp;|&nbsp; Technology Stack Specification</span><span>Section 7</span></div>
+
+  <span class="sec-num">Section 7</span>
+  <h1 class="sec">Data Architecture &amp; Persistence</h1>
+  <div class="sec-rule"></div>
+
+  <h2>7.1 Database engines</h2>
+  <p>The platform is engine-agnostic by virtue of Laravel's database abstraction, and is configured
+    differently per environment:</p>
+  <table>
+    <thead><tr><th style="width:38mm">Environment</th><th style="width:34mm">Engine</th><th>Configuration source</th></tr></thead>
+    <tbody>
+      <tr><td class="k">Local development</td><td>SQLite 3</td><td><code>.env.example</code> sets <code>DB_CONNECTION=sqlite</code>; a database file is present</td></tr>
+      <tr><td class="k">Containerised</td><td>MySQL 8.0</td><td><code>docker-compose.yml</code> provisions the <code>mysql:8.0</code> image</td></tr>
+      <tr><td class="k">Automated testing</td><td>SQLite in-memory</td><td><code>phpunit.xml</code> forces <code>:memory:</code> for isolation and speed</td></tr>
+      <tr><td class="k">Framework default</td><td>MySQL</td><td><code>config/database.php</code> falls back to the MySQL driver</td></tr>
+    </tbody>
+  </table>
+  <p>MySQL&nbsp;8.0 is the intended production engine, consistent with the container image, which
+    compiles only the <code>pdo_mysql</code> driver.</p>
+
+  <h2>7.2 Object-relational mapping</h2>
+  <p>Persistence is mediated entirely through <strong>Eloquent</strong>, Laravel's active-record ORM.
+    The domain comprises 22 model classes plus a reusable <code>HasSponsorCode</code> trait that
+    generates unique supporter reference codes. Models make extensive use of attribute casting,
+    computed accessors, and both one-to-many and many-to-many relationships.</p>
+
+  <h3>Notable computed attributes</h3>
+  <table>
+    <thead><tr><th style="width:34mm">Model</th><th style="width:38mm">Accessor</th><th>Derivation</th></tr></thead>
+    <tbody>
+      <tr><td class="k">Event</td><td class="v">trees_alive</td><td>Trees planted less trees lost</td></tr>
+      <tr><td class="k">Event</td><td class="v">survival_rate</td><td>Surviving trees as a proportion of trees planted</td></tr>
+      <tr><td class="k">Media</td><td class="v">youtube_video_id</td><td>Identifier parsed from a supplied YouTube URL</td></tr>
+      <tr><td class="k">Media</td><td class="v">is_short</td><td>Detection of short-form video format</td></tr>
+      <tr><td class="k">Media</td><td class="v">thumbnail_url</td><td>Derived preview image endpoint</td></tr>
+    </tbody>
+  </table>
+
+  <h2>7.3 Schema management</h2>
+  <p>The schema is defined across <strong>44 versioned migrations</strong> dated between February and
+    July 2026, producing <strong>36 tables</strong>. Reference and demonstration data are supplied by
+    12 seeder classes, including a dedicated <code>RolesAndPermissionsSeeder</code> that
+    reconstructs the entire authorisation catalogue idempotently.</p>
+
+  <div class="grid3">
+    <div class="stat"><span class="n">44</span><span class="l">Migrations</span></div>
+    <div class="stat"><span class="n">36</span><span class="l">Tables</span></div>
+    <div class="stat"><span class="n">22</span><span class="l">Eloquent models</span></div>
+  </div>
+
+  <div class="runfoot"><span>Internal &mdash; Technical Documentation</span><span class="pn">Page 9 of 24</span></div>
+</section>
+
+<!-- ══════════════ PAGE 10 — DATA 2 ══════════════ -->
+<section class="page">
+  <div class="runhead"><span><b>Every Tree for Hope</b> &nbsp;|&nbsp; Technology Stack Specification</span><span>Section 7 (cont.)</span></div>
+
+  <h2 style="margin-top:0">7.4 Domain entity inventory</h2>
+  <p>The following table enumerates the persisted domain entities and their functional
+    responsibility. Framework-internal tables (sessions, cache, jobs, failed jobs, batches, password
+    reset tokens) are omitted.</p>
+
+  <table>
+    <caption>Table 7.1 &mdash; Domain entities</caption>
+    <thead><tr><th style="width:36mm">Entity</th><th style="width:32mm">Domain</th><th>Responsibility</th></tr></thead>
+    <tbody>
+      <tr><td class="k">Event</td><td>Impact</td><td>Planting events with location, counts, survival and maintenance data</td></tr>
+      <tr><td class="k">EventImage</td><td>Impact</td><td>Photographic gallery attached to a planting event</td></tr>
+      <tr><td class="k">UpcomingEvent</td><td>Engagement</td><td>Scheduled future activities open to volunteer registration</td></tr>
+      <tr><td class="k">Donator</td><td>Financial</td><td>Supporter records, contribution values and sponsor codes</td></tr>
+      <tr><td class="k">SponsorPackage</td><td>Financial</td><td>Priced sponsorship tiers with fund-allocation breakdowns</td></tr>
+      <tr><td class="k">Expense</td><td>Financial</td><td>Itemised expenditure underpinning public transparency reporting</td></tr>
+      <tr><td class="k">Partner</td><td>Relationships</td><td>Institutional partners and advisors, typed by category</td></tr>
+      <tr><td class="k">Team</td><td>Relationships</td><td>Staff and volunteer profiles</td></tr>
+      <tr><td class="k">Company</td><td>Careers</td><td>Employing organisations for job listings</td></tr>
+      <tr><td class="k">JobCategory</td><td>Careers</td><td>Translatable classification of vacancies</td></tr>
+      <tr><td class="k">JobPosting</td><td>Careers</td><td>Translatable vacancy with employment type and experience level</td></tr>
+      <tr><td class="k">JobApplication</td><td>Careers</td><td>Candidate submissions with résumé attachments</td></tr>
+      <tr><td class="k">TreeRequest</td><td>Community</td><td>Community-originated planting requests with review workflow</td></tr>
+      <tr><td class="k">InvolvementRequest</td><td>Community</td><td>Volunteer, sponsor and collaboration enquiries with CV upload</td></tr>
+      <tr><td class="k">Voice</td><td>Community</td><td>Moderated community posts on the &ldquo;Voices of Nature&rdquo; wall</td></tr>
+      <tr><td class="k">VoiceComment</td><td>Community</td><td>Threaded responses subject to moderation</td></tr>
+      <tr><td class="k">VoiceLike</td><td>Community</td><td>Anonymous appreciation, deduplicated by fingerprint</td></tr>
+      <tr><td class="k">ContactMessage</td><td>Communication</td><td>General enquiries received through the contact form</td></tr>
+      <tr><td class="k">Faq</td><td>Content</td><td>Translatable frequently asked questions</td></tr>
+      <tr><td class="k">Media</td><td>Content</td><td>Video story library backed by YouTube references</td></tr>
+      <tr><td class="k">Setting</td><td>System</td><td>Key/value configuration store editable by administrators</td></tr>
+      <tr><td class="k">User</td><td>Access control</td><td>Administrative accounts with assigned roles</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Associative tables</h3>
+  <p><code>event_donator</code> attributes supporters to the specific plantings they funded, and
+    <code>event_partner</code> records institutional involvement per event. Spatie contributes five
+    further tables governing roles, permissions and their assignments.</p>
+
+  <h2>7.5 Structured attributes</h2>
+  <p>Several entities employ JSON-typed columns for naturally variable data: volunteer name lists and
+    custom tree species on events, maintenance visit logs and photographs, sponsorship fund
+    allocation breakdowns, and uploaded media paths on tree requests. Translatable attributes are
+    likewise stored as per-locale JSON maps.</p>
+
+  <div class="runfoot"><span>Internal &mdash; Technical Documentation</span><span class="pn">Page 10 of 24</span></div>
+</section>
+
+<!-- ══════════════ PAGE 11 — SECURITY 1 ══════════════ -->
+<section class="page">
+  <div class="runhead"><span><b>Every Tree for Hope</b> &nbsp;|&nbsp; Technology Stack Specification</span><span>Section 8</span></div>
+
+  <span class="sec-num">Section 8</span>
+  <h1 class="sec">Security &amp; Access Control</h1>
+  <div class="sec-rule"></div>
+
+  <p class="lead">The authorisation subsystem is the most rigorously engineered component of the
+    platform, implementing a complete role-based access control model with a single authoritative
+    permission catalogue and comprehensive policy coverage.</p>
+
+  <h2>8.1 Authentication</h2>
+  <p>Authentication uses Laravel's <strong>session-based</strong> mechanism with a single
+    <code>web</code> guard backed by an Eloquent user provider. Credentials are hashed using bcrypt
+    with a configurable work factor, applied automatically through the model's
+    <code>hashed</code> attribute cast. The login interface is provided by Filament at
+    <code>/admin/login</code>.</p>
+  <p>There is <strong>no public user registration</strong>. Accounts are created exclusively by
+    administrators, which materially reduces the platform's authentication attack surface. Token,
+    OAuth and JWT mechanisms are not present and are not required by the architecture.</p>
+
+  <h2>8.2 Authorisation model</h2>
+  <p>Authorisation is implemented on <code>spatie/laravel-permission&nbsp;8.3.0</code>, extended by a
+    project-specific architecture documented in <code>docs/RBAC.md</code>.</p>
+
+  <h3>Permission catalogue</h3>
+  <p>All permissions derive from a single class, <code>App\Support\PermissionCatalog</code>, which
+    generates the complete set programmatically. This single-source-of-truth design guarantees that
+    seeders, policies and the administrative interface can never diverge.</p>
+
+  <table>
+    <thead><tr><th style="width:44mm">Permission family</th><th style="width:30mm">Cardinality</th><th>Composition</th></tr></thead>
+    <tbody>
+      <tr><td class="k">Model abilities</td><td>21 modules &times; 6</td><td><code>view_any</code>, <code>view</code>, <code>create</code>, <code>update</code>, <code>delete</code>, <code>delete_any</code></td></tr>
+      <tr><td class="k">Workflow abilities</td><td>2</td><td><code>approve_voice</code>, <code>reject_voice</code></td></tr>
+      <tr><td class="k">Export abilities</td><td>2</td><td><code>export_donator</code>, <code>export_expense</code></td></tr>
+      <tr><td class="k">Interface abilities</td><td>4</td><td><code>view_dashboard</code>, <code>manage_site_settings</code>, <code>view_financial_widgets</code>, <code>view_activity_widgets</code></td></tr>
+      <tr><td class="k"><strong>Total</strong></td><td colspan="2"><strong>Approximately 125 discrete permissions</strong></td></tr>
+    </tbody>
+  </table>
+
+  <h3>Policy enforcement</h3>
+  <p>Enforcement is delegated to <strong>22 policy classes</strong>. A single <code>BasePolicy</code>
+    encodes the naming convention that maps an ability and model to its permission string; the 21
+    per-model policies are thin subclasses. Policies are registered centrally in
+    <code>AuthServiceProvider</code>, which additionally installs a <code>Gate::before</code>
+    callback granting the Super Administrator role unconditional access.</p>
+
+  <div class="callout">
+    <span class="t">Architectural strength</span>
+    <p>Deriving 125 permissions and 22 policies from one convention means adding a new administered
+      entity requires only a catalogue entry and a three-line policy subclass. The design scales
+      without introducing authorisation gaps.</p>
+  </div>
+
+  <div class="runfoot"><span>Internal &mdash; Technical Documentation</span><span class="pn">Page 11 of 24</span></div>
+</section>
+
+<!-- ══════════════ PAGE 12 — SECURITY 2 ══════════════ -->
+<section class="page">
+  <div class="runhead"><span><b>Every Tree for Hope</b> &nbsp;|&nbsp; Technology Stack Specification</span><span>Section 8 (cont.)</span></div>
+
+  <h2 style="margin-top:0">8.3 Role hierarchy</h2>
+  <p>Five roles are provisioned by the <code>RolesAndPermissionsSeeder</code>, forming a graduated
+    privilege ladder:</p>
+  <table>
+    <thead><tr><th style="width:34mm">Role</th><th>Intended scope of authority</th></tr></thead>
+    <tbody>
+      <tr><td class="k">Super Admin</td><td>Unrestricted access via gate bypass; reserved for system custodians</td></tr>
+      <tr><td class="k">Admin</td><td>Full operational administration across all modules</td></tr>
+      <tr><td class="k">Manager</td><td>Content, engagement and financial management without access-control rights</td></tr>
+      <tr><td class="k">Staff</td><td>Day-to-day content maintenance and submission processing</td></tr>
+      <tr><td class="k">Viewer</td><td>Read-only visibility for auditors and observers</td></tr>
+    </tbody>
+  </table>
+  <p>Panel entry is gated by <code>User::canAccessPanel()</code>, which admits only accounts holding
+    at least one assigned role. A legacy boolean administrator column was removed by migration in
+    July 2026 in favour of this role-driven check.</p>
+
+  <h2>8.4 Framework-level protections</h2>
+  <table>
+    <thead><tr><th style="width:44mm">Control</th><th>Implementation</th></tr></thead>
+    <tbody>
+      <tr><td class="k">CSRF protection</td><td>Token verification on all state-changing form submissions</td></tr>
+      <tr><td class="k">SQL injection</td><td>Parameter binding throughout the Eloquent query builder</td></tr>
+      <tr><td class="k">Output escaping</td><td>Blade escapes interpolated output by default</td></tr>
+      <tr><td class="k">Password storage</td><td>bcrypt hashing with configurable cost factor</td></tr>
+      <tr><td class="k">Session security</td><td>Configurable encryption, lifetime, domain and path scoping</td></tr>
+      <tr><td class="k">Mass assignment</td><td>Explicit fillable declarations on all models</td></tr>
+      <tr><td class="k">Upload handling</td><td>Validated file uploads written to namespaced storage directories</td></tr>
+      <tr><td class="k">Third-party embed</td><td>Donation provider rendered inside a sandboxed iframe</td></tr>
+      <tr><td class="k">Abuse mitigation</td><td>Anonymous engagement deduplicated by 64-character fingerprint</td></tr>
+      <tr><td class="k">Content moderation</td><td>Community submissions default to a pending state pending review</td></tr>
+    </tbody>
+  </table>
+
+  <h2>8.5 Payment data posture</h2>
+  <p>The platform processes <strong>no payment instruments whatsoever</strong>. Donation capture is
+    delegated entirely to the AidOS / Aseel embedded widget, which executes in an isolated browsing
+    context. No cardholder data enters the application boundary, its database, or its logs. This
+    materially reduces the compliance perimeter.</p>
+
+  <div class="note">
+    <span class="t">Security review items</span>
+    <p>Two configuration matters warrant attention before production deployment: an environment file
+      containing development credentials is committed to version control, and database passwords are
+      declared inline in the Compose manifest. Both are development-scope values, and both are
+      tracked as remediation items TD-02 and TD-03 in Section&nbsp;16.</p>
+  </div>
+
+  <div class="runfoot"><span>Internal &mdash; Technical Documentation</span><span class="pn">Page 12 of 24</span></div>
+</section>
+
+<!-- ══════════════ PAGE 13 — I18N ══════════════ -->
+<section class="page">
+  <div class="runhead"><span><b>Every Tree for Hope</b> &nbsp;|&nbsp; Technology Stack Specification</span><span>Section 9</span></div>
+
+  <span class="sec-num">Section 9</span>
+  <h1 class="sec">Internationalisation &amp; Localisation</h1>
+  <div class="sec-rule"></div>
+
+  <p class="lead">Multilingual capability is a first-class architectural concern rather than a
+    retrofitted feature. The platform serves three languages spanning two writing directions,
+    covering both interface strings and administrator-authored content.</p>
+
+  <h2>9.1 Supported locales</h2>
+  <table>
+    <thead><tr><th style="width:22mm">Code</th><th style="width:38mm">Language</th><th style="width:24mm">Direction</th><th>Script and typeface</th></tr></thead>
+    <tbody>
+      <tr><td class="v">en</td><td class="k">English</td><td>Left to right</td><td>Latin &mdash; Manrope, Playfair Display</td></tr>
+      <tr><td class="v">fa</td><td class="k">Dari (Afghan Persian)</td><td>Right to left</td><td>Perso-Arabic &mdash; Vazirmatn</td></tr>
+      <tr><td class="v">ps</td><td class="k">Pashto</td><td>Right to left</td><td>Perso-Arabic &mdash; Vazirmatn, Noto Naskh Arabic</td></tr>
+    </tbody>
+  </table>
+
+  <h2>9.2 Two-tier translation strategy</h2>
+  <p>The platform distinguishes between <em>static</em> interface text and <em>dynamic</em>
+    administrator-authored content, applying a purpose-built mechanism to each.</p>
+
+  <div class="grid2">
+    <div class="card">
+      <h4>Tier 1 &mdash; Interface strings</h4>
+      <p>Laravel translation catalogues at <code>resources/lang/{en,fa,ps}/messages.php</code>,
+        totalling 3,241 lines. Resolved at render time with a configured fallback chain.</p>
+    </div>
+    <div class="card">
+      <h4>Tier 2 &mdash; Database content</h4>
+      <p><code>spatie/laravel-translatable&nbsp;6.11.4</code> stores per-locale values in JSON
+        columns, allowing editors to maintain all three languages from a single admin form.</p>
+    </div>
+  </div>
+
+  <h3>Translatable entities</h3>
+  <p>Per-locale attributes are enabled on <code>upcoming_events</code>, <code>faqs</code>,
+    <code>job_postings</code> and <code>job_categories</code>.</p>
+
+  <h2>9.3 Locale resolution</h2>
+  <p>Two global middleware components participate in every request. <code>SetLocale</code>
+    establishes the active application locale, and <code>LanguageMiddleware</code> propagates
+    presentation concerns derived from it. Selection persists across requests, and the resolved
+    locale determines the document's <code>dir</code> attribute, the active typeface stack and the
+    directional layout applied by Tailwind.</p>
+
+  <h2>9.4 Right-to-left support</h2>
+  <p>Right-to-left rendering is handled at the document level rather than through duplicated
+    stylesheets. Setting the <code>dir</code> attribute on the root element allows Tailwind's
+    logical properties to mirror margins, padding, alignment and flow automatically, while the
+    typeface stack is exchanged for Arabic-script faces. Translator guidance is maintained in
+    <code>TRANSLATION_GUIDE.md</code>.</p>
+
+  <div class="callout">
+    <span class="t">Operational significance</span>
+    <p>Serving Dari and Pashto natively, with correct right-to-left typography, is essential to the
+      organisation's mission of engaging Afghan communities directly. The translation architecture
+      permits new locales to be added without schema migration.</p>
+  </div>
+
+  <div class="runfoot"><span>Internal &mdash; Technical Documentation</span><span class="pn">Page 13 of 24</span></div>
+</section>
+
+<!-- ══════════════ PAGE 14 — INTEGRATIONS ══════════════ -->
+<section class="page">
+  <div class="runhead"><span><b>Every Tree for Hope</b> &nbsp;|&nbsp; Technology Stack Specification</span><span>Section 10</span></div>
+
+  <span class="sec-num">Section 10</span>
+  <h1 class="sec">Third-Party Integrations</h1>
+  <div class="sec-rule"></div>
+
+  <h2>10.1 Active integrations</h2>
+  <table>
+    <caption>Table 10.1 &mdash; Integrations in production use</caption>
+    <thead><tr><th style="width:38mm">Integration</th><th style="width:32mm">Provider / library</th><th>Function</th></tr></thead>
+    <tbody>
+      <tr><td class="k">Donation processing</td><td>AidOS / Aseel</td><td>Sandboxed campaign iframe plus hosted widget scripts; the destination URL is administrator-configurable through the settings store</td></tr>
+      <tr><td class="k">Spreadsheet ingestion</td><td>PhpSpreadsheet 5.5.0</td><td>Bulk import of expenditure records from XLSX and CSV files, with date normalisation, numeric cleaning and expense-type inference</td></tr>
+      <tr><td class="k">Video hosting</td><td>YouTube</td><td>Embedded video stories with identifier parsing, short-form detection and derived thumbnails</td></tr>
+      <tr><td class="k">Web typography</td><td>Google Fonts</td><td>Delivery of the six-face multilingual type system</td></tr>
+      <tr><td class="k">Data visualisation</td><td>Chart.js via Filament</td><td>Dashboard charts for donation volume and planting progress</td></tr>
+      <tr><td class="k">Mapping</td><td>Embedded map markup</td><td>Per-event embed snippets stored as content; no SDK dependency</td></tr>
+      <tr><td class="k">Social presence</td><td>Outbound links</td><td>Facebook, Instagram, LinkedIn, YouTube and WhatsApp referrals</td></tr>
+    </tbody>
+  </table>
+
+  <h2>10.2 Configured but not yet exercised</h2>
+  <p>The following capabilities are configured within the framework and available for immediate use,
+    but have no invoking application code at present:</p>
+  <ul class="clean tight">
+    <li><strong>Transactional email.</strong> Mail transport is configured, with MailHog provisioned
+      for local capture and driver scaffolding present for Postmark, Resend and Amazon SES. No
+      mailable classes have yet been authored.</li>
+    <li><strong>Amazon S3 storage.</strong> Credentials and bucket variables are declared; the
+      active filesystem disk remains local.</li>
+    <li><strong>Slack notifications.</strong> Service configuration is present without a consuming
+      notification channel.</li>
+  </ul>
+
+  <h2>10.3 Deliberately excluded</h2>
+  <p>The following categories of dependency are absent by design, and their exclusion should be read
+    as an architectural decision rather than an omission:</p>
+  <table>
+    <thead><tr><th style="width:44mm">Category</th><th>Rationale for exclusion</th></tr></thead>
+    <tbody>
+      <tr><td class="k">Native payment gateway</td><td>Payment handling is fully delegated, keeping the compliance perimeter minimal</td></tr>
+      <tr><td class="k">Real-time / WebSockets</td><td>No feature requires server-pushed updates; broadcasting remains inert</td></tr>
+      <tr><td class="k">Search engine</td><td>Dataset volume is well within the capability of indexed relational queries</td></tr>
+      <tr><td class="k">SMS gateway</td><td>Engagement channels are web and email based</td></tr>
+      <tr><td class="k">Server-side PDF generation</td><td>Published documents are prepared externally and served as static assets</td></tr>
+    </tbody>
+  </table>
+
+  <div class="note">
+    <span class="t">Recommended addition</span>
+    <p>Application performance monitoring and error aggregation are not currently instrumented.
+      Introducing an exception-tracking service is recorded as remediation item TD-06.</p>
+  </div>
+
+  <div class="runfoot"><span>Internal &mdash; Technical Documentation</span><span class="pn">Page 14 of 24</span></div>
+</section>
+
+<!-- ══════════════ PAGE 15 — INFRA ══════════════ -->
+<section class="page">
+  <div class="runhead"><span><b>Every Tree for Hope</b> &nbsp;|&nbsp; Technology Stack Specification</span><span>Section 11</span></div>
+
+  <span class="sec-num">Section 11</span>
+  <h1 class="sec">Infrastructure, Containerisation &amp; Build Pipeline</h1>
+  <div class="sec-rule"></div>
+
+  <h2>11.1 Container image</h2>
+  <p>The application image derives from <code>php:8.2-apache</code>. The build installs the required
+    PHP extensions, copies Composer from its official image, and executes
+    <code>composer install --no-dev --optimize-autoloader</code> to produce a production-optimised
+    autoloader. The Apache document root is rewritten to the <code>public</code> directory so that
+    only web-accessible assets are exposed.</p>
+
+  <h2>11.2 Development environment topology</h2>
+  <p>A five-service Docker Compose stack provides a reproducible development environment, isolated on
+    a dedicated bridge network with named volumes for durable state.</p>
+  <table>
+    <caption>Table 11.1 &mdash; Compose services</caption>
+    <thead><tr><th style="width:30mm">Service</th><th style="width:34mm">Image</th><th style="width:22mm">Host port</th><th>Function</th></tr></thead>
+    <tbody>
+      <tr><td class="k">app</td><td class="v">local build</td><td class="v">8000</td><td>Apache and PHP application runtime</td></tr>
+      <tr><td class="k">mysql</td><td class="v">mysql:8.0</td><td class="v">33066</td><td>Primary relational database</td></tr>
+      <tr><td class="k">redis</td><td class="v">redis:7-alpine</td><td class="v">63799</td><td>Cache, session and queue backend</td></tr>
+      <tr><td class="k">phpmyadmin</td><td class="v">phpmyadmin</td><td class="v">8080</td><td>Database administration interface</td></tr>
+      <tr><td class="k">mailhog</td><td class="v">mailhog</td><td class="v">1025 / 8025</td><td>SMTP capture and inspection interface</td></tr>
+    </tbody>
+  </table>
+  <p>Persistent volumes <code>mysql_data</code> and <code>redis_data</code> retain state across
+    container recreation. Convenience wrappers <code>docker-commands.sh</code> and
+    <code>docker-commands.bat</code> provide parity across POSIX and Windows workstations, with
+    procedures documented in <code>DOCKER-README.md</code>.</p>
+
+  <h2>11.3 Asset build pipeline</h2>
+  <p>Front-end assets are compiled by <strong>Vite&nbsp;7</strong> through
+    <code>laravel-vite-plugin&nbsp;2</code>, which writes a manifest consumed by Blade's
+    <code>@vite</code> directive to resolve content-hashed filenames. Two entry points are declared:
+    the application stylesheet and the application script. Hot module replacement with automatic
+    Blade refresh is enabled during development.</p>
+
+  <h2>11.4 Unified development workflow</h2>
+  <p>A single Composer script starts the complete development environment concurrently, removing the
+    need to coordinate multiple terminals:</p>
+  <table>
+    <thead><tr><th style="width:44mm">Process</th><th>Responsibility</th></tr></thead>
+    <tbody>
+      <tr><td class="k">artisan serve</td><td>PHP development HTTP server</td></tr>
+      <tr><td class="k">artisan queue:listen</td><td>Background job worker with automatic code reloading</td></tr>
+      <tr><td class="k">artisan pail</td><td>Real-time formatted log streaming</td></tr>
+      <tr><td class="k">npm run dev</td><td>Vite development server with hot module replacement</td></tr>
+    </tbody>
+  </table>
+
+  <div class="note">
+    <span class="t">Pipeline gap</span>
+    <p>No continuous integration configuration is present in the repository. Establishing an
+      automated pipeline that runs the test suite and code-style verification on every push is
+      recorded as remediation item TD-04.</p>
+  </div>
+
+  <div class="runfoot"><span>Internal &mdash; Technical Documentation</span><span class="pn">Page 15 of 24</span></div>
+</section>
+
+<!-- ══════════════ PAGE 16 — QA ══════════════ -->
+<section class="page">
+  <div class="runhead"><span><b>Every Tree for Hope</b> &nbsp;|&nbsp; Technology Stack Specification</span><span>Section 12</span></div>
+
+  <span class="sec-num">Section 12</span>
+  <h1 class="sec">Quality Assurance &amp; Code Standards</h1>
+  <div class="sec-rule"></div>
+
+  <h2>12.1 Automated testing</h2>
+  <p>The test suite is executed by <strong>PHPUnit&nbsp;11.5.42</strong>, configured through
+    <code>phpunit.xml</code> with two suites &mdash; <code>Unit</code> and <code>Feature</code>. The
+    testing environment is fully isolated: an in-memory SQLite database, array-backed cache and
+    session stores, a synchronous queue driver and a null mail transport ensure that no test can
+    reach external state.</p>
+
+  <table>
+    <thead><tr><th style="width:60mm">Test suite</th><th style="width:22mm">Files</th><th>Coverage focus</th></tr></thead>
+    <tbody>
+      <tr><td class="k">Feature &mdash; Authorization</td><td class="num">3</td><td>Panel access, role management and permission resolution</td></tr>
+      <tr><td class="k">Framework stubs</td><td class="num">2</td><td>Default scaffolding, retained but not extended</td></tr>
+      <tr><td class="k">Base test case</td><td class="num">1</td><td>Shared application bootstrapping</td></tr>
+    </tbody>
+  </table>
+
+  <p>Test coverage is currently concentrated entirely on the access-control subsystem &mdash;
+    appropriately, since that is the highest-risk area of the platform. Controllers, domain models,
+    form validation and the expense import service are not yet covered. Expanding coverage is
+    recorded as remediation item TD-05.</p>
+
+  <h2>12.2 Code style</h2>
+  <p><strong>Laravel Pint&nbsp;1.25.1</strong> enforces PHP formatting. No custom rule set is
+    defined, so the tool applies its default PSR-12-derived preset, giving a consistent and
+    conventional style across the codebase with no configuration burden.</p>
+
+  <h2>12.3 Developer tooling</h2>
+  <table>
+    <thead><tr><th style="width:44mm">Tool</th><th style="width:20mm">Version</th><th>Purpose</th></tr></thead>
+    <tbody>
+      <tr><td class="k">Laravel Tinker</td><td class="v">2.10.1</td><td>Interactive REPL against the live application container</td></tr>
+      <tr><td class="k">Laravel Pail</td><td class="v">1.2.3</td><td>Human-readable real-time log tailing</td></tr>
+      <tr><td class="k">Nuno Collision</td><td class="v">8.8.2</td><td>Structured console error reporting</td></tr>
+      <tr><td class="k">Laravel Sail</td><td class="v">1.46.0</td><td>Alternative Docker development harness</td></tr>
+      <tr><td class="k">Mockery</td><td class="v">1.6.12</td><td>Test doubles and behavioural expectations</td></tr>
+      <tr><td class="k">FakerPHP</td><td class="v">1.24.1</td><td>Realistic fixture generation for seeders and factories</td></tr>
+      <tr><td class="k">Concurrently</td><td class="v">9.x</td><td>Parallel orchestration of development processes</td></tr>
+    </tbody>
+  </table>
+
+  <h2>12.4 Project documentation</h2>
+  <table>
+    <thead><tr><th style="width:52mm">Document</th><th>Content</th></tr></thead>
+    <tbody>
+      <tr><td class="k">docs/RBAC.md</td><td>Access-control architecture, a ten-point security review and a deployment checklist</td></tr>
+      <tr><td class="k">DOCKER-README.md</td><td>Container environment setup and operational procedures</td></tr>
+      <tr><td class="k">TRANSLATION_GUIDE.md</td><td>Guidance for maintaining the three translation catalogues</td></tr>
+      <tr><td class="k">README.md</td><td>Currently the unmodified framework template; superseding it is item TD-07</td></tr>
+    </tbody>
+  </table>
+
+  <div class="runfoot"><span>Internal &mdash; Technical Documentation</span><span class="pn">Page 16 of 24</span></div>
+</section>
+
+<!-- ══════════════ PAGE 17 — MODULES 1 ══════════════ -->
+<section class="page">
+  <div class="runhead"><span><b>Every Tree for Hope</b> &nbsp;|&nbsp; Technology Stack Specification</span><span>Section 13</span></div>
+
+  <span class="sec-num">Section 13</span>
+  <h1 class="sec">Functional Module Inventory</h1>
+  <div class="sec-rule"></div>
+
+  <p>Every Tree for Hope is a reforestation and community-impact platform serving Afghan communities.
+    The system combines a public engagement website with a comprehensive operational back office
+    across the following functional modules.</p>
+
+  <h2>13.1 Impact &amp; planting operations</h2>
+  <p>The central module records planting events with title, description, location, province,
+    embedded map reference, date, event type and video reference. Quantitative impact is captured as
+    trees planted, trees lost and volunteers engaged, from which surviving-tree counts and survival
+    rates are derived automatically.</p>
+  <p>The module extends beyond initial planting into <strong>longitudinal stewardship</strong>: each
+    event maintains a last-maintenance timestamp, free-text maintenance notes, a structured log of
+    maintenance visits and an associated photographic record. Volunteer names and tree species,
+    including custom species entries, are stored as structured lists. Photographic galleries attach
+    to each event through a dedicated image entity.</p>
+
+  <h2>13.2 Financial transparency</h2>
+  <p>Expenditure is recorded line by line with date, description, quantity, unit price, total cost,
+    paying party, categorised expense type and supporting notes. Records may be entered individually
+    or ingested in bulk from spreadsheets through a dedicated import service that normalises dates,
+    cleans numeric formatting, extracts the paying party from column headers and infers expense
+    categories. The resulting dataset drives a publicly accessible transparency report.</p>
+
+  <h2>13.3 Supporters &amp; sponsorship</h2>
+  <p>Supporter records capture name, stated impact, location and location type, financial
+    contribution, contact details, profile image, donation date and trees sponsored, together with a
+    verification status and a featured flag for public recognition. Each supporter receives a unique
+    sponsor code generated automatically. Supporters are attributed to the specific planting events
+    their contributions funded.</p>
+  <p>Sponsorship tiers are modelled as configurable packages with title, price, currency (US dollar,
+    euro or Afghani), tree count, descriptive copy, an optional badge label, and a structured
+    allocation breakdown expressing how contributions are apportioned. These packages populate the
+    public funding-model page.</p>
+
+  <h2>13.4 Community request workflows</h2>
+  <p>Two structured intake workflows accept community submissions, each governed by a five-state
+    review lifecycle spanning pending, reviewing, approved, rejected and completed, with
+    administrator notes and a review timestamp.</p>
+  <ul class="clean tight">
+    <li><strong>Tree requests</strong> allow communities to petition for plantings, capturing
+      location, requested tree count, available water source, responsible person, contact number and
+      supporting photographs.</li>
+    <li><strong>Involvement requests</strong> handle volunteer, sponsor and collaboration enquiries,
+      including curriculum vitae uploads and optional association with a scheduled upcoming event.</li>
+  </ul>
+
+  <div class="runfoot"><span>Internal &mdash; Technical Documentation</span><span class="pn">Page 17 of 24</span></div>
+</section>
+
+<!-- ══════════════ PAGE 18 — MODULES 2 ══════════════ -->
+<section class="page">
+  <div class="runhead"><span><b>Every Tree for Hope</b> &nbsp;|&nbsp; Technology Stack Specification</span><span>Section 13 (cont.)</span></div>
+
+  <h2 style="margin-top:0">13.5 Voices of Nature</h2>
+  <p>A moderated community wall invites the public to contribute ideas, findings, experiences and
+    questions. Posts carry a slug for stable addressing, author name, email and country, an optional
+    image, and denormalised counters for likes, comments and views. Every submission enters a
+    moderation queue, governed by dedicated approve and reject permissions.</p>
+  <p>Engagement is deliberately frictionless: readers may express appreciation and comment
+    <strong>without registering an account</strong>, with duplicates prevented by a 64-character
+    fingerprint rather than by identity &mdash; preserving anonymity while limiting abuse.</p>
+
+  <h2>13.6 Careers</h2>
+  <p>A recruitment module spans four related entities. Employing organisations are recorded as
+    companies; vacancies are classified by translatable categories and published as translatable
+    postings carrying employment type, experience level, slug-based routing and an optional external
+    application URL. Applications are captured with résumé attachments.</p>
+
+  <h2>13.7 Engagement &amp; content</h2>
+  <table>
+    <thead><tr><th style="width:44mm">Module</th><th>Capability</th></tr></thead>
+    <tbody>
+      <tr><td class="k">Upcoming Events</td><td>Translatable announcements of forthcoming activities, linked to volunteer registrations</td></tr>
+      <tr><td class="k">Partners &amp; Advisors</td><td>Typed institutional relationships with logo, description, sponsor code and per-event linkage; surfaced through separate public pages</td></tr>
+      <tr><td class="k">Team</td><td>Staff and volunteer profiles with photograph, personal message and social link</td></tr>
+      <tr><td class="k">Media library</td><td>Curated video stories and short-form content sourced from YouTube</td></tr>
+      <tr><td class="k">Contact</td><td>Public enquiry form feeding an administrative inbox</td></tr>
+      <tr><td class="k">FAQ</td><td>Translatable question-and-answer catalogue with public submission</td></tr>
+      <tr><td class="k">Children's Awareness</td><td>Dedicated educational programme content for younger audiences</td></tr>
+      <tr><td class="k">Editorial pages</td><td>About, Our Works, History, Report and Funding Model</td></tr>
+    </tbody>
+  </table>
+
+  <h2>13.8 Public route surface</h2>
+  <table>
+    <caption>Table 13.1 &mdash; Representative public endpoints</caption>
+    <thead><tr><th style="width:22mm">Method</th><th style="width:46mm">Path</th><th>Function</th></tr></thead>
+    <tbody>
+      <tr><td class="v">GET</td><td class="v">/</td><td>Landing page</td></tr>
+      <tr><td class="v">GET</td><td class="v">/event, /event/{event}</td><td>Planting event index and detail</td></tr>
+      <tr><td class="v">GET</td><td class="v">/report</td><td>Financial transparency report</td></tr>
+      <tr><td class="v">GET</td><td class="v">/funding-model</td><td>Sponsorship packages and allocation</td></tr>
+      <tr><td class="v">GET</td><td class="v">/donators, /partners, /advisors</td><td>Recognition listings</td></tr>
+      <tr><td class="v">GET</td><td class="v">/careers, /careers/{job}</td><td>Vacancy index and detail</td></tr>
+      <tr><td class="v">GET</td><td class="v">/voices, /voices/{voice}</td><td>Community wall index and detail</td></tr>
+      <tr><td class="v">POST</td><td class="v">/voices/{voice}/like, /comment</td><td>Anonymous engagement actions</td></tr>
+      <tr><td class="v">POST</td><td class="v">/tree-request</td><td>Community planting request intake</td></tr>
+      <tr><td class="v">POST</td><td class="v">/get-involved</td><td>Volunteer and sponsorship enquiry intake</td></tr>
+      <tr><td class="v">POST</td><td class="v">/contact</td><td>General enquiry submission</td></tr>
+    </tbody>
+  </table>
+
+  <div class="runfoot"><span>Internal &mdash; Technical Documentation</span><span class="pn">Page 18 of 24</span></div>
+</section>
+
+<!-- ══════════════ PAGE 19 — METRICS ══════════════ -->
+<section class="page">
+  <div class="runhead"><span><b>Every Tree for Hope</b> &nbsp;|&nbsp; Technology Stack Specification</span><span>Section 14</span></div>
+
+  <span class="sec-num">Section 14</span>
+  <h1 class="sec">Codebase Metrics</h1>
+  <div class="sec-rule"></div>
+
+  <p>The following measurements characterise the scale and composition of the project's own source
+    code; vendored dependencies are excluded throughout.</p>
+
+  <h2>14.1 Source composition</h2>
+  <table>
+    <caption>Table 14.1 &mdash; Lines of code by area</caption>
+    <thead><tr><th style="width:60mm">Area</th><th class="num" style="width:26mm">Files</th><th class="num" style="width:30mm">Lines</th></tr></thead>
+    <tbody>
+      <tr><td class="k">Application code (app/)</td><td class="num">175</td><td class="num">10,839</td></tr>
+      <tr><td class="k">Blade templates</td><td class="num">44</td><td class="num">12,409</td></tr>
+      <tr><td class="k">Database layer</td><td class="num">57</td><td class="num">3,277</td></tr>
+      <tr><td class="k">Translation catalogues</td><td class="num">3</td><td class="num">3,241</td></tr>
+      <tr><td class="k">Configuration, routes and tests</td><td class="num">&mdash;</td><td class="num">1,881</td></tr>
+      <tr><td class="k">JavaScript and CSS sources</td><td class="num">3</td><td class="num">16</td></tr>
+      <tr style="background:var(--green-50)"><td class="k"><strong>Total project source</strong></td><td class="num"><strong>&mdash;</strong></td><td class="num"><strong>≈ 31,700</strong></td></tr>
+    </tbody>
+  </table>
+
+  <h2>14.2 Structural inventory</h2>
+  <table>
+    <caption>Table 14.2 &mdash; Component counts</caption>
+    <thead><tr><th style="width:60mm">Component</th><th class="num" style="width:26mm">Count</th><th>Note</th></tr></thead>
+    <tbody>
+      <tr><td class="k">Eloquent models</td><td class="num">22</td><td>Plus one shared trait</td></tr>
+      <tr><td class="k">Database tables</td><td class="num">36</td><td>Including framework and RBAC tables</td></tr>
+      <tr><td class="k">Migrations</td><td class="num">44</td><td>Feb&ndash;Jul 2026</td></tr>
+      <tr><td class="k">Seeders / factories</td><td class="num">12 / 1</td><td>Includes idempotent RBAC seeder</td></tr>
+      <tr><td class="k">Filament resources</td><td class="num">25</td><td>Across six navigation groups; plus 2 pages and 5 widgets</td></tr>
+      <tr><td class="k">Authorisation policies</td><td class="num">22</td><td>One base plus 21 subclasses</td></tr>
+      <tr><td class="k">Discrete permissions</td><td class="num">≈ 125</td><td>Generated from a single catalogue</td></tr>
+      <tr><td class="k">Roles</td><td class="num">5</td><td>Super Admin through Viewer</td></tr>
+      <tr><td class="k">Controllers / actions</td><td class="num">11 / 27</td><td>Public-facing website only</td></tr>
+      <tr><td class="k">Web routes</td><td class="num">29</td><td>Excluding generated admin routes</td></tr>
+      <tr><td class="k">Backed enumerations</td><td class="num">2</td><td>Expense type, partner type</td></tr>
+      <tr><td class="k">Supported locales</td><td class="num">3</td><td>One LTR, two RTL</td></tr>
+      <tr><td class="k">Composer packages</td><td class="num">118 / 35</td><td>Production / development</td></tr>
+      <tr><td class="k">Static public assets</td><td class="num">107</td><td>Images, documents and icons</td></tr>
+    </tbody>
+  </table>
+
+  <h2>14.3 Observations</h2>
+  <p>The ratio of template to application code &mdash; roughly 12,400 lines of Blade against 10,800
+    of PHP &mdash; confirms the content-rich, server-rendered posture. The near-total absence of
+    project-authored JavaScript shows how completely Livewire and Alpine displace conventional
+    front-end tooling.</p>
+
+  <div class="runfoot"><span>Internal &mdash; Technical Documentation</span><span class="pn">Page 19 of 24</span></div>
+</section>
+
+<!-- ══════════════ PAGE 20 — RATIONALE ══════════════ -->
+<section class="page">
+  <div class="runhead"><span><b>Every Tree for Hope</b> &nbsp;|&nbsp; Technology Stack Specification</span><span>Section 15</span></div>
+
+  <span class="sec-num">Section 15</span>
+  <h1 class="sec">Technology Selection Rationale</h1>
+  <div class="sec-rule"></div>
+
+  <p>This section records the reasoning behind the principal technology decisions, together with the
+    alternatives considered and the trade-offs accepted.</p>
+
+  <table>
+    <caption>Table 15.1 &mdash; Decision register</caption>
+    <thead><tr><th style="width:34mm">Decision</th><th style="width:34mm">Alternative</th><th>Rationale and accepted trade-off</th></tr></thead>
+    <tbody>
+      <tr>
+        <td class="k">Modular monolith</td><td>Microservices</td>
+        <td>A single deployable artefact matches the organisation's operational capacity. Distributed architecture would impose coordination and observability costs disproportionate to the domain.</td>
+      </tr>
+      <tr>
+        <td class="k">Server-rendered Blade</td><td>React or Vue SPA</td>
+        <td>Public content requires first-class indexability and fast initial paint. Server rendering eliminates hydration cost and an entire API contract. Rich client interactivity is forgone &mdash; not required here.</td>
+      </tr>
+      <tr>
+        <td class="k">Livewire and Alpine</td><td>Client-side framework</td>
+        <td>Reactive administrative interfaces are achieved without a JavaScript build for behaviour, keeping business logic in one language and one codebase.</td>
+      </tr>
+      <tr>
+        <td class="k">Filament admin</td><td>Bespoke admin</td>
+        <td>Twenty-five fully featured CRUD modules with search, filtering, validation and authorisation are obtained declaratively. The trade-off is conformity to Filament's conventions.</td>
+      </tr>
+      <tr>
+        <td class="k">Spatie permissions</td><td>Hard-coded role checks</td>
+        <td>Roles and permissions become runtime data, editable without deployment. Enables the catalogue-driven design described in Section&nbsp;8.</td>
+      </tr>
+      <tr>
+        <td class="k">Spatie translatable</td><td>Per-locale tables</td>
+        <td>JSON per-locale attributes allow new languages without schema migration, and let editors maintain all locales from one form.</td>
+      </tr>
+      <tr>
+        <td class="k">Tailwind CSS</td><td>Bootstrap or bespoke CSS</td>
+        <td>Utility classes with logical properties make right-to-left mirroring largely automatic &mdash; decisive for Dari and Pashto support.</td>
+      </tr>
+      <tr>
+        <td class="k">Delegated donations</td><td>Native gateway</td>
+        <td>No payment data enters the system, minimising compliance burden. Control over the donation experience is ceded to the provider.</td>
+      </tr>
+      <tr>
+        <td class="k">No public API</td><td>REST or GraphQL</td>
+        <td>Removes authentication, versioning and rate-limiting surface area. Laravel Sanctum can be introduced later without restructuring the domain model.</td>
+      </tr>
+      <tr>
+        <td class="k">Docker Compose</td><td>Native installation</td>
+        <td>Guarantees environment parity across contributor workstations and mirrors the production runtime.</td>
+      </tr>
+      <tr>
+        <td class="k">SQLite in development</td><td>MySQL everywhere</td>
+        <td>Zero-configuration onboarding and fast test execution. Requires discipline to avoid engine-specific constructs.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout">
+    <span class="t">Coherence assessment</span>
+    <p>The selections form a mutually reinforcing set. Laravel, Livewire, Filament, Blade, Alpine and
+      Tailwind constitute a single well-integrated ecosystem with shared conventions and a common
+      release cadence, minimising integration friction and easing the onboarding of engineers
+      already familiar with the Laravel ecosystem.</p>
+  </div>
+
+  <div class="runfoot"><span>Internal &mdash; Technical Documentation</span><span class="pn">Page 20 of 24</span></div>
+</section>
+
+<!-- ══════════════ PAGE 21 — DEBT ══════════════ -->
+<section class="page">
+  <div class="runhead"><span><b>Every Tree for Hope</b> &nbsp;|&nbsp; Technology Stack Specification</span><span>Section 16</span></div>
+
+  <span class="sec-num">Section 16</span>
+  <h1 class="sec">Technical Debt Register &amp; Roadmap</h1>
+  <div class="sec-rule"></div>
+
+  <p>The following register records known items requiring attention, ordered by priority. Recording
+    them explicitly is a deliberate engineering practice: each item is understood, bounded and
+    scheduled rather than latent.</p>
+
+  <table>
+    <caption>Table 16.1 &mdash; Remediation register</caption>
+    <thead><tr><th style="width:16mm">Ref</th><th style="width:38mm">Item</th><th style="width:20mm">Priority</th><th>Recommended action</th></tr></thead>
+    <tbody>
+      <tr><td class="k">TD-01</td><td>Duplicate Tailwind delivery</td><td>High</td><td>Retire the Play CDN reference and serve compiled Tailwind through the Vite manifest, migrating brand tokens into the CSS-first configuration.</td></tr>
+      <tr><td class="k">TD-02</td><td>Environment file in version control</td><td>High</td><td>Remove the committed environment file from tracking, purge it from history and rotate any values it exposed.</td></tr>
+      <tr><td class="k">TD-03</td><td>Inline Compose credentials</td><td>Medium</td><td>Relocate database passwords into an untracked environment file referenced by the Compose manifest.</td></tr>
+      <tr><td class="k">TD-04</td><td>No continuous integration</td><td>High</td><td>Introduce a pipeline executing the test suite, Pint verification and a container build on every push and pull request.</td></tr>
+      <tr><td class="k">TD-05</td><td>Narrow test coverage</td><td>Medium</td><td>Extend feature coverage to controllers, submission workflows and the expense import service; add regression tests for survival-rate computation.</td></tr>
+      <tr><td class="k">TD-06</td><td>No error monitoring</td><td>Medium</td><td>Integrate an exception-tracking and performance-monitoring service before production launch.</td></tr>
+      <tr><td class="k">TD-07</td><td>Placeholder project README</td><td>Medium</td><td>Replace the framework template with project-specific setup, architecture and contribution guidance.</td></tr>
+      <tr><td class="k">TD-08</td><td>Absent JavaScript lock file</td><td>Medium</td><td>Commit the package lock file to guarantee reproducible front-end builds.</td></tr>
+      <tr><td class="k">TD-09</td><td>Container port declaration</td><td>Low</td><td>Reconcile the image's exposed port with the Apache listener and the Compose port mapping.</td></tr>
+      <tr><td class="k">TD-10</td><td>Unreferenced legacy code</td><td>Low</td><td>Remove superseded administrator middleware and the unrouted media controller.</td></tr>
+      <tr><td class="k">TD-11</td><td>Static analysis absent</td><td>Low</td><td>Adopt a static analyser to detect type and nullability defects ahead of runtime.</td></tr>
+      <tr><td class="k">TD-12</td><td>Uncommunicative commit history</td><td>Low</td><td>Adopt a conventional commit standard to render history auditable.</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Suggested sequencing</h2>
+  <div class="grid3">
+    <div class="card">
+      <h4>Phase 1 &mdash; Pre-launch</h4>
+      <p>TD-01, TD-02, TD-04. Resolve production styling delivery, secret exposure and automated verification.</p>
+    </div>
+    <div class="card">
+      <h4>Phase 2 &mdash; Stabilisation</h4>
+      <p>TD-03, TD-05, TD-06, TD-08. Harden configuration, broaden coverage and gain production visibility.</p>
+    </div>
+    <div class="card">
+      <h4>Phase 3 &mdash; Maintainability</h4>
+      <p>TD-07, TD-09 through TD-12. Improve documentation, remove dead code and raise static guarantees.</p>
+    </div>
+  </div>
+
+  <div class="callout">
+    <span class="t">Overall assessment</span>
+    <p>No item in this register represents an architectural defect. Every entry is a configuration,
+      tooling or coverage matter addressable without structural change. The foundation &mdash; the
+      domain model, the authorisation architecture and the localisation strategy &mdash; is sound.</p>
+  </div>
+
+  <div class="runfoot"><span>Internal &mdash; Technical Documentation</span><span class="pn">Page 21 of 24</span></div>
+</section>
+
+<!-- ══════════════ PAGE 22 — APPENDIX A ══════════════ -->
+<section class="page">
+  <div class="runhead"><span><b>Every Tree for Hope</b> &nbsp;|&nbsp; Technology Stack Specification</span><span>Appendix A</span></div>
+
+  <span class="sec-num">Appendix A</span>
+  <h1 class="sec">Complete Dependency Manifest</h1>
+  <div class="sec-rule"></div>
+
+  <h2>A.1 PHP production dependencies (declared)</h2>
+  <table>
+    <thead><tr><th style="width:56mm">Package</th><th style="width:26mm">Constraint</th><th style="width:24mm">Resolved</th><th>Purpose</th></tr></thead>
+    <tbody>
+      <tr><td class="v">php</td><td class="v">^8.2</td><td class="v">&mdash;</td><td>Language runtime</td></tr>
+      <tr><td class="v">laravel/framework</td><td class="v">^12.0</td><td class="v">12.35.1</td><td>Application framework</td></tr>
+      <tr><td class="v">filament/filament</td><td class="v">^5.2</td><td class="v">5.2.0</td><td>Administration panel</td></tr>
+      <tr><td class="v">spatie/laravel-permission</td><td class="v">^8.3</td><td class="v">8.3.0</td><td>Role-based access control</td></tr>
+      <tr><td class="v">spatie/laravel-translatable</td><td class="v">^6.11</td><td class="v">6.11.4</td><td>Translatable model attributes</td></tr>
+      <tr><td class="v">phpoffice/phpspreadsheet</td><td class="v">^5.5</td><td class="v">5.5.0</td><td>Spreadsheet import</td></tr>
+      <tr><td class="v">laravel/tinker</td><td class="v">^2.10.1</td><td class="v">2.10.1</td><td>Interactive console</td></tr>
+    </tbody>
+  </table>
+
+  <h2>A.2 Significant transitive dependencies</h2>
+  <table>
+    <thead><tr><th style="width:56mm">Package</th><th style="width:26mm">Resolved</th><th>Purpose</th></tr></thead>
+    <tbody>
+      <tr><td class="v">livewire/livewire</td><td class="v">4.1.4</td><td>Reactive server-driven components</td></tr>
+      <tr><td class="v">filament/forms, tables, actions</td><td class="v">5.2.0</td><td>Form, table and action builders</td></tr>
+      <tr><td class="v">filament/infolists, schemas</td><td class="v">5.2.0</td><td>Read views and schema definitions</td></tr>
+      <tr><td class="v">filament/notifications, widgets</td><td class="v">5.2.0</td><td>Notifications and dashboard widgets</td></tr>
+      <tr><td class="v">filament/support</td><td class="v">5.2.0</td><td>Shared panel infrastructure</td></tr>
+      <tr><td class="v">blade-ui-kit/blade-heroicons</td><td class="v">2.6.0</td><td>SVG icon components</td></tr>
+      <tr><td class="v">guzzlehttp/guzzle</td><td class="v">7.10.0</td><td>HTTP client</td></tr>
+      <tr><td class="v">nesbot/carbon</td><td class="v">3.10.3</td><td>Date and time handling</td></tr>
+      <tr><td class="v">symfony/console</td><td class="v">7.3.4</td><td>Console command layer</td></tr>
+      <tr><td class="v">monolog/monolog</td><td class="v">3.9.0</td><td>Logging</td></tr>
+      <tr><td class="v">league/commonmark</td><td class="v">2.7.1</td><td>Markdown rendering</td></tr>
+      <tr><td class="v">ueberdosis/tiptap-php</td><td class="v">2.1.0</td><td>Rich-text document handling</td></tr>
+      <tr><td class="v">openspout/openspout</td><td class="v">4.28.5</td><td>Streaming spreadsheet reader</td></tr>
+      <tr><td class="v">pragmarx/google2fa</td><td class="v">9.0.0</td><td>Available for two-factor authentication; not currently enabled</td></tr>
+    </tbody>
+  </table>
+
+  <div class="runfoot"><span>Internal &mdash; Technical Documentation</span><span class="pn">Page 22 of 24</span></div>
+</section>
+
+<!-- ══════════════ PAGE 23 — APPENDIX B ══════════════ -->
+<section class="page">
+  <div class="runhead"><span><b>Every Tree for Hope</b> &nbsp;|&nbsp; Technology Stack Specification</span><span>Appendix B</span></div>
+
+  <h2 style="margin-top:0">A.3 PHP development dependencies</h2>
+  <table>
+    <thead><tr><th style="width:56mm">Package</th><th style="width:26mm">Constraint</th><th style="width:24mm">Resolved</th><th>Purpose</th></tr></thead>
+    <tbody>
+      <tr><td class="v">phpunit/phpunit</td><td class="v">^11.5.3</td><td class="v">11.5.42</td><td>Test framework</td></tr>
+      <tr><td class="v">laravel/pint</td><td class="v">^1.24</td><td class="v">1.25.1</td><td>Code formatter</td></tr>
+      <tr><td class="v">laravel/sail</td><td class="v">^1.41</td><td class="v">1.46.0</td><td>Docker harness</td></tr>
+      <tr><td class="v">laravel/pail</td><td class="v">^1.2.2</td><td class="v">1.2.3</td><td>Log viewer</td></tr>
+      <tr><td class="v">mockery/mockery</td><td class="v">^1.6</td><td class="v">1.6.12</td><td>Mocking library</td></tr>
+      <tr><td class="v">nunomaduro/collision</td><td class="v">^8.6</td><td class="v">8.8.2</td><td>Console error reporting</td></tr>
+      <tr><td class="v">fakerphp/faker</td><td class="v">^1.23</td><td class="v">1.24.1</td><td>Fixture generation</td></tr>
+    </tbody>
+  </table>
+
+  <h2>A.4 JavaScript dependencies</h2>
+  <table>
+    <thead><tr><th style="width:56mm">Package</th><th style="width:26mm">Constraint</th><th>Purpose</th></tr></thead>
+    <tbody>
+      <tr><td class="v">vite</td><td class="v">^7.0.7</td><td>Asset bundler and development server</td></tr>
+      <tr><td class="v">laravel-vite-plugin</td><td class="v">^2.0.0</td><td>Laravel manifest integration</td></tr>
+      <tr><td class="v">tailwindcss</td><td class="v">^4.0.0</td><td>Utility-first CSS framework</td></tr>
+      <tr><td class="v">@tailwindcss/vite</td><td class="v">^4.0.0</td><td>Tailwind CSS-first build plugin</td></tr>
+      <tr><td class="v">axios</td><td class="v">^1.11.0</td><td>Promise-based HTTP client</td></tr>
+      <tr><td class="v">concurrently</td><td class="v">^9.0.1</td><td>Parallel process orchestration</td></tr>
+    </tbody>
+  </table>
+  <p style="font-size:8.6pt;color:var(--ink-soft)">Resolved versions are not recorded, as no package
+    lock file is committed. See remediation item TD-08.</p>
+
+  <span class="sec-num" style="margin-top:8mm">Appendix B</span>
+  <h1 class="sec">Glossary of Terms</h1>
+  <div class="sec-rule"></div>
+
+  <table>
+    <thead><tr><th style="width:42mm">Term</th><th>Definition</th></tr></thead>
+    <tbody>
+      <tr><td class="k">Blade</td><td>Laravel's server-side templating engine, compiled once to plain PHP and cached.</td></tr>
+      <tr><td class="k">Eloquent</td><td>Laravel's active-record object-relational mapper.</td></tr>
+      <tr><td class="k">Filament</td><td>A component-driven administration panel framework for Laravel.</td></tr>
+      <tr><td class="k">Livewire</td><td>A library providing reactive interfaces with state held on the server.</td></tr>
+      <tr><td class="k">Alpine.js</td><td>A minimal JavaScript library for declarative behaviour expressed in markup.</td></tr>
+      <tr><td class="k">Migration</td><td>A version-controlled, executable description of a database schema change.</td></tr>
+      <tr><td class="k">Seeder</td><td>A class that populates the database with reference or demonstration data.</td></tr>
+      <tr><td class="k">Policy</td><td>A class encapsulating authorisation rules for a specific model.</td></tr>
+      <tr><td class="k">Gate</td><td>Laravel's authorisation primitive; a callback determining whether an action is permitted.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="runfoot"><span>Internal &mdash; Technical Documentation</span><span class="pn">Page 23 of 24</span></div>
+</section>
+
+<!-- ══════════════ PAGE 24 — GLOSSARY CONT. ══════════════ -->
+<section class="page">
+  <div class="runhead"><span><b>Every Tree for Hope</b> &nbsp;|&nbsp; Technology Stack Specification</span><span>Appendix B (cont.)</span></div>
+
+  <h2 style="margin-top:0">Glossary of Terms <span style="font-weight:400;color:var(--ink-faint)">(continued)</span></h2>
+  <table>
+    <thead><tr><th style="width:42mm">Term</th><th>Definition</th></tr></thead>
+    <tbody>
+      <tr><td class="k">RBAC</td><td>Role-Based Access Control &mdash; permissions granted to roles, roles assigned to users.</td></tr>
+      <tr><td class="k">Guard</td><td>A named authentication configuration defining how users are identified and stored.</td></tr>
+      <tr><td class="k">Middleware</td><td>A layer intercepting HTTP requests before or after they reach the application.</td></tr>
+      <tr><td class="k">Monolith</td><td>An architecture in which all functionality is delivered as a single deployable unit.</td></tr>
+      <tr><td class="k">SPA</td><td>Single-Page Application &mdash; a client-rendered application; deliberately not used here.</td></tr>
+      <tr><td class="k">SSR</td><td>Server-Side Rendering &mdash; HTML produced on the server, as employed throughout.</td></tr>
+      <tr><td class="k">RTL / LTR</td><td>Right-to-left and left-to-right writing directions.</td></tr>
+      <tr><td class="k">CSRF</td><td>Cross-Site Request Forgery; mitigated by per-session request tokens.</td></tr>
+      <tr><td class="k">HMR</td><td>Hot Module Replacement &mdash; live asset updates during development.</td></tr>
+      <tr><td class="k">Composer</td><td>The dependency manager for PHP projects.</td></tr>
+      <tr><td class="k">Vite</td><td>A modern front-end build tool and development server.</td></tr>
+      <tr><td class="k">Artisan</td><td>Laravel's command-line interface.</td></tr>
+    </tbody>
+  </table>
+
+  <div style="margin-top:8mm;padding-top:4mm;border-top:.5pt solid var(--rule);font-size:8.2pt;color:var(--ink-faint);text-align:center">
+    <strong style="color:var(--green-700)">End of document</strong><br>
+    Every Tree for Hope &mdash; Technology Stack &amp; System Architecture Specification<br>
+    Document reference ETFH-TS-001 &nbsp;&middot;&nbsp; Version 1.0 &nbsp;&middot;&nbsp; 20 July 2026
+  </div>
+
+  <div class="runfoot"><span>Internal &mdash; Technical Documentation</span><span class="pn">Page 24 of 24</span></div>
+</section>
+
+</body>
+</html>
