@@ -147,6 +147,23 @@ class UpcomingEventResource extends Resource
                     ])
                     ->searchable()
                     ->columnSpanFull(),
+                Components\Textarea::make('map_embed')
+                    ->label('Google Map (optional)')
+                    ->rows(3)
+                    ->placeholder('Paste the Google Maps "Embed a map" iframe, a share link, or "lat,lng" coordinates')
+                    ->helperText('On Google Maps: Share → "Embed a map" → copy the HTML and paste it here. A share link (maps.app.goo.gl / google.com/maps) or "34.5553,69.2075" coordinates also work. Leave empty to skip the map.')
+                    ->columnSpanFull(),
+                Components\CheckboxList::make('tree_names')
+                    ->label('Tree Species Planted')
+                    ->options(UpcomingEvent::treeSpeciesOptions())
+                    ->columns(3)
+                    ->helperText('Select the species planned for this event. Do not repeat them in the custom field below.')
+                    ->columnSpanFull(),
+                Components\TextInput::make('custom_tree_species')
+                    ->label('Custom Tree Species')
+                    ->placeholder('Enter additional tree species (comma-separated)')
+                    ->helperText('Add any tree species NOT listed above.')
+                    ->columnSpanFull(),
                 Components\FileUpload::make('images')
                     ->label('Event Images')
                     ->multiple()
