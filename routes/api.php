@@ -1,42 +1,5 @@
 <?php
 
-use App\Http\Controllers\Api\V1\AuthController;
-use Illuminate\Support\Facades\Route;
-
-/*
-|--------------------------------------------------------------------------
-| Mobile API — version 1
-|--------------------------------------------------------------------------
-|
-| Consumed by the Every Tree for Hope React Native application. Every route is
-| prefixed with /api/v1 so that a future breaking change can ship as v2 while
-| older installed apps continue to work against v1 — app-store updates are not
-| instantaneous and cannot be forced.
-|
-| Authorisation is NOT re-implemented here. Protected routes resolve the user
-| via Sanctum and then defer to the same policy classes the admin panel uses,
-| so the mobile client inherits the existing RBAC rules automatically.
-|
-*/
-
-Route::prefix('v1')->name('api.v1.')->group(function () {
-
-    // ── Public ──────────────────────────────────────────────────────────
-    // Login is throttled hard: 5 attempts per minute per IP. Credential
-    // stuffing is the most likely attack against this surface.
-    Route::post('/auth/login', [AuthController::class, 'login'])
-        ->middleware('throttle:5,1')
-        ->name('auth.login');
-
-    // ── Authenticated ───────────────────────────────────────────────────
-    Route::middleware(['auth:sanctum', 'throttle:60,1'])->group(function () {
-        Route::post('/auth/logout', [AuthController::class, 'logout'])->name('auth.logout');
-        Route::get('/auth/me', [AuthController::class, 'me'])->name('auth.me');
-    });
-});
-
-<?php
-
 use App\Http\Controllers\Api\CareerController;
 use App\Http\Controllers\Api\ContactController;
 use App\Http\Controllers\Api\DonatorController;
@@ -51,24 +14,34 @@ use App\Http\Controllers\Api\SponsorPackageController;
 use App\Http\Controllers\Api\TeamController;
 use App\Http\Controllers\Api\TreeRequestController;
 use App\Http\Controllers\Api\UpcomingEventController;
+use App\Http\Controllers\Api\V1\AuthController;
 use App\Http\Controllers\Api\VoiceController;
 use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
-| API Routes — Every Tree for Hope
+| Mobile API — version 1
 |--------------------------------------------------------------------------
 |
-| The JSON counterpart of routes/web.php, for the React Native app. The web
-| routes are untouched; these live alongside them under the /api URL prefix.
+| Consumed by the Every Tree for Hope React Native application. Every route is
+| prefixed with /api/v1 so that a future breaking change can ship as v2 while
+| older installed apps continue to work against v1 — app-store updates are not
+| instantaneous and cannot be forced.
+|
+| This is the JSON counterpart of routes/web.php. The web routes are untouched;
+| these live alongside them and reuse the same models, queries and validation.
+|
+| Authorisation is NOT re-implemented here. Protected routes resolve the user
+| via Sanctum and then defer to the same policy classes the admin panel uses,
+| so the mobile client inherits the existing RBAC rules automatically.
 |
 | Conventions
 | -----------
-| • Every group is a resource prefix: /api/events, /api/voices, ...
+| • Every group is a resource prefix: /api/v1/events, /api/v1/voices, ...
 | • Within a group: index → '/', show → '/{id}', writes → POST.
-| • Route names are all prefixed `api.` (the whole file is wrapped in one
-|   name group below) so they never clash with the web route names — the
-|   Blade views call route('voices.index'), the app calls api.voices.index.
+| • Route names are all prefixed `api.v1.` so they never clash with the web
+|   route names — the Blade views call route('voices.index'), the app calls
+|   route('api.v1.voices.index').
 | • Static "meta" routes (/filters, /categories) are declared BEFORE the
 |   '/{param}' route so the wildcard does not swallow them.
 | • Locale: send `X-Locale: en|fa|ps` (or ?lang=). See SetApiLocale.
@@ -77,7 +50,24 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::name('api.')->group(function () {
+Route::prefix('v1')->name('api.v1.')->group(function () {
+
+    /*
+    |----------------------------------------------------------------------
+    | Authentication
+    |----------------------------------------------------------------------
+    */
+
+    // Login is throttled hard: 5 attempts per minute per IP. Credential
+    // stuffing is the most likely attack against this surface.
+    Route::post('/auth/login', [AuthController::class, 'login'])
+        ->middleware('throttle:5,1')
+        ->name('auth.login');
+
+    Route::middleware(['auth:sanctum', 'throttle:60,1'])->group(function () {
+        Route::post('/auth/logout', [AuthController::class, 'logout'])->name('auth.logout');
+        Route::get('/auth/me', [AuthController::class, 'me'])->name('auth.me');
+    });
 
     /*
     |----------------------------------------------------------------------
@@ -185,11 +175,10 @@ Route::name('api.')->group(function () {
          * Admin CRUD, mirroring the web MediaController. Declared before
          * '/{media}' so "manage" is not read as an id.
          *
-         * Left open for now because the web routes are too — add
-         * ->middleware('auth:sanctum') or 'role:Admin' to this one group
-         * once the app has admin login.
+         * Now that Sanctum is available, this is guarded by a token. Swap in
+         * 'role:Admin' if a specific role should be required.
          */
-        Route::prefix('manage')->name('manage.')->group(function () {
+        Route::prefix('manage')->name('manage.')->middleware('auth:sanctum')->group(function () {
             Route::post('/', [MediaController::class, 'store'])->name('store');
             Route::put('/{media}', [MediaController::class, 'update'])->name('update');
             Route::delete('/{media}', [MediaController::class, 'destroy'])->name('destroy');
