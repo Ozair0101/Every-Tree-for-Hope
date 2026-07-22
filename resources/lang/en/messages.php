@@ -728,8 +728,7 @@ return [
     // Navigation
     'nav_awareness' => 'Children & Awareness',
     'nav_group_about' => 'About',
-    'nav_group_our_work' => 'Our Work',
-    'nav_group_community' => 'Community',
+    'nav_group_events' => 'Events',
     'nav_partners' => 'Partners',
     'nav_advisors' => 'Advisors',
 

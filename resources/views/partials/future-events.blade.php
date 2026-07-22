@@ -84,8 +84,12 @@
                     {{-- Visual side --}}
                     <div class="relative min-h-[220px] md:min-h-full overflow-hidden bg-deep-green/5">
                         @if ($fHero)
+                            {{-- Blurred copy fills the frame so the real image can be shown
+                                 complete (object-contain) without cropping or empty bars. --}}
+                            <img src="{{ asset('storage/' . ltrim($fHero, '/')) }}" alt="" aria-hidden="true"
+                                class="absolute inset-0 w-full h-full object-cover scale-110 blur-2xl opacity-40 select-none pointer-events-none">
                             <img src="{{ asset('storage/' . ltrim($fHero, '/')) }}" alt="{{ $featured->title }}"
-                                class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-[1500ms]">
+                                class="absolute inset-0 w-full h-full object-contain">
                             <div class="absolute inset-0 bg-gradient-to-t from-black/55 via-black/10 to-transparent"></div>
                         @else
                             <div class="absolute inset-0 bg-gradient-to-br from-deep-green via-deep-green to-[#0a3d2c]"></div>
@@ -198,9 +202,12 @@
                                 {{-- Event image (like the featured card) --}}
                                 @if ($aHero)
                                     <div class="relative h-44 md:h-56 rounded-xl overflow-hidden bg-deep-green/5 mb-5">
+                                        {{-- Blurred fill + contained image = full picture, no cropping --}}
+                                        <img src="{{ asset('storage/' . ltrim($aHero, '/')) }}" alt="" aria-hidden="true"
+                                            class="absolute inset-0 w-full h-full object-cover scale-110 blur-2xl opacity-40 select-none pointer-events-none">
                                         <img src="{{ asset('storage/' . ltrim($aHero, '/')) }}"
                                             alt="{{ $event->title }}"
-                                            class="w-full h-full object-cover">
+                                            class="relative w-full h-full object-contain">
                                         <div class="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-black/30 to-transparent pointer-events-none"></div>
                                         @if ($aExtra > 0)
                                             <span class="absolute top-3 end-3 inline-flex items-center gap-1 px-3 py-1 rounded-full bg-black/55 backdrop-blur-sm text-white text-[10px] font-bold tracking-widest uppercase">

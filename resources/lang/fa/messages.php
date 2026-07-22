@@ -706,8 +706,7 @@ return [
     // ناوبری
     'nav_awareness' => 'کودکان و آگاهی',
     'nav_group_about' => 'دربارهٔ ما',
-    'nav_group_our_work' => 'کار ما',
-    'nav_group_community' => 'جامعه',
+    'nav_group_events' => 'رویدادها',
     'nav_partners' => 'شرکا',
     'nav_advisors' => 'مشاوران',
 

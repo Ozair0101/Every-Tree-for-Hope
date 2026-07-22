@@ -438,6 +438,16 @@
                                         class="material-symbols-outlined text-base text-deep-green/70">auto_stories</span>
                                     {{ __('messages.our_story') }}
                                 </a>
+                                <a href="{{ route('partners') }}"
+                                    class="flex items-center gap-3 px-4 py-2.5 text-sm hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 hover:text-primary transition-colors">
+                                    <span class="material-symbols-outlined text-base text-gold-accent">handshake</span>
+                                    {{ __('messages.nav_partners') }}
+                                </a>
+                                <a href="{{ route('advisors') }}"
+                                    class="flex items-center gap-3 px-4 py-2.5 text-sm hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 hover:text-primary transition-colors">
+                                    <span class="material-symbols-outlined text-base text-deep-green/70">psychology</span>
+                                    {{ __('messages.nav_advisors') }}
+                                </a>
                                 <a href="{{ route('faq') }}"
                                     class="flex items-center gap-3 px-4 py-2.5 text-sm hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 hover:text-primary transition-colors">
                                     <span
@@ -452,7 +462,7 @@
                     <div class="relative group">
                         <button type="button"
                             class="inline-flex items-center gap-1 text-[13px] font-medium hover:text-primary transition-colors whitespace-nowrap">
-                            {{ __('messages.nav_group_our_work') }}
+                            {{ __('messages.nav_group_events') }}
                             <span
                                 class="material-symbols-outlined text-base group-hover:rotate-180 transition-transform">expand_more</span>
                         </button>
@@ -488,28 +498,6 @@
                         </div>
                     </div>
 
-                    {{-- Community dropdown (Partners, Advisors, Donators) --}}
-                    <div class="relative group">
-                        <button type="button"
-                            class="inline-flex items-center gap-1 text-[13px] font-medium hover:text-primary transition-colors whitespace-nowrap">
-                            {{ __('messages.nav_group_community') }}
-                            <span class="material-symbols-outlined text-base group-hover:rotate-180 transition-transform">expand_more</span>
-                        </button>
-                        <div class="absolute left-0 top-full pt-2 w-60 invisible opacity-0 group-hover:visible group-hover:opacity-100 transition-all z-50">
-                            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl border border-gray-200 dark:border-gray-700 py-2 overflow-hidden">
-                                <a href="{{ route('partners') }}"
-                                    class="flex items-center gap-3 px-4 py-2.5 text-sm hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 hover:text-primary transition-colors">
-                                    <span class="material-symbols-outlined text-base text-gold-accent">handshake</span>
-                                    {{ __('messages.nav_partners') }}
-                                </a>
-                                <a href="{{ route('advisors') }}"
-                                    class="flex items-center gap-3 px-4 py-2.5 text-sm hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 hover:text-primary transition-colors">
-                                    <span class="material-symbols-outlined text-base text-deep-green/70">psychology</span>
-                                    {{ __('messages.nav_advisors') }}
-                                </a>
-                            </div>
-                        </div>
-                    </div>
                     <a class="text-[13px] font-medium hover:text-primary transition-colors whitespace-nowrap"
                         href="{{ route('careers') }}">{{ __('messages.careers_nav') }}</a>
                     <a class="text-[13px] font-medium hover:text-primary transition-colors whitespace-nowrap {{ request()->routeIs('voices.*') ? 'text-primary font-bold' : '' }}"
@@ -555,9 +543,8 @@
             <!-- Mobile Menu Drawer -->
             @php
                 $rn = Route::currentRouteName();
-                $aboutActive = in_array($rn, ['about', 'contact', 'history', 'faq']);
+                $aboutActive = in_array($rn, ['about', 'contact', 'history', 'partners', 'advisors', 'faq']);
                 $workActive = in_array($rn, ['gallery', 'report', 'awareness', 'funding']);
-                $communityActive = in_array($rn, ['partners', 'advisors']);
                 $linkBase = 'flex items-center gap-3 px-4 py-3 rounded-xl text-[15px] font-semibold transition-all active:scale-[.98]';
                 $linkIdle = 'text-gray-800 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-800';
                 $linkActive = 'bg-primary/10 text-primary';
@@ -624,6 +611,16 @@
                                             class="material-symbols-outlined text-lg text-deep-green/60">auto_stories</span>
                                         {{ __('messages.our_story') }}
                                     </a>
+                                    <a href="{{ route('partners') }}"
+                                        class="{{ $childBase }} {{ $rn === 'partners' ? $childActive : $childIdle }}">
+                                        <span class="material-symbols-outlined text-lg text-gold-accent">handshake</span>
+                                        {{ __('messages.nav_partners') }}
+                                    </a>
+                                    <a href="{{ route('advisors') }}"
+                                        class="{{ $childBase }} {{ $rn === 'advisors' ? $childActive : $childIdle }}">
+                                        <span class="material-symbols-outlined text-lg text-deep-green/60">psychology</span>
+                                        {{ __('messages.nav_advisors') }}
+                                    </a>
                                     <a href="{{ route('faq') }}"
                                         class="{{ $childBase }} {{ $rn === 'faq' ? $childActive : $childIdle }}">
                                         <span
@@ -638,7 +635,7 @@
                         <div class="mm-acc {{ $workActive ? 'mm-acc-open' : '' }}">
                             <button type="button"
                                 class="mm-acc-toggle w-full flex items-center justify-between gap-3 px-4 py-3 rounded-xl text-[15px] font-semibold text-gray-800 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
-                                <span>{{ __('messages.nav_group_our_work') }}</span>
+                                <span>{{ __('messages.nav_group_events') }}</span>
                                 <span
                                     class="mm-acc-chevron material-symbols-outlined text-xl text-gray-400 transition-transform">expand_more</span>
                             </button>
@@ -664,30 +661,6 @@
                                         class="{{ $childBase }} {{ $rn === 'awareness' ? $childActive : $childIdle }}">
                                         <span class="material-symbols-outlined text-lg text-vibrant-lime">menu_book</span>
                                         {{ __('messages.nav_awareness') }}
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-
-                        {{-- Community accordion --}}
-                        <div class="mm-acc {{ $communityActive ? 'mm-acc-open' : '' }}">
-                            <button type="button"
-                                class="mm-acc-toggle w-full flex items-center justify-between gap-3 px-4 py-3 rounded-xl text-[15px] font-semibold text-gray-800 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
-                                <span>{{ __('messages.nav_group_community') }}</span>
-                                <span
-                                    class="mm-acc-chevron material-symbols-outlined text-xl text-gray-400 transition-transform">expand_more</span>
-                            </button>
-                            <div class="mm-acc-content">
-                                <div class="ms-5 my-1 ps-3 border-s-2 border-primary/15 space-y-0.5">
-                                    <a href="{{ route('partners') }}"
-                                        class="{{ $childBase }} {{ $rn === 'partners' ? $childActive : $childIdle }}">
-                                        <span class="material-symbols-outlined text-lg text-gold-accent">handshake</span>
-                                        {{ __('messages.nav_partners') }}
-                                    </a>
-                                    <a href="{{ route('advisors') }}"
-                                        class="{{ $childBase }} {{ $rn === 'advisors' ? $childActive : $childIdle }}">
-                                        <span class="material-symbols-outlined text-lg text-deep-green/60">psychology</span>
-                                        {{ __('messages.nav_advisors') }}
                                     </a>
                                 </div>
                             </div>

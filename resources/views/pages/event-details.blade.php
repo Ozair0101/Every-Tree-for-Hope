@@ -6,8 +6,11 @@
         <!-- Hero Section with Event Image -->
         <section class="relative h-[400px] md:h-[500px] overflow-hidden">
             @forelse($event->images->take(1) as $image)
+                {{-- Blurred copy fills the frame so the real image shows complete, uncropped --}}
+                <img alt="" aria-hidden="true" src="{{ $image->full_image_url }}"
+                    class="absolute inset-0 w-full h-full object-cover scale-110 blur-2xl opacity-40 select-none pointer-events-none" />
                 <img alt="{{ $event->title }}"
-                    class="w-full h-full object-cover cursor-pointer"
+                    class="relative w-full h-full object-contain cursor-pointer"
                     src="{{ $image->full_image_url }}"
                     onclick="openLightbox('{{ $image->full_image_url }}', '{{ addslashes($event->title) }}', '{{ addslashes($image->caption ?? '') }}')" />
             @empty

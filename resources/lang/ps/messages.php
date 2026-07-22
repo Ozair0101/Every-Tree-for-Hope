@@ -703,8 +703,7 @@ return [
     // ناوبري
     'nav_awareness' => 'ماشومان او پوهاوی',
     'nav_group_about' => 'زموږ په اړه',
-    'nav_group_our_work' => 'زموږ کار',
-    'nav_group_community' => 'ټولنه',
+    'nav_group_events' => 'پیښې',
     'nav_partners' => 'ملګري',
     'nav_advisors' => 'سلاکاران',
 
