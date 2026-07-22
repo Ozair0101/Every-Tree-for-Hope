@@ -783,7 +783,14 @@ return [
     'future_closing_note' => 'در تقویم یادداشت کنید — درختان خودشان کاشته نمی‌شوند',
     'future_share_btn' => 'اشتراک‌گذاری',
     'future_share_copied' => 'لینک کاپی شد!',
-    'future_next_up' => 'رویداد بعدی',
+    'nav_upcoming_events' => 'رویدادهای پیش‌رو',
+    'future_none_title' => 'در حال حاضر رویدادی در پیش نیست',
+    'future_none_desc' => 'فعلاً برنامه‌ای ثبت نشده است — به‌زودی دوباره سر بزنید یا کارهای انجام‌شدهٔ ما را ببینید.',
+    'future_back_to_events' => 'همهٔ رویدادهای پیش‌رو',
+    'future_about_event' => 'دربارهٔ این رویداد',
+    'future_species_title' => 'گونه‌های درختی که خواهیم کاشت',
+    'future_related' => 'رویدادهای پیش‌روی دیگر',
+    'future_next_up' =>'رویداد بعدی',
     'future_more_dates' => 'تاریخ‌های بیشتر',
 
     // جست‌وجوی کد حامی (نگارخانه)

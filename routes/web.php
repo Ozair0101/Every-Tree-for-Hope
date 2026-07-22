@@ -22,6 +22,12 @@ Route::get('/event', [App\Http\Controllers\EventController::class, 'index'])->na
 Route::redirect('/gallery', '/event');
 Route::redirect('/gallery/{event}', '/event/{event}');
 
+// Upcoming (future) events
+Route::get('/upcoming-events', [App\Http\Controllers\UpcomingEventController::class, 'index'])
+    ->name('upcoming-events.index');
+Route::get('/upcoming-event/{upcomingEvent}', [App\Http\Controllers\UpcomingEventController::class, 'show'])
+    ->name('upcoming-events.show');
+
 // Careers / Jobs
 Route::get('/careers', [App\Http\Controllers\CareerController::class, 'index'])->name('careers');
 Route::get('/careers/{job}', [App\Http\Controllers\CareerController::class, 'show'])->name('careers.show');

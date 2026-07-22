@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Concerns\HasTreeSpecies;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Spatie\Translatable\HasTranslations;
@@ -9,6 +10,7 @@ use Spatie\Translatable\HasTranslations;
 class UpcomingEvent extends Model
 {
     use HasTranslations;
+    use HasTreeSpecies;
 
     /**
      * Attributes stored as {"en": "...", "fa": "...", "ps": "..."} JSON.
@@ -23,12 +25,16 @@ class UpcomingEvent extends Model
         'date',
         'location',
         'province',
+        'map_embed',
+        'tree_names',
+        'custom_tree_species',
         'images',
         'is_active',
     ];
 
     protected $casts = [
         'date' => 'date',
+        'tree_names' => 'array',
         'images' => 'array',
         'is_active' => 'boolean',
     ];

@@ -498,6 +498,8 @@
                         </div>
                     </div>
 
+                    <a class="text-[13px] font-medium hover:text-primary transition-colors whitespace-nowrap {{ request()->routeIs('upcoming-events.*') ? 'text-primary font-bold' : '' }}"
+                        href="{{ route('upcoming-events.index') }}">{{ __('messages.nav_upcoming_events') }}</a>
                     <a class="text-[13px] font-medium hover:text-primary transition-colors whitespace-nowrap"
                         href="{{ route('careers') }}">{{ __('messages.careers_nav') }}</a>
                     <a class="text-[13px] font-medium hover:text-primary transition-colors whitespace-nowrap {{ request()->routeIs('voices.*') ? 'text-primary font-bold' : '' }}"
@@ -669,6 +671,10 @@
                         <div class="my-2 border-t border-gray-200 dark:border-gray-800"></div>
 
                         {{-- Standalone parent links --}}
+                        <a href="{{ route('upcoming-events.index') }}"
+                            class="{{ $linkBase }} {{ str_starts_with($rn, 'upcoming-events') ? $linkActive : $linkIdle }}">
+                            {{ __('messages.nav_upcoming_events') }}
+                        </a>
                         <a href="{{ route('careers') }}"
                             class="{{ $linkBase }} {{ $rn === 'careers' ? $linkActive : $linkIdle }}">
                             {{ __('messages.careers_nav') }}

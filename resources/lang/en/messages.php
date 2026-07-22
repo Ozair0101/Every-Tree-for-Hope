@@ -805,6 +805,13 @@ return [
     'future_closing_note' => "pencil it in — the trees won't plant themselves",
     'future_share_btn' => 'Share',
     'future_share_copied' => 'Link copied!',
+    'nav_upcoming_events' => 'Upcoming Events',
+    'future_none_title' => 'No upcoming events right now',
+    'future_none_desc' => 'Nothing is scheduled at the moment — check back soon, or explore the work we have already done.',
+    'future_back_to_events' => 'All upcoming events',
+    'future_about_event' => 'About this event',
+    'future_species_title' => 'Tree species we will plant',
+    'future_related' => 'Other upcoming events',
     'future_next_up' => 'Next up',
     'future_more_dates' => 'More dates',
 

@@ -780,7 +780,14 @@ return [
     'future_closing_note' => 'په تقویم کې یې ولیکئ — ونې پخپله نه کرل کیږي',
     'future_share_btn' => 'شریکول',
     'future_share_copied' => 'لینک کاپي شو!',
-    'future_next_up' => 'راتلونکې پېښه',
+    'nav_upcoming_events' => 'راتلونکې پېښې',
+    'future_none_title' => 'اوس مهال هیڅ راتلونکې پېښه نشته',
+    'future_none_desc' => 'دا مهال هیڅ پروګرام نه دی ټاکل شوی — ژر بیا وګورئ، یا زموږ ترسره شوي کارونه وګورئ.',
+    'future_back_to_events' => 'ټولې راتلونکې پېښې',
+    'future_about_event' => 'د دې پېښې په اړه',
+    'future_species_title' => 'د ونو ډولونه چې وبه کرو',
+    'future_related' => 'نورې راتلونکې پېښې',
+    'future_next_up' =>'راتلونکې پېښه',
     'future_more_dates' => 'نورې نېټې',
 
     // د سپانسر کوډ لټون (ګالري)
