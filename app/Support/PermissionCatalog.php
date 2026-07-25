@@ -62,6 +62,7 @@ class PermissionCatalog
             ['key' => 'contact_message',     'label' => 'Contact Messages',    'scope' => 'engagement', 'group' => 'User Engagement', 'abilities' => ['view_any', 'view', 'delete', 'delete_any'], 'custom' => []],
             ['key' => 'involvement_request', 'label' => 'Involvement Requests', 'scope' => 'engagement', 'group' => 'User Engagement', 'abilities' => self::CRUD, 'custom' => []],
             ['key' => 'tree_request',        'label' => 'Tree Requests',       'scope' => 'engagement', 'group' => 'User Engagement', 'abilities' => self::CRUD, 'custom' => []],
+            ['key' => 'tree',                'label' => 'Planted Trees',       'scope' => 'engagement', 'group' => 'User Engagement', 'abilities' => self::CRUD, 'custom' => ['approve_tree' => 'Approve', 'reject_tree' => 'Reject']],
 
             // ── Financial ───────────────────────────────────────────
             ['key' => 'donator',         'label' => 'Donators',        'scope' => 'financial', 'group' => 'Financial', 'abilities' => self::CRUD, 'custom' => ['export_donator' => 'Export']],

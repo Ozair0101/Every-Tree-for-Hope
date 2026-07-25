@@ -15,6 +15,7 @@ use App\Http\Controllers\Api\TeamController;
 use App\Http\Controllers\Api\TreeRequestController;
 use App\Http\Controllers\Api\UpcomingEventController;
 use App\Http\Controllers\Api\V1\AuthController;
+use App\Http\Controllers\Api\V1\TreeController;
 use App\Http\Controllers\Api\VoiceController;
 use Illuminate\Support\Facades\Route;
 
@@ -141,6 +142,31 @@ Route::prefix('v1')->name('api.v1.')->group(function () {
             Route::post('/{voice}/like', [VoiceController::class, 'like'])->name('like');
             Route::post('/{voice}/comment', [VoiceController::class, 'comment'])->name('comment');
         });
+    });
+
+    /*
+    |----------------------------------------------------------------------
+    | Planted trees — user field capture with GPS, tracking and moderation
+    |----------------------------------------------------------------------
+    | Static segments (map, mine) are declared before the '/{tree}' wildcard
+    | so it does not swallow them. Writes require a Sanctum token.
+    */
+    Route::prefix('trees')->name('trees.')->group(function () {
+        Route::get('/', [TreeController::class, 'index'])->name('index');
+        Route::get('/map', [TreeController::class, 'map'])->name('map');
+
+        Route::middleware('auth:sanctum')->group(function () {
+            Route::get('/mine', [TreeController::class, 'mine'])->name('mine');
+            Route::post('/', [TreeController::class, 'store'])
+                ->middleware('throttle:20,1')
+                ->name('store');
+            Route::post('/{tree}/updates', [TreeController::class, 'storeUpdate'])
+                ->middleware('throttle:30,1')
+                ->name('updates.store');
+        });
+
+        // Declared last so the wildcard does not match "map" or "mine".
+        Route::get('/{tree}', [TreeController::class, 'show'])->name('show');
     });
 
     /*

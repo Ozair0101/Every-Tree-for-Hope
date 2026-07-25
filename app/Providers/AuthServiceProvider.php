@@ -16,6 +16,7 @@ use App\Models\Media;
 use App\Models\Partner;
 use App\Models\SponsorPackage;
 use App\Models\Team;
+use App\Models\Tree;
 use App\Models\TreeRequest;
 use App\Models\UpcomingEvent;
 use App\Models\User;
@@ -37,6 +38,7 @@ use App\Policies\PermissionPolicy;
 use App\Policies\RolePolicy;
 use App\Policies\SponsorPackagePolicy;
 use App\Policies\TeamPolicy;
+use App\Policies\TreePolicy;
 use App\Policies\TreeRequestPolicy;
 use App\Policies\UpcomingEventPolicy;
 use App\Policies\UserPolicy;
@@ -82,6 +84,7 @@ class AuthServiceProvider extends ServiceProvider
         Partner::class => PartnerPolicy::class,
         SponsorPackage::class => SponsorPackagePolicy::class,
         Team::class => TeamPolicy::class,
+        Tree::class => TreePolicy::class,
         TreeRequest::class => TreeRequestPolicy::class,
         UpcomingEvent::class => UpcomingEventPolicy::class,
         Voice::class => VoicePolicy::class,

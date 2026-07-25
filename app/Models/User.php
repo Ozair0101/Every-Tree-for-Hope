@@ -6,6 +6,7 @@ namespace App\Models;
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Panel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -74,5 +75,13 @@ class User extends Authenticatable implements FilamentUser
     public function isSuperAdmin(): bool
     {
         return $this->hasRole(\App\Providers\AuthServiceProvider::SUPER_ADMIN);
+    }
+
+    /**
+     * Trees this user has planted and recorded (any moderation status).
+     */
+    public function trees(): HasMany
+    {
+        return $this->hasMany(Tree::class);
     }
 }
