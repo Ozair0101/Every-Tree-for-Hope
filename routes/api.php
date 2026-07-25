@@ -64,9 +64,21 @@ Route::prefix('v1')->name('api.v1.')->group(function () {
         ->middleware('throttle:5,1')
         ->name('auth.login');
 
+    // Sign-up is throttled too, though less aggressively than login: it is a
+    // slower, deliberate action, but still a write that must not be scriptable
+    // into thousands of junk accounts.
+    Route::post('/auth/register', [AuthController::class, 'register'])
+        ->middleware('throttle:5,1')
+        ->name('auth.register');
+
     Route::middleware(['auth:sanctum', 'throttle:60,1'])->group(function () {
         Route::post('/auth/logout', [AuthController::class, 'logout'])->name('auth.logout');
         Route::get('/auth/me', [AuthController::class, 'me'])->name('auth.me');
+
+        // POST, not PUT: PHP does not populate an uploaded file on PUT/PATCH, and
+        // the avatar arrives as multipart. The client spoofs the method if it
+        // wants REST semantics; the server just needs the file.
+        Route::post('/auth/profile', [AuthController::class, 'updateProfile'])->name('auth.profile');
     });
 
     /*

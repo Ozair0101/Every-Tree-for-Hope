@@ -4,11 +4,14 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\V1\LoginRequest;
+use App\Http\Requests\Api\V1\RegisterRequest;
+use App\Http\Requests\Api\V1\UpdateProfileRequest;
 use App\Http\Resources\Api\V1\UserResource;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\ValidationException;
 
 /**
@@ -54,6 +57,85 @@ class AuthController extends Controller
             'token' => $token->plainTextToken,
             'user' => new UserResource($user),
         ]);
+    }
+
+    /**
+     * Self-service volunteer sign-up from the mobile app.
+     *
+     * The account is created with NO role, so the new user is an ordinary
+     * volunteer — the same standing an admin-provisioned volunteer has. Elevated
+     * access is only ever granted later, in the admin panel, never claimed here.
+     *
+     * On success the response mirrors {@see login()}: a fresh token plus the
+     * user, so the app lands the person straight into their signed-in profile
+     * without a second round-trip to log in.
+     */
+    public function register(RegisterRequest $request): JsonResponse
+    {
+        $data = $request->validated();
+
+        // Store the avatar first. If it were saved after the row and the write
+        // failed, we would have a user with a path to a file that never landed.
+        $imagePath = $request->hasFile('profile_image')
+            ? $request->file('profile_image')->store('profile-images', 'public')
+            : null;
+
+        $user = User::create([
+            'name' => $data['name'],
+            'lastname' => $data['lastname'],
+            'email' => $data['email'],
+            'country' => $data['country'],
+            'address' => $data['address'],
+            'password' => Hash::make($data['password']),
+            'profile_image' => $imagePath,
+        ]);
+
+        $token = $user->createToken($data['device_name']);
+
+        return response()->json([
+            'token' => $token->plainTextToken,
+            'user' => new UserResource($user),
+        ], 201);
+    }
+
+    /**
+     * Update the signed-in user's own profile.
+     *
+     * A blank password field means "leave it unchanged" — it is only re-hashed
+     * when a new one is supplied. A newly uploaded avatar replaces the previous
+     * file, and the old one is deleted so orphaned images do not accumulate on
+     * disk.
+     */
+    public function updateProfile(UpdateProfileRequest $request): UserResource
+    {
+        $user = $request->user();
+        $data = $request->validated();
+
+        $user->fill([
+            'name' => $data['name'],
+            'lastname' => $data['lastname'],
+            'email' => $data['email'],
+            'country' => $data['country'],
+            'address' => $data['address'],
+        ]);
+
+        if (! empty($data['password'])) {
+            $user->password = Hash::make($data['password']);
+        }
+
+        if ($request->hasFile('profile_image')) {
+            $newPath = $request->file('profile_image')->store('profile-images', 'public');
+
+            if ($user->profile_image) {
+                Storage::disk('public')->delete($user->profile_image);
+            }
+
+            $user->profile_image = $newPath;
+        }
+
+        $user->save();
+
+        return new UserResource($user);
     }
 
     /**

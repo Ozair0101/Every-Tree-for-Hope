@@ -4,6 +4,7 @@ namespace App\Http\Resources\Api\V1;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * The authenticated user as the mobile client sees them.
@@ -25,7 +26,16 @@ class UserResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
+            'lastname' => $this->lastname,
             'email' => $this->email,
+            'country' => $this->country,
+            'address' => $this->address,
+            // A ready-to-render absolute URL, or null when no avatar was set —
+            // the client shows an initials monogram in that case and never has
+            // to know the storage layout.
+            'profile_image_url' => $this->profile_image
+                ? Storage::disk('public')->url($this->profile_image)
+                : null,
             'roles' => $this->getRoleNames()->values(),
             'permissions' => $this->getAllPermissions()->pluck('name')->values(),
             'is_super_admin' => $this->isSuperAdmin(),
