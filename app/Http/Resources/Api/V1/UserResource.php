@@ -4,7 +4,6 @@ namespace App\Http\Resources\Api\V1;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
-use Illuminate\Support\Facades\Storage;
 
 /**
  * The authenticated user as the mobile client sees them.
@@ -33,8 +32,16 @@ class UserResource extends JsonResource
             // A ready-to-render absolute URL, or null when no avatar was set —
             // the client shows an initials monogram in that case and never has
             // to know the storage layout.
+            //
+            // Built from the host the client actually connected on (the request
+            // Host header) rather than APP_URL. The app reaches the API at a
+            // different host per platform — localhost:8000 on web/iOS,
+            // 10.0.2.2:8000 on the Android emulator, a LAN IP on a real device —
+            // and a single APP_URL cannot be correct for all of them. Using the
+            // request host guarantees the avatar is served from wherever the
+            // client just successfully talked to the API.
             'profile_image_url' => $this->profile_image
-                ? Storage::disk('public')->url($this->profile_image)
+                ? $request->getSchemeAndHttpHost() . '/storage/' . ltrim($this->profile_image, '/')
                 : null,
             'roles' => $this->getRoleNames()->values(),
             'permissions' => $this->getAllPermissions()->pluck('name')->values(),
