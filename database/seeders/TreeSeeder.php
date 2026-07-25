@@ -43,28 +43,33 @@ class TreeSeeder extends Seeder
         // Idempotent: clear this seeder's previous trees (cascades to updates).
         Tree::whereIn('user_id', $planters->pluck('id'))->delete();
 
-        // [ species, place label, latitude, longitude ] — every continent.
+        // [ species, place label, latitude, longitude ] — spread across the
+        // provinces of Afghanistan.
         $places = [
-            ['Chinar (plane tree)', 'Kabul, Afghanistan', 34.5553, 69.2075],
-            ['Mulberry', 'Mazar-i-Sharif, Afghanistan', 36.7090, 67.1109],
-            ['Pomegranate', 'Herat, Afghanistan', 34.3529, 62.2040],
-            ['Cedar of Lebanon', 'Istanbul, Türkiye', 41.0082, 28.9784],
-            ['English oak', 'London, United Kingdom', 51.5074, -0.1278],
-            ['Silver birch', 'Moscow, Russia', 55.7558, 37.6173],
-            ['Rowan', 'Reykjavík, Iceland', 64.1466, -21.9426],
-            ['Stone pine', 'Rome, Italy', 41.9028, 12.4964],
-            ['Date palm', 'Cairo, Egypt', 30.0444, 31.2357],
-            ['Acacia', 'Nairobi, Kenya', -1.2921, 36.8219],
-            ['Baobab', 'Antananarivo, Madagascar', -18.8792, 47.5079],
-            ['Yellowwood', 'Cape Town, South Africa', -33.9249, 18.4241],
-            ['Neem', 'New Delhi, India', 28.6139, 77.2090],
-            ['Teak', 'Jakarta, Indonesia', -6.2088, 106.8456],
-            ['Cherry blossom', 'Tokyo, Japan', 35.6762, 139.6503],
-            ['Eucalyptus', 'Sydney, Australia', -33.8688, 151.2093],
-            ['Red maple', 'New York, USA', 40.7128, -74.0060],
-            ['Douglas fir', 'Vancouver, Canada', 49.2827, -123.1207],
-            ['Brazil nut', 'Manaus, Brazil', -3.1190, -60.0217],
-            ['Quindío wax palm', 'Bogotá, Colombia', 4.7110, -74.0721],
+            ['Chinar (plane tree)', 'Kabul', 34.5553, 69.2075],
+            ['White mulberry', 'Mazar-i-Sharif, Balkh', 36.7090, 67.1109],
+            ['Pomegranate', 'Herat', 34.3529, 62.2040],
+            ['Almond', 'Kandahar', 31.6289, 65.7372],
+            ['Walnut', 'Jalalabad, Nangarhar', 34.4265, 70.4515],
+            ['Russian poplar (Safeda)', 'Kunduz', 36.7286, 68.8681],
+            ['Apricot', 'Ghazni', 33.5450, 68.4173],
+            ['Sea buckthorn', 'Bamyan', 34.8100, 67.8210],
+            ['Willow', 'Faizabad, Badakhshan', 37.1279, 70.5792],
+            ['Date palm', 'Lashkargah, Helmand', 31.5940, 64.3710],
+            ['Plane tree', 'Charikar, Parwan', 35.0139, 69.1683],
+            ['Ash', 'Pul-e-Khumri, Baghlan', 35.9483, 68.7150],
+            ['Mulberry', 'Taloqan, Takhar', 36.7360, 69.5346],
+            ['Pistachio', 'Maymana, Faryab', 35.9210, 64.7840],
+            ['Silver poplar', 'Sheberghan, Jowzjan', 36.6676, 65.7529],
+            ['Wild pine', 'Gardez, Paktia', 33.5975, 69.2258],
+            ['Jujube', 'Farah', 32.3745, 62.1164],
+            ['Tamarisk', 'Zaranj, Nimroz', 30.9585, 61.8600],
+            ['Walnut', 'Bazarak, Panjshir', 35.3126, 69.5150],
+            ['Juniper', 'Firozkoh, Ghor', 34.5200, 65.2510],
+            ['Holm oak', 'Asadabad, Kunar', 34.8742, 71.1462],
+            ['Apple', 'Nili, Daykundi', 33.7220, 66.1300],
+            ['Fig', 'Khost', 33.3395, 69.9200],
+            ['Elm', 'Puli Alam, Logar', 33.9950, 69.0170],
         ];
 
         foreach ($places as $i => [$species, $label, $lat, $lng]) {
@@ -89,6 +94,6 @@ class TreeSeeder extends Seeder
             }
         }
 
-        $this->command?->info('Seeded ' . count($places) . ' approved trees across the globe.');
+        $this->command?->info('Seeded ' . count($places) . ' approved trees across Afghanistan.');
     }
 }
