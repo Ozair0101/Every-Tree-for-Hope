@@ -43,6 +43,11 @@ class UserResource extends JsonResource
             'profile_image_url' => $this->profile_image
                 ? $request->getSchemeAndHttpHost() . '/storage/' . ltrim($this->profile_image, '/')
                 : null,
+            // The optional banner behind the profile header, resolved the same
+            // request-host way as the avatar above.
+            'cover_image_url' => $this->cover_image
+                ? $request->getSchemeAndHttpHost() . '/storage/' . ltrim($this->cover_image, '/')
+                : null,
             'roles' => $this->getRoleNames()->values(),
             'permissions' => $this->getAllPermissions()->pluck('name')->values(),
             'is_super_admin' => $this->isSuperAdmin(),

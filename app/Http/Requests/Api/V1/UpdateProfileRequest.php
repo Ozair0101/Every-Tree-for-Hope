@@ -40,6 +40,7 @@ class UpdateProfileRequest extends FormRequest
             'address' => ['required', 'string', 'max:255'],
             'password' => ['nullable', 'string', 'min:8', 'confirmed'],
             'profile_image' => ['nullable', 'image', 'mimes:jpeg,jpg,png,webp', 'max:5120'],
+            'cover_image' => ['nullable', 'image', 'mimes:jpeg,jpg,png,webp', 'max:8192'],
         ];
     }
 

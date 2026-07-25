@@ -43,6 +43,8 @@ class RegisterRequest extends FormRequest
             // 5 MB ceiling: the client already downscales and compresses avatars,
             // so anything larger is almost certainly an un-processed original.
             'profile_image' => ['nullable', 'image', 'mimes:jpeg,jpg,png,webp', 'max:5120'],
+            // The cover is a wider banner, so it gets a slightly higher ceiling.
+            'cover_image' => ['nullable', 'image', 'mimes:jpeg,jpg,png,webp', 'max:8192'],
             'device_name' => ['required', 'string', 'max:255'],
         ];
     }

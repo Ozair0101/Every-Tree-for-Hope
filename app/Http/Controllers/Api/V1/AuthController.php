@@ -74,10 +74,15 @@ class AuthController extends Controller
     {
         $data = $request->validated();
 
-        // Store the avatar first. If it were saved after the row and the write
-        // failed, we would have a user with a path to a file that never landed.
+        // Store the images first. If a file were saved after the row and that
+        // write failed, we would have a user pointing at a file that never
+        // landed.
         $imagePath = $request->hasFile('profile_image')
             ? $request->file('profile_image')->store('profile-images', 'public')
+            : null;
+
+        $coverPath = $request->hasFile('cover_image')
+            ? $request->file('cover_image')->store('cover-images', 'public')
             : null;
 
         $user = User::create([
@@ -88,6 +93,7 @@ class AuthController extends Controller
             'address' => $data['address'],
             'password' => Hash::make($data['password']),
             'profile_image' => $imagePath,
+            'cover_image' => $coverPath,
         ]);
 
         $token = $user->createToken($data['device_name']);
@@ -131,6 +137,16 @@ class AuthController extends Controller
             }
 
             $user->profile_image = $newPath;
+        }
+
+        if ($request->hasFile('cover_image')) {
+            $newCover = $request->file('cover_image')->store('cover-images', 'public');
+
+            if ($user->cover_image) {
+                Storage::disk('public')->delete($user->cover_image);
+            }
+
+            $user->cover_image = $newCover;
         }
 
         $user->save();
