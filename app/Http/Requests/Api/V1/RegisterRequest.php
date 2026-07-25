@@ -3,7 +3,6 @@
 namespace App\Http\Requests\Api\V1;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\Rule;
 
 /**
@@ -24,32 +23,6 @@ class RegisterRequest extends FormRequest
     public function authorize(): bool
     {
         return true;
-    }
-
-    /**
-     * TEMPORARY DIAGNOSTIC — remove once the avatar upload is confirmed working.
-     *
-     * Runs before validation, so it captures what the server actually received
-     * regardless of whether the `image` rule then rejects it. This tells us
-     * definitively whether `profile_image` arrived as a real uploaded file, a
-     * string, or nothing at all.
-     */
-    protected function prepareForValidation(): void
-    {
-        $file = $this->file('profile_image');
-        $raw = $this->input('profile_image');
-
-        Log::info('[register-debug] incoming request', [
-            'content_type' => $this->header('Content-Type'),
-            'has_file' => $this->hasFile('profile_image'),
-            'input_keys' => array_keys($this->all()),
-            'file_keys' => array_keys($this->allFiles()),
-            'profile_image_is_file' => $file !== null,
-            'profile_image_size' => $file?->getSize(),
-            'profile_image_client_mime' => $file?->getClientMimeType(),
-            'profile_image_real_mime' => $file && $file->isValid() ? $file->getMimeType() : null,
-            'profile_image_as_input' => is_string($raw) ? substr($raw, 0, 150) : gettype($raw),
-        ]);
     }
 
     /**
