@@ -15,6 +15,7 @@ use App\Http\Controllers\Api\TeamController;
 use App\Http\Controllers\Api\TreeRequestController;
 use App\Http\Controllers\Api\UpcomingEventController;
 use App\Http\Controllers\Api\V1\AuthController;
+use App\Http\Controllers\Api\V1\NotificationController;
 use App\Http\Controllers\Api\V1\TreeController;
 use App\Http\Controllers\Api\VoiceController;
 use Illuminate\Support\Facades\Route;
@@ -167,6 +168,18 @@ Route::prefix('v1')->name('api.v1.')->group(function () {
 
         // Declared last so the wildcard does not match "map" or "mine".
         Route::get('/{tree}', [TreeController::class, 'show'])->name('show');
+    });
+
+    /*
+    |----------------------------------------------------------------------
+    | Notifications — the in-app notification centre (all authenticated)
+    |----------------------------------------------------------------------
+    */
+    Route::prefix('notifications')->name('notifications.')->middleware('auth:sanctum')->group(function () {
+        Route::get('/', [NotificationController::class, 'index'])->name('index');
+        Route::get('/unread-count', [NotificationController::class, 'unreadCount'])->name('unread-count');
+        Route::post('/read-all', [NotificationController::class, 'markAllRead'])->name('read-all');
+        Route::post('/{id}/read', [NotificationController::class, 'markRead'])->name('read');
     });
 
     /*

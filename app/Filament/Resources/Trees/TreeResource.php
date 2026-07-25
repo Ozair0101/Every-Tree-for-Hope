@@ -6,6 +6,7 @@ use App\Filament\Resources\Trees\Pages\CreateTree;
 use App\Filament\Resources\Trees\Pages\EditTree;
 use App\Filament\Resources\Trees\Pages\ListTrees;
 use App\Models\Tree;
+use App\Notifications\TreeReviewed;
 use BackedEnum;
 use Filament\Actions;
 use Filament\Forms\Components;
@@ -151,14 +152,20 @@ class TreeResource extends Resource
                     ->color('success')
                     ->authorize('approve_tree')
                     ->visible(fn (Tree $r) => $r->status !== 'approved')
-                    ->action(fn (Tree $r) => $r->update(['status' => 'approved', 'approved_at' => now(), 'rejection_reason' => null])),
+                    ->action(function (Tree $r) {
+                        $r->update(['status' => 'approved', 'approved_at' => now(), 'rejection_reason' => null]);
+                        $r->user?->notify(new TreeReviewed($r, 'approved'));
+                    }),
                 Actions\Action::make('reject')
                     ->icon('heroicon-o-x-circle')
                     ->color('danger')
                     ->requiresConfirmation()
                     ->authorize('reject_tree')
                     ->visible(fn (Tree $r) => $r->status !== 'rejected')
-                    ->action(fn (Tree $r) => $r->update(['status' => 'rejected'])),
+                    ->action(function (Tree $r) {
+                        $r->update(['status' => 'rejected']);
+                        $r->user?->notify(new TreeReviewed($r, 'rejected'));
+                    }),
                 Actions\EditAction::make(),
                 Actions\DeleteAction::make(),
             ])
@@ -169,7 +176,10 @@ class TreeResource extends Resource
                         ->icon('heroicon-o-check-circle')
                         ->color('success')
                         ->authorize('approve_tree')
-                        ->action(fn ($records) => $records->each->update(['status' => 'approved', 'approved_at' => now()])),
+                        ->action(fn ($records) => $records->each(function (Tree $r) {
+                            $r->update(['status' => 'approved', 'approved_at' => now(), 'rejection_reason' => null]);
+                            $r->user?->notify(new TreeReviewed($r, 'approved'));
+                        })),
                     Actions\DeleteBulkAction::make(),
                 ]),
             ])

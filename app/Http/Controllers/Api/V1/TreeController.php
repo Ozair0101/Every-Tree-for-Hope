@@ -6,6 +6,9 @@ use App\Http\Controllers\Api\ApiController;
 use App\Http\Resources\Api\V1\TreeResource;
 use App\Http\Resources\Api\V1\TreeUpdateResource;
 use App\Models\Tree;
+use App\Models\User;
+use App\Notifications\TreeSubmitted;
+use App\Providers\AuthServiceProvider;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -143,6 +146,8 @@ class TreeController extends ApiController
             'status' => 'pending',
         ]);
 
+        $this->notifyModerators($tree, $request->user()->id);
+
         return $this->created(
             ['tree' => new TreeResource($tree)],
             __('Your tree was submitted and is waiting for review.'),
@@ -176,5 +181,29 @@ class TreeController extends ApiController
             ['update' => new TreeUpdateResource($update)],
             __('Progress added.'),
         );
+    }
+
+    /**
+     * Notify everyone who can review a tree that a new one has arrived.
+     *
+     * "Reviewers" are Super Admins (whose access is a Gate bypass, so they hold
+     * no explicit permission and must be found by role) plus anyone whose role
+     * grants `approve_tree`. The submitting user is excluded — they know they
+     * just submitted it.
+     */
+    protected function notifyModerators(Tree $tree, int $submitterId): void
+    {
+        $ids = User::role(AuthServiceProvider::SUPER_ADMIN)->pluck('id')
+            ->merge(User::permission('approve_tree')->pluck('id'))
+            ->unique()
+            ->reject(fn ($id) => $id === $submitterId);
+
+        if ($ids->isEmpty()) {
+            return;
+        }
+
+        $tree->loadMissing('user');
+
+        User::whereIn('id', $ids)->get()->each->notify(new TreeSubmitted($tree));
     }
 }
