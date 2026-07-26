@@ -67,6 +67,7 @@ class TreeController extends ApiController
                 'species' => $tree->species,
                 'latitude' => (float) $tree->latitude,
                 'longitude' => (float) $tree->longitude,
+                'location_name' => $tree->location_name,
                 'planter_name' => $tree->user?->name,
                 'image_url' => $tree->image_url,
             ]);
