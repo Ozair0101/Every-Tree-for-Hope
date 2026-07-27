@@ -41,7 +41,11 @@ class EventResource extends JsonResource
             'last_maintained_at' => $this->last_maintained_at?->toDateString(),
             'maintenance_notes' => $this->maintenance_notes,
             'maintenance_visits' => $this->maintenance_visits ?? [],
-            'maintenance_photos' => $this->maintenance_photos ?? [],
+            // Stored as relative paths on the public disk — expose full URLs so
+            // the app can render them directly.
+            'maintenance_photos' => collect($this->maintenance_photos ?? [])
+                ->map(fn ($p) => str_starts_with((string) $p, 'http') ? $p : asset('storage/' . $p))
+                ->values(),
 
             'is_active' => (bool) $this->is_active,
             'sort_order' => $this->sort_order,

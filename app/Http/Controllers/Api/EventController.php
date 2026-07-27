@@ -95,6 +95,11 @@ class EventController extends ApiController
             'sponsor_partner' => 'nullable|string|max:255',
             'tree_names' => 'nullable|array',
             'tree_names.*' => 'string|max:120',
+            // Google Map: an "embed a map" iframe, a share link, or "lat,lng".
+            'map_embed' => 'nullable|string|max:10000',
+            // Maintenance & Health.
+            'last_maintained_at' => 'nullable|date',
+            'maintenance_notes' => 'nullable|string|max:5000',
             'images' => 'nullable|array|max:8',
             'images.*' => 'image|mimes:jpeg,jpg,png,webp|max:8192',
         ]);
@@ -110,6 +115,9 @@ class EventController extends ApiController
             'volunteers' => $validated['volunteers'] ?? 0,
             'sponsor_partner' => $validated['sponsor_partner'] ?? null,
             'tree_names' => $validated['tree_names'] ?? [],
+            'map_embed' => $validated['map_embed'] ?? null,
+            'last_maintained_at' => $validated['last_maintained_at'] ?? null,
+            'maintenance_notes' => $validated['maintenance_notes'] ?? null,
             'is_active' => true,
         ]);
 
