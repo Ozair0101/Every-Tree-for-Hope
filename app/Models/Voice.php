@@ -11,6 +11,7 @@ class Voice extends Model
 {
     protected $fillable = [
         'slug',
+        'user_id',
         'author_name',
         'author_email',
         'country',
@@ -68,6 +69,11 @@ class Voice extends Model
     public function getRouteKeyName(): string
     {
         return 'slug';
+    }
+
+    public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(User::class);
     }
 
     public function comments(): HasMany

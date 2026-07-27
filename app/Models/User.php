@@ -84,4 +84,12 @@ class User extends Authenticatable implements FilamentUser
     {
         return $this->hasMany(Tree::class);
     }
+
+    /**
+     * Voices this user has shared on the community wall (any moderation status).
+     */
+    public function voices(): HasMany
+    {
+        return $this->hasMany(Voice::class);
+    }
 }

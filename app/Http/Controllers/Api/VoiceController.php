@@ -80,6 +80,32 @@ class VoiceController extends ApiController
      * Replaces the web "share" form page — the app builds its own form, so
      * all it needs from us is the list of valid categories.
      */
+    /**
+     * The signed-in user's own voices — every moderation status, so they can see
+     * posts still awaiting review alongside the published ones.
+     */
+    public function mine(Request $request): JsonResponse
+    {
+        $userId = $request->user()->id;
+
+        $voices = Voice::query()
+            ->where('user_id', $userId)
+            ->orderByDesc('created_at')
+            ->paginate($this->perPage($request, 20));
+
+        VoiceResource::usingLikedIds(
+            $this->likedIdsFor($request, $voices->pluck('id')->all())
+        );
+
+        return $this->paginated($voices, VoiceResource::class, [
+            'summary' => [
+                'total' => Voice::where('user_id', $userId)->count(),
+                'pending' => Voice::where('user_id', $userId)->where('status', 'pending')->count(),
+                'approved' => Voice::where('user_id', $userId)->where('status', 'approved')->count(),
+            ],
+        ]);
+    }
+
     public function categories(): JsonResponse
     {
         return $this->ok([
@@ -146,6 +172,9 @@ class VoiceController extends ApiController
         }
 
         $voice = Voice::create([
+            // Attribute to the signed-in user when there is one — the wall still
+            // accepts anonymous posts, so this stays optional.
+            'user_id' => $request->user('sanctum')?->id,
             'author_name' => $validated['author_name'],
             'author_email' => $validated['author_email'] ?? null,
             'country' => $validated['country'] ?? null,

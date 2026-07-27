@@ -43,6 +43,9 @@ class VoiceResource extends JsonResource
 
             'category' => $this->category,
             'category_label' => $this->category_label,
+            // Meaningful on "my voices" (where unapproved posts are visible);
+            // always 'approved' on the public wall.
+            'status' => $this->status,
 
             'image_url' => $this->image_url,
 

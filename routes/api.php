@@ -143,6 +143,10 @@ Route::prefix('v1')->name('api.v1.')->group(function () {
     Route::prefix('voices')->name('voices.')->group(function () {
         Route::get('/', [VoiceController::class, 'index'])->name('index');
         Route::get('/categories', [VoiceController::class, 'categories'])->name('categories');
+        // Declared before '/{voice}' so the wildcard does not read "mine" as a slug.
+        Route::get('/mine', [VoiceController::class, 'mine'])
+            ->middleware('auth:sanctum')
+            ->name('mine');
         Route::get('/{voice}', [VoiceController::class, 'show'])->name('show');
 
         Route::middleware('throttle:20,1')->group(function () {
