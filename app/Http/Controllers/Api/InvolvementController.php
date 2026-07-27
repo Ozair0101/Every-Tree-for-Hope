@@ -72,7 +72,7 @@ class InvolvementController extends ApiController
                     "[%s] %s — %s\n\n%s",
                     __('messages.future_admin_prefix'),
                     $event->title,
-                    $event->date->format('M j, Y') . ' · ' . $event->location,
+                    $event->date->format('M j, Y').' · '.$event->location,
                     $userNote !== '' ? $userNote : '—'
                 );
             }

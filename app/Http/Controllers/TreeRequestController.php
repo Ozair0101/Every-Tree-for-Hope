@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\TreeRequest;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 
 class TreeRequestController extends Controller
 {
@@ -32,11 +31,11 @@ class TreeRequestController extends Controller
         $paths = [];
         if ($request->hasFile('media')) {
             foreach ($request->file('media') as $file) {
-                $paths[] = $file->store('tree-requests/' . $treeRequest->id, 'public');
+                $paths[] = $file->store('tree-requests/'.$treeRequest->id, 'public');
             }
         }
 
-        if (!empty($paths)) {
+        if (! empty($paths)) {
             $treeRequest->update(['media_paths' => $paths]);
         }
 

@@ -41,7 +41,7 @@ class TreeRequestController extends ApiController
         $paths = [];
         if ($request->hasFile('media')) {
             foreach ($request->file('media') as $file) {
-                $paths[] = $file->store('tree-requests/' . $treeRequest->id, 'public');
+                $paths[] = $file->store('tree-requests/'.$treeRequest->id, 'public');
             }
         }
 
@@ -51,7 +51,7 @@ class TreeRequestController extends ApiController
 
         return $this->created([
             'id' => $treeRequest->id,
-            'media' => array_map(fn ($path) => asset('storage/' . $path), $paths),
+            'media' => array_map(fn ($path) => asset('storage/'.$path), $paths),
         ], 'Your tree request has been submitted successfully. Our team will contact you soon.');
     }
 }

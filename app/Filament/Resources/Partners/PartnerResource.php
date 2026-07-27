@@ -2,14 +2,13 @@
 
 namespace App\Filament\Resources\Partners;
 
+use App\Enums\PartnerType;
 use App\Filament\Resources\Partners\Pages\CreatePartner;
 use App\Filament\Resources\Partners\Pages\EditPartner;
 use App\Filament\Resources\Partners\Pages\ListPartners;
-use App\Enums\PartnerType;
 use App\Models\Partner;
 use BackedEnum;
 use Filament\Actions;
-use Filament\Forms;
 use Filament\Forms\Components;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;

@@ -43,4 +43,42 @@ return Application::configure(basePath: dirname(__DIR__))
         $exceptions->shouldRenderJsonWhen(
             fn (Request $request) => $request->is('api/*') || $request->expectsJson()
         );
+
+        /*
+         | Business-rule failures from the task module.
+         |
+         | These are not faults — "this task already has its one assignee" is a
+         | legitimate answer, and the client needs to show it to the user rather
+         | than a stack trace. They carry their own status (422, or 403 for an
+         | authorisation-shaped refusal) and a machine-readable `reason` so the
+         | app can branch without parsing English.
+         |
+         | Deliberately narrow: only these two types are translated. Anything
+         | else keeps bubbling to the 500 handler, where a real bug belongs.
+        */
+        $exceptions->render(function (\App\Services\Tasks\Exceptions\TaskOperationException $e, Request $request) {
+            if (! $request->is('api/*') && ! $request->expectsJson()) {
+                return null;
+            }
+
+            return response()->json([
+                'success' => false,
+                'message' => $e->getMessage(),
+                'reason' => $e->reason(),
+                'errors' => null,
+            ], $e->getStatusCode());
+        });
+
+        $exceptions->render(function (\App\Exceptions\TaskAssignmentException $e, Request $request) {
+            if (! $request->is('api/*') && ! $request->expectsJson()) {
+                return null;
+            }
+
+            return response()->json([
+                'success' => false,
+                'message' => $e->getMessage(),
+                'reason' => 'assignment_refused',
+                'errors' => null,
+            ], 422);
+        });
     })->create();

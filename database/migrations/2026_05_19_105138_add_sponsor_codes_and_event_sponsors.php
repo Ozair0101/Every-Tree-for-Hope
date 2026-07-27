@@ -47,7 +47,7 @@ return new class extends Migration
     private function uniqueCode(string $table): string
     {
         do {
-            $code = 'ETH-' . Str::upper(Str::random(6));
+            $code = 'ETH-'.Str::upper(Str::random(6));
         } while (DB::table($table)->where('code', $code)->exists());
 
         return $code;

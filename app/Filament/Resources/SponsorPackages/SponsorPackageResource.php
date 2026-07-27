@@ -121,9 +121,8 @@ class SponsorPackageResource extends Resource
                                     ->columnSpan(1),
                             ])
                             ->columns(4)
-                            ->itemLabel(fn (array $state): ?string =>
-                                ($state['label'] ?? null)
-                                    ? $state['label'] . ' — ' . ($state['percentage'] ?? '0') . '%'
+                            ->itemLabel(fn (array $state): ?string => ($state['label'] ?? null)
+                                    ? $state['label'].' — '.($state['percentage'] ?? '0').'%'
                                     : 'New allocation'
                             )
                             ->addActionLabel('Add allocation')

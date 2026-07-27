@@ -134,7 +134,7 @@ class VoiceController extends ApiController
             'author_name' => 'required|string|max:120',
             'author_email' => 'nullable|email|max:255',
             'country' => 'nullable|string|max:120',
-            'category' => 'required|in:' . implode(',', array_keys(Voice::CATEGORIES)),
+            'category' => 'required|in:'.implode(',', array_keys(Voice::CATEGORIES)),
             'title' => 'required|string|max:160',
             'body' => 'required|string|max:8000',
             'image' => 'nullable|image|max:5120',
@@ -227,12 +227,12 @@ class VoiceController extends ApiController
         $deviceId = trim((string) $request->header('X-Device-Id'));
 
         if ($deviceId !== '') {
-            return substr(hash('sha256', 'device|' . $deviceId), 0, 40);
+            return substr(hash('sha256', 'device|'.$deviceId), 0, 40);
         }
 
         // No device id sent — degrade to the IP so likes still toggle,
         // accepting that a shared network shares the fingerprint.
-        return substr(hash('sha256', 'ip|' . $request->ip()), 0, 40);
+        return substr(hash('sha256', 'ip|'.$request->ip()), 0, 40);
     }
 
     /**

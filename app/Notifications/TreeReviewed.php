@@ -18,16 +18,17 @@ class TreeReviewed extends Notification
     /**
      * @param  'approved'|'rejected'  $outcome
      */
-    public function __construct(public Tree $tree, public string $outcome)
-    {
-    }
+    public function __construct(public Tree $tree, public string $outcome) {}
 
     /**
      * @return array<int, string>
      */
     public function via(object $notifiable): array
     {
-        return ['database'];
+        // 'database' backs the in-app notification centre; 'expo' pushes the same
+        // payload to the user's registered devices. Both, so the record survives
+        // even when the push cannot be delivered.
+        return ['database', 'expo'];
     }
 
     /**
@@ -45,7 +46,7 @@ class TreeReviewed extends Notification
             'body' => $approved
                 ? __('":species" is now live on your profile and the public map.', ['species' => $this->tree->species])
                 : __('":species" was not approved.', ['species' => $this->tree->species])
-                    . ($this->tree->rejection_reason ? ' ' . $this->tree->rejection_reason : ''),
+                    .($this->tree->rejection_reason ? ' '.$this->tree->rejection_reason : ''),
             'tree_id' => $this->tree->id,
             'species' => $this->tree->species,
         ];

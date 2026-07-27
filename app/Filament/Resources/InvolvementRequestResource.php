@@ -10,10 +10,10 @@ use Filament\Forms\Components;
 use Filament\Resources\Resource;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
-use Illuminate\Support\HtmlString;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\HtmlString;
 
 class InvolvementRequestResource extends Resource
 {
@@ -91,11 +91,12 @@ class InvolvementRequestResource extends Resource
                                 if (! $record || empty($record->cv_path)) {
                                     return new HtmlString('<span style="color:#9ca3af;">No CV uploaded</span>');
                                 }
-                                $url = asset('storage/' . ltrim($record->cv_path, '/'));
+                                $url = asset('storage/'.ltrim($record->cv_path, '/'));
+
                                 return new HtmlString(
-                                    '<a href="' . e($url) . '" target="_blank" rel="noopener" '
-                                    . 'style="display:inline-flex;align-items:center;gap:6px;color:#064e3b;font-weight:700;text-decoration:underline;">'
-                                    . '⬇ Download / View CV</a>'
+                                    '<a href="'.e($url).'" target="_blank" rel="noopener" '
+                                    .'style="display:inline-flex;align-items:center;gap:6px;color:#064e3b;font-weight:700;text-decoration:underline;">'
+                                    .'⬇ Download / View CV</a>'
                                 );
                             }),
                     ])
@@ -160,7 +161,7 @@ class InvolvementRequestResource extends Resource
                     ->badge()
                     ->state(fn ($record) => empty($record->cv_path) ? '—' : 'Download')
                     ->color(fn ($record) => empty($record->cv_path) ? 'gray' : 'success')
-                    ->url(fn ($record) => empty($record->cv_path) ? null : asset('storage/' . ltrim($record->cv_path, '/')))
+                    ->url(fn ($record) => empty($record->cv_path) ? null : asset('storage/'.ltrim($record->cv_path, '/')))
                     ->openUrlInNewTab()
                     ->toggleable(),
 

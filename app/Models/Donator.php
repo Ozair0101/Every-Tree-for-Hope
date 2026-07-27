@@ -53,7 +53,7 @@ class Donator extends Model
      */
     public function getFormattedFinancialSupportAttribute()
     {
-        return '$' . number_format($this->financial_support, 2);
+        return '$'.number_format($this->financial_support, 2);
     }
 
     /**
@@ -63,7 +63,7 @@ class Donator extends Model
     {
         $color = $this->status === 'verified' ? 'green' : 'yellow';
         $text = ucfirst($this->status);
-        
+
         return "<span class='bg-{$color}-100 text-{$color}-800 text-xs font-semibold px-2.5 py-0.5 rounded'>{$text}</span>";
     }
 }

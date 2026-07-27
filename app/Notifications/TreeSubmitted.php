@@ -15,16 +15,17 @@ class TreeSubmitted extends Notification
 {
     use Queueable;
 
-    public function __construct(public Tree $tree)
-    {
-    }
+    public function __construct(public Tree $tree) {}
 
     /**
      * @return array<int, string>
      */
     public function via(object $notifiable): array
     {
-        return ['database'];
+        // 'database' backs the in-app notification centre; 'expo' pushes the same
+        // payload to the user's registered devices. Both, so the record survives
+        // even when the push cannot be delivered.
+        return ['database', 'expo'];
     }
 
     /**

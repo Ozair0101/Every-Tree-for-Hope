@@ -8,7 +8,6 @@ use App\Filament\Resources\Teams\Pages\ListTeams;
 use App\Models\Team;
 use BackedEnum;
 use Filament\Actions;
-use Filament\Forms;
 use Filament\Forms\Components;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;

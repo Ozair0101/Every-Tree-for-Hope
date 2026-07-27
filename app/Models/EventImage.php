@@ -36,9 +36,11 @@ class EventImage extends Model
             if (str_starts_with($this->image_path, 'http')) {
                 return $this->image_path;
             }
+
             // Otherwise, treat as stored file path
-            return asset('storage/' . $this->image_path);
+            return asset('storage/'.$this->image_path);
         }
+
         return asset('placeholder-event.jpg');
     }
 }

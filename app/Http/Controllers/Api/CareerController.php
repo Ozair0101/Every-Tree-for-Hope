@@ -142,7 +142,7 @@ class CareerController extends ApiController
             'resume.max' => __('messages.jobs_resume_max'),
         ]);
 
-        $path = $request->file('resume')->store('job-applications/' . $job->id, 'public');
+        $path = $request->file('resume')->store('job-applications/'.$job->id, 'public');
 
         $application = JobApplication::create([
             'job_posting_id' => $job->id,

@@ -43,6 +43,7 @@ class SponsorPackage extends Model
         $price = (float) $this->price;
         $whole = number_format($price, $price == floor($price) ? 0 : 2);
         $currency = $this->currency ?? 'USD';
-        return $currency === 'USD' ? '$' . $whole : $whole . ' ' . $currency;
+
+        return $currency === 'USD' ? '$'.$whole : $whole.' '.$currency;
     }
 }

@@ -18,10 +18,10 @@ class DonatorInfolist
                     ->size(150)
                     ->circular()
                     ->disk('public')
-                    ->defaultImageUrl(fn ($record) => 'https://ui-avatars.com/api/?name=' . urlencode($record->full_name) . '&color=7F9CF5&background=EBF4FF&size=150')
+                    ->defaultImageUrl(fn ($record) => 'https://ui-avatars.com/api/?name='.urlencode($record->full_name).'&color=7F9CF5&background=EBF4FF&size=150')
                     ->columnSpanFull()
                     ->alignCenter(),
-                
+
                 // Basic Information
                 TextEntry::make('full_name')
                     ->label('Full Name')
@@ -36,7 +36,7 @@ class DonatorInfolist
                 // Donation Information
                 TextEntry::make('financial_support')
                     ->label('Financial Support')
-                    ->formatStateUsing(fn ($state) => '$' . number_format($state, 2))
+                    ->formatStateUsing(fn ($state) => '$'.number_format($state, 2))
                     ->weight('semibold'),
 
                 TextEntry::make('donation_date')

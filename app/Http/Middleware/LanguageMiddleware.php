@@ -4,9 +4,9 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Session;
+use Symfony\Component\HttpFoundation\Response;
 
 class LanguageMiddleware
 {
@@ -28,13 +28,13 @@ class LanguageMiddleware
     {
         // Get language from URL parameter, session, or default
         $locale = $this->getLocale($request);
-        
+
         // Set application locale
         App::setLocale($locale);
-        
+
         // Store locale in session
         Session::put('locale', $locale);
-        
+
         // Share language info with views
         view()->share([
             'current_locale' => $locale,

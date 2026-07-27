@@ -7,10 +7,14 @@ use App\Http\Resources\Api\V1\TreeResource;
 use App\Http\Resources\Api\V1\TreeUpdateResource;
 use App\Models\Tree;
 use App\Models\User;
+use App\Notifications\TreeReviewed;
 use App\Notifications\TreeSubmitted;
 use App\Providers\AuthServiceProvider;
+use App\Services\Media\ImageProcessingService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * User-planted trees — the mobile-first field-capture feature.
@@ -185,6 +189,215 @@ class TreeController extends ApiController
     }
 
     /**
+     * Add the "after" photograph to a tree already recorded.
+     *
+     * The point of the whole feature: the same record holds the planting photo
+     * and the one taken a season later, so the pair is unambiguous. A second
+     * row would leave "which after belongs to which before?" as a guess.
+     *
+     * Only the planter may do this, and only once — a second call replaces the
+     * photo rather than creating another, because a record has exactly one
+     * "now". Ongoing growth belongs in `tree_updates`, which is a log.
+     */
+    public function storeAfterImage(Request $request, Tree $tree): JsonResponse
+    {
+        abort_unless($request->user()->id === $tree->user_id, 403);
+
+        // A before photo is the thing being compared against. Without one the
+        // "after" is just a photo, and the comparison view has nothing to show.
+        if (blank($tree->image_path)) {
+            return $this->fail(
+                __('This tree has no planting photo to compare against.'),
+                status: 422,
+            );
+        }
+
+        $validated = $request->validate([
+            'image' => 'required|image|mimes:jpeg,jpg,png,webp,heic|max:8192',
+            'note' => 'nullable|string|max:2000',
+            // The device's own capture time. Trusted for display but clamped
+            // below, because a wrong phone clock must not produce a tree that
+            // grew before it was planted.
+            'taken_at' => 'nullable|date',
+            // Where the photographer stood. The tree's own coordinates say where
+            // it grows; these say where the follow-up was shot, and a shot taken
+            // kilometres away is the single most useful thing to catch here.
+            'latitude' => 'nullable|numeric|between:-90,90|required_with:longitude',
+            'longitude' => 'nullable|numeric|between:-180,180|required_with:latitude',
+            'device_make' => 'nullable|string|max:60',
+            'device_model' => 'nullable|string|max:80',
+            'device_os' => 'nullable|string|max:60',
+        ]);
+
+        $processed = app(ImageProcessingService::class)->store(
+            $request->file('image'),
+            'tree-after',
+            'public',
+            $validated,
+        );
+
+        $path = $processed['paths']['compressed'];
+        $metadata = $processed['metadata'];
+
+        // EXIF wins over the client's reading, for the same reason it does on
+        // task photos: the camera wrote it at the moment of capture and the app
+        // cannot revise it afterwards.
+        $takenAt = $metadata->capturedAt
+            ?? (isset($validated['taken_at']) ? Carbon::parse($validated['taken_at']) : now());
+
+        // Clamped into a sane window: never before planting, never in the
+        // future. A nonsensical date would make growthDays() negative and the
+        // comparison caption absurd.
+        if ($tree->planted_on && $takenAt->lt($tree->planted_on)) {
+            $takenAt = $tree->planted_on;
+        }
+
+        if ($takenAt->isFuture()) {
+            $takenAt = now();
+        }
+
+        // The previous after-photo is unlinked so replacing one does not leak
+        // storage — the same rule TaskAttachment follows.
+        $previous = array_filter([$tree->after_image_path, $tree->after_image_thumbnail_path]);
+
+        // How far the photographer was from the tree they are documenting.
+        // Computed once, at write time, so the comparison screen never has to.
+        $distance = $metadata->hasLocation() && $tree->latitude !== null
+            ? (int) round($this->metresBetween(
+                (float) $tree->latitude,
+                (float) $tree->longitude,
+                $metadata->latitude,
+                $metadata->longitude,
+            ))
+            : null;
+
+        $tree->update([
+            'after_image_path' => $path,
+            'after_image_thumbnail_path' => $processed['paths']['thumbnail'],
+            'after_image_note' => $validated['note'] ?? null,
+            'after_image_taken_at' => $takenAt,
+            'after_image_latitude' => $metadata->latitude,
+            'after_image_longitude' => $metadata->longitude,
+            'after_image_distance' => $distance,
+            'after_image_device' => $metadata->deviceLabel(),
+        ]);
+
+        if ($previous !== []) {
+            Storage::disk('public')->delete($previous);
+        }
+
+        return $this->created(
+            ['tree' => new TreeResource($tree->fresh())],
+            __('Growth photo added.'),
+        );
+    }
+
+    /**
+     * Great-circle distance in metres.
+     *
+     * The same haversine used by Task::distanceTo and GpsVerificationService.
+     * Duplicated here rather than reached for across a service boundary — this
+     * controller has one use for it, and a shared "GeoHelper" that three
+     * unrelated things import is its own kind of mess.
+     */
+    private function metresBetween(float $lat1, float $lon1, float $lat2, float $lon2): float
+    {
+        $earthRadius = 6_371_000;
+        $dLat = deg2rad($lat2 - $lat1);
+        $dLon = deg2rad($lon2 - $lon1);
+
+        $a = sin($dLat / 2) ** 2
+            + cos(deg2rad($lat1)) * cos(deg2rad($lat2)) * sin($dLon / 2) ** 2;
+
+        return $earthRadius * 2 * atan2(sqrt($a), sqrt(1 - $a));
+    }
+
+    /**
+     * The moderation queue — trees awaiting a decision, oldest first.
+     *
+     * Oldest first on purpose: this is a work queue, and the tree that has been
+     * waiting longest is the one a reviewer should see first. Every other tree
+     * listing in this controller is newest-first, because those are feeds.
+     */
+    public function pending(Request $request): JsonResponse
+    {
+        abort_unless($request->user()->can('approve_tree'), 403);
+
+        $trees = Tree::query()
+            ->where('status', 'pending')
+            ->with('user')
+            ->withCount('updates')
+            ->orderBy('created_at')
+            ->paginate($this->perPage($request, 20));
+
+        return $this->paginated($trees, TreeResource::class);
+    }
+
+    /** Publish a tree: it becomes visible on the profile, list and map. */
+    public function approve(Request $request, Tree $tree): JsonResponse
+    {
+        abort_unless($request->user()->can('approve_tree'), 403);
+
+        // Clearing the reason matters when a previously rejected tree is being
+        // approved on a second look — a stale "blurry photo" note would
+        // otherwise sit on an approved record forever.
+        $tree->update([
+            'status' => 'approved',
+            'approved_at' => now(),
+            'rejection_reason' => null,
+        ]);
+
+        $this->notifyPlanter($tree, 'approved');
+
+        return $this->ok(
+            ['tree' => new TreeResource($tree->load('user'))],
+            __('Tree approved.'),
+        );
+    }
+
+    /**
+     * Decline a tree, optionally saying why.
+     *
+     * The reason is optional but strongly worth sending: it is the only thing
+     * the planter receives explaining the decision, and "not approved" with no
+     * cause reads as arbitrary to someone who walked out to plant it.
+     */
+    public function reject(Request $request, Tree $tree): JsonResponse
+    {
+        abort_unless($request->user()->can('reject_tree'), 403);
+
+        $validated = $request->validate([
+            'reason' => 'nullable|string|max:500',
+        ]);
+
+        $tree->update([
+            'status' => 'rejected',
+            'rejection_reason' => $validated['reason'] ?? null,
+        ]);
+
+        $this->notifyPlanter($tree, 'rejected');
+
+        return $this->ok(
+            ['tree' => new TreeResource($tree->load('user'))],
+            __('Tree rejected.'),
+        );
+    }
+
+    /**
+     * Tell the planter the outcome. Same reasoning as {@see notifyModerators}:
+     * the decision is already committed, so a notification failure must not
+     * turn a successful review into an error the reviewer will retry.
+     */
+    protected function notifyPlanter(Tree $tree, string $outcome): void
+    {
+        try {
+            $tree->user?->notify(new TreeReviewed($tree, $outcome));
+        } catch (\Throwable $e) {
+            report($e);
+        }
+    }
+
+    /**
      * Notify everyone who can review a tree that a new one has arrived.
      *
      * "Reviewers" are Super Admins (whose access is a Gate bypass, so they hold
@@ -194,17 +407,36 @@ class TreeController extends ApiController
      */
     protected function notifyModerators(Tree $tree, int $submitterId): void
     {
-        $ids = User::role(AuthServiceProvider::SUPER_ADMIN)->pluck('id')
-            ->merge(User::permission('approve_tree')->pluck('id'))
-            ->unique()
-            ->reject(fn ($id) => $id === $submitterId);
+        /*
+         * The tree is already saved by the time we get here, so nothing in this
+         * method may be allowed to fail the request. Telling a volunteer their
+         * submission failed when it did not is the worst outcome available: they
+         * resubmit, and the moderation queue fills with duplicates of a tree
+         * that was recorded correctly the first time.
+         *
+         * `User::permission()` in particular throws PermissionDoesNotExist when
+         * the permission is absent from the table — which is exactly the state
+         * of a database whose RBAC seeder has not been re-run after a new
+         * feature added its permissions. That is an operator problem to fix (run
+         * RolesAndPermissionsSeeder), not a reason to reject field data.
+         */
+        try {
+            $ids = User::role(AuthServiceProvider::SUPER_ADMIN)->pluck('id')
+                ->merge(User::permission('approve_tree')->pluck('id'))
+                ->unique()
+                ->reject(fn ($id) => $id === $submitterId);
 
-        if ($ids->isEmpty()) {
-            return;
+            if ($ids->isEmpty()) {
+                return;
+            }
+
+            $tree->loadMissing('user');
+
+            User::whereIn('id', $ids)->get()->each->notify(new TreeSubmitted($tree));
+        } catch (\Throwable $e) {
+            // Logged, not surfaced: the submission stands, and the tree still
+            // appears in the pending queue for anyone who opens it.
+            report($e);
         }
-
-        $tree->loadMissing('user');
-
-        User::whereIn('id', $ids)->get()->each->notify(new TreeSubmitted($tree));
     }
 }

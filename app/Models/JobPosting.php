@@ -108,7 +108,7 @@ class JobPosting extends Model
         $i = 2;
 
         while (static::query()->where('slug', $slug)->exists()) {
-            $slug = $base . '-' . $i;
+            $slug = $base.'-'.$i;
             $i++;
         }
 

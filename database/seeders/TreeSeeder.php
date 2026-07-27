@@ -94,6 +94,6 @@ class TreeSeeder extends Seeder
             }
         }
 
-        $this->command?->info('Seeded ' . count($places) . ' approved trees across Afghanistan.');
+        $this->command?->info('Seeded '.count($places).' approved trees across Afghanistan.');
     }
 }

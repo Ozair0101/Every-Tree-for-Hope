@@ -60,6 +60,7 @@ class Event extends Model
         if ($planted <= 0) {
             return null;
         }
+
         return round((($planted - (int) ($this->trees_lost ?? 0)) / $planted) * 100, 1);
     }
 

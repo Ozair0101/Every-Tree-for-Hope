@@ -13,6 +13,7 @@ class MediaController extends Controller
     public function index()
     {
         $media = Media::active()->ordered()->paginate(12);
+
         return view('media.index', compact('media'));
     }
 
@@ -95,7 +96,7 @@ class MediaController extends Controller
     public function apiIndex()
     {
         $media = Media::active()->ordered()->get();
-        
+
         return response()->json([
             'media' => $media->map(function ($item) {
                 return [
@@ -106,7 +107,7 @@ class MediaController extends Controller
                     'thumbnail_url' => $item->thumbnail_url,
                     'description' => $item->description,
                 ];
-            })
+            }),
         ]);
     }
 }

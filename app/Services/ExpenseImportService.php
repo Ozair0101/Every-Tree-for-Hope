@@ -32,8 +32,8 @@ class ExpenseImportService
         $headerText = '';
         $firstRow = $rows[1] ?? [];
         foreach ($firstRow as $cell) {
-            if (!empty($cell)) {
-                $headerText .= ' ' . $cell;
+            if (! empty($cell)) {
+                $headerText .= ' '.$cell;
             }
         }
         // Also check merged cells — the title might span across the first row
@@ -69,7 +69,7 @@ class ExpenseImportService
             }
         }
 
-        if (!$headerRowIndex || empty($colMap['date'])) {
+        if (! $headerRowIndex || empty($colMap['date'])) {
             return ['imported' => 0, 'errors' => ['Could not detect column headers in the file.']];
         }
 
@@ -92,8 +92,9 @@ class ExpenseImportService
             // Parse date
             $dateRaw = $row[$colMap['date'] ?? ''] ?? null;
             $date = self::parseDate($dateRaw);
-            if (!$date) {
+            if (! $date) {
                 $errors[] = "Row {$rowIndex}: Could not parse date '{$dateRaw}'";
+
                 continue;
             }
 
@@ -132,6 +133,7 @@ class ExpenseImportService
         if (preg_match('/توسط\s+(.+?)(?:\s*[\n\r]|$)/u', $headerText, $m)) {
             return trim($m[1]);
         }
+
         return null;
     }
 
@@ -174,6 +176,7 @@ class ExpenseImportService
     {
         // If there's a newline, take the first line (English) and trim
         $lines = preg_split('/[\r\n]+/', $desc);
+
         return trim($lines[0] ?? $desc);
     }
 
@@ -210,6 +213,7 @@ class ExpenseImportService
         }
         // Remove commas, spaces, currency symbols
         $cleaned = preg_replace('/[^\d.]/', '', (string) $val);
+
         return $cleaned !== '' ? (float) $cleaned : 0;
     }
 }

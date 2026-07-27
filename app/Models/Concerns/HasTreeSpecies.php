@@ -53,7 +53,7 @@ trait HasTreeSpecies
         if ($value) {
             $species = array_map('trim', explode(',', $value));
             $species = array_filter($species, function ($species) {
-                return !empty($species);
+                return ! empty($species);
             });
 
             // Remove duplicates (case-insensitive)
@@ -61,7 +61,7 @@ trait HasTreeSpecies
             $seen = [];
             foreach ($species as $item) {
                 $lowerItem = strtolower($item);
-                if (!isset($seen[$lowerItem])) {
+                if (! isset($seen[$lowerItem])) {
                     $uniqueSpecies[] = $item;
                     $seen[$lowerItem] = true;
                 }
@@ -80,7 +80,7 @@ trait HasTreeSpecies
     {
         if (is_array($value)) {
             $filtered = array_filter($value, function ($species) {
-                return $species !== 'Other' && !empty(trim($species));
+                return $species !== 'Other' && ! empty(trim($species));
             });
 
             // Remove duplicates (case-insensitive)
@@ -88,7 +88,7 @@ trait HasTreeSpecies
             $seen = [];
             foreach ($filtered as $item) {
                 $lowerItem = strtolower(trim($item));
-                if (!isset($seen[$lowerItem])) {
+                if (! isset($seen[$lowerItem])) {
                     $uniqueSpecies[] = trim($item);
                     $seen[$lowerItem] = true;
                 }
@@ -110,7 +110,7 @@ trait HasTreeSpecies
         // Add checkbox selections (excluding 'Other' if it exists)
         if ($this->tree_names && is_array($this->tree_names)) {
             $filteredSpecies = array_filter($this->tree_names, function ($species) {
-                return $species !== 'Other' && !empty(trim($species));
+                return $species !== 'Other' && ! empty(trim($species));
             });
             $species = array_merge($species, $filteredSpecies);
         }
@@ -119,7 +119,7 @@ trait HasTreeSpecies
         if ($this->custom_tree_species) {
             $customSpecies = array_map('trim', explode(',', $this->custom_tree_species));
             $customSpecies = array_filter($customSpecies, function ($species) {
-                return !empty($species);
+                return ! empty($species);
             });
             $species = array_merge($species, $customSpecies);
         }
@@ -130,7 +130,7 @@ trait HasTreeSpecies
 
         foreach ($species as $item) {
             $lowerItem = strtolower(trim($item));
-            if (!isset($seen[$lowerItem])) {
+            if (! isset($seen[$lowerItem])) {
                 $uniqueSpecies[] = trim($item);
                 $seen[$lowerItem] = true;
             }

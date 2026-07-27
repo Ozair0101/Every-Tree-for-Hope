@@ -19,7 +19,14 @@ class TreeResource extends JsonResource
             'longitude' => (float) $this->longitude,
             'gps_accuracy' => $this->gps_accuracy,
             'planted_on' => $this->planted_on?->toDateString(),
-            'image_url' => $this->image_url,
+            // Built from the host the client actually connected on rather than
+            // the model's asset() accessor, which resolves against APP_URL. The
+            // app reaches the API on a different host per platform, so a single
+            // APP_URL cannot be right for all of them. Same approach as
+            // UserResource — see the note there.
+            'image_url' => $this->image_path
+                ? $request->getSchemeAndHttpHost().'/storage/'.ltrim($this->image_path, '/')
+                : null,
 
             'status' => $this->status,
             // Only meaningful to the owner viewing their own rejected tree.

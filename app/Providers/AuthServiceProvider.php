@@ -15,6 +15,9 @@ use App\Models\JobPosting;
 use App\Models\Media;
 use App\Models\Partner;
 use App\Models\SponsorPackage;
+use App\Models\Task;
+use App\Models\TaskAssignment;
+use App\Models\TaskNotification;
 use App\Models\Team;
 use App\Models\Tree;
 use App\Models\TreeRequest;
@@ -37,6 +40,9 @@ use App\Policies\PartnerPolicy;
 use App\Policies\PermissionPolicy;
 use App\Policies\RolePolicy;
 use App\Policies\SponsorPackagePolicy;
+use App\Policies\TaskAssignmentPolicy;
+use App\Policies\TaskNotificationPolicy;
+use App\Policies\TaskPolicy;
 use App\Policies\TeamPolicy;
 use App\Policies\TreePolicy;
 use App\Policies\TreeRequestPolicy;
@@ -83,6 +89,9 @@ class AuthServiceProvider extends ServiceProvider
         Media::class => MediaPolicy::class,
         Partner::class => PartnerPolicy::class,
         SponsorPackage::class => SponsorPackagePolicy::class,
+        Task::class => TaskPolicy::class,
+        TaskAssignment::class => TaskAssignmentPolicy::class,
+        TaskNotification::class => TaskNotificationPolicy::class,
         Team::class => TeamPolicy::class,
         Tree::class => TreePolicy::class,
         TreeRequest::class => TreeRequestPolicy::class,

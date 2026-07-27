@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -20,6 +21,15 @@ use Illuminate\Http\Request;
  */
 abstract class ApiController extends Controller
 {
+    /**
+     * Laravel 12 ships a bare base controller, so `$this->authorize()` is not
+     * available by default. Added here rather than on the shared base class so
+     * the web and Filament controllers are untouched — and on the base API class
+     * rather than per controller, so an API endpoint can never silently lack the
+     * ability to authorise.
+     */
+    use AuthorizesRequests;
+
     /**
      * A successful response carrying a payload.
      */

@@ -64,6 +64,25 @@ class PermissionCatalog
             ['key' => 'tree_request',        'label' => 'Tree Requests',       'scope' => 'engagement', 'group' => 'User Engagement', 'abilities' => self::CRUD, 'custom' => []],
             ['key' => 'tree',                'label' => 'Planted Trees',       'scope' => 'engagement', 'group' => 'User Engagement', 'abilities' => self::CRUD, 'custom' => ['approve_tree' => 'Approve', 'reject_tree' => 'Reject']],
 
+            // ── Field Operations ────────────────────────────────────
+            // Task management. `assign_task` and `review_task` are separate
+            // from `update_task` on purpose: a coordinator may hand out and
+            // sign off work without being able to rewrite the brief, and a
+            // reviewer is not automatically an editor.
+            ['key' => 'task', 'label' => 'Tasks', 'scope' => 'operations', 'group' => 'Field Operations', 'abilities' => self::CRUD, 'custom' => [
+                'assign_task' => 'Assign to volunteers',
+                'review_task' => 'Review submissions (approve/reject)',
+                'cancel_task' => 'Cancel',
+                'export_task' => 'Export',
+            ]],
+            ['key' => 'task_category', 'label' => 'Task Categories', 'scope' => 'operations', 'group' => 'Field Operations', 'abilities' => self::CRUD, 'custom' => []],
+            ['key' => 'task_template', 'label' => 'Task Templates',  'scope' => 'operations', 'group' => 'Field Operations', 'abilities' => self::CRUD, 'custom' => []],
+            ['key' => 'task_recurrence', 'label' => 'Task Schedules', 'scope' => 'operations', 'group' => 'Field Operations', 'abilities' => self::CRUD, 'custom' => []],
+            // Read-only by design: an audit trail nobody can edit or delete is
+            // the only kind worth keeping. Purging old entries is an archival
+            // job, not a permission.
+            ['key' => 'task_activity_log', 'label' => 'Activity Log', 'scope' => 'operations', 'group' => 'Field Operations', 'abilities' => self::READ, 'custom' => []],
+
             // ── Financial ───────────────────────────────────────────
             ['key' => 'donator',         'label' => 'Donators',        'scope' => 'financial', 'group' => 'Financial', 'abilities' => self::CRUD, 'custom' => ['export_donator' => 'Export']],
             ['key' => 'expense',         'label' => 'Expenses',        'scope' => 'financial', 'group' => 'Financial', 'abilities' => self::CRUD, 'custom' => ['export_expense' => 'Export']],
@@ -75,18 +94,18 @@ class PermissionCatalog
      * Standalone permissions not tied to an Eloquent model (custom pages,
      * dashboard, widget groups).
      *
-     * @return array<string, array<string, string>>  group label => [permission => human label]
+     * @return array<string, array<string, string>> group label => [permission => human label]
      */
     public static function extras(): array
     {
         return [
             'System' => [
-                'view_dashboard'        => 'View dashboard',
-                'manage_site_settings'  => 'Manage site settings',
+                'view_dashboard' => 'View dashboard',
+                'manage_site_settings' => 'Manage site settings',
             ],
             'Dashboard Widgets' => [
                 'view_financial_widgets' => 'View financial widgets (stats, donations, top donors)',
-                'view_activity_widgets'  => 'View recent-activity widget',
+                'view_activity_widgets' => 'View recent-activity widget',
             ],
         ];
     }
@@ -122,16 +141,16 @@ class PermissionCatalog
      * Permission names grouped by UI label, with human-readable option labels —
      * consumed directly by the Role resource's grouped CheckboxList.
      *
-     * @return array<string, array<string, string>>  group label => [permission => human label]
+     * @return array<string, array<string, string>> group label => [permission => human label]
      */
     public static function groupedForUi(): array
     {
         $abilityLabels = [
-            'view_any'   => 'View list',
-            'view'       => 'View',
-            'create'     => 'Create',
-            'update'     => 'Update',
-            'delete'     => 'Delete',
+            'view_any' => 'View list',
+            'view' => 'View',
+            'create' => 'Create',
+            'update' => 'Update',
+            'delete' => 'Delete',
             'delete_any' => 'Delete any (bulk)',
         ];
 

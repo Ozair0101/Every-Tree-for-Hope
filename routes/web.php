@@ -78,3 +78,40 @@ Route::post('/voices', [App\Http\Controllers\VoiceController::class, 'store'])->
 Route::get('/voices/{voice}', [App\Http\Controllers\VoiceController::class, 'show'])->name('voices.show');
 Route::post('/voices/{voice}/like', [App\Http\Controllers\VoiceController::class, 'like'])->name('voices.like');
 Route::post('/voices/{voice}/comment', [App\Http\Controllers\VoiceController::class, 'comment'])->name('voices.comment');
+
+/*
+|--------------------------------------------------------------------------
+| Admin — printable task report
+|--------------------------------------------------------------------------
+|
+| A web route rather than a Filament action, because the report has to open in
+| a new tab: the browser's own print dialogue is what turns it into a PDF, and
+| a Livewire action cannot navigate there. Guarded by the panel's auth plus an
+| explicit `export_task` check inside the controller.
+*/
+Route::middleware(['auth'])
+    ->prefix('admin/tasks')
+    ->name('admin.tasks.')
+    ->group(function () {
+        Route::get('/export/pdf', [App\Http\Controllers\Admin\TaskExportController::class, 'pdf'])
+            ->name('export.pdf');
+    });
+
+/*
+|--------------------------------------------------------------------------
+| Admin — analytics reports
+|--------------------------------------------------------------------------
+|
+| Same reasoning as above, twice over: the Excel report streams a file download
+| and the printable report needs its own tab, and a Livewire action can do
+| neither. Both re-check `export_task` inside the controller.
+*/
+Route::middleware(['auth'])
+    ->prefix('admin/analytics')
+    ->name('admin.analytics.')
+    ->group(function () {
+        Route::get('/export/excel', [App\Http\Controllers\Admin\AnalyticsExportController::class, 'excel'])
+            ->name('export.excel');
+        Route::get('/export/pdf', [App\Http\Controllers\Admin\AnalyticsExportController::class, 'pdf'])
+            ->name('export.pdf');
+    });

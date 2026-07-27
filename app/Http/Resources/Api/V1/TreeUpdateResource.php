@@ -13,7 +13,10 @@ class TreeUpdateResource extends JsonResource
         return [
             'id' => $this->id,
             'note' => $this->note,
-            'image_url' => $this->image_url,
+            // Request-host based, for the reason documented in TreeResource.
+            'image_url' => $this->image_path
+                ? $request->getSchemeAndHttpHost().'/storage/'.ltrim($this->image_path, '/')
+                : null,
             'height_cm' => $this->height_cm,
             'created_at' => $this->created_at?->toIso8601String(),
             'time_ago' => $this->created_at?->diffForHumans(),

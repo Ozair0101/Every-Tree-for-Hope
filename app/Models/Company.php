@@ -34,7 +34,7 @@ class Company extends Model
                 $slug = $base;
                 $i = 2;
                 while (static::query()->where('slug', $slug)->exists()) {
-                    $slug = $base . '-' . $i++;
+                    $slug = $base.'-'.$i++;
                 }
                 $company->slug = $slug;
             }
@@ -71,7 +71,7 @@ class Company extends Model
             return $this->logo_path;
         }
 
-        return asset('storage/' . $this->logo_path);
+        return asset('storage/'.$this->logo_path);
     }
 
     /**
@@ -90,6 +90,6 @@ class Company extends Model
         $first = mb_substr($words[0], 0, 1);
         $second = isset($words[1]) ? mb_substr($words[1], 0, 1) : '';
 
-        return mb_strtoupper($first . $second);
+        return mb_strtoupper($first.$second);
     }
 }

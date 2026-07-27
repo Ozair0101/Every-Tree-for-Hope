@@ -123,7 +123,7 @@ class TreeResource extends Resource
                 Tables\Columns\TextColumn::make('location_name')
                     ->label('Location')
                     ->placeholder('—')
-                    ->description(fn (Tree $r) => round((float) $r->latitude, 4) . ', ' . round((float) $r->longitude, 4)),
+                    ->description(fn (Tree $r) => round((float) $r->latitude, 4).', '.round((float) $r->longitude, 4)),
                 Tables\Columns\TextColumn::make('status')
                     ->badge()
                     ->color(fn ($state) => match ($state) {

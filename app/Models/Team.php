@@ -47,9 +47,11 @@ class Team extends Model
             if (str_starts_with($this->image, 'http')) {
                 return $this->image;
             }
+
             // Otherwise, treat as stored file path
-            return asset('storage/' . $this->image);
+            return asset('storage/'.$this->image);
         }
+
         return asset('placeholder-user.jpg');
     }
 }
