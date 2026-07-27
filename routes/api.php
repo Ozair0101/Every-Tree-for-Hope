@@ -99,6 +99,10 @@ Route::prefix('v1')->name('api.v1.')->group(function () {
     */
     Route::prefix('events')->name('events.')->group(function () {
         Route::get('/', [EventController::class, 'index'])->name('index');
+        // Create — gated by the create_event permission inside the controller.
+        Route::post('/', [EventController::class, 'store'])
+            ->middleware(['auth:sanctum', 'throttle:20,1'])
+            ->name('store');
         Route::get('/{event}', [EventController::class, 'show'])->name('show');
     });
 
@@ -109,6 +113,9 @@ Route::prefix('v1')->name('api.v1.')->group(function () {
     */
     Route::prefix('upcoming-events')->name('upcoming-events.')->group(function () {
         Route::get('/', [UpcomingEventController::class, 'index'])->name('index');
+        Route::post('/', [UpcomingEventController::class, 'store'])
+            ->middleware(['auth:sanctum', 'throttle:20,1'])
+            ->name('store');
         Route::get('/{upcomingEvent}', [UpcomingEventController::class, 'show'])->name('show');
     });
 
