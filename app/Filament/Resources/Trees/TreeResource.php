@@ -99,7 +99,14 @@ class TreeResource extends Resource
                                 'rejected' => 'Rejected',
                             ])
                             ->required()
-                            ->default('pending'),
+                            // Approved by default, because reaching this form
+                            // already required the permission that lets you
+                            // approve someone else's tree. Queueing your own
+                            // entry for a review only you can perform is a step
+                            // with one possible outcome. Still a Select, so a
+                            // record entered on someone's behalf can be held
+                            // back deliberately.
+                            ->default('approved'),
                         Components\TextInput::make('rejection_reason')
                             ->maxLength(255)
                             ->helperText('Shown to the planter when a tree is rejected.'),

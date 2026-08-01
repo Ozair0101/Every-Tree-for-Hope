@@ -87,11 +87,6 @@ class TaskResource extends Resource
                             ->maxLength(20000)
                             ->helperText('Step-by-step guidance shown to the volunteer in the field.')
                             ->columnSpanFull(),
-                        Components\Select::make('task_category_id')
-                            ->label('Category')
-                            ->relationship('category', 'name')
-                            ->searchable()
-                            ->preload(),
                         Components\Select::make('priority')
                             ->options(TaskPriority::options())
                             ->default(TaskPriority::MEDIUM->value)
@@ -311,30 +306,41 @@ class TaskResource extends Resource
                         ->when($data['from'] ?? null, fn ($q, $d) => $q->whereDate('due_date', '>=', $d))
                         ->when($data['until'] ?? null, fn ($q, $d) => $q->whereDate('due_date', '<=', $d))),
             ])
+            /*
+             * One menu, not four buttons.
+             *
+             * Publish / Cancel / Edit / Delete rendered inline as labelled
+             * buttons occupied more horizontal space than any data column, and
+             * on a laptop that pushed the last of them off the right edge
+             * entirely — the actions were there but unreachable without
+             * sideways scrolling.
+             */
             ->recordActions([
-                Actions\Action::make('publish')
-                    ->icon('heroicon-o-paper-airplane')
-                    ->color('info')
-                    ->authorize('update_task')
-                    ->visible(fn (Task $r) => $r->status === TaskStatus::DRAFT)
-                    ->requiresConfirmation()
-                    ->action(fn (Task $r) => app(\App\Services\Tasks\TaskService::class)
-                        ->publish($r, auth()->user())),
-                Actions\Action::make('cancel')
-                    ->icon('heroicon-o-no-symbol')
-                    ->color('danger')
-                    ->authorize('cancel_task')
-                    ->visible(fn (Task $r) => ! $r->status->isTerminal())
-                    ->schema([
-                        Components\TextInput::make('reason')
-                            ->required()
-                            ->maxLength(255)
-                            ->helperText('Shown to everyone assigned.'),
-                    ])
-                    ->action(fn (Task $r, array $data) => app(\App\Services\Tasks\TaskService::class)
-                        ->cancel($r, auth()->user(), $data['reason'])),
-                Actions\EditAction::make(),
-                Actions\DeleteAction::make(),
+                Actions\ActionGroup::make([
+                    Actions\Action::make('publish')
+                        ->icon('heroicon-o-paper-airplane')
+                        ->color('info')
+                        ->authorize('update_task')
+                        ->visible(fn (Task $r) => $r->status === TaskStatus::DRAFT)
+                        ->requiresConfirmation()
+                        ->action(fn (Task $r) => app(\App\Services\Tasks\TaskService::class)
+                            ->publish($r, auth()->user())),
+                    Actions\Action::make('cancel')
+                        ->icon('heroicon-o-no-symbol')
+                        ->color('danger')
+                        ->authorize('cancel_task')
+                        ->visible(fn (Task $r) => ! $r->status->isTerminal())
+                        ->schema([
+                            Components\TextInput::make('reason')
+                                ->required()
+                                ->maxLength(255)
+                                ->helperText('Shown to everyone assigned.'),
+                        ])
+                        ->action(fn (Task $r, array $data) => app(\App\Services\Tasks\TaskService::class)
+                            ->cancel($r, auth()->user(), $data['reason'])),
+                    Actions\EditAction::make(),
+                    Actions\DeleteAction::make(),
+                ]),
             ])
             ->toolbarActions([
                 Actions\BulkActionGroup::make([

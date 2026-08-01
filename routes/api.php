@@ -22,6 +22,8 @@ use App\Http\Controllers\Api\V1\Tasks\TaskController;
 use App\Http\Controllers\Api\V1\Tasks\TaskProgressController;
 use App\Http\Controllers\Api\V1\Tasks\TaskReviewController;
 use App\Http\Controllers\Api\V1\TreeController;
+use App\Http\Controllers\Api\V1\TreeImageController;
+use App\Http\Controllers\Api\V1\TreeSocialController;
 use App\Http\Controllers\Api\VoiceController;
 use Illuminate\Support\Facades\Route;
 
@@ -161,6 +163,17 @@ Route::prefix('v1')->name('api.v1.')->group(function () {
         Route::get('/', [TreeController::class, 'index'])->name('index');
         Route::get('/map', [TreeController::class, 'map'])->name('map');
 
+        // The community wall. Reading is open — a plantation programme's work
+        // is public — so this sits outside the auth group alongside the map.
+        Route::get('/feed', [TreeSocialController::class, 'feed'])->name('feed');
+
+        // Deleting a comment is keyed on the comment, not the tree it sits on:
+        // the author may remove their own from anywhere. Declared before the
+        // '/{tree}' wildcard so "comments" is not read as a tree id.
+        Route::delete('/comments/{comment}', [TreeSocialController::class, 'destroyComment'])
+            ->middleware('auth:sanctum')
+            ->name('comments.destroy');
+
         Route::middleware('auth:sanctum')->group(function () {
             Route::get('/mine', [TreeController::class, 'mine'])->name('mine');
 
@@ -174,18 +187,63 @@ Route::prefix('v1')->name('api.v1.')->group(function () {
             Route::post('/', [TreeController::class, 'store'])
                 ->middleware('throttle:20,1')
                 ->name('store');
+
+            // The planter correcting their own record. Coordinates are not
+            // editable — see the controller for why.
+            Route::match(['put', 'patch'], '/{tree}', [TreeController::class, 'update'])
+                ->middleware('throttle:30,1')
+                ->name('update');
             Route::post('/{tree}/updates', [TreeController::class, 'storeUpdate'])
                 ->middleware('throttle:30,1')
                 ->name('updates.store');
 
             // The "after" photograph, added to the same record as the planting
-            // photo so the pair is unambiguous.
+            // photo so the pair is unambiguous. Superseded by the multi-image
+            // endpoint below; kept so an app build that has not updated yet
+            // keeps working.
             Route::post('/{tree}/after-image', [TreeController::class, 'storeAfterImage'])
                 ->middleware('throttle:20,1')
                 ->name('after-image');
+
+            /*
+            |------------------------------------------------------------------
+            | Galleries — several photographs per phase, one of them the cover
+            |------------------------------------------------------------------
+            */
+            Route::post('/{tree}/images', [TreeImageController::class, 'storeBefore'])
+                ->middleware('throttle:20,1')
+                ->name('images.store');
+            Route::post('/{tree}/after-images', [TreeImageController::class, 'storeAfter'])
+                ->middleware('throttle:20,1')
+                ->name('after-images.store');
+            Route::post('/{tree}/images/{image}/cover', [TreeImageController::class, 'setCover'])
+                ->name('images.cover');
+            Route::delete('/{tree}/images/{image}', [TreeImageController::class, 'destroy'])
+                ->name('images.destroy');
+
+            /*
+            |------------------------------------------------------------------
+            | Reacting — signed in only
+            |------------------------------------------------------------------
+            | Reading the wall is public; liking, commenting and sharing are not.
+            */
+            Route::post('/{tree}/like', [TreeSocialController::class, 'toggleLike'])
+                ->middleware('throttle:60,1')
+                ->name('like');
+            Route::post('/{tree}/share', [TreeSocialController::class, 'share'])
+                ->middleware('throttle:60,1')
+                ->name('share');
+            Route::post('/{tree}/comments', [TreeSocialController::class, 'storeComment'])
+                ->middleware('throttle:30,1')
+                ->name('comments.store');
         });
 
-        // Declared last so the wildcard does not match "map" or "mine".
+        // Public reads that carry a tree id. Declared before the bare '/{tree}'
+        // so the wildcard does not swallow the sub-paths.
+        Route::get('/{tree}/images', [TreeImageController::class, 'index'])->name('images.index');
+        Route::get('/{tree}/comments', [TreeSocialController::class, 'comments'])->name('comments.index');
+
+        // Declared last so the wildcard does not match "map", "mine" or "feed".
         Route::get('/{tree}', [TreeController::class, 'show'])->name('show');
     });
 

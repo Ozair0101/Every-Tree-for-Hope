@@ -6,11 +6,13 @@ use App\Http\Controllers\Api\ApiController;
 use App\Http\Resources\Api\V1\TreeResource;
 use App\Http\Resources\Api\V1\TreeUpdateResource;
 use App\Models\Tree;
+use App\Models\TreeImage;
 use App\Models\User;
 use App\Notifications\TreeReviewed;
 use App\Notifications\TreeSubmitted;
 use App\Providers\AuthServiceProvider;
 use App\Services\Media\ImageProcessingService;
+use App\Services\Trees\TreeGalleryService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -111,7 +113,7 @@ class TreeController extends ApiController
 
         abort_unless($tree->status === 'approved' || $isOwner, 404);
 
-        $tree->load(['user', 'updates']);
+        $tree->load(['user', 'updates.images']);
 
         return $this->ok(['tree' => new TreeResource($tree)]);
     }
@@ -132,14 +134,44 @@ class TreeController extends ApiController
             'longitude' => 'required|numeric|between:-180,180',
             'gps_accuracy' => 'nullable|integer|min:0|max:100000',
             'planted_on' => 'required|date|before_or_equal:today',
-            'image' => 'nullable|image|mimes:jpeg,jpg,png,webp|max:8192',
+            // `images[]` is the current shape — a planting is several frames,
+            // not one. `image` is still accepted so an app build that has not
+            // updated yet keeps working; both land in the same gallery.
+            'images' => 'nullable|array|max:'.TreeImage::MAX_PER_PHASE,
+            'images.*' => 'image|mimes:jpeg,jpg,png,webp,heic|max:8192',
+            'image' => 'nullable|image|mimes:jpeg,jpg,png,webp,heic|max:8192',
+            'cover_index' => 'nullable|integer|min:0',
+            'captions' => 'nullable|array',
+            'captions.*' => 'nullable|string|max:500',
+            'taken_at' => 'nullable|date',
+            'device_make' => 'nullable|string|max:60',
+            'device_model' => 'nullable|string|max:80',
+            'device_os' => 'nullable|string|max:60',
         ]);
 
-        $path = $request->hasFile('image')
-            ? $request->file('image')->store('trees', 'public')
-            : null;
+        // A planting record with no photograph is a claim, not evidence — the
+        // whole feature rests on the picture. At least one frame is required,
+        // enforced here (not only in the validator) because a planting may
+        // arrive as `images[]` or as the legacy single `image`, and the rule is
+        // "at least one, either way".
+        $files = array_values($request->file('images') ?? array_filter([$request->file('image')]));
 
-        $tree = $request->user()->trees()->create([
+        if ($files === []) {
+            return $this->fail(
+                __('Add at least one photo of the tree you planted.'),
+                ['images' => [__('At least one photo is required.')]],
+                422,
+            );
+        }
+
+        $author = $request->user();
+        // Staff record trees on behalf of the programme — at an event, from a
+        // field report — and their own submission is not something they should
+        // then have to queue up and approve. Anyone who may approve a tree is
+        // trusted to publish one directly.
+        $autoApprove = $author->can('approve_tree');
+
+        $tree = $author->trees()->create([
             'species' => $validated['species'],
             'notes' => $validated['notes'] ?? null,
             'location_name' => $validated['location_name'] ?? null,
@@ -147,15 +179,63 @@ class TreeController extends ApiController
             'longitude' => $validated['longitude'],
             'gps_accuracy' => $validated['gps_accuracy'] ?? null,
             'planted_on' => $validated['planted_on'],
-            'image_path' => $path,
-            'status' => 'pending',
+            'status' => $autoApprove ? 'approved' : 'pending',
+            'approved_at' => $autoApprove ? now() : null,
         ]);
 
-        $this->notifyModerators($tree, $request->user()->id);
+        if ($files !== []) {
+            app(TreeGalleryService::class)->attach(
+                tree: $tree,
+                files: $files,
+                phase: TreeImage::PHASE_BEFORE,
+                coverIndex: $validated['cover_index'] ?? null,
+                clientMetadata: $validated,
+                captions: $validated['captions'] ?? [],
+            );
+        }
+
+        // Nothing to moderate when it is already published.
+        if (! $autoApprove) {
+            $this->notifyModerators($tree, $author->id);
+        }
 
         return $this->created(
-            ['tree' => new TreeResource($tree)],
-            __('Your tree was submitted and is waiting for review.'),
+            ['tree' => new TreeResource($tree->fresh()->load(['user', 'beforeImages']))],
+            $autoApprove
+                ? __('Your tree was published.')
+                : __('Your tree was submitted and is waiting for review.'),
+        );
+    }
+
+    /**
+     * Edit a tree the caller planted.
+     *
+     * Only the descriptive fields. Coordinates are deliberately not editable:
+     * they were captured on site at the moment of planting and are the evidence
+     * the whole record rests on — letting them be typed in afterwards would turn
+     * a measurement into a claim. A tree in the wrong place is a moderation
+     * matter, not a form field.
+     *
+     * Editing does not send an approved tree back for review. The species name
+     * or a note being corrected is not a reason to hide a published record, and
+     * treating it as one would teach planters not to fix their own mistakes.
+     */
+    public function update(Request $request, Tree $tree): JsonResponse
+    {
+        abort_unless($request->user()->id === $tree->user_id, 403);
+
+        $validated = $request->validate([
+            'species' => 'sometimes|required|string|max:160',
+            'notes' => 'sometimes|nullable|string|max:2000',
+            'location_name' => 'sometimes|nullable|string|max:200',
+            'planted_on' => 'sometimes|required|date|before_or_equal:today',
+        ]);
+
+        $tree->update($validated);
+
+        return $this->ok(
+            ['tree' => new TreeResource($tree->fresh()->load(['user', 'beforeImages', 'afterImages']))],
+            __('Your tree was updated.'),
         );
     }
 
@@ -169,21 +249,39 @@ class TreeController extends ApiController
         $validated = $request->validate([
             'note' => 'required|string|max:2000',
             'height_cm' => 'nullable|integer|min:0|max:20000',
-            'image' => 'nullable|image|mimes:jpeg,jpg,png,webp|max:8192',
+            // `images[]` is the current shape — a progress entry is often several
+            // frames (the trunk, the canopy, a ruler against the stem). `image`
+            // is still accepted so an app build that has not updated yet keeps
+            // working; both land in the same gallery.
+            'images' => 'nullable|array|max:'.\App\Models\TreeUpdate::MAX_IMAGES,
+            'images.*' => 'image|mimes:jpeg,jpg,png,webp,heic|max:8192',
+            'image' => 'nullable|image|mimes:jpeg,jpg,png,webp,heic|max:8192',
         ]);
 
-        $path = $request->hasFile('image')
-            ? $request->file('image')->store('tree-updates', 'public')
-            : null;
+        $files = $request->file('images') ?? array_filter([$request->file('image')]);
 
         $update = $tree->updates()->create([
             'note' => $validated['note'],
             'height_cm' => $validated['height_cm'] ?? null,
-            'image_path' => $path,
         ]);
 
+        foreach (array_values($files) as $index => $file) {
+            $path = $file->store('tree-updates', 'public');
+
+            $update->images()->create([
+                'image_path' => $path,
+                'sort_order' => $index,
+            ]);
+
+            // Mirror the first frame into the legacy single column so older
+            // clients and any code still reading `image_path` keep working.
+            if ($index === 0) {
+                $update->update(['image_path' => $path]);
+            }
+        }
+
         return $this->created(
-            ['update' => new TreeUpdateResource($update)],
+            ['update' => new TreeUpdateResource($update->load('images'))],
             __('Progress added.'),
         );
     }
