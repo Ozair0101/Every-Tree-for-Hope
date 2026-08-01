@@ -85,31 +85,55 @@ class RolesAndPermissionsSeeder extends Seeder
             // Everything except Access Control (roles/permissions) — that stays
             // exclusive to Super Admin.
             'Admin' => array_merge(
-                PermissionCatalog::permissionsForScopes(['system', 'content', 'careers', 'engagement', 'financial']),
+                PermissionCatalog::permissionsForScopes(['system', 'content', 'careers', 'engagement', 'financial', 'operations']),
                 ['view_dashboard', 'manage_site_settings', 'view_financial_widgets', 'view_activity_widgets'],
             ),
 
-            // Full content/careers/engagement; read-only financial.
+            // Full content/careers/engagement and field operations; read-only
+            // financial. A Manager runs the plantation programme end to end:
+            // creates tasks, assigns volunteers, signs off submissions.
             'Manager' => array_merge(
-                PermissionCatalog::permissionsForScopes(['content', 'careers', 'engagement']),
+                PermissionCatalog::permissionsForScopes(['content', 'careers', 'engagement', 'operations']),
                 PermissionCatalog::permissionsForScopes(['financial'], PermissionCatalog::READ, includeCustom: false),
                 ['view_dashboard', 'view_financial_widgets', 'view_activity_widgets'],
             ),
 
             // Day-to-day content editor + light moderation. No deletes on content,
             // no financial.
+            //
+            // On tasks: a coordinator who can create and hand out work and
+            // review what comes back, but cannot delete tasks or cancel a
+            // programme — deletion and cancellation stay with Manager and above.
             'Staff' => array_merge(
                 PermissionCatalog::permissionsForScopes(['content'], ['view_any', 'view', 'create', 'update'], includeCustom: false),
                 PermissionCatalog::permissionsForScopes(['careers'], PermissionCatalog::READ, includeCustom: false),
                 PermissionCatalog::permissionsForScopes(['engagement'], PermissionCatalog::READ, includeCustom: false),
+                PermissionCatalog::permissionsForScopes(['operations'], ['view_any', 'view', 'create', 'update'], includeCustom: false),
+                ['assign_task', 'review_task'],
                 ['update_job_application'],
                 ['approve_voice', 'reject_voice', 'update_voice', 'update_voice_comment', 'delete_voice_comment'],
                 ['view_dashboard', 'view_activity_widgets'],
             ),
 
+            /*
+             | Self-registered members of the public.
+             |
+             | Deliberately empty, and deliberately a role rather than the
+             | absence of one. It carries no permission at all: a volunteer's
+             | access comes from being *attached to a task*, which TaskPolicy
+             | checks by relationship. What the role buys is a queryable account
+             | type — the assign dialog can list "normal users", and an account
+             | whose staff role was removed is no longer indistinguishable from
+             | a member of the public.
+             |
+             | User::canAccessPanel() explicitly excludes this role, so holding
+             | it grants no admin panel access.
+            */
+            User::VOLUNTEER_ROLE => [],
+
             // Read-only across non-sensitive modules.
             'Viewer' => array_merge(
-                PermissionCatalog::permissionsForScopes(['content', 'careers', 'engagement'], PermissionCatalog::READ, includeCustom: false),
+                PermissionCatalog::permissionsForScopes(['content', 'careers', 'engagement', 'operations'], PermissionCatalog::READ, includeCustom: false),
                 ['view_dashboard', 'view_activity_widgets'],
             ),
         ];

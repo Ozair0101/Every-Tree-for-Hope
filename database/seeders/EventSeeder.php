@@ -2,10 +2,9 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Illuminate\Database\Seeder;
 use App\Models\Event;
 use App\Models\EventImage;
+use Illuminate\Database\Seeder;
 
 class EventSeeder extends Seeder
 {

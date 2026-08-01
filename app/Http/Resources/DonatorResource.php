@@ -22,7 +22,7 @@ class DonatorResource extends JsonResource
             'impact' => $this->impact,
             'location' => $this->location,
             'profile_image' => $this->profile_image
-                ? asset('storage/' . $this->profile_image)
+                ? asset('storage/'.$this->profile_image)
                 : null,
             'donation_date' => $this->donation_date?->toDateString(),
             'status' => $this->status,

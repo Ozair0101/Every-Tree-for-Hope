@@ -123,7 +123,7 @@ class VoiceResource extends Resource
                 Tables\Columns\TextColumn::make('title')
                     ->searchable()
                     ->limit(40)
-                    ->description(fn (Voice $r) => $r->author_name . ($r->country ? ' · ' . $r->country : '')),
+                    ->description(fn (Voice $r) => $r->author_name.($r->country ? ' · '.$r->country : '')),
                 Tables\Columns\TextColumn::make('category')
                     ->formatStateUsing(fn ($state) => Voice::CATEGORIES[$state] ?? $state)
                     ->badge(),

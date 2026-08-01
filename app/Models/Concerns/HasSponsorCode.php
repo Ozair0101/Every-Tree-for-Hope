@@ -54,7 +54,7 @@ trait HasSponsorCode
 
         $i = 1;
         do {
-            $code = 'ETH-' . $slug . '-' . str_pad((string) $i, 2, '0', STR_PAD_LEFT);
+            $code = 'ETH-'.$slug.'-'.str_pad((string) $i, 2, '0', STR_PAD_LEFT);
             $i++;
         } while (static::query()->where('code', $code)->exists());
 

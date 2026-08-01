@@ -99,7 +99,14 @@ class TreeResource extends Resource
                                 'rejected' => 'Rejected',
                             ])
                             ->required()
-                            ->default('pending'),
+                            // Approved by default, because reaching this form
+                            // already required the permission that lets you
+                            // approve someone else's tree. Queueing your own
+                            // entry for a review only you can perform is a step
+                            // with one possible outcome. Still a Select, so a
+                            // record entered on someone's behalf can be held
+                            // back deliberately.
+                            ->default('approved'),
                         Components\TextInput::make('rejection_reason')
                             ->maxLength(255)
                             ->helperText('Shown to the planter when a tree is rejected.'),
@@ -123,7 +130,7 @@ class TreeResource extends Resource
                 Tables\Columns\TextColumn::make('location_name')
                     ->label('Location')
                     ->placeholder('—')
-                    ->description(fn (Tree $r) => round((float) $r->latitude, 4) . ', ' . round((float) $r->longitude, 4)),
+                    ->description(fn (Tree $r) => round((float) $r->latitude, 4).', '.round((float) $r->longitude, 4)),
                 Tables\Columns\TextColumn::make('status')
                     ->badge()
                     ->color(fn ($state) => match ($state) {

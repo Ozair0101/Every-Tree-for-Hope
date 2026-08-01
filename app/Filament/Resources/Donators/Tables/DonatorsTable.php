@@ -24,7 +24,7 @@ class DonatorsTable
                     ->label('Photo')
                     ->circular()
                     ->disk('public')
-                    ->defaultImageUrl(fn ($record) => 'https://ui-avatars.com/api/?name=' . urlencode($record->full_name) . '&color=7F9CF5&background=EBF4FF')
+                    ->defaultImageUrl(fn ($record) => 'https://ui-avatars.com/api/?name='.urlencode($record->full_name).'&color=7F9CF5&background=EBF4FF')
                     ->size(40),
 
                 TextColumn::make('full_name')
@@ -82,11 +82,11 @@ class DonatorsTable
                 ViewAction::make()
                     ->icon('heroicon-o-eye')
                     ->color('primary'),
-                
+
                 EditAction::make()
                     ->icon('heroicon-o-pencil')
                     ->color('warning'),
-                
+
                 DeleteAction::make()
                     ->icon('heroicon-o-trash')
                     ->color('danger')

@@ -117,7 +117,7 @@ class TreeRequestResource extends Resource
                 Tables\Columns\IconColumn::make('has_media')
                     ->label('Media')
                     ->boolean()
-                    ->getStateUsing(fn ($record) => !empty($record->media_paths))
+                    ->getStateUsing(fn ($record) => ! empty($record->media_paths))
                     ->trueIcon('heroicon-o-paper-clip')
                     ->falseIcon('heroicon-o-minus')
                     ->trueColor('success'),

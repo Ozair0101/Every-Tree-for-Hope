@@ -8,7 +8,6 @@ use App\Filament\Resources\Events\Pages\ListEvents;
 use App\Models\Event;
 use BackedEnum;
 use Filament\Actions;
-use Filament\Forms;
 use Filament\Forms\Components;
 use Filament\Resources\Resource;
 use Filament\Schemas\Components\Section;
@@ -125,11 +124,13 @@ class EventResource extends Resource
                     ->formatStateUsing(function ($state) {
                         if ($state) {
                             $species = array_map('trim', explode(',', $state));
-                            $species = array_filter($species, function($species) {
-                                return !empty($species);
+                            $species = array_filter($species, function ($species) {
+                                return ! empty($species);
                             });
+
                             return implode(', ', array_unique($species));
                         }
+
                         return $state;
                     })
                     ->columnSpanFull(),
@@ -204,9 +205,8 @@ class EventResource extends Resource
                             ])
                             ->columns(3)
                             ->collapsible()
-                            ->itemLabel(fn (array $state): ?string =>
-                                ($state['date'] ?? null)
-                                    ? (string) $state['date'] . ' · ' . ($state['action'] ?? 'visit')
+                            ->itemLabel(fn (array $state): ?string => ($state['date'] ?? null)
+                                    ? (string) $state['date'].' · '.($state['action'] ?? 'visit')
                                     : 'New visit'
                             )
                             ->addActionLabel('Add a maintenance visit')
@@ -268,7 +268,7 @@ class EventResource extends Resource
                             ->multiple()
                             ->searchable()
                             ->preload()
-                            ->getOptionLabelFromRecordUsing(fn ($record) => $record->full_name . ' — ' . $record->code)
+                            ->getOptionLabelFromRecordUsing(fn ($record) => $record->full_name.' — '.$record->code)
                             ->helperText('Search by name; each donator has a unique sponsor code.')
                             ->columnSpanFull(),
                         Components\Select::make('partners')
@@ -277,7 +277,7 @@ class EventResource extends Resource
                             ->multiple()
                             ->searchable()
                             ->preload()
-                            ->getOptionLabelFromRecordUsing(fn ($record) => $record->company_name . ' — ' . $record->code)
+                            ->getOptionLabelFromRecordUsing(fn ($record) => $record->company_name.' — '.$record->code)
                             ->helperText('Search by company; each partner has a unique sponsor code.')
                             ->columnSpanFull(),
                     ])
@@ -337,15 +337,15 @@ class EventResource extends Resource
                     ->searchable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('tree_names')
-                ->label('Tree Species')
-                ->formatStateUsing(function ($state) {
+                    ->label('Tree Species')
+                    ->formatStateUsing(function ($state) {
 
-                    if (is_array($state)) {
-                        return implode(', ', $state);
-                    }
+                        if (is_array($state)) {
+                            return implode(', ', $state);
+                        }
 
-                    return $state ?? 'N/A';
-                })
+                        return $state ?? 'N/A';
+                    })
                     ->toggleable(),
                 Tables\Columns\TextColumn::make('date')
                     ->date()

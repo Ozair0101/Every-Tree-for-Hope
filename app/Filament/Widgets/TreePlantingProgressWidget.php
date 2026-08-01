@@ -14,7 +14,7 @@ class TreePlantingProgressWidget extends ChartWidget
     {
         return auth()->user()?->can('view_activity_widgets') ?? false;
     }
-    
+
     protected static ?int $columns = 1;
 
     protected function getPollingInterval(): ?string
@@ -31,7 +31,7 @@ class TreePlantingProgressWidget extends ChartWidget
     {
         $treesFromEvents = Event::sum('trees_planted');
         $totalTrees = $treesFromEvents;
-        
+
         // Set a goal (you can make this configurable)
         $goal = 10000;
         $progress = min(($totalTrees / $goal) * 100, 100);
@@ -41,10 +41,10 @@ class TreePlantingProgressWidget extends ChartWidget
             DB::raw('DATE_FORMAT(date, "%Y-%m") as month'),
             DB::raw('SUM(trees_planted) as trees_planted')
         )
-        ->where('date', '>=', now()->subMonths(12))
-        ->groupBy('month')
-        ->orderBy('month')
-        ->get();
+            ->where('date', '>=', now()->subMonths(12))
+            ->groupBy('month')
+            ->orderBy('month')
+            ->get();
 
         $labels = [];
         $treesPlanted = [];
@@ -52,7 +52,7 @@ class TreePlantingProgressWidget extends ChartWidget
         for ($i = 11; $i >= 0; $i--) {
             $month = now()->subMonths($i)->format('Y-m');
             $monthData = $monthlyData->where('month', $month)->first();
-            
+
             $labels[] = now()->subMonths($i)->format('M');
             $treesPlanted[] = $monthData ? (int) $monthData->trees_planted : 0;
         }
@@ -82,7 +82,7 @@ class TreePlantingProgressWidget extends ChartWidget
         $totalTrees = $treesFromEvents;
         $goal = 10000;
         $progress = min(($totalTrees / $goal) * 100, 100);
-        
+
         return [
             'responsive' => true,
             'plugins' => [

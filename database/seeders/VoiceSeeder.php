@@ -116,7 +116,7 @@ class VoiceSeeder extends Seeder
             $createdAt = (clone $now)->subDays(count($voices) - $i)->subHours($i);
 
             $voice = Voice::create([
-                'slug' => Str::slug(Str::limit($data['title'], 60, '')) . '-' . ($i + 1),
+                'slug' => Str::slug(Str::limit($data['title'], 60, '')).'-'.($i + 1),
                 'author_name' => $data['author_name'],
                 'country' => $data['country'],
                 'category' => $data['category'],

@@ -56,7 +56,7 @@ class ListExpenses extends ListRecords
                                 ->send();
                         }
 
-                        if (!empty($result['errors'])) {
+                        if (! empty($result['errors'])) {
                             Notification::make()
                                 ->title('Import Warnings')
                                 ->body(implode("\n", array_slice($result['errors'], 0, 5)))
@@ -76,7 +76,7 @@ class ListExpenses extends ListRecords
 
                         Notification::make()
                             ->title('Import Failed')
-                            ->body('Error: ' . $e->getMessage())
+                            ->body('Error: '.$e->getMessage())
                             ->danger()
                             ->send();
                     }

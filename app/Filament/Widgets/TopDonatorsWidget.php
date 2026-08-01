@@ -14,12 +14,12 @@ class TopDonatorsWidget extends TableWidget
     {
         return auth()->user()?->can('view_financial_widgets') ?? false;
     }
-    
+
     protected static ?string $heading = 'Top Donators';
-    
+
     protected static ?int $columns = 1;
 
-    protected int | string | array $columnSpan = 'full';
+    protected int|string|array $columnSpan = 'full';
 
     protected function getPollingInterval(): ?string
     {
@@ -41,14 +41,14 @@ class TopDonatorsWidget extends TableWidget
                 ->searchable()
                 ->sortable()
                 ->weight('bold'),
-                
+
             \Filament\Tables\Columns\TextColumn::make('financial_support')
                 ->label('Total Donated')
                 ->money('USD')
                 ->sortable()
                 ->weight('semibold')
                 ->color('success'),
-                
+
             \Filament\Tables\Columns\TextColumn::make('location')
                 ->label('Location')
                 ->searchable()

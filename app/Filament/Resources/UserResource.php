@@ -7,7 +7,6 @@ use App\Models\User;
 use BackedEnum;
 use Filament\Actions;
 use Filament\Forms;
-use Filament\Forms\Components;
 use Filament\Resources\Resource;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
@@ -43,20 +42,20 @@ class UserResource extends Resource
                         Forms\Components\TextInput::make('name')
                             ->required()
                             ->maxLength(255),
-                        
+
                         Forms\Components\TextInput::make('email')
                             ->email()
                             ->required()
                             ->maxLength(255)
                             ->unique(ignoreRecord: true),
-                        
+
                         Forms\Components\TextInput::make('password')
                             ->password()
                             ->required(fn (string $context): bool => $context === 'create')
                             ->dehydrateStateUsing(fn ($state) => $state ? Hash::make($state) : null)
                             ->dehydrated(fn ($state) => filled($state))
                             ->label(fn (string $context): string => $context === 'edit' ? 'New Password' : 'Password'),
-                        
+
                         Forms\Components\Select::make('roles')
                             ->relationship('roles', 'name')
                             ->multiple()
@@ -81,11 +80,11 @@ class UserResource extends Resource
                 Tables\Columns\TextColumn::make('name')
                     ->searchable()
                     ->sortable(),
-                
+
                 Tables\Columns\TextColumn::make('email')
                     ->searchable()
                     ->sortable(),
-                
+
                 Tables\Columns\TextColumn::make('roles.name')
                     ->label('Roles')
                     ->badge()
@@ -96,7 +95,7 @@ class UserResource extends Resource
                     ->dateTime('M j, Y')
                     ->sortable()
                     ->placeholder('Not verified'),
-                
+
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime('M j, Y g:i A')
                     ->sortable()

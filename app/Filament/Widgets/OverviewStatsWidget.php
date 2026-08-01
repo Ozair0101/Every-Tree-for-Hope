@@ -2,13 +2,11 @@
 
 namespace App\Filament\Widgets;
 
+use App\Models\ContactMessage;
 use App\Models\Donator;
 use App\Models\Event;
-use App\Models\ContactMessage;
-use App\Models\User;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
-use Illuminate\Support\Facades\DB;
 
 class OverviewStatsWidget extends BaseWidget
 {
@@ -43,8 +41,8 @@ class OverviewStatsWidget extends BaseWidget
         $donationGrowth = $totalDonations > 0 ? (($lastMonthDonations / $totalDonations) * 100) : 0;
 
         return [
-            Stat::make('Total Donations', '$' . number_format($totalDonations, 2))
-                ->description($donationGrowth > 0 ? '+$' . number_format($lastMonthDonations, 2) . ' this month' : 'No recent donations')
+            Stat::make('Total Donations', '$'.number_format($totalDonations, 2))
+                ->description($donationGrowth > 0 ? '+$'.number_format($lastMonthDonations, 2).' this month' : 'No recent donations')
                 ->descriptionIcon($donationGrowth > 0 ? 'heroicon-m-arrow-trending-up' : 'heroicon-m-arrow-trending-down')
                 ->color($donationGrowth > 0 ? 'success' : 'warning')
                 ->chart([7, 12, 10, 14, 15, 18, 20]),

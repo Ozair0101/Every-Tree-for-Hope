@@ -16,7 +16,14 @@ use App\Http\Controllers\Api\TreeRequestController;
 use App\Http\Controllers\Api\UpcomingEventController;
 use App\Http\Controllers\Api\V1\AuthController;
 use App\Http\Controllers\Api\V1\NotificationController;
+use App\Http\Controllers\Api\V1\Tasks\NotificationController as TaskNotificationController;
+use App\Http\Controllers\Api\V1\Tasks\TaskAssignmentController;
+use App\Http\Controllers\Api\V1\Tasks\TaskController;
+use App\Http\Controllers\Api\V1\Tasks\TaskProgressController;
+use App\Http\Controllers\Api\V1\Tasks\TaskReviewController;
 use App\Http\Controllers\Api\V1\TreeController;
+use App\Http\Controllers\Api\V1\TreeImageController;
+use App\Http\Controllers\Api\V1\TreeSocialController;
 use App\Http\Controllers\Api\VoiceController;
 use Illuminate\Support\Facades\Route;
 
@@ -167,18 +174,173 @@ Route::prefix('v1')->name('api.v1.')->group(function () {
         Route::get('/', [TreeController::class, 'index'])->name('index');
         Route::get('/map', [TreeController::class, 'map'])->name('map');
 
+        // The community wall. Reading is open — a plantation programme's work
+        // is public — so this sits outside the auth group alongside the map.
+        Route::get('/feed', [TreeSocialController::class, 'feed'])->name('feed');
+
+        // Deleting a comment is keyed on the comment, not the tree it sits on:
+        // the author may remove their own from anywhere. Declared before the
+        // '/{tree}' wildcard so "comments" is not read as a tree id.
+        Route::delete('/comments/{comment}', [TreeSocialController::class, 'destroyComment'])
+            ->middleware('auth:sanctum')
+            ->name('comments.destroy');
+
         Route::middleware('auth:sanctum')->group(function () {
             Route::get('/mine', [TreeController::class, 'mine'])->name('mine');
+
+            // Moderation, mirroring the approve/reject actions on the Filament
+            // resource so a reviewer can clear the queue from the phone.
+            // Declared before '/{tree}' so "pending" is not read as an id.
+            Route::get('/pending', [TreeController::class, 'pending'])->name('pending');
+            Route::post('/{tree}/approve', [TreeController::class, 'approve'])->name('approve');
+            Route::post('/{tree}/reject', [TreeController::class, 'reject'])->name('reject');
+
             Route::post('/', [TreeController::class, 'store'])
                 ->middleware('throttle:20,1')
                 ->name('store');
+
+            // The planter correcting their own record. Coordinates are not
+            // editable — see the controller for why.
+            Route::match(['put', 'patch'], '/{tree}', [TreeController::class, 'update'])
+                ->middleware('throttle:30,1')
+                ->name('update');
             Route::post('/{tree}/updates', [TreeController::class, 'storeUpdate'])
                 ->middleware('throttle:30,1')
                 ->name('updates.store');
+
+            // The "after" photograph, added to the same record as the planting
+            // photo so the pair is unambiguous. Superseded by the multi-image
+            // endpoint below; kept so an app build that has not updated yet
+            // keeps working.
+            Route::post('/{tree}/after-image', [TreeController::class, 'storeAfterImage'])
+                ->middleware('throttle:20,1')
+                ->name('after-image');
+
+            /*
+            |------------------------------------------------------------------
+            | Galleries — several photographs per phase, one of them the cover
+            |------------------------------------------------------------------
+            */
+            Route::post('/{tree}/images', [TreeImageController::class, 'storeBefore'])
+                ->middleware('throttle:20,1')
+                ->name('images.store');
+            Route::post('/{tree}/after-images', [TreeImageController::class, 'storeAfter'])
+                ->middleware('throttle:20,1')
+                ->name('after-images.store');
+            Route::post('/{tree}/images/{image}/cover', [TreeImageController::class, 'setCover'])
+                ->name('images.cover');
+            Route::delete('/{tree}/images/{image}', [TreeImageController::class, 'destroy'])
+                ->name('images.destroy');
+
+            /*
+            |------------------------------------------------------------------
+            | Reacting — signed in only
+            |------------------------------------------------------------------
+            | Reading the wall is public; liking, commenting and sharing are not.
+            */
+            Route::post('/{tree}/like', [TreeSocialController::class, 'toggleLike'])
+                ->middleware('throttle:60,1')
+                ->name('like');
+            Route::post('/{tree}/share', [TreeSocialController::class, 'share'])
+                ->middleware('throttle:60,1')
+                ->name('share');
+            Route::post('/{tree}/comments', [TreeSocialController::class, 'storeComment'])
+                ->middleware('throttle:30,1')
+                ->name('comments.store');
         });
 
-        // Declared last so the wildcard does not match "map" or "mine".
+        // Public reads that carry a tree id. Declared before the bare '/{tree}'
+        // so the wildcard does not swallow the sub-paths.
+        Route::get('/{tree}/images', [TreeImageController::class, 'index'])->name('images.index');
+        Route::get('/{tree}/comments', [TreeSocialController::class, 'comments'])->name('comments.index');
+
+        // Declared last so the wildcard does not match "map", "mine" or "feed".
         Route::get('/{tree}', [TreeController::class, 'show'])->name('show');
+    });
+
+    /*
+    |----------------------------------------------------------------------
+    | Task management — field operations
+    |----------------------------------------------------------------------
+    |
+    | Every route requires a Sanctum token: there is no public view of who is
+    | doing what and where. Authorisation beyond that is the policy's job —
+    | staff see the whole board, volunteers see their own work.
+    |
+    | {task} binds on the public UUID (see TaskServiceProvider::boot), so an
+    | integer id in a URL is a 404 rather than someone else's task.
+    |
+    | Ordering matters: every static segment (mine, map, notifications,
+    | reviews) is declared BEFORE '/{task}', or the wildcard swallows it.
+    |
+    | Write endpoints are rate limited. Submissions and progress reports carry
+    | photos over slow connections, so their limits are lower than reads but
+    | high enough for a volunteer working through a checklist in the field.
+    */
+    Route::prefix('tasks')->name('tasks.')->middleware('auth:sanctum')->group(function () {
+
+        // ── Task inbox (task_notifications, not Laravel's notifications) ──
+        Route::prefix('notifications')->name('notifications.')->group(function () {
+            Route::get('/', [TaskNotificationController::class, 'index'])->name('index');
+            Route::get('/unread-count', [TaskNotificationController::class, 'unreadCount'])->name('unread-count');
+            Route::post('/read-all', [TaskNotificationController::class, 'markAllRead'])->name('read-all');
+            Route::get('/preferences', [TaskNotificationController::class, 'preferences'])->name('preferences');
+            Route::put('/preferences', [TaskNotificationController::class, 'updatePreferences'])->name('preferences.update');
+            Route::post('/{id}/read', [TaskNotificationController::class, 'markRead'])->whereNumber('id')->name('read');
+            Route::post('/{id}/unread', [TaskNotificationController::class, 'markUnread'])->whereNumber('id')->name('unread');
+            Route::delete('/{id}', [TaskNotificationController::class, 'destroy'])->whereNumber('id')->name('destroy');
+        });
+
+        // ── The reviewer's queue, across every task ──
+        Route::get('/reviews/queue', [TaskReviewController::class, 'queue'])->name('reviews.queue');
+
+        // Who a coordinator may assign to. Static, so declared before '/{task}'.
+        Route::get('/assignable-users', [TaskAssignmentController::class, 'assignableUsers'])
+            ->name('assignable-users');
+
+        // ── Lists ──
+        Route::get('/', [TaskController::class, 'index'])->name('index');
+        Route::get('/mine', [TaskController::class, 'mine'])->name('mine');
+        Route::get('/map', [TaskController::class, 'map'])->name('map');
+        Route::post('/', [TaskController::class, 'store'])->middleware('throttle:60,1')->name('store');
+
+        // ── One task ──
+        Route::get('/{task}', [TaskController::class, 'show'])->name('show');
+        Route::match(['put', 'patch'], '/{task}', [TaskController::class, 'update'])->name('update');
+        Route::delete('/{task}', [TaskController::class, 'destroy'])->name('destroy');
+        Route::post('/{task}/publish', [TaskController::class, 'publish'])->name('publish');
+        Route::post('/{task}/cancel', [TaskController::class, 'cancel'])->name('cancel');
+        Route::get('/{task}/progress', [TaskProgressController::class, 'index'])->name('progress.index');
+
+        // ── Assignments ──
+        Route::prefix('/{task}/assignments')->name('assignments.')->group(function () {
+            Route::get('/', [TaskAssignmentController::class, 'index'])->name('index');
+            Route::post('/', [TaskAssignmentController::class, 'store'])->name('store');
+
+            Route::prefix('/{assignment}')->group(function () {
+                Route::post('/accept', [TaskAssignmentController::class, 'accept'])->name('accept');
+                Route::post('/decline', [TaskAssignmentController::class, 'decline'])->name('decline');
+                Route::post('/start', [TaskAssignmentController::class, 'start'])->name('start');
+                Route::post('/reassign', [TaskAssignmentController::class, 'reassign'])->name('reassign');
+
+                Route::post('/submit', [TaskAssignmentController::class, 'submit'])
+                    ->middleware('throttle:20,1')->name('submit');
+
+                Route::get('/checklist', [TaskAssignmentController::class, 'checklist'])->name('checklist');
+                Route::post('/checklist/{item}', [TaskAssignmentController::class, 'tickChecklistItem'])
+                    ->whereNumber('item')->middleware('throttle:120,1')->name('checklist.tick');
+                Route::delete('/checklist/{item}', [TaskAssignmentController::class, 'untickChecklistItem'])
+                    ->whereNumber('item')->middleware('throttle:120,1')->name('checklist.untick');
+
+                Route::get('/progress', [TaskProgressController::class, 'forAssignment'])->name('progress.index');
+                Route::post('/progress', [TaskProgressController::class, 'store'])
+                    ->middleware('throttle:60,1')->name('progress.store');
+
+                Route::get('/reviews', [TaskReviewController::class, 'index'])->name('reviews.index');
+                Route::post('/reviews', [TaskReviewController::class, 'store'])
+                    ->middleware('throttle:60,1')->name('reviews.store');
+            });
+        });
     });
 
     /*
@@ -190,6 +352,12 @@ Route::prefix('v1')->name('api.v1.')->group(function () {
         Route::get('/', [NotificationController::class, 'index'])->name('index');
         Route::get('/unread-count', [NotificationController::class, 'unreadCount'])->name('unread-count');
         Route::post('/read-all', [NotificationController::class, 'markAllRead'])->name('read-all');
+
+        // Expo push device registration. Declared before '/{id}/read' so the
+        // wildcard does not swallow them.
+        Route::post('/devices', [NotificationController::class, 'registerDevice'])->name('devices.register');
+        Route::delete('/devices', [NotificationController::class, 'unregisterDevice'])->name('devices.unregister');
+
         Route::post('/{id}/read', [NotificationController::class, 'markRead'])->name('read');
     });
 

@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Models;
-    
+
 use Illuminate\Database\Eloquent\Model;
 
 class Media extends Model
@@ -26,7 +26,9 @@ class Media extends Model
     {
         $url = $this->video_youtube_url;
 
-        if (!$url) return null;
+        if (! $url) {
+            return null;
+        }
 
         // youtube.com/shorts/ID
         if (preg_match('/youtube\.com\/shorts\/([a-zA-Z0-9_-]+)/', $url, $matches)) {
@@ -72,6 +74,7 @@ class Media extends Model
     public function getThumbnailUrlAttribute()
     {
         $videoId = $this->youtube_video_id;
+
         return $videoId ? "https://img.youtube.com/vi/{$videoId}/hqdefault.jpg" : null;
     }
 

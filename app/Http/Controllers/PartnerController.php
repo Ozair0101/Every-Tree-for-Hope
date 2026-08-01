@@ -23,10 +23,10 @@ class PartnerController extends Controller
             ->get();
 
         $countsByType = [
-            'sponsor'      => $partners->where('type', PartnerType::SPONSOR)->count(),
+            'sponsor' => $partners->where('type', PartnerType::SPONSOR)->count(),
             'collaborator' => $partners->where('type', PartnerType::COLLABORATOR)->count(),
-            'supporter'    => $partners->where('type', PartnerType::SUPPORTER)->count(),
-            'other'        => $partners->where('type', PartnerType::OTHER)->count(),
+            'supporter' => $partners->where('type', PartnerType::SUPPORTER)->count(),
+            'other' => $partners->where('type', PartnerType::OTHER)->count(),
         ];
 
         $featured = $partners->first();

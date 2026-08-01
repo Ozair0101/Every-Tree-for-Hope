@@ -50,7 +50,7 @@ class EventController extends ApiController
             $query = Event::active();
 
             if ($searchQuery !== '') {
-                $query->where('title', 'like', '%' . $searchQuery . '%');
+                $query->where('title', 'like', '%'.$searchQuery.'%');
             }
         }
 

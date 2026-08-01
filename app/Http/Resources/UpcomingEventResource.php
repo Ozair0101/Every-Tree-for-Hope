@@ -24,7 +24,7 @@ class UpcomingEventResource extends JsonResource
             'images' => collect($this->images ?? [])
                 ->map(fn ($path) => str_starts_with((string) $path, 'http')
                     ? $path
-                    : asset('storage/' . $path))
+                    : asset('storage/'.$path))
                 ->values()
                 ->all(),
 

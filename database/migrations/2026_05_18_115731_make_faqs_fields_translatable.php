@@ -55,6 +55,7 @@ return new class extends Migration
             if (is_array($v)) {
                 return $v['en'] ?? (reset($v) ?: null);
             }
+
             return $json;
         };
 

@@ -46,7 +46,7 @@ class InvolvementController extends Controller
 
         // If the registration is tied to a specific upcoming event, prepend event details
         // to the message so admins see the context at a glance.
-        if (!empty($validated['upcoming_event_id'])) {
+        if (! empty($validated['upcoming_event_id'])) {
             $event = UpcomingEvent::find($validated['upcoming_event_id']);
             if ($event) {
                 $userNote = trim($validated['message'] ?? '');
@@ -54,7 +54,7 @@ class InvolvementController extends Controller
                     "[%s] %s — %s\n\n%s",
                     __('messages.future_admin_prefix'),
                     $event->title,
-                    $event->date->format('M j, Y') . ' · ' . $event->location,
+                    $event->date->format('M j, Y').' · '.$event->location,
                     $userNote !== '' ? $userNote : '—'
                 );
             }
@@ -73,7 +73,7 @@ class InvolvementController extends Controller
             'collaborate' => __('messages.collaborate_request'),
         ];
 
-        $successMessage = !empty($validated['upcoming_event_id'])
+        $successMessage = ! empty($validated['upcoming_event_id'])
             ? __('messages.future_register_success')
             : __('messages.involvement_success', ['type' => $typeLabels[$validated['type']]]);
 

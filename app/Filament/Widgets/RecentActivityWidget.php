@@ -2,13 +2,11 @@
 
 namespace App\Filament\Widgets;
 
+use App\Models\ContactMessage;
 use App\Models\Donator;
 use App\Models\Event;
-use App\Models\ContactMessage;
 use Filament\Widgets\TableWidget;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Carbon;
 
 class RecentActivityWidget extends TableWidget
 {
@@ -18,10 +16,10 @@ class RecentActivityWidget extends TableWidget
     {
         return auth()->user()?->can('view_activity_widgets') ?? false;
     }
-    
+
     protected static ?string $heading = 'Recent Activity';
-    
-    protected int | string | array $columnSpan = 'full';
+
+    protected int|string|array $columnSpan = 'full';
 
     protected function getPollingInterval(): ?string
     {
@@ -46,9 +44,10 @@ class RecentActivityWidget extends TableWidget
             ])
             ->limit(5)
             ->get()
-            ->map(function($item) {
+            ->map(function ($item) {
                 $item->type = 'donation';
                 $item->type_label = 'Donation';
+
                 return $item;
             });
 
@@ -61,9 +60,10 @@ class RecentActivityWidget extends TableWidget
             ])
             ->limit(5)
             ->get()
-            ->map(function($item) {
+            ->map(function ($item) {
                 $item->type = 'event';
                 $item->type_label = 'Event';
+
                 return $item;
             });
 
@@ -76,9 +76,10 @@ class RecentActivityWidget extends TableWidget
             ])
             ->limit(5)
             ->get()
-            ->map(function($item) {
+            ->map(function ($item) {
                 $item->type = 'message';
                 $item->type_label = 'Contact Message';
+
                 return $item;
             });
 
@@ -97,24 +98,23 @@ class RecentActivityWidget extends TableWidget
             \Filament\Tables\Columns\TextColumn::make('type_label')
                 ->label('Type')
                 ->badge()
-                ->color(fn ($record) => match($record->type) {
+                ->color(fn ($record) => match ($record->type) {
                     'donation' => 'success',
                     'event' => 'primary',
                     'message' => 'warning',
                 }),
-                
+
             \Filament\Tables\Columns\TextColumn::make('title')
                 ->label('Title/Name')
                 ->searchable()
                 ->limit(30),
-                
+
             \Filament\Tables\Columns\TextColumn::make('description')
                 ->label('Description')
-                ->formatStateUsing(fn ($state, $record) => 
-                    $record->type === 'donation' ? '$' . number_format($state, 2) : $state
+                ->formatStateUsing(fn ($state, $record) => $record->type === 'donation' ? '$'.number_format($state, 2) : $state
                 )
                 ->limit(40),
-                
+
             \Filament\Tables\Columns\TextColumn::make('created_at')
                 ->label('Time')
                 ->dateTime('M j, Y g:i A')

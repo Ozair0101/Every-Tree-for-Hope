@@ -35,7 +35,7 @@ class JobCategory extends Model
                 $slug = $base;
                 $i = 2;
                 while (static::query()->where('slug', $slug)->exists()) {
-                    $slug = $base . '-' . $i++;
+                    $slug = $base.'-'.$i++;
                 }
                 $category->slug = $slug;
             }

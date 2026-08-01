@@ -47,7 +47,7 @@ class EventController extends Controller
             $query = Event::active();
 
             if ($searchQuery !== '') {
-                $query->where('title', 'like', '%' . $searchQuery . '%');
+                $query->where('title', 'like', '%'.$searchQuery.'%');
             }
         }
 

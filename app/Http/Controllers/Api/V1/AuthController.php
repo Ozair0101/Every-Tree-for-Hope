@@ -96,6 +96,13 @@ class AuthController extends Controller
             'cover_image' => $coverPath,
         ]);
 
+        // Every self-registered account is a normal user. Assigned explicitly
+        // rather than left roleless so the account type is a fact the admin
+        // panel can filter and assign work by — and note that Volunteer is the
+        // one role User::canAccessPanel() refuses, so this grants no admin
+        // access whatsoever.
+        $user->assignRole(User::VOLUNTEER_ROLE);
+
         $token = $user->createToken($data['device_name']);
 
         return response()->json([

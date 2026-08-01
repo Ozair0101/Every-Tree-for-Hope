@@ -14,9 +14,9 @@ class RecentDonationsChart extends ChartWidget
     {
         return auth()->user()?->can('view_financial_widgets') ?? false;
     }
-    
+
     protected ?string $heading = 'Donation Trends (Last 6 Months)';
-    
+
     protected static ?int $columns = 2;
 
     protected function getPollingInterval(): ?string
@@ -31,10 +31,10 @@ class RecentDonationsChart extends ChartWidget
             DB::raw('SUM(financial_support) as total'),
             DB::raw('COUNT(*) as count')
         )
-        ->where('donation_date', '>=', now()->subMonths(6))
-        ->groupBy('month')
-        ->orderBy('month')
-        ->get();
+            ->where('donation_date', '>=', now()->subMonths(6))
+            ->groupBy('month')
+            ->orderBy('month')
+            ->get();
 
         $labels = [];
         $donationAmounts = [];
@@ -44,7 +44,7 @@ class RecentDonationsChart extends ChartWidget
         for ($i = 5; $i >= 0; $i--) {
             $month = now()->subMonths($i)->format('Y-m');
             $monthData = $data->where('month', $month)->first();
-            
+
             $labels[] = now()->subMonths($i)->format('M Y');
             $donationAmounts[] = $monthData ? (float) $monthData->total : 0;
             $donationCounts[] = $monthData ? $monthData->count : 0;

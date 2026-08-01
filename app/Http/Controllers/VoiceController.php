@@ -70,7 +70,7 @@ class VoiceController extends Controller
         abort_unless($voice->status === 'approved', 404);
 
         // Cheap, non-blocking view counter (one bump per session per voice).
-        $viewedKey = 'voice_viewed_' . $voice->id;
+        $viewedKey = 'voice_viewed_'.$voice->id;
         if (! $request->session()->has($viewedKey)) {
             $voice->increment('views_count');
             $request->session()->put($viewedKey, true);
@@ -103,7 +103,7 @@ class VoiceController extends Controller
             'author_name' => 'required|string|max:120',
             'author_email' => 'nullable|email|max:255',
             'country' => 'nullable|string|max:120',
-            'category' => 'required|in:' . implode(',', array_keys(Voice::CATEGORIES)),
+            'category' => 'required|in:'.implode(',', array_keys(Voice::CATEGORIES)),
             'title' => 'required|string|max:160',
             'body' => 'required|string|max:8000',
             'image' => 'nullable|image|max:5120',
@@ -215,7 +215,7 @@ class VoiceController extends Controller
             return $cookie;
         }
 
-        $fp = substr(hash('sha256', $request->session()->getId() . '|' . $request->ip()), 0, 40);
+        $fp = substr(hash('sha256', $request->session()->getId().'|'.$request->ip()), 0, 40);
 
         // Keep it for ~1 year.
         cookie()->queue(cookie('voice_fp', $fp, 60 * 24 * 365));

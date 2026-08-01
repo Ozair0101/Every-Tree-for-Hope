@@ -66,9 +66,11 @@ class Partner extends Model
             if (str_starts_with($this->logo, 'http')) {
                 return $this->logo;
             }
+
             // Otherwise, treat as stored file path
-            return asset('storage/' . $this->logo);
+            return asset('storage/'.$this->logo);
         }
+
         return asset('placeholder-logo.png');
     }
 }

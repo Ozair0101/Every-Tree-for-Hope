@@ -46,25 +46,25 @@ class TreeRequestInfolist
                 TextEntry::make('media_paths')
                     ->label('Media')
                     ->state(function ($record) {
-                        if (!$record || empty($record->media_paths) || !is_array($record->media_paths)) {
+                        if (! $record || empty($record->media_paths) || ! is_array($record->media_paths)) {
                             return null;
                         }
 
                         $items = [];
                         foreach ($record->media_paths as $path) {
-                            if (!$path) {
+                            if (! $path) {
                                 continue;
                             }
 
-                            $url = asset('storage/' . ltrim($path, '/'));
+                            $url = asset('storage/'.ltrim($path, '/'));
                             $ext = strtolower(pathinfo($path, PATHINFO_EXTENSION));
 
                             if (in_array($ext, ['mp4', 'webm', 'mov', 'qt'])) {
-                                $items[] = '<video controls class="w-full rounded-lg border border-gray-200" src="' . e($url) . '"></video>';
+                                $items[] = '<video controls class="w-full rounded-lg border border-gray-200" src="'.e($url).'"></video>';
                             } else {
-                                $items[] = '<a href="' . e($url) . '" target="_blank" rel="noopener" class="block">'
-                                    . '<img class="w-full h-auto rounded-lg border border-gray-200" src="' . e($url) . '" alt="Media" />'
-                                    . '</a>';
+                                $items[] = '<a href="'.e($url).'" target="_blank" rel="noopener" class="block">'
+                                    .'<img class="w-full h-auto rounded-lg border border-gray-200" src="'.e($url).'" alt="Media" />'
+                                    .'</a>';
                             }
                         }
 
@@ -72,7 +72,7 @@ class TreeRequestInfolist
                             return null;
                         }
 
-                        return new HtmlString('<div class="grid grid-cols-1 md:grid-cols-2 gap-4">' . implode('', $items) . '</div>');
+                        return new HtmlString('<div class="grid grid-cols-1 md:grid-cols-2 gap-4">'.implode('', $items).'</div>');
                     })
                     ->html()
                     ->placeholder('No media uploaded.'),
