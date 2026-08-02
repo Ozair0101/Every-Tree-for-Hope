@@ -71,14 +71,32 @@ class TreeGalleryAndSocialTest extends TestCase
 
     /* ══════════════ AUTO-APPROVAL ══════════════ */
 
-    public function test_a_volunteers_tree_still_waits_for_review(): void
+    /** The minimum a planting needs: the details, and at least one photograph. */
+    private function plantingPayload(array $overrides = []): array
     {
-        $response = $this->actingAs($this->planter, 'sanctum')->postJson('/api/v1/trees', [
+        return array_merge([
             'species' => 'Chinar',
             'latitude' => 34.55,
             'longitude' => 69.05,
             'planted_on' => now()->toDateString(),
-        ]);
+            'images' => [$this->photo()],
+        ], $overrides);
+    }
+
+    public function test_a_planting_must_carry_a_photo(): void
+    {
+        // A tree record with no picture is a claim with no evidence, and the
+        // whole before/after feature rests on there being a frame to compare.
+        $this->actingAs($this->planter, 'sanctum')
+            ->postJson('/api/v1/trees', $this->plantingPayload(['images' => []]))
+            ->assertStatus(422)
+            ->assertJsonValidationErrors('images');
+    }
+
+    public function test_a_volunteers_tree_still_waits_for_review(): void
+    {
+        $response = $this->actingAs($this->planter, 'sanctum')
+            ->post('/api/v1/trees', $this->plantingPayload());
 
         $response->assertCreated();
         $this->assertSame('pending', $response->json('data.tree.status'));
@@ -88,12 +106,8 @@ class TreeGalleryAndSocialTest extends TestCase
     {
         // Someone who may approve other people's trees would otherwise have to
         // approve their own as a second step with one possible outcome.
-        $response = $this->actingAs($this->moderator, 'sanctum')->postJson('/api/v1/trees', [
-            'species' => 'Chinar',
-            'latitude' => 34.55,
-            'longitude' => 69.05,
-            'planted_on' => now()->toDateString(),
-        ]);
+        $response = $this->actingAs($this->moderator, 'sanctum')
+            ->post('/api/v1/trees', $this->plantingPayload());
 
         $response->assertCreated();
         $this->assertSame('approved', $response->json('data.tree.status'));
@@ -196,6 +210,27 @@ class TreeGalleryAndSocialTest extends TestCase
             $tree->afterImages()->where('is_cover', true)->sole()->path,
             $tree->after_image_path,
         );
+    }
+
+    public function test_a_follow_up_without_exif_still_yields_a_growth_figure(): void
+    {
+        // On-device compression strips EXIF from most gallery photos. Leaving
+        // captured_at null would leave growthDays() null for nearly every
+        // follow-up — and the growth figure is the headline of the comparison.
+        $tree = $this->tree(['planted_on' => now()->subDays(120)->toDateString()]);
+        $this->image($tree);
+        $tree->syncCover(TreeImage::PHASE_BEFORE);
+
+        $this->actingAs($this->planter, 'sanctum')
+            ->post("/api/v1/trees/{$tree->id}/after-images", ['images' => [$this->photo('after.jpg')]])
+            ->assertCreated();
+
+        $tree->refresh();
+
+        $this->assertNotNull($tree->after_image_taken_at);
+        $this->assertSame(120, $tree->growthDays());
+        // Still honest about where the time came from.
+        $this->assertNotSame('exif', $tree->afterImages()->first()->metadata_source);
     }
 
     public function test_follow_up_photos_are_refused_until_the_tree_is_approved(): void

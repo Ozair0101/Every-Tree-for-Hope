@@ -5,8 +5,6 @@ namespace App\Notifications\Tasks;
 use App\Models\NotificationPreference;
 use App\Models\Task;
 use App\Models\TaskAssignment;
-use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Notification;
 
 /**
@@ -16,18 +14,23 @@ use Illuminate\Notifications\Notification;
  * inbox entry and the push payload relate, and the fact that both are built
  * from the same title and body so they can never drift apart in wording.
  *
- * Queued. Composing a notification means writing rows and dispatching send
- * jobs, and none of that should happen inside the HTTP request that triggered
- * it — a volunteer tapping "Start" waits for their own task to start, not for
- * thirty coordinators to be notified.
+ * Sent inline, not queued.
+ *
+ * Queueing was the theoretically better design — it keeps the triggering
+ * request short — but it made delivery conditional on a worker running on the
+ * right queue, and when none was, assignees were simply never told. A
+ * notification that depends on separate infrastructure to exist at all is worse
+ * than one that costs the request a few milliseconds.
+ *
+ * The cost is small: the inbox channel writes one row, and the push channel
+ * writes rows and hands off. Neither is expensive enough to notice against the
+ * database work the triggering action is already doing.
  *
  * Subclasses supply `eventKey()`, `title()` and `body()`. Everything else is
  * handled here.
  */
-abstract class TaskEventNotification extends Notification implements ShouldQueue
+abstract class TaskEventNotification extends Notification
 {
-    use Queueable;
-
     /** Set by the inbox channel so the push rows can point back at the entry. */
     public ?int $taskNotificationId = null;
 
@@ -35,7 +38,6 @@ abstract class TaskEventNotification extends Notification implements ShouldQueue
         public readonly ?Task $task = null,
         public readonly ?TaskAssignment $assignment = null,
     ) {
-        $this->onQueue('notifications');
     }
 
     /** The dot-namespaced event key: task.assigned, task.approved, … */

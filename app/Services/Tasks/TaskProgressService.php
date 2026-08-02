@@ -20,6 +20,10 @@ use Illuminate\Support\Facades\DB;
  */
 class TaskProgressService
 {
+    public function __construct(
+        private readonly TaskNotificationService $notifications,
+    ) {}
+
     /**
      * @param  array<int, UploadedFile>  $files
      */
@@ -43,7 +47,7 @@ class TaskProgressService
             throw TaskOperationException::notAssigned($assignment->task);
         }
 
-        return DB::transaction(function () use ($assignment, $actor, $percentage, $note, $latitude, $longitude, $files, $clientUuid) {
+        $progress = DB::transaction(function () use ($assignment, $actor, $percentage, $note, $latitude, $longitude, $files, $clientUuid) {
             $progress = $assignment->reportProgress(
                 percentage: $percentage,
                 actor: $actor,
@@ -61,5 +65,21 @@ class TaskProgressService
 
             return $progress;
         });
+
+        /*
+         * Tell whoever is accountable for the task.
+         *
+         * Outside the transaction and swallowed on failure, for the same reason
+         * as everywhere else: the report is committed by now, and a volunteer
+         * in the field must never be told their update failed because a
+         * coordinator's device could not be reached. They would file it again.
+         */
+        try {
+            $this->notifications->taskProgressReported($assignment, $percentage, $note);
+        } catch (\Throwable $e) {
+            report($e);
+        }
+
+        return $progress;
     }
 }

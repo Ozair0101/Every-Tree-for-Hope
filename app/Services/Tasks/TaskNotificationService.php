@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Notifications\Tasks\TaskApprovedNotification;
 use App\Notifications\Tasks\TaskAssignedNotification;
 use App\Notifications\Tasks\TaskEventNotification;
+use App\Notifications\Tasks\TaskProgressReportedNotification;
 use App\Notifications\Tasks\TaskRejectedNotification;
 use App\Notifications\Tasks\TaskStartedNotification;
 use App\Notifications\Tasks\TaskSubmittedNotification;
@@ -59,6 +60,31 @@ class TaskNotificationService
     }
 
     /** Volunteer submitted → tell whoever can review it. */
+    /**
+     * Tell the people accountable for a task that a volunteer has filed
+     * progress on it.
+     *
+     * Same recipients as a submission — the task's reviewers, falling back to
+     * its creator — minus the person reporting, who does not need telling what
+     * they just did.
+     */
+    public function taskProgressReported(
+        TaskAssignment $assignment,
+        int $percentage,
+        ?string $note = null,
+    ): int {
+        $task = $assignment->task;
+
+        if (! $task) {
+            return 0;
+        }
+
+        return $this->dispatch(
+            $this->reviewersFor($task, except: $assignment->user),
+            new TaskProgressReportedNotification($task, $assignment, $percentage, $note),
+        );
+    }
+
     public function taskSubmitted(TaskAssignment $assignment): int
     {
         $task = $assignment->task;

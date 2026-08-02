@@ -158,8 +158,21 @@ class TreeGalleryService
 
     private function sensibleCaptureTime(Tree $tree, ?Carbon $captured, string $phase): ?Carbon
     {
+        /*
+         | No EXIF time — fall back to now.
+         |
+         | Most gallery photos lose their EXIF to the on-device compression
+         | before they ever reach us, so leaving this null would leave
+         | `growthDays()` null for nearly every follow-up, and the growth figure
+         | is the headline of the whole comparison.
+         |
+         | This is not a claim that the camera said so: `metadata_source` stays
+         | whatever the extractor decided, so a reviewer can still tell a
+         | camera-stamped time from an assumed one. The endpoint this replaced
+         | did the same.
+        */
         if (! $captured) {
-            return null;
+            return now();
         }
 
         if ($captured->isFuture()) {
