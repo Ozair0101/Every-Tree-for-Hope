@@ -9,6 +9,7 @@ use App\Models\Task;
 use App\Models\User;
 use Illuminate\Notifications\Notification;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 /**
  * Queues a push for every device the user has registered.
@@ -74,8 +75,28 @@ class TaskPushChannel
             ])->id)->all();
         });
 
+        /*
+         * Delivered in-request rather than queued.
+         *
+         * `dispatch()` put these on the `push` queue, which meant a device only
+         * ever buzzed if a worker happened to be running on that queue — and
+         * when none was, the row sat in push_notifications forever looking like
+         * it had been sent.
+         *
+         * Each send is isolated: one unreachable device must not stop the
+         * others, and none of them may fail the action that triggered the
+         * notification. The row is already written either way, so a failure
+         * here costs the buzz, not the record.
+         */
         foreach ($ids as $id) {
-            SendPushNotificationJob::dispatch($id);
+            try {
+                SendPushNotificationJob::dispatchSync($id);
+            } catch (\Throwable $e) {
+                Log::warning('[task-push] Delivery failed.', [
+                    'push_notification_id' => $id,
+                    'error' => $e->getMessage(),
+                ]);
+            }
         }
     }
 
