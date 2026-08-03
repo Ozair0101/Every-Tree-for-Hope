@@ -17,6 +17,7 @@ use App\Http\Controllers\Api\TreeRequestController;
 use App\Http\Controllers\Api\UpcomingEventController;
 use App\Http\Controllers\Api\V1\AuthController;
 use App\Http\Controllers\Api\V1\NotificationController;
+use App\Http\Controllers\Api\V1\PublicProfileController;
 use App\Http\Controllers\Api\V1\Tasks\NotificationController as TaskNotificationController;
 use App\Http\Controllers\Api\V1\Tasks\TaskAssignmentController;
 use App\Http\Controllers\Api\V1\Tasks\TaskController;
@@ -96,6 +97,17 @@ Route::prefix('v1')->name('api.v1.')->group(function () {
     | Home & impact
     |----------------------------------------------------------------------
     */
+    /*
+    |----------------------------------------------------------------------
+    | Public member profiles
+    |----------------------------------------------------------------------
+    | Reached by tapping a name on a post or a comment. Open to anyone, because
+    | the wall itself is — but the payload is narrow, and the task block inside
+    | it only appears for a caller holding `view_any_task`.
+    */
+    Route::get('/users/{user}/profile', [PublicProfileController::class, 'show'])
+        ->name('users.profile');
+
     Route::get('/home', [HomeController::class, 'index'])->name('home');
     Route::get('/stats', [HomeController::class, 'stats'])->name('stats');
     Route::get('/report', [ReportController::class, 'index'])->name('report');
@@ -180,6 +192,14 @@ Route::prefix('v1')->name('api.v1.')->group(function () {
         Route::get('/mine', [VoiceController::class, 'mine'])
             ->middleware('auth:sanctum')
             ->name('mine');
+
+        // Keyed on the comment, not the finding it sits on — a comment id is
+        // unique on its own. Declared before the '/{voice}' wildcard so
+        // "comments" is not read as a slug.
+        Route::delete('/comments/{comment}', [VoiceController::class, 'destroyComment'])
+            ->middleware('auth:sanctum')
+            ->name('comments.destroy');
+
         Route::get('/{voice}', [VoiceController::class, 'show'])->name('show');
 
         Route::middleware('throttle:20,1')->group(function () {
@@ -218,6 +238,10 @@ Route::prefix('v1')->name('api.v1.')->group(function () {
             // resource so a reviewer can clear the queue from the phone.
             // Declared before '/{tree}' so "pending" is not read as an id.
             Route::get('/pending', [TreeController::class, 'pending'])->name('pending');
+
+            // The caller's own saved posts. Declared before '/{tree}' so the
+            // wildcard does not read "favourites" as an id.
+            Route::get('/favourites', [TreeSocialController::class, 'favourites'])->name('favourites');
             Route::post('/{tree}/approve', [TreeController::class, 'approve'])->name('approve');
             Route::post('/{tree}/reject', [TreeController::class, 'reject'])->name('reject');
 
@@ -264,6 +288,13 @@ Route::prefix('v1')->name('api.v1.')->group(function () {
             |------------------------------------------------------------------
             | Reading the wall is public; liking, commenting and sharing are not.
             */
+            // Private save. Toggling, like the like above.
+            Route::post('/{tree}/favourite', [TreeSocialController::class, 'toggleFavourite'])
+                ->name('favourite');
+
+            // Removing a post you planted. Moderators may also remove one.
+            Route::delete('/{tree}', [TreeController::class, 'destroy'])->name('destroy');
+
             Route::post('/{tree}/like', [TreeSocialController::class, 'toggleLike'])
                 ->middleware('throttle:60,1')
                 ->name('like');

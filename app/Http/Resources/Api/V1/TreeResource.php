@@ -73,6 +73,9 @@ class TreeResource extends JsonResource
             // the heart is filled correctly on a fresh install where the app
             // holds no local state.
             'is_liked' => $this->isLikedBy($request->user('sanctum')),
+            // Private to the caller — no count accompanies it, because a
+            // favourite says something about the reader, not about the tree.
+            'is_favourited' => $this->isFavouritedBy($request->user('sanctum')),
             'is_mine' => $request->user('sanctum')?->id === $this->user_id,
 
             'created_at' => $this->created_at?->toIso8601String(),

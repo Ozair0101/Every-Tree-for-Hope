@@ -7,6 +7,7 @@ use App\Http\Resources\Api\V1\TreeCommentResource;
 use App\Http\Resources\Api\V1\TreeResource;
 use App\Models\Tree;
 use App\Models\TreeComment;
+use App\Models\TreeFavourite;
 use App\Models\TreeLike;
 use Illuminate\Database\UniqueConstraintViolationException;
 use Illuminate\Http\JsonResponse;
@@ -91,6 +92,67 @@ class TreeSocialController extends ApiController
             'is_liked' => $liked,
             'likes_count' => $tree->likes()->count(),
         ]);
+    }
+
+    /**
+     * Save a post to the caller's favourites, or take it back off.
+     *
+     * Toggling for the same reason as the like above: one button whose meaning
+     * depends on a state the app may not yet know.
+     *
+     * Unlike a like, this returns no count. A favourite is private — the post's
+     * author is not told, and no total is published — so there is nothing
+     * aggregate to report.
+     */
+    public function toggleFavourite(Request $request, Tree $tree): JsonResponse
+    {
+        abort_unless($tree->status === 'approved', 404);
+
+        $user = $request->user();
+        $existing = $tree->favourites()->where('user_id', $user->id)->first();
+
+        if ($existing) {
+            $existing->delete();
+
+            return $this->ok(['is_favourited' => false], __('Removed from favourites.'));
+        }
+
+        try {
+            TreeFavourite::create(['tree_id' => $tree->id, 'user_id' => $user->id]);
+        } catch (UniqueConstraintViolationException) {
+            // A double-tap on a slow connection sends this twice. The second
+            // arrival is not an error — the intent was "saved", and it is.
+        }
+
+        return $this->ok(['is_favourited' => true], __('Saved to favourites.'));
+    }
+
+    /**
+     * The caller's own saved posts, newest save first.
+     *
+     * Scoped to the authenticated user with no parameter to override it: one
+     * person's favourites are never another's to read, so there is deliberately
+     * no way to ask for someone else's.
+     */
+    public function favourites(Request $request): JsonResponse
+    {
+        $trees = Tree::query()
+            ->approved()
+            ->whereHas('favourites', fn ($q) => $q->where('user_id', $request->user()->id))
+            ->with(['user', 'beforeImages', 'afterImages', 'favourites', 'likes'])
+            ->withCount(['likes', 'comments'])
+            // Ordered by when it was saved, not when it was planted — this is a
+            // reading list, and the last thing saved is the one being looked for.
+            ->orderByDesc(
+                TreeFavourite::query()
+                    ->select('created_at')
+                    ->whereColumn('tree_id', 'trees.id')
+                    ->where('user_id', $request->user()->id)
+                    ->limit(1),
+            )
+            ->paginate($this->perPage($request, 12));
+
+        return $this->paginated($trees, TreeResource::class);
     }
 
     /**
