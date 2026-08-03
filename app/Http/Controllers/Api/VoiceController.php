@@ -180,7 +180,11 @@ class VoiceController extends ApiController
             'category' => 'required|in:'.implode(',', array_keys(Voice::CATEGORIES)),
             'title' => 'required|string|max:160',
             'body' => 'required|string|max:8000',
-            'image' => 'nullable|image|max:5120',
+            // 8 MB, matching every other image endpoint (events, trees,
+            // maintenance). The app compresses on-device before upload, so a
+            // real photo lands far under this — the ceiling is headroom, not a
+            // target.
+            'image' => 'nullable|image|mimes:jpeg,jpg,png,webp,heic|max:8192',
         ]);
 
         $path = null;
