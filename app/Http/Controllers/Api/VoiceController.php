@@ -253,6 +253,22 @@ class VoiceController extends ApiController
      */
     protected function fingerprint(Request $request): string
     {
+        /*
+         * A signed-in reader is identified by their account, not their handset.
+         *
+         * This is what makes "one like per person" true. Keyed on the device, a
+         * user with a phone and a tablet could like the same finding twice, and
+         * the heart would read as unfilled on whichever device they had not used
+         * — which looks like the like was lost.
+         *
+         * Guests keep the device fingerprint below. It is the best identity
+         * available for someone with no account, and it still stops the same
+         * visitor liking repeatedly.
+         */
+        if ($user = $request->user('sanctum')) {
+            return substr(hash('sha256', 'user|'.$user->getKey()), 0, 40);
+        }
+
         $deviceId = trim((string) $request->header('X-Device-Id'));
 
         if ($deviceId !== '') {
