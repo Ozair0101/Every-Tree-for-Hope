@@ -81,6 +81,15 @@ class Event extends Model
     }
 
     /**
+     * Field maintenance visits — follow-up inspections whose approved
+     * `trees_lost` roll up into this event's survival rate.
+     */
+    public function maintenanceVisits(): HasMany
+    {
+        return $this->hasMany(MaintenanceVisit::class);
+    }
+
+    /**
      * Donators who sponsored this event.
      */
     public function donators(): BelongsToMany

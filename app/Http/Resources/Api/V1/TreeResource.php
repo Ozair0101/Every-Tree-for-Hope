@@ -13,6 +13,7 @@ class TreeResource extends JsonResource
         return [
             'id' => $this->id,
             'species' => $this->species,
+            'tree_count' => (int) ($this->tree_count ?? 1),
             'notes' => $this->notes,
             'location_name' => $this->location_name,
             'latitude' => (float) $this->latitude,

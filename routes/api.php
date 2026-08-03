@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\CareerController;
 use App\Http\Controllers\Api\ContactController;
 use App\Http\Controllers\Api\DonatorController;
 use App\Http\Controllers\Api\EventController;
+use App\Http\Controllers\Api\MaintenanceVisitController;
 use App\Http\Controllers\Api\FaqController;
 use App\Http\Controllers\Api\HomeController;
 use App\Http\Controllers\Api\InvolvementController;
@@ -115,7 +116,28 @@ Route::prefix('v1')->name('api.v1.')->group(function () {
             ->middleware(['auth:sanctum', 'throttle:20,1'])
             ->name('store');
         Route::get('/{event}', [EventController::class, 'show'])->name('show');
+
+        // Module B — maintenance visits logged against a planting event. The
+        // log is public (approved visits only for anonymous viewers, resolved
+        // in the controller); recording one needs a session.
+        Route::get('/{event}/maintenance-visits', [MaintenanceVisitController::class, 'index'])
+            ->name('maintenance-visits.index');
+        Route::post('/{event}/maintenance-visits', [MaintenanceVisitController::class, 'store'])
+            ->middleware(['auth:sanctum', 'throttle:20,1'])
+            ->name('maintenance-visits.store');
     });
+
+    /*
+    |----------------------------------------------------------------------
+    | Maintenance visit moderation — approve/reject a logged visit
+    |----------------------------------------------------------------------
+    */
+    Route::prefix('maintenance-visits')->name('maintenance-visits.')
+        ->middleware('auth:sanctum')
+        ->group(function () {
+            Route::post('/{visit}/approve', [MaintenanceVisitController::class, 'approve'])->name('approve');
+            Route::post('/{visit}/reject', [MaintenanceVisitController::class, 'reject'])->name('reject');
+        });
 
     /*
     |----------------------------------------------------------------------

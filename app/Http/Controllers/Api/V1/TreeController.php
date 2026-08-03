@@ -127,7 +127,13 @@ class TreeController extends ApiController
     public function store(Request $request): JsonResponse
     {
         $validated = $request->validate([
+            // Idempotency key — set by the app before its first attempt so an
+            // offline planting replayed on reconnect is recorded exactly once.
+            'client_uuid' => 'nullable|uuid',
             'species' => 'required|string|max:160',
+            // A field record can be a batch — "40 saplings at this spot" — so a
+            // count rides alongside the single GPS point. Defaults to 1.
+            'tree_count' => 'nullable|integer|min:1|max:100000000',
             'notes' => 'nullable|string|max:2000',
             'location_name' => 'nullable|string|max:200',
             'latitude' => 'required|numeric|between:-90,90',
@@ -148,6 +154,19 @@ class TreeController extends ApiController
             'device_model' => 'nullable|string|max:80',
             'device_os' => 'nullable|string|max:60',
         ]);
+
+        // A planting queued offline is replayed when the signal returns. If this
+        // client key already produced a tree, return that one rather than
+        // re-attaching its photos and re-notifying the moderators — the app sees
+        // success either way, and the review queue stays free of duplicates.
+        $clientUuid = $validated['client_uuid'] ?? null;
+
+        if (filled($clientUuid) && $existing = Tree::query()->where('client_uuid', $clientUuid)->first()) {
+            return $this->created(
+                ['tree' => new TreeResource($existing->fresh()->load(['user', 'beforeImages']))],
+                __('This tree was already recorded.'),
+            );
+        }
 
         // A planting record with no photograph is a claim, not evidence — the
         // whole feature rests on the picture. At least one frame is required,
@@ -172,7 +191,9 @@ class TreeController extends ApiController
         $autoApprove = $author->can('approve_tree');
 
         $tree = $author->trees()->create([
+            'client_uuid' => $clientUuid,
             'species' => $validated['species'],
+            'tree_count' => $validated['tree_count'] ?? 1,
             'notes' => $validated['notes'] ?? null,
             'location_name' => $validated['location_name'] ?? null,
             'latitude' => $validated['latitude'],

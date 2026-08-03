@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Concerns\HasClientUuid;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -12,12 +13,20 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  *
  * Moderated like {@see Voice}: created `pending`, made visible on the planter's
  * profile, the public list and the map only once `status` is `approved`.
+ *
+ * Field-captured, so it carries a client-generated {@see HasClientUuid} key: a
+ * planting recorded with no signal is queued on the device and replayed when
+ * the connection returns, and the key stops that replay becoming a second tree.
  */
 class Tree extends Model
 {
+    use HasClientUuid;
+
     protected $fillable = [
+        'client_uuid',
         'user_id',
         'species',
+        'tree_count',
         'notes',
         'location_name',
         'latitude',
