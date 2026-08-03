@@ -16,6 +16,7 @@ use App\Http\Controllers\Api\TreeRequestController;
 use App\Http\Controllers\Api\UpcomingEventController;
 use App\Http\Controllers\Api\V1\AuthController;
 use App\Http\Controllers\Api\V1\NotificationController;
+use App\Http\Controllers\Api\V1\PublicProfileController;
 use App\Http\Controllers\Api\V1\Tasks\NotificationController as TaskNotificationController;
 use App\Http\Controllers\Api\V1\Tasks\TaskAssignmentController;
 use App\Http\Controllers\Api\V1\Tasks\TaskController;
@@ -95,6 +96,17 @@ Route::prefix('v1')->name('api.v1.')->group(function () {
     | Home & impact
     |----------------------------------------------------------------------
     */
+    /*
+    |----------------------------------------------------------------------
+    | Public member profiles
+    |----------------------------------------------------------------------
+    | Reached by tapping a name on a post or a comment. Open to anyone, because
+    | the wall itself is — but the payload is narrow, and the task block inside
+    | it only appears for a caller holding `view_any_task`.
+    */
+    Route::get('/users/{user}/profile', [PublicProfileController::class, 'show'])
+        ->name('users.profile');
+
     Route::get('/home', [HomeController::class, 'index'])->name('home');
     Route::get('/stats', [HomeController::class, 'stats'])->name('stats');
     Route::get('/report', [ReportController::class, 'index'])->name('report');
@@ -154,6 +166,14 @@ Route::prefix('v1')->name('api.v1.')->group(function () {
         Route::get('/mine', [VoiceController::class, 'mine'])
             ->middleware('auth:sanctum')
             ->name('mine');
+
+        // Keyed on the comment, not the finding it sits on — a comment id is
+        // unique on its own. Declared before the '/{voice}' wildcard so
+        // "comments" is not read as a slug.
+        Route::delete('/comments/{comment}', [VoiceController::class, 'destroyComment'])
+            ->middleware('auth:sanctum')
+            ->name('comments.destroy');
+
         Route::get('/{voice}', [VoiceController::class, 'show'])->name('show');
 
         Route::middleware('throttle:20,1')->group(function () {

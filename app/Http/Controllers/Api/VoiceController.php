@@ -129,7 +129,24 @@ class VoiceController extends ApiController
         $voice->increment('views_count');
         $voice->refresh();
 
-        $comments = $voice->comments()->visible()->latest()->get();
+        /*
+         * Roots only, each carrying its whole thread.
+         *
+         * Returning every comment flat would make the client rebuild the tree,
+         * and it would count replies as top-level entries. Eager-loading the
+         * replies and their authors keeps a busy thread to a handful of queries
+         * rather than one per comment.
+         */
+        $comments = $voice->comments()
+            ->visible()
+            ->roots()
+            ->with([
+                'user',
+                'replies' => fn ($q) => $q->visible()->with(['user', 'parent.user']),
+            ])
+            ->withCount(['replies' => fn ($q) => $q->visible()])
+            ->latest()
+            ->get();
 
         // More to explore — same category first.
         $related = Voice::query()->approved()
@@ -228,14 +245,40 @@ class VoiceController extends ApiController
     {
         abort_unless($voice->status === 'approved', 404);
 
+        $user = $request->user('sanctum');
+
         $validated = $request->validate([
-            'author_name' => 'required|string|max:120',
+            // Optional for a signed-in reader: their account already names them,
+            // and asking a logged-in user to retype their own name is friction
+            // for nothing. Still required for an anonymous visitor, who has no
+            // other identity to attribute the comment to.
+            'author_name' => [$user ? 'nullable' : 'required', 'string', 'max:120'],
             'body' => 'required|string|max:2000',
+            'parent_id' => 'nullable|integer|exists:voice_comments,id',
         ]);
+
+        /*
+         * Replies are stored flat under the top of the thread.
+         *
+         * `parent_id` records who was actually answered; `root_id` records which
+         * conversation it belongs to. The client draws two levels and names the
+         * recipient beyond that, so it asks for one flat list per root rather
+         * than a tree it would have to walk.
+         */
+        $parent = isset($validated['parent_id'])
+            ? VoiceComment::where('voice_id', $voice->id)->find($validated['parent_id'])
+            : null;
 
         $comment = VoiceComment::create([
             'voice_id' => $voice->id,
-            'author_name' => $validated['author_name'],
+            'user_id' => $user?->getKey(),
+            'parent_id' => $parent?->id,
+            // A reply to a reply belongs to the same root as the reply it
+            // answered, not to that reply.
+            'root_id' => $parent ? ($parent->root_id ?? $parent->id) : null,
+            'author_name' => $user
+                ? trim($user->name.' '.($user->lastname ?? ''))
+                : $validated['author_name'],
             'body' => $validated['body'],
             'status' => 'approved',
         ]);
@@ -243,9 +286,37 @@ class VoiceController extends ApiController
         $voice->increment('comments_count');
 
         return $this->created([
-            'comment' => new VoiceCommentResource($comment),
+            'comment' => new VoiceCommentResource($comment->load(['user', 'parent.user'])),
             'count' => (int) $voice->fresh()->comments_count,
         ], __('messages.voices_comment_success'));
+    }
+
+    /**
+     * Remove a comment.
+     *
+     * Allowed for its author, the person whose finding it is, and moderators —
+     * the rule lives on the model so this and the `can_delete` flag the client
+     * renders from can never disagree.
+     *
+     * Replies cascade with the row, so deleting the top of a thread takes the
+     * conversation under it. The count is recomputed rather than decremented,
+     * because one delete can remove several rows.
+     */
+    public function destroyComment(Request $request, VoiceComment $comment): JsonResponse
+    {
+        abort_unless($comment->isRemovableBy($request->user()), 403);
+
+        $voice = $comment->voice;
+        $comment->delete();
+
+        if ($voice) {
+            $voice->update(['comments_count' => $voice->comments()->visible()->count()]);
+        }
+
+        return $this->ok(
+            ['count' => (int) ($voice?->fresh()->comments_count ?? 0)],
+            __('Comment removed.'),
+        );
     }
 
     /**
