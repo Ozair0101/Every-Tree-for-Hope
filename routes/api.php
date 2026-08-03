@@ -98,6 +98,10 @@ Route::prefix('v1')->name('api.v1.')->group(function () {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
     Route::get('/stats', [HomeController::class, 'stats'])->name('stats');
     Route::get('/report', [ReportController::class, 'index'])->name('report');
+    // Record an expense — gated by the create_expense permission in the controller.
+    Route::post('/report', [ReportController::class, 'store'])
+        ->middleware(['auth:sanctum', 'throttle:20,1'])
+        ->name('report.store');
 
     /*
     |----------------------------------------------------------------------
