@@ -192,6 +192,10 @@ Route::prefix('v1')->name('api.v1.')->group(function () {
             // resource so a reviewer can clear the queue from the phone.
             // Declared before '/{tree}' so "pending" is not read as an id.
             Route::get('/pending', [TreeController::class, 'pending'])->name('pending');
+
+            // The caller's own saved posts. Declared before '/{tree}' so the
+            // wildcard does not read "favourites" as an id.
+            Route::get('/favourites', [TreeSocialController::class, 'favourites'])->name('favourites');
             Route::post('/{tree}/approve', [TreeController::class, 'approve'])->name('approve');
             Route::post('/{tree}/reject', [TreeController::class, 'reject'])->name('reject');
 
@@ -238,6 +242,13 @@ Route::prefix('v1')->name('api.v1.')->group(function () {
             |------------------------------------------------------------------
             | Reading the wall is public; liking, commenting and sharing are not.
             */
+            // Private save. Toggling, like the like above.
+            Route::post('/{tree}/favourite', [TreeSocialController::class, 'toggleFavourite'])
+                ->name('favourite');
+
+            // Removing a post you planted. Moderators may also remove one.
+            Route::delete('/{tree}', [TreeController::class, 'destroy'])->name('destroy');
+
             Route::post('/{tree}/like', [TreeSocialController::class, 'toggleLike'])
                 ->middleware('throttle:60,1')
                 ->name('like');

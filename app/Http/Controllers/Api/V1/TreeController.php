@@ -411,6 +411,42 @@ class TreeController extends ApiController
     }
 
     /**
+     * Delete a tree you planted.
+     *
+     * The planter or a moderator, nobody else. Moderators are included because
+     * the alternative to removing an abusive post is leaving it up.
+     *
+     * Photographs go with it: the rows cascade, but the files on disk do not, so
+     * they are removed explicitly. A deleted post whose images stay served is
+     * still public to anyone holding the URL.
+     */
+    public function destroy(Request $request, Tree $tree): JsonResponse
+    {
+        $isOwner = $request->user()->id === $tree->user_id;
+
+        abort_unless($isOwner || $request->user()->can('delete_any_tree'), 403);
+
+        $paths = $tree->images()->pluck('image_path')
+            ->push($tree->image_path)
+            ->filter()
+            ->all();
+
+        $tree->delete();
+
+        foreach ($paths as $path) {
+            // Best effort: the record is already gone, and a file that resists
+            // deletion must not turn a successful delete into an error.
+            try {
+                Storage::disk('public')->delete($path);
+            } catch (\Throwable $e) {
+                report($e);
+            }
+        }
+
+        return $this->ok(null, __('Your tree was deleted.'));
+    }
+
+    /**
      * The moderation queue — trees awaiting a decision, oldest first.
      *
      * Oldest first on purpose: this is a work queue, and the tree that has been

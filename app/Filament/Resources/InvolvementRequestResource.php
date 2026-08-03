@@ -31,6 +31,19 @@ class InvolvementRequestResource extends Resource
 
     protected static ?int $navigationSort = 2;
 
+    /** New requests awaiting a first look, shown as a nav badge. */
+    public static function getNavigationBadge(): ?string
+    {
+        $count = static::getModel()::where('status', 'pending')->count();
+
+        return $count > 0 ? (string) $count : null;
+    }
+
+    public static function getNavigationBadgeColor(): ?string
+    {
+        return 'warning';
+    }
+
     public static function form(Schema $schema): Schema
     {
         return $schema

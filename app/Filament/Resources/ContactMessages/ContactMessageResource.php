@@ -30,6 +30,19 @@ class ContactMessageResource extends Resource
 
     protected static ?string $pluralModelLabel = 'Contact Messages';
 
+    /** Unread messages, shown as a nav badge like the other "incoming" menus. */
+    public static function getNavigationBadge(): ?string
+    {
+        $count = static::getModel()::where('status', 'unread')->count();
+
+        return $count > 0 ? (string) $count : null;
+    }
+
+    public static function getNavigationBadgeColor(): ?string
+    {
+        return 'warning';
+    }
+
     public static function form(Schema $schema): Schema
     {
         return $schema

@@ -98,6 +98,31 @@ class Tree extends Model
         return $this->hasMany(TreeComment::class);
     }
 
+    /**
+     * Saves of this post. Private to each saver — unlike likes, there is no
+     * public count, so nothing here is ever exposed in aggregate.
+     */
+    public function favourites(): HasMany
+    {
+        return $this->hasMany(TreeFavourite::class);
+    }
+
+    /** Whether a given user has saved this tree. Null user never has. */
+    public function isFavouritedBy(?User $user): bool
+    {
+        if (! $user) {
+            return false;
+        }
+
+        // Uses the loaded relation when the feed eager-loaded it, so a page of
+        // twenty posts costs one query rather than twenty.
+        if ($this->relationLoaded('favourites')) {
+            return $this->favourites->contains('user_id', $user->id);
+        }
+
+        return $this->favourites()->where('user_id', $user->id)->exists();
+    }
+
     /** Whether a given user has liked this tree. Null user is never a liker. */
     public function isLikedBy(?User $user): bool
     {
