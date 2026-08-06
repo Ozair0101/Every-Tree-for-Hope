@@ -136,6 +136,7 @@ class TreeController extends ApiController
             'tree_count' => 'nullable|integer|min:1|max:100000000',
             'notes' => 'nullable|string|max:2000',
             'location_name' => 'nullable|string|max:200',
+            'province' => 'nullable|string|max:120',
             'latitude' => 'required|numeric|between:-90,90',
             'longitude' => 'required|numeric|between:-180,180',
             'gps_accuracy' => 'nullable|integer|min:0|max:100000',
@@ -196,6 +197,7 @@ class TreeController extends ApiController
             'tree_count' => $validated['tree_count'] ?? 1,
             'notes' => $validated['notes'] ?? null,
             'location_name' => $validated['location_name'] ?? null,
+            'province' => $validated['province'] ?? null,
             'latitude' => $validated['latitude'],
             'longitude' => $validated['longitude'],
             'gps_accuracy' => $validated['gps_accuracy'] ?? null,
@@ -249,6 +251,7 @@ class TreeController extends ApiController
             'species' => 'sometimes|required|string|max:160',
             'notes' => 'sometimes|nullable|string|max:2000',
             'location_name' => 'sometimes|nullable|string|max:200',
+            'province' => 'sometimes|nullable|string|max:120',
             'planted_on' => 'sometimes|required|date|before_or_equal:today',
         ]);
 

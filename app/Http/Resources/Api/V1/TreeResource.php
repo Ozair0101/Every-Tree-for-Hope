@@ -16,6 +16,7 @@ class TreeResource extends JsonResource
             'tree_count' => (int) ($this->tree_count ?? 1),
             'notes' => $this->notes,
             'location_name' => $this->location_name,
+            'province' => $this->province,
             'latitude' => (float) $this->latitude,
             'longitude' => (float) $this->longitude,
             'gps_accuracy' => $this->gps_accuracy,

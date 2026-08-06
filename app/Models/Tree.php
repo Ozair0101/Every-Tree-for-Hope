@@ -29,6 +29,7 @@ class Tree extends Model
         'tree_count',
         'notes',
         'location_name',
+        'province',
         'latitude',
         'longitude',
         'gps_accuracy',
