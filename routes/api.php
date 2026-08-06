@@ -240,6 +240,9 @@ Route::prefix('v1')->name('api.v1.')->group(function () {
     Route::prefix('trees')->name('trees.')->group(function () {
         Route::get('/', [TreeController::class, 'index'])->name('index');
         Route::get('/map', [TreeController::class, 'map'])->name('map');
+        // How many trees have been planted in each province. Public, and declared
+        // before the '/{tree}' wildcard so "by-province" is not read as an id.
+        Route::get('/by-province', [TreeController::class, 'byProvince'])->name('by-province');
 
         // The community wall. Reading is open — a plantation programme's work
         // is public — so this sits outside the auth group alongside the map.

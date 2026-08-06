@@ -81,6 +81,39 @@ class TreeController extends ApiController
         return $this->ok(['markers' => $markers]);
     }
 
+    /**
+     * How many trees have been planted in each province.
+     *
+     * Counts approved trees only — the same public set the map and gallery show —
+     * and sums `tree_count` so a batch record ("40 saplings") contributes all of
+     * its trees, not one. Rows without a province are left out rather than bucketed
+     * into an "Unknown" the map cannot place. Ordered biggest first, so the screen
+     * reads as a leaderboard.
+     */
+    public function byProvince(): JsonResponse
+    {
+        $rows = Tree::query()
+            ->approved()
+            ->whereNotNull('province')
+            ->where('province', '!=', '')
+            ->selectRaw('province, SUM(tree_count) as trees, COUNT(*) as records')
+            ->groupBy('province')
+            ->orderByDesc('trees')
+            ->get()
+            ->map(fn (Tree $row) => [
+                'province' => $row->province,
+                'trees' => (int) $row->trees,
+                'records' => (int) $row->records,
+            ]);
+
+        return $this->ok([
+            'provinces' => $rows->values(),
+            'total_trees' => (int) $rows->sum('trees'),
+            'total_records' => (int) $rows->sum('records'),
+            'provinces_count' => $rows->count(),
+        ]);
+    }
+
     /** The caller's own trees, every status, so they can see drafts/pending. */
     public function mine(Request $request): JsonResponse
     {
