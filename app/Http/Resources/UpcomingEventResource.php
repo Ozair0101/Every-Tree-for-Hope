@@ -20,6 +20,7 @@ class UpcomingEventResource extends JsonResource
             'formatted_date' => $this->formatted_date,
             'location' => $this->location,
             'province' => $this->province,
+            'tree_names' => $this->tree_names ?? [],
 
             'images' => collect($this->images ?? [])
                 ->map(fn ($path) => str_starts_with((string) $path, 'http')

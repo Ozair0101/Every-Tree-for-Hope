@@ -8,6 +8,7 @@ use App\Models\Event;
 use App\Models\Partner;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * JSON twin of \App\Http\Controllers\EventController.
@@ -133,6 +134,75 @@ class EventController extends ApiController
         $event->load('images');
 
         return $this->created(['event' => new EventResource($event)], __('Event created.'));
+    }
+
+    /**
+     * Edit an event from the mobile app.
+     *
+     * Guarded by `update_event` (via {@see \App\Policies\EventPolicy}). Only the
+     * fields that are sent are changed. Photos follow one simple rule: send
+     * `images[]` to replace the whole gallery, send none to leave it untouched —
+     * so a text-only edit never disturbs the pictures. Send as multipart with
+     * `_method=PUT` when attaching images.
+     */
+    public function update(Request $request, Event $event): JsonResponse
+    {
+        abort_unless($request->user()->can('update', $event), 403);
+
+        $validated = $request->validate([
+            'title' => 'sometimes|required|string|max:255',
+            'description' => 'nullable|string|max:5000',
+            'location' => 'nullable|string|max:255',
+            'province' => 'nullable|string|max:120',
+            'date' => 'sometimes|required|date',
+            'trees_planted' => 'nullable|integer|min:0|max:100000000',
+            'trees_lost' => 'nullable|integer|min:0|max:100000000',
+            'volunteers' => 'nullable|integer|min:0|max:10000000',
+            'sponsor_partner' => 'nullable|string|max:255',
+            'tree_names' => 'nullable|array',
+            'tree_names.*' => 'string|max:120',
+            'map_embed' => 'nullable|string|max:10000',
+            'last_maintained_at' => 'nullable|date',
+            'maintenance_notes' => 'nullable|string|max:5000',
+            'images' => 'nullable|array|max:8',
+            'images.*' => 'image|mimes:jpeg,jpg,png,webp|max:8192',
+        ]);
+
+        $event->fill(collect($validated)->except('images')->all());
+        $event->save();
+
+        if ($request->hasFile('images')) {
+            foreach ($event->images as $image) {
+                Storage::disk('public')->delete($image->image_path);
+            }
+            $event->images()->delete();
+
+            foreach ($request->file('images') as $i => $file) {
+                $event->images()->create([
+                    'image_path' => $file->store('events', 'public'),
+                    'sort_order' => $i,
+                ]);
+            }
+        }
+
+        return $this->ok(
+            ['event' => new EventResource($event->fresh()->load('images'))],
+            __('Event updated.'),
+        );
+    }
+
+    /** Delete an event and its photographs. Requires `delete_event`. */
+    public function destroy(Request $request, Event $event): JsonResponse
+    {
+        abort_unless($request->user()->can('delete', $event), 403);
+
+        foreach ($event->images as $image) {
+            Storage::disk('public')->delete($image->image_path);
+        }
+        $event->images()->delete();
+        $event->delete();
+
+        return $this->ok(null, __('Event deleted.'));
     }
 
     /**

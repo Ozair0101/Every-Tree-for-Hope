@@ -82,6 +82,38 @@ class ReportController extends ApiController
         return $this->created(['expense' => $this->present($expense)], __('Expense recorded.'));
     }
 
+    /** Edit an expense. Requires `update_expense`. */
+    public function update(Request $request, Expense $expense): JsonResponse
+    {
+        abort_unless($request->user()->can('update', $expense), 403);
+
+        $validated = $request->validate([
+            'date' => 'sometimes|required|date',
+            'description' => 'sometimes|required|string|max:255',
+            'expense_type' => 'nullable|string|max:120',
+            'quantity' => 'nullable|string|max:120',
+            'unit_price' => 'nullable|numeric|min:0|max:9999999999',
+            'total_cost' => 'nullable|numeric|min:0|max:9999999999',
+            'who_paid' => 'nullable|string|max:255',
+            'notes' => 'nullable|string|max:5000',
+        ]);
+
+        $expense->fill($validated);
+        $expense->save();
+
+        return $this->ok(['expense' => $this->present($expense)], __('Expense updated.'));
+    }
+
+    /** Delete an expense. Requires `delete_expense`. */
+    public function destroy(Request $request, Expense $expense): JsonResponse
+    {
+        abort_unless($request->user()->can('delete', $expense), 403);
+
+        $expense->delete();
+
+        return $this->ok(null, __('Expense deleted.'));
+    }
+
     /** The public shape of a single expense row. */
     private function present(Expense $expense): array
     {

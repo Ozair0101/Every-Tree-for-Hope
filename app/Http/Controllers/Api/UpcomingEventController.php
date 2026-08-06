@@ -6,6 +6,7 @@ use App\Http\Resources\UpcomingEventResource;
 use App\Models\UpcomingEvent;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * Upcoming events — the counterpart to the "get involved" form, which
@@ -93,5 +94,69 @@ class UpcomingEventController extends ApiController
             ['event' => new UpcomingEventResource($event)],
             __('Upcoming event created.'),
         );
+    }
+
+    /**
+     * Edit an upcoming event. Requires `update_upcoming_event`.
+     *
+     * Only the sent fields change. `title`/`description` are translatable and are
+     * stored under the request's locale, as in {@see store()}. Photos follow the
+     * replace-if-provided rule. Send as multipart with `_method=PUT` for images.
+     */
+    public function update(Request $request, UpcomingEvent $upcomingEvent): JsonResponse
+    {
+        abort_unless($request->user()->can('update', $upcomingEvent), 403);
+
+        $validated = $request->validate([
+            'title' => 'sometimes|required|string|max:255',
+            'description' => 'nullable|string|max:5000',
+            'date' => 'sometimes|required|date',
+            'location' => 'nullable|string|max:255',
+            'province' => 'nullable|string|max:120',
+            'tree_names' => 'nullable|array',
+            'tree_names.*' => 'string|max:120',
+            'images' => 'nullable|array|max:8',
+            'images.*' => 'image|mimes:jpeg,jpg,png,webp|max:8192',
+        ]);
+
+        foreach (['title', 'description', 'date', 'location', 'province'] as $field) {
+            if (array_key_exists($field, $validated)) {
+                $upcomingEvent->{$field} = $validated[$field];
+            }
+        }
+        if (array_key_exists('tree_names', $validated)) {
+            $upcomingEvent->tree_names = $validated['tree_names'] ?? [];
+        }
+
+        if ($request->hasFile('images')) {
+            foreach ((array) $upcomingEvent->images as $path) {
+                Storage::disk('public')->delete($path);
+            }
+            $paths = [];
+            foreach ($request->file('images') as $file) {
+                $paths[] = $file->store('upcoming-events', 'public');
+            }
+            $upcomingEvent->images = $paths;
+        }
+
+        $upcomingEvent->save();
+
+        return $this->ok(
+            ['event' => new UpcomingEventResource($upcomingEvent->fresh())],
+            __('Upcoming event updated.'),
+        );
+    }
+
+    /** Delete an upcoming event and its photographs. Requires `delete_upcoming_event`. */
+    public function destroy(Request $request, UpcomingEvent $upcomingEvent): JsonResponse
+    {
+        abort_unless($request->user()->can('delete', $upcomingEvent), 403);
+
+        foreach ((array) $upcomingEvent->images as $path) {
+            Storage::disk('public')->delete($path);
+        }
+        $upcomingEvent->delete();
+
+        return $this->ok(null, __('Upcoming event deleted.'));
     }
 }

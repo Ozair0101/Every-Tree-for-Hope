@@ -115,6 +115,13 @@ Route::prefix('v1')->name('api.v1.')->group(function () {
     Route::post('/report', [ReportController::class, 'store'])
         ->middleware(['auth:sanctum', 'throttle:20,1'])
         ->name('report.store');
+    // Edit / delete an expense — gated by update_expense / delete_expense.
+    Route::match(['put', 'patch'], '/report/{expense}', [ReportController::class, 'update'])
+        ->middleware(['auth:sanctum', 'throttle:20,1'])
+        ->name('report.update');
+    Route::delete('/report/{expense}', [ReportController::class, 'destroy'])
+        ->middleware(['auth:sanctum', 'throttle:20,1'])
+        ->name('report.destroy');
 
     /*
     |----------------------------------------------------------------------
@@ -128,6 +135,13 @@ Route::prefix('v1')->name('api.v1.')->group(function () {
             ->middleware(['auth:sanctum', 'throttle:20,1'])
             ->name('store');
         Route::get('/{event}', [EventController::class, 'show'])->name('show');
+        // Edit / delete — gated by update_event / delete_event in the controller.
+        Route::match(['put', 'patch'], '/{event}', [EventController::class, 'update'])
+            ->middleware(['auth:sanctum', 'throttle:20,1'])
+            ->name('update');
+        Route::delete('/{event}', [EventController::class, 'destroy'])
+            ->middleware(['auth:sanctum', 'throttle:20,1'])
+            ->name('destroy');
 
         // Module B — maintenance visits logged against a planting event. The
         // log is public (approved visits only for anonymous viewers, resolved
@@ -162,6 +176,13 @@ Route::prefix('v1')->name('api.v1.')->group(function () {
             ->middleware(['auth:sanctum', 'throttle:20,1'])
             ->name('store');
         Route::get('/{upcomingEvent}', [UpcomingEventController::class, 'show'])->name('show');
+        // Edit / delete — gated by update_upcoming_event / delete_upcoming_event.
+        Route::match(['put', 'patch'], '/{upcomingEvent}', [UpcomingEventController::class, 'update'])
+            ->middleware(['auth:sanctum', 'throttle:20,1'])
+            ->name('update');
+        Route::delete('/{upcomingEvent}', [UpcomingEventController::class, 'destroy'])
+            ->middleware(['auth:sanctum', 'throttle:20,1'])
+            ->name('destroy');
     });
 
     /*
