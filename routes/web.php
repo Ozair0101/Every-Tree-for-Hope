@@ -115,3 +115,17 @@ Route::middleware(['auth'])
         Route::get('/export/pdf', [App\Http\Controllers\Admin\AnalyticsExportController::class, 'pdf'])
             ->name('export.pdf');
     });
+
+/*
+|--------------------------------------------------------------------------
+| Cached image thumbnails
+|--------------------------------------------------------------------------
+|
+| Serves small, cached copies of stored photographs for the mobile app's list
+| cards. Deliberately outside the API's rate limiter — a scrolling feed loads
+| many images at once, and static images should not count against it.
+*/
+Route::get('/thumb/{width}/{path}', [App\Http\Controllers\ThumbnailController::class, 'show'])
+    ->where('width', '[0-9]+')
+    ->where('path', '.*')
+    ->name('thumb');

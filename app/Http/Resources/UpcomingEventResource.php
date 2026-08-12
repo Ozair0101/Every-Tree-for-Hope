@@ -28,6 +28,12 @@ class UpcomingEventResource extends JsonResource
                     : asset('storage/'.$path))
                 ->values()
                 ->all(),
+            // Light copies for the poster card; the app falls back to `images`.
+            'image_thumbnails' => collect($this->images ?? [])
+                ->map(fn ($path) => \App\Support\Thumb::url((string) $path, 800))
+                ->filter()
+                ->values()
+                ->all(),
 
             'is_active' => (bool) $this->is_active,
         ];

@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Support\Thumb;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -48,6 +49,9 @@ class VoiceResource extends JsonResource
             'status' => $this->status,
 
             'image_url' => $this->image_url,
+            // A small copy for the wall's list cards; the app falls back to
+            // `image_url` when this is null.
+            'thumbnail_url' => Thumb::url($this->image_path, 400),
 
             'likes_count' => (int) $this->likes_count,
             'comments_count' => (int) $this->comments_count,

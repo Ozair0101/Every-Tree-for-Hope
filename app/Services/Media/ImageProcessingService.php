@@ -365,6 +365,67 @@ class ImageProcessingService
     }
 
     /**
+     * Resize an already-stored image to a target width, returning JPEG bytes.
+     *
+     * The engine behind the on-the-fly thumbnail endpoint. Unlike {@see render()}
+     * it reads a file on disk rather than an upload, scales down to `$maxWidth`
+     * keeping aspect, and never enlarges a smaller source. Returns null when GD
+     * cannot read the format (e.g. HEIC), so the caller can serve the original.
+     */
+    public function resizeStoredToWidth(string $absolutePath, int $maxWidth): ?string
+    {
+        if (! extension_loaded('gd') || ! is_readable($absolutePath)) {
+            return null;
+        }
+
+        $info = @getimagesize($absolutePath);
+        if ($info === false) {
+            return null;
+        }
+
+        $source = match ($info[2]) {
+            IMAGETYPE_JPEG => @imagecreatefromjpeg($absolutePath),
+            IMAGETYPE_PNG => @imagecreatefrompng($absolutePath),
+            IMAGETYPE_WEBP => @imagecreatefromwebp($absolutePath),
+            IMAGETYPE_GIF => @imagecreatefromgif($absolutePath),
+            default => false,
+        };
+
+        if ($source === false) {
+            return null;
+        }
+
+        try {
+            $source = $this->applyOrientation($source, $absolutePath);
+
+            $width = imagesx($source);
+            $height = imagesy($source);
+
+            $scale = min(1, $maxWidth / max(1, $width));
+            $targetW = max(1, (int) round($width * $scale));
+            $targetH = max(1, (int) round($height * $scale));
+
+            $canvas = imagecreatetruecolor($targetW, $targetH);
+            imagefill($canvas, 0, 0, imagecolorallocate($canvas, 255, 255, 255));
+            imagecopyresampled($canvas, $source, 0, 0, 0, 0, $targetW, $targetH, $width, $height);
+
+            ob_start();
+            imagejpeg($canvas, null, self::QUALITY);
+            $bytes = (string) ob_get_clean();
+
+            imagedestroy($canvas);
+
+            return $bytes;
+        } catch (\Throwable $e) {
+            Log::warning('[images] Could not resize a stored image.', ['error' => $e->getMessage()]);
+
+            return null;
+        } finally {
+            imagedestroy($source);
+        }
+    }
+
+    /**
      * Resize and re-encode with GD.
      *
      * @param  bool  $square  centre-crop to a square, for grid thumbnails
