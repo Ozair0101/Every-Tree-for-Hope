@@ -45,10 +45,18 @@ class ThumbnailController extends Controller
         $cacheKey = 'thumbnails/'.$width.'/'.preg_replace('/\.[^.\/]+$/', '.jpg', $path);
 
         if (! $disk->exists($cacheKey)) {
-            $bytes = app(ImageProcessingService::class)->resizeStoredToWidth($disk->path($path), $width);
+            try {
+                $bytes = app(ImageProcessingService::class)->resizeStoredToWidth($disk->path($path), $width);
+            } catch (\Throwable $e) {
+                // Any failure in the resize pipeline (no GD extension, an
+                // unreadable/HEIC source, out of memory): never 500 on an image
+                // that is otherwise fine — the client is showing a real card.
+                $bytes = null;
+            }
 
-            // GD could not read the source (e.g. HEIC): fall back to the
-            // original rather than 500-ing on an image that is otherwise fine.
+            // Could not resize: serve the original so the card still gets its
+            // image. The app prefers this endpoint for list cards, so it must
+            // always return a picture when the source exists.
             if ($bytes === null) {
                 return response()->file($disk->path($path), self::HEADERS);
             }
