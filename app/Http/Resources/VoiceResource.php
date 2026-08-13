@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Support\PublicUrl;
 use App\Support\Thumb;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -48,7 +49,9 @@ class VoiceResource extends JsonResource
             // always 'approved' on the public wall.
             'status' => $this->status,
 
-            'image_url' => $this->image_url,
+            // Request-host origin (not the model's asset() accessor) so the
+            // image loads on the same host the app called the API on.
+            'image_url' => PublicUrl::for($request, $this->image_path),
             // A small copy for the wall's list cards; the app falls back to
             // `image_url` when this is null.
             'thumbnail_url' => Thumb::url($this->image_path, 400),

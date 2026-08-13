@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Support\PublicUrl;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -23,9 +24,8 @@ class UpcomingEventResource extends JsonResource
             'tree_names' => $this->tree_names ?? [],
 
             'images' => collect($this->images ?? [])
-                ->map(fn ($path) => str_starts_with((string) $path, 'http')
-                    ? $path
-                    : asset('storage/'.$path))
+                ->map(fn ($path) => PublicUrl::for($request, (string) $path))
+                ->filter()
                 ->values()
                 ->all(),
             // Light copies for the poster card; the app falls back to `images`.
