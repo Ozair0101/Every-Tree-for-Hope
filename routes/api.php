@@ -86,6 +86,10 @@ Route::prefix('v1')->name('api.v1.')->group(function () {
         Route::post('/auth/logout', [AuthController::class, 'logout'])->name('auth.logout');
         Route::get('/auth/me', [AuthController::class, 'me'])->name('auth.me');
 
+        // Account deletion — required by App Store guideline 5.1.1(v). Anonymises
+        // in place (keeps the user's trees/findings, scrubs the person).
+        Route::delete('/auth/account', [AuthController::class, 'destroy'])->name('auth.destroy');
+
         // POST, not PUT: PHP does not populate an uploaded file on PUT/PATCH, and
         // the avatar arrives as multipart. The client spoofs the method if it
         // wants REST semantics; the server just needs the file.

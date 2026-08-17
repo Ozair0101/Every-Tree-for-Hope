@@ -8,10 +8,13 @@ use App\Http\Requests\Api\V1\RegisterRequest;
 use App\Http\Requests\Api\V1\UpdateProfileRequest;
 use App\Http\Resources\Api\V1\UserResource;
 use App\Models\User;
+use App\Models\Voice;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 
 /**
@@ -181,5 +184,66 @@ class AuthController extends Controller
     public function me(Request $request): UserResource
     {
         return new UserResource($request->user());
+    }
+
+    /**
+     * Delete the caller's account.
+     *
+     * Apple's App Store guideline 5.1.1(v) requires any app that lets people
+     * create an account to let them delete it from inside the app. We honour
+     * that without throwing away the conservation record: a member's planted
+     * trees and findings are the point of the platform, so those stay — but the
+     * person is scrubbed off them.
+     *
+     * The account row is kept (deleting it would orphan every tree, finding,
+     * comment and task that references it) and anonymised in place: every field
+     * that identifies a human is wiped, the password is replaced with an
+     * unguessable value, the login email is freed, roles and push tokens are
+     * removed, and every access token is revoked. What remains cannot be logged
+     * into and names nobody — the trees simply show "Former member".
+     */
+    public function destroy(Request $request): JsonResponse
+    {
+        $user = $request->user();
+
+        DB::transaction(function () use ($user) {
+            // Findings carry a denormalised author name/email of their own, so
+            // clear those too — nulling the relation alone would leave the name
+            // printed on the card.
+            Voice::where('user_id', $user->id)->update([
+                'author_name' => __('Former member'),
+                'author_email' => null,
+            ]);
+
+            // No more notifications to a closed account, and no lingering role.
+            $user->pushTokens()->delete();
+            $user->syncRoles([]);
+
+            // Erase the actual photo files, not just the columns that point at
+            // them — an orphaned avatar on disk is still the person's face.
+            foreach (array_filter([$user->profile_image, $user->cover_image]) as $imagePath) {
+                Storage::disk('public')->delete($imagePath);
+            }
+
+            // Scrub the row itself. The e-mail is moved aside (kept unique) so
+            // the original address is free to register again from scratch.
+            $user->forceFill([
+                'name' => __('Former'),
+                'lastname' => __('member'),
+                'email' => 'deleted_'.$user->id.'@removed.invalid',
+                'country' => null,
+                'address' => null,
+                'profile_image' => null,
+                'cover_image' => null,
+                'password' => Hash::make(Str::random(40)),
+            ])->save();
+
+            // Sign the account out of every device and make its tokens useless.
+            $user->tokens()->delete();
+        });
+
+        return response()->json([
+            'message' => __('Your account has been deleted.'),
+        ]);
     }
 }
